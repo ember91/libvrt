@@ -1,0 +1,82 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.formatOnSave": true,
+		"files.associations": {
+			"array": "cpp",
+			"atomic": "cpp",
+			"bit": "cpp",
+			"*.tcc": "cpp",
+			"cctype": "cpp",
+			"clocale": "cpp",
+			"cmath": "cpp",
+			"cstdarg": "cpp",
+			"cstddef": "cpp",
+			"cstdint": "cpp",
+			"cstdio": "cpp",
+			"cstdlib": "cpp",
+			"cstring": "cpp",
+			"ctime": "cpp",
+			"cwchar": "cpp",
+			"cwctype": "cpp",
+			"deque": "cpp",
+			"map": "cpp",
+			"set": "cpp",
+			"unordered_map": "cpp",
+			"vector": "cpp",
+			"exception": "cpp",
+			"algorithm": "cpp",
+			"functional": "cpp",
+			"iterator": "cpp",
+			"memory": "cpp",
+			"memory_resource": "cpp",
+			"numeric": "cpp",
+			"optional": "cpp",
+			"random": "cpp",
+			"string": "cpp",
+			"string_view": "cpp",
+			"system_error": "cpp",
+			"tuple": "cpp",
+			"type_traits": "cpp",
+			"utility": "cpp",
+			"fstream": "cpp",
+			"initializer_list": "cpp",
+			"iomanip": "cpp",
+			"iosfwd": "cpp",
+			"iostream": "cpp",
+			"istream": "cpp",
+			"limits": "cpp",
+			"new": "cpp",
+			"ostream": "cpp",
+			"sstream": "cpp",
+			"stdexcept": "cpp",
+			"streambuf": "cpp",
+			"typeinfo": "cpp",
+			"any": "cpp"
+		},
+		"cSpell.words": [
+			"libvrt"
+		],
+		"C_Cpp.default.cppStandard": "c++17",
+		"C_Cpp.default.cStandard": "c99",
+		"search.exclude": {
+			"/doc/html/": true
+		},
+		"doxdocgen.cpp.tparamTemplate": "\\tparam {param} ",
+		"doxdocgen.file.fileTemplate": "\\file {name}",
+		"doxdocgen.generic.briefTemplate": "\\brief {text}",
+		"doxdocgen.generic.dateTemplate": "\\date {date}",
+		"doxdocgen.generic.paramTemplate": "\\param {param} ",
+		"doxdocgen.generic.returnTemplate": "\\return {type} ",
+		"doxdocgen.file.versionTag": "\\version 0.1",
+		"cmake.buildDirectory": "${workspaceFolder}/${buildType}",
+		"cmake.configureArgs": [
+			"-DTEST=On"
+		],
+		"files.insertFinalNewline": true
+	}
+}
