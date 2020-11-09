@@ -5,7 +5,7 @@ C implementation of an encoder and decoder of the ANSI/VITA 49.0 Radio Transport
 **Features:**
 * Well tested - High test code coverage, analyzed with static analysis tools
 * Compatible - Tested with GCC, Clang, Visual Studio and ICC
-* Well [documented](doc/html/index.html) - Doxygen style
+* Well documented - Doxygen style
 * Low-level - A high degree of control
 * Portable - Written in plain C99
 * Flexible - Read and write only the parts of a packet you want
@@ -164,7 +164,7 @@ And others:
 ```
 vrt_is_context(type)
 ```
-More documentation is found in the source code, or in the generated [documentation](doc/html/index.html).
+More documentation is found in the source code, or in the generated documentation found in `doc/index.html`.
 
 Some functions may return `VRT_ERR` (-1) if there's an error.
 
@@ -202,4 +202,4 @@ Tools using this library may pop up in the future.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
