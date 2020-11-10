@@ -39,8 +39,6 @@ This installs a static library. It can now be linked, e.g. with:
 | clang          | clang example.c -lvrt -lm -o example    |
 | Visual Studio  | cl example.c vrt.lib                    |
 
-*Note that you may need to link with a math library, with e.g. `-lm`, due to the inclusion of math.h.*
-
 Generate a packet with:
 ```
 #include <math.h>
@@ -178,8 +176,6 @@ Some functions may return `VRT_ERR` (-1) if there's an error.
 ### Notes
 
 To follow the standard fully one must byte swap before reading and after writing on little endian platforms such as x86 and most ARM CPUs. As of now, there's no support for that in this library. Obviously, header, context, and trailer words must be swapped with 4 byte swaps while the data section depends on the data type.
-
-You may need to link to the math library (`-lm` in GCC and clang), since this library uses some math functions.
 
 ## Running tests
 
