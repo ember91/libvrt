@@ -8,8 +8,8 @@ extern "C" {
 #endif
 
 #ifndef __cplusplus
-#pragma GCC diagnostic ignored "-Wbad-function-cast"
 #pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wbad-function-cast"
 #endif
 
 /* Silence warnings when using C++ */
