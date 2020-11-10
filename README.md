@@ -33,14 +33,19 @@ make -j4
 sudo make install
 ```
 This installs a static library. It can now be linked, e.g. with:
-| Compiler       | Command                                 |
-|----------------|-----------------------------------------|
-| gcc            | gcc example.c -lvrt -lm -o example      |
-| clang          | clang example.c -lvrt -lm -o example    |
-| Visual Studio  | cl example.c vrt.lib                    |
+| Compiler       | Command                             |
+|----------------|-------------------------------------|
+| gcc            | gcc example.c -lvrt -o example      |
+| clang          | clang example.c -lvrt -o example    |
+| icc            |                                     |
+| Visual Studio  | cl example.c vrt.lib                |
 
 Generate a packet with:
 ```
+/*
+ * Generate signal and write VRT IF data packet to file. Note that this won't generate a big endian-format packet if on
+ * a little endian platform, so the generated packet may be non-standard.
+ */
 #include <math.h>
 #include <stdint.h>
 #include <stdio.h>

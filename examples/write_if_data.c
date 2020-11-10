@@ -1,4 +1,7 @@
-/* Generate signal and write VRT IF data packet to file */
+/*
+ * Generate signal and write VRT IF data packet to file. Note that this won't generate a big endian-format packet if on
+ * a little endian platform, so the generated packet may be non-standard.
+ */
 
 #include <math.h>
 #include <stdint.h>
