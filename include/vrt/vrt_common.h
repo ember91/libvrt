@@ -110,6 +110,16 @@ inline bool vrt_is_context(vrt_packet_type type) {
     return (STATIC_CAST(uint32_t, type) & 0x4U) != 0;
 }
 
+/**
+ * Check if platform is big endian.
+ *
+ * \return True if big endian.
+ */
+inline bool is_platform_little_endian() {
+    volatile uint32_t i = 0x01234567; /* Ensure written to memory */
+    return (*((uint8_t*)(&i))) == 0x67;
+}
+
 #ifdef __cplusplus
 }
 #endif

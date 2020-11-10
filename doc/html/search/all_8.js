@@ -5,5 +5,6 @@ var searchData=
   ['information_5fclass_5fcode_35',['information_class_code',['../structvrt__class__identifier.html#a1ec16cacb060e80c44eb8b41233a4c3c',1,'vrt_class_identifier']]],
   ['integer_5fsecond_5ftimestamp_36',['integer_second_timestamp',['../structvrt__formatted__geolocation.html#adab1161bde48fb22ec6e249a39f31c33',1,'vrt_formatted_geolocation::integer_second_timestamp()'],['../structvrt__ephemeris.html#a432ef104a882335c4fe69424cf9fef14',1,'vrt_ephemeris::integer_second_timestamp()']]],
   ['integer_5fseconds_5ftimestamp_37',['integer_seconds_timestamp',['../structvrt__fields.html#af0abc01e6eb521f814253986423ad9d0',1,'vrt_fields']]],
-  ['item_5fpacking_5ffield_5fsize_38',['item_packing_field_size',['../structvrt__data__packet__payload__format.html#a4b70c2c7569c2b4318128a5a9265717a',1,'vrt_data_packet_payload_format']]]
+  ['is_5fplatform_5flittle_5fendian_38',['is_platform_little_endian',['../vrt__common_8h.html#ab3d611820863cf24034efefa69f9942f',1,'vrt_common.h']]],
+  ['item_5fpacking_5ffield_5fsize_39',['item_packing_field_size',['../structvrt__data__packet__payload__format.html#a4b70c2c7569c2b4318128a5a9265717a',1,'vrt_data_packet_payload_format']]]
 ];

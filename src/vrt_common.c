@@ -277,3 +277,5 @@ uint32_t vrt_words_context(const vrt_context* context) {
 }
 
 extern bool vrt_is_context(vrt_packet_type type);
+
+extern bool is_platform_little_endian();
