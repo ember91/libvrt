@@ -173,7 +173,7 @@ Some functions may return `VRT_ERR` (-1) if there's an error.
 * C99 compiler, such as GCC
 * CMake
 * Build system such as GNU Make
-* (Google test framework, for running the tests)
+* (C++ compiler and Google test framework, for the tests)
 
 ### Notes
 
