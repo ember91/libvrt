@@ -26,19 +26,19 @@ extern "C" {
 /**
  * Size of header in 32-bit words. Always 1.
  */
-static const uint16_t SIZE_HEADER = 1;
+static const uint16_t VRT_SIZE_HEADER = 1;
 /**
  * Maximum size of fields section in 32-bit words.
  */
-static const uint16_t MAX_SIZE_FIELDS = 6;
+static const uint16_t VRT_MAX_SIZE_FIELDS = 6;
 /**
  * Maximum size of trailer in 32-bit words.
  */
-static const uint16_t MAX_SIZE_TRAILER = 1;
+static const uint16_t VRT_MAX_SIZE_TRAILER = 1;
 /**
  * Maximum size of a VRT packet in 32-bit words.
  */
-static const uint16_t MAX_SIZE_PACKET = UINT16_MAX;
+static const uint16_t VRT_MAX_SIZE_PACKET = UINT16_MAX;
 
 /**
  * Initialize header to a reasonable default state.
