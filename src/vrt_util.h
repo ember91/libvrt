@@ -32,17 +32,6 @@ inline uint32_t vrt_u2b(uint32_t u) {
 }
 
 /**
- * Check if a specific packet type means it has the Stream ID field.
- *
- * \param type Packet type.
- *
- * \return True if it has the Stream ID field.
- */
-inline bool vrt_has_stream_id(vrt_packet_type type) {
-    return ((uint32_t)type & 0x5U) != 0;
-}
-
-/**
  * Check if a packet has the integer timestamp.
  *
  * \param t TSI field.

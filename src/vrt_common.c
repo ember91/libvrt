@@ -276,6 +276,7 @@ uint32_t vrt_words_context(const vrt_context* context) {
     return words;
 }
 
+/* Defined inline in header */
 extern bool vrt_is_context(vrt_packet_type type);
-
+extern bool vrt_has_stream_id(vrt_packet_type type);
 extern bool is_platform_little_endian();

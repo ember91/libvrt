@@ -101,6 +101,8 @@ Functions</h2></td></tr>
 <tr class="separator:a90888a76d829c60729cec718788e060d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02b3ce76d3e1969a9338c05dc15f52e0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a02b3ce76d3e1969a9338c05dc15f52e0">vrt_is_context</a> (<a class="el" href="vrt__types_8h.html#a8b7e0ca74814ff290cb1afee9acc2504">vrt_packet_type</a> type)</td></tr>
 <tr class="separator:a02b3ce76d3e1969a9338c05dc15f52e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad623c6295952d8d38af85f3a6419067e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ad623c6295952d8d38af85f3a6419067e">vrt_has_stream_id</a> (<a class="el" href="vrt__types_8h.html#a8b7e0ca74814ff290cb1afee9acc2504">vrt_packet_type</a> type)</td></tr>
+<tr class="separator:ad623c6295952d8d38af85f3a6419067e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3d611820863cf24034efefa69f9942f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ab3d611820863cf24034efefa69f9942f">is_platform_little_endian</a> ()</td></tr>
 <tr class="separator:ab3d611820863cf24034efefa69f9942f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -169,6 +171,40 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <p>Check if platform is big endian.</p>
 <dl class="section return"><dt>Returns</dt><dd>True if big endian. </dd></dl>
+
+</div>
+</div>
+<a id="ad623c6295952d8d38af85f3a6419067e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad623c6295952d8d38af85f3a6419067e">&#9670;&nbsp;</a></span>vrt_has_stream_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool vrt_has_stream_id </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="vrt__types_8h.html#a8b7e0ca74814ff290cb1afee9acc2504">vrt_packet_type</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Check if a specific packet type means it has the Stream ID field.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>Packet type.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if it has the Stream ID field. </dd></dl>
 
 </div>
 </div>
