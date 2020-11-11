@@ -1,3 +1,6 @@
+* Use CMAKE_CURRENT_SOURCE_DIR
+* Rename VRT_SIZE_HEADER and similar constants to VRT_WORDS_HEADER?
+* Breathe and sphinx?
 * Add tests that write to buffer and then read from the same buffer
 * Add read example
 * Add vrt_validate_header(), vrt_validate_fields(), vrt_validate_context(), vrt_validate_trailer(), ...
