@@ -40,11 +40,12 @@ int main() {
     vrt_init_trailer(&t);
 
     /* Configure */
-    h.packet_type    = VRT_PT_IF_DATA_WITH_STREAM_ID;
-    h.has.trailer    = true;
-    h.packet_size    = SIZE;
-    f.stream_id      = 0xDEADBEEF;
-    t.reference_lock = true;
+    h.packet_type        = VRT_PT_IF_DATA_WITH_STREAM_ID;
+    h.has.trailer        = true;
+    h.packet_size        = SIZE;
+    f.stream_id          = 0xDEADBEEF;
+    t.has.reference_lock = true;
+    t.reference_lock     = true;
 
     /* Write header */
     int32_t offset = 0;
