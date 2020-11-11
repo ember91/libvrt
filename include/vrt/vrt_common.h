@@ -105,6 +105,8 @@ uint32_t vrt_words_context(const vrt_context* context);
  * \param type Packet type.
  *
  * \return True if it is a context packet.
+ *
+ * \warning Undefined behaviour if type is outside bounds.
  */
 inline bool vrt_is_context(vrt_packet_type type) {
     return (STATIC_CAST(uint32_t, type) & 0x4U) != 0;
@@ -116,6 +118,8 @@ inline bool vrt_is_context(vrt_packet_type type) {
  * \param type Packet type.
  *
  * \return True if it has the Stream ID field.
+ *
+ * \warning Undefined behaviour if type is outside bounds.
  */
 inline bool vrt_has_stream_id(vrt_packet_type type) {
     return ((uint32_t)type & 0x5U) != 0;

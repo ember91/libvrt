@@ -168,6 +168,8 @@ vrt_write_context(const context, buf, buf_words)
 And others:
 ```
 vrt_is_context(type)
+inline bool vrt_has_stream_id(type)
+inline bool is_platform_little_endian()
 ```
 More documentation is found in the source code, or in the generated documentation found in `doc/index.html`.
 

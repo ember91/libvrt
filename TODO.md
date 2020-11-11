@@ -1,4 +1,4 @@
-* Add missing tests for functions in vrt_common
+* Add string functions in vrt_string.h
 * Use CMAKE_CURRENT_SOURCE_DIR
 * Rename VRT_SIZE_HEADER and similar constants to VRT_WORDS_HEADER?
 * Breathe and sphinx?

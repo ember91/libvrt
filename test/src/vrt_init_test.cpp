@@ -2,6 +2,7 @@
 
 #include <vrt/vrt_common.h>
 
+/* This is not nice, but whatever... */
 #include <../src/vrt_fixed_point.h>
 
 #include "hex.h"
