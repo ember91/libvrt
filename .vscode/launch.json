@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch Unit tests",
+            "name": "Launch Unit tests",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/Debug/test/run_unit_tests",
@@ -24,10 +24,10 @@
             ]
         },
         {
-            "name": "(gdb) Launch Example",
+            "name": "Launch Example",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/example",
+            "program": "${workspaceFolder}/examples/write_if_data",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
