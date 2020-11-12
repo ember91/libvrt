@@ -1,4 +1,6 @@
-* Add string functions in vrt_string.h
+* Compile with -fvisibility=hidden?
+* context should be renamed to if_data_context to separate it from ext context
+* Remember to validate that packet_size = header + fields for context packets only
 * Use CMAKE_CURRENT_SOURCE_DIR
 * Rename VRT_SIZE_HEADER and similar constants to VRT_WORDS_HEADER?
 * Breathe and sphinx?

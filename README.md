@@ -165,6 +165,14 @@ vrt_write_fields(header, fields, buf, buf_words)
 vrt_write_trailer(const trailer, buf, buf_words)
 vrt_write_context(const context, buf, buf_words)
 ```
+For making string representations:
+```
+vrt_string_packet_type(packet_type)
+vrt_string_tsi(tsi)
+vrt_string_tsf(tsf)
+vrt_string_real_or_complex(real_or_complex)
+vrt_string_data_item_format(data_item_format)
+```
 And others:
 ```
 vrt_is_context(type)
