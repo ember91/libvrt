@@ -4,7 +4,6 @@
 * Header only library
 * Remember to validate that packet_size = header + fields for context packets only
 * Use CMAKE_CURRENT_SOURCE_DIR
-* Rename VRT_SIZE_HEADER and similar constants to VRT_WORDS_HEADER?
 * Breathe and sphinx?
 * Add tests that write to buffer and then read from the same buffer
 * Add read example
