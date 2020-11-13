@@ -114,12 +114,12 @@ $(function() {
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
 <div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="vrt__common_8h.html#ad623c6295952d8d38af85f3a6419067e">  124</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="vrt__common_8h.html#ad623c6295952d8d38af85f3a6419067e">vrt_has_stream_id</a>(<a class="code" href="vrt__types_8h.html#a8b7e0ca74814ff290cb1afee9acc2504">vrt_packet_type</a> type) {</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">return</span> ((uint32_t)type &amp; 0x5U) != 0;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="vrt__common_8h.html#ae4cbfd2e2ff73da3b5ac98171e4626d3">STATIC_CAST</a>(uint32_t, type) &amp; 0x5U) != 0;</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
 <div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="vrt__common_8h.html#ab3d611820863cf24034efefa69f9942f">  133</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="vrt__common_8h.html#ab3d611820863cf24034efefa69f9942f">is_platform_little_endian</a>() {</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keyword">volatile</span> uint32_t i = 0x01234567; <span class="comment">/* Ensure written to memory */</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">return</span> (*((uint8_t*)(&amp;i))) == 0x67;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">return</span> *(uint8_t*)(&amp;i) == 0x67;</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>

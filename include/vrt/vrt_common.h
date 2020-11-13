@@ -122,7 +122,7 @@ inline bool vrt_is_context(vrt_packet_type type) {
  * \warning Undefined behaviour if type is outside bounds.
  */
 inline bool vrt_has_stream_id(vrt_packet_type type) {
-    return ((uint32_t)type & 0x5U) != 0;
+    return (STATIC_CAST(uint32_t, type) & 0x5U) != 0;
 }
 
 /**
@@ -132,7 +132,7 @@ inline bool vrt_has_stream_id(vrt_packet_type type) {
  */
 inline bool is_platform_little_endian() {
     volatile uint32_t i = 0x01234567; /* Ensure written to memory */
-    return (*((uint8_t*)(&i))) == 0x67;
+    return *(uint8_t*)(&i) == 0x67;
 }
 
 #ifdef __cplusplus
