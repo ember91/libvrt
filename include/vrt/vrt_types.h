@@ -493,12 +493,12 @@ typedef struct vrt_ephemeris {
     /** Fractional second timestamp of position fix  as specified by tsf. */
     uint64_t fractional_second_timestamp;
     /**
-     * x-position. Along earth's equator. Positive direction is intersection of equator plane and prime meridian [m].
+     * x-position [m]. Along earth's equator. Positive direction is intersection of equator plane and prime meridian.
      */
     double position_x;
-    /** y-position. Completes a right-handed orthogonal system 90 degrees east of the x-axis [m]. */
+    /** y-position [m]. Completes a right-handed orthogonal system 90 degrees east of the x-axis. */
     double position_y;
-    /** z-position. Directed along earth's rotational axis, where north is positive. [m]. */
+    /** z-position [m]. Directed along earth's rotational axis, where north is positive. */
     double position_z;
     /** Altitude about z-axis [degrees]. Positive rotation is x to y. */
     double altitude_alpha;
@@ -548,8 +548,6 @@ typedef struct vrt_context_association_lists_indicators {
  * Contains association lists.
  */
 typedef struct vrt_context_association_lists {
-    /** Field presence indicators. */
-    vrt_context_association_lists_indicators has;
     /**
      * Number of Stream IDs in source context association list.
      *
@@ -564,6 +562,8 @@ typedef struct vrt_context_association_lists {
     uint16_t system_list_size;
     /** Number of Stream IDs in vector-component association list. */
     uint16_t vector_component_list_size;
+    /** Field presence indicators. */
+    vrt_context_association_lists_indicators has;
     /**
      * Number of Stream IDs in asynchronous-channel context association list.
      *
