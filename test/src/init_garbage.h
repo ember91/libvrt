@@ -25,10 +25,10 @@ void init_fields_garbage(vrt_fields* f);
 void init_trailer_garbage(vrt_trailer* t);
 
 /**
- * Initialize context to an easy to spot, non-default sequence.
+ * Initialize IF context to an easy to spot, non-default sequence.
  *
- * \param c Context.
+ * \param c IF context.
  */
-void init_context_garbage(vrt_context* c);
+void init_if_context_garbage(vrt_if_context* c);
 
 #endif

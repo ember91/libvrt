@@ -54,10 +54,10 @@ int32_t vrt_write_fields(const vrt_header* header, const vrt_fields* fields, voi
 int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_words);
 
 /**
- * Low-level function that writes VRT context section.
+ * Low-level function that writes VRT IF context section.
  *
- * \param context    Context to write.
- * \param buf        Buffer to write to. This must point to the first context section word int the packet, i.e. directly
+ * \param if_context IF context to write.
+ * \param buf        Buffer to write to. This must point to the first context section word in the packet, i.e. directly
  *                   following the fields section.
  * \param buf_words  Size of buf in 32-bit words.
  *
@@ -68,7 +68,7 @@ int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_wo
  *          if_reference_frequency, rf_reference_frequency, rf_reference_frequency_offset, if_band_offset, and
  *          sample_rate, may in rare cases lose precision since double only has 53 bits of precision.
  */
-int32_t vrt_write_context(const vrt_context* context, void* buf, uint32_t buf_words);
+int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32_t buf_words);
 
 #ifdef __cplusplus
 }

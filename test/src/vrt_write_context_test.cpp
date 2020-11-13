@@ -8,589 +8,589 @@
 
 #include "hex.h"
 
-class WriteContextTest : public ::testing::Test {
+class WriteIfContextTest : public ::testing::Test {
    protected:
-    WriteContextTest() : c_(), buf_() {}
+    WriteIfContextTest() : c_(), buf_() {}
 
     void SetUp() override {
-        vrt_init_context(&c_);
+        vrt_init_if_context(&c_);
         buf_.fill(0xBAADF00D);
     }
 
-    vrt_context                c_;
+    vrt_if_context             c_;
     std::array<uint32_t, 1024> buf_;
 };
 
-TEST_F(WriteContextTest, None) {
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 0), VRT_ERR);
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 1), 1);
+TEST_F(WriteIfContextTest, None) {
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0), VRT_ERR);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 1), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, ContextFieldChange) {
+TEST_F(WriteIfContextTest, ContextFieldChange) {
     c_.context_field_change_indicator = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 1), 1);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 1), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x80000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, ReferencePointIdentifier) {
+TEST_F(WriteIfContextTest, ReferencePointIdentifier) {
     c_.has.reference_point_identifier = true;
     c_.reference_point_identifier     = 0xFEFEFEFE;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x40000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xFEFEFEFE));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, Bandwidth) {
+TEST_F(WriteIfContextTest, Bandwidth) {
     c_.has.bandwidth = true;
     c_.bandwidth     = 4097.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x20000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000001));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00100000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, IfReferenceFrequency) {
+TEST_F(WriteIfContextTest, IfReferenceFrequency) {
     c_.has.if_reference_frequency = true;
     c_.if_reference_frequency     = 4097.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x10000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000001));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00100000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RfReferenceFrequency) {
+TEST_F(WriteIfContextTest, RfReferenceFrequency) {
     c_.has.rf_reference_frequency = true;
     c_.rf_reference_frequency     = 4097.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x08000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000001));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00100000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RfReferenceFrequencyOffset) {
+TEST_F(WriteIfContextTest, RfReferenceFrequencyOffset) {
     c_.has.rf_reference_frequency_offset = true;
     c_.rf_reference_frequency_offset     = 4097.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x04000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000001));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00100000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, IfBandOffset) {
+TEST_F(WriteIfContextTest, IfBandOffset) {
     c_.has.if_band_offset = true;
     c_.if_band_offset     = 4097.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x02000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000001));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00100000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, ReferenceLevel) {
+TEST_F(WriteIfContextTest, ReferenceLevel) {
     c_.has.reference_level = true;
     c_.reference_level     = -1.0F;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x01000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0000FF80));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, Gain) {
+TEST_F(WriteIfContextTest, Gain) {
     c_.has.gain    = true;
     c_.gain.stage1 = -1.0F;
     c_.gain.stage2 = 1.0F;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00800000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0080FF80));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, OverRangeCount) {
+TEST_F(WriteIfContextTest, OverRangeCount) {
     c_.has.over_range_count = true;
     c_.over_range_count     = 0xFEFEFEFE;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00400000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xFEFEFEFE));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, SampleRate) {
+TEST_F(WriteIfContextTest, SampleRate) {
     c_.has.sample_rate = true;
     c_.sample_rate     = 4097.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00200000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000001));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00100000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, TimestampAdjustment) {
+TEST_F(WriteIfContextTest, TimestampAdjustment) {
     c_.has.timestamp_adjustment = true;
     c_.timestamp_adjustment     = 0xABABABABBEBEBEBE;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00100000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xABABABAB));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBEBEBEBE));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, TimestampCalibrationTime) {
+TEST_F(WriteIfContextTest, TimestampCalibrationTime) {
     c_.has.timestamp_calibration_time = true;
     c_.timestamp_calibration_time     = 0xABABABAB;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00080000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xABABABAB));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, Temperature) {
+TEST_F(WriteIfContextTest, Temperature) {
     c_.has.temperature = true;
     c_.temperature     = -1.0F;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00040000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0000FFC0));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, DeviceIdentifier) {
+TEST_F(WriteIfContextTest, DeviceIdentifier) {
     c_.has.device_identifier         = true;
     c_.device_identifier.oui         = 0xFFFFFFFF;
     c_.device_identifier.device_code = 0xABAF;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00020000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x0000ABAF));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsHasCalibratedTime) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsHasCalibratedTime) {
     c_.has.state_and_event_indicators                 = true;
     c_.state_and_event_indicators.has.calibrated_time = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x80000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsHasValidData) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsHasValidData) {
     c_.has.state_and_event_indicators            = true;
     c_.state_and_event_indicators.has.valid_data = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x40000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsHasReferenceLock) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsHasReferenceLock) {
     c_.has.state_and_event_indicators                = true;
     c_.state_and_event_indicators.has.reference_lock = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x20000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsHasAgcOrMgc) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsHasAgcOrMgc) {
     c_.has.state_and_event_indicators            = true;
     c_.state_and_event_indicators.has.agc_or_mgc = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x10000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsHasDetectedSignal) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsHasDetectedSignal) {
     c_.has.state_and_event_indicators                 = true;
     c_.state_and_event_indicators.has.detected_signal = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x08000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsHasSpectralInversion) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsHasSpectralInversion) {
     c_.has.state_and_event_indicators                    = true;
     c_.state_and_event_indicators.has.spectral_inversion = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x04000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsHasOverRange) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsHasOverRange) {
     c_.has.state_and_event_indicators            = true;
     c_.state_and_event_indicators.has.over_range = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x02000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsHasSampleLoss) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsHasSampleLoss) {
     c_.has.state_and_event_indicators             = true;
     c_.state_and_event_indicators.has.sample_loss = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x01000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsCalibratedTime) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsCalibratedTime) {
     c_.has.state_and_event_indicators             = true;
     c_.state_and_event_indicators.calibrated_time = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsValidData) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsValidData) {
     c_.has.state_and_event_indicators        = true;
     c_.state_and_event_indicators.valid_data = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsReferenceLock) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsReferenceLock) {
     c_.has.state_and_event_indicators            = true;
     c_.state_and_event_indicators.reference_lock = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsAgcOrMgc) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsAgcOrMgc) {
     c_.has.state_and_event_indicators        = true;
     c_.state_and_event_indicators.agc_or_mgc = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsDetectedSignal) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsDetectedSignal) {
     c_.has.state_and_event_indicators             = true;
     c_.state_and_event_indicators.detected_signal = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsSpectralInversion) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsSpectralInversion) {
     c_.has.state_and_event_indicators                = true;
     c_.state_and_event_indicators.spectral_inversion = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsOverRange) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsOverRange) {
     c_.has.state_and_event_indicators        = true;
     c_.state_and_event_indicators.over_range = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, StateAndEventIndicatorsSampleLoss) {
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsSampleLoss) {
     c_.has.state_and_event_indicators         = true;
     c_.state_and_event_indicators.sample_loss = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsCalibratedTime) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsCalibratedTime) {
     c_.has.state_and_event_indicators                 = true;
     c_.state_and_event_indicators.has.calibrated_time = true;
     c_.state_and_event_indicators.calibrated_time     = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x80080000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsValidData) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsValidData) {
     c_.has.state_and_event_indicators            = true;
     c_.state_and_event_indicators.has.valid_data = true;
     c_.state_and_event_indicators.valid_data     = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x40040000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsReferenceLock) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsReferenceLock) {
     c_.has.state_and_event_indicators                = true;
     c_.state_and_event_indicators.has.reference_lock = true;
     c_.state_and_event_indicators.reference_lock     = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x20020000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsAgcOrMgc) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsAgcOrMgc) {
     c_.has.state_and_event_indicators            = true;
     c_.state_and_event_indicators.has.agc_or_mgc = true;
     c_.state_and_event_indicators.agc_or_mgc     = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x10010000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsDetectedSignal) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsDetectedSignal) {
     c_.has.state_and_event_indicators                 = true;
     c_.state_and_event_indicators.has.detected_signal = true;
     c_.state_and_event_indicators.detected_signal     = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x08008000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsSpectralInversion) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsSpectralInversion) {
     c_.has.state_and_event_indicators                    = true;
     c_.state_and_event_indicators.has.spectral_inversion = true;
     c_.state_and_event_indicators.spectral_inversion     = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x04004000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsOverRange) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsOverRange) {
     c_.has.state_and_event_indicators            = true;
     c_.state_and_event_indicators.has.over_range = true;
     c_.state_and_event_indicators.over_range     = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x02002000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsSampleLoss) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsSampleLoss) {
     c_.has.state_and_event_indicators             = true;
     c_.state_and_event_indicators.has.sample_loss = true;
     c_.state_and_event_indicators.sample_loss     = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x01001000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsUserDefined7) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsUserDefined7) {
     c_.has.state_and_event_indicators           = true;
     c_.state_and_event_indicators.user_defined7 = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000080));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsUserDefined6) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsUserDefined6) {
     c_.has.state_and_event_indicators           = true;
     c_.state_and_event_indicators.user_defined6 = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000040));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsUserDefined5) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsUserDefined5) {
     c_.has.state_and_event_indicators           = true;
     c_.state_and_event_indicators.user_defined5 = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000020));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsUserDefined4) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsUserDefined4) {
     c_.has.state_and_event_indicators           = true;
     c_.state_and_event_indicators.user_defined4 = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000010));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsUserDefined3) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsUserDefined3) {
     c_.has.state_and_event_indicators           = true;
     c_.state_and_event_indicators.user_defined3 = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000008));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsUserDefined2) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsUserDefined2) {
     c_.has.state_and_event_indicators           = true;
     c_.state_and_event_indicators.user_defined2 = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000004));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsUserDefined1) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsUserDefined1) {
     c_.has.state_and_event_indicators           = true;
     c_.state_and_event_indicators.user_defined1 = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000002));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, BothStateAndEventIndicatorsUserDefined0) {
+TEST_F(WriteIfContextTest, BothStateAndEventIndicatorsUserDefined0) {
     c_.has.state_and_event_indicators           = true;
     c_.state_and_event_indicators.user_defined0 = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000001));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, DataPacketPayloadFormatPackingMethod) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatPackingMethod) {
     c_.has.data_packet_payload_format            = true;
     c_.data_packet_payload_format.packing_method = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x80000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, DataPacketPayloadFormatRealOrComplex1) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatRealOrComplex1) {
     c_.has.data_packet_payload_format             = true;
     c_.data_packet_payload_format.real_or_complex = VRT_ROC_COMPLEX_POLAR;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x40000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, DataPacketPayloadFormatRealOrComplex2) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatRealOrComplex2) {
     c_.has.data_packet_payload_format             = true;
     c_.data_packet_payload_format.real_or_complex = static_cast<vrt_real_complex>(3);
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x60000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, DataPacketPayloadFormatDataItemFormat1) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormat1) {
     c_.has.data_packet_payload_format              = true;
     c_.data_packet_payload_format.data_item_format = VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x16000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, DataPacketPayloadFormatDataItemFormat2) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormat2) {
     c_.has.data_packet_payload_format              = true;
     c_.data_packet_payload_format.data_item_format = static_cast<vrt_data_item_format>(31);
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x1F000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, DataPacketPayloadFormatSampleComponentRepeat) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatSampleComponentRepeat) {
     c_.has.data_packet_payload_format                     = true;
     c_.data_packet_payload_format.sample_component_repeat = true;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00800000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, DataPacketPayloadFormatEventTagSize) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatEventTagSize) {
     c_.has.data_packet_payload_format            = true;
     c_.data_packet_payload_format.event_tag_size = 0xFF;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00700000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, DataPacketPayloadFormatChannelTagSize) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatChannelTagSize) {
     c_.has.data_packet_payload_format              = true;
     c_.data_packet_payload_format.channel_tag_size = 0xFF;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x000F0000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, DataPacketPayloadFormatItemPackingFieldSize) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatItemPackingFieldSize) {
     c_.has.data_packet_payload_format                     = true;
     c_.data_packet_payload_format.item_packing_field_size = 0xFF;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000FC0));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, DataPacketPayloadFormatDataItemSize) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemSize) {
     c_.has.data_packet_payload_format            = true;
     c_.data_packet_payload_format.data_item_size = 0xFF;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0000003F));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, DataPacketPayloadFormatRepeatCount) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatRepeatCount) {
     c_.has.data_packet_payload_format          = true;
     c_.data_packet_payload_format.repeat_count = 0xFFFF;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFF0000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, DataPacketPayloadFormatVectorSize) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatVectorSize) {
     c_.has.data_packet_payload_format         = true;
     c_.data_packet_payload_format.vector_size = 0xFFFF;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x0000FFFF));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedGpsGeolocationTsi) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsi) {
     c_.has.formatted_gps_geolocation = true;
     c_.formatted_gps_geolocation.tsi = VRT_TSI_OTHER;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -606,10 +606,10 @@ TEST_F(WriteContextTest, FormattedGpsGeolocationTsi) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedGpsGeolocationTsf) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsf) {
     c_.has.formatted_gps_geolocation = true;
     c_.formatted_gps_geolocation.tsf = VRT_TSF_FREE_RUNNING_COUNT;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -625,10 +625,10 @@ TEST_F(WriteContextTest, FormattedGpsGeolocationTsf) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedGpsGeolocationOui) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationOui) {
     c_.has.formatted_gps_geolocation = true;
     c_.formatted_gps_geolocation.oui = 0xFFFFFFFF;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -644,11 +644,11 @@ TEST_F(WriteContextTest, FormattedGpsGeolocationOui) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedGpsGeolocationIntegerSecondTimestamp) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationIntegerSecondTimestamp) {
     c_.has.formatted_gps_geolocation                      = true;
     c_.formatted_gps_geolocation.tsi                      = VRT_TSI_UTC;
     c_.formatted_gps_geolocation.integer_second_timestamp = 0xABABABAB;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x04000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xABABABAB));
@@ -664,11 +664,11 @@ TEST_F(WriteContextTest, FormattedGpsGeolocationIntegerSecondTimestamp) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedGpsGeolocationFractionalSecondTimestamp) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationFractionalSecondTimestamp) {
     c_.has.formatted_gps_geolocation                         = true;
     c_.formatted_gps_geolocation.tsf                         = VRT_TSF_REAL_TIME;
     c_.formatted_gps_geolocation.fractional_second_timestamp = 0xABABABABBABABABA;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x02000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -684,10 +684,10 @@ TEST_F(WriteContextTest, FormattedGpsGeolocationFractionalSecondTimestamp) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedGpsGeolocationLatitude) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationLatitude) {
     c_.has.formatted_gps_geolocation      = true;
     c_.formatted_gps_geolocation.latitude = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -703,10 +703,10 @@ TEST_F(WriteContextTest, FormattedGpsGeolocationLatitude) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedGpsGeolocationLongitude) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationLongitude) {
     c_.has.formatted_gps_geolocation       = true;
     c_.formatted_gps_geolocation.longitude = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -722,10 +722,10 @@ TEST_F(WriteContextTest, FormattedGpsGeolocationLongitude) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedGpsGeolocationAltitude) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationAltitude) {
     c_.has.formatted_gps_geolocation      = true;
     c_.formatted_gps_geolocation.altitude = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -741,10 +741,10 @@ TEST_F(WriteContextTest, FormattedGpsGeolocationAltitude) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedGpsGeolocationSpeedOverGround) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationSpeedOverGround) {
     c_.has.formatted_gps_geolocation               = true;
     c_.formatted_gps_geolocation.speed_over_ground = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -760,10 +760,10 @@ TEST_F(WriteContextTest, FormattedGpsGeolocationSpeedOverGround) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedGpsGeolocationHeadingAngle) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationHeadingAngle) {
     c_.has.formatted_gps_geolocation           = true;
     c_.formatted_gps_geolocation.heading_angle = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -779,10 +779,10 @@ TEST_F(WriteContextTest, FormattedGpsGeolocationHeadingAngle) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedGpsGeolocationTrackAngle) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationTrackAngle) {
     c_.has.formatted_gps_geolocation         = true;
     c_.formatted_gps_geolocation.track_angle = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -798,10 +798,10 @@ TEST_F(WriteContextTest, FormattedGpsGeolocationTrackAngle) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedGpsGeolocationMagneticVariation) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationMagneticVariation) {
     c_.has.formatted_gps_geolocation                = true;
     c_.formatted_gps_geolocation.magnetic_variation = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -817,10 +817,10 @@ TEST_F(WriteContextTest, FormattedGpsGeolocationMagneticVariation) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedInsGeolocationTsi) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationTsi) {
     c_.has.formatted_ins_geolocation = true;
     c_.formatted_ins_geolocation.tsi = VRT_TSI_OTHER;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -836,10 +836,10 @@ TEST_F(WriteContextTest, FormattedInsGeolocationTsi) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedInsGeolocationTsf) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationTsf) {
     c_.has.formatted_ins_geolocation = true;
     c_.formatted_ins_geolocation.tsf = VRT_TSF_FREE_RUNNING_COUNT;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -855,10 +855,10 @@ TEST_F(WriteContextTest, FormattedInsGeolocationTsf) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedInsGeolocationOui) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationOui) {
     c_.has.formatted_ins_geolocation = true;
     c_.formatted_ins_geolocation.oui = 0xFFFFFFFF;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -874,11 +874,11 @@ TEST_F(WriteContextTest, FormattedInsGeolocationOui) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedInsGeolocationIntegerSecondTimestamp) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationIntegerSecondTimestamp) {
     c_.has.formatted_ins_geolocation                      = true;
     c_.formatted_ins_geolocation.tsi                      = VRT_TSI_UTC;
     c_.formatted_ins_geolocation.integer_second_timestamp = 0xABABABAB;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x04000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xABABABAB));
@@ -894,11 +894,11 @@ TEST_F(WriteContextTest, FormattedInsGeolocationIntegerSecondTimestamp) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedInsGeolocationFractionalSecondTimestamp) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationFractionalSecondTimestamp) {
     c_.has.formatted_ins_geolocation                         = true;
     c_.formatted_ins_geolocation.tsf                         = VRT_TSF_REAL_TIME;
     c_.formatted_ins_geolocation.fractional_second_timestamp = 0xABABABABBABABABA;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x02000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -914,10 +914,10 @@ TEST_F(WriteContextTest, FormattedInsGeolocationFractionalSecondTimestamp) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedInsGeolocationLatitude) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationLatitude) {
     c_.has.formatted_ins_geolocation      = true;
     c_.formatted_ins_geolocation.latitude = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -933,10 +933,10 @@ TEST_F(WriteContextTest, FormattedInsGeolocationLatitude) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedInsGeolocationLongitude) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationLongitude) {
     c_.has.formatted_ins_geolocation       = true;
     c_.formatted_ins_geolocation.longitude = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -952,10 +952,10 @@ TEST_F(WriteContextTest, FormattedInsGeolocationLongitude) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedInsGeolocationAltitude) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationAltitude) {
     c_.has.formatted_ins_geolocation      = true;
     c_.formatted_ins_geolocation.altitude = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -971,10 +971,10 @@ TEST_F(WriteContextTest, FormattedInsGeolocationAltitude) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedInsGeolocationSpeedOverGround) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationSpeedOverGround) {
     c_.has.formatted_ins_geolocation               = true;
     c_.formatted_ins_geolocation.speed_over_ground = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -990,10 +990,10 @@ TEST_F(WriteContextTest, FormattedInsGeolocationSpeedOverGround) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedInsGeolocationHeadingAngle) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationHeadingAngle) {
     c_.has.formatted_ins_geolocation           = true;
     c_.formatted_ins_geolocation.heading_angle = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1009,10 +1009,10 @@ TEST_F(WriteContextTest, FormattedInsGeolocationHeadingAngle) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedInsGeolocationTrackAngle) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationTrackAngle) {
     c_.has.formatted_ins_geolocation         = true;
     c_.formatted_ins_geolocation.track_angle = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1028,10 +1028,10 @@ TEST_F(WriteContextTest, FormattedInsGeolocationTrackAngle) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, FormattedInsGeolocationMagneticVariation) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationMagneticVariation) {
     c_.has.formatted_ins_geolocation                = true;
     c_.formatted_ins_geolocation.magnetic_variation = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 12), 12);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1047,10 +1047,10 @@ TEST_F(WriteContextTest, FormattedInsGeolocationMagneticVariation) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisTsi) {
+TEST_F(WriteIfContextTest, EcefEphemerisTsi) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsi = VRT_TSI_OTHER;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1068,10 +1068,10 @@ TEST_F(WriteContextTest, EcefEphemerisTsi) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisTsf) {
+TEST_F(WriteIfContextTest, EcefEphemerisTsf) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsf = VRT_TSF_FREE_RUNNING_COUNT;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1089,10 +1089,10 @@ TEST_F(WriteContextTest, EcefEphemerisTsf) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisOui) {
+TEST_F(WriteIfContextTest, EcefEphemerisOui) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.oui = 0xFFFFFFFF;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1110,11 +1110,11 @@ TEST_F(WriteContextTest, EcefEphemerisOui) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisIntegerSecondTimestamp) {
+TEST_F(WriteIfContextTest, EcefEphemerisIntegerSecondTimestamp) {
     c_.has.ecef_ephemeris                      = true;
     c_.ecef_ephemeris.tsi                      = VRT_TSI_UTC;
     c_.ecef_ephemeris.integer_second_timestamp = 0xABABABAB;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x04000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xABABABAB));
@@ -1132,11 +1132,11 @@ TEST_F(WriteContextTest, EcefEphemerisIntegerSecondTimestamp) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisFractionalSecondTimestamp) {
+TEST_F(WriteIfContextTest, EcefEphemerisFractionalSecondTimestamp) {
     c_.has.ecef_ephemeris                         = true;
     c_.ecef_ephemeris.tsf                         = VRT_TSF_REAL_TIME;
     c_.ecef_ephemeris.fractional_second_timestamp = 0xABABABABBABABABA;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x02000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1154,10 +1154,10 @@ TEST_F(WriteContextTest, EcefEphemerisFractionalSecondTimestamp) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisPositionX) {
+TEST_F(WriteIfContextTest, EcefEphemerisPositionX) {
     c_.has.ecef_ephemeris        = true;
     c_.ecef_ephemeris.position_x = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1175,10 +1175,10 @@ TEST_F(WriteContextTest, EcefEphemerisPositionX) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisPositionY) {
+TEST_F(WriteIfContextTest, EcefEphemerisPositionY) {
     c_.has.ecef_ephemeris        = true;
     c_.ecef_ephemeris.position_y = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1196,10 +1196,10 @@ TEST_F(WriteContextTest, EcefEphemerisPositionY) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisPositionZ) {
+TEST_F(WriteIfContextTest, EcefEphemerisPositionZ) {
     c_.has.ecef_ephemeris        = true;
     c_.ecef_ephemeris.position_z = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1217,10 +1217,10 @@ TEST_F(WriteContextTest, EcefEphemerisPositionZ) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisAltitudeAlpha) {
+TEST_F(WriteIfContextTest, EcefEphemerisAltitudeAlpha) {
     c_.has.ecef_ephemeris            = true;
     c_.ecef_ephemeris.altitude_alpha = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1238,10 +1238,10 @@ TEST_F(WriteContextTest, EcefEphemerisAltitudeAlpha) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisAltitudeBeta) {
+TEST_F(WriteIfContextTest, EcefEphemerisAltitudeBeta) {
     c_.has.ecef_ephemeris           = true;
     c_.ecef_ephemeris.altitude_beta = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1259,10 +1259,10 @@ TEST_F(WriteContextTest, EcefEphemerisAltitudeBeta) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisAltitudePhi) {
+TEST_F(WriteIfContextTest, EcefEphemerisAltitudePhi) {
     c_.has.ecef_ephemeris          = true;
     c_.ecef_ephemeris.altitude_phi = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1280,10 +1280,10 @@ TEST_F(WriteContextTest, EcefEphemerisAltitudePhi) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisVelocityDx) {
+TEST_F(WriteIfContextTest, EcefEphemerisVelocityDx) {
     c_.has.ecef_ephemeris         = true;
     c_.ecef_ephemeris.velocity_dx = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1301,10 +1301,10 @@ TEST_F(WriteContextTest, EcefEphemerisVelocityDx) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisVelocityDy) {
+TEST_F(WriteIfContextTest, EcefEphemerisVelocityDy) {
     c_.has.ecef_ephemeris         = true;
     c_.ecef_ephemeris.velocity_dy = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1322,10 +1322,10 @@ TEST_F(WriteContextTest, EcefEphemerisVelocityDy) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EcefEphemerisVelocityDz) {
+TEST_F(WriteIfContextTest, EcefEphemerisVelocityDz) {
     c_.has.ecef_ephemeris         = true;
     c_.ecef_ephemeris.velocity_dz = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1343,10 +1343,10 @@ TEST_F(WriteContextTest, EcefEphemerisVelocityDz) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisTsi) {
+TEST_F(WriteIfContextTest, RelativeEphemerisTsi) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsi = VRT_TSI_OTHER;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1364,10 +1364,10 @@ TEST_F(WriteContextTest, RelativeEphemerisTsi) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisTsf) {
+TEST_F(WriteIfContextTest, RelativeEphemerisTsf) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsf = VRT_TSF_FREE_RUNNING_COUNT;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1385,10 +1385,10 @@ TEST_F(WriteContextTest, RelativeEphemerisTsf) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisOui) {
+TEST_F(WriteIfContextTest, RelativeEphemerisOui) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.oui = 0xFFFFFFFF;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1406,11 +1406,11 @@ TEST_F(WriteContextTest, RelativeEphemerisOui) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisIntegerSecondTimestamp) {
+TEST_F(WriteIfContextTest, RelativeEphemerisIntegerSecondTimestamp) {
     c_.has.relative_ephemeris                      = true;
     c_.relative_ephemeris.tsi                      = VRT_TSI_UTC;
     c_.relative_ephemeris.integer_second_timestamp = 0xABABABAB;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x04000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xABABABAB));
@@ -1428,11 +1428,11 @@ TEST_F(WriteContextTest, RelativeEphemerisIntegerSecondTimestamp) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisFractionalSecondTimestamp) {
+TEST_F(WriteIfContextTest, RelativeEphemerisFractionalSecondTimestamp) {
     c_.has.relative_ephemeris                         = true;
     c_.relative_ephemeris.tsf                         = VRT_TSF_REAL_TIME;
     c_.relative_ephemeris.fractional_second_timestamp = 0xABABABABBABABABA;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x02000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1450,10 +1450,10 @@ TEST_F(WriteContextTest, RelativeEphemerisFractionalSecondTimestamp) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisPositionX) {
+TEST_F(WriteIfContextTest, RelativeEphemerisPositionX) {
     c_.has.relative_ephemeris        = true;
     c_.relative_ephemeris.position_x = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1471,10 +1471,10 @@ TEST_F(WriteContextTest, RelativeEphemerisPositionX) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisPositionY) {
+TEST_F(WriteIfContextTest, RelativeEphemerisPositionY) {
     c_.has.relative_ephemeris        = true;
     c_.relative_ephemeris.position_y = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1492,10 +1492,10 @@ TEST_F(WriteContextTest, RelativeEphemerisPositionY) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisPositionZ) {
+TEST_F(WriteIfContextTest, RelativeEphemerisPositionZ) {
     c_.has.relative_ephemeris        = true;
     c_.relative_ephemeris.position_z = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1513,10 +1513,10 @@ TEST_F(WriteContextTest, RelativeEphemerisPositionZ) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisAltitudeAlpha) {
+TEST_F(WriteIfContextTest, RelativeEphemerisAltitudeAlpha) {
     c_.has.relative_ephemeris            = true;
     c_.relative_ephemeris.altitude_alpha = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1534,10 +1534,10 @@ TEST_F(WriteContextTest, RelativeEphemerisAltitudeAlpha) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisAltitudeBeta) {
+TEST_F(WriteIfContextTest, RelativeEphemerisAltitudeBeta) {
     c_.has.relative_ephemeris           = true;
     c_.relative_ephemeris.altitude_beta = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1555,10 +1555,10 @@ TEST_F(WriteContextTest, RelativeEphemerisAltitudeBeta) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisAltitudePhi) {
+TEST_F(WriteIfContextTest, RelativeEphemerisAltitudePhi) {
     c_.has.relative_ephemeris          = true;
     c_.relative_ephemeris.altitude_phi = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1576,10 +1576,10 @@ TEST_F(WriteContextTest, RelativeEphemerisAltitudePhi) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisVelocityDx) {
+TEST_F(WriteIfContextTest, RelativeEphemerisVelocityDx) {
     c_.has.relative_ephemeris         = true;
     c_.relative_ephemeris.velocity_dx = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1597,10 +1597,10 @@ TEST_F(WriteContextTest, RelativeEphemerisVelocityDx) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisVelocityDy) {
+TEST_F(WriteIfContextTest, RelativeEphemerisVelocityDy) {
     c_.has.relative_ephemeris         = true;
     c_.relative_ephemeris.velocity_dy = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1618,10 +1618,10 @@ TEST_F(WriteContextTest, RelativeEphemerisVelocityDy) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, RelativeEphemerisVelocityDz) {
+TEST_F(WriteIfContextTest, RelativeEphemerisVelocityDz) {
     c_.has.relative_ephemeris         = true;
     c_.relative_ephemeris.velocity_dz = 1.0;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 14), 14);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
@@ -1639,30 +1639,30 @@ TEST_F(WriteContextTest, RelativeEphemerisVelocityDz) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EphemerisReferenceIdentifier) {
+TEST_F(WriteIfContextTest, EphemerisReferenceIdentifier) {
     c_.has.ephemeris_reference_identifier = true;
     c_.ephemeris_reference_identifier     = 0xFEFEFEFE;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000400));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xFEFEFEFE));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, GpsAsciiOui) {
+TEST_F(WriteIfContextTest, GpsAsciiOui) {
     c_.has.gps_ascii = true;
     c_.gps_ascii.oui = 0xFFFFFFFF;
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 3), 3);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000200));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, GpsAsciiAscii) {
+TEST_F(WriteIfContextTest, GpsAsciiAscii) {
     c_.has.gps_ascii             = true;
     c_.gps_ascii.number_of_words = 5;
     c_.gps_ascii.ascii           = "What's your name?";
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 8), 8);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 8), 8);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000200));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000005));
@@ -1670,14 +1670,14 @@ TEST_F(WriteContextTest, GpsAsciiAscii) {
     ASSERT_EQ(Hex(buf_[8]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, ContextAssociationListsSource) {
+TEST_F(WriteIfContextTest, ContextAssociationListsSource) {
     c_.has.context_association_lists                             = true;
     c_.context_association_lists.source_list_size                = 0xFFFF;
     std::array<uint32_t, 0x1FF> l                                = {};
     l[0]                                                         = 0xABABABAB;
     l[0x1FE]                                                     = 0xCBCBCBCB;
     c_.context_association_lists.source_context_association_list = l.data();
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 0x202), 0x202);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0x202), 0x202);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000100));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x01FF0000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
@@ -1686,14 +1686,14 @@ TEST_F(WriteContextTest, ContextAssociationListsSource) {
     ASSERT_EQ(Hex(buf_[0x202]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, ContextAssociationListsSystem) {
+TEST_F(WriteIfContextTest, ContextAssociationListsSystem) {
     c_.has.context_association_lists                             = true;
     c_.context_association_lists.system_list_size                = 0xFFFF;
     std::array<uint32_t, 0x1FF> l                                = {};
     l[0]                                                         = 0xABABABAB;
     l[0x1FE]                                                     = 0xCBCBCBCB;
     c_.context_association_lists.system_context_association_list = l.data();
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 0x202), 0x202);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0x202), 0x202);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000100));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x000001FF));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
@@ -1702,14 +1702,14 @@ TEST_F(WriteContextTest, ContextAssociationListsSystem) {
     ASSERT_EQ(Hex(buf_[0x202]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, ContextAssociationListsVectorComponent) {
+TEST_F(WriteIfContextTest, ContextAssociationListsVectorComponent) {
     c_.has.context_association_lists                                       = true;
     c_.context_association_lists.vector_component_list_size                = 0x1FF;
     std::array<uint32_t, 0x1FF> l                                          = {};
     l[0]                                                                   = 0xABABABAB;
     l[0x1FE]                                                               = 0xCBCBCBCB;
     c_.context_association_lists.vector_component_context_association_list = l.data();
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 0x202), 0x202);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0x202), 0x202);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000100));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x01FF0000));
@@ -1718,14 +1718,14 @@ TEST_F(WriteContextTest, ContextAssociationListsVectorComponent) {
     ASSERT_EQ(Hex(buf_[0x202]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, ContextAssociationListsAsynchronous) {
+TEST_F(WriteIfContextTest, ContextAssociationListsAsynchronous) {
     c_.has.context_association_lists                                           = true;
     c_.context_association_lists.asynchronous_channel_list_size                = 0x1FF;
     std::array<uint32_t, 0x1FF> l                                              = {};
     l[0]                                                                       = 0xABABABAB;
     l[0x1FE]                                                                   = 0xCBCBCBCB;
     c_.context_association_lists.asynchronous_channel_context_association_list = l.data();
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 0x202), 0x202);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0x202), 0x202);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000100));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x000001FF));
@@ -1734,7 +1734,7 @@ TEST_F(WriteContextTest, ContextAssociationListsAsynchronous) {
     ASSERT_EQ(Hex(buf_[0x202]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, ContextAssociationListsAsynchronousTag) {
+TEST_F(WriteIfContextTest, ContextAssociationListsAsynchronousTag) {
     c_.has.context_association_lists                                           = true;
     c_.context_association_lists.asynchronous_channel_list_size                = 3;
     c_.context_association_lists.has.asynchronous_channel_tag_list             = true;
@@ -1748,7 +1748,7 @@ TEST_F(WriteContextTest, ContextAssociationListsAsynchronousTag) {
     l2[2]                                                                      = 0xCDCDCDCD;
     c_.context_association_lists.asynchronous_channel_context_association_list = l1.data();
     c_.context_association_lists.asynchronous_channel_tag_list                 = l2.data();
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 9), 9);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 9), 9);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000100));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00008003));
@@ -1761,7 +1761,7 @@ TEST_F(WriteContextTest, ContextAssociationListsAsynchronousTag) {
     ASSERT_EQ(Hex(buf_[9]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteContextTest, EveryOther1) {
+TEST_F(WriteIfContextTest, EveryOther1) {
     c_.context_field_change_indicator = true;
     c_.has.bandwidth                  = true;
     c_.has.rf_reference_frequency     = true;
@@ -1828,8 +1828,8 @@ TEST_F(WriteContextTest, EveryOther1) {
     c_.gps_ascii.number_of_words = 3;
     c_.gps_ascii.ascii           = "Lorem ipsum!";
 
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 43), VRT_ERR);
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 44), 44);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 43), VRT_ERR);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 44), 44);
     ASSERT_EQ(Hex(buf_[0]), Hex(0xAAAAAA00)); /* Context indicators */
     ASSERT_EQ(Hex(buf_[1]), Hex(0xFFFFFFFF)); /* Bandwidth */
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFF00000));
@@ -1876,7 +1876,7 @@ TEST_F(WriteContextTest, EveryOther1) {
     ASSERT_EQ(Hex(buf_[43]), Hex(0x216D7573));
 }
 
-TEST_F(WriteContextTest, EveryOther2) {
+TEST_F(WriteIfContextTest, EveryOther2) {
     c_.has.reference_point_identifier     = true;
     c_.has.if_reference_frequency         = true;
     c_.has.rf_reference_frequency_offset  = true;
@@ -1969,8 +1969,8 @@ TEST_F(WriteContextTest, EveryOther2) {
     c_.context_association_lists.asynchronous_channel_context_association_list = l4.data();
     c_.context_association_lists.asynchronous_channel_tag_list                 = l5.data();
 
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 48), VRT_ERR);
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 49), 49);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 48), VRT_ERR);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 49), 49);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x55555500)); /* Context indicators */
     ASSERT_EQ(Hex(buf_[1]), Hex(0xACACACAC)); /* Reference point identifier */
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF)); /* IF reference frequency */
@@ -2022,7 +2022,7 @@ TEST_F(WriteContextTest, EveryOther2) {
     ASSERT_EQ(Hex(buf_[48]), Hex(0xABCDEF01));
 }
 
-TEST_F(WriteContextTest, All) {
+TEST_F(WriteIfContextTest, All) {
     c_.context_field_change_indicator     = true;
     c_.has.reference_point_identifier     = true;
     c_.has.bandwidth                      = true;
@@ -2179,8 +2179,8 @@ TEST_F(WriteContextTest, All) {
     c_.context_association_lists.asynchronous_channel_context_association_list = l4.data();
     c_.context_association_lists.asynchronous_channel_tag_list                 = l5.data();
 
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 91), VRT_ERR);
-    ASSERT_EQ(vrt_write_context(&c_, buf_.data(), 92), 92);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 91), VRT_ERR);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 92), 92);
     ASSERT_EQ(Hex(buf_[0]), Hex(0xFFFFFF00)); /* Context indicators */
     ASSERT_EQ(Hex(buf_[1]), Hex(0xACACACAC)); /* Reference point identifier */
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF)); /* Bandwidth */

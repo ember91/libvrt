@@ -52,11 +52,11 @@ int32_t vrt_read_fields(const vrt_header* header, const void* buf, uint32_t buf_
 int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trailer);
 
 /**
- * Low-level function that reads VRT context section.
+ * Low-level function that reads VRT IF context section.
  *
  * \param buf        Buffer to read from.
  * \param buf_words  Size of buf in 32-bit words. Starting from the header word.
- * \param context    Context struct to read into.
+ * \param if_context IF context struct to read into.
  *
  * \return Number of read 32-bit words, or VRT_ERR if error.
  *
@@ -65,7 +65,7 @@ int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trail
  *          if_reference_frequency, rf_reference_frequency, rf_reference_frequency_offset, if_band_offset, and
  *          sample_rate, may in rare cases lose precision since double only has 53 bits of precision.
  */
-int32_t vrt_read_context(const void* buf, uint32_t buf_words, vrt_context* context);
+int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context* if_context);
 
 #ifdef __cplusplus
 }

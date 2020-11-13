@@ -16,27 +16,27 @@
 #include "init_garbage.h"
 #include "read_util.h"
 
-class ReadContextTest : public ::testing::Test {
+class ReadIfContextTest : public ::testing::Test {
    protected:
-    ReadContextTest() : c_(), buf_() {}
+    ReadIfContextTest() : c_(), buf_() {}
 
     void SetUp() override {
-        init_context_garbage(&c_);
+        init_if_context_garbage(&c_);
         buf_.fill(0xBAADF00D);
     }
 
-    vrt_context               c_;
+    vrt_if_context            c_;
     std::array<uint32_t, 128> buf_;
 };
 
 /**
- * Assert context values.
+ * Assert IF context values.
  *
- * \param c      Context.
- * \param values Lists non-default values, i.e. values that differ from the vrt_init_context() state, as field name ->
- *               field value.
+ * \param c      IF context.
+ * \param values Lists non-default values, i.e. values that differ from the vrt_init_if_context() state, as field name
+ *               -> field value.
  */
-static void assert_context(const vrt_context& c, const std::map<std::string, std::any>& values) {
+static void assert_if_context(const vrt_if_context& c, const std::map<std::string, std::any>& values) {
     std::map<std::string, std::any> val_cp(values);
     ASSERT_EQ(c.context_field_change_indicator, get_val<bool>(&val_cp, "context_field_change_indicator", false));
     ASSERT_EQ(c.has.reference_point_identifier, get_val<bool>(&val_cp, "has.reference_point_identifier", false));
@@ -307,549 +307,561 @@ static void assert_context(const vrt_context& c, const std::map<std::string, std
     check_remaining(val_cp);
 }
 
-TEST_F(ReadContextTest, ZeroSizeBuffer) {
-    ASSERT_EQ(vrt_read_context(buf_.data(), 0, &c_), VRT_ERR);
+TEST_F(ReadIfContextTest, ZeroSizeBuffer) {
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 0, &c_), VRT_ERR);
 }
 
-TEST_F(ReadContextTest, None) {
+TEST_F(ReadIfContextTest, None) {
     buf_[0] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 1, &c_), 1);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 1, &c_), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {});
+    assert_if_context(c_, {});
 }
 
-TEST_F(ReadContextTest, ContextFieldChangeIndicator) {
+TEST_F(ReadIfContextTest, ContextFieldChangeIndicator) {
     buf_[0] = 0x80000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 1, &c_), 1);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 1, &c_), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"context_field_change_indicator", true}});
+    assert_if_context(c_, {{"context_field_change_indicator", true}});
 }
 
-TEST_F(ReadContextTest, ContextIndicatorsReserved) {
+TEST_F(ReadIfContextTest, ContextIndicatorsReserved) {
     buf_[0] = 0x000000FF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 1, &c_), 1);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 1, &c_), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {});
+    assert_if_context(c_, {});
 }
 
-TEST_F(ReadContextTest, ReferencePointIdentifier) {
+TEST_F(ReadIfContextTest, ReferencePointIdentifier) {
     buf_[0] = 0x40000000;
     buf_[1] = 0xFEDCBA98;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.reference_point_identifier", true}, {"reference_point_identifier", 0xFEDCBA98}});
+    assert_if_context(c_, {{"has.reference_point_identifier", true}, {"reference_point_identifier", 0xFEDCBA98}});
 }
 
-TEST_F(ReadContextTest, Bandwidth) {
+TEST_F(ReadIfContextTest, Bandwidth) {
     buf_[0] = 0x20000000;
     buf_[1] = 0x00000001;
     buf_[2] = 0x00100000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.bandwidth", true}, {"bandwidth", 4097.0}});
+    assert_if_context(c_, {{"has.bandwidth", true}, {"bandwidth", 4097.0}});
 }
 
-TEST_F(ReadContextTest, IfReferenceFrequency) {
+TEST_F(ReadIfContextTest, IfReferenceFrequency) {
     buf_[0] = 0x10000000;
     buf_[1] = 0x00000001;
     buf_[2] = 0x00100000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.if_reference_frequency", true}, {"if_reference_frequency", 4097.0}});
+    assert_if_context(c_, {{"has.if_reference_frequency", true}, {"if_reference_frequency", 4097.0}});
 }
 
-TEST_F(ReadContextTest, RfReferenceFrequency) {
+TEST_F(ReadIfContextTest, RfReferenceFrequency) {
     buf_[0] = 0x08000000;
     buf_[1] = 0x00000001;
     buf_[2] = 0x00100000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.rf_reference_frequency", true}, {"rf_reference_frequency", 4097.0}});
+    assert_if_context(c_, {{"has.rf_reference_frequency", true}, {"rf_reference_frequency", 4097.0}});
 }
 
-TEST_F(ReadContextTest, RfReferenceFrequencyOffset) {
+TEST_F(ReadIfContextTest, RfReferenceFrequencyOffset) {
     buf_[0] = 0x04000000;
     buf_[1] = 0x00000001;
     buf_[2] = 0x00100000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.rf_reference_frequency_offset", true}, {"rf_reference_frequency_offset", 4097.0}});
+    assert_if_context(c_, {{"has.rf_reference_frequency_offset", true}, {"rf_reference_frequency_offset", 4097.0}});
 }
 
-TEST_F(ReadContextTest, IfBandOffset) {
+TEST_F(ReadIfContextTest, IfBandOffset) {
     buf_[0] = 0x02000000;
     buf_[1] = 0x00000001;
     buf_[2] = 0x00100000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.if_band_offset", true}, {"if_band_offset", 4097.0}});
+    assert_if_context(c_, {{"has.if_band_offset", true}, {"if_band_offset", 4097.0}});
 }
 
-TEST_F(ReadContextTest, ReferenceLevel) {
+TEST_F(ReadIfContextTest, ReferenceLevel) {
     buf_[0] = 0x01000000;
     buf_[1] = 0x0000FF80;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.reference_level", true}, {"reference_level", -1.0F}});
+    assert_if_context(c_, {{"has.reference_level", true}, {"reference_level", -1.0F}});
 }
 
-TEST_F(ReadContextTest, Gain) {
+TEST_F(ReadIfContextTest, Gain) {
     buf_[0] = 0x00800000;
     buf_[1] = 0xFF80FF80;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.gain", true}, {"gain.stage2", -1.0F}, {"gain.stage1", -1.0F}});
+    assert_if_context(c_, {{"has.gain", true}, {"gain.stage2", -1.0F}, {"gain.stage1", -1.0F}});
 }
 
-TEST_F(ReadContextTest, OverRangeCount) {
+TEST_F(ReadIfContextTest, OverRangeCount) {
     buf_[0] = 0x00400000;
     buf_[1] = 0xFFEEDDCC;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.over_range_count", true}, {"over_range_count", static_cast<uint32_t>(0xFFEEDDCC)}});
+    assert_if_context(c_, {{"has.over_range_count", true}, {"over_range_count", static_cast<uint32_t>(0xFFEEDDCC)}});
 }
 
-TEST_F(ReadContextTest, SampleRate) {
+TEST_F(ReadIfContextTest, SampleRate) {
     buf_[0] = 0x00200000;
     buf_[1] = 0x00000001;
     buf_[2] = 0x00100000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.sample_rate", true}, {"sample_rate", 4097.0}});
+    assert_if_context(c_, {{"has.sample_rate", true}, {"sample_rate", 4097.0}});
 }
 
-TEST_F(ReadContextTest, TimestampAdjustment) {
+TEST_F(ReadIfContextTest, TimestampAdjustment) {
     buf_[0] = 0x00100000;
     buf_[1] = 0xABCDEFAB;
     buf_[2] = 0xBABBABBA;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(
+    assert_if_context(
         c_, {{"has.timestamp_adjustment", true}, {"timestamp_adjustment", static_cast<uint64_t>(0xABCDEFABBABBABBA)}});
 }
 
-TEST_F(ReadContextTest, TimestampCalibrationTime) {
+TEST_F(ReadIfContextTest, TimestampCalibrationTime) {
     buf_[0] = 0x00080000;
     buf_[1] = 0xABCDEFAB;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.timestamp_calibration_time", true},
-                        {"timestamp_calibration_time", static_cast<uint32_t>(0xABCDEFAB)}});
+    assert_if_context(c_, {{"has.timestamp_calibration_time", true},
+                           {"timestamp_calibration_time", static_cast<uint32_t>(0xABCDEFAB)}});
 }
 
-TEST_F(ReadContextTest, Temperature) {
+TEST_F(ReadIfContextTest, Temperature) {
     buf_[0] = 0x00040000;
     buf_[1] = 0x0000FFC0;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.temperature", true}, {"temperature", -1.0F}});
+    assert_if_context(c_, {{"has.temperature", true}, {"temperature", -1.0F}});
 }
 
-TEST_F(ReadContextTest, DeviceIdentifier) {
+TEST_F(ReadIfContextTest, DeviceIdentifier) {
     buf_[0] = 0x00020000;
     buf_[1] = 0xFFABCDEF;
     buf_[2] = 0xFFFFF045;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.device_identifier", true},
-                        {"device_identifier.oui", static_cast<uint32_t>(0x00ABCDEF)},
-                        {"device_identifier.device_code", static_cast<uint16_t>(0xF045)}});
+    assert_if_context(c_, {{"has.device_identifier", true},
+                           {"device_identifier.oui", static_cast<uint32_t>(0x00ABCDEF)},
+                           {"device_identifier.device_code", static_cast<uint16_t>(0xF045)}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsHasCalibratedTime) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsHasCalibratedTime) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x80000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(
+    assert_if_context(
         c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.has.calibrated_time", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsHasValidData) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsHasValidData) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x40000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.has.valid_data", true}});
+    assert_if_context(c_,
+                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.has.valid_data", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsHasReferenceLock) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsHasReferenceLock) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x20000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_,
-                   {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.has.reference_lock", true}});
+    assert_if_context(
+        c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.has.reference_lock", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsHasAgcOrMgc) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsHasAgcOrMgc) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x10000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.has.agc_or_mgc", true}});
+    assert_if_context(c_,
+                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.has.agc_or_mgc", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsHasDetectedSignal) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsHasDetectedSignal) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x08000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(
+    assert_if_context(
         c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.has.detected_signal", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsHasSpectralInversion) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsHasSpectralInversion) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x04000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(
+    assert_if_context(
         c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.has.spectral_inversion", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsHasOverRange) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsHasOverRange) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x02000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.has.over_range", true}});
+    assert_if_context(c_,
+                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.has.over_range", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsHasSampleLoss) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsHasSampleLoss) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x01000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_,
-                   {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.has.sample_loss", true}});
+    assert_if_context(c_,
+                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.has.sample_loss", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsCalibratedTime) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsCalibratedTime) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00080000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsValidData) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsValidData) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00040000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsReferenceLock) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsReferenceLock) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00020000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsAgcOrMgc) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsAgcOrMgc) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00010000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsDetectedSignal) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsDetectedSignal) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00008000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsSpectralInversion) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsSpectralInversion) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00004000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsOverRange) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsOverRange) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00002000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsSampleLoss) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsSampleLoss) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00001000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true}});
 }
 
-TEST_F(ReadContextTest, BothStateAndEventIndicatorsCalibratedTime) {
+TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsCalibratedTime) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x80080000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true},
-                        {"state_and_event_indicators.has.calibrated_time", true},
-                        {"state_and_event_indicators.calibrated_time", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true},
+                           {"state_and_event_indicators.has.calibrated_time", true},
+                           {"state_and_event_indicators.calibrated_time", true}});
 }
 
-TEST_F(ReadContextTest, BothStateAndEventIndicatorsValidData) {
+TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsValidData) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x40040000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true},
-                        {"state_and_event_indicators.has.valid_data", true},
-                        {"state_and_event_indicators.valid_data", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true},
+                           {"state_and_event_indicators.has.valid_data", true},
+                           {"state_and_event_indicators.valid_data", true}});
 }
 
-TEST_F(ReadContextTest, BothStateAndEventIndicatorsReferenceLock) {
+TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsReferenceLock) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x20020000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true},
-                        {"state_and_event_indicators.has.reference_lock", true},
-                        {"state_and_event_indicators.reference_lock", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true},
+                           {"state_and_event_indicators.has.reference_lock", true},
+                           {"state_and_event_indicators.reference_lock", true}});
 }
 
-TEST_F(ReadContextTest, BothStateAndEventIndicatorsAgcOrMgc) {
+TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsAgcOrMgc) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x10010000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true},
-                        {"state_and_event_indicators.has.agc_or_mgc", true},
-                        {"state_and_event_indicators.agc_or_mgc", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true},
+                           {"state_and_event_indicators.has.agc_or_mgc", true},
+                           {"state_and_event_indicators.agc_or_mgc", true}});
 }
 
-TEST_F(ReadContextTest, BothStateAndEventIndicatorsDetectedSignal) {
+TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsDetectedSignal) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x08008000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true},
-                        {"state_and_event_indicators.has.detected_signal", true},
-                        {"state_and_event_indicators.detected_signal", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true},
+                           {"state_and_event_indicators.has.detected_signal", true},
+                           {"state_and_event_indicators.detected_signal", true}});
 }
 
-TEST_F(ReadContextTest, BothStateAndEventIndicatorsSpectralInversion) {
+TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsSpectralInversion) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x04004000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true},
-                        {"state_and_event_indicators.has.spectral_inversion", true},
-                        {"state_and_event_indicators.spectral_inversion", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true},
+                           {"state_and_event_indicators.has.spectral_inversion", true},
+                           {"state_and_event_indicators.spectral_inversion", true}});
 }
 
-TEST_F(ReadContextTest, BothStateAndEventIndicatorsOverRange) {
+TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsOverRange) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x02002000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true},
-                        {"state_and_event_indicators.has.over_range", true},
-                        {"state_and_event_indicators.over_range", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true},
+                           {"state_and_event_indicators.has.over_range", true},
+                           {"state_and_event_indicators.over_range", true}});
 }
 
-TEST_F(ReadContextTest, BothStateAndEventIndicatorsSampleLoss) {
+TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsSampleLoss) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x01001000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true},
-                        {"state_and_event_indicators.has.sample_loss", true},
-                        {"state_and_event_indicators.sample_loss", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true},
+                           {"state_and_event_indicators.has.sample_loss", true},
+                           {"state_and_event_indicators.sample_loss", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsUserDefined7) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined7) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00000080;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined7", true}});
+    assert_if_context(c_,
+                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined7", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsUserDefined6) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined6) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00000040;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined6", true}});
+    assert_if_context(c_,
+                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined6", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsUserDefined5) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined5) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00000020;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined5", true}});
+    assert_if_context(c_,
+                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined5", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsUserDefine4) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefine4) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00000010;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined4", true}});
+    assert_if_context(c_,
+                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined4", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsUserDefined3) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined3) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00000008;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined3", true}});
+    assert_if_context(c_,
+                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined3", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsUserDefined2) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined2) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00000004;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined2", true}});
+    assert_if_context(c_,
+                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined2", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsUserDefined1) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined1) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00000002;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined1", true}});
+    assert_if_context(c_,
+                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined1", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsUserDefined0) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined0) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00000001;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined0", true}});
+    assert_if_context(c_,
+                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined0", true}});
 }
 
-TEST_F(ReadContextTest, StateAndEventIndicatorsReserved) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsReserved) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x00F00F00;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.state_and_event_indicators", true}});
+    assert_if_context(c_, {{"has.state_and_event_indicators", true}});
 }
 
-TEST_F(ReadContextTest, DataPacketPayloadFormatPackingMethod) {
+TEST_F(ReadIfContextTest, DataPacketPayloadFormatPackingMethod) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x80000000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.data_packet_payload_format", true}, {"data_packet_payload_format.packing_method", true}});
+    assert_if_context(c_,
+                      {{"has.data_packet_payload_format", true}, {"data_packet_payload_format.packing_method", true}});
 }
 
-TEST_F(ReadContextTest, DataPacketPayloadFormatPackingMethodRealOrComplex) {
+TEST_F(ReadIfContextTest, DataPacketPayloadFormatPackingMethodRealOrComplex) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x40000000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.data_packet_payload_format", true},
-                        {"data_packet_payload_format.real_or_complex", VRT_ROC_COMPLEX_POLAR}});
+    assert_if_context(c_, {{"has.data_packet_payload_format", true},
+                           {"data_packet_payload_format.real_or_complex", VRT_ROC_COMPLEX_POLAR}});
 }
 
-TEST_F(ReadContextTest, DataPacketPayloadFormatDataItemFormat) {
+TEST_F(ReadIfContextTest, DataPacketPayloadFormatDataItemFormat) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x16000000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.data_packet_payload_format", true},
-                        {"data_packet_payload_format.data_item_format", VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT}});
+    assert_if_context(c_, {{"has.data_packet_payload_format", true},
+                           {"data_packet_payload_format.data_item_format", VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT}});
 }
 
-TEST_F(ReadContextTest, DataPacketPayloadFormatSampleComponentRepeat) {
+TEST_F(ReadIfContextTest, DataPacketPayloadFormatSampleComponentRepeat) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x00800000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(
+    assert_if_context(
         c_, {{"has.data_packet_payload_format", true}, {"data_packet_payload_format.sample_component_repeat", true}});
 }
 
-TEST_F(ReadContextTest, DataPacketPayloadFormatEventTagSize) {
+TEST_F(ReadIfContextTest, DataPacketPayloadFormatEventTagSize) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x00700000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.data_packet_payload_format", true},
-                        {"data_packet_payload_format.event_tag_size", static_cast<uint8_t>(0x7)}});
+    assert_if_context(c_, {{"has.data_packet_payload_format", true},
+                           {"data_packet_payload_format.event_tag_size", static_cast<uint8_t>(0x7)}});
 }
 
-TEST_F(ReadContextTest, DataPacketPayloadFormatChannelTagSize) {
+TEST_F(ReadIfContextTest, DataPacketPayloadFormatChannelTagSize) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x000F0000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.data_packet_payload_format", true},
-                        {"data_packet_payload_format.channel_tag_size", static_cast<uint8_t>(0xF)}});
+    assert_if_context(c_, {{"has.data_packet_payload_format", true},
+                           {"data_packet_payload_format.channel_tag_size", static_cast<uint8_t>(0xF)}});
 }
 
-TEST_F(ReadContextTest, DataPacketPayloadFormatItemPackingFieldSize) {
+TEST_F(ReadIfContextTest, DataPacketPayloadFormatItemPackingFieldSize) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x00000FC0;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.data_packet_payload_format", true},
-                        {"data_packet_payload_format.item_packing_field_size", static_cast<uint8_t>(0x3F)}});
+    assert_if_context(c_, {{"has.data_packet_payload_format", true},
+                           {"data_packet_payload_format.item_packing_field_size", static_cast<uint8_t>(0x3F)}});
 }
 
-TEST_F(ReadContextTest, DataPacketPayloadFormatDataItemSize) {
+TEST_F(ReadIfContextTest, DataPacketPayloadFormatDataItemSize) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x0000003F;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.data_packet_payload_format", true},
-                        {"data_packet_payload_format.data_item_size", static_cast<uint8_t>(0x3F)}});
+    assert_if_context(c_, {{"has.data_packet_payload_format", true},
+                           {"data_packet_payload_format.data_item_size", static_cast<uint8_t>(0x3F)}});
 }
 
-TEST_F(ReadContextTest, DataPacketPayloadFormatRepeatCount) {
+TEST_F(ReadIfContextTest, DataPacketPayloadFormatRepeatCount) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x00000000;
     buf_[2] = 0xFFFF0000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.data_packet_payload_format", true},
-                        {"data_packet_payload_format.repeat_count", static_cast<uint16_t>(0xFFFF)}});
+    assert_if_context(c_, {{"has.data_packet_payload_format", true},
+                           {"data_packet_payload_format.repeat_count", static_cast<uint16_t>(0xFFFF)}});
 }
 
-TEST_F(ReadContextTest, DataPacketPayloadFormatVectorSize) {
+TEST_F(ReadIfContextTest, DataPacketPayloadFormatVectorSize) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x00000000;
     buf_[2] = 0x0000FFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.data_packet_payload_format", true},
-                        {"data_packet_payload_format.vector_size", static_cast<uint16_t>(0xFFFF)}});
+    assert_if_context(c_, {{"has.data_packet_payload_format", true},
+                           {"data_packet_payload_format.vector_size", static_cast<uint16_t>(0xFFFF)}});
 }
 
-TEST_F(ReadContextTest, Reserved) {
+TEST_F(ReadIfContextTest, Reserved) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x0000F000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.data_packet_payload_format", true}});
+    assert_if_context(c_, {{"has.data_packet_payload_format", true}});
 }
 
-TEST_F(ReadContextTest, FormattedGpsGeolocationTsi) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationTsi) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x0C000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -862,12 +874,12 @@ TEST_F(ReadContextTest, FormattedGpsGeolocationTsi) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.tsi", VRT_TSI_OTHER}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.tsi", VRT_TSI_OTHER}});
 }
 
-TEST_F(ReadContextTest, FormattedGpsGeolocationTsf) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationTsf) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x03000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -880,13 +892,13 @@ TEST_F(ReadContextTest, FormattedGpsGeolocationTsf) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(
+    assert_if_context(
         c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.tsf", VRT_TSF_FREE_RUNNING_COUNT}});
 }
 
-TEST_F(ReadContextTest, FormattedGpsGeolocationOui) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationOui) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00FFFFFF;
     buf_[2]  = 0xFFFFFFFF;
@@ -899,13 +911,13 @@ TEST_F(ReadContextTest, FormattedGpsGeolocationOui) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_gps_geolocation", true},
-                        {"formatted_gps_geolocation.oui", static_cast<uint32_t>(0x00FFFFFF)}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.oui", static_cast<uint32_t>(0x00FFFFFF)}});
 }
 
-TEST_F(ReadContextTest, FormattedGpsGeolocationIntegerSecondTimestamp) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationIntegerSecondTimestamp) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x04000000;
     buf_[2]  = 0xABABABAB;
@@ -918,14 +930,14 @@ TEST_F(ReadContextTest, FormattedGpsGeolocationIntegerSecondTimestamp) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_gps_geolocation", true},
-                        {"formatted_gps_geolocation.tsi", VRT_TSI_UTC},
-                        {"formatted_gps_geolocation.integer_second_timestamp", static_cast<uint32_t>(0xABABABAB)}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.tsi", VRT_TSI_UTC},
+                           {"formatted_gps_geolocation.integer_second_timestamp", static_cast<uint32_t>(0xABABABAB)}});
 }
 
-TEST_F(ReadContextTest, FormattedGpsGeolocationFractionalSecondTimestamp) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationFractionalSecondTimestamp) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x01000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -938,15 +950,15 @@ TEST_F(ReadContextTest, FormattedGpsGeolocationFractionalSecondTimestamp) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(
+    assert_if_context(
         c_, {{"has.formatted_gps_geolocation", true},
              {"formatted_gps_geolocation.tsf", VRT_TSF_SAMPLE_COUNT},
              {"formatted_gps_geolocation.fractional_second_timestamp", static_cast<uint64_t>(0xABABABABABBABBAB)}});
 }
 
-TEST_F(ReadContextTest, FormattedGpsGeolocationIntegerLatitude) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationIntegerLatitude) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -959,12 +971,12 @@ TEST_F(ReadContextTest, FormattedGpsGeolocationIntegerLatitude) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.latitude", 1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.latitude", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedGpsGeolocationIntegerLongitude) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationIntegerLongitude) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -977,12 +989,12 @@ TEST_F(ReadContextTest, FormattedGpsGeolocationIntegerLongitude) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.longitude", 1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.longitude", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedGpsGeolocationIntegerAltitude) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationIntegerAltitude) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -995,12 +1007,12 @@ TEST_F(ReadContextTest, FormattedGpsGeolocationIntegerAltitude) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.altitude", 1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.altitude", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedGpsGeolocationSpeedOverGround) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationSpeedOverGround) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1013,12 +1025,13 @@ TEST_F(ReadContextTest, FormattedGpsGeolocationSpeedOverGround) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.speed_over_ground", 1.0}});
+    assert_if_context(c_,
+                      {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.speed_over_ground", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedGpsGeolocationHeadingAngle) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngle) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1031,12 +1044,12 @@ TEST_F(ReadContextTest, FormattedGpsGeolocationHeadingAngle) {
     buf_[9]  = 0x00400000;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.heading_angle", 1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.heading_angle", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedGpsGeolocationTrackAngle) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngle) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1049,12 +1062,12 @@ TEST_F(ReadContextTest, FormattedGpsGeolocationTrackAngle) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x00400000;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.track_angle", 1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.track_angle", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedGpsGeolocationMagneticVariation) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariation) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1067,13 +1080,13 @@ TEST_F(ReadContextTest, FormattedGpsGeolocationMagneticVariation) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x00400000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_,
-                   {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.magnetic_variation", 1.0}});
+    assert_if_context(c_,
+                      {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.magnetic_variation", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedGpsGeolocationReserved) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationReserved) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0xF0000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1086,12 +1099,12 @@ TEST_F(ReadContextTest, FormattedGpsGeolocationReserved) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_gps_geolocation", true}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}});
 }
 
-TEST_F(ReadContextTest, FormattedInsGeolocationTsi) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationTsi) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x0C000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1104,12 +1117,12 @@ TEST_F(ReadContextTest, FormattedInsGeolocationTsi) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.tsi", VRT_TSI_OTHER}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.tsi", VRT_TSI_OTHER}});
 }
 
-TEST_F(ReadContextTest, FormattedInsGeolocationTsf) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationTsf) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x03000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1122,13 +1135,13 @@ TEST_F(ReadContextTest, FormattedInsGeolocationTsf) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(
+    assert_if_context(
         c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.tsf", VRT_TSF_FREE_RUNNING_COUNT}});
 }
 
-TEST_F(ReadContextTest, FormattedInsGeolocationOui) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationOui) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00FFFFFF;
     buf_[2]  = 0xFFFFFFFF;
@@ -1141,13 +1154,13 @@ TEST_F(ReadContextTest, FormattedInsGeolocationOui) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_ins_geolocation", true},
-                        {"formatted_ins_geolocation.oui", static_cast<uint32_t>(0x00FFFFFF)}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.oui", static_cast<uint32_t>(0x00FFFFFF)}});
 }
 
-TEST_F(ReadContextTest, FormattedInsGeolocationIntegerSecondTimestamp) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationIntegerSecondTimestamp) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x04000000;
     buf_[2]  = 0xABABABAB;
@@ -1160,14 +1173,14 @@ TEST_F(ReadContextTest, FormattedInsGeolocationIntegerSecondTimestamp) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_ins_geolocation", true},
-                        {"formatted_ins_geolocation.tsi", VRT_TSI_UTC},
-                        {"formatted_ins_geolocation.integer_second_timestamp", static_cast<uint32_t>(0xABABABAB)}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.tsi", VRT_TSI_UTC},
+                           {"formatted_ins_geolocation.integer_second_timestamp", static_cast<uint32_t>(0xABABABAB)}});
 }
 
-TEST_F(ReadContextTest, FormattedInsGeolocationFractionalSecondTimestamp) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationFractionalSecondTimestamp) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x01000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1180,15 +1193,15 @@ TEST_F(ReadContextTest, FormattedInsGeolocationFractionalSecondTimestamp) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(
+    assert_if_context(
         c_, {{"has.formatted_ins_geolocation", true},
              {"formatted_ins_geolocation.tsf", VRT_TSF_SAMPLE_COUNT},
              {"formatted_ins_geolocation.fractional_second_timestamp", static_cast<uint64_t>(0xABABABABABBABBAB)}});
 }
 
-TEST_F(ReadContextTest, FormattedInsGeolocationIntegerLatitude) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationIntegerLatitude) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1201,12 +1214,12 @@ TEST_F(ReadContextTest, FormattedInsGeolocationIntegerLatitude) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.latitude", 1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.latitude", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedInsGeolocationIntegerLongitude) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationIntegerLongitude) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1219,12 +1232,12 @@ TEST_F(ReadContextTest, FormattedInsGeolocationIntegerLongitude) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.longitude", 1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.longitude", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedInsGeolocationIntegerAltitude) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationIntegerAltitude) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1237,12 +1250,12 @@ TEST_F(ReadContextTest, FormattedInsGeolocationIntegerAltitude) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.altitude", 1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.altitude", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedInsGeolocationSpeedOverGround) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationSpeedOverGround) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1255,12 +1268,13 @@ TEST_F(ReadContextTest, FormattedInsGeolocationSpeedOverGround) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.speed_over_ground", 1.0}});
+    assert_if_context(c_,
+                      {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.speed_over_ground", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedInsGeolocationHeadingAngle) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngle) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1273,12 +1287,12 @@ TEST_F(ReadContextTest, FormattedInsGeolocationHeadingAngle) {
     buf_[9]  = 0x00400000;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.heading_angle", 1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.heading_angle", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedInsGeolocationTrackAngle) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngle) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1291,12 +1305,12 @@ TEST_F(ReadContextTest, FormattedInsGeolocationTrackAngle) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x00400000;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.track_angle", 1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.track_angle", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedInsGeolocationMagneticVariation) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariation) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1309,13 +1323,13 @@ TEST_F(ReadContextTest, FormattedInsGeolocationMagneticVariation) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x00400000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_,
-                   {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.magnetic_variation", 1.0}});
+    assert_if_context(c_,
+                      {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.magnetic_variation", 1.0}});
 }
 
-TEST_F(ReadContextTest, FormattedInsGeolocationReserved) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationReserved) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0xF0000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1328,12 +1342,12 @@ TEST_F(ReadContextTest, FormattedInsGeolocationReserved) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 12, &c_), 12);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.formatted_ins_geolocation", true}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisTsi) {
+TEST_F(ReadIfContextTest, EcefEphemerisTsi) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x0C000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1348,12 +1362,12 @@ TEST_F(ReadContextTest, EcefEphemerisTsi) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.tsi", VRT_TSI_OTHER}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.tsi", VRT_TSI_OTHER}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisTsf) {
+TEST_F(ReadIfContextTest, EcefEphemerisTsf) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x03000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1368,12 +1382,12 @@ TEST_F(ReadContextTest, EcefEphemerisTsf) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.tsf", VRT_TSF_FREE_RUNNING_COUNT}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.tsf", VRT_TSF_FREE_RUNNING_COUNT}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisEcefOui) {
+TEST_F(ReadIfContextTest, EcefEphemerisEcefOui) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00FFFFFF;
     buf_[2]  = 0xFFFFFFFF;
@@ -1388,12 +1402,12 @@ TEST_F(ReadContextTest, EcefEphemerisEcefOui) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.oui", static_cast<uint32_t>(0x00FFFFFF)}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.oui", static_cast<uint32_t>(0x00FFFFFF)}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisIntegerSecondTimestamp) {
+TEST_F(ReadIfContextTest, EcefEphemerisIntegerSecondTimestamp) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x04000000;
     buf_[2]  = 0xABABABAB;
@@ -1408,14 +1422,14 @@ TEST_F(ReadContextTest, EcefEphemerisIntegerSecondTimestamp) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true},
-                        {"ecef_ephemeris.tsi", VRT_TSI_UTC},
-                        {"ecef_ephemeris.integer_second_timestamp", static_cast<uint32_t>(0xABABABAB)}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true},
+                           {"ecef_ephemeris.tsi", VRT_TSI_UTC},
+                           {"ecef_ephemeris.integer_second_timestamp", static_cast<uint32_t>(0xABABABAB)}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisFractionalSecondTimestamp) {
+TEST_F(ReadIfContextTest, EcefEphemerisFractionalSecondTimestamp) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x01000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1430,14 +1444,14 @@ TEST_F(ReadContextTest, EcefEphemerisFractionalSecondTimestamp) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true},
-                        {"ecef_ephemeris.tsf", VRT_TSF_SAMPLE_COUNT},
-                        {"ecef_ephemeris.fractional_second_timestamp", static_cast<uint64_t>(0xABABABABABBABBAB)}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true},
+                           {"ecef_ephemeris.tsf", VRT_TSF_SAMPLE_COUNT},
+                           {"ecef_ephemeris.fractional_second_timestamp", static_cast<uint64_t>(0xABABABABABBABBAB)}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisPositionX) {
+TEST_F(ReadIfContextTest, EcefEphemerisPositionX) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1452,12 +1466,12 @@ TEST_F(ReadContextTest, EcefEphemerisPositionX) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.position_x", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.position_x", 1.0}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisPositionY) {
+TEST_F(ReadIfContextTest, EcefEphemerisPositionY) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1472,12 +1486,12 @@ TEST_F(ReadContextTest, EcefEphemerisPositionY) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.position_y", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.position_y", 1.0}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisPositionZ) {
+TEST_F(ReadIfContextTest, EcefEphemerisPositionZ) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1492,12 +1506,12 @@ TEST_F(ReadContextTest, EcefEphemerisPositionZ) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.position_z", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.position_z", 1.0}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisAltitudeAlpha) {
+TEST_F(ReadIfContextTest, EcefEphemerisAltitudeAlpha) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1512,12 +1526,12 @@ TEST_F(ReadContextTest, EcefEphemerisAltitudeAlpha) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.altitude_alpha", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.altitude_alpha", 1.0}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisAltitudeBeta) {
+TEST_F(ReadIfContextTest, EcefEphemerisAltitudeBeta) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1532,12 +1546,12 @@ TEST_F(ReadContextTest, EcefEphemerisAltitudeBeta) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.altitude_beta", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.altitude_beta", 1.0}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisAltitudePhi) {
+TEST_F(ReadIfContextTest, EcefEphemerisAltitudePhi) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1552,12 +1566,12 @@ TEST_F(ReadContextTest, EcefEphemerisAltitudePhi) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.altitude_phi", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.altitude_phi", 1.0}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisAltitudeDx) {
+TEST_F(ReadIfContextTest, EcefEphemerisAltitudeDx) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1572,12 +1586,12 @@ TEST_F(ReadContextTest, EcefEphemerisAltitudeDx) {
     buf_[11] = 0x00010000;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.velocity_dx", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.velocity_dx", 1.0}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisAltitudeDy) {
+TEST_F(ReadIfContextTest, EcefEphemerisAltitudeDy) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1592,12 +1606,12 @@ TEST_F(ReadContextTest, EcefEphemerisAltitudeDy) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x00010000;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.velocity_dy", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.velocity_dy", 1.0}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisAltitudeDz) {
+TEST_F(ReadIfContextTest, EcefEphemerisAltitudeDz) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1612,12 +1626,12 @@ TEST_F(ReadContextTest, EcefEphemerisAltitudeDz) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x00010000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.velocity_dz", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.velocity_dz", 1.0}});
 }
 
-TEST_F(ReadContextTest, EcefEphemerisReserved) {
+TEST_F(ReadIfContextTest, EcefEphemerisReserved) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0xF0000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1632,12 +1646,12 @@ TEST_F(ReadContextTest, EcefEphemerisReserved) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ecef_ephemeris", true}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisTsi) {
+TEST_F(ReadIfContextTest, RelativeEphemerisTsi) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x0C000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1652,12 +1666,12 @@ TEST_F(ReadContextTest, RelativeEphemerisTsi) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.tsi", VRT_TSI_OTHER}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.tsi", VRT_TSI_OTHER}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisTsf) {
+TEST_F(ReadIfContextTest, RelativeEphemerisTsf) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x03000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1672,12 +1686,12 @@ TEST_F(ReadContextTest, RelativeEphemerisTsf) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.tsf", VRT_TSF_FREE_RUNNING_COUNT}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.tsf", VRT_TSF_FREE_RUNNING_COUNT}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisEcefOui) {
+TEST_F(ReadIfContextTest, RelativeEphemerisEcefOui) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00FFFFFF;
     buf_[2]  = 0xFFFFFFFF;
@@ -1692,13 +1706,13 @@ TEST_F(ReadContextTest, RelativeEphemerisEcefOui) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_,
-                   {{"has.relative_ephemeris", true}, {"relative_ephemeris.oui", static_cast<uint32_t>(0x00FFFFFF)}});
+    assert_if_context(
+        c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.oui", static_cast<uint32_t>(0x00FFFFFF)}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisIntegerSecondTimestamp) {
+TEST_F(ReadIfContextTest, RelativeEphemerisIntegerSecondTimestamp) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x04000000;
     buf_[2]  = 0xABABABAB;
@@ -1713,14 +1727,14 @@ TEST_F(ReadContextTest, RelativeEphemerisIntegerSecondTimestamp) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true},
-                        {"relative_ephemeris.tsi", VRT_TSI_UTC},
-                        {"relative_ephemeris.integer_second_timestamp", static_cast<uint32_t>(0xABABABAB)}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true},
+                           {"relative_ephemeris.tsi", VRT_TSI_UTC},
+                           {"relative_ephemeris.integer_second_timestamp", static_cast<uint32_t>(0xABABABAB)}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisFractionalSecondTimestamp) {
+TEST_F(ReadIfContextTest, RelativeEphemerisFractionalSecondTimestamp) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x01000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1735,14 +1749,15 @@ TEST_F(ReadContextTest, RelativeEphemerisFractionalSecondTimestamp) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true},
-                        {"relative_ephemeris.tsf", VRT_TSF_SAMPLE_COUNT},
-                        {"relative_ephemeris.fractional_second_timestamp", static_cast<uint64_t>(0xABABABABABBABBAB)}});
+    assert_if_context(c_,
+                      {{"has.relative_ephemeris", true},
+                       {"relative_ephemeris.tsf", VRT_TSF_SAMPLE_COUNT},
+                       {"relative_ephemeris.fractional_second_timestamp", static_cast<uint64_t>(0xABABABABABBABBAB)}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisPositionX) {
+TEST_F(ReadIfContextTest, RelativeEphemerisPositionX) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1757,12 +1772,12 @@ TEST_F(ReadContextTest, RelativeEphemerisPositionX) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.position_x", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.position_x", 1.0}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisPositionY) {
+TEST_F(ReadIfContextTest, RelativeEphemerisPositionY) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1777,12 +1792,12 @@ TEST_F(ReadContextTest, RelativeEphemerisPositionY) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.position_y", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.position_y", 1.0}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisPositionZ) {
+TEST_F(ReadIfContextTest, RelativeEphemerisPositionZ) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1797,12 +1812,12 @@ TEST_F(ReadContextTest, RelativeEphemerisPositionZ) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.position_z", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.position_z", 1.0}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisAltitudeAlpha) {
+TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeAlpha) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1817,12 +1832,12 @@ TEST_F(ReadContextTest, RelativeEphemerisAltitudeAlpha) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.altitude_alpha", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.altitude_alpha", 1.0}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisAltitudeBeta) {
+TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeBeta) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1837,12 +1852,12 @@ TEST_F(ReadContextTest, RelativeEphemerisAltitudeBeta) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.altitude_beta", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.altitude_beta", 1.0}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisAltitudePhi) {
+TEST_F(ReadIfContextTest, RelativeEphemerisAltitudePhi) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1857,12 +1872,12 @@ TEST_F(ReadContextTest, RelativeEphemerisAltitudePhi) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.altitude_phi", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.altitude_phi", 1.0}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisAltitudeDx) {
+TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeDx) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1877,12 +1892,12 @@ TEST_F(ReadContextTest, RelativeEphemerisAltitudeDx) {
     buf_[11] = 0x00010000;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.velocity_dx", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.velocity_dx", 1.0}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisAltitudeDy) {
+TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeDy) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1897,12 +1912,12 @@ TEST_F(ReadContextTest, RelativeEphemerisAltitudeDy) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x00010000;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.velocity_dy", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.velocity_dy", 1.0}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisAltitudeDz) {
+TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeDz) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1917,12 +1932,12 @@ TEST_F(ReadContextTest, RelativeEphemerisAltitudeDz) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x00010000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.velocity_dz", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.velocity_dz", 1.0}});
 }
 
-TEST_F(ReadContextTest, RelativeEphemerisReserved) {
+TEST_F(ReadIfContextTest, RelativeEphemerisReserved) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0xF0000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1937,134 +1952,135 @@ TEST_F(ReadContextTest, RelativeEphemerisReserved) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 14, &c_), 14);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.relative_ephemeris", true}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}});
 }
 
-TEST_F(ReadContextTest, EphemerisReferenceIdentifier) {
+TEST_F(ReadIfContextTest, EphemerisReferenceIdentifier) {
     buf_[0] = 0x00000400;
     buf_[1] = 0xFFFFFFFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 2, &c_), 2);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.ephemeris_reference_identifier", true}, {"ephemeris_reference_identifier", 0xFFFFFFFF}});
+    assert_if_context(c_,
+                      {{"has.ephemeris_reference_identifier", true}, {"ephemeris_reference_identifier", 0xFFFFFFFF}});
 }
 
-TEST_F(ReadContextTest, GpsAsciiOui) {
+TEST_F(ReadIfContextTest, GpsAsciiOui) {
     buf_[0] = 0x00000200;
     buf_[1] = 0x00FFFFFF;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.gps_ascii", true}, {"gps_ascii.oui", static_cast<uint32_t>(0x00FFFFFF)}});
+    assert_if_context(c_, {{"has.gps_ascii", true}, {"gps_ascii.oui", static_cast<uint32_t>(0x00FFFFFF)}});
 }
 
-TEST_F(ReadContextTest, GpsAsciiAscii) {
+TEST_F(ReadIfContextTest, GpsAsciiAscii) {
     buf_[0] = 0x00000200;
     buf_[1] = 0x00000000;
     buf_[2] = 0x00000003;
     std::string str("Raspberry c");
     std::memcpy(buf_.data() + 3, str.c_str(), 3 * 4);
-    ASSERT_EQ(vrt_read_context(buf_.data(), 6, &c_), 6);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 6, &c_), 6);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.gps_ascii", true},
-                        {"gps_ascii.number_of_words", static_cast<uint32_t>(0x00000003)},
-                        {"gps_ascii.ascii", reinterpret_cast<const char*>(buf_.data() + 3)}});
+    assert_if_context(c_, {{"has.gps_ascii", true},
+                           {"gps_ascii.number_of_words", static_cast<uint32_t>(0x00000003)},
+                           {"gps_ascii.ascii", reinterpret_cast<const char*>(buf_.data() + 3)}});
     ASSERT_STREQ(str.c_str(), reinterpret_cast<const char*>(buf_.data() + 3));
 }
 
-TEST_F(ReadContextTest, GpsAsciiReserved) {
+TEST_F(ReadIfContextTest, GpsAsciiReserved) {
     buf_[0] = 0x00000200;
     buf_[1] = 0xFF000000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.gps_ascii", true}});
+    assert_if_context(c_, {{"has.gps_ascii", true}});
 }
 
-TEST_F(ReadContextTest, ContextAssocationListsEmpty) {
+TEST_F(ReadIfContextTest, ContextAssocationListsEmpty) {
     buf_[0] = 0x00000100;
     buf_[1] = 0x00000000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.context_association_lists", true}});
+    assert_if_context(c_, {{"has.context_association_lists", true}});
 }
 
-TEST_F(ReadContextTest, ContextAssocationListsSource) {
+TEST_F(ReadIfContextTest, ContextAssocationListsSource) {
     buf_[0] = 0x00000100;
     buf_[1] = 0xFFFF0000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 514, &c_), 514);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 514, &c_), 514);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.context_association_lists", true},
-                        {"context_association_lists.source_list_size", static_cast<uint16_t>(0x01FF)},
-                        {"context_association_lists.source_context_association_list",
-                         const_cast<const uint32_t*>(buf_.data() + 3)}});
+    assert_if_context(c_, {{"has.context_association_lists", true},
+                           {"context_association_lists.source_list_size", static_cast<uint16_t>(0x01FF)},
+                           {"context_association_lists.source_context_association_list",
+                            const_cast<const uint32_t*>(buf_.data() + 3)}});
 }
 
-TEST_F(ReadContextTest, ContextAssocationListsSystem) {
+TEST_F(ReadIfContextTest, ContextAssocationListsSystem) {
     buf_[0] = 0x00000100;
     buf_[1] = 0x0000FFFF;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 514, &c_), 514);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 514, &c_), 514);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.context_association_lists", true},
-                        {"context_association_lists.system_list_size", static_cast<uint16_t>(0x01FF)},
-                        {"context_association_lists.system_context_association_list",
-                         const_cast<const uint32_t*>(buf_.data() + 3)}});
+    assert_if_context(c_, {{"has.context_association_lists", true},
+                           {"context_association_lists.system_list_size", static_cast<uint16_t>(0x01FF)},
+                           {"context_association_lists.system_context_association_list",
+                            const_cast<const uint32_t*>(buf_.data() + 3)}});
 }
 
-TEST_F(ReadContextTest, ContextAssocationListsVectorComponent) {
+TEST_F(ReadIfContextTest, ContextAssocationListsVectorComponent) {
     buf_[0] = 0x00000100;
     buf_[1] = 0x00000000;
     buf_[2] = 0xFFFF0000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 65538, &c_), 65538);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 65538, &c_), 65538);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.context_association_lists", true},
-                        {"context_association_lists.vector_component_list_size", static_cast<uint16_t>(0xFFFF)},
-                        {"context_association_lists.vector_component_context_association_list",
-                         const_cast<const uint32_t*>(buf_.data() + 3)}});
+    assert_if_context(c_, {{"has.context_association_lists", true},
+                           {"context_association_lists.vector_component_list_size", static_cast<uint16_t>(0xFFFF)},
+                           {"context_association_lists.vector_component_context_association_list",
+                            const_cast<const uint32_t*>(buf_.data() + 3)}});
 }
 
-TEST_F(ReadContextTest, ContextAssocationListsHasChannelTag) {
+TEST_F(ReadIfContextTest, ContextAssocationListsHasChannelTag) {
     buf_[0] = 0x00000100;
     buf_[1] = 0x00000000;
     buf_[2] = 0x00008000;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 3, &c_), 3);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.context_association_lists", true},
-                        {"context_association_lists.has.asynchronous_channel_tag_list", true}});
+    assert_if_context(c_, {{"has.context_association_lists", true},
+                           {"context_association_lists.has.asynchronous_channel_tag_list", true}});
 }
 
-TEST_F(ReadContextTest, ContextAssocationListsContextAssociation) {
+TEST_F(ReadIfContextTest, ContextAssocationListsContextAssociation) {
     buf_[0] = 0x00000100;
     buf_[1] = 0x00000000;
     buf_[2] = 0x00007FFF;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 32770, &c_), 32770);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 32770, &c_), 32770);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.context_association_lists", true},
-                        {"context_association_lists.asynchronous_channel_list_size", static_cast<uint16_t>(0x7FFF)},
-                        {"context_association_lists.asynchronous_channel_context_association_list",
-                         const_cast<const uint32_t*>(buf_.data() + 3)}});
+    assert_if_context(c_, {{"has.context_association_lists", true},
+                           {"context_association_lists.asynchronous_channel_list_size", static_cast<uint16_t>(0x7FFF)},
+                           {"context_association_lists.asynchronous_channel_context_association_list",
+                            const_cast<const uint32_t*>(buf_.data() + 3)}});
 }
 
-TEST_F(ReadContextTest, ContextAssocationListsContextChannelTag) {
+TEST_F(ReadIfContextTest, ContextAssocationListsContextChannelTag) {
     buf_[0] = 0x00000100;
     buf_[1] = 0x00000000;
     buf_[2] = 0x00008003;
-    ASSERT_EQ(vrt_read_context(buf_.data(), 9, &c_), 9);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 9, &c_), 9);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"has.context_association_lists", true},
-                        {"context_association_lists.has.asynchronous_channel_tag_list", true},
-                        {"context_association_lists.asynchronous_channel_list_size", static_cast<uint16_t>(0x0003)},
-                        {"context_association_lists.asynchronous_channel_context_association_list",
-                         const_cast<const uint32_t*>(buf_.data() + 3)},
-                        {"context_association_lists.asynchronous_channel_tag_list",
-                         const_cast<const uint32_t*>(buf_.data() + 6)}});
+    assert_if_context(c_, {{"has.context_association_lists", true},
+                           {"context_association_lists.has.asynchronous_channel_tag_list", true},
+                           {"context_association_lists.asynchronous_channel_list_size", static_cast<uint16_t>(0x0003)},
+                           {"context_association_lists.asynchronous_channel_context_association_list",
+                            const_cast<const uint32_t*>(buf_.data() + 3)},
+                           {"context_association_lists.asynchronous_channel_tag_list",
+                            const_cast<const uint32_t*>(buf_.data() + 6)}});
 }
 
-TEST_F(ReadContextTest, EveryOther1) {
+TEST_F(ReadIfContextTest, EveryOther1) {
     buf_[0]  = 0xAAAAAA00; /* Context indicator field */
     buf_[1]  = 0x00000000;
     buf_[2]  = 0x00100000; /* Bandwidth */
@@ -2110,77 +2126,77 @@ TEST_F(ReadContextTest, EveryOther1) {
     buf_[42] = 0x5A5A5A5A;
     buf_[43] = 0x5A5A5A5A; /* GPS ASCII */
 
-    ASSERT_EQ(vrt_read_context(buf_.data(), 44, &c_), 44);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 44, &c_), 44);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(c_, {{"context_field_change_indicator", true},
-                        {"has.bandwidth", true},
-                        {"has.rf_reference_frequency", true},
-                        {"has.if_band_offset", true},
-                        {"has.gain", true},
-                        {"has.sample_rate", true},
-                        {"has.timestamp_calibration_time", true},
-                        {"has.device_identifier", true},
-                        {"has.data_packet_payload_format", true},
-                        {"has.formatted_ins_geolocation", true},
-                        {"has.relative_ephemeris", true},
-                        {"has.gps_ascii", true},
+    assert_if_context(c_, {{"context_field_change_indicator", true},
+                           {"has.bandwidth", true},
+                           {"has.rf_reference_frequency", true},
+                           {"has.if_band_offset", true},
+                           {"has.gain", true},
+                           {"has.sample_rate", true},
+                           {"has.timestamp_calibration_time", true},
+                           {"has.device_identifier", true},
+                           {"has.data_packet_payload_format", true},
+                           {"has.formatted_ins_geolocation", true},
+                           {"has.relative_ephemeris", true},
+                           {"has.gps_ascii", true},
 
-                        {"bandwidth", 1.0},
-                        {"rf_reference_frequency", 1.0},
-                        {"if_band_offset", 1.0},
-                        {"gain.stage1", 1.0F},
-                        {"gain.stage2", 1.0F},
-                        {"sample_rate", 1.0},
-                        {"timestamp_calibration_time", 0xFFFFFFFF},
+                           {"bandwidth", 1.0},
+                           {"rf_reference_frequency", 1.0},
+                           {"if_band_offset", 1.0},
+                           {"gain.stage1", 1.0F},
+                           {"gain.stage2", 1.0F},
+                           {"sample_rate", 1.0},
+                           {"timestamp_calibration_time", 0xFFFFFFFF},
 
-                        {"device_identifier.oui", static_cast<uint32_t>(0x00FFFFFF)},
-                        {"device_identifier.device_code", static_cast<uint16_t>(0xFFFF)},
+                           {"device_identifier.oui", static_cast<uint32_t>(0x00FFFFFF)},
+                           {"device_identifier.device_code", static_cast<uint16_t>(0xFFFF)},
 
-                        {"data_packet_payload_format.packing_method", true},
-                        {"data_packet_payload_format.real_or_complex", VRT_ROC_COMPLEX_POLAR},
-                        {"data_packet_payload_format.data_item_format", VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT},
-                        {"data_packet_payload_format.sample_component_repeat", true},
-                        {"data_packet_payload_format.event_tag_size", static_cast<uint8_t>(0x07)},
-                        {"data_packet_payload_format.channel_tag_size", static_cast<uint8_t>(0x0F)},
-                        {"data_packet_payload_format.item_packing_field_size", static_cast<uint8_t>(0x3F)},
-                        {"data_packet_payload_format.data_item_size", static_cast<uint8_t>(0x3F)},
-                        {"data_packet_payload_format.repeat_count", static_cast<uint16_t>(0xFFFF)},
-                        {"data_packet_payload_format.vector_size", static_cast<uint16_t>(0xFFFF)},
+                           {"data_packet_payload_format.packing_method", true},
+                           {"data_packet_payload_format.real_or_complex", VRT_ROC_COMPLEX_POLAR},
+                           {"data_packet_payload_format.data_item_format", VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT},
+                           {"data_packet_payload_format.sample_component_repeat", true},
+                           {"data_packet_payload_format.event_tag_size", static_cast<uint8_t>(0x07)},
+                           {"data_packet_payload_format.channel_tag_size", static_cast<uint8_t>(0x0F)},
+                           {"data_packet_payload_format.item_packing_field_size", static_cast<uint8_t>(0x3F)},
+                           {"data_packet_payload_format.data_item_size", static_cast<uint8_t>(0x3F)},
+                           {"data_packet_payload_format.repeat_count", static_cast<uint16_t>(0xFFFF)},
+                           {"data_packet_payload_format.vector_size", static_cast<uint16_t>(0xFFFF)},
 
-                        {"formatted_ins_geolocation.tsi", VRT_TSI_OTHER},
-                        {"formatted_ins_geolocation.tsf", VRT_TSF_FREE_RUNNING_COUNT},
-                        {"formatted_ins_geolocation.oui", static_cast<uint32_t>(0x00FFFFFF)},
-                        {"formatted_ins_geolocation.integer_second_timestamp", 0xABABABAB},
-                        {"formatted_ins_geolocation.fractional_second_timestamp", 0xABABABABABABABAB},
-                        {"formatted_ins_geolocation.latitude", 1.0},
-                        {"formatted_ins_geolocation.longitude", 1.0},
-                        {"formatted_ins_geolocation.altitude", 1.0},
-                        {"formatted_ins_geolocation.speed_over_ground", 1.0},
-                        {"formatted_ins_geolocation.heading_angle", 1.0},
-                        {"formatted_ins_geolocation.track_angle", 1.0},
-                        {"formatted_ins_geolocation.magnetic_variation", 1.0},
+                           {"formatted_ins_geolocation.tsi", VRT_TSI_OTHER},
+                           {"formatted_ins_geolocation.tsf", VRT_TSF_FREE_RUNNING_COUNT},
+                           {"formatted_ins_geolocation.oui", static_cast<uint32_t>(0x00FFFFFF)},
+                           {"formatted_ins_geolocation.integer_second_timestamp", 0xABABABAB},
+                           {"formatted_ins_geolocation.fractional_second_timestamp", 0xABABABABABABABAB},
+                           {"formatted_ins_geolocation.latitude", 1.0},
+                           {"formatted_ins_geolocation.longitude", 1.0},
+                           {"formatted_ins_geolocation.altitude", 1.0},
+                           {"formatted_ins_geolocation.speed_over_ground", 1.0},
+                           {"formatted_ins_geolocation.heading_angle", 1.0},
+                           {"formatted_ins_geolocation.track_angle", 1.0},
+                           {"formatted_ins_geolocation.magnetic_variation", 1.0},
 
-                        {"relative_ephemeris.tsi", VRT_TSI_OTHER},
-                        {"relative_ephemeris.tsf", VRT_TSF_FREE_RUNNING_COUNT},
-                        {"relative_ephemeris.oui", static_cast<uint32_t>(0x00FFFFFF)},
-                        {"relative_ephemeris.integer_second_timestamp", 0xABABABAB},
-                        {"relative_ephemeris.fractional_second_timestamp", 0xABABABABABABABAB},
-                        {"relative_ephemeris.position_x", 1.0},
-                        {"relative_ephemeris.position_y", 1.0},
-                        {"relative_ephemeris.position_z", 1.0},
-                        {"relative_ephemeris.altitude_alpha", 1.0},
-                        {"relative_ephemeris.altitude_beta", 1.0},
-                        {"relative_ephemeris.altitude_phi", 1.0},
-                        {"relative_ephemeris.velocity_dx", 1.0},
-                        {"relative_ephemeris.velocity_dy", 1.0},
-                        {"relative_ephemeris.velocity_dz", 1.0},
+                           {"relative_ephemeris.tsi", VRT_TSI_OTHER},
+                           {"relative_ephemeris.tsf", VRT_TSF_FREE_RUNNING_COUNT},
+                           {"relative_ephemeris.oui", static_cast<uint32_t>(0x00FFFFFF)},
+                           {"relative_ephemeris.integer_second_timestamp", 0xABABABAB},
+                           {"relative_ephemeris.fractional_second_timestamp", 0xABABABABABABABAB},
+                           {"relative_ephemeris.position_x", 1.0},
+                           {"relative_ephemeris.position_y", 1.0},
+                           {"relative_ephemeris.position_z", 1.0},
+                           {"relative_ephemeris.altitude_alpha", 1.0},
+                           {"relative_ephemeris.altitude_beta", 1.0},
+                           {"relative_ephemeris.altitude_phi", 1.0},
+                           {"relative_ephemeris.velocity_dx", 1.0},
+                           {"relative_ephemeris.velocity_dy", 1.0},
+                           {"relative_ephemeris.velocity_dz", 1.0},
 
-                        {"gps_ascii.oui", static_cast<uint32_t>(0x00FFFFFF)},
-                        {"gps_ascii.number_of_words", static_cast<uint32_t>(0x00000003)},
-                        {"gps_ascii.ascii", reinterpret_cast<const char*>(buf_.data() + 41)}});
+                           {"gps_ascii.oui", static_cast<uint32_t>(0x00FFFFFF)},
+                           {"gps_ascii.number_of_words", static_cast<uint32_t>(0x00000003)},
+                           {"gps_ascii.ascii", reinterpret_cast<const char*>(buf_.data() + 41)}});
 }
 
-TEST_F(ReadContextTest, EveryOther2) {
+TEST_F(ReadIfContextTest, EveryOther2) {
     buf_[0]  = 0x55555500; /* Context indicator field */
     buf_[1]  = 0xFFFFFFFF; /* Reference point identifier */
     buf_[2]  = 0x00000000;
@@ -2226,9 +2242,9 @@ TEST_F(ReadContextTest, EveryOther2) {
     buf_[42] = 0x5A5A5A5A;
     buf_[43] = 0x5A5A5A5A; /* Context association lists */
 
-    ASSERT_EQ(vrt_read_context(buf_.data(), 44, &c_), 44);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 44, &c_), 44);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(
+    assert_if_context(
         c_,
         {{"has.reference_point_identifier", true},
          {"has.if_reference_frequency", true},
@@ -2320,7 +2336,7 @@ TEST_F(ReadContextTest, EveryOther2) {
          {"context_association_lists.asynchronous_channel_tag_list", const_cast<const uint32_t*>(buf_.data() + 43)}});
 }
 
-TEST_F(ReadContextTest, All) {
+TEST_F(ReadIfContextTest, All) {
     buf_[0]  = 0xFFFFFF00; /* Context indicator field */
     buf_[1]  = 0xFFFFFFFF; /* Reference point identifier */
     buf_[2]  = 0x00000000;
@@ -2409,9 +2425,9 @@ TEST_F(ReadContextTest, All) {
     buf_[85] = 0x5A5A5A5A;
     buf_[86] = 0x5A5A5A5A; /* Context association lists */
 
-    ASSERT_EQ(vrt_read_context(buf_.data(), 87, &c_), 87);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 87, &c_), 87);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_context(
+    assert_if_context(
         c_,
         {{"context_field_change_indicator", true},
          {"has.reference_point_identifier", true},

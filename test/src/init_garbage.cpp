@@ -51,7 +51,7 @@ void init_trailer_garbage(vrt_trailer* t) {
     t->associated_context_packet_count     = 0x7F;
 }
 
-void init_context_garbage(vrt_context* c) {
+void init_if_context_garbage(vrt_if_context* c) {
     c->context_field_change_indicator     = true;
     c->has.reference_point_identifier     = true;
     c->has.bandwidth                      = true;

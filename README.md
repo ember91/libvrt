@@ -14,11 +14,11 @@ C implementation of an encoder and decoder of the ANSI/VITA 49.0 Radio Transport
 * Heap friendly - No heap allocations
 
 This library uses a packet terminology as follows:
-| Header - 1 word          |
-|--------------------------|
-| Fields - 0 to 6 words    |
-| Data/context section     |
-| Trailer - 1 word         |
+| Header: 1 word       |
+|----------------------|
+| Fields: 0 - 6 words  |
+| Data/context section |
+| Trailer: 0 - 1 words |
 
 Where a 'word' in this context is 32 bits long.
 
@@ -143,27 +143,27 @@ Useful functions for initializing structs to default values are:
 vrt_init_header(header)
 vrt_init_fields(fields)
 vrt_init_trailer(trailer)
-vrt_init_context(context)
+vrt_init_if_context(if_context)
 ```
 For counting size of a packet:
 ```
 vrt_words_fields(header)
 vrt_words_trailer(header)
-vrt_words_context(context)
+vrt_words_if_context(if_context)
 ```
 For reading:
 ```
 vrt_read_header(buf, buf_words, header)
 vrt_read_fields(header, buf, buf_words, fields)
 vrt_read_trailer(buf, buf_words, trailer)
-vrt_read_context(buf, buf_words, context)
+vrt_read_if_context(buf, buf_words, if_context)
 ```
 For writing:
 ```
 vrt_write_header(header, buf, buf_words)
 vrt_write_fields(header, fields, buf, buf_words)
 vrt_write_trailer(const trailer, buf, buf_words)
-vrt_write_context(const context, buf, buf_words)
+vrt_write_if_context(const if_context, buf, buf_words)
 ```
 For making string representations:
 ```
@@ -192,7 +192,7 @@ Some functions may return `VRT_ERR` (-1) if there's an error.
 
 ### Notes
 
-To follow the standard fully one must byte swap before reading and after writing on little endian platforms such as x86 and most ARM CPUs. As of now, there's no support for that in this library. Obviously, header, context, and trailer words must be swapped with 4 byte swaps while the data section depends on the data type.
+To follow the standard fully one must byte swap before reading and after writing on little endian platforms such as x86 and most ARM CPUs. As of now, there's no support for that in this library. Obviously, header, fields section, context, and trailer words must be swapped with 4 byte swaps while the data section depends on the data type.
 
 ## Running tests
 

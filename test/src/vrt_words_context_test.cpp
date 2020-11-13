@@ -2,167 +2,167 @@
 
 #include <vrt/vrt_common.h>
 
-class WordsContextTest : public ::testing::Test {
+class WordsIfContextTest : public ::testing::Test {
    protected:
-    WordsContextTest() : c_() {}
+    WordsIfContextTest() : c_() {}
 
-    void SetUp() override { vrt_init_context(&c_); }
+    void SetUp() override { vrt_init_if_context(&c_); }
 
-    vrt_context c_;
+    vrt_if_context c_;
 };
 
-TEST_F(WordsContextTest, None) {
-    ASSERT_EQ(vrt_words_context(&c_), 1);
+TEST_F(WordsIfContextTest, None) {
+    ASSERT_EQ(vrt_words_if_context(&c_), 1);
 }
 
-TEST_F(WordsContextTest, ReferencePointIdentifier) {
+TEST_F(WordsIfContextTest, ReferencePointIdentifier) {
     c_.has.reference_point_identifier = true;
-    ASSERT_EQ(vrt_words_context(&c_), 2);
+    ASSERT_EQ(vrt_words_if_context(&c_), 2);
 }
 
-TEST_F(WordsContextTest, Bandwidth) {
+TEST_F(WordsIfContextTest, Bandwidth) {
     c_.has.bandwidth = true;
-    ASSERT_EQ(vrt_words_context(&c_), 3);
+    ASSERT_EQ(vrt_words_if_context(&c_), 3);
 }
 
-TEST_F(WordsContextTest, IfReferenceFrequency) {
+TEST_F(WordsIfContextTest, IfReferenceFrequency) {
     c_.has.if_reference_frequency = true;
-    ASSERT_EQ(vrt_words_context(&c_), 3);
+    ASSERT_EQ(vrt_words_if_context(&c_), 3);
 }
 
-TEST_F(WordsContextTest, RfReferenceFrequency) {
+TEST_F(WordsIfContextTest, RfReferenceFrequency) {
     c_.has.rf_reference_frequency = true;
-    ASSERT_EQ(vrt_words_context(&c_), 3);
+    ASSERT_EQ(vrt_words_if_context(&c_), 3);
 }
 
-TEST_F(WordsContextTest, RfReferenceFrequencyOffset) {
+TEST_F(WordsIfContextTest, RfReferenceFrequencyOffset) {
     c_.has.rf_reference_frequency_offset = true;
-    ASSERT_EQ(vrt_words_context(&c_), 3);
+    ASSERT_EQ(vrt_words_if_context(&c_), 3);
 }
 
-TEST_F(WordsContextTest, IfBandOffset) {
+TEST_F(WordsIfContextTest, IfBandOffset) {
     c_.has.if_band_offset = true;
-    ASSERT_EQ(vrt_words_context(&c_), 3);
+    ASSERT_EQ(vrt_words_if_context(&c_), 3);
 }
 
-TEST_F(WordsContextTest, ReferenceLevel) {
+TEST_F(WordsIfContextTest, ReferenceLevel) {
     c_.has.reference_level = true;
-    ASSERT_EQ(vrt_words_context(&c_), 2);
+    ASSERT_EQ(vrt_words_if_context(&c_), 2);
 }
 
-TEST_F(WordsContextTest, Gain) {
+TEST_F(WordsIfContextTest, Gain) {
     c_.has.gain = true;
-    ASSERT_EQ(vrt_words_context(&c_), 2);
+    ASSERT_EQ(vrt_words_if_context(&c_), 2);
 }
 
-TEST_F(WordsContextTest, OverRangeCount) {
+TEST_F(WordsIfContextTest, OverRangeCount) {
     c_.has.over_range_count = true;
-    ASSERT_EQ(vrt_words_context(&c_), 2);
+    ASSERT_EQ(vrt_words_if_context(&c_), 2);
 }
 
-TEST_F(WordsContextTest, SampleRate) {
+TEST_F(WordsIfContextTest, SampleRate) {
     c_.has.sample_rate = true;
-    ASSERT_EQ(vrt_words_context(&c_), 3);
+    ASSERT_EQ(vrt_words_if_context(&c_), 3);
 }
 
-TEST_F(WordsContextTest, TimestampAdjustment) {
+TEST_F(WordsIfContextTest, TimestampAdjustment) {
     c_.has.timestamp_adjustment = true;
-    ASSERT_EQ(vrt_words_context(&c_), 3);
+    ASSERT_EQ(vrt_words_if_context(&c_), 3);
 }
 
-TEST_F(WordsContextTest, CalibrationTime) {
+TEST_F(WordsIfContextTest, CalibrationTime) {
     c_.has.timestamp_calibration_time = true;
-    ASSERT_EQ(vrt_words_context(&c_), 2);
+    ASSERT_EQ(vrt_words_if_context(&c_), 2);
 }
 
-TEST_F(WordsContextTest, Temperature) {
+TEST_F(WordsIfContextTest, Temperature) {
     c_.has.temperature = true;
-    ASSERT_EQ(vrt_words_context(&c_), 2);
+    ASSERT_EQ(vrt_words_if_context(&c_), 2);
 }
 
-TEST_F(WordsContextTest, DeviceIdentifier) {
+TEST_F(WordsIfContextTest, DeviceIdentifier) {
     c_.has.device_identifier = true;
-    ASSERT_EQ(vrt_words_context(&c_), 3);
+    ASSERT_EQ(vrt_words_if_context(&c_), 3);
 }
 
-TEST_F(WordsContextTest, StateAndEventIndicators) {
+TEST_F(WordsIfContextTest, StateAndEventIndicators) {
     c_.has.state_and_event_indicators = true;
-    ASSERT_EQ(vrt_words_context(&c_), 2);
+    ASSERT_EQ(vrt_words_if_context(&c_), 2);
 }
 
-TEST_F(WordsContextTest, DataPacketPayloadFormat) {
+TEST_F(WordsIfContextTest, DataPacketPayloadFormat) {
     c_.has.data_packet_payload_format = true;
-    ASSERT_EQ(vrt_words_context(&c_), 3);
+    ASSERT_EQ(vrt_words_if_context(&c_), 3);
 }
 
-TEST_F(WordsContextTest, FormattedGpsGeolocation) {
+TEST_F(WordsIfContextTest, FormattedGpsGeolocation) {
     c_.has.formatted_gps_geolocation = true;
-    ASSERT_EQ(vrt_words_context(&c_), 12);
+    ASSERT_EQ(vrt_words_if_context(&c_), 12);
 }
 
-TEST_F(WordsContextTest, FormattedInsGeolocation) {
+TEST_F(WordsIfContextTest, FormattedInsGeolocation) {
     c_.has.formatted_ins_geolocation = true;
-    ASSERT_EQ(vrt_words_context(&c_), 12);
+    ASSERT_EQ(vrt_words_if_context(&c_), 12);
 }
 
-TEST_F(WordsContextTest, EcefEphemeris) {
+TEST_F(WordsIfContextTest, EcefEphemeris) {
     c_.has.ecef_ephemeris = true;
-    ASSERT_EQ(vrt_words_context(&c_), 14);
+    ASSERT_EQ(vrt_words_if_context(&c_), 14);
 }
 
-TEST_F(WordsContextTest, RelativeEphemeris) {
+TEST_F(WordsIfContextTest, RelativeEphemeris) {
     c_.has.relative_ephemeris = true;
-    ASSERT_EQ(vrt_words_context(&c_), 14);
+    ASSERT_EQ(vrt_words_if_context(&c_), 14);
 }
 
-TEST_F(WordsContextTest, GpsAsciiNoWords) {
+TEST_F(WordsIfContextTest, GpsAsciiNoWords) {
     c_.has.gps_ascii = true;
-    ASSERT_EQ(vrt_words_context(&c_), 3);
+    ASSERT_EQ(vrt_words_if_context(&c_), 3);
 }
 
-TEST_F(WordsContextTest, GpsAsciiWords) {
+TEST_F(WordsIfContextTest, GpsAsciiWords) {
     c_.has.gps_ascii             = true;
     c_.gps_ascii.number_of_words = 9;
-    ASSERT_EQ(vrt_words_context(&c_), 12);
+    ASSERT_EQ(vrt_words_if_context(&c_), 12);
 }
 
-TEST_F(WordsContextTest, ContextAssociationListsNoLists) {
+TEST_F(WordsIfContextTest, ContextAssociationListsNoLists) {
     c_.has.context_association_lists = true;
-    ASSERT_EQ(vrt_words_context(&c_), 3);
+    ASSERT_EQ(vrt_words_if_context(&c_), 3);
 }
 
-TEST_F(WordsContextTest, ContextAssociationListsSource) {
+TEST_F(WordsIfContextTest, ContextAssociationListsSource) {
     c_.has.context_association_lists              = true;
     c_.context_association_lists.source_list_size = 6;
-    ASSERT_EQ(vrt_words_context(&c_), 9);
+    ASSERT_EQ(vrt_words_if_context(&c_), 9);
 }
 
-TEST_F(WordsContextTest, ContextAssociationListsSystem) {
+TEST_F(WordsIfContextTest, ContextAssociationListsSystem) {
     c_.has.context_association_lists              = true;
     c_.context_association_lists.system_list_size = 5;
-    ASSERT_EQ(vrt_words_context(&c_), 8);
+    ASSERT_EQ(vrt_words_if_context(&c_), 8);
 }
 
-TEST_F(WordsContextTest, ContextAssociationListsVectorComponent) {
+TEST_F(WordsIfContextTest, ContextAssociationListsVectorComponent) {
     c_.has.context_association_lists                        = true;
     c_.context_association_lists.vector_component_list_size = 4;
-    ASSERT_EQ(vrt_words_context(&c_), 7);
+    ASSERT_EQ(vrt_words_if_context(&c_), 7);
 }
 
-TEST_F(WordsContextTest, ContextAssociationListsAsynchronous) {
+TEST_F(WordsIfContextTest, ContextAssociationListsAsynchronous) {
     c_.has.context_association_lists                            = true;
     c_.context_association_lists.asynchronous_channel_list_size = 3;
-    ASSERT_EQ(vrt_words_context(&c_), 6);
+    ASSERT_EQ(vrt_words_if_context(&c_), 6);
 }
 
-TEST_F(WordsContextTest, ContextAssociationListsChannelTag) {
+TEST_F(WordsIfContextTest, ContextAssociationListsChannelTag) {
     c_.has.context_association_lists                               = true;
     c_.context_association_lists.has.asynchronous_channel_tag_list = true;
     c_.context_association_lists.asynchronous_channel_list_size    = 2;
-    ASSERT_EQ(vrt_words_context(&c_), 7);
+    ASSERT_EQ(vrt_words_if_context(&c_), 7);
 }
 
-TEST_F(WordsContextTest, EveryOther1) {
+TEST_F(WordsIfContextTest, EveryOther1) {
     c_.has.reference_point_identifier    = true;
     c_.has.if_reference_frequency        = true;
     c_.has.rf_reference_frequency_offset = true;
@@ -176,10 +176,10 @@ TEST_F(WordsContextTest, EveryOther1) {
     c_.has.gps_ascii                     = true;
     c_.gps_ascii.number_of_words         = 9;
 
-    ASSERT_EQ(vrt_words_context(&c_), 47);
+    ASSERT_EQ(vrt_words_if_context(&c_), 47);
 }
 
-TEST_F(WordsContextTest, EveryOther2) {
+TEST_F(WordsIfContextTest, EveryOther2) {
     c_.has.bandwidth                                               = true;
     c_.has.rf_reference_frequency                                  = true;
     c_.has.if_band_offset                                          = true;
@@ -197,10 +197,10 @@ TEST_F(WordsContextTest, EveryOther2) {
     c_.context_association_lists.has.asynchronous_channel_tag_list = true;
     c_.context_association_lists.asynchronous_channel_list_size    = 3;
 
-    ASSERT_EQ(vrt_words_context(&c_), 62);
+    ASSERT_EQ(vrt_words_if_context(&c_), 62);
 }
 
-TEST_F(WordsContextTest, All) {
+TEST_F(WordsIfContextTest, All) {
     c_.has.reference_point_identifier                              = true;
     c_.has.bandwidth                                               = true;
     c_.has.if_reference_frequency                                  = true;
@@ -230,5 +230,5 @@ TEST_F(WordsContextTest, All) {
     c_.context_association_lists.has.asynchronous_channel_tag_list = true;
     c_.context_association_lists.asynchronous_channel_list_size    = 3;
 
-    ASSERT_EQ(vrt_words_context(&c_), 108);
+    ASSERT_EQ(vrt_words_if_context(&c_), 108);
 }

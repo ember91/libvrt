@@ -69,10 +69,10 @@ TEST(InitTest, InitTrailer) {
 }
 
 TEST(InitTest, InitContext) {
-    vrt_context c;
-    init_context_garbage(&c);
+    vrt_if_context c;
+    init_if_context_garbage(&c);
 
-    vrt_init_context(&c);
+    vrt_init_if_context(&c);
     ASSERT_FALSE(c.context_field_change_indicator);
     ASSERT_FALSE(c.has.reference_point_identifier);
     ASSERT_FALSE(c.has.bandwidth);

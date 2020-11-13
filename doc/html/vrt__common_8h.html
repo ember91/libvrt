@@ -91,14 +91,14 @@ Functions</h2></td></tr>
 <tr class="separator:a9f7f55ea8ca949ef2f0f2033e8b9e896"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac48207b4c8fe750f09efca40d5d12130"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ac48207b4c8fe750f09efca40d5d12130">vrt_init_trailer</a> (<a class="el" href="structvrt__trailer.html">vrt_trailer</a> *trailer)</td></tr>
 <tr class="separator:ac48207b4c8fe750f09efca40d5d12130"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9846ca030bce1a2ace3752fcfb2da581"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a9846ca030bce1a2ace3752fcfb2da581">vrt_init_context</a> (<a class="el" href="structvrt__context.html">vrt_context</a> *context)</td></tr>
-<tr class="separator:a9846ca030bce1a2ace3752fcfb2da581"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17707913c26e86919ef357b8ee303fb8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a17707913c26e86919ef357b8ee303fb8">vrt_init_if_context</a> (<a class="el" href="structvrt__if__context.html">vrt_if_context</a> *if_context)</td></tr>
+<tr class="separator:a17707913c26e86919ef357b8ee303fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8070a11ce64da478e93bd0ec74aaaa89"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a8070a11ce64da478e93bd0ec74aaaa89">vrt_words_fields</a> (const <a class="el" href="structvrt__header.html">vrt_header</a> *header)</td></tr>
 <tr class="separator:a8070a11ce64da478e93bd0ec74aaaa89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18ac9dbeb45b0a28b97160cb30dd3e12"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a18ac9dbeb45b0a28b97160cb30dd3e12">vrt_words_trailer</a> (const <a class="el" href="structvrt__header.html">vrt_header</a> *header)</td></tr>
 <tr class="separator:a18ac9dbeb45b0a28b97160cb30dd3e12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90888a76d829c60729cec718788e060d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a90888a76d829c60729cec718788e060d">vrt_words_context</a> (const <a class="el" href="structvrt__context.html">vrt_context</a> *context)</td></tr>
-<tr class="separator:a90888a76d829c60729cec718788e060d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb62bd0691de8842da2c3e1a6fe47ef0"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#abb62bd0691de8842da2c3e1a6fe47ef0">vrt_words_if_context</a> (const <a class="el" href="structvrt__if__context.html">vrt_if_context</a> *if_context)</td></tr>
+<tr class="separator:abb62bd0691de8842da2c3e1a6fe47ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02b3ce76d3e1969a9338c05dc15f52e0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a02b3ce76d3e1969a9338c05dc15f52e0">vrt_is_context</a> (<a class="el" href="vrt__types_8h.html#a8b7e0ca74814ff290cb1afee9acc2504">vrt_packet_type</a> type)</td></tr>
 <tr class="separator:a02b3ce76d3e1969a9338c05dc15f52e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad623c6295952d8d38af85f3a6419067e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ad623c6295952d8d38af85f3a6419067e">vrt_has_stream_id</a> (<a class="el" href="vrt__types_8h.html#a8b7e0ca74814ff290cb1afee9acc2504">vrt_packet_type</a> type)</td></tr>
@@ -209,31 +209,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a9846ca030bce1a2ace3752fcfb2da581"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9846ca030bce1a2ace3752fcfb2da581">&#9670;&nbsp;</a></span>vrt_init_context()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void vrt_init_context </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structvrt__context.html">vrt_context</a> *&#160;</td>
-          <td class="paramname"><em>context</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Initialize context to a reasonable default state.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">context</td><td>Context. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a9f7f55ea8ca949ef2f0f2033e8b9e896"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9f7f55ea8ca949ef2f0f2033e8b9e896">&#9670;&nbsp;</a></span>vrt_init_fields()</h2>
 
@@ -282,6 +257,31 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Packet size must still be set explicitly to the actual packet size in 32-bit words. </dd></dl>
+
+</div>
+</div>
+<a id="a17707913c26e86919ef357b8ee303fb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17707913c26e86919ef357b8ee303fb8">&#9670;&nbsp;</a></span>vrt_init_if_context()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void vrt_init_if_context </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structvrt__if__context.html">vrt_if_context</a> *&#160;</td>
+          <td class="paramname"><em>if_context</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Initialize IF context to a reasonable default state.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">if_context</td><td>IF context. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -340,34 +340,8 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if it is a context packet.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if it is a IF or Ext context packet.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Undefined behaviour if type is outside bounds. </dd></dl>
-
-</div>
-</div>
-<a id="a90888a76d829c60729cec718788e060d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90888a76d829c60729cec718788e060d">&#9670;&nbsp;</a></span>vrt_words_context()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t vrt_words_context </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structvrt__context.html">vrt_context</a> *&#160;</td>
-          <td class="paramname"><em>context</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Calculate size of context section in 32-bit words.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">context</td><td>Context.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Number of 32-bit words it consists of. </dd></dl>
 
 </div>
 </div>
@@ -394,6 +368,32 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of 32-bit words the fields section consists of. </dd></dl>
+
+</div>
+</div>
+<a id="abb62bd0691de8842da2c3e1a6fe47ef0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb62bd0691de8842da2c3e1a6fe47ef0">&#9670;&nbsp;</a></span>vrt_words_if_context()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t vrt_words_if_context </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structvrt__if__context.html">vrt_if_context</a> *&#160;</td>
+          <td class="paramname"><em>if_context</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Calculate size of IF context section in 32-bit words.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">if_context</td><td>IF context.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of 32-bit words it consists of. </dd></dl>
 
 </div>
 </div>

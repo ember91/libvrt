@@ -54,7 +54,7 @@ inline bool vrt_has_fractional_timestamp(vrt_tsf t) {
 }
 
 /**
- * Calculate partial size in 32-bit words of context section, from the information available in the context indicator
+ * Calculate partial size in 32-bit words of IF context section, from the information available in the context indicator
  * section.
  *
  * \note This does not take the variable sizes from the GPS ASCII as well as Context association lists fields into
@@ -64,7 +64,7 @@ inline bool vrt_has_fractional_timestamp(vrt_tsf t) {
  *
  * \return Number of 32-bit words it consists of.
  */
-uint32_t vrt_words_context_indicator(const vrt_context_indicators* ind);
+uint32_t vrt_words_if_context_indicator(const vrt_context_indicators* ind);
 
 #ifdef __cplusplus
 }

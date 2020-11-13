@@ -21,7 +21,7 @@ extern "C" {
 #define STATIC_CAST(T, X) (T)(X)
 #endif
 
-/* There is no point in adding max sizes for e.g. data body and context, since they can be UINT16_MAX - 1. */
+/* There is no point in adding max sizes for e.g. data body and IF/Ext context, since they can be UINT16_MAX - 1. */
 
 /**
  * Size of header in 32-bit words. Always 1.
@@ -64,11 +64,11 @@ void vrt_init_fields(vrt_fields* fields);
 void vrt_init_trailer(vrt_trailer* trailer);
 
 /**
- * Initialize context to a reasonable default state.
+ * Initialize IF context to a reasonable default state.
  *
- * \param context Context.
+ * \param if_context IF context.
  */
-void vrt_init_context(vrt_context* context);
+void vrt_init_if_context(vrt_if_context* if_context);
 
 /**
  * Calculate size of fields section in 32-bit words.
@@ -91,20 +91,20 @@ uint32_t vrt_words_fields(const vrt_header* header);
 uint32_t vrt_words_trailer(const vrt_header* header);
 
 /**
- * Calculate size of context section in 32-bit words.
+ * Calculate size of IF context section in 32-bit words.
  *
- * \param context Context.
+ * \param if_context IF context.
  *
  * \return Number of 32-bit words it consists of.
  */
-uint32_t vrt_words_context(const vrt_context* context);
+uint32_t vrt_words_if_context(const vrt_if_context* if_context);
 
 /**
  * Check if a specific packet type means it is a context packet.
  *
  * \param type Packet type.
  *
- * \return True if it is a context packet.
+ * \return True if it is a IF or Ext context packet.
  *
  * \warning Undefined behaviour if type is outside bounds.
  */

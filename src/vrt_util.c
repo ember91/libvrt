@@ -7,7 +7,7 @@ extern bool     vrt_has_stream_id(vrt_packet_type type);
 extern bool     vrt_has_integer_timestamp(vrt_tsi t);
 extern bool     vrt_has_fractional_timestamp(vrt_tsf t);
 
-uint32_t vrt_words_context_indicator(const vrt_context_indicators* ind) {
+uint32_t vrt_words_if_context_indicator(const vrt_context_indicators* ind) {
     /* For context indicator field */
     uint32_t words = 1;
 

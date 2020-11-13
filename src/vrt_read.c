@@ -203,14 +203,14 @@ int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trail
 }
 
 /**
- * Read context indicator field into context struct.
+ * Read IF context indicator field into its struct.
  *
  * \param b Word to read from.
- * \param c Context to read into.
+ * \param c IF context to read into.
  *
  * \return Number of read words.
  */
-static uint32_t context_read_indicator_field(uint32_t b, vrt_context* c) {
+static uint32_t if_context_read_indicator_field(uint32_t b, vrt_if_context* c) {
     c->context_field_change_indicator     = vrt_u2b(msk(b, 31, 1));
     c->has.reference_point_identifier     = vrt_u2b(msk(b, 30, 1));
     c->has.bandwidth                      = vrt_u2b(msk(b, 29, 1));
@@ -240,7 +240,7 @@ static uint32_t context_read_indicator_field(uint32_t b, vrt_context* c) {
 }
 
 /**
- * Read context state and event indicator field into context struct.
+ * Read IF context state and event indicator field into its struct.
  *
  * \param has True if it is included.
  * \param b   Word to read from.
@@ -248,7 +248,7 @@ static uint32_t context_read_indicator_field(uint32_t b, vrt_context* c) {
  *
  * \return Number of read words.
  */
-static uint32_t context_read_state_and_event_indicators(bool has, uint32_t b, vrt_state_and_event* s) {
+static uint32_t if_context_read_state_and_event_indicators(bool has, uint32_t b, vrt_state_and_event* s) {
     if (has) {
         s->has.calibrated_time    = vrt_u2b(msk(b, 31, 1));
         s->has.valid_data         = vrt_u2b(msk(b, 30, 1));
@@ -341,7 +341,7 @@ static uint32_t context_read_state_and_event_indicators(bool has, uint32_t b, vr
 }
 
 /**
- * Read context data packet payload format field into context struct.
+ * Read IF context data packet payload format field into its struct.
  *
  * \param has True if it is included.
  * \param b   Buffer to read from.
@@ -349,9 +349,9 @@ static uint32_t context_read_state_and_event_indicators(bool has, uint32_t b, vr
  *
  * \return Number of read words.
  */
-static uint32_t context_read_data_packet_payload_format(bool                            has,
-                                                        const uint32_t*                 b,
-                                                        vrt_data_packet_payload_format* f) {
+static uint32_t if_context_read_data_packet_payload_format(bool                            has,
+                                                           const uint32_t*                 b,
+                                                           vrt_data_packet_payload_format* f) {
     if (has) {
         f->packing_method          = vrt_u2b(msk(b[0], 31, 1));
         f->real_or_complex         = (vrt_real_complex)msk(b[0], 29, 2);
@@ -383,7 +383,7 @@ static uint32_t context_read_data_packet_payload_format(bool                    
 }
 
 /**
- * Read context formatted GPS/INS geolocation field into context struct.
+ * Read IF context formatted GPS/INS geolocation field into its struct.
  *
  * \param has True if it is included.
  * \param b   Buffer to read from.
@@ -391,7 +391,7 @@ static uint32_t context_read_data_packet_payload_format(bool                    
  *
  * \return Number of read words.
  */
-static uint32_t context_read_formatted_geolocation(bool has, const uint32_t* b, vrt_formatted_geolocation* l) {
+static uint32_t if_context_read_formatted_geolocation(bool has, const uint32_t* b, vrt_formatted_geolocation* l) {
     if (has) {
         l->tsi = (vrt_tsi)msk(b[0], 26, 2);
         l->tsf = (vrt_tsf)msk(b[0], 24, 2);
@@ -437,7 +437,7 @@ static uint32_t context_read_formatted_geolocation(bool has, const uint32_t* b, 
 }
 
 /**
- * Read context ephemeris field into context struct.
+ * Read IF context ephemeris field into its struct.
  *
  * \param has True if it is included.
  * \param b   Buffer to read from [0] or [13].
@@ -445,7 +445,7 @@ static uint32_t context_read_formatted_geolocation(bool has, const uint32_t* b, 
  *
  * \return Number of read words.
  */
-static uint32_t context_read_ephemeris(bool has, const uint32_t* b, vrt_ephemeris* e) {
+static uint32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephemeris* e) {
     if (has) {
         e->tsi = (vrt_tsi)msk(b[0], 26, 2);
         e->tsf = (vrt_tsf)msk(b[0], 24, 2);
@@ -496,7 +496,7 @@ static uint32_t context_read_ephemeris(bool has, const uint32_t* b, vrt_ephemeri
 }
 
 /**
- * Read context GPS ASCII field into context struct.
+ * Read IF context GPS ASCII field into its struct.
  *
  * \param has True if it is included.
  * \param b   Buffer to read from.
@@ -504,7 +504,7 @@ static uint32_t context_read_ephemeris(bool has, const uint32_t* b, vrt_ephemeri
  *
  * \return Number of read words.
  */
-static uint32_t context_read_gps_ascii(bool has, const uint32_t* b, vrt_gps_ascii* g) {
+static uint32_t if_context_read_gps_ascii(bool has, const uint32_t* b, vrt_gps_ascii* g) {
     if (has) {
         g->oui             = msk(b[0], 0, 24);
         g->number_of_words = b[1];
@@ -525,7 +525,7 @@ static uint32_t context_read_gps_ascii(bool has, const uint32_t* b, vrt_gps_asci
 }
 
 /**
- * Read context association lists field into context struct.
+ * Read IF context association lists field into its struct.
  *
  * \param has True if it is included.
  * \param b   Buffer to read from.
@@ -533,7 +533,7 @@ static uint32_t context_read_gps_ascii(bool has, const uint32_t* b, vrt_gps_asci
  *
  * \return Number of read words.
  */
-static uint32_t context_read_association_lists(bool has, const uint32_t* b, vrt_context_association_lists* l) {
+static uint32_t if_context_read_association_lists(bool has, const uint32_t* b, vrt_context_association_lists* l) {
     if (has) {
         l->source_list_size                  = (uint16_t)msk(b[0], 16, 9);
         l->system_list_size                  = (uint16_t)msk(b[0], 0, 9);
@@ -592,8 +592,8 @@ static uint32_t context_read_association_lists(bool has, const uint32_t* b, vrt_
     return 0;
 }
 
-int32_t vrt_read_context(const void* buf, uint32_t buf_words, vrt_context* context) {
-    /* Cannot count words here since the context section hasn't been read yet */
+int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context* if_context) {
+    /* Cannot count words here since the IF context section hasn't been read yet */
 
     uint32_t words = 1;
 
@@ -604,128 +604,128 @@ int32_t vrt_read_context(const void* buf, uint32_t buf_words, vrt_context* conte
     const uint32_t* b = (const uint32_t*)buf;
 
     /* Go from msb to lsb. Make sure to zero fields if not present, just to be sure. */
-    b += context_read_indicator_field(b[0], context);
+    b += if_context_read_indicator_field(b[0], if_context);
 
     /* Replace context_words here instead of increasing it */
-    words = vrt_words_context_indicator(&context->has);
+    words = vrt_words_if_context_indicator(&if_context->has);
     if (buf_words < words) {
         return VRT_ERR;
     }
 
-    if (context->has.reference_point_identifier) {
-        context->reference_point_identifier = b[0];
+    if (if_context->has.reference_point_identifier) {
+        if_context->reference_point_identifier = b[0];
         b += 1;
     } else {
-        context->reference_point_identifier = 0;
+        if_context->reference_point_identifier = 0;
     }
-    if (context->has.bandwidth) {
-        context->bandwidth = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+    if (if_context->has.bandwidth) {
+        if_context->bandwidth = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
         b += 2;
     } else {
-        context->bandwidth = 0.0;
+        if_context->bandwidth = 0.0;
     }
-    if (context->has.if_reference_frequency) {
-        context->if_reference_frequency = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+    if (if_context->has.if_reference_frequency) {
+        if_context->if_reference_frequency = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
         b += 2;
     } else {
-        context->if_reference_frequency = 0.0;
+        if_context->if_reference_frequency = 0.0;
     }
-    if (context->has.rf_reference_frequency) {
-        context->rf_reference_frequency = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+    if (if_context->has.rf_reference_frequency) {
+        if_context->rf_reference_frequency = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
         b += 2;
     } else {
-        context->rf_reference_frequency = 0.0;
+        if_context->rf_reference_frequency = 0.0;
     }
-    if (context->has.rf_reference_frequency_offset) {
-        context->rf_reference_frequency_offset = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+    if (if_context->has.rf_reference_frequency_offset) {
+        if_context->rf_reference_frequency_offset = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
         b += 2;
     } else {
-        context->rf_reference_frequency_offset = 0.0;
+        if_context->rf_reference_frequency_offset = 0.0;
     }
-    if (context->has.if_band_offset) {
-        context->if_band_offset = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+    if (if_context->has.if_band_offset) {
+        if_context->if_band_offset = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
         b += 2;
     } else {
-        context->if_band_offset = 0.0;
+        if_context->if_band_offset = 0.0;
     }
-    if (context->has.reference_level) {
-        context->reference_level = vrt_fixed_point_i16_to_float((int16_t)(b[0] & 0x0000FFFFU), 7);
+    if (if_context->has.reference_level) {
+        if_context->reference_level = vrt_fixed_point_i16_to_float((int16_t)(b[0] & 0x0000FFFFU), 7);
         b += 1;
     } else {
-        context->reference_level = 0.0F;
+        if_context->reference_level = 0.0F;
     }
-    if (context->has.gain) {
-        int16_t fp1          = b[0] & 0x0000FFFFU;
-        int16_t fp2          = (b[0] >> 16U) & 0x0000FFFFU;
-        context->gain.stage1 = vrt_fixed_point_i16_to_float(fp1, 7);
-        context->gain.stage2 = vrt_fixed_point_i16_to_float(fp2, 7);
+    if (if_context->has.gain) {
+        int16_t fp1             = b[0] & 0x0000FFFFU;
+        int16_t fp2             = (b[0] >> 16U) & 0x0000FFFFU;
+        if_context->gain.stage1 = vrt_fixed_point_i16_to_float(fp1, 7);
+        if_context->gain.stage2 = vrt_fixed_point_i16_to_float(fp2, 7);
         b += 1;
     } else {
-        context->gain.stage1 = 0.0F;
-        context->gain.stage2 = 0.0F;
+        if_context->gain.stage1 = 0.0F;
+        if_context->gain.stage2 = 0.0F;
     }
-    if (context->has.over_range_count) {
-        context->over_range_count = b[0];
+    if (if_context->has.over_range_count) {
+        if_context->over_range_count = b[0];
         b += 1;
     } else {
-        context->over_range_count = 0;
+        if_context->over_range_count = 0;
     }
-    if (context->has.sample_rate) {
-        context->sample_rate = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+    if (if_context->has.sample_rate) {
+        if_context->sample_rate = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
         b += 2;
     } else {
-        context->sample_rate = 0.0;
+        if_context->sample_rate = 0.0;
     }
-    if (context->has.timestamp_adjustment) {
-        context->timestamp_adjustment = read_uint64(b);
+    if (if_context->has.timestamp_adjustment) {
+        if_context->timestamp_adjustment = read_uint64(b);
         b += 2;
     } else {
-        context->timestamp_adjustment = 0;
+        if_context->timestamp_adjustment = 0;
     }
-    if (context->has.timestamp_calibration_time) {
-        context->timestamp_calibration_time = b[0];
+    if (if_context->has.timestamp_calibration_time) {
+        if_context->timestamp_calibration_time = b[0];
         b += 1;
     } else {
-        context->timestamp_calibration_time = 0;
+        if_context->timestamp_calibration_time = 0;
     }
-    if (context->has.temperature) {
-        context->temperature = vrt_fixed_point_i16_to_float(b[0] & 0x0000FFFFU, 6);
+    if (if_context->has.temperature) {
+        if_context->temperature = vrt_fixed_point_i16_to_float(b[0] & 0x0000FFFFU, 6);
         b += 1;
     } else {
-        context->temperature = 0.0F;
+        if_context->temperature = 0.0F;
     }
-    if (context->has.device_identifier) {
-        context->device_identifier.oui         = msk(b[0], 0, 24);
-        context->device_identifier.device_code = (uint16_t)msk(b[1], 0, 16);
+    if (if_context->has.device_identifier) {
+        if_context->device_identifier.oui         = msk(b[0], 0, 24);
+        if_context->device_identifier.device_code = (uint16_t)msk(b[1], 0, 16);
         b += 2;
     } else {
-        context->device_identifier.oui         = 0;
-        context->device_identifier.device_code = 0;
+        if_context->device_identifier.oui         = 0;
+        if_context->device_identifier.device_code = 0;
     }
-    b += context_read_state_and_event_indicators(context->has.state_and_event_indicators, b[0],
-                                                 &context->state_and_event_indicators);
-    b += context_read_data_packet_payload_format(context->has.data_packet_payload_format, b,
-                                                 &context->data_packet_payload_format);
-    b += context_read_formatted_geolocation(context->has.formatted_gps_geolocation, b,
-                                            &context->formatted_gps_geolocation);
-    b += context_read_formatted_geolocation(context->has.formatted_ins_geolocation, b,
-                                            &context->formatted_ins_geolocation);
-    b += context_read_ephemeris(context->has.ecef_ephemeris, b, &context->ecef_ephemeris);
-    b += context_read_ephemeris(context->has.relative_ephemeris, b, &context->relative_ephemeris);
-    if (context->has.ephemeris_reference_identifier) {
-        context->ephemeris_reference_identifier = b[0];
+    b += if_context_read_state_and_event_indicators(if_context->has.state_and_event_indicators, b[0],
+                                                    &if_context->state_and_event_indicators);
+    b += if_context_read_data_packet_payload_format(if_context->has.data_packet_payload_format, b,
+                                                    &if_context->data_packet_payload_format);
+    b += if_context_read_formatted_geolocation(if_context->has.formatted_gps_geolocation, b,
+                                               &if_context->formatted_gps_geolocation);
+    b += if_context_read_formatted_geolocation(if_context->has.formatted_ins_geolocation, b,
+                                               &if_context->formatted_ins_geolocation);
+    b += if_context_read_ephemeris(if_context->has.ecef_ephemeris, b, &if_context->ecef_ephemeris);
+    b += if_context_read_ephemeris(if_context->has.relative_ephemeris, b, &if_context->relative_ephemeris);
+    if (if_context->has.ephemeris_reference_identifier) {
+        if_context->ephemeris_reference_identifier = b[0];
         b += 1;
     } else {
-        context->ephemeris_reference_identifier = 0;
+        if_context->ephemeris_reference_identifier = 0;
     }
 
-    uint32_t gps_ascii_words = context_read_gps_ascii(context->has.gps_ascii, b, &context->gps_ascii);
+    uint32_t gps_ascii_words = if_context_read_gps_ascii(if_context->has.gps_ascii, b, &if_context->gps_ascii);
     b += gps_ascii_words;
     words += gps_ascii_words;
 
     /* No need to increase b here since it is last */
-    words +=
-        context_read_association_lists(context->has.context_association_lists, b, &context->context_association_lists);
+    words += if_context_read_association_lists(if_context->has.context_association_lists, b,
+                                               &if_context->context_association_lists);
 
     return (int32_t)words;
 }

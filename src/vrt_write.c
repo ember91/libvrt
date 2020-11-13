@@ -162,14 +162,14 @@ int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_wo
 }
 
 /**
- * Write context indicator field to buffer.
+ * Write IF context indicator field to buffer.
  *
- * \param c Context to write.
+ * \param c IF context to write.
  * \param b Buffer to write to.
  *
  * \return Number of written words.
  */
-static uint32_t context_write_context_indicator_field(const vrt_context* c, uint32_t* b) {
+static uint32_t if_context_write_context_indicator_field(const vrt_if_context* c, uint32_t* b) {
     /* Zero reserved bits */
     b[0] = 0;
 
@@ -202,7 +202,7 @@ static uint32_t context_write_context_indicator_field(const vrt_context* c, uint
 }
 
 /**
- * Write context state and event indicator field to buffer.
+ * Write IF context state and event indicator field to buffer.
  *
  * \param has True if it is included.
  * \param s   State and event fields struct to write.
@@ -210,7 +210,7 @@ static uint32_t context_write_context_indicator_field(const vrt_context* c, uint
  *
  * \return Number of written words.
  */
-static uint32_t context_write_state_and_event_indicator_field(bool has, const vrt_state_and_event* s, uint32_t* b) {
+static uint32_t if_context_write_state_and_event_indicator_field(bool has, const vrt_state_and_event* s, uint32_t* b) {
     if (has) {
         /* Zero reserved bits */
         b[0] = 0;
@@ -264,7 +264,7 @@ static uint32_t context_write_state_and_event_indicator_field(bool has, const vr
 }
 
 /**
- * Write context data packet payload format field to buffer.
+ * Write IF context data packet payload format field to buffer.
  *
  * \param has True if it is included.
  * \param f   Data packet payload format struct to write.
@@ -272,9 +272,9 @@ static uint32_t context_write_state_and_event_indicator_field(bool has, const vr
  *
  * \return Number of written words.
  */
-static uint32_t context_write_data_packet_payload_format(bool                                  has,
-                                                         const vrt_data_packet_payload_format* f,
-                                                         uint32_t*                             b) {
+static uint32_t if_context_write_data_packet_payload_format(bool                                  has,
+                                                            const vrt_data_packet_payload_format* f,
+                                                            uint32_t*                             b) {
     if (has) {
         /* Zero reserved bits */
         b[0] = 0;
@@ -297,7 +297,7 @@ static uint32_t context_write_data_packet_payload_format(bool                   
 }
 
 /**
- * Write context formatted GPS/INS geolocation field to buffer.
+ * Write IF context formatted GPS/INS geolocation field to buffer.
  *
  * \param has True if it is included.
  * \param g   GPS/INS geolocation field to write.
@@ -305,7 +305,7 @@ static uint32_t context_write_data_packet_payload_format(bool                   
  *
  * \return Number of written words.
  */
-static uint32_t context_write_formatted_geolocation(bool has, const vrt_formatted_geolocation* g, uint32_t* b) {
+static uint32_t if_context_write_formatted_geolocation(bool has, const vrt_formatted_geolocation* g, uint32_t* b) {
     if (has) {
         /* Zero reserved bits */
         b[0] = 0;
@@ -331,7 +331,7 @@ static uint32_t context_write_formatted_geolocation(bool has, const vrt_formatte
 }
 
 /**
- * Write context ephemeris field to buffer.
+ * Write IF context ephemeris field to buffer.
  *
  * \param has True if it is included.
  * \param e   Ephemeris struct to write.
@@ -339,7 +339,7 @@ static uint32_t context_write_formatted_geolocation(bool has, const vrt_formatte
  *
  * \return Number of written words.
  */
-static uint32_t context_write_ephemeris(bool has, const vrt_ephemeris* e, uint32_t* b) {
+static uint32_t if_context_write_ephemeris(bool has, const vrt_ephemeris* e, uint32_t* b) {
     if (has) {
         /* Zero reserved bits */
         b[0] = 0;
@@ -366,7 +366,7 @@ static uint32_t context_write_ephemeris(bool has, const vrt_ephemeris* e, uint32
 }
 
 /**
- * Write context GPS ASCII field to buffer.
+ * Write IF context GPS ASCII field to buffer.
  *
  * \param has True if it is included.
  * \param g   GPS ASCII struct to write.
@@ -374,7 +374,7 @@ static uint32_t context_write_ephemeris(bool has, const vrt_ephemeris* e, uint32
  *
  * \return Number of written words.
  */
-static uint32_t context_write_gps_ascii(bool has, const vrt_gps_ascii* g, uint32_t* b) {
+static uint32_t if_context_write_gps_ascii(bool has, const vrt_gps_ascii* g, uint32_t* b) {
     if (has) {
         b[0] = msk(g->oui, 0, 24);
         b[1] = g->number_of_words;
@@ -391,13 +391,13 @@ static uint32_t context_write_gps_ascii(bool has, const vrt_gps_ascii* g, uint32
 }
 
 /**
- * Write context association lists field to buffer.
+ * Write IF context association lists field to buffer.
  *
  * \param has True if it is included.
  * \param l   Context association lists struct to write.
  * \param b   Buffer to write to.
  */
-static void context_write_context_association_lists(bool has, const vrt_context_association_lists* l, uint32_t* b) {
+static void if_context_write_context_association_lists(bool has, const vrt_context_association_lists* l, uint32_t* b) {
     if (has) {
         uint16_t sz1 = (uint16_t)msk(l->source_list_size, 0, 9);
         uint16_t sz2 = (uint16_t)msk(l->system_list_size, 0, 9);
@@ -421,8 +421,8 @@ static void context_write_context_association_lists(bool has, const vrt_context_
     }
 }
 
-int32_t vrt_write_context(const vrt_context* context, void* buf, uint32_t buf_words) {
-    const uint32_t words = vrt_words_context(context);
+int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32_t buf_words) {
+    const uint32_t words = vrt_words_if_context(if_context);
 
     /* Check if buf size is sufficient */
     if (buf_words < words) {
@@ -431,83 +431,83 @@ int32_t vrt_write_context(const vrt_context* context, void* buf, uint32_t buf_wo
 
     uint32_t* b = (uint32_t*)buf;
 
-    b += context_write_context_indicator_field(context, b);
-    if (context->has.reference_point_identifier) {
-        b[0] = context->reference_point_identifier;
+    b += if_context_write_context_indicator_field(if_context, b);
+    if (if_context->has.reference_point_identifier) {
+        b[0] = if_context->reference_point_identifier;
         b += 1;
     }
-    if (context->has.bandwidth) {
-        write_uint64((uint64_t)vrt_double_to_fixed_point_i64(context->bandwidth, 20), b);
+    if (if_context->has.bandwidth) {
+        write_uint64((uint64_t)vrt_double_to_fixed_point_i64(if_context->bandwidth, 20), b);
         b += 2;
     }
-    if (context->has.if_reference_frequency) {
-        write_uint64((uint64_t)vrt_double_to_fixed_point_i64(context->if_reference_frequency, 20), b);
+    if (if_context->has.if_reference_frequency) {
+        write_uint64((uint64_t)vrt_double_to_fixed_point_i64(if_context->if_reference_frequency, 20), b);
         b += 2;
     }
-    if (context->has.rf_reference_frequency) {
-        write_uint64((uint64_t)vrt_double_to_fixed_point_i64(context->rf_reference_frequency, 20), b);
+    if (if_context->has.rf_reference_frequency) {
+        write_uint64((uint64_t)vrt_double_to_fixed_point_i64(if_context->rf_reference_frequency, 20), b);
         b += 2;
     }
-    if (context->has.rf_reference_frequency_offset) {
-        write_uint64((uint64_t)vrt_double_to_fixed_point_i64(context->rf_reference_frequency_offset, 20), b);
+    if (if_context->has.rf_reference_frequency_offset) {
+        write_uint64((uint64_t)vrt_double_to_fixed_point_i64(if_context->rf_reference_frequency_offset, 20), b);
         b += 2;
     }
-    if (context->has.if_band_offset) {
-        write_uint64((uint64_t)vrt_double_to_fixed_point_i64(context->if_band_offset, 20), b);
+    if (if_context->has.if_band_offset) {
+        write_uint64((uint64_t)vrt_double_to_fixed_point_i64(if_context->if_band_offset, 20), b);
         b += 2;
     }
-    if (context->has.reference_level) {
-        b[0] = (uint32_t)vrt_float_to_fixed_point_i16(context->reference_level, 7) & 0x0000FFFFU;
+    if (if_context->has.reference_level) {
+        b[0] = (uint32_t)vrt_float_to_fixed_point_i16(if_context->reference_level, 7) & 0x0000FFFFU;
         b += 1;
     }
-    if (context->has.gain) {
-        b[0] = ((int32_t)msk(vrt_float_to_fixed_point_i16(context->gain.stage2, 7), 16, 16) & 0xFFFF0000) |
-               ((int32_t)vrt_float_to_fixed_point_i16(context->gain.stage1, 7) & 0x0000FFFF);
+    if (if_context->has.gain) {
+        b[0] = ((int32_t)msk(vrt_float_to_fixed_point_i16(if_context->gain.stage2, 7), 16, 16) & 0xFFFF0000) |
+               ((int32_t)vrt_float_to_fixed_point_i16(if_context->gain.stage1, 7) & 0x0000FFFF);
         b += 1;
     }
-    if (context->has.over_range_count) {
-        b[0] = context->over_range_count;
+    if (if_context->has.over_range_count) {
+        b[0] = if_context->over_range_count;
         b += 1;
     }
-    if (context->has.sample_rate) {
-        write_uint64((uint64_t)vrt_double_to_fixed_point_i64(context->sample_rate, 20), b);
+    if (if_context->has.sample_rate) {
+        write_uint64((uint64_t)vrt_double_to_fixed_point_i64(if_context->sample_rate, 20), b);
         b += 2;
     }
-    if (context->has.timestamp_adjustment) {
-        write_uint64(context->timestamp_adjustment, b);
+    if (if_context->has.timestamp_adjustment) {
+        write_uint64(if_context->timestamp_adjustment, b);
         b += 2;
     }
-    if (context->has.timestamp_calibration_time) {
-        b[0] = context->timestamp_calibration_time;
+    if (if_context->has.timestamp_calibration_time) {
+        b[0] = if_context->timestamp_calibration_time;
         b += 1;
     }
-    if (context->has.temperature) {
-        b[0] = (int32_t)vrt_float_to_fixed_point_i16(context->temperature, 6) & 0x0000FFFF;
+    if (if_context->has.temperature) {
+        b[0] = (int32_t)vrt_float_to_fixed_point_i16(if_context->temperature, 6) & 0x0000FFFF;
         b += 1;
     }
-    if (context->has.device_identifier) {
-        b[0] = msk(context->device_identifier.oui, 0, 24);
-        b[1] = context->device_identifier.device_code;
+    if (if_context->has.device_identifier) {
+        b[0] = msk(if_context->device_identifier.oui, 0, 24);
+        b[1] = if_context->device_identifier.device_code;
         b += 2;
     }
-    b += context_write_state_and_event_indicator_field(context->has.state_and_event_indicators,
-                                                       &context->state_and_event_indicators, b);
-    b += context_write_data_packet_payload_format(context->has.data_packet_payload_format,
-                                                  &context->data_packet_payload_format, b);
-    b += context_write_formatted_geolocation(context->has.formatted_gps_geolocation,
-                                             &context->formatted_gps_geolocation, b);
-    b += context_write_formatted_geolocation(context->has.formatted_ins_geolocation,
-                                             &context->formatted_ins_geolocation, b);
-    b += context_write_ephemeris(context->has.ecef_ephemeris, &context->ecef_ephemeris, b);
-    b += context_write_ephemeris(context->has.relative_ephemeris, &context->relative_ephemeris, b);
-    if (context->has.ephemeris_reference_identifier) {
-        b[0] = context->ephemeris_reference_identifier;
+    b += if_context_write_state_and_event_indicator_field(if_context->has.state_and_event_indicators,
+                                                          &if_context->state_and_event_indicators, b);
+    b += if_context_write_data_packet_payload_format(if_context->has.data_packet_payload_format,
+                                                     &if_context->data_packet_payload_format, b);
+    b += if_context_write_formatted_geolocation(if_context->has.formatted_gps_geolocation,
+                                                &if_context->formatted_gps_geolocation, b);
+    b += if_context_write_formatted_geolocation(if_context->has.formatted_ins_geolocation,
+                                                &if_context->formatted_ins_geolocation, b);
+    b += if_context_write_ephemeris(if_context->has.ecef_ephemeris, &if_context->ecef_ephemeris, b);
+    b += if_context_write_ephemeris(if_context->has.relative_ephemeris, &if_context->relative_ephemeris, b);
+    if (if_context->has.ephemeris_reference_identifier) {
+        b[0] = if_context->ephemeris_reference_identifier;
         b += 1;
     }
-    b += context_write_gps_ascii(context->has.gps_ascii, &context->gps_ascii, b);
+    b += if_context_write_gps_ascii(if_context->has.gps_ascii, &if_context->gps_ascii, b);
     /* No need to increase b here since it is last */
-    context_write_context_association_lists(context->has.context_association_lists, &context->context_association_lists,
-                                            b);
+    if_context_write_context_association_lists(if_context->has.context_association_lists,
+                                               &if_context->context_association_lists, b);
 
     return (int32_t)words;
 }

@@ -612,7 +612,7 @@ typedef struct vrt_context_association_lists {
 /**
  * Context section data.
  */
-typedef struct vrt_context {
+typedef struct vrt_if_context {
     /**
      * True if this packet contains new context information.
      *
@@ -709,7 +709,7 @@ typedef struct vrt_context {
      * \note This is sometimes called lists and sometimes list.
      */
     vrt_context_association_lists context_association_lists;
-} vrt_context;
+} vrt_if_context;
 
 #ifdef __cplusplus
 }
