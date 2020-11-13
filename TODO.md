@@ -1,4 +1,6 @@
+* Make AGC/MGC, packing_method and perhaps others enums
 * Compile with -fvisibility=hidden?
+* Header only library
 * context should be renamed to if_data_context to separate it from ext context
 * Remember to validate that packet_size = header + fields for context packets only
 * Use CMAKE_CURRENT_SOURCE_DIR
