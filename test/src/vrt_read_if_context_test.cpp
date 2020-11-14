@@ -592,7 +592,7 @@ TEST_F(ReadIfContextTest, StateAndEventIndicatorsSampleLoss) {
     assert_if_context(c_, {{"has.state_and_event_indicators", true}});
 }
 
-TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsCalibratedTime) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsBothCalibratedTime) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x80080000;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
@@ -602,7 +602,7 @@ TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsCalibratedTime) {
                            {"state_and_event_indicators.calibrated_time", true}});
 }
 
-TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsValidData) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsBothValidData) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x40040000;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
@@ -612,7 +612,7 @@ TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsValidData) {
                            {"state_and_event_indicators.valid_data", true}});
 }
 
-TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsReferenceLock) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsBothReferenceLock) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x20020000;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
@@ -622,7 +622,7 @@ TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsReferenceLock) {
                            {"state_and_event_indicators.reference_lock", true}});
 }
 
-TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsAgcOrMgc) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsBothAgcOrMgc) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x10010000;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
@@ -632,7 +632,7 @@ TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsAgcOrMgc) {
                            {"state_and_event_indicators.agc_or_mgc", true}});
 }
 
-TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsDetectedSignal) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsBothDetectedSignal) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x08008000;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
@@ -642,7 +642,7 @@ TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsDetectedSignal) {
                            {"state_and_event_indicators.detected_signal", true}});
 }
 
-TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsSpectralInversion) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsBothSpectralInversion) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x04004000;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
@@ -652,7 +652,7 @@ TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsSpectralInversion) {
                            {"state_and_event_indicators.spectral_inversion", true}});
 }
 
-TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsOverRange) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsBothOverRange) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x02002000;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
@@ -662,7 +662,7 @@ TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsOverRange) {
                            {"state_and_event_indicators.over_range", true}});
 }
 
-TEST_F(ReadIfContextTest, BothStateAndEventIndicatorsSampleLoss) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsBothSampleLoss) {
     buf_[0] = 0x00010000;
     buf_[1] = 0x01001000;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_), 2);
