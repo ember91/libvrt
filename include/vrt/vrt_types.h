@@ -500,12 +500,12 @@ typedef struct vrt_ephemeris {
     double position_y;
     /** z-position [m]. Directed along earth's rotational axis, where north is positive. */
     double position_z;
-    /** Altitude about z-axis [degrees]. Positive rotation is x to y. */
-    double altitude_alpha;
-    /** Altitude about y-axis [degrees]. Positive direction is x to z. */
-    double altitude_beta;
-    /** Altitude about x-axis [degrees]. Positive direction is y to z. */
-    double altitude_phi;
+    /** Attitude coordinate about z-axis [degrees]. Positive rotation is x to y. */
+    double attitude_alpha;
+    /** Attitude coordinate about y-axis [degrees]. Positive direction is x to z. */
+    double attitude_beta;
+    /** Attitude coordinate about x-axis [degrees]. Positive direction is y to z. */
+    double attitude_phi;
     /** x-velocity [m/s]. Defined similarly to x-position. */
     double velocity_dx;
     /** y-velocity [m/s]. Defined similarly to y-position. */

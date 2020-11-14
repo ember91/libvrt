@@ -1,3 +1,4 @@
+* vrt_string_err()
 * Not following google style guide...
 * Make AGC/MGC, packing_method and perhaps others enums
 * Compile with -fvisibility=hidden?

@@ -168,9 +168,9 @@ void init_if_context_garbage(vrt_if_context* c) {
     c->ecef_ephemeris.position_x     = 987.654;
     c->ecef_ephemeris.position_y     = 987.654;
     c->ecef_ephemeris.position_z     = 987.654;
-    c->ecef_ephemeris.altitude_alpha = 987.654;
-    c->ecef_ephemeris.altitude_beta  = 987.654;
-    c->ecef_ephemeris.altitude_phi   = 987.654;
+    c->ecef_ephemeris.attitude_alpha = 987.654;
+    c->ecef_ephemeris.attitude_beta  = 987.654;
+    c->ecef_ephemeris.attitude_phi   = 987.654;
     c->ecef_ephemeris.velocity_dx    = 987.654;
     c->ecef_ephemeris.velocity_dy    = 987.654;
     c->ecef_ephemeris.velocity_dz    = 987.654;
@@ -184,9 +184,9 @@ void init_if_context_garbage(vrt_if_context* c) {
     c->relative_ephemeris.position_x     = 987.654;
     c->relative_ephemeris.position_y     = 987.654;
     c->relative_ephemeris.position_z     = 987.654;
-    c->relative_ephemeris.altitude_alpha = 987.654;
-    c->relative_ephemeris.altitude_beta  = 987.654;
-    c->relative_ephemeris.altitude_phi   = 987.654;
+    c->relative_ephemeris.attitude_alpha = 987.654;
+    c->relative_ephemeris.attitude_beta  = 987.654;
+    c->relative_ephemeris.attitude_phi   = 987.654;
     c->relative_ephemeris.velocity_dx    = 987.654;
     c->relative_ephemeris.velocity_dy    = 987.654;
     c->relative_ephemeris.velocity_dz    = 987.654;

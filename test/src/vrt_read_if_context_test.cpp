@@ -231,11 +231,11 @@ static void assert_if_context(const vrt_if_context& c, const std::map<std::strin
                                                                   vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
     ASSERT_DOUBLE_EQ(c.ecef_ephemeris.position_z, get_val<double>(&val_cp, "ecef_ephemeris.position_z",
                                                                   vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.altitude_alpha, get_val<double>(&val_cp, "ecef_ephemeris.altitude_alpha",
+    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.attitude_alpha, get_val<double>(&val_cp, "ecef_ephemeris.attitude_alpha",
                                                                       vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.altitude_beta, get_val<double>(&val_cp, "ecef_ephemeris.altitude_beta",
+    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.attitude_beta, get_val<double>(&val_cp, "ecef_ephemeris.attitude_beta",
                                                                      vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.altitude_phi, get_val<double>(&val_cp, "ecef_ephemeris.altitude_phi",
+    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.attitude_phi, get_val<double>(&val_cp, "ecef_ephemeris.attitude_phi",
                                                                     vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
     ASSERT_DOUBLE_EQ(c.ecef_ephemeris.velocity_dx, get_val<double>(&val_cp, "ecef_ephemeris.velocity_dx",
                                                                    vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16)));
@@ -260,12 +260,12 @@ static void assert_if_context(const vrt_if_context& c, const std::map<std::strin
     ASSERT_DOUBLE_EQ(c.relative_ephemeris.position_z, get_val<double>(&val_cp, "relative_ephemeris.position_z",
                                                                       vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
     ASSERT_DOUBLE_EQ(
-        c.relative_ephemeris.altitude_alpha,
-        get_val<double>(&val_cp, "relative_ephemeris.altitude_alpha", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
+        c.relative_ephemeris.attitude_alpha,
+        get_val<double>(&val_cp, "relative_ephemeris.attitude_alpha", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
     ASSERT_DOUBLE_EQ(
-        c.relative_ephemeris.altitude_beta,
-        get_val<double>(&val_cp, "relative_ephemeris.altitude_beta", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.altitude_phi, get_val<double>(&val_cp, "relative_ephemeris.altitude_phi",
+        c.relative_ephemeris.attitude_beta,
+        get_val<double>(&val_cp, "relative_ephemeris.attitude_beta", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
+    ASSERT_DOUBLE_EQ(c.relative_ephemeris.attitude_phi, get_val<double>(&val_cp, "relative_ephemeris.attitude_phi",
                                                                         vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
     ASSERT_DOUBLE_EQ(c.relative_ephemeris.velocity_dx, get_val<double>(&val_cp, "relative_ephemeris.velocity_dx",
                                                                        vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16)));
@@ -1511,7 +1511,7 @@ TEST_F(ReadIfContextTest, EcefEphemerisPositionZ) {
     assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.position_z", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, EcefEphemerisAltitudeAlpha) {
+TEST_F(ReadIfContextTest, EcefEphemerisAttitudeAlpha) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1528,10 +1528,10 @@ TEST_F(ReadIfContextTest, EcefEphemerisAltitudeAlpha) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.altitude_alpha", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.attitude_alpha", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, EcefEphemerisAltitudeBeta) {
+TEST_F(ReadIfContextTest, EcefEphemerisAttitudeBeta) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1548,10 +1548,10 @@ TEST_F(ReadIfContextTest, EcefEphemerisAltitudeBeta) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.altitude_beta", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.attitude_beta", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, EcefEphemerisAltitudePhi) {
+TEST_F(ReadIfContextTest, EcefEphemerisAttitudePhi) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1568,10 +1568,10 @@ TEST_F(ReadIfContextTest, EcefEphemerisAltitudePhi) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.altitude_phi", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.attitude_phi", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, EcefEphemerisAltitudeDx) {
+TEST_F(ReadIfContextTest, EcefEphemerisVelocityDx) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1591,7 +1591,7 @@ TEST_F(ReadIfContextTest, EcefEphemerisAltitudeDx) {
     assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.velocity_dx", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, EcefEphemerisAltitudeDy) {
+TEST_F(ReadIfContextTest, EcefEphemerisVelocityDy) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1611,7 +1611,7 @@ TEST_F(ReadIfContextTest, EcefEphemerisAltitudeDy) {
     assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.velocity_dy", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, EcefEphemerisAltitudeDz) {
+TEST_F(ReadIfContextTest, EcefEphemerisVelocityDz) {
     buf_[0]  = 0x00001000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1817,7 +1817,7 @@ TEST_F(ReadIfContextTest, RelativeEphemerisPositionZ) {
     assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.position_z", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeAlpha) {
+TEST_F(ReadIfContextTest, RelativeEphemerisAttitudeAlpha) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1834,10 +1834,10 @@ TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeAlpha) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.altitude_alpha", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.attitude_alpha", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeBeta) {
+TEST_F(ReadIfContextTest, RelativeEphemerisAttitudeBeta) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1854,10 +1854,10 @@ TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeBeta) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.altitude_beta", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.attitude_beta", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, RelativeEphemerisAltitudePhi) {
+TEST_F(ReadIfContextTest, RelativeEphemerisAttitudePhi) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1874,10 +1874,10 @@ TEST_F(ReadIfContextTest, RelativeEphemerisAltitudePhi) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.altitude_phi", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.attitude_phi", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeDx) {
+TEST_F(ReadIfContextTest, RelativeEphemerisVelocityDx) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1897,7 +1897,7 @@ TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeDx) {
     assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.velocity_dx", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeDy) {
+TEST_F(ReadIfContextTest, RelativeEphemerisVelocityDy) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1917,7 +1917,7 @@ TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeDy) {
     assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.velocity_dy", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, RelativeEphemerisAltitudeDz) {
+TEST_F(ReadIfContextTest, RelativeEphemerisVelocityDz) {
     buf_[0]  = 0x00000800;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -2184,9 +2184,9 @@ TEST_F(ReadIfContextTest, EveryOther1) {
                            {"relative_ephemeris.position_x", 1.0},
                            {"relative_ephemeris.position_y", 1.0},
                            {"relative_ephemeris.position_z", 1.0},
-                           {"relative_ephemeris.altitude_alpha", 1.0},
-                           {"relative_ephemeris.altitude_beta", 1.0},
-                           {"relative_ephemeris.altitude_phi", 1.0},
+                           {"relative_ephemeris.attitude_alpha", 1.0},
+                           {"relative_ephemeris.attitude_beta", 1.0},
+                           {"relative_ephemeris.attitude_phi", 1.0},
                            {"relative_ephemeris.velocity_dx", 1.0},
                            {"relative_ephemeris.velocity_dy", 1.0},
                            {"relative_ephemeris.velocity_dz", 1.0},
@@ -2313,9 +2313,9 @@ TEST_F(ReadIfContextTest, EveryOther2) {
          {"ecef_ephemeris.position_x", 1.0},
          {"ecef_ephemeris.position_y", 1.0},
          {"ecef_ephemeris.position_z", 1.0},
-         {"ecef_ephemeris.altitude_alpha", 1.0},
-         {"ecef_ephemeris.altitude_beta", 1.0},
-         {"ecef_ephemeris.altitude_phi", 1.0},
+         {"ecef_ephemeris.attitude_alpha", 1.0},
+         {"ecef_ephemeris.attitude_beta", 1.0},
+         {"ecef_ephemeris.attitude_phi", 1.0},
          {"ecef_ephemeris.velocity_dx", 1.0},
          {"ecef_ephemeris.velocity_dy", 1.0},
          {"ecef_ephemeris.velocity_dz", 1.0},
@@ -2542,9 +2542,9 @@ TEST_F(ReadIfContextTest, All) {
          {"ecef_ephemeris.position_x", 1.0},
          {"ecef_ephemeris.position_y", 1.0},
          {"ecef_ephemeris.position_z", 1.0},
-         {"ecef_ephemeris.altitude_alpha", 1.0},
-         {"ecef_ephemeris.altitude_beta", 1.0},
-         {"ecef_ephemeris.altitude_phi", 1.0},
+         {"ecef_ephemeris.attitude_alpha", 1.0},
+         {"ecef_ephemeris.attitude_beta", 1.0},
+         {"ecef_ephemeris.attitude_phi", 1.0},
          {"ecef_ephemeris.velocity_dx", 1.0},
          {"ecef_ephemeris.velocity_dy", 1.0},
          {"ecef_ephemeris.velocity_dz", 1.0},
@@ -2557,9 +2557,9 @@ TEST_F(ReadIfContextTest, All) {
          {"relative_ephemeris.position_x", 1.0},
          {"relative_ephemeris.position_y", 1.0},
          {"relative_ephemeris.position_z", 1.0},
-         {"relative_ephemeris.altitude_alpha", 1.0},
-         {"relative_ephemeris.altitude_beta", 1.0},
-         {"relative_ephemeris.altitude_phi", 1.0},
+         {"relative_ephemeris.attitude_alpha", 1.0},
+         {"relative_ephemeris.attitude_beta", 1.0},
+         {"relative_ephemeris.attitude_phi", 1.0},
          {"relative_ephemeris.velocity_dx", 1.0},
          {"relative_ephemeris.velocity_dy", 1.0},
          {"relative_ephemeris.velocity_dz", 1.0},

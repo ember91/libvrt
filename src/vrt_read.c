@@ -463,9 +463,9 @@ static uint32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephem
         e->position_x     = vrt_fixed_point_i32_to_double((int32_t)b[4], 5);
         e->position_y     = vrt_fixed_point_i32_to_double((int32_t)b[5], 5);
         e->position_z     = vrt_fixed_point_i32_to_double((int32_t)b[6], 5);
-        e->altitude_alpha = vrt_fixed_point_i32_to_double((int32_t)b[7], 22);
-        e->altitude_beta  = vrt_fixed_point_i32_to_double((int32_t)b[8], 22);
-        e->altitude_phi   = vrt_fixed_point_i32_to_double((int32_t)b[9], 22);
+        e->attitude_alpha = vrt_fixed_point_i32_to_double((int32_t)b[7], 22);
+        e->attitude_beta  = vrt_fixed_point_i32_to_double((int32_t)b[8], 22);
+        e->attitude_phi   = vrt_fixed_point_i32_to_double((int32_t)b[9], 22);
         e->velocity_dx    = vrt_fixed_point_i32_to_double((int32_t)b[10], 16);
         e->velocity_dy    = vrt_fixed_point_i32_to_double((int32_t)b[11], 16);
         e->velocity_dz    = vrt_fixed_point_i32_to_double((int32_t)b[12], 16);
@@ -485,9 +485,9 @@ static uint32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephem
     e->position_x                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
     e->position_y                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
     e->position_z                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    e->altitude_alpha              = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    e->altitude_beta               = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    e->altitude_phi                = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
+    e->attitude_alpha              = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
+    e->attitude_beta               = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
+    e->attitude_phi                = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
     e->velocity_dx                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16);
     e->velocity_dy                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16);
     e->velocity_dz                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16);

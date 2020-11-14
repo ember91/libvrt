@@ -1217,9 +1217,9 @@ TEST_F(WriteIfContextTest, EcefEphemerisPositionZ) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisAltitudeAlpha) {
+TEST_F(WriteIfContextTest, EcefEphemerisAttitudeAlpha) {
     c_.has.ecef_ephemeris            = true;
-    c_.ecef_ephemeris.altitude_alpha = 1.0;
+    c_.ecef_ephemeris.attitude_alpha = 1.0;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1238,9 +1238,9 @@ TEST_F(WriteIfContextTest, EcefEphemerisAltitudeAlpha) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisAltitudeBeta) {
+TEST_F(WriteIfContextTest, EcefEphemerisAttitudeBeta) {
     c_.has.ecef_ephemeris           = true;
-    c_.ecef_ephemeris.altitude_beta = 1.0;
+    c_.ecef_ephemeris.attitude_beta = 1.0;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1259,9 +1259,9 @@ TEST_F(WriteIfContextTest, EcefEphemerisAltitudeBeta) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisAltitudePhi) {
+TEST_F(WriteIfContextTest, EcefEphemerisAttitudePhi) {
     c_.has.ecef_ephemeris          = true;
-    c_.ecef_ephemeris.altitude_phi = 1.0;
+    c_.ecef_ephemeris.attitude_phi = 1.0;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1513,9 +1513,9 @@ TEST_F(WriteIfContextTest, RelativeEphemerisPositionZ) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisAltitudeAlpha) {
+TEST_F(WriteIfContextTest, RelativeEphemerisAttitudeAlpha) {
     c_.has.relative_ephemeris            = true;
-    c_.relative_ephemeris.altitude_alpha = 1.0;
+    c_.relative_ephemeris.attitude_alpha = 1.0;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1534,9 +1534,9 @@ TEST_F(WriteIfContextTest, RelativeEphemerisAltitudeAlpha) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisAltitudeBeta) {
+TEST_F(WriteIfContextTest, RelativeEphemerisAttitudeBeta) {
     c_.has.relative_ephemeris           = true;
-    c_.relative_ephemeris.altitude_beta = 1.0;
+    c_.relative_ephemeris.attitude_beta = 1.0;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1555,9 +1555,9 @@ TEST_F(WriteIfContextTest, RelativeEphemerisAltitudeBeta) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisAltitudePhi) {
+TEST_F(WriteIfContextTest, RelativeEphemerisAttitudePhi) {
     c_.has.relative_ephemeris          = true;
-    c_.relative_ephemeris.altitude_phi = 1.0;
+    c_.relative_ephemeris.attitude_phi = 1.0;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1817,9 +1817,9 @@ TEST_F(WriteIfContextTest, EveryOther1) {
     c_.relative_ephemeris.position_x                  = -1.0;
     c_.relative_ephemeris.position_y                  = -1.0;
     c_.relative_ephemeris.position_z                  = -1.0;
-    c_.relative_ephemeris.altitude_alpha              = -1.0;
-    c_.relative_ephemeris.altitude_beta               = -1.0;
-    c_.relative_ephemeris.altitude_phi                = -1.0;
+    c_.relative_ephemeris.attitude_alpha              = -1.0;
+    c_.relative_ephemeris.attitude_beta               = -1.0;
+    c_.relative_ephemeris.attitude_phi                = -1.0;
     c_.relative_ephemeris.velocity_dx                 = -1.0;
     c_.relative_ephemeris.velocity_dy                 = -1.0;
     c_.relative_ephemeris.velocity_dz                 = -1.0;
@@ -1944,9 +1944,9 @@ TEST_F(WriteIfContextTest, EveryOther2) {
     c_.ecef_ephemeris.position_x                  = -1.0;
     c_.ecef_ephemeris.position_y                  = -1.0;
     c_.ecef_ephemeris.position_z                  = -1.0;
-    c_.ecef_ephemeris.altitude_alpha              = -1.0;
-    c_.ecef_ephemeris.altitude_beta               = -1.0;
-    c_.ecef_ephemeris.altitude_phi                = -1.0;
+    c_.ecef_ephemeris.attitude_alpha              = -1.0;
+    c_.ecef_ephemeris.attitude_beta               = -1.0;
+    c_.ecef_ephemeris.attitude_phi                = -1.0;
     c_.ecef_ephemeris.velocity_dx                 = -1.0;
     c_.ecef_ephemeris.velocity_dy                 = -1.0;
     c_.ecef_ephemeris.velocity_dz                 = -1.0;
@@ -2135,9 +2135,9 @@ TEST_F(WriteIfContextTest, All) {
     c_.ecef_ephemeris.position_x                  = -1.0;
     c_.ecef_ephemeris.position_y                  = -1.0;
     c_.ecef_ephemeris.position_z                  = -1.0;
-    c_.ecef_ephemeris.altitude_alpha              = -1.0;
-    c_.ecef_ephemeris.altitude_beta               = -1.0;
-    c_.ecef_ephemeris.altitude_phi                = -1.0;
+    c_.ecef_ephemeris.attitude_alpha              = -1.0;
+    c_.ecef_ephemeris.attitude_beta               = -1.0;
+    c_.ecef_ephemeris.attitude_phi                = -1.0;
     c_.ecef_ephemeris.velocity_dx                 = -1.0;
     c_.ecef_ephemeris.velocity_dy                 = -1.0;
     c_.ecef_ephemeris.velocity_dz                 = -1.0;
@@ -2150,9 +2150,9 @@ TEST_F(WriteIfContextTest, All) {
     c_.relative_ephemeris.position_x                  = -1.0;
     c_.relative_ephemeris.position_y                  = -1.0;
     c_.relative_ephemeris.position_z                  = -1.0;
-    c_.relative_ephemeris.altitude_alpha              = -1.0;
-    c_.relative_ephemeris.altitude_beta               = -1.0;
-    c_.relative_ephemeris.altitude_phi                = -1.0;
+    c_.relative_ephemeris.attitude_alpha              = -1.0;
+    c_.relative_ephemeris.attitude_beta               = -1.0;
+    c_.relative_ephemeris.attitude_phi                = -1.0;
     c_.relative_ephemeris.velocity_dx                 = -1.0;
     c_.relative_ephemeris.velocity_dy                 = -1.0;
     c_.relative_ephemeris.velocity_dz                 = -1.0;

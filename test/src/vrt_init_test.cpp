@@ -185,9 +185,9 @@ TEST(InitTest, InitContext) {
     ASSERT_DOUBLE_EQ(c.ecef_ephemeris.position_x, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
     ASSERT_DOUBLE_EQ(c.ecef_ephemeris.position_y, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
     ASSERT_DOUBLE_EQ(c.ecef_ephemeris.position_z, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.altitude_alpha, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.altitude_beta, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.altitude_phi, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.attitude_alpha, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.attitude_beta, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.attitude_phi, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
     ASSERT_DOUBLE_EQ(c.ecef_ephemeris.velocity_dx, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
     ASSERT_DOUBLE_EQ(c.ecef_ephemeris.velocity_dy, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
     ASSERT_DOUBLE_EQ(c.ecef_ephemeris.velocity_dz, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
@@ -200,9 +200,9 @@ TEST(InitTest, InitContext) {
     ASSERT_DOUBLE_EQ(c.relative_ephemeris.position_x, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
     ASSERT_DOUBLE_EQ(c.relative_ephemeris.position_y, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
     ASSERT_DOUBLE_EQ(c.relative_ephemeris.position_z, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.altitude_alpha, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.altitude_beta, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.altitude_phi, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(c.relative_ephemeris.attitude_alpha, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(c.relative_ephemeris.attitude_beta, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(c.relative_ephemeris.attitude_phi, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
     ASSERT_DOUBLE_EQ(c.relative_ephemeris.velocity_dx, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
     ASSERT_DOUBLE_EQ(c.relative_ephemeris.velocity_dy, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
     ASSERT_DOUBLE_EQ(c.relative_ephemeris.velocity_dz, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));

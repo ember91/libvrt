@@ -352,9 +352,9 @@ static uint32_t if_context_write_ephemeris(bool has, const vrt_ephemeris* e, uin
         b[4]  = (uint32_t)vrt_double_to_fixed_point_i32(e->position_x, 5);
         b[5]  = (uint32_t)vrt_double_to_fixed_point_i32(e->position_y, 5);
         b[6]  = (uint32_t)vrt_double_to_fixed_point_i32(e->position_z, 5);
-        b[7]  = (uint32_t)vrt_double_to_fixed_point_i32(e->altitude_alpha, 22);
-        b[8]  = (uint32_t)vrt_double_to_fixed_point_i32(e->altitude_beta, 22);
-        b[9]  = (uint32_t)vrt_double_to_fixed_point_i32(e->altitude_phi, 22);
+        b[7]  = (uint32_t)vrt_double_to_fixed_point_i32(e->attitude_alpha, 22);
+        b[8]  = (uint32_t)vrt_double_to_fixed_point_i32(e->attitude_beta, 22);
+        b[9]  = (uint32_t)vrt_double_to_fixed_point_i32(e->attitude_phi, 22);
         b[10] = (uint32_t)vrt_double_to_fixed_point_i32(e->velocity_dx, 16);
         b[11] = (uint32_t)vrt_double_to_fixed_point_i32(e->velocity_dy, 16);
         b[12] = (uint32_t)vrt_double_to_fixed_point_i32(e->velocity_dz, 16);
