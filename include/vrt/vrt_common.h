@@ -3,8 +3,8 @@
  * Encoder and decoder of the ANSI/VITA 49.0 Radio Transport (VRT) standard.
  */
 
-#ifndef INCLUDE_VRT_COMMON_H_
-#define INCLUDE_VRT_COMMON_H_
+#ifndef INCLUDE_VRT_VRT_COMMON_H_
+#define INCLUDE_VRT_VRT_COMMON_H_
 
 #include <stdint.h>
 

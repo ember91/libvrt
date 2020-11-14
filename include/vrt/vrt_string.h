@@ -1,5 +1,5 @@
-#ifndef INCLUDE_VRT_TO_STRING_H_
-#define INCLUDE_VRT_TO_STRING_H_
+#ifndef INCLUDE_VRT_VRT_STRING_H_
+#define INCLUDE_VRT_VRT_STRING_H_
 
 #include <vrt/vrt_types.h>
 

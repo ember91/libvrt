@@ -1,5 +1,5 @@
-#ifndef INCLUDE_VRT_TYPES_H_
-#define INCLUDE_VRT_TYPES_H_
+#ifndef INCLUDE_VRT_VRT_TYPES_H_
+#define INCLUDE_VRT_VRT_TYPES_H_
 
 #include <stdbool.h>
 #include <stdint.h>

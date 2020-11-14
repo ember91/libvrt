@@ -1,5 +1,5 @@
-#ifndef INCLUDE_VRT_WRITE_H_
-#define INCLUDE_VRT_WRITE_H_
+#ifndef INCLUDE_VRT_VRT_WRITE_H_
+#define INCLUDE_VRT_VRT_WRITE_H_
 
 #include <stdint.h>
 
