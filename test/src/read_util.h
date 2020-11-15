@@ -17,9 +17,9 @@
  * \param name     Field name.
  * \param def      Default value.
  *
- * \return Value from map if there was a hit, or default if no hit.
+ * \return Value from map if there is a hit, or default if no hit.
  *
- * \throw std::runtime_error If key was present with missing value, or if the value could not be cast to type T.
+ * \throw std::runtime_error If key is present with missing value, or if the value could not be cast to type T.
  *
  * \note It is unfortunately not possible to use googletest macros inside templated code.
  */

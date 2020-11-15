@@ -32,7 +32,7 @@ static inline uint64_t read_uint64(const uint32_t* b) {
     return (uint64_t)b[0] << 32U | (uint64_t)b[1];
 }
 
-int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header) {
+int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header, bool validate) {
     /* Size is always 1 */
     const uint32_t words = 1;
 
@@ -54,10 +54,32 @@ int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header)
     header->packet_count = (uint8_t)msk(b, 16, 4);
     header->packet_size  = (uint16_t)msk(b, 0, 16);
 
+    if (validate) {
+        if (header->packet_type > VRT_PT_EXT_CONTEXT) {
+            return VRT_ERR_PACKET_TYPE;
+        }
+        if (vrt_is_context(header->packet_type)) {
+            if (header->has.trailer) {
+                return VRT_ERR_TRAILER;
+            }
+        } else {
+            if (header->tsm) {
+                return VRT_ERR_TSM;
+            }
+        }
+        if (msk(b, 25, 1) != 0) {
+            return VRT_ERR_RESERVED;
+        }
+    }
+
     return words;
 }
 
-int32_t vrt_read_fields(const vrt_header* header, const void* buf, uint32_t buf_words, vrt_fields* fields) {
+int32_t vrt_read_fields(const vrt_header* header,
+                        const void*       buf,
+                        uint32_t          buf_words,
+                        vrt_fields*       fields,
+                        bool              validate) {
     const uint32_t words = vrt_words_fields(header);
 
     /* Check if buf size is sufficient */
@@ -79,6 +101,13 @@ int32_t vrt_read_fields(const vrt_header* header, const void* buf, uint32_t buf_
         fields->class_id.oui                    = msk(b[0], 0, 24);
         fields->class_id.information_class_code = (uint16_t)msk(b[1], 16, 16);
         fields->class_id.packet_class_code      = (uint16_t)b[1];
+
+        if (validate) {
+            if (msk(b[0], 24, 8) != 0) {
+                return VRT_ERR_RESERVED;
+            }
+        }
+
         b += 2;
     } else {
         /* Zero Class ID here, just to be sure */
@@ -97,6 +126,13 @@ int32_t vrt_read_fields(const vrt_header* header, const void* buf, uint32_t buf_
 
     if (vrt_has_fractional_timestamp(header->tsf)) {
         fields->fractional_seconds_timestamp = read_uint64(b);
+
+        if (validate) {
+            if (header->tsf == VRT_TSF_REAL_TIME && fields->fractional_seconds_timestamp >= (uint64_t)1000000000000) {
+                return VRT_ERR_REAL_TIME;
+            }
+        }
+
         /* No point in increasing b pointer here, since we're finished */
     } else {
         /* Zero fractional timestamp here, just to be sure */
@@ -199,18 +235,23 @@ int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trail
         trailer->associated_context_packet_count = 0;
     }
 
+    /*
+     * Due to Recommendation 6.1.7-1: All unused trailer bits should be set to zero, there is not much to validate here.
+     */
+
     return words;
 }
 
 /**
  * Read IF context indicator field into its struct.
  *
- * \param b Word to read from.
- * \param c IF context to read into.
+ * \param b        Word to read from.
+ * \param c        IF context to read into.
+ * \param validate True if data should be validated.
  *
- * \return Number of read words.
+ * \return Number of read words, or a negative number if error.
  */
-static uint32_t if_context_read_indicator_field(uint32_t b, vrt_if_context* c) {
+static uint32_t if_context_read_indicator_field(uint32_t b, vrt_if_context* c, bool validate) {
     c->context_field_change_indicator     = vrt_u2b(msk(b, 31, 1));
     c->has.reference_point_identifier     = vrt_u2b(msk(b, 30, 1));
     c->has.bandwidth                      = vrt_u2b(msk(b, 29, 1));
@@ -236,19 +277,29 @@ static uint32_t if_context_read_indicator_field(uint32_t b, vrt_if_context* c) {
     c->has.gps_ascii                      = vrt_u2b(msk(b, 9, 1));
     c->has.context_association_lists      = vrt_u2b(msk(b, 8, 1));
 
+    if (validate) {
+        if (msk(b, 0, 8) != 0) {
+            return VRT_ERR_RESERVED;
+        }
+    }
+
     return 1;
 }
 
 /**
  * Read IF context state and event indicator field into its struct.
  *
- * \param has True if it is included.
- * \param b   Word to read from.
- * \param s   State and event field struct to read into.
+ * \param has      True if it is included.
+ * \param b        Word to read from.
+ * \param s        State and event field struct to read into.
+ * \param validate True if data should be validated.
  *
- * \return Number of read words.
+ * \return Number of read words, or a negative number if error.
  */
-static uint32_t if_context_read_state_and_event_indicators(bool has, uint32_t b, vrt_state_and_event* s) {
+static uint32_t if_context_read_state_and_event_indicators(bool                 has,
+                                                           uint32_t             b,
+                                                           vrt_state_and_event* s,
+                                                           bool                 validate) {
     if (has) {
         s->has.calibrated_time    = vrt_u2b(msk(b, 31, 1));
         s->has.valid_data         = vrt_u2b(msk(b, 30, 1));
@@ -309,6 +360,12 @@ static uint32_t if_context_read_state_and_event_indicators(bool has, uint32_t b,
         s->user_defined1 = vrt_u2b(msk(b, 1, 1));
         s->user_defined0 = vrt_u2b(msk(b, 0, 1));
 
+        if (validate) {
+            if ((b & 0x00F00F00U) != 0) {
+                return VRT_ERR_RESERVED;
+            }
+        }
+
         return 1;
     }
 
@@ -343,15 +400,17 @@ static uint32_t if_context_read_state_and_event_indicators(bool has, uint32_t b,
 /**
  * Read IF context data packet payload format field into its struct.
  *
- * \param has True if it is included.
- * \param b   Buffer to read from.
- * \param f   Data packet payload format struct to read into.
+ * \param has      True if it is included.
+ * \param b        Buffer to read from.
+ * \param f        Data packet payload format struct to read into.
+ * \param validate True if data should be validated.
  *
- * \return Number of read words.
+ * \return Number of read words, or a negative number if error.
  */
 static uint32_t if_context_read_data_packet_payload_format(bool                            has,
                                                            const uint32_t*                 b,
-                                                           vrt_data_packet_payload_format* f) {
+                                                           vrt_data_packet_payload_format* f,
+                                                           bool                            validate) {
     if (has) {
         f->packing_method          = vrt_u2b(msk(b[0], 31, 1));
         f->real_or_complex         = (vrt_real_complex)msk(b[0], 29, 2);
@@ -364,6 +423,21 @@ static uint32_t if_context_read_data_packet_payload_format(bool                 
 
         f->repeat_count = (uint16_t)msk(b[1], 16, 16);
         f->vector_size  = (uint16_t)msk(b[1], 0, 16);
+
+        if (validate) {
+            if (f->real_or_complex > VRT_ROC_COMPLEX_POLAR) {
+                return VRT_ERR_REAL_OR_COMPLEX;
+            }
+            if ((f->data_item_format > VRT_DIF_SIGNED_VRT_6_BIT_EXPONENT &&
+                 f->data_item_format < VRT_DIF_IEEE_754_SINGLE_PRECISION_FLOATING_POINT) ||
+                f->data_item_format > VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT) {
+                return VRT_ERR_DATA_ITEM_FORMAT;
+            }
+
+            if ((b[0] & 0x0000F000U) != 0) {
+                return VRT_ERR_RESERVED;
+            }
+        }
 
         return 2;
     }
@@ -385,53 +459,79 @@ static uint32_t if_context_read_data_packet_payload_format(bool                 
 /**
  * Read IF context formatted GPS/INS geolocation field into its struct.
  *
- * \param has True if it is included.
- * \param b   Buffer to read from.
- * \param l   Formatted GPS/INS geolocation struct to read into.
+ * \param has      True if it is included.
+ * \param b        Buffer to read from.
+ * \param g        Formatted GPS/INS geolocation struct to read into.
+ * \param validate True if data should be validated.
  *
- * \return Number of read words.
+ * \return Number of read words, or a negative number if error.
  */
-static uint32_t if_context_read_formatted_geolocation(bool has, const uint32_t* b, vrt_formatted_geolocation* l) {
+static uint32_t if_context_read_formatted_geolocation(bool                       has,
+                                                      const uint32_t*            b,
+                                                      vrt_formatted_geolocation* g,
+                                                      bool                       validate) {
     if (has) {
-        l->tsi = (vrt_tsi)msk(b[0], 26, 2);
-        l->tsf = (vrt_tsf)msk(b[0], 24, 2);
-        l->oui = msk(b[0], 0, 24);
-        if (l->tsi == VRT_TSI_UNDEFINED) {
-            l->integer_second_timestamp = 0xFFFFFFFFU;
-        } else {
-            l->integer_second_timestamp = b[1];
-        }
-        if (l->tsf == VRT_TSF_UNDEFINED) {
-            l->fractional_second_timestamp = 0xFFFFFFFFFFFFFFFFU;
-        } else {
-            l->fractional_second_timestamp = read_uint64(b + 2);
-        }
-        l->latitude          = vrt_fixed_point_i32_to_double((int32_t)b[4], 22);
-        l->longitude         = vrt_fixed_point_i32_to_double((int32_t)b[5], 22);
-        l->altitude          = vrt_fixed_point_i32_to_double((int32_t)b[6], 5);
-        l->speed_over_ground = vrt_fixed_point_u32_to_double(b[7], 16);
-        l->heading_angle     = vrt_fixed_point_i32_to_double((int32_t)b[8], 22);
-        l->track_angle       = vrt_fixed_point_i32_to_double((int32_t)b[9], 22);
+        g->tsi                         = (vrt_tsi)msk(b[0], 26, 2);
+        g->tsf                         = (vrt_tsf)msk(b[0], 24, 2);
+        g->oui                         = msk(b[0], 0, 24);
+        g->integer_second_timestamp    = b[1];
+        g->fractional_second_timestamp = read_uint64(b + 2);
+        g->latitude                    = vrt_fixed_point_i32_to_double((int32_t)b[4], 22);
+        g->longitude                   = vrt_fixed_point_i32_to_double((int32_t)b[5], 22);
+        g->altitude                    = vrt_fixed_point_i32_to_double((int32_t)b[6], 5);
+        g->speed_over_ground           = vrt_fixed_point_u32_to_double(b[7], 16);
+        g->heading_angle               = vrt_fixed_point_i32_to_double((int32_t)b[8], 22);
+        g->track_angle                 = vrt_fixed_point_i32_to_double((int32_t)b[9], 22);
         /* There seems to be an error in Rule 7.1.5.19-13. A correction seems to be 6.2.5.15-2 -> 7.1.5.19-2.*/
-        l->magnetic_variation = vrt_fixed_point_i32_to_double((int32_t)b[10], 22);
+        g->magnetic_variation = vrt_fixed_point_i32_to_double((int32_t)b[10], 22);
+
+        if (validate) {
+            if (g->tsi == VRT_TSI_UNDEFINED && g->integer_second_timestamp != 0xFFFFFFFFU) {
+                return VRT_ERR_INTEGER_SECOND_TIMESTAMP;
+            }
+            if (g->tsf == VRT_TSF_UNDEFINED && g->fractional_second_timestamp != 0xFFFFFFFFFFFFFFFFU) {
+                return VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP;
+            }
+            if (g->tsf == VRT_TSF_REAL_TIME && g->fractional_second_timestamp >= (uint64_t)1000000000000) {
+                return VRT_ERR_REAL_TIME;
+            }
+            if (b[4] != 0x7FFFFFFFU && (g->latitude < -90.0 || g->latitude > 90.0)) {
+                return VRT_ERR_LATITUDE;
+            }
+            if (b[5] != 0x7FFFFFFFU && (g->longitude < -180.0 || g->longitude > 180.0)) {
+                return VRT_ERR_LONGITUDE;
+            }
+            if (b[8] != 0x7FFFFFFFU && (g->heading_angle < 0.0 || g->heading_angle > 359.999999761582)) {
+                return VRT_ERR_HEADING_ANGLE;
+            }
+            if (b[9] != 0x7FFFFFFFU && (g->track_angle < 0.0 || g->track_angle > 359.999999761582)) {
+                return VRT_ERR_TRACK_ANGLE;
+            }
+            if (b[10] != 0x7FFFFFFF && (g->magnetic_variation < -180.0 || g->magnetic_variation > 180)) {
+                return VRT_ERR_MAGNETIC_VARIATION;
+            }
+            if ((b[0] & 0xF0000000U) != 0) {
+                return VRT_ERR_RESERVED;
+            }
+        }
 
         return 11;
     }
 
-    l->tsi = VRT_TSI_UNDEFINED;
-    l->tsf = VRT_TSF_UNDEFINED;
-    l->oui = 0;
+    g->tsi = VRT_TSI_UNDEFINED;
+    g->tsf = VRT_TSF_UNDEFINED;
+    g->oui = 0;
     /* See Rule 7.1.5.19-1: When the TSI or TSF fields are zero the corresponding Timestamp of Position Fix subfield
      * words shall take the value 0xFFFFFFFF. */
-    l->integer_second_timestamp    = 0xFFFFFFFF;
-    l->fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
-    l->latitude                    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    l->longitude                   = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    l->altitude                    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    l->speed_over_ground           = vrt_fixed_point_u32_to_double(0x7FFFFFFF, 16);
-    l->heading_angle               = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    l->track_angle                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    l->magnetic_variation          = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
+    g->integer_second_timestamp    = 0xFFFFFFFF;
+    g->fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
+    g->latitude                    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
+    g->longitude                   = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
+    g->altitude                    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
+    g->speed_over_ground           = vrt_fixed_point_u32_to_double(0x7FFFFFFF, 16);
+    g->heading_angle               = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
+    g->track_angle                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
+    g->magnetic_variation          = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
 
     return 0;
 }
@@ -439,36 +539,44 @@ static uint32_t if_context_read_formatted_geolocation(bool has, const uint32_t* 
 /**
  * Read IF context ephemeris field into its struct.
  *
- * \param has True if it is included.
- * \param b   Buffer to read from [0] or [13].
- * \param e   Ephemeris struct to read into.
+ * \param has      True if it is included.
+ * \param b        Buffer to read from [0] or [13].
+ * \param e        Ephemeris struct to read into.
+ * \param validate True if data should be validated.
  *
- * \return Number of read words.
+ * \return Number of read words, or a negative number if error.
  */
-static uint32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephemeris* e) {
+static uint32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephemeris* e, bool validate) {
     if (has) {
-        e->tsi = (vrt_tsi)msk(b[0], 26, 2);
-        e->tsf = (vrt_tsf)msk(b[0], 24, 2);
-        e->oui = msk(b[0], 0, 24);
-        if (e->tsi == VRT_TSI_UNDEFINED) {
-            e->integer_second_timestamp = 0xFFFFFFFF;
-        } else {
-            e->integer_second_timestamp = b[1];
+        e->tsi                         = (vrt_tsi)msk(b[0], 26, 2);
+        e->tsf                         = (vrt_tsf)msk(b[0], 24, 2);
+        e->oui                         = msk(b[0], 0, 24);
+        e->integer_second_timestamp    = b[1];
+        e->fractional_second_timestamp = read_uint64(b + 2);
+        e->position_x                  = vrt_fixed_point_i32_to_double((int32_t)b[4], 5);
+        e->position_y                  = vrt_fixed_point_i32_to_double((int32_t)b[5], 5);
+        e->position_z                  = vrt_fixed_point_i32_to_double((int32_t)b[6], 5);
+        e->attitude_alpha              = vrt_fixed_point_i32_to_double((int32_t)b[7], 22);
+        e->attitude_beta               = vrt_fixed_point_i32_to_double((int32_t)b[8], 22);
+        e->attitude_phi                = vrt_fixed_point_i32_to_double((int32_t)b[9], 22);
+        e->velocity_dx                 = vrt_fixed_point_i32_to_double((int32_t)b[10], 16);
+        e->velocity_dy                 = vrt_fixed_point_i32_to_double((int32_t)b[11], 16);
+        e->velocity_dz                 = vrt_fixed_point_i32_to_double((int32_t)b[12], 16);
+
+        if (validate) {
+            if (e->tsi == VRT_TSI_UNDEFINED && e->integer_second_timestamp != 0xFFFFFFFFU) {
+                return VRT_ERR_INTEGER_SECOND_TIMESTAMP;
+            }
+            if (e->tsf == VRT_TSF_UNDEFINED && e->fractional_second_timestamp != 0xFFFFFFFFFFFFFFFFU) {
+                return VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP;
+            }
+            if (e->tsf == VRT_TSF_REAL_TIME && e->fractional_second_timestamp >= (uint64_t)1000000000000) {
+                return VRT_ERR_REAL_TIME;
+            }
+            if ((b[0] & 0xF0000000U) != 0) {
+                return VRT_ERR_RESERVED;
+            }
         }
-        if (e->tsf == VRT_TSF_UNDEFINED) {
-            e->fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
-        } else {
-            e->fractional_second_timestamp = read_uint64(b + 2);
-        }
-        e->position_x     = vrt_fixed_point_i32_to_double((int32_t)b[4], 5);
-        e->position_y     = vrt_fixed_point_i32_to_double((int32_t)b[5], 5);
-        e->position_z     = vrt_fixed_point_i32_to_double((int32_t)b[6], 5);
-        e->attitude_alpha = vrt_fixed_point_i32_to_double((int32_t)b[7], 22);
-        e->attitude_beta  = vrt_fixed_point_i32_to_double((int32_t)b[8], 22);
-        e->attitude_phi   = vrt_fixed_point_i32_to_double((int32_t)b[9], 22);
-        e->velocity_dx    = vrt_fixed_point_i32_to_double((int32_t)b[10], 16);
-        e->velocity_dy    = vrt_fixed_point_i32_to_double((int32_t)b[11], 16);
-        e->velocity_dz    = vrt_fixed_point_i32_to_double((int32_t)b[12], 16);
 
         return 13;
     }
@@ -498,13 +606,14 @@ static uint32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephem
 /**
  * Read IF context GPS ASCII field into its struct.
  *
- * \param has True if it is included.
- * \param b   Buffer to read from.
- * \param g   GPS ASCII struct to read into.
+ * \param has      True if it is included.
+ * \param b        Buffer to read from.
+ * \param g        GPS ASCII struct to read into.
+ * \param validate True if data should be validated.
  *
- * \return Number of read words.
+ * \return Number of read words, or a negative number if error.
  */
-static uint32_t if_context_read_gps_ascii(bool has, const uint32_t* b, vrt_gps_ascii* g) {
+static uint32_t if_context_read_gps_ascii(bool has, const uint32_t* b, vrt_gps_ascii* g, bool validate) {
     if (has) {
         g->oui             = msk(b[0], 0, 24);
         g->number_of_words = b[1];
@@ -512,6 +621,12 @@ static uint32_t if_context_read_gps_ascii(bool has, const uint32_t* b, vrt_gps_a
             g->ascii = NULL;
         } else {
             g->ascii = (const char*)(b + 2);
+        }
+
+        if (validate) {
+            if ((b[0] & 0xFF000000U) != 0) {
+                return VRT_ERR_RESERVED;
+            }
         }
 
         return 2 + g->number_of_words;
@@ -592,7 +707,7 @@ static uint32_t if_context_read_association_lists(bool has, const uint32_t* b, v
     return 0;
 }
 
-int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context* if_context) {
+int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context* if_context, bool validate) {
     /* Cannot count words here since the IF context section hasn't been read yet */
 
     uint32_t words = 1;
@@ -604,7 +719,11 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
     const uint32_t* b = (const uint32_t*)buf;
 
     /* Go from msb to lsb. Make sure to zero fields if not present, just to be sure. */
-    b += if_context_read_indicator_field(b[0], if_context);
+    int32_t rv = if_context_read_indicator_field(b[0], if_context, validate);
+    if (rv < 0) {
+        return rv;
+    }
+    b += rv;
 
     /* Replace context_words here instead of increasing it */
     words = vrt_words_if_context_indicator(&if_context->has);
@@ -620,6 +739,13 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
     }
     if (if_context->has.bandwidth) {
         if_context->bandwidth = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+
+        if (validate) {
+            if (if_context->bandwidth < 0.0) {
+                return VRT_ERR_BANDWIDTH;
+            }
+        }
+
         b += 2;
     } else {
         if_context->bandwidth = 0.0;
@@ -650,6 +776,13 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
     }
     if (if_context->has.reference_level) {
         if_context->reference_level = vrt_fixed_point_i16_to_float((int16_t)(b[0] & 0x0000FFFFU), 7);
+
+        if (validate) {
+            if ((b[0] & 0xFFFF0000U) != 0) {
+                return VRT_ERR_RESERVED;
+            }
+        }
+
         b += 1;
     } else {
         if_context->reference_level = 0.0F;
@@ -672,6 +805,13 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
     }
     if (if_context->has.sample_rate) {
         if_context->sample_rate = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+
+        if (validate) {
+            if (if_context->sample_rate < 0) {
+                return VRT_ERR_SAMPLE_RATE;
+            }
+        }
+
         b += 2;
     } else {
         if_context->sample_rate = 0.0;
@@ -690,6 +830,16 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
     }
     if (if_context->has.temperature) {
         if_context->temperature = vrt_fixed_point_i16_to_float(b[0] & 0x0000FFFFU, 6);
+
+        if (validate) {
+            if (if_context->temperature < -273.15) {
+                return VRT_ERR_TEMPERATURE;
+            }
+            if ((b[0] & 0xFFFF0000U) != 0) {
+                return VRT_ERR_RESERVED;
+            }
+        }
+
         b += 1;
     } else {
         if_context->temperature = 0.0F;
@@ -697,21 +847,52 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
     if (if_context->has.device_identifier) {
         if_context->device_identifier.oui         = msk(b[0], 0, 24);
         if_context->device_identifier.device_code = (uint16_t)msk(b[1], 0, 16);
+
+        if (validate) {
+            if ((b[0] & 0xFF000000U) != 0 || (b[1] & 0xFFFF0000U) != 0) {
+                return VRT_ERR_RESERVED;
+            }
+        }
+
         b += 2;
     } else {
         if_context->device_identifier.oui         = 0;
         if_context->device_identifier.device_code = 0;
     }
-    b += if_context_read_state_and_event_indicators(if_context->has.state_and_event_indicators, b[0],
-                                                    &if_context->state_and_event_indicators);
-    b += if_context_read_data_packet_payload_format(if_context->has.data_packet_payload_format, b,
-                                                    &if_context->data_packet_payload_format);
-    b += if_context_read_formatted_geolocation(if_context->has.formatted_gps_geolocation, b,
-                                               &if_context->formatted_gps_geolocation);
-    b += if_context_read_formatted_geolocation(if_context->has.formatted_ins_geolocation, b,
-                                               &if_context->formatted_ins_geolocation);
-    b += if_context_read_ephemeris(if_context->has.ecef_ephemeris, b, &if_context->ecef_ephemeris);
-    b += if_context_read_ephemeris(if_context->has.relative_ephemeris, b, &if_context->relative_ephemeris);
+    rv = if_context_read_state_and_event_indicators(if_context->has.state_and_event_indicators, b[0],
+                                                    &if_context->state_and_event_indicators, validate);
+    if (rv < 0) {
+        return rv;
+    }
+    b += rv;
+    rv = if_context_read_data_packet_payload_format(if_context->has.data_packet_payload_format, b,
+                                                    &if_context->data_packet_payload_format, validate);
+    if (rv < 0) {
+        return rv;
+    }
+    b += rv;
+    rv = if_context_read_formatted_geolocation(if_context->has.formatted_gps_geolocation, b,
+                                               &if_context->formatted_gps_geolocation, validate);
+    if (rv < 0) {
+        return rv;
+    }
+    b += rv;
+    rv = if_context_read_formatted_geolocation(if_context->has.formatted_ins_geolocation, b,
+                                               &if_context->formatted_ins_geolocation, validate);
+    if (rv < 0) {
+        return rv;
+    }
+    b += rv;
+    rv = if_context_read_ephemeris(if_context->has.ecef_ephemeris, b, &if_context->ecef_ephemeris, validate);
+    if (rv < 0) {
+        return rv;
+    }
+    b += rv;
+    rv = if_context_read_ephemeris(if_context->has.relative_ephemeris, b, &if_context->relative_ephemeris, validate);
+    if (rv < 0) {
+        return rv;
+    }
+    b += rv;
     if (if_context->has.ephemeris_reference_identifier) {
         if_context->ephemeris_reference_identifier = b[0];
         b += 1;
@@ -719,13 +900,20 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
         if_context->ephemeris_reference_identifier = 0;
     }
 
-    uint32_t gps_ascii_words = if_context_read_gps_ascii(if_context->has.gps_ascii, b, &if_context->gps_ascii);
-    b += gps_ascii_words;
-    words += gps_ascii_words;
+    rv = if_context_read_gps_ascii(if_context->has.gps_ascii, b, &if_context->gps_ascii, validate);
+    if (rv < 0) {
+        return rv;
+    }
+    b += rv;
+    words += rv;
 
     /* No need to increase b here since it is last */
-    words += if_context_read_association_lists(if_context->has.context_association_lists, b,
-                                               &if_context->context_association_lists);
+    rv = if_context_read_association_lists(if_context->has.context_association_lists, b,
+                                           &if_context->context_association_lists);
+    if (rv < 0) {
+        return rv;
+    }
+    words += rv;
 
     return (int32_t)words;
 }

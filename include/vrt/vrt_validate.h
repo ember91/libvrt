@@ -54,7 +54,6 @@ int32_t vrt_validate_fields(const vrt_header* header, const vrt_fields* fields);
  * \retval VRT_ERR_CHANNEL_TAG_SIZE            Channel tag size is outside valid bounds (> 0x0F).
  * \retval VRT_ERR_ITEM_PACKING_FIELD_SIZE     Item packing fields size is outside valid bounds (> 0x3F).
  * \retval VRT_ERR_DATA_ITEM_SIZE              Data item size is outside valid bounds (> 0x3F).
- * \retval VRT_ERR_OUI                         OUI is outside valid bounds (> 0x00FFFFFF).
  * \retval VRT_ERR_TSI                         TSI is an invalid value.
  * \retval VRT_ERR_TSF                         TSF is an invalid value.
  * \retval VRT_ERR_INTEGER_SECOND_TIMESTAMP    Integer second timestamp is not 0xFFFFFFFF when TSI is VRT_TSI_UNDEFINED.

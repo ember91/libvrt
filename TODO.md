@@ -1,3 +1,4 @@
+* Are error codes used and in the right order?
 * vrt_string_err()
 * Not following google style guide...
 * Make AGC/MGC, packing_method and perhaps others enums

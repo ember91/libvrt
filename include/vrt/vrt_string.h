@@ -54,7 +54,7 @@ const char* vrt_string_real_or_complex(vrt_real_complex real_or_complex);
 /**
  * Get a string representation of Data item format enum.
  *
- * \param real_or_complex Data item format.
+ * \param data_item_format Data item format.
  *
  * \return String representation.
  *

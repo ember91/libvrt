@@ -153,10 +153,10 @@ vrt_words_if_context(if_context)
 ```
 For reading:
 ```
-vrt_read_header(buf, buf_words, header)
-vrt_read_fields(header, buf, buf_words, fields)
+vrt_read_header(buf, buf_words, header, validate)
+vrt_read_fields(header, buf, buf_words, fields, validate)
 vrt_read_trailer(buf, buf_words, trailer)
-vrt_read_if_context(buf, buf_words, if_context)
+vrt_read_if_context(buf, buf_words, if_context, validate)
 ```
 For writing:
 ```

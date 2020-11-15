@@ -48,82 +48,100 @@ static void assert_header(const vrt_header& h, const std::map<std::string, std::
 }
 
 TEST_F(ReadHeaderTest, ZeroSizeBuffer) {
-    ASSERT_EQ(vrt_read_header(buf_.data(), 0, &h_), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 0, &h_, true), VRT_ERR_BUF_SIZE);
 }
 
-TEST_F(ReadHeaderTest, PacketType1) {
+TEST_F(ReadHeaderTest, PacketType) {
     buf_[0] = 0x00000000;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_), 1);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {});
 }
 
-TEST_F(ReadHeaderTest, PacketType2) {
+TEST_F(ReadHeaderTest, PacketTypeInvalid) {
     buf_[0] = 0xF0000000;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_), 1);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), VRT_ERR_PACKET_TYPE);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, false), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"packet_type", static_cast<vrt_packet_type>(0xF)}});
 }
 
 TEST_F(ReadHeaderTest, HasClassId) {
     buf_[0] = 0x08000000;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_), 1);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"has.class_id", true}});
 }
 
 TEST_F(ReadHeaderTest, HasTrailer) {
     buf_[0] = 0x04000000;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_), 1);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"has.trailer", true}});
 }
 
+TEST_F(ReadHeaderTest, HasTrailerInvalid) {
+    buf_[0] = 0x44000000;
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), VRT_ERR_TRAILER);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, false), 1);
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    assert_header(h_, {{"packet_type", VRT_PT_IF_CONTEXT}, {"has.trailer", true}});
+}
+
 TEST_F(ReadHeaderTest, Tsm) {
+    buf_[0] = 0x41000000;
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), 1);
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    assert_header(h_, {{"packet_type", VRT_PT_IF_CONTEXT}, {"tsm", true}});
+}
+
+TEST_F(ReadHeaderTest, TsmInvalid) {
     buf_[0] = 0x01000000;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_), 1);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), VRT_ERR_TSM);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, false), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"tsm", true}});
 }
 
 TEST_F(ReadHeaderTest, Tsi) {
     buf_[0] = 0x00C00000;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_), 1);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"tsi", VRT_TSI_OTHER}});
 }
 
 TEST_F(ReadHeaderTest, Tsf) {
     buf_[0] = 0x00300000;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_), 1);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"tsf", VRT_TSF_FREE_RUNNING_COUNT}});
 }
 
 TEST_F(ReadHeaderTest, PacketCount) {
     buf_[0] = 0x000A0000;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_), 1);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"packet_count", static_cast<uint8_t>(0xA)}});
 }
 
 TEST_F(ReadHeaderTest, PacketSize) {
     buf_[0] = 0x0000FEDC;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_), 1);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"packet_size", static_cast<uint16_t>(0xFEDC)}});
 }
 
 TEST_F(ReadHeaderTest, Reserved) {
     buf_[0] = 0x02000000;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_), 1);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), VRT_ERR_RESERVED);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, false), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {});
 }
 
 TEST_F(ReadHeaderTest, EveryOther1) {
     buf_[0] = 0x0810ABCD;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_), 1);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(
         h_, {{"has.class_id", true}, {"tsf", VRT_TSF_SAMPLE_COUNT}, {"packet_size", static_cast<uint16_t>(0xABCD)}});
@@ -131,7 +149,7 @@ TEST_F(ReadHeaderTest, EveryOther1) {
 
 TEST_F(ReadHeaderTest, EveryOther2) {
     buf_[0] = 0x14850000;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_), 1);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"packet_type", VRT_PT_IF_DATA_WITH_STREAM_ID},
                        {"has.trailer", true},
@@ -141,7 +159,7 @@ TEST_F(ReadHeaderTest, EveryOther2) {
 
 TEST_F(ReadHeaderTest, All) {
     buf_[0] = 0x597FBEDE;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_), 1);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"packet_type", VRT_PT_EXT_CONTEXT},
                        {"has.class_id", true},
