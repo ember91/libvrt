@@ -135,7 +135,13 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Number of written 32-bit words, or VRT_ERR if error.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of written 32-bit words, or a negative number if error. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">VRT_ERR_BUF_SIZE</td><td>Buffer is too small.</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section warning"><dt>Warning</dt><dd>This does not do any validation, i.e. it doesn't check if the field values make any sense. </dd></dl>
 
 </div>
@@ -180,7 +186,13 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Number of written 32-bit words (always 1), or VRT_ERR if error.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of written 32-bit words (always 1), or a negative number if error. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">VRT_ERR_BUF_SIZE</td><td>Buffer is too small.</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section note"><dt>Note</dt><dd>May requires output buffer data to be byte swapped if platform endianess isn't big endian (network order).</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>This does not do any validation, i.e. it doesn't check if the field values make any sense. </dd></dl>
 
@@ -226,7 +238,13 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Number of written 32-bit words, or VRT_ERR if error.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of written 32-bit words, or a negative number if error. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">VRT_ERR_BUF_SIZE</td><td>Buffer is too small.</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section warning"><dt>Warning</dt><dd>This does not do any validation, i.e. it doesn't check if the field values make any sense. </dd>
 <dd>
 Fields represented as double but with an underlying 64-bit fixed precision format, i.e. bandwidth, if_reference_frequency, rf_reference_frequency, rf_reference_frequency_offset, if_band_offset, and sample_rate, may in rare cases lose precision since double only has 53 bits of precision. </dd></dl>
@@ -273,7 +291,13 @@ Fields represented as double but with an underlying 64-bit fixed precision forma
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Number of written 32-bit words, or VRT_ERR if error.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of written 32-bit words, or a negative number if error. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">VRT_ERR_BUF_SIZE</td><td>Buffer is too small.</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section warning"><dt>Warning</dt><dd>This does not do any validation, i.e. it doesn't check if the field values make any sense. </dd></dl>
 
 </div>

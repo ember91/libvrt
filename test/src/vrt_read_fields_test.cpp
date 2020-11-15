@@ -70,7 +70,7 @@ TEST_F(ReadFieldsTest, StreamId2) {
 TEST_F(ReadFieldsTest, StreamId3) {
     h_.packet_type = VRT_PT_EXT_DATA_WITH_STREAM_ID;
     buf_[0]        = 0xFEFEBEBE;
-    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_), VRT_ERR);
+    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_), VRT_ERR_BUF_SIZE);
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 1, &f_), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_fields(f_, {{"stream_id", static_cast<uint32_t>(0xFEFEBEBE)}});
@@ -79,7 +79,7 @@ TEST_F(ReadFieldsTest, StreamId3) {
 TEST_F(ReadFieldsTest, StreamId4) {
     h_.packet_type = VRT_PT_IF_CONTEXT;
     buf_[0]        = 0xFEFEBEBE;
-    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_), VRT_ERR);
+    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_), VRT_ERR_BUF_SIZE);
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 1, &f_), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_fields(f_, {{"stream_id", static_cast<uint32_t>(0xFEFEBEBE)}});
@@ -88,7 +88,7 @@ TEST_F(ReadFieldsTest, StreamId4) {
 TEST_F(ReadFieldsTest, StreamId5) {
     h_.packet_type = VRT_PT_EXT_CONTEXT;
     buf_[0]        = 0xFEFEBEBE;
-    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_), VRT_ERR);
+    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_), VRT_ERR_BUF_SIZE);
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 1, &f_), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_fields(f_, {{"stream_id", static_cast<uint32_t>(0xFEFEBEBE)}});
@@ -133,7 +133,7 @@ TEST_F(ReadFieldsTest, ClassIdReserved) {
 TEST_F(ReadFieldsTest, IntegerSecondsTimestamp) {
     h_.tsi  = VRT_TSI_OTHER;
     buf_[0] = 0x12345678;
-    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_), VRT_ERR);
+    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_), VRT_ERR_BUF_SIZE);
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 1, &f_), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_fields(f_, {{"integer_seconds_timestamp", static_cast<uint32_t>(0x12345678)}});
@@ -143,7 +143,7 @@ TEST_F(ReadFieldsTest, FractionalSecondsTimestamp) {
     h_.tsf  = VRT_TSF_FREE_RUNNING_COUNT;
     buf_[0] = 0xBABBABBA;
     buf_[1] = 0xCEECCEEC;
-    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 1, &f_), VRT_ERR);
+    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 1, &f_), VRT_ERR_BUF_SIZE);
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 2, &f_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_fields(f_, {{"fractional_seconds_timestamp", static_cast<uint64_t>(0xBABBABBACEECCEEC)}});
@@ -154,7 +154,7 @@ TEST_F(ReadFieldsTest, EveryOther1) {
     h_.tsi         = VRT_TSI_UTC;
     buf_[0]        = 0xABABCBCB;
     buf_[1]        = 0xCECEBEBE;
-    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 1, &f_), VRT_ERR);
+    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 1, &f_), VRT_ERR_BUF_SIZE);
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 2, &f_), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_fields(f_, {{"stream_id", static_cast<uint32_t>(0xABABCBCB)},
@@ -168,7 +168,7 @@ TEST_F(ReadFieldsTest, EveryOther2) {
     buf_[1]         = 0xABABCBCB;
     buf_[2]         = 0xCECEBEBE;
     buf_[3]         = 0xBABBA011;
-    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 3, &f_), VRT_ERR);
+    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 3, &f_), VRT_ERR_BUF_SIZE);
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 4, &f_), 4);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_fields(f_, {{"class_id.oui", static_cast<uint32_t>(0x00FEDCBA)},
@@ -188,7 +188,7 @@ TEST_F(ReadFieldsTest, All) {
     buf_[3]         = 0xCECEBEBE;
     buf_[4]         = 0xADDABEBB;
     buf_[5]         = 0xEFEFEF01;
-    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 5, &f_), VRT_ERR);
+    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 5, &f_), VRT_ERR_BUF_SIZE);
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 6, &f_), 6);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_fields(f_, {{"stream_id", static_cast<uint32_t>(0xCECEBEBE)},

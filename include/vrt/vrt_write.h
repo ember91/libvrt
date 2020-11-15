@@ -16,7 +16,8 @@ extern "C" {
  * \param buf       Buffer to write to.
  * \param buf_words Size of buf in 32-bit words.
  *
- * \return Number of written 32-bit words (always 1), or VRT_ERR if error.
+ * \return Number of written 32-bit words (always 1), or a negative number if error.
+ * \retval VRT_ERR_BUF_SIZE Buffer is too small.
  *
  * \note May requires output buffer data to be byte swapped if platform endianess isn't big endian (network order).
  *
@@ -33,7 +34,8 @@ int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t buf_words
  *                  header word.
  * \param buf_words Size of buf in 32-bit words.
  *
- * \return Number of written 32-bit words, or VRT_ERR if error.
+ * \return Number of written 32-bit words, or a negative number if error.
+ * \retval VRT_ERR_BUF_SIZE Buffer is too small.
  *
  * \warning This does not do any validation, i.e. it doesn't check if the field values make any sense.
  */
@@ -47,7 +49,8 @@ int32_t vrt_write_fields(const vrt_header* header, const vrt_fields* fields, voi
  *                   packet.
  * \param buf_words  Size of buf in 32-bit words.
  *
- * \return Number of written 32-bit words, or VRT_ERR if error.
+ * \return Number of written 32-bit words, or a negative number if error.
+ * \retval VRT_ERR_BUF_SIZE Buffer is too small.
  *
  * \warning This does not do any validation, i.e. it doesn't check if the field values make any sense.
  */
@@ -61,7 +64,8 @@ int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_wo
  *                   following the fields section.
  * \param buf_words  Size of buf in 32-bit words.
  *
- * \return Number of written 32-bit words, or VRT_ERR if error.
+ * \return Number of written 32-bit words, or a negative number if error.
+ * \retval VRT_ERR_BUF_SIZE Buffer is too small.
  *
  * \warning This does not do any validation, i.e. it doesn't check if the field values make any sense.
  * \warning Fields represented as double but with an underlying 64-bit fixed precision format, i.e. bandwidth,

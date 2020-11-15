@@ -21,7 +21,7 @@ class WriteHeaderTest : public ::testing::Test {
 };
 
 TEST_F(WriteHeaderTest, ZeroSizeBuffer) {
-    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 0), VRT_ERR);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 0), VRT_ERR_BUF_SIZE);
 }
 
 TEST_F(WriteHeaderTest, PacketType1) {

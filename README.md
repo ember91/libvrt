@@ -94,7 +94,7 @@ int main() {
     /* Write header */
     int32_t offset = 0;
     int32_t rv     = vrt_write_header(&h, b + offset, SIZE);
-    if (rv == VRT_ERR) {
+    if (rv < 0) {
         fprintf(stderr, "Failed to write header\n");
         return EXIT_FAILURE;
     }
@@ -102,7 +102,7 @@ int main() {
 
     /* Write fields, which in this case is Stream ID */
     rv = vrt_write_fields(&h, &f, b + offset, SIZE - offset);
-    if (rv == VRT_ERR) {
+    if (rv < 0) {
         fprintf(stderr, "Failed to write fields section\n");
         return EXIT_FAILURE;
     }
@@ -115,7 +115,7 @@ int main() {
 
     /* Write trailer */
     rv = vrt_write_trailer(&t, b + offset, SIZE - offset);
-    if (rv == VRT_ERR) {
+    if (rv < 0) {
         fprintf(stderr, "Failed to write trailer\n");
         return EXIT_FAILURE;
     }
@@ -181,7 +181,7 @@ inline bool is_platform_little_endian()
 ```
 More documentation is found in the source code, or in the generated documentation found in `doc/index.html`.
 
-Some functions may return `VRT_ERR` (-1) if there's an error.
+Some functions return negative numbers if there's an error.
 
 ### Prerequisites
 

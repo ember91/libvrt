@@ -9,11 +9,6 @@ extern "C" {
 #endif
 
 /**
- * Error return code.
- */
-static const int32_t VRT_ERR = -1;
-
-/**
  * Type of packet.
  *
  * \note Remaining values are reserved for future packet types.

@@ -7,6 +7,7 @@
 #include <map>
 #include <string>
 
+#include <vrt/vrt_common.h>
 #include <vrt/vrt_read.h>
 
 /* This is not nice, but whatever... */
@@ -308,7 +309,7 @@ static void assert_if_context(const vrt_if_context& c, const std::map<std::strin
 }
 
 TEST_F(ReadIfContextTest, ZeroSizeBuffer) {
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 0, &c_), VRT_ERR);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 0, &c_), VRT_ERR_BUF_SIZE);
 }
 
 TEST_F(ReadIfContextTest, None) {

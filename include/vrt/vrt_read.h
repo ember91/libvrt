@@ -14,7 +14,8 @@ extern "C" {
  * \param buf_words Size of buf in 32-bit words.
  * \param header    Header to read into.
  *
- * \return Number of read 32-bit words, or VRT_ERR if error.
+ * \return Number of read 32-bit words, or a negative number if error.
+ * \retval VRT_ERR_BUF_SIZE Buffer is too small.
  *
  * \note Requires input buffer data to be byte swapped if platform endianess isn't big endian (network order).
  *
@@ -31,7 +32,8 @@ int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header)
  * \param buf_words Size of buf in 32-bit words.
  * \param fields    Fields to read into.
  *
- * \return Number of read 32-bit words, or VRT_ERR if error.
+ * \return Number of read 32-bit words, or a negative number if error.
+ * \retval VRT_ERR_BUF_SIZE Buffer is too small.
  *
  * \warning This does not do any validation, i.e. it doesn't check if the field values make any sense.
  */
@@ -45,7 +47,8 @@ int32_t vrt_read_fields(const vrt_header* header, const void* buf, uint32_t buf_
  * \param buf_words Size of buf in 32-bit words.
  * \param trailer   Trailer to read into.
  *
- * \return Number of read 32-bit words, i.e. 1, or VRT_ERR if error.
+ * \return Number of read 32-bit words, i.e. 1, or a negative number if error.
+ * \retval VRT_ERR_BUF_SIZE Buffer is too small.
  *
  * \warning This does not do any validation, i.e. it doesn't check if the field values make any sense.
  */
@@ -58,7 +61,8 @@ int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trail
  * \param buf_words  Size of buf in 32-bit words. Starting from the header word.
  * \param if_context IF context struct to read into.
  *
- * \return Number of read 32-bit words, or VRT_ERR if error.
+ * \return Number of read 32-bit words, or a negative number if error.
+ * \retval VRT_ERR_BUF_SIZE Buffer is too small.
  *
  * \warning This does not do any validation, i.e. it doesn't check if the field values make any sense.
  * \warning Fields represented as double but with an underlying 64-bit fixed precision format, i.e. bandwidth,

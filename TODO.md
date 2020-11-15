@@ -1,4 +1,3 @@
-* Not sure if VRT_ERR should be in vrt_types.h
 * vrt_string_err()
 * Not following google style guide...
 * Make AGC/MGC, packing_method and perhaps others enums

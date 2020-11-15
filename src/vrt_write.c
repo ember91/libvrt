@@ -38,7 +38,7 @@ int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t buf_words
 
     /* Check if buf size is sufficient */
     if (buf_words < words) {
-        return VRT_ERR;
+        return VRT_ERR_BUF_SIZE;
     }
 
     /* Word in header section */
@@ -64,7 +64,7 @@ int32_t vrt_write_fields(const vrt_header* header, const vrt_fields* fields, voi
 
     /* Check if buf size is sufficient */
     if (buf_words < words) {
-        return VRT_ERR;
+        return VRT_ERR_BUF_SIZE;
     }
 
     uint32_t* b = ((uint32_t*)buf);
@@ -96,7 +96,7 @@ int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_wo
 
     /* Check if buf size is sufficient */
     if (buf_words < words) {
-        return VRT_ERR;
+        return VRT_ERR_BUF_SIZE;
     }
 
     uint32_t* b = (uint32_t*)buf;
@@ -426,7 +426,7 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32
 
     /* Check if buf size is sufficient */
     if (buf_words < words) {
-        return VRT_ERR;
+        return VRT_ERR_BUF_SIZE;
     }
 
     uint32_t* b = (uint32_t*)buf;
