@@ -6,7 +6,7 @@ void init_header_garbage(vrt_header* h) {
     h->packet_type  = static_cast<vrt_packet_type>(0xFFFFFFFF);
     h->has.class_id = true;
     h->has.trailer  = true;
-    h->tsm          = true;
+    h->tsm          = VRT_TSM_COARSE;
     h->tsi          = static_cast<vrt_tsi>(0xF);
     h->tsf          = static_cast<vrt_tsf>(0xF);
     h->packet_count = 0xF;
@@ -38,7 +38,7 @@ void init_trailer_garbage(vrt_trailer* t) {
     t->calibrated_time                     = true;
     t->valid_data                          = true;
     t->reference_lock                      = true;
-    t->agc_or_mgc                          = true;
+    t->agc_or_mgc                          = VRT_AOM_AGC;
     t->detected_signal                     = true;
     t->spectral_inversion                  = true;
     t->over_range                          = true;
@@ -106,7 +106,7 @@ void init_if_context_garbage(vrt_if_context* c) {
     c->state_and_event_indicators.calibrated_time        = true;
     c->state_and_event_indicators.valid_data             = true;
     c->state_and_event_indicators.reference_lock         = true;
-    c->state_and_event_indicators.agc_or_mgc             = true;
+    c->state_and_event_indicators.agc_or_mgc             = VRT_AOM_AGC;
     c->state_and_event_indicators.detected_signal        = true;
     c->state_and_event_indicators.spectral_inversion     = true;
     c->state_and_event_indicators.over_range             = true;
@@ -120,7 +120,7 @@ void init_if_context_garbage(vrt_if_context* c) {
     c->state_and_event_indicators.user_defined1          = true;
     c->state_and_event_indicators.user_defined0          = true;
 
-    c->data_packet_payload_format.packing_method          = true;
+    c->data_packet_payload_format.packing_method          = VRT_PM_LINK_EFFICIENT;
     c->data_packet_payload_format.real_or_complex         = VRT_ROC_COMPLEX_POLAR;
     c->data_packet_payload_format.data_item_format        = VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT;
     c->data_packet_payload_format.sample_component_repeat = true;

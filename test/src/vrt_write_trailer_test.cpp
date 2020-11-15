@@ -131,7 +131,7 @@ TEST_F(WriteTrailerTest, ReferenceLock) {
 }
 
 TEST_F(WriteTrailerTest, AgcOrMgc) {
-    t_.agc_or_mgc = true;
+    t_.agc_or_mgc = VRT_AOM_AGC;
     ASSERT_EQ(vrt_write_trailer(&t_, buf_.data(), 1), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -233,7 +233,7 @@ TEST_F(WriteTrailerTest, BothReferenceLock) {
 
 TEST_F(WriteTrailerTest, BothAgcOrMgc) {
     t_.has.agc_or_mgc = true;
-    t_.agc_or_mgc     = true;
+    t_.agc_or_mgc     = VRT_AOM_AGC;
     ASSERT_EQ(vrt_write_trailer(&t_, buf_.data(), 1), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x10010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -338,7 +338,7 @@ TEST_F(WriteTrailerTest, EveryOther2) {
     t_.has.user_defined10              = true;
     t_.has.user_defined8               = true;
     t_.valid_data                      = true;
-    t_.agc_or_mgc                      = true;
+    t_.agc_or_mgc                      = VRT_AOM_AGC;
     t_.spectral_inversion              = true;
     t_.sample_loss                     = true;
     t_.user_defined10                  = true;
@@ -365,7 +365,7 @@ TEST_F(WriteTrailerTest, All) {
     t_.calibrated_time                     = true;
     t_.valid_data                          = true;
     t_.reference_lock                      = true;
-    t_.agc_or_mgc                          = true;
+    t_.agc_or_mgc                          = VRT_AOM_AGC;
     t_.detected_signal                     = true;
     t_.spectral_inversion                  = true;
     t_.over_range                          = true;

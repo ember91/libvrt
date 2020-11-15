@@ -106,7 +106,7 @@ static void assert_if_context(const vrt_if_context& c, const std::map<std::strin
     ASSERT_EQ(c.state_and_event_indicators.reference_lock,
               get_val<bool>(&val_cp, "state_and_event_indicators.reference_lock", false));
     ASSERT_EQ(c.state_and_event_indicators.agc_or_mgc,
-              get_val<bool>(&val_cp, "state_and_event_indicators.agc_or_mgc", false));
+              get_val<vrt_agc_or_mgc>(&val_cp, "state_and_event_indicators.agc_or_mgc", VRT_AOM_MGC));
     ASSERT_EQ(c.state_and_event_indicators.detected_signal,
               get_val<bool>(&val_cp, "state_and_event_indicators.detected_signal", false));
     ASSERT_EQ(c.state_and_event_indicators.spectral_inversion,
@@ -132,8 +132,9 @@ static void assert_if_context(const vrt_if_context& c, const std::map<std::strin
     ASSERT_EQ(c.state_and_event_indicators.user_defined0,
               get_val<bool>(&val_cp, "state_and_event_indicators.user_defined0", false));
 
-    ASSERT_EQ(c.data_packet_payload_format.packing_method,
-              get_val<bool>(&val_cp, "data_packet_payload_format.packing_method", false));
+    ASSERT_EQ(
+        c.data_packet_payload_format.packing_method,
+        get_val<vrt_packing_method>(&val_cp, "data_packet_payload_format.packing_method", VRT_PM_PROCESSING_EFFICIENT));
     ASSERT_EQ(Hex(c.data_packet_payload_format.real_or_complex),
               Hex(get_val<vrt_real_complex>(&val_cp, "data_packet_payload_format.real_or_complex", VRT_ROC_REAL)));
     ASSERT_EQ(Hex(c.data_packet_payload_format.data_item_format),
@@ -709,7 +710,7 @@ TEST_F(ReadIfContextTest, StateAndEventIndicatorsBothAgcOrMgc) {
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.state_and_event_indicators", true},
                            {"state_and_event_indicators.has.agc_or_mgc", true},
-                           {"state_and_event_indicators.agc_or_mgc", true}});
+                           {"state_and_event_indicators.agc_or_mgc", VRT_AOM_AGC}});
 }
 
 TEST_F(ReadIfContextTest, StateAndEventIndicatorsBothDetectedSignal) {
@@ -839,8 +840,8 @@ TEST_F(ReadIfContextTest, DataPacketPayloadFormatPackingMethod) {
     buf_[2] = 0x00000000;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, true), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.data_packet_payload_format", true}, {"data_packet_payload_format.packing_method", true}});
+    assert_if_context(c_, {{"has.data_packet_payload_format", true},
+                           {"data_packet_payload_format.packing_method", VRT_PM_LINK_EFFICIENT}});
 }
 
 TEST_F(ReadIfContextTest, DataPacketPayloadFormatRealOrComplex) {
@@ -2931,7 +2932,7 @@ TEST_F(ReadIfContextTest, EveryOther1) {
                            {"device_identifier.oui", static_cast<uint32_t>(0x00FFFFFF)},
                            {"device_identifier.device_code", static_cast<uint16_t>(0xFFFF)},
 
-                           {"data_packet_payload_format.packing_method", true},
+                           {"data_packet_payload_format.packing_method", VRT_PM_LINK_EFFICIENT},
                            {"data_packet_payload_format.real_or_complex", VRT_ROC_COMPLEX_POLAR},
                            {"data_packet_payload_format.data_item_format", VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT},
                            {"data_packet_payload_format.sample_component_repeat", true},
@@ -3057,7 +3058,7 @@ TEST_F(ReadIfContextTest, EveryOther2) {
          {"state_and_event_indicators.calibrated_time", true},
          {"state_and_event_indicators.valid_data", true},
          {"state_and_event_indicators.reference_lock", true},
-         {"state_and_event_indicators.agc_or_mgc", true},
+         {"state_and_event_indicators.agc_or_mgc", VRT_AOM_AGC},
          {"state_and_event_indicators.detected_signal", true},
          {"state_and_event_indicators.spectral_inversion", true},
          {"state_and_event_indicators.over_range", true},
@@ -3262,7 +3263,7 @@ TEST_F(ReadIfContextTest, All) {
          {"state_and_event_indicators.calibrated_time", true},
          {"state_and_event_indicators.valid_data", true},
          {"state_and_event_indicators.reference_lock", true},
-         {"state_and_event_indicators.agc_or_mgc", true},
+         {"state_and_event_indicators.agc_or_mgc", VRT_AOM_AGC},
          {"state_and_event_indicators.detected_signal", true},
          {"state_and_event_indicators.spectral_inversion", true},
          {"state_and_event_indicators.over_range", true},
@@ -3276,7 +3277,7 @@ TEST_F(ReadIfContextTest, All) {
          {"state_and_event_indicators.user_defined1", true},
          {"state_and_event_indicators.user_defined0", true},
 
-         {"data_packet_payload_format.packing_method", true},
+         {"data_packet_payload_format.packing_method", VRT_PM_LINK_EFFICIENT},
          {"data_packet_payload_format.real_or_complex", VRT_ROC_COMPLEX_POLAR},
          {"data_packet_payload_format.data_item_format", VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT},
          {"data_packet_payload_format.sample_component_repeat", true},

@@ -38,7 +38,7 @@ static void assert_header(const vrt_header& h, const std::map<std::string, std::
               Hex(get_val<vrt_packet_type>(&val_cp, "packet_type", VRT_PT_IF_DATA_WITHOUT_STREAM_ID)));
     ASSERT_EQ(h.has.class_id, get_val<bool>(&val_cp, "has.class_id", false));
     ASSERT_EQ(h.has.trailer, get_val<bool>(&val_cp, "has.trailer", false));
-    ASSERT_EQ(h.tsm, get_val<bool>(&val_cp, "tsm", false));
+    ASSERT_EQ(h.tsm, get_val<vrt_tsm>(&val_cp, "tsm", VRT_TSM_FINE));
     ASSERT_EQ(Hex(h.tsi), Hex(get_val<vrt_tsi>(&val_cp, "tsi", VRT_TSI_NONE)));
     ASSERT_EQ(Hex(h.tsf), Hex(get_val<vrt_tsf>(&val_cp, "tsf", VRT_TSF_NONE)));
     ASSERT_EQ(Hex(h.packet_count), Hex(get_val<uint8_t>(&val_cp, "packet_count", 0)));
@@ -92,7 +92,7 @@ TEST_F(ReadHeaderTest, Tsm) {
     buf_[0] = 0x41000000;
     ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_header(h_, {{"packet_type", VRT_PT_IF_CONTEXT}, {"tsm", true}});
+    assert_header(h_, {{"packet_type", VRT_PT_IF_CONTEXT}, {"tsm", VRT_TSM_COARSE}});
 }
 
 TEST_F(ReadHeaderTest, TsmInvalid) {
@@ -100,7 +100,7 @@ TEST_F(ReadHeaderTest, TsmInvalid) {
     ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), VRT_ERR_TSM);
     ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, false), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_header(h_, {{"tsm", true}});
+    assert_header(h_, {{"tsm", VRT_TSM_COARSE}});
 }
 
 TEST_F(ReadHeaderTest, Tsi) {
@@ -163,7 +163,7 @@ TEST_F(ReadHeaderTest, All) {
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"packet_type", VRT_PT_EXT_CONTEXT},
                        {"has.class_id", true},
-                       {"tsm", true},
+                       {"tsm", VRT_TSM_COARSE},
                        {"tsi", VRT_TSI_UTC},
                        {"tsf", VRT_TSF_FREE_RUNNING_COUNT},
                        {"packet_count", static_cast<uint8_t>(0xF)},

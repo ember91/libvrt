@@ -48,7 +48,7 @@ int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header,
     header->packet_type  = (vrt_packet_type)msk(b, 28, 4);
     header->has.class_id = vrt_u2b(msk(b, 27, 1));
     header->has.trailer  = vrt_u2b(msk(b, 26, 1));
-    header->tsm          = vrt_u2b(msk(b, 24, 1));
+    header->tsm          = (vrt_tsm)msk(b, 24, 1);
     header->tsi          = (vrt_tsi)msk(b, 22, 2);
     header->tsf          = (vrt_tsf)msk(b, 20, 2);
     header->packet_count = (uint8_t)msk(b, 16, 4);
@@ -63,7 +63,7 @@ int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header,
                 return VRT_ERR_TRAILER;
             }
         } else {
-            if (header->tsm) {
+            if (header->tsm != VRT_TSM_FINE) {
                 return VRT_ERR_TSM;
             }
         }
@@ -183,9 +183,9 @@ int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trail
         trailer->reference_lock = false;
     }
     if (trailer->has.agc_or_mgc) {
-        trailer->agc_or_mgc = msk(b, 16, 1);
+        trailer->agc_or_mgc = (vrt_agc_or_mgc)msk(b, 16, 1);
     } else {
-        trailer->agc_or_mgc = false;
+        trailer->agc_or_mgc = VRT_AOM_MGC;
     }
     if (trailer->has.detected_signal) {
         trailer->detected_signal = msk(b, 15, 1);
@@ -326,9 +326,9 @@ static uint32_t if_context_read_state_and_event_indicators(bool                 
             s->reference_lock = 0;
         }
         if (s->has.agc_or_mgc) {
-            s->agc_or_mgc = vrt_u2b(msk(b, 16, 1));
+            s->agc_or_mgc = (vrt_agc_or_mgc)msk(b, 16, 1);
         } else {
-            s->agc_or_mgc = 0;
+            s->agc_or_mgc = VRT_AOM_MGC;
         }
         if (s->has.detected_signal) {
             s->detected_signal = vrt_u2b(msk(b, 15, 1));
@@ -380,7 +380,7 @@ static uint32_t if_context_read_state_and_event_indicators(bool                 
     s->calibrated_time        = false;
     s->valid_data             = false;
     s->reference_lock         = false;
-    s->agc_or_mgc             = false;
+    s->agc_or_mgc             = VRT_AOM_MGC;
     s->detected_signal        = false;
     s->spectral_inversion     = false;
     s->over_range             = false;
@@ -412,7 +412,7 @@ static uint32_t if_context_read_data_packet_payload_format(bool                 
                                                            vrt_data_packet_payload_format* f,
                                                            bool                            validate) {
     if (has) {
-        f->packing_method          = vrt_u2b(msk(b[0], 31, 1));
+        f->packing_method          = (vrt_packing_method)msk(b[0], 31, 1);
         f->real_or_complex         = (vrt_real_complex)msk(b[0], 29, 2);
         f->data_item_format        = (vrt_data_item_format)msk(b[0], 24, 5);
         f->sample_component_repeat = vrt_u2b(msk(b[0], 23, 1));
@@ -442,7 +442,7 @@ static uint32_t if_context_read_data_packet_payload_format(bool                 
         return 2;
     }
 
-    f->packing_method          = false;
+    f->packing_method          = VRT_PM_PROCESSING_EFFICIENT;
     f->real_or_complex         = VRT_ROC_REAL;
     f->data_item_format        = VRT_DIF_SIGNED_FIXED_POINT;
     f->sample_component_repeat = false;

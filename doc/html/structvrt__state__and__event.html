@@ -80,8 +80,8 @@ Data Fields</h2></td></tr>
 <tr class="separator:af48f548739ba43838de898e5e2c04274"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5680bb5f8a903ae3a226b5778530f58d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvrt__state__and__event.html#a5680bb5f8a903ae3a226b5778530f58d">reference_lock</a></td></tr>
 <tr class="separator:a5680bb5f8a903ae3a226b5778530f58d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64052e440e92de02ef45e504cec72560"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvrt__state__and__event.html#a64052e440e92de02ef45e504cec72560">agc_or_mgc</a></td></tr>
-<tr class="separator:a64052e440e92de02ef45e504cec72560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef8a3bd96062ee3e22e4558e291fb188"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vrt__types_8h.html#ad3f5248585002368996827c559fa7e8d">vrt_agc_or_mgc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvrt__state__and__event.html#aef8a3bd96062ee3e22e4558e291fb188">agc_or_mgc</a></td></tr>
+<tr class="separator:aef8a3bd96062ee3e22e4558e291fb188"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56355374b8213d7e4827962e4abcc2f5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvrt__state__and__event.html#a56355374b8213d7e4827962e4abcc2f5">detected_signal</a></td></tr>
 <tr class="separator:a56355374b8213d7e4827962e4abcc2f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1ad3c1951c7d1ee4c509be2d4f10518"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvrt__state__and__event.html#ad1ad3c1951c7d1ee4c509be2d4f10518">spectral_inversion</a></td></tr>
@@ -110,18 +110,18 @@ Data Fields</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Binary state and event indicators. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="a64052e440e92de02ef45e504cec72560"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64052e440e92de02ef45e504cec72560">&#9670;&nbsp;</a></span>agc_or_mgc</h2>
+<a id="aef8a3bd96062ee3e22e4558e291fb188"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef8a3bd96062ee3e22e4558e291fb188">&#9670;&nbsp;</a></span>agc_or_mgc</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool vrt_state_and_event::agc_or_mgc</td>
+          <td class="memname"><a class="el" href="vrt__types_8h.html#ad3f5248585002368996827c559fa7e8d">vrt_agc_or_mgc</a> vrt_state_and_event::agc_or_mgc</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>True if AGC is active, False if MGC is active. Activate by setting has.agc_or_mgc to true. </p>
+<p>Whether AGC or MGC is active. Activate by setting has.agc_or_mgc to true. </p>
 
 </div>
 </div>
@@ -181,7 +181,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>True if at least one data sample in the packet exceeds the range of a sample. Activate by setting has.over_range to true.</p>
+<p>True if at least one data sample in the packet exceeds the range of a sample. Activate by setting has.over_range to true. The definition of this fields changes depending on the TSM field.</p>
 <dl class="section note"><dt>Note</dt><dd>This field does not have to be persistent between context packets. </dd></dl>
 
 </div>

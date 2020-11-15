@@ -1,7 +1,7 @@
 * Are error codes used and in the right order?
+* There should be constants for the undefined values in geolocation/ephemeris structs.
 * vrt_string_err()
 * Not following google style guide...
-* Make AGC/MGC, packing_method and perhaps others enums
 * Compile with -fvisibility=hidden?
 * Header only library
 * Use CMAKE_CURRENT_SOURCE_DIR

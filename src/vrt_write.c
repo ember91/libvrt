@@ -50,7 +50,7 @@ int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t buf_words
     b[0] |= msk(header->packet_type, 28, 4);
     b[0] |= msk(vrt_b2u(header->has.class_id), 27, 1);
     b[0] |= msk(vrt_b2u(header->has.trailer), 26, 1);
-    b[0] |= msk(vrt_b2u(header->tsm), 24, 1);
+    b[0] |= msk(header->tsm, 24, 1);
     b[0] |= msk(header->tsi, 22, 2);
     b[0] |= msk(header->tsf, 20, 2);
     b[0] |= msk(header->packet_count, 16, 4);
@@ -118,7 +118,7 @@ int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_wo
         b[0] |= msk(1, 29, 1);
     }
     if (trailer->has.agc_or_mgc) {
-        b[0] |= msk(vrt_b2u(trailer->agc_or_mgc), 16, 1);
+        b[0] |= msk(trailer->agc_or_mgc, 16, 1);
         b[0] |= msk(1, 28, 1);
     }
     if (trailer->has.detected_signal) {
@@ -229,7 +229,7 @@ static uint32_t if_context_write_state_and_event_indicator_field(bool has, const
         }
         if (s->has.agc_or_mgc) {
             b[0] |= msk(vrt_b2u(s->has.agc_or_mgc), 28, 1);
-            b[0] |= msk(vrt_b2u(s->agc_or_mgc), 16, 1);
+            b[0] |= msk(s->agc_or_mgc, 16, 1);
         }
         if (s->has.detected_signal) {
             b[0] |= msk(vrt_b2u(s->has.detected_signal), 27, 1);
@@ -279,7 +279,7 @@ static uint32_t if_context_write_data_packet_payload_format(bool                
         /* Zero reserved bits */
         b[0] = 0;
 
-        b[0] |= msk(vrt_b2u(f->packing_method), 31, 1);
+        b[0] |= msk(f->packing_method, 31, 1);
         b[0] |= msk(f->real_or_complex, 29, 2);
         b[0] |= msk(f->data_item_format, 24, 5);
         b[0] |= msk(vrt_b2u(f->sample_component_repeat), 23, 1);

@@ -9,7 +9,7 @@ void vrt_init_header(vrt_header* header) {
     header->packet_type  = VRT_PT_IF_DATA_WITHOUT_STREAM_ID;
     header->has.class_id = false;
     header->has.trailer  = false;
-    header->tsm          = false;
+    header->tsm          = VRT_TSM_FINE;
     header->tsi          = VRT_TSI_NONE;
     header->tsf          = VRT_TSF_NONE;
     header->packet_count = 0;
@@ -41,7 +41,7 @@ void vrt_init_trailer(vrt_trailer* trailer) {
     trailer->calibrated_time                     = false;
     trailer->valid_data                          = false;
     trailer->reference_lock                      = false;
-    trailer->agc_or_mgc                          = false;
+    trailer->agc_or_mgc                          = VRT_AOM_MGC;
     trailer->detected_signal                     = false;
     trailer->spectral_inversion                  = false;
     trailer->over_range                          = false;
@@ -109,7 +109,7 @@ void vrt_init_if_context(vrt_if_context* if_context) {
     if_context->state_and_event_indicators.calibrated_time        = false;
     if_context->state_and_event_indicators.valid_data             = false;
     if_context->state_and_event_indicators.reference_lock         = false;
-    if_context->state_and_event_indicators.agc_or_mgc             = false;
+    if_context->state_and_event_indicators.agc_or_mgc             = VRT_AOM_MGC;
     if_context->state_and_event_indicators.detected_signal        = false;
     if_context->state_and_event_indicators.spectral_inversion     = false;
     if_context->state_and_event_indicators.over_range             = false;
@@ -123,7 +123,7 @@ void vrt_init_if_context(vrt_if_context* if_context) {
     if_context->state_and_event_indicators.user_defined1          = false;
     if_context->state_and_event_indicators.user_defined0          = false;
 
-    if_context->data_packet_payload_format.packing_method          = false;
+    if_context->data_packet_payload_format.packing_method          = VRT_PM_PROCESSING_EFFICIENT;
     if_context->data_packet_payload_format.real_or_complex         = VRT_ROC_REAL;
     if_context->data_packet_payload_format.data_item_format        = VRT_DIF_SIGNED_FIXED_POINT;
     if_context->data_packet_payload_format.sample_component_repeat = false;

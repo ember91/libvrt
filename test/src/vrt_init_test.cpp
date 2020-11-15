@@ -16,7 +16,7 @@ TEST(InitTest, InitHeader) {
     ASSERT_EQ(h.packet_type, 0);
     ASSERT_FALSE(h.has.class_id);
     ASSERT_FALSE(h.has.trailer);
-    ASSERT_FALSE(h.tsm);
+    ASSERT_EQ(h.tsm, VRT_TSM_FINE);
     ASSERT_EQ(h.tsi, VRT_TSI_NONE);
     ASSERT_EQ(h.tsf, VRT_TSF_NONE);
     ASSERT_EQ(Hex(h.packet_count), Hex(0));
@@ -55,7 +55,7 @@ TEST(InitTest, InitTrailer) {
     ASSERT_FALSE(t.calibrated_time);
     ASSERT_FALSE(t.valid_data);
     ASSERT_FALSE(t.reference_lock);
-    ASSERT_FALSE(t.agc_or_mgc);
+    ASSERT_EQ(t.agc_or_mgc, VRT_AOM_MGC);
     ASSERT_FALSE(t.detected_signal);
     ASSERT_FALSE(t.spectral_inversion);
     ASSERT_FALSE(t.over_range);
@@ -126,7 +126,7 @@ TEST(InitTest, InitContext) {
     ASSERT_FALSE(c.state_and_event_indicators.calibrated_time);
     ASSERT_FALSE(c.state_and_event_indicators.valid_data);
     ASSERT_FALSE(c.state_and_event_indicators.reference_lock);
-    ASSERT_FALSE(c.state_and_event_indicators.agc_or_mgc);
+    ASSERT_EQ(c.state_and_event_indicators.agc_or_mgc, VRT_AOM_MGC);
     ASSERT_FALSE(c.state_and_event_indicators.detected_signal);
     ASSERT_FALSE(c.state_and_event_indicators.spectral_inversion);
     ASSERT_FALSE(c.state_and_event_indicators.over_range);
@@ -140,7 +140,7 @@ TEST(InitTest, InitContext) {
     ASSERT_FALSE(c.state_and_event_indicators.user_defined1);
     ASSERT_FALSE(c.state_and_event_indicators.user_defined0);
 
-    ASSERT_FALSE(c.data_packet_payload_format.packing_method);
+    ASSERT_EQ(c.data_packet_payload_format.packing_method, VRT_PM_PROCESSING_EFFICIENT);
     ASSERT_EQ(Hex(c.data_packet_payload_format.real_or_complex), Hex(VRT_ROC_REAL));
     ASSERT_EQ(Hex(c.data_packet_payload_format.data_item_format), Hex(VRT_DIF_SIGNED_FIXED_POINT));
     ASSERT_FALSE(c.data_packet_payload_format.sample_component_repeat);

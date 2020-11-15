@@ -37,6 +37,14 @@ typedef struct vrt_header_indicators {
 } vrt_header_indicators;
 
 /**
+ * Timestamp mode. Resolution of timestamps.
+ */
+typedef enum vrt_tsm {
+    VRT_TSM_FINE   = 0x0,
+    VRT_TSM_COARSE = 0x1,
+} vrt_tsm;
+
+/**
  * Reference-point time in resolution of a second.
  *
  * \note Rule 6.1.1-7: All the packets in an IF Data Packet Stream shall have the same TSI code, and thus the same
@@ -73,12 +81,12 @@ typedef struct vrt_header {
     /** Indicates presence of extra fields. */
     vrt_header_indicators has;
     /**
-     * Timestamp mode. Whether timestamps are with fine (false) or coarse (true) resolution. Coarse if an event
-     * happened sometime in the data sampling interval.
+     * Timestamp mode. Whether timestamps are with fine or coarse resolution. Coarse if an event happened sometime in
+     * the data sampling interval.
      *
      * \note True is only valid for context packets.
      */
-    bool tsm;
+    vrt_tsm tsm;
     /**
      * Type of integer second timestamp.
      *
@@ -167,6 +175,11 @@ typedef struct vrt_trailer_indicators {
 } vrt_trailer_indicators;
 
 /**
+ * Indicated if AGC or MGC is active.
+ */
+typedef enum vrt_agc_or_mgc { VRT_AOM_MGC = 0x0, VRT_AOM_AGC = 0x1 } vrt_agc_or_mgc;
+
+/**
  * Trailer section data.
  */
 typedef struct vrt_trailer {
@@ -180,8 +193,8 @@ typedef struct vrt_trailer {
     bool valid_data;
     /** True if the reference is phase locked and stable. Activate by setting has.reference_lock to true. */
     bool reference_lock;
-    /** True if AGC is active, False if MGC is. Activate by setting has.agc_or_mgc to true. */
-    bool agc_or_mgc;
+    /** Whether AGC or MGC is active. Activate by setting has.agc_or_mgc to true. */
+    vrt_agc_or_mgc agc_or_mgc;
     /** True if a signal is detected in the packet. Activate by setting has.detected_signal to true. */
     bool detected_signal;
     /** True if the signal has an inverted spectrum. Activate by setting has.spectral_inversion to true. */
@@ -290,15 +303,15 @@ typedef struct vrt_state_and_event {
     bool valid_data;
     /** True if the reference is phase locked and stable. Activate by setting has.reference_lock to true. */
     bool reference_lock;
-    /** True if AGC is active, False if MGC is active. Activate by setting has.agc_or_mgc to true. */
-    bool agc_or_mgc;
+    /** Whether AGC or MGC is active. Activate by setting has.agc_or_mgc to true. */
+    vrt_agc_or_mgc agc_or_mgc;
     /** True if a signal is detected in the packet. Activate by setting has.detected_signal to true. */
     bool detected_signal;
     /** True if a signal in the data has an inverted spectrum. Activate by setting has.spectral_inversion to true. */
     bool spectral_inversion;
     /**
      * True if at least one data sample in the packet exceeds the range of a sample. Activate by setting has.over_range
-     * to true.
+     * to true. The definition of this fields changes depending on the TSM field.
      *
      * \note This field does not have to be persistent between context packets.
      */
@@ -391,14 +404,19 @@ typedef enum vrt_data_item_format {
 } vrt_data_item_format;
 
 /**
+ * Packing method.
+ */
+typedef enum vrt_packing_method { VRT_PM_PROCESSING_EFFICIENT = 0x0, VRT_PM_LINK_EFFICIENT = 0x1 } vrt_packing_method;
+
+/**
  * Format of data packet payload.
  *
  * \note Some fields regarding size contain a number that is one less than the actual size, while some contain a number
  *       equal to the actual size.
  */
 typedef struct vrt_data_packet_payload_format {
-    /** True if link-efficient packing is used. False if processing-efficient packing is used. */
-    bool packing_method;
+    /** If link-efficient or processing-efficient packing is used. */
+    vrt_packing_method packing_method;
     /** Data sample type. */
     vrt_real_complex real_or_complex;
     /** Data sample format. */

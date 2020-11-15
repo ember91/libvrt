@@ -53,7 +53,7 @@ TEST_F(WriteHeaderTest, HasTrailer) {
 }
 
 TEST_F(WriteHeaderTest, Tsm) {
-    h_.tsm = true;
+    h_.tsm = VRT_TSM_COARSE;
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x01000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -105,7 +105,7 @@ TEST_F(WriteHeaderTest, EveryOther1) {
     h_.packet_type  = VRT_PT_IF_CONTEXT;
     h_.has.class_id = false;
     h_.has.trailer  = true;
-    h_.tsm          = false;
+    h_.tsm          = VRT_TSM_FINE;
     h_.tsi          = VRT_TSI_UTC;
     h_.tsf          = VRT_TSF_NONE;
     h_.packet_count = 0xF;
@@ -119,7 +119,7 @@ TEST_F(WriteHeaderTest, EveryOther2) {
     h_.packet_type  = VRT_PT_IF_DATA_WITHOUT_STREAM_ID;
     h_.has.class_id = true;
     h_.has.trailer  = true;
-    h_.tsm          = false;
+    h_.tsm          = VRT_TSM_FINE;
     h_.tsi          = VRT_TSI_NONE;
     h_.tsf          = VRT_TSF_SAMPLE_COUNT;
     h_.packet_count = 0x0;
@@ -133,7 +133,7 @@ TEST_F(WriteHeaderTest, All) {
     h_.packet_type  = VRT_PT_EXT_DATA_WITH_STREAM_ID;
     h_.has.class_id = true;
     h_.has.trailer  = true;
-    h_.tsm          = false;
+    h_.tsm          = VRT_TSM_FINE;
     h_.tsi          = VRT_TSI_OTHER;
     h_.tsf          = VRT_TSF_SAMPLE_COUNT;
     h_.packet_count = 0xC;

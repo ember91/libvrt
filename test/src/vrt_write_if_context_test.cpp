@@ -272,7 +272,7 @@ TEST_F(WriteIfContextTest, StateAndEventIndicatorsReferenceLock) {
 
 TEST_F(WriteIfContextTest, StateAndEventIndicatorsAgcOrMgc) {
     c_.has.state_and_event_indicators        = true;
-    c_.state_and_event_indicators.agc_or_mgc = true;
+    c_.state_and_event_indicators.agc_or_mgc = VRT_AOM_AGC;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -348,7 +348,7 @@ TEST_F(WriteIfContextTest, StateAndEventIndicatorsBothReferenceLock) {
 TEST_F(WriteIfContextTest, StateAndEventIndicatorsBothAgcOrMgc) {
     c_.has.state_and_event_indicators            = true;
     c_.state_and_event_indicators.has.agc_or_mgc = true;
-    c_.state_and_event_indicators.agc_or_mgc     = true;
+    c_.state_and_event_indicators.agc_or_mgc     = VRT_AOM_AGC;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x10010000));
@@ -469,7 +469,7 @@ TEST_F(WriteIfContextTest, StateAndEventIndicatorsBothUserDefined0) {
 
 TEST_F(WriteIfContextTest, DataPacketPayloadFormatPackingMethod) {
     c_.has.data_packet_payload_format            = true;
-    c_.data_packet_payload_format.packing_method = true;
+    c_.data_packet_payload_format.packing_method = VRT_PM_LINK_EFFICIENT;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x80000000));
@@ -1785,7 +1785,7 @@ TEST_F(WriteIfContextTest, EveryOther1) {
     c_.device_identifier.oui         = 0xFEBEFEBE;
     c_.device_identifier.device_code = 0xBEBA;
 
-    c_.data_packet_payload_format.packing_method          = true;
+    c_.data_packet_payload_format.packing_method          = VRT_PM_LINK_EFFICIENT;
     c_.data_packet_payload_format.real_or_complex         = VRT_ROC_COMPLEX_POLAR;
     c_.data_packet_payload_format.data_item_format        = VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT;
     c_.data_packet_payload_format.sample_component_repeat = true;
@@ -1909,7 +1909,7 @@ TEST_F(WriteIfContextTest, EveryOther2) {
     c_.state_and_event_indicators.calibrated_time        = true;
     c_.state_and_event_indicators.valid_data             = true;
     c_.state_and_event_indicators.reference_lock         = true;
-    c_.state_and_event_indicators.agc_or_mgc             = true;
+    c_.state_and_event_indicators.agc_or_mgc             = VRT_AOM_AGC;
     c_.state_and_event_indicators.detected_signal        = true;
     c_.state_and_event_indicators.spectral_inversion     = true;
     c_.state_and_event_indicators.over_range             = true;
@@ -2076,7 +2076,7 @@ TEST_F(WriteIfContextTest, All) {
     c_.state_and_event_indicators.calibrated_time        = true;
     c_.state_and_event_indicators.valid_data             = true;
     c_.state_and_event_indicators.reference_lock         = true;
-    c_.state_and_event_indicators.agc_or_mgc             = true;
+    c_.state_and_event_indicators.agc_or_mgc             = VRT_AOM_AGC;
     c_.state_and_event_indicators.detected_signal        = true;
     c_.state_and_event_indicators.spectral_inversion     = true;
     c_.state_and_event_indicators.over_range             = true;
@@ -2090,7 +2090,7 @@ TEST_F(WriteIfContextTest, All) {
     c_.state_and_event_indicators.user_defined1          = true;
     c_.state_and_event_indicators.user_defined0          = true;
 
-    c_.data_packet_payload_format.packing_method          = true;
+    c_.data_packet_payload_format.packing_method          = VRT_PM_LINK_EFFICIENT;
     c_.data_packet_payload_format.real_or_complex         = VRT_ROC_COMPLEX_POLAR;
     c_.data_packet_payload_format.data_item_format        = VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT;
     c_.data_packet_payload_format.sample_component_repeat = true;

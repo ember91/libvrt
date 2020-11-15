@@ -50,7 +50,7 @@ static void assert_trailer(const vrt_trailer& t, const std::map<std::string, std
     ASSERT_EQ(t.calibrated_time, get_val<bool>(&val_cp, "calibrated_time", false));
     ASSERT_EQ(t.valid_data, get_val<bool>(&val_cp, "valid_data", false));
     ASSERT_EQ(t.reference_lock, get_val<bool>(&val_cp, "reference_lock", false));
-    ASSERT_EQ(t.agc_or_mgc, get_val<bool>(&val_cp, "agc_or_mgc", false));
+    ASSERT_EQ(t.agc_or_mgc, get_val<vrt_agc_or_mgc>(&val_cp, "agc_or_mgc", VRT_AOM_MGC));
     ASSERT_EQ(t.detected_signal, get_val<bool>(&val_cp, "detected_signal", false));
     ASSERT_EQ(t.spectral_inversion, get_val<bool>(&val_cp, "spectral_inversion", false));
     ASSERT_EQ(t.over_range, get_val<bool>(&val_cp, "over_range", false));
@@ -271,7 +271,7 @@ TEST_F(ReadTrailerTest, BothAgcOrMgc) {
     buf_[0] = 0x10010000;
     ASSERT_EQ(vrt_read_trailer(buf_.data(), 1, &t_), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_trailer(t_, {{"has.agc_or_mgc", true}, {"agc_or_mgc", true}});
+    assert_trailer(t_, {{"has.agc_or_mgc", true}, {"agc_or_mgc", VRT_AOM_AGC}});
 }
 
 TEST_F(ReadTrailerTest, BothDetectedSignal) {
@@ -359,7 +359,7 @@ TEST_F(ReadTrailerTest, EveryOther1) {
     assert_trailer(t_, {{"has.valid_data", true},
                         {"valid_data", true},
                         {"has.agc_or_mgc", true},
-                        {"agc_or_mgc", true},
+                        {"agc_or_mgc", VRT_AOM_AGC},
                         {"has.spectral_inversion", true},
                         {"spectral_inversion", true},
                         {"has.sample_loss", true},
@@ -401,7 +401,7 @@ TEST_F(ReadTrailerTest, All) {
                         {"has.reference_lock", true},
                         {"reference_lock", true},
                         {"has.agc_or_mgc", true},
-                        {"agc_or_mgc", true},
+                        {"agc_or_mgc", VRT_AOM_AGC},
                         {"has.detected_signal", true},
                         {"detected_signal", true},
                         {"has.spectral_inversion", true},
