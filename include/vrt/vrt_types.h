@@ -175,7 +175,7 @@ typedef struct vrt_trailer_indicators {
 } vrt_trailer_indicators;
 
 /**
- * Indicated if AGC or MGC is active.
+ * Indicates if AGC or MGC is active.
  */
 typedef enum vrt_agc_or_mgc { VRT_AOM_MGC = 0x0, VRT_AOM_AGC = 0x1 } vrt_agc_or_mgc;
 
@@ -373,6 +373,11 @@ typedef struct vrt_state_and_event {
 } vrt_state_and_event;
 
 /**
+ * Packing method.
+ */
+typedef enum vrt_packing_method { VRT_PM_PROCESSING_EFFICIENT = 0x0, VRT_PM_LINK_EFFICIENT = 0x1 } vrt_packing_method;
+
+/**
  * Indicates data sample type.
  */
 typedef enum vrt_real_complex {
@@ -402,11 +407,6 @@ typedef enum vrt_data_item_format {
     VRT_DIF_UNSIGNED_VRT_5_BIT_EXPONENT              = 0x15,
     VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT              = 0x16
 } vrt_data_item_format;
-
-/**
- * Packing method.
- */
-typedef enum vrt_packing_method { VRT_PM_PROCESSING_EFFICIENT = 0x0, VRT_PM_LINK_EFFICIENT = 0x1 } vrt_packing_method;
 
 /**
  * Format of data packet payload.

@@ -19,6 +19,17 @@ extern "C" {
 const char* vrt_string_packet_type(vrt_packet_type packet_type);
 
 /**
+ * Get a string representation of TSM (Timestamp mode) enum.
+ *
+ * \param tsm TSM.
+ *
+ * \return String representation.
+ *
+ * \note Inputting an unknown TSM returns "Unknown".
+ */
+const char* vrt_string_tsm(vrt_tsm tsm);
+
+/**
  * Get a string representation of TSI (Timestamp integer) enum.
  *
  * \param tsi TSI.
@@ -39,6 +50,28 @@ const char* vrt_string_tsi(vrt_tsi tsi);
  * \note Inputting an unknown TSF returns "Unknown".
  */
 const char* vrt_string_tsf(vrt_tsf tsf);
+
+/**
+ * Get a string representation of AGC/MGC enum.
+ *
+ * \param agc_or_mgc AGC/MGC.
+ *
+ * \return String representation.
+ *
+ * \note Inputting an unknown AGC/MGC returns "Unknown".
+ */
+const char* vrt_string_agc_or_mgc(vrt_agc_or_mgc agc_or_mgc);
+
+/**
+ * Get a string representation of Packing method enum.
+ *
+ * \param packing_method Packing method.
+ *
+ * \return String representation.
+ *
+ * \note Inputting an unknown Packing method returns "Unknown".
+ */
+const char* vrt_string_packing_method(vrt_packing_method packing_method);
 
 /**
  * Get a string representation of Real/Complex enum.

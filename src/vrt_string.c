@@ -19,6 +19,17 @@ const char* vrt_string_packet_type(vrt_packet_type packet_type) {
     }
 }
 
+const char* vrt_string_tsm(vrt_tsm tsm) {
+    switch (tsm) {
+        case VRT_TSM_FINE:
+            return "Fine";
+        case VRT_TSM_COARSE:
+            return "Coarse";
+        default:
+            return "Unknown";
+    }
+}
+
 const char* vrt_string_tsi(vrt_tsi tsi) {
     switch (tsi) {
         case VRT_TSI_NONE:
@@ -44,6 +55,28 @@ const char* vrt_string_tsf(vrt_tsf tsf) {
             return "Real Time";
         case VRT_TSI_OTHER:
             return "Free Running";
+        default:
+            return "Unknown";
+    }
+}
+
+const char* vrt_string_agc_or_mgc(vrt_agc_or_mgc agc_or_mgc) {
+    switch (agc_or_mgc) {
+        case VRT_AOM_MGC:
+            return "MGC";
+        case VRT_AOM_AGC:
+            return "AGC";
+        default:
+            return "Unknown";
+    }
+}
+
+const char* vrt_string_packing_method(vrt_packing_method packing_method) {
+    switch (packing_method) {
+        case VRT_PM_PROCESSING_EFFICIENT:
+            return "Processing Efficient";
+        case VRT_PM_LINK_EFFICIENT:
+            return "Link Efficient";
         default:
             return "Unknown";
     }

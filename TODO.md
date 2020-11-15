@@ -1,3 +1,4 @@
+* Define radixes as constants
 * Are error codes used and in the right order?
 * There should be constants for the undefined values in geolocation/ephemeris structs.
 * vrt_string_err()
