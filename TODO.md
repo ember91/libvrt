@@ -1,5 +1,7 @@
+* Same warning message right now for TSM bit set for data packet and TSM outside bounds.
+* In write test, break out common initializations of buffer for GPS, INS, ECEF ephemeris and Relative ephemeris. 
 * Define radixes as constants
-* Are error codes used and in the right order?
+* Are all error codes used and in the right order?
 * There should be constants for the undefined values in geolocation/ephemeris structs.
 * vrt_string_err()
 * Not following google style guide...
@@ -15,4 +17,6 @@
 * Add int32_t vrt_words_body(vrt_header* h), which calculates number of words body consists of
 * float128 instead of double for fixed point?
 * Fuzzing
-* Byte swapping functionality?
+* Change some use of msk into usage of & in validation in vrt_read, e.g. if (msk(b, 25, 1) != 0)
+* Remove usage of unnecessary vrt_has_integer_timestamp?
+* Check that float, double... are inside bound when writing and validating

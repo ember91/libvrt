@@ -49,7 +49,7 @@ int main() {
 
     /* Write header */
     int32_t offset = 0;
-    int32_t rv     = vrt_write_header(&h, b + offset, SIZE);
+    int32_t rv     = vrt_write_header(&h, b + offset, SIZE, true);
     if (rv < 0) {
         fprintf(stderr, "Failed to write header\n");
         return EXIT_FAILURE;
@@ -57,7 +57,7 @@ int main() {
     offset += rv;
 
     /* Write fields, which in this case is Stream ID */
-    rv = vrt_write_fields(&h, &f, b + offset, SIZE - offset);
+    rv = vrt_write_fields(&h, &f, b + offset, SIZE - offset, true);
     if (rv < 0) {
         fprintf(stderr, "Failed to write fields section\n");
         return EXIT_FAILURE;
@@ -70,7 +70,7 @@ int main() {
     offset += SIZE - 3;
 
     /* Write trailer */
-    rv = vrt_write_trailer(&t, b + offset, SIZE - offset);
+    rv = vrt_write_trailer(&t, b + offset, SIZE - offset, true);
     if (rv < 0) {
         fprintf(stderr, "Failed to write trailer\n");
         return EXIT_FAILURE;

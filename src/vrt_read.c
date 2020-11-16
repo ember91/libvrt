@@ -507,7 +507,7 @@ static uint32_t if_context_read_formatted_geolocation(bool                      
             if (b[9] != 0x7FFFFFFFU && (g->track_angle < 0.0 || g->track_angle > 359.999999761582)) {
                 return VRT_ERR_TRACK_ANGLE;
             }
-            if (b[10] != 0x7FFFFFFF && (g->magnetic_variation < -180.0 || g->magnetic_variation > 180)) {
+            if (b[10] != 0x7FFFFFFF && (g->magnetic_variation < -180.0 || g->magnetic_variation > 180.0)) {
                 return VRT_ERR_MAGNETIC_VARIATION;
             }
             if ((b[0] & 0xF0000000U) != 0) {
@@ -807,7 +807,7 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
         if_context->sample_rate = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
 
         if (validate) {
-            if (if_context->sample_rate < 0) {
+            if (if_context->sample_rate < 0.0) {
                 return VRT_ERR_SAMPLE_RATE;
             }
         }

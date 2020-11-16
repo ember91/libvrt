@@ -137,7 +137,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">buf</td><td>Buffer to read from. This must point to the first field in the sequence, i.e. directly following the header word. </td></tr>
     <tr><td class="paramname">buf_words</td><td>Size of buf in 32-bit words. </td></tr>
     <tr><td class="paramname">fields</td><td>Fields to read into. </td></tr>
-    <tr><td class="paramname">validate</td><td>True if validation should be done. If this is false, only buffer size is validated.</td></tr>
+    <tr><td class="paramname">validate</td><td>True if validation should be done. If false, only buffer size is validated.</td></tr>
   </table>
   </dd>
 </dl>
@@ -196,7 +196,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">buf</td><td>Buffer to read from. </td></tr>
     <tr><td class="paramname">buf_words</td><td>Size of buf in 32-bit words. </td></tr>
     <tr><td class="paramname">header</td><td>Header to read into. </td></tr>
-    <tr><td class="paramname">validate</td><td>True if validation should be done. If this is false, only buffer size is validated.</td></tr>
+    <tr><td class="paramname">validate</td><td>True if validation should be done. If false, only buffer size is validated.</td></tr>
   </table>
   </dd>
 </dl>
@@ -258,7 +258,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">buf</td><td>Buffer to read from. </td></tr>
     <tr><td class="paramname">buf_words</td><td>Size of buf in 32-bit words. Starting from the header word. </td></tr>
     <tr><td class="paramname">if_context</td><td>IF context struct to read into. </td></tr>
-    <tr><td class="paramname">validate</td><td>True if validation should be done. If this is false, only buffer size is validated.</td></tr>
+    <tr><td class="paramname">validate</td><td>True if validation should be done. If false, only buffer size is validated.</td></tr>
   </table>
   </dd>
 </dl>
@@ -334,7 +334,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>Unlike other read functions, there is nothing to validate, so no validate parameter here. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Unlike other read functions, there is nothing to validate, so no 'validate' parameter here. </dd></dl>
 
 </div>
 </div>

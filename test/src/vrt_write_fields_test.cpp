@@ -24,20 +24,20 @@ class WriteFieldsTest : public ::testing::Test {
 };
 
 TEST_F(WriteFieldsTest, None) {
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0), 0);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0, true), 0);
 }
 
 TEST_F(WriteFieldsTest, StreamIdIfDataWithout) {
     h_.packet_type = VRT_PT_IF_DATA_WITHOUT_STREAM_ID;
     f_.stream_id   = 0xFEDCBA98;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1), 0);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1, true), 0);
 }
 
 TEST_F(WriteFieldsTest, StreamIdIfDataWith) {
     h_.packet_type = VRT_PT_IF_DATA_WITH_STREAM_ID;
     f_.stream_id   = 0xFEDCBA98;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0), VRT_ERR_BUF_SIZE);
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1), 1);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1, true), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0xFEDCBA98));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
 }
@@ -45,14 +45,14 @@ TEST_F(WriteFieldsTest, StreamIdIfDataWith) {
 TEST_F(WriteFieldsTest, StreamIdExtDataWithout) {
     h_.packet_type = VRT_PT_EXT_DATA_WITHOUT_STREAM_ID;
     f_.stream_id   = 0xFEDCBA98;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1), 0);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1, true), 0);
 }
 
 TEST_F(WriteFieldsTest, StreamIdExtDataWith) {
     h_.packet_type = VRT_PT_EXT_DATA_WITH_STREAM_ID;
     f_.stream_id   = 0xFEDCBA98;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0), VRT_ERR_BUF_SIZE);
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1), 1);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1, true), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0xFEDCBA98));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
 }
@@ -60,8 +60,8 @@ TEST_F(WriteFieldsTest, StreamIdExtDataWith) {
 TEST_F(WriteFieldsTest, StreamIdIfContext) {
     h_.packet_type = VRT_PT_IF_CONTEXT;
     f_.stream_id   = 0xFEDCBA98;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0), VRT_ERR_BUF_SIZE);
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1), 1);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1, true), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0xFEDCBA98));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
 }
@@ -69,19 +69,31 @@ TEST_F(WriteFieldsTest, StreamIdIfContext) {
 TEST_F(WriteFieldsTest, StreamIdExtContext) {
     h_.packet_type = VRT_PT_EXT_CONTEXT;
     f_.stream_id   = 0xFEDCBA98;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0), VRT_ERR_BUF_SIZE);
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1), 1);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1, true), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0xFEDCBA98));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
 }
 
 TEST_F(WriteFieldsTest, ClassId) {
     h_.has.class_id                    = true;
+    f_.class_id.oui                    = 0x00FEDCBA;
+    f_.class_id.information_class_code = 0xFEDC;
+    f_.class_id.packet_class_code      = 0xBA98;
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2, true), 2);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00FEDCBA));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0xFEDCBA98));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteFieldsTest, ClassIdInvalid) {
+    h_.has.class_id                    = true;
     f_.class_id.oui                    = 0xFFFEDCBA;
     f_.class_id.information_class_code = 0xFEDC;
     f_.class_id.packet_class_code      = 0xBA98;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1), VRT_ERR_BUF_SIZE);
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2, true), VRT_ERR_OUI);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2, false), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00FEDCBA));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xFEDCBA98));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
@@ -90,17 +102,27 @@ TEST_F(WriteFieldsTest, ClassId) {
 TEST_F(WriteFieldsTest, IntegerSecondsTimestamp) {
     h_.tsi                       = VRT_TSI_OTHER;
     f_.integer_seconds_timestamp = 0xFEDCBA98;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1), 1);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1, true), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0xFEDCBA98));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
 }
 
 TEST_F(WriteFieldsTest, FractionalSecondsTimestamp) {
-    h_.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    f_.fractional_seconds_timestamp = 0xFEDCBA987654321F;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2), 2);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0xFEDCBA98));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x7654321F));
+    h_.tsf                          = VRT_TSF_REAL_TIME;
+    f_.fractional_seconds_timestamp = 0x000000E8D4A50FFF;
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2, true), 2);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x000000E8));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0xD4A50FFF));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteFieldsTest, FractionalSecondsTimestampInvalid) {
+    h_.tsf                          = VRT_TSF_REAL_TIME;
+    f_.fractional_seconds_timestamp = 0x000000E8D4A51000;
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2, true), VRT_ERR_REAL_TIME);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2, false), 2);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x000000E8));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0xD4A51000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
@@ -112,8 +134,8 @@ TEST_F(WriteFieldsTest, EveryOther1) {
     h_.packet_count              = 0xF;
     f_.stream_id                 = 0xDEADBEEF;
     f_.integer_seconds_timestamp = 0xFEDCBA98;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1), VRT_ERR_BUF_SIZE);
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2), 2);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2, true), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0xDEADBEEF));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xFEDCBA98));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
@@ -129,8 +151,8 @@ TEST_F(WriteFieldsTest, EveryOther2) {
     f_.class_id.information_class_code = 0xFEDC;
     f_.class_id.packet_class_code      = 0xBA98;
     f_.fractional_seconds_timestamp    = 0xFEDCBA987654321F;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 3), VRT_ERR_BUF_SIZE);
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 4), 4);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 3, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 4, true), 4);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00FEDCBA));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xFEDCBA98));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFEDCBA98));
@@ -150,8 +172,8 @@ TEST_F(WriteFieldsTest, All) {
     f_.class_id.packet_class_code      = 0xBA98;
     f_.integer_seconds_timestamp       = 0xFEDCBA98;
     f_.fractional_seconds_timestamp    = 0xFEDCBA987654321F;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 5), VRT_ERR_BUF_SIZE);
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 6), 6);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 5, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 6, true), 6);
     ASSERT_EQ(Hex(buf_[0]), Hex(0xDEADBEEF));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FEDCBA));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFEDCBA98));

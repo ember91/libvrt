@@ -62,86 +62,93 @@ static const int32_t VRT_ERR_PACKET_COUNT = -9;
  */
 static const int32_t VRT_ERR_OUI = -10;
 /**
+ * Error return code. Associated context packet count is outside valid bounds (> 0x7F).
+ */
+static const int32_t VRT_ERR_ASSOCIATED_CONTEXT_PACKET_COUNT = -11;
+/**
  * Error return code. Bandwidth is negative.
  */
-static const int32_t VRT_ERR_BANDWIDTH = -11;
+static const int32_t VRT_ERR_BANDWIDTH = -12;
 /**
  * Error return code. Sample rate is negative.
  */
-static const int32_t VRT_ERR_SAMPLE_RATE = -12;
+static const int32_t VRT_ERR_SAMPLE_RATE = -13;
 /**
  * Error return code. Temperature is below absolute zero (< -273.15).
  */
-static const int32_t VRT_ERR_TEMPERATURE = -13;
+static const int32_t VRT_ERR_TEMPERATURE = -14;
+/**
+ * Error return code. Packing method is an invalid value.
+ */
+static const int32_t VRT_ERR_PACKING_METHOD = -15;
 /**
  * Error return code. Real/Complex is an invalid value.
  */
-static const int32_t VRT_ERR_REAL_OR_COMPLEX = -14;
+static const int32_t VRT_ERR_REAL_OR_COMPLEX = -16;
 /**
  * Error return code. Data item format is an invalid value.
  */
-static const int32_t VRT_ERR_DATA_ITEM_FORMAT = -15;
+static const int32_t VRT_ERR_DATA_ITEM_FORMAT = -17;
 /**
  * Error return code. Event tag size is outside valid bounds (> 0x07).
  */
-static const int32_t VRT_ERR_EVENT_TAG_SIZE = -16;
+static const int32_t VRT_ERR_EVENT_TAG_SIZE = -18;
 /**
  * Error return code. Channel tag size is outside valid bounds (> 0x0F).
  */
-static const int32_t VRT_ERR_CHANNEL_TAG_SIZE = -17;
+static const int32_t VRT_ERR_CHANNEL_TAG_SIZE = -19;
 /**
  * Error return code. Item packing fields size is outside valid bounds (> 0x3F).
  */
-static const int32_t VRT_ERR_ITEM_PACKING_FIELD_SIZE = -18;
+static const int32_t VRT_ERR_ITEM_PACKING_FIELD_SIZE = -20;
 /**
  * Error return code. Data item size is outside valid bounds (> 0x3F).
  */
-static const int32_t VRT_ERR_DATA_ITEM_SIZE = -19;
+static const int32_t VRT_ERR_DATA_ITEM_SIZE = -21;
 /**
  * Error return code. Integer second timestamp is not 0xFFFFFFFF when TSI is VRT_TSI_UNDEFINED.
  */
-static const int32_t VRT_ERR_INTEGER_SECOND_TIMESTAMP = -20;
+static const int32_t VRT_ERR_INTEGER_SECOND_TIMESTAMP = -22;
 /**
  * Error return code. Fractional second timestamp is not 0xFFFFFFFFFFFFFFFF when TSF is
  */
-static const int32_t VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP = -21;
+static const int32_t VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP = -23;
 /**
  * Error return code. Latitude is outside valid bounds (< -90 or > 90).
  */
-static const int32_t VRT_ERR_LATITUDE = -22;
+static const int32_t VRT_ERR_LATITUDE = -24;
 /**
  * Error return code. Longitude is outside valid bounds (< -180 or > 180).
  */
-static const int32_t VRT_ERR_LONGITUDE = -23;
+static const int32_t VRT_ERR_LONGITUDE = -25;
+/**
+ * Error return code. Speed over ground is negative.
+ */
+static const int32_t VRT_ERR_SPEED_OVER_GROUND = -26;
 /**
  * Error return code. Heading angle outside valid bounds (< 0 or > 359.999999761582).
  */
-static const int32_t VRT_ERR_HEADING_ANGLE = -24;
+static const int32_t VRT_ERR_HEADING_ANGLE = -27;
 /**
  * Error return code. Track angle is outside valid bounds (< 0 or > 359.999999761582).
  */
-static const int32_t VRT_ERR_TRACK_ANGLE = -25;
+static const int32_t VRT_ERR_TRACK_ANGLE = -28;
 /**
  * Error return code. Magnetic variation is outside valid bounds (< -180 or > 180).
  */
-static const int32_t VRT_ERR_MAGNETIC_VARIATION = -26;
+static const int32_t VRT_ERR_MAGNETIC_VARIATION = -29;
 /**
  * Error return code. Source list size is outside valid bounds (> 0x01FF).
  */
-static const int32_t VRT_ERR_SOURCE_LIST_SIZE = -27;
+static const int32_t VRT_ERR_SOURCE_LIST_SIZE = -30;
 /**
  * Error return code. System list size is outside valid bounds (> 0x01FF).
  */
-static const int32_t VRT_ERR_SYSTEM_LIST_SIZE = -28;
+static const int32_t VRT_ERR_SYSTEM_LIST_SIZE = -31;
 /**
  * Error return code. Channel list size is outside valid bounds (> 0x7FFF).
  */
-static const int32_t VRT_ERR_CHANNEL_LIST_SIZE = -29;
-/**
- * Error return code. Associated context packet count is outside valid bounds (> 0x7F). is outside valid bounds
- * (> 0x7F).
- */
-static const int32_t VRT_ERR_ASSOCIATED_CONTEXT_PACKET_COUNT = -30;
+static const int32_t VRT_ERR_CHANNEL_LIST_SIZE = -32;
 
 /* There is no point in adding max sizes for e.g. data body and IF/Ext context, since they can be UINT16_MAX - 1. */
 
