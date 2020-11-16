@@ -95,6 +95,17 @@ const char* vrt_string_real_or_complex(vrt_real_complex real_or_complex);
  */
 const char* vrt_string_data_item_format(vrt_data_item_format data_item_format);
 
+/**
+ * Get a string representation of an error code.
+ *
+ * \param error Error code.
+ *
+ * \return String representation.
+ *
+ * \note Inputting an unknown error code returns "Unknown".
+ */
+const char* vrt_string_error(int32_t error);
+
 #ifdef __cplusplus
 }
 #endif

@@ -1,5 +1,7 @@
 #include <vrt/vrt_string.h>
 
+#include <vrt/vrt_common.h>
+
 const char* vrt_string_packet_type(vrt_packet_type packet_type) {
     switch (packet_type) {
         case VRT_PT_IF_DATA_WITHOUT_STREAM_ID:
@@ -129,6 +131,77 @@ const char* vrt_string_data_item_format(vrt_data_item_format data_item_format) {
             return "Unsigned VRT, 5-bit exponent";
         case VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT:
             return "Unsigned VRT, 6-bit exponent";
+        default:
+            return "Unknown";
+    }
+}
+
+const char* vrt_string_error(int32_t error) {
+    switch (error) {
+        case VRT_ERR_BUF_SIZE:
+            return "Buffer is too small";
+        case VRT_ERR_RESERVED:
+            return "One or multiple reserved bits are set";
+        case VRT_ERR_PACKET_TYPE:
+            return "Packet type is an invalid value";
+        case VRT_ERR_TRAILER:
+            return "Context packet has trailer bit set";
+        case VRT_ERR_TSM:
+            return "Data packet has TSM bit set";
+        case VRT_ERR_TSI:
+            return "TSI is an invalid value";
+        case VRT_ERR_TSF:
+            return "TSF is an invalid value";
+        case VRT_ERR_REAL_TIME:
+            return "Fractional seconds Real time is active but picoseconds is outside bounds";
+        case VRT_ERR_PACKET_COUNT:
+            return "Packet count is outside valid bounds (> 0x0F)";
+        case VRT_ERR_OUI:
+            return "OUI is outside valid bounds (> 0x00FFFFFF)";
+        case VRT_ERR_ASSOCIATED_CONTEXT_PACKET_COUNT:
+            return "Associated context packet count is outside valid bounds (> 0x7F)";
+        case VRT_ERR_BANDWIDTH:
+            return "Bandwidth is negative";
+        case VRT_ERR_SAMPLE_RATE:
+            return "Sample rate is negative";
+        case VRT_ERR_TEMPERATURE:
+            return "Temperature is below absolute zero (< -273.15)";
+        case VRT_ERR_PACKING_METHOD:
+            return "Packing method is an invalid value";
+        case VRT_ERR_REAL_OR_COMPLEX:
+            return "Real/Complex is an invalid value";
+        case VRT_ERR_DATA_ITEM_FORMAT:
+            return "Data item format is an invalid value";
+        case VRT_ERR_EVENT_TAG_SIZE:
+            return "Event tag size is outside valid bounds (> 0x07)";
+        case VRT_ERR_CHANNEL_TAG_SIZE:
+            return "Channel tag size is outside valid bounds (> 0x0F)";
+        case VRT_ERR_ITEM_PACKING_FIELD_SIZE:
+            return "Item packing fields size is outside valid bounds (> 0x3F)";
+        case VRT_ERR_DATA_ITEM_SIZE:
+            return "Data item size is outside valid bounds (> 0x3F)";
+        case VRT_ERR_INTEGER_SECOND_TIMESTAMP:
+            return "Integer second timestamp is not 0xFFFFFFFF when TSI is VRT_TSI_UNDEFINED";
+        case VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP:
+            return "Fractional second timestamp is not 0xFFFFFFFFFFFFFFFF when TSF i";
+        case VRT_ERR_LATITUDE:
+            return "Latitude is outside valid bounds (< -90 or > 90)";
+        case VRT_ERR_LONGITUDE:
+            return "Longitude is outside valid bounds (< -180 or > 180)";
+        case VRT_ERR_SPEED_OVER_GROUND:
+            return "Speed over ground is negative";
+        case VRT_ERR_HEADING_ANGLE:
+            return "Heading angle outside valid bounds (< 0 or > 359.999999761582)";
+        case VRT_ERR_TRACK_ANGLE:
+            return "Track angle is outside valid bounds (< 0 or > 359.999999761582)";
+        case VRT_ERR_MAGNETIC_VARIATION:
+            return "Magnetic variation is outside valid bounds (< -180 or > 180)";
+        case VRT_ERR_SOURCE_LIST_SIZE:
+            return "Source list size is outside valid bounds (> 0x01FF)";
+        case VRT_ERR_SYSTEM_LIST_SIZE:
+            return "System list size is outside valid bounds (> 0x01FF)";
+        case VRT_ERR_CHANNEL_LIST_SIZE:
+            return "Channel list size is outside valid bounds (> 0x7FFF)";
         default:
             return "Unknown";
     }
