@@ -26,7 +26,7 @@ extern "C" {
  */
 static const int32_t VRT_ERR_BUF_SIZE = -1;
 /**
- * Error return code. A reserved field is written to.
+ * Error return code. One or multiple reserved bits are set.
  */
 static const int32_t VRT_ERR_RESERVED = -2;
 /**
