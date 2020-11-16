@@ -143,13 +143,15 @@ void vrt_init_if_context(vrt_if_context* if_context) {
     if_context->formatted_gps_geolocation.fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
     /* Rule 7.1.5.19-14: The Latitude, Longitude, Altitude, Speed Over Ground, Heading, Track Angle, and Magnetic
      * Variation subfields shall take the value 0x7FFFFFFF when unspecified. */
-    if_context->formatted_gps_geolocation.latitude           = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->formatted_gps_geolocation.longitude          = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->formatted_gps_geolocation.altitude           = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    if_context->formatted_gps_geolocation.speed_over_ground  = vrt_fixed_point_u32_to_double(0x7FFFFFFF, 16);
-    if_context->formatted_gps_geolocation.heading_angle      = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->formatted_gps_geolocation.track_angle        = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->formatted_gps_geolocation.magnetic_variation = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
+    if_context->formatted_gps_geolocation.latitude  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->formatted_gps_geolocation.longitude = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->formatted_gps_geolocation.altitude  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ALTITUDE);
+    if_context->formatted_gps_geolocation.speed_over_ground =
+        vrt_fixed_point_u32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    if_context->formatted_gps_geolocation.heading_angle = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->formatted_gps_geolocation.track_angle   = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->formatted_gps_geolocation.magnetic_variation =
+        vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
 
     if_context->formatted_ins_geolocation.tsi = VRT_TSI_UNDEFINED;
     if_context->formatted_ins_geolocation.tsf = VRT_TSF_UNDEFINED;
@@ -160,13 +162,15 @@ void vrt_init_if_context(vrt_if_context* if_context) {
     if_context->formatted_ins_geolocation.fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
     /* Rule 7.1.5.19-14: The Latitude, Longitude, Altitude, Speed Over Ground, Heading, Track Angle, and Magnetic
      * Variation subfields shall take the value 0x7FFFFFFF when unspecified. */
-    if_context->formatted_ins_geolocation.latitude           = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->formatted_ins_geolocation.longitude          = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->formatted_ins_geolocation.altitude           = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    if_context->formatted_ins_geolocation.speed_over_ground  = vrt_fixed_point_u32_to_double(0x7FFFFFFF, 16);
-    if_context->formatted_ins_geolocation.heading_angle      = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->formatted_ins_geolocation.track_angle        = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->formatted_ins_geolocation.magnetic_variation = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
+    if_context->formatted_ins_geolocation.latitude  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->formatted_ins_geolocation.longitude = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->formatted_ins_geolocation.altitude  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ALTITUDE);
+    if_context->formatted_ins_geolocation.speed_over_ground =
+        vrt_fixed_point_u32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    if_context->formatted_ins_geolocation.heading_angle = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->formatted_ins_geolocation.track_angle   = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->formatted_ins_geolocation.magnetic_variation =
+        vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
 
     if_context->ecef_ephemeris.tsi = VRT_TSI_UNDEFINED;
     if_context->ecef_ephemeris.tsf = VRT_TSF_UNDEFINED;
@@ -176,15 +180,15 @@ void vrt_init_if_context(vrt_if_context* if_context) {
     /* Clash here between Rule 7.1.5.21-4 and Rule 7.1.5.21-8. Rule 7.1.5.21-4 seems more reasonable. */
     if_context->ecef_ephemeris.integer_second_timestamp    = 0xFFFFFFFF;
     if_context->ecef_ephemeris.fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
-    if_context->ecef_ephemeris.position_x                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    if_context->ecef_ephemeris.position_y                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    if_context->ecef_ephemeris.position_z                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    if_context->ecef_ephemeris.attitude_alpha              = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->ecef_ephemeris.attitude_beta               = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->ecef_ephemeris.attitude_phi                = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->ecef_ephemeris.velocity_dx                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16);
-    if_context->ecef_ephemeris.velocity_dy                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16);
-    if_context->ecef_ephemeris.velocity_dz                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16);
+    if_context->ecef_ephemeris.position_x     = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
+    if_context->ecef_ephemeris.position_y     = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
+    if_context->ecef_ephemeris.position_z     = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
+    if_context->ecef_ephemeris.attitude_alpha = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->ecef_ephemeris.attitude_beta  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->ecef_ephemeris.attitude_phi   = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->ecef_ephemeris.velocity_dx    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    if_context->ecef_ephemeris.velocity_dy    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    if_context->ecef_ephemeris.velocity_dz    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
 
     if_context->relative_ephemeris.tsi = VRT_TSI_UNDEFINED;
     if_context->relative_ephemeris.tsf = VRT_TSF_UNDEFINED;
@@ -194,15 +198,15 @@ void vrt_init_if_context(vrt_if_context* if_context) {
     /* Clash here between Rule 7.1.5.21-4 and Rule 7.1.5.21-8. Rule 7.1.5.21-4 seems more reasonable. */
     if_context->relative_ephemeris.integer_second_timestamp    = 0xFFFFFFFF;
     if_context->relative_ephemeris.fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
-    if_context->relative_ephemeris.position_x                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    if_context->relative_ephemeris.position_y                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    if_context->relative_ephemeris.position_z                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    if_context->relative_ephemeris.attitude_alpha              = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->relative_ephemeris.attitude_beta               = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->relative_ephemeris.attitude_phi                = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    if_context->relative_ephemeris.velocity_dx                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16);
-    if_context->relative_ephemeris.velocity_dy                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16);
-    if_context->relative_ephemeris.velocity_dz                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16);
+    if_context->relative_ephemeris.position_x     = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
+    if_context->relative_ephemeris.position_y     = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
+    if_context->relative_ephemeris.position_z     = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
+    if_context->relative_ephemeris.attitude_alpha = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->relative_ephemeris.attitude_beta  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->relative_ephemeris.attitude_phi   = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    if_context->relative_ephemeris.velocity_dx    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    if_context->relative_ephemeris.velocity_dy    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    if_context->relative_ephemeris.velocity_dz    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
 
     if_context->ephemeris_reference_identifier = 0;
 

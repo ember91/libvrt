@@ -20,6 +20,42 @@ extern "C" {
 #endif
 
 /**
+ * Radix position counting from lsb for frequency fields, such as Bandwidth, IF reference frequency, IF reference
+ * frequency, RF reference frequency, RF reference frequency offset, IF band offset, and Sample rate.
+ */
+static const uint32_t VRT_RADIX_FREQUENCY = 20;
+/**
+ * Radix position counting from lsb for Reference level field.
+ */
+static const uint32_t VRT_RADIX_REFERENCE_LEVEL = 7;
+/**
+ * Radix position counting from lsb for Gain stage1 and Gain stage 2 fields.
+ */
+static const uint32_t VRT_RADIX_GAIN = 7;
+/**
+ * Radix position counting from lsb for Temperature field.
+ */
+static const uint32_t VRT_RADIX_TEMPERATURE = 6;
+/**
+ * Radix position counting from lsb for Angle fields, such as Latitude, Longitude, Heading angle, Track angle, Magnetic
+ * variation, Attitude alpha, Attitude beta, and Attitude phi.
+ */
+static const uint32_t VRT_RADIX_ANGLE = 22;
+/**
+ * Radix position counting from lsb for Altitude field.
+ */
+static const uint32_t VRT_RADIX_ALTITUDE = 5;
+/**
+ * Radix position counting from lsb for speed or velocity fields such as Speed over ground, Velocity dX, Velocity dY,
+ * and Velocity dZ.
+ */
+static const uint32_t VRT_RADIX_SPEED_VELOCITY = 16;
+/**
+ * Radix position counting from lsb for position fields such as Position X, Position Y, and Position Z.
+ */
+static const uint32_t VRT_RADIX_POSITION = 5;
+
+/**
  * Round float to nearest int16.
  *
  * \param f Float.

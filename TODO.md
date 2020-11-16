@@ -1,6 +1,5 @@
 * Same warning message right now for TSM bit set for data packet and TSM outside bounds.
 * In write test, break out common initializations of buffer for GPS, INS, ECEF ephemeris and Relative ephemeris. 
-* Define radixes as constants
 * Are all error codes used and in the right order?
 * There should be constants for the undefined values in geolocation/ephemeris structs.
 * vrt_string_err()

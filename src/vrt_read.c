@@ -476,14 +476,14 @@ static uint32_t if_context_read_formatted_geolocation(bool                      
         g->oui                         = msk(b[0], 0, 24);
         g->integer_second_timestamp    = b[1];
         g->fractional_second_timestamp = read_uint64(b + 2);
-        g->latitude                    = vrt_fixed_point_i32_to_double((int32_t)b[4], 22);
-        g->longitude                   = vrt_fixed_point_i32_to_double((int32_t)b[5], 22);
-        g->altitude                    = vrt_fixed_point_i32_to_double((int32_t)b[6], 5);
-        g->speed_over_ground           = vrt_fixed_point_u32_to_double(b[7], 16);
-        g->heading_angle               = vrt_fixed_point_i32_to_double((int32_t)b[8], 22);
-        g->track_angle                 = vrt_fixed_point_i32_to_double((int32_t)b[9], 22);
+        g->latitude                    = vrt_fixed_point_i32_to_double((int32_t)b[4], VRT_RADIX_ANGLE);
+        g->longitude                   = vrt_fixed_point_i32_to_double((int32_t)b[5], VRT_RADIX_ANGLE);
+        g->altitude                    = vrt_fixed_point_i32_to_double((int32_t)b[6], VRT_RADIX_ALTITUDE);
+        g->speed_over_ground           = vrt_fixed_point_u32_to_double(b[7], VRT_RADIX_SPEED_VELOCITY);
+        g->heading_angle               = vrt_fixed_point_i32_to_double((int32_t)b[8], VRT_RADIX_ANGLE);
+        g->track_angle                 = vrt_fixed_point_i32_to_double((int32_t)b[9], VRT_RADIX_ANGLE);
         /* There seems to be an error in Rule 7.1.5.19-13. A correction seems to be 6.2.5.15-2 -> 7.1.5.19-2.*/
-        g->magnetic_variation = vrt_fixed_point_i32_to_double((int32_t)b[10], 22);
+        g->magnetic_variation = vrt_fixed_point_i32_to_double((int32_t)b[10], VRT_RADIX_ANGLE);
 
         if (validate) {
             if (g->tsi == VRT_TSI_UNDEFINED && g->integer_second_timestamp != 0xFFFFFFFFU) {
@@ -525,13 +525,13 @@ static uint32_t if_context_read_formatted_geolocation(bool                      
      * words shall take the value 0xFFFFFFFF. */
     g->integer_second_timestamp    = 0xFFFFFFFF;
     g->fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
-    g->latitude                    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    g->longitude                   = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    g->altitude                    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    g->speed_over_ground           = vrt_fixed_point_u32_to_double(0x7FFFFFFF, 16);
-    g->heading_angle               = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    g->track_angle                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    g->magnetic_variation          = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
+    g->latitude                    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    g->longitude                   = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    g->altitude                    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ALTITUDE);
+    g->speed_over_ground           = vrt_fixed_point_u32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    g->heading_angle               = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    g->track_angle                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    g->magnetic_variation          = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
 
     return 0;
 }
@@ -553,15 +553,15 @@ static uint32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephem
         e->oui                         = msk(b[0], 0, 24);
         e->integer_second_timestamp    = b[1];
         e->fractional_second_timestamp = read_uint64(b + 2);
-        e->position_x                  = vrt_fixed_point_i32_to_double((int32_t)b[4], 5);
-        e->position_y                  = vrt_fixed_point_i32_to_double((int32_t)b[5], 5);
-        e->position_z                  = vrt_fixed_point_i32_to_double((int32_t)b[6], 5);
-        e->attitude_alpha              = vrt_fixed_point_i32_to_double((int32_t)b[7], 22);
-        e->attitude_beta               = vrt_fixed_point_i32_to_double((int32_t)b[8], 22);
-        e->attitude_phi                = vrt_fixed_point_i32_to_double((int32_t)b[9], 22);
-        e->velocity_dx                 = vrt_fixed_point_i32_to_double((int32_t)b[10], 16);
-        e->velocity_dy                 = vrt_fixed_point_i32_to_double((int32_t)b[11], 16);
-        e->velocity_dz                 = vrt_fixed_point_i32_to_double((int32_t)b[12], 16);
+        e->position_x                  = vrt_fixed_point_i32_to_double((int32_t)b[4], VRT_RADIX_POSITION);
+        e->position_y                  = vrt_fixed_point_i32_to_double((int32_t)b[5], VRT_RADIX_POSITION);
+        e->position_z                  = vrt_fixed_point_i32_to_double((int32_t)b[6], VRT_RADIX_POSITION);
+        e->attitude_alpha              = vrt_fixed_point_i32_to_double((int32_t)b[7], VRT_RADIX_ANGLE);
+        e->attitude_beta               = vrt_fixed_point_i32_to_double((int32_t)b[8], VRT_RADIX_ANGLE);
+        e->attitude_phi                = vrt_fixed_point_i32_to_double((int32_t)b[9], VRT_RADIX_ANGLE);
+        e->velocity_dx                 = vrt_fixed_point_i32_to_double((int32_t)b[10], VRT_RADIX_SPEED_VELOCITY);
+        e->velocity_dy                 = vrt_fixed_point_i32_to_double((int32_t)b[11], VRT_RADIX_SPEED_VELOCITY);
+        e->velocity_dz                 = vrt_fixed_point_i32_to_double((int32_t)b[12], VRT_RADIX_SPEED_VELOCITY);
 
         if (validate) {
             if (e->tsi == VRT_TSI_UNDEFINED && e->integer_second_timestamp != 0xFFFFFFFFU) {
@@ -590,15 +590,15 @@ static uint32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephem
     e->oui                         = 0;
     e->integer_second_timestamp    = 0xFFFFFFFF;
     e->fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
-    e->position_x                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    e->position_y                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    e->position_z                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5);
-    e->attitude_alpha              = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    e->attitude_beta               = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    e->attitude_phi                = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22);
-    e->velocity_dx                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16);
-    e->velocity_dy                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16);
-    e->velocity_dz                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16);
+    e->position_x                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
+    e->position_y                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
+    e->position_z                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
+    e->attitude_alpha              = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    e->attitude_beta               = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    e->attitude_phi                = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    e->velocity_dx                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    e->velocity_dy                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    e->velocity_dz                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
 
     return 0;
 }
@@ -738,7 +738,7 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
         if_context->reference_point_identifier = 0;
     }
     if (if_context->has.bandwidth) {
-        if_context->bandwidth = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+        if_context->bandwidth = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), VRT_RADIX_FREQUENCY);
 
         if (validate) {
             if (if_context->bandwidth < 0.0) {
@@ -751,31 +751,35 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
         if_context->bandwidth = 0.0;
     }
     if (if_context->has.if_reference_frequency) {
-        if_context->if_reference_frequency = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+        if_context->if_reference_frequency =
+            vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), VRT_RADIX_FREQUENCY);
         b += 2;
     } else {
         if_context->if_reference_frequency = 0.0;
     }
     if (if_context->has.rf_reference_frequency) {
-        if_context->rf_reference_frequency = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+        if_context->rf_reference_frequency =
+            vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), VRT_RADIX_FREQUENCY);
         b += 2;
     } else {
         if_context->rf_reference_frequency = 0.0;
     }
     if (if_context->has.rf_reference_frequency_offset) {
-        if_context->rf_reference_frequency_offset = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+        if_context->rf_reference_frequency_offset =
+            vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), VRT_RADIX_FREQUENCY);
         b += 2;
     } else {
         if_context->rf_reference_frequency_offset = 0.0;
     }
     if (if_context->has.if_band_offset) {
-        if_context->if_band_offset = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+        if_context->if_band_offset = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), VRT_RADIX_FREQUENCY);
         b += 2;
     } else {
         if_context->if_band_offset = 0.0;
     }
     if (if_context->has.reference_level) {
-        if_context->reference_level = vrt_fixed_point_i16_to_float((int16_t)(b[0] & 0x0000FFFFU), 7);
+        if_context->reference_level =
+            vrt_fixed_point_i16_to_float((int16_t)(b[0] & 0x0000FFFFU), VRT_RADIX_REFERENCE_LEVEL);
 
         if (validate) {
             if ((b[0] & 0xFFFF0000U) != 0) {
@@ -790,8 +794,8 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
     if (if_context->has.gain) {
         int16_t fp1             = b[0] & 0x0000FFFFU;
         int16_t fp2             = (b[0] >> 16U) & 0x0000FFFFU;
-        if_context->gain.stage1 = vrt_fixed_point_i16_to_float(fp1, 7);
-        if_context->gain.stage2 = vrt_fixed_point_i16_to_float(fp2, 7);
+        if_context->gain.stage1 = vrt_fixed_point_i16_to_float(fp1, VRT_RADIX_GAIN);
+        if_context->gain.stage2 = vrt_fixed_point_i16_to_float(fp2, VRT_RADIX_GAIN);
         b += 1;
     } else {
         if_context->gain.stage1 = 0.0F;
@@ -804,7 +808,7 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
         if_context->over_range_count = 0;
     }
     if (if_context->has.sample_rate) {
-        if_context->sample_rate = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), 20);
+        if_context->sample_rate = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), VRT_RADIX_FREQUENCY);
 
         if (validate) {
             if (if_context->sample_rate < 0.0) {
@@ -829,7 +833,7 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
         if_context->timestamp_calibration_time = 0;
     }
     if (if_context->has.temperature) {
-        if_context->temperature = vrt_fixed_point_i16_to_float(b[0] & 0x0000FFFFU, 6);
+        if_context->temperature = vrt_fixed_point_i16_to_float(b[0] & 0x0000FFFFU, VRT_RADIX_TEMPERATURE);
 
         if (validate) {
             if (if_context->temperature < -273.15) {
