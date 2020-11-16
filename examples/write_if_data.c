@@ -10,6 +10,7 @@
 #include <string.h>
 
 #include <vrt/vrt_common.h>
+#include <vrt/vrt_string.h>
 #include <vrt/vrt_write.h>
 
 /* Size of packet in 32-bit words */
@@ -51,7 +52,7 @@ int main() {
     int32_t offset = 0;
     int32_t rv     = vrt_write_header(&h, b + offset, SIZE, true);
     if (rv < 0) {
-        fprintf(stderr, "Failed to write header\n");
+        fprintf(stderr, "Failed to write header: %s\n", vrt_string_error(rv));
         return EXIT_FAILURE;
     }
     offset += rv;
@@ -59,7 +60,7 @@ int main() {
     /* Write fields, which in this case is Stream ID */
     rv = vrt_write_fields(&h, &f, b + offset, SIZE - offset, true);
     if (rv < 0) {
-        fprintf(stderr, "Failed to write fields section\n");
+        fprintf(stderr, "Failed to write fields section: %s\n", vrt_string_error(rv));
         return EXIT_FAILURE;
     }
     offset += rv;
@@ -72,7 +73,7 @@ int main() {
     /* Write trailer */
     rv = vrt_write_trailer(&t, b + offset, SIZE - offset, true);
     if (rv < 0) {
-        fprintf(stderr, "Failed to write trailer\n");
+        fprintf(stderr, "Failed to write trailer: %s\n", vrt_string_error(rv));
         return EXIT_FAILURE;
     }
 
