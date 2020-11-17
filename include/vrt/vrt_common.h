@@ -21,6 +21,9 @@ extern "C" {
 #define STATIC_CAST(T, X) (T)(X)
 #endif
 
+/**
+ * Error code constants.
+ */
 typedef enum vrt_error_code {
     /**
      * Error return code. Buffer is too small.
