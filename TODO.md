@@ -1,4 +1,3 @@
-* Doesn't compile in debug?
 * Same warning message right now for TSM bit set for data packet and TSM outside bounds.
 * Should error codes really be in common.h?
 * In write test, break out common initializations of buffer for GPS, INS, ECEF ephemeris and Relative ephemeris. 
@@ -17,4 +16,4 @@
 * float128 instead of double for fixed point?
 * Fuzzing
 * Check that float, double... are inside bound when writing and validating
-* Break out 0x7FFFFFFF and 0xFFFFFFFF as invalid value constants for geolocation, ephemeris...
+* Geolocation and ephemeris has a common base. Maybe use that somehow?

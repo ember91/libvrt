@@ -10,6 +10,19 @@ extern "C" {
 #endif
 
 /**
+ * Value when TSI is unspecified in Formatted GPS/INS geolocation and ECEF/Relative ephemeris.
+ */
+static const uint32_t VRT_UNSPECIFIED_TSI = 0xFFFFFFFFU;
+/**
+ * Value when TSF is unspecified in Formatted GPS/INS geolocation and ECEF/Relative ephemeris.
+ */
+static const uint64_t VRT_UNSPECIFIED_TSF = 0xFFFFFFFFFFFFFFFFU;
+/**
+ * Value when fixed point number fields are unspecified in Formatted GPS/INS geolocation and ECEF/Relative ephemeris.
+ */
+static const uint32_t VRT_UNSPECIFIED_FIXED_POINT = 0x7FFFFFFFU;
+
+/**
  * Convert bool to uint32.
  *
  * \param b Bool to convert.

@@ -399,10 +399,10 @@ static int32_t if_context_write_formatted_geolocation(bool                      
             if (g->oui > 0x00FFFFFF) {
                 return VRT_ERR_OUI;
             }
-            if (g->tsi == VRT_TSI_UNDEFINED && g->integer_second_timestamp != 0xFFFFFFFFU) {
+            if (g->tsi == VRT_TSI_UNDEFINED && g->integer_second_timestamp != VRT_UNSPECIFIED_TSI) {
                 return VRT_ERR_INTEGER_SECOND_TIMESTAMP;
             }
-            if (g->tsf == VRT_TSF_UNDEFINED && g->fractional_second_timestamp != 0xFFFFFFFFFFFFFFFFU) {
+            if (g->tsf == VRT_TSF_UNDEFINED && g->fractional_second_timestamp != VRT_UNSPECIFIED_TSF) {
                 return VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP;
             }
             if (g->tsf == VRT_TSF_REAL_TIME && g->fractional_second_timestamp >= 1000000000000) {
@@ -436,19 +436,22 @@ static int32_t if_context_write_formatted_geolocation(bool                      
         b[0] |= msk(g->oui, 0, 24);
         b[1] = g->integer_second_timestamp;
         write_uint64(g->fractional_second_timestamp, b + 2);
-        b[4] = g->has.latitude ? (uint32_t)vrt_double_to_fixed_point_i32(g->latitude, VRT_RADIX_ANGLE) : 0x7FFFFFFFU;
-        b[5] = g->has.longitude ? (uint32_t)vrt_double_to_fixed_point_i32(g->longitude, VRT_RADIX_ANGLE) : 0x7FFFFFFFU;
-        b[6] = g->has.altitude ? (uint32_t)vrt_double_to_fixed_point_i32(g->altitude, VRT_RADIX_ALTITUDE) : 0x7FFFFFFFU;
+        b[4] = g->has.latitude ? (uint32_t)vrt_double_to_fixed_point_i32(g->latitude, VRT_RADIX_ANGLE)
+                               : VRT_UNSPECIFIED_FIXED_POINT;
+        b[5] = g->has.longitude ? (uint32_t)vrt_double_to_fixed_point_i32(g->longitude, VRT_RADIX_ANGLE)
+                                : VRT_UNSPECIFIED_FIXED_POINT;
+        b[6] = g->has.altitude ? (uint32_t)vrt_double_to_fixed_point_i32(g->altitude, VRT_RADIX_ALTITUDE)
+                               : VRT_UNSPECIFIED_FIXED_POINT;
         b[7] = g->has.speed_over_ground ? vrt_double_to_fixed_point_u32(g->speed_over_ground, VRT_RADIX_SPEED_VELOCITY)
-                                        : 0x7FFFFFFFU;
+                                        : VRT_UNSPECIFIED_FIXED_POINT;
         b[8] = g->has.heading_angle ? (uint32_t)vrt_double_to_fixed_point_i32(g->heading_angle, VRT_RADIX_ANGLE)
-                                    : 0x7FFFFFFFU;
-        b[9] =
-            g->has.track_angle ? (uint32_t)vrt_double_to_fixed_point_i32(g->track_angle, VRT_RADIX_ANGLE) : 0x7FFFFFFFU;
+                                    : VRT_UNSPECIFIED_FIXED_POINT;
+        b[9] = g->has.track_angle ? (uint32_t)vrt_double_to_fixed_point_i32(g->track_angle, VRT_RADIX_ANGLE)
+                                  : VRT_UNSPECIFIED_FIXED_POINT;
         /* There seems to be an error in Rule 7.1.5.19-13. A correction seems to be 6.2.5.15-2 -> 7.1.5.19-2.*/
         b[10] = g->has.magnetic_variation
                     ? (uint32_t)vrt_double_to_fixed_point_i32(g->magnetic_variation, VRT_RADIX_ANGLE)
-                    : 0x7FFFFFFFU;
+                    : VRT_UNSPECIFIED_FIXED_POINT;
 
         return 11;
     }
@@ -478,10 +481,10 @@ static int32_t if_context_write_ephemeris(bool has, const vrt_ephemeris* e, uint
             if (e->oui > 0x00FFFFFF) {
                 return VRT_ERR_OUI;
             }
-            if (e->tsi == VRT_TSI_UNDEFINED && e->integer_second_timestamp != 0xFFFFFFFFU) {
+            if (e->tsi == VRT_TSI_UNDEFINED && e->integer_second_timestamp != VRT_UNSPECIFIED_TSI) {
                 return VRT_ERR_INTEGER_SECOND_TIMESTAMP;
             }
-            if (e->tsf == VRT_TSF_UNDEFINED && e->fractional_second_timestamp != 0xFFFFFFFFFFFFFFFFU) {
+            if (e->tsf == VRT_TSF_UNDEFINED && e->fractional_second_timestamp != VRT_UNSPECIFIED_TSF) {
                 return VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP;
             }
             if (e->tsf == VRT_TSF_REAL_TIME && e->fractional_second_timestamp >= 1000000000000) {
@@ -497,24 +500,24 @@ static int32_t if_context_write_ephemeris(bool has, const vrt_ephemeris* e, uint
         b[0] |= msk(e->oui, 0, 24);
         b[1] = e->integer_second_timestamp;
         write_uint64(e->fractional_second_timestamp, b + 2);
-        b[4] =
-            e->has.position_x ? (uint32_t)vrt_double_to_fixed_point_i32(e->position_x, VRT_RADIX_POSITION) : 0x7FFFFFFF;
-        b[5] =
-            e->has.position_y ? (uint32_t)vrt_double_to_fixed_point_i32(e->position_y, VRT_RADIX_POSITION) : 0x7FFFFFFF;
-        b[6] =
-            e->has.position_z ? (uint32_t)vrt_double_to_fixed_point_i32(e->position_z, VRT_RADIX_POSITION) : 0x7FFFFFFF;
+        b[4] = e->has.position_x ? (uint32_t)vrt_double_to_fixed_point_i32(e->position_x, VRT_RADIX_POSITION)
+                                 : VRT_UNSPECIFIED_FIXED_POINT;
+        b[5] = e->has.position_y ? (uint32_t)vrt_double_to_fixed_point_i32(e->position_y, VRT_RADIX_POSITION)
+                                 : VRT_UNSPECIFIED_FIXED_POINT;
+        b[6] = e->has.position_z ? (uint32_t)vrt_double_to_fixed_point_i32(e->position_z, VRT_RADIX_POSITION)
+                                 : VRT_UNSPECIFIED_FIXED_POINT;
         b[7] = e->has.attitude_alpha ? (uint32_t)vrt_double_to_fixed_point_i32(e->attitude_alpha, VRT_RADIX_ANGLE)
-                                     : 0x7FFFFFFF;
+                                     : VRT_UNSPECIFIED_FIXED_POINT;
         b[8] = e->has.attitude_beta ? (uint32_t)vrt_double_to_fixed_point_i32(e->attitude_beta, VRT_RADIX_ANGLE)
-                                    : 0x7FFFFFFF;
+                                    : VRT_UNSPECIFIED_FIXED_POINT;
         b[9] = e->has.attitude_phi ? (uint32_t)vrt_double_to_fixed_point_i32(e->attitude_phi, VRT_RADIX_ANGLE)
-                                   : 0x7FFFFFFF;
+                                   : VRT_UNSPECIFIED_FIXED_POINT;
         b[10] = e->has.velocity_dx ? (uint32_t)vrt_double_to_fixed_point_i32(e->velocity_dx, VRT_RADIX_SPEED_VELOCITY)
-                                   : 0x7FFFFFFF;
+                                   : VRT_UNSPECIFIED_FIXED_POINT;
         b[11] = e->has.velocity_dy ? (uint32_t)vrt_double_to_fixed_point_i32(e->velocity_dy, VRT_RADIX_SPEED_VELOCITY)
-                                   : 0x7FFFFFFF;
+                                   : VRT_UNSPECIFIED_FIXED_POINT;
         b[12] = e->has.velocity_dz ? (uint32_t)vrt_double_to_fixed_point_i32(e->velocity_dz, VRT_RADIX_SPEED_VELOCITY)
-                                   : 0x7FFFFFFF;
+                                   : VRT_UNSPECIFIED_FIXED_POINT;
 
         return 13;
     }

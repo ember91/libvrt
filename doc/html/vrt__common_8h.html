@@ -67,6 +67,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
@@ -82,6 +84,57 @@ $(function() {
 Macros</h2></td></tr>
 <tr class="memitem:ae4cbfd2e2ff73da3b5ac98171e4626d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ae4cbfd2e2ff73da3b5ac98171e4626d3">STATIC_CAST</a>(T,  X)&#160;&#160;&#160;(T)(X)</td></tr>
 <tr class="separator:ae4cbfd2e2ff73da3b5ac98171e4626d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a3e44610f267afc6441a1c149083be04b"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4">vrt_error_code</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a3e44610f267afc6441a1c149083be04b">vrt_error_code</a></td></tr>
+<tr class="separator:a3e44610f267afc6441a1c149083be04b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a9abf070632d4fe3b3942f589a1576cd4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4">vrt_error_code</a> { <br />
+&#160;&#160;<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4af54661c5c72a821c5fc8ad198f006cee">VRT_ERR_BUF_SIZE</a> = -1, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4aefc005beea43ec9f9690ef98b0d41ec2">VRT_ERR_RESERVED</a> = -2, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4adb09f23bc2c6aed34bc7a19eb5a7a257">VRT_ERR_PACKET_TYPE</a> = -3, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4abf23674a416fafdc1599dd1d40691384">VRT_ERR_TRAILER</a> = -4, 
+<br />
+&#160;&#160;<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4ad74d8531f394af6aa90a7c04bf760b86">VRT_ERR_TSM</a> = -5, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a60f67b18828a84b35e80c3a5de2c24d7">VRT_ERR_TSI</a> = -6, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4aa70fa58fa5a1d62e35ad40a83bc86c31">VRT_ERR_TSF</a> = -7, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4aab78c48c7486b8761f8b70e11de5be96">VRT_ERR_REAL_TIME</a> = -8, 
+<br />
+&#160;&#160;<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a20b08e3de312325c01ea02820a627e32">VRT_ERR_PACKET_COUNT</a> = -9, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4ab5171fe0f970adef8908b77a1fdbf5ee">VRT_ERR_OUI</a> = -10, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4af73a0d229377ec582253cc7ac5cd4693">VRT_ERR_ASSOCIATED_CONTEXT_PACKET_COUNT</a> = -11, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4afdafe69e12e1192bd83c62846c20e3ab">VRT_ERR_BANDWIDTH</a> = -12, 
+<br />
+&#160;&#160;<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a32786fa705e6c352640fc5be06694d1e">VRT_ERR_SAMPLE_RATE</a> = -13, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a2ef9995ab6813c5b25851521dffb1ef2">VRT_ERR_TEMPERATURE</a> = -14, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a6bdb14ce815836aa8a383aac6e9ad29d">VRT_ERR_PACKING_METHOD</a> = -15, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4ad854821e0a87e56be3150e3f962b43aa">VRT_ERR_REAL_OR_COMPLEX</a> = -16, 
+<br />
+&#160;&#160;<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a2026a82fe5cfb5389fd1a136f371f340">VRT_ERR_DATA_ITEM_FORMAT</a> = -17, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4ac289810d1922be0fd6e3327fbf782746">VRT_ERR_EVENT_TAG_SIZE</a> = -18, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a49a49969ad24be06d079ff1e9b9cba90">VRT_ERR_CHANNEL_TAG_SIZE</a> = -19, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a1831c080782522f9a46808aed2767411">VRT_ERR_ITEM_PACKING_FIELD_SIZE</a> = -20, 
+<br />
+&#160;&#160;<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a0448b5384f3b6f5cde5d703d12d6f5f8">VRT_ERR_DATA_ITEM_SIZE</a> = -21, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4aa494acdad4a811beaaeb189581dc2aa9">VRT_ERR_INTEGER_SECOND_TIMESTAMP</a> = -22, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4acbe6c204630a4995a31c637cf3256c24">VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP</a> = -23, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a8ad379d7ba6df0afaeacc25dbff2cbdb">VRT_ERR_LATITUDE</a> = -24, 
+<br />
+&#160;&#160;<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a4fe71c9f8a5b896d6b98db76a7566e23">VRT_ERR_LONGITUDE</a> = -25, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4aed83e28557509e8bc92add519e084d85">VRT_ERR_SPEED_OVER_GROUND</a> = -26, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a781bd5ccd60db01391de3e430f7d1aa7">VRT_ERR_HEADING_ANGLE</a> = -27, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4ade513680cd2c9f4da4022b5f5e27b4a3">VRT_ERR_TRACK_ANGLE</a> = -28, 
+<br />
+&#160;&#160;<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a651fd7aad02cfd3925a7aaca8fec61f2">VRT_ERR_MAGNETIC_VARIATION</a> = -29, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a2e2e6f85277427057acbcf5c2cf79830">VRT_ERR_SOURCE_LIST_SIZE</a> = -30, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4a8ff76c027e4813408bda5a57d1adf41b">VRT_ERR_SYSTEM_LIST_SIZE</a> = -31, 
+<a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4af15fb76612d1feca18a3e2bbe5642488">VRT_ERR_CHANNEL_LIST_SIZE</a> = -32
+<br />
+ }</td></tr>
+<tr class="separator:a9abf070632d4fe3b3942f589a1576cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -108,70 +161,6 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a80af04eade8cb16dabdde55db6f88122"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a80af04eade8cb16dabdde55db6f88122">VRT_ERR_BUF_SIZE</a> = -1</td></tr>
-<tr class="separator:a80af04eade8cb16dabdde55db6f88122"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac931e19a84069f342f55b52bdbd78536"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ac931e19a84069f342f55b52bdbd78536">VRT_ERR_RESERVED</a> = -2</td></tr>
-<tr class="separator:ac931e19a84069f342f55b52bdbd78536"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7525290eb26d488e4f0a6e7286dd1c8"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#af7525290eb26d488e4f0a6e7286dd1c8">VRT_ERR_PACKET_TYPE</a> = -3</td></tr>
-<tr class="separator:af7525290eb26d488e4f0a6e7286dd1c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53c23e6749e1ba009f0fb7e32f99ba45"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a53c23e6749e1ba009f0fb7e32f99ba45">VRT_ERR_TRAILER</a> = -4</td></tr>
-<tr class="separator:a53c23e6749e1ba009f0fb7e32f99ba45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20106c867a5508e0e8550dfc1eaba335"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a20106c867a5508e0e8550dfc1eaba335">VRT_ERR_TSM</a> = -5</td></tr>
-<tr class="separator:a20106c867a5508e0e8550dfc1eaba335"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fa5bcce51763dbbf9128db56025329d"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a4fa5bcce51763dbbf9128db56025329d">VRT_ERR_TSI</a> = -6</td></tr>
-<tr class="separator:a4fa5bcce51763dbbf9128db56025329d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5def6e423a8f26cc860dca4d86fe790"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#af5def6e423a8f26cc860dca4d86fe790">VRT_ERR_TSF</a> = -7</td></tr>
-<tr class="separator:af5def6e423a8f26cc860dca4d86fe790"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab33491366581e3b446712236e4185649"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ab33491366581e3b446712236e4185649">VRT_ERR_REAL_TIME</a> = -8</td></tr>
-<tr class="separator:ab33491366581e3b446712236e4185649"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f715bfbecebf66f01713539355dc97b"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a4f715bfbecebf66f01713539355dc97b">VRT_ERR_PACKET_COUNT</a> = -9</td></tr>
-<tr class="separator:a4f715bfbecebf66f01713539355dc97b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17341bc580cd3bb6451265cba5042956"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a17341bc580cd3bb6451265cba5042956">VRT_ERR_OUI</a> = -10</td></tr>
-<tr class="separator:a17341bc580cd3bb6451265cba5042956"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac891e1fa743df2b4a9b0b5e4d01f15aa"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ac891e1fa743df2b4a9b0b5e4d01f15aa">VRT_ERR_ASSOCIATED_CONTEXT_PACKET_COUNT</a> = -11</td></tr>
-<tr class="separator:ac891e1fa743df2b4a9b0b5e4d01f15aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ff05e052acb4c0f417fa32171a0ffd3"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a4ff05e052acb4c0f417fa32171a0ffd3">VRT_ERR_BANDWIDTH</a> = -12</td></tr>
-<tr class="separator:a4ff05e052acb4c0f417fa32171a0ffd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70d654bb945e6676f13f50f6d868abc3"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a70d654bb945e6676f13f50f6d868abc3">VRT_ERR_SAMPLE_RATE</a> = -13</td></tr>
-<tr class="separator:a70d654bb945e6676f13f50f6d868abc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49e06a24dc4c6907faae7fa73abe98d8"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a49e06a24dc4c6907faae7fa73abe98d8">VRT_ERR_TEMPERATURE</a> = -14</td></tr>
-<tr class="separator:a49e06a24dc4c6907faae7fa73abe98d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6edde68417a24c83190ec9acea34ea4"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ae6edde68417a24c83190ec9acea34ea4">VRT_ERR_PACKING_METHOD</a> = -15</td></tr>
-<tr class="separator:ae6edde68417a24c83190ec9acea34ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac05f6e93614c07d53b457cfeb6e1d5ad"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ac05f6e93614c07d53b457cfeb6e1d5ad">VRT_ERR_REAL_OR_COMPLEX</a> = -16</td></tr>
-<tr class="separator:ac05f6e93614c07d53b457cfeb6e1d5ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8316369c12c021d66f232a8862dd1081"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a8316369c12c021d66f232a8862dd1081">VRT_ERR_DATA_ITEM_FORMAT</a> = -17</td></tr>
-<tr class="separator:a8316369c12c021d66f232a8862dd1081"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1dcee1c7ff8d2bc750c60cfca93ab903"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a1dcee1c7ff8d2bc750c60cfca93ab903">VRT_ERR_EVENT_TAG_SIZE</a> = -18</td></tr>
-<tr class="separator:a1dcee1c7ff8d2bc750c60cfca93ab903"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3d957f27fd1c004292fab3413ebcb5c"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ab3d957f27fd1c004292fab3413ebcb5c">VRT_ERR_CHANNEL_TAG_SIZE</a> = -19</td></tr>
-<tr class="separator:ab3d957f27fd1c004292fab3413ebcb5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc305d57a466f14da464b602e46c602d"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#afc305d57a466f14da464b602e46c602d">VRT_ERR_ITEM_PACKING_FIELD_SIZE</a> = -20</td></tr>
-<tr class="separator:afc305d57a466f14da464b602e46c602d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa63ab7ac146ff083d3cd1f389fddbd91"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#aa63ab7ac146ff083d3cd1f389fddbd91">VRT_ERR_DATA_ITEM_SIZE</a> = -21</td></tr>
-<tr class="separator:aa63ab7ac146ff083d3cd1f389fddbd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab21203cc08d6a12392bb0368fdcfb4c0"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ab21203cc08d6a12392bb0368fdcfb4c0">VRT_ERR_INTEGER_SECOND_TIMESTAMP</a> = -22</td></tr>
-<tr class="separator:ab21203cc08d6a12392bb0368fdcfb4c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82914f4311727e7feb2857ef1140cdc8"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a82914f4311727e7feb2857ef1140cdc8">VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP</a> = -23</td></tr>
-<tr class="separator:a82914f4311727e7feb2857ef1140cdc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abaadbf13bb9691a0a1a2c3d6f4971ec8"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#abaadbf13bb9691a0a1a2c3d6f4971ec8">VRT_ERR_LATITUDE</a> = -24</td></tr>
-<tr class="separator:abaadbf13bb9691a0a1a2c3d6f4971ec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af80c3e2a6c64c4fc79dd81798cc39029"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#af80c3e2a6c64c4fc79dd81798cc39029">VRT_ERR_LONGITUDE</a> = -25</td></tr>
-<tr class="separator:af80c3e2a6c64c4fc79dd81798cc39029"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f0f48caaab3c5fde561907964e267ac"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a6f0f48caaab3c5fde561907964e267ac">VRT_ERR_SPEED_OVER_GROUND</a> = -26</td></tr>
-<tr class="separator:a6f0f48caaab3c5fde561907964e267ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b15eca271b170a0725c9df239e1cf0c"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a0b15eca271b170a0725c9df239e1cf0c">VRT_ERR_HEADING_ANGLE</a> = -27</td></tr>
-<tr class="separator:a0b15eca271b170a0725c9df239e1cf0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02ca8084e996f0d4e90d1a843fcc9ebe"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a02ca8084e996f0d4e90d1a843fcc9ebe">VRT_ERR_TRACK_ANGLE</a> = -28</td></tr>
-<tr class="separator:a02ca8084e996f0d4e90d1a843fcc9ebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac57ec5b284102bee373742af9fb30070"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ac57ec5b284102bee373742af9fb30070">VRT_ERR_MAGNETIC_VARIATION</a> = -29</td></tr>
-<tr class="separator:ac57ec5b284102bee373742af9fb30070"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5a36875e95507679ddabc7319c63c80"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#ab5a36875e95507679ddabc7319c63c80">VRT_ERR_SOURCE_LIST_SIZE</a> = -30</td></tr>
-<tr class="separator:ab5a36875e95507679ddabc7319c63c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a446ea809712819ca0025e3caee6e2d7a"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a446ea809712819ca0025e3caee6e2d7a">VRT_ERR_SYSTEM_LIST_SIZE</a> = -31</td></tr>
-<tr class="separator:a446ea809712819ca0025e3caee6e2d7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a020c40bb7ca8e69c1fd0377dd41e37b4"><td class="memItemLeft" align="right" valign="top">static const int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a020c40bb7ca8e69c1fd0377dd41e37b4">VRT_ERR_CHANNEL_LIST_SIZE</a> = -32</td></tr>
-<tr class="separator:a020c40bb7ca8e69c1fd0377dd41e37b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a541e0edfa3580d3802db81981c6fb8a7"><td class="memItemLeft" align="right" valign="top">static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a541e0edfa3580d3802db81981c6fb8a7">VRT_WORDS_HEADER</a> = 1</td></tr>
 <tr class="separator:a541e0edfa3580d3802db81981c6fb8a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b1c2b7216a6c475736a8916f2356486"><td class="memItemLeft" align="right" valign="top">static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="vrt__common_8h.html#a4b1c2b7216a6c475736a8916f2356486">VRT_WORDS_MAX_FIELDS</a> = 6</td></tr>
@@ -207,6 +196,102 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a3e44610f267afc6441a1c149083be04b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e44610f267afc6441a1c149083be04b">&#9670;&nbsp;</a></span>vrt_error_code</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef enum <a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4">vrt_error_code</a> <a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4">vrt_error_code</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a9abf070632d4fe3b3942f589a1576cd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9abf070632d4fe3b3942f589a1576cd4">&#9670;&nbsp;</a></span>vrt_error_code</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="vrt__common_8h.html#a9abf070632d4fe3b3942f589a1576cd4">vrt_error_code</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4af54661c5c72a821c5fc8ad198f006cee"></a>VRT_ERR_BUF_SIZE&#160;</td><td class="fielddoc"><p>Error return code. Buffer is too small. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4aefc005beea43ec9f9690ef98b0d41ec2"></a>VRT_ERR_RESERVED&#160;</td><td class="fielddoc"><p>Error return code. One or multiple reserved bits are set. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4adb09f23bc2c6aed34bc7a19eb5a7a257"></a>VRT_ERR_PACKET_TYPE&#160;</td><td class="fielddoc"><p>Error return code. Packet type is an invalid value. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4abf23674a416fafdc1599dd1d40691384"></a>VRT_ERR_TRAILER&#160;</td><td class="fielddoc"><p>Error return code. Context packet has trailer bit set. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4ad74d8531f394af6aa90a7c04bf760b86"></a>VRT_ERR_TSM&#160;</td><td class="fielddoc"><p>Error return code. Data packet has TSM bit set. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a60f67b18828a84b35e80c3a5de2c24d7"></a>VRT_ERR_TSI&#160;</td><td class="fielddoc"><p>Error return code. TSI is an invalid value. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4aa70fa58fa5a1d62e35ad40a83bc86c31"></a>VRT_ERR_TSF&#160;</td><td class="fielddoc"><p>Error return code. TSF is an invalid value. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4aab78c48c7486b8761f8b70e11de5be96"></a>VRT_ERR_REAL_TIME&#160;</td><td class="fielddoc"><p>Error return code. Fractional seconds Real time is active but picoseconds is outside bounds. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a20b08e3de312325c01ea02820a627e32"></a>VRT_ERR_PACKET_COUNT&#160;</td><td class="fielddoc"><p>Error return code. Packet count is outside valid bounds (&gt; 0x0F). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4ab5171fe0f970adef8908b77a1fdbf5ee"></a>VRT_ERR_OUI&#160;</td><td class="fielddoc"><p>Error return code. OUI is outside valid bounds (&gt; 0x00FFFFFF). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4af73a0d229377ec582253cc7ac5cd4693"></a>VRT_ERR_ASSOCIATED_CONTEXT_PACKET_COUNT&#160;</td><td class="fielddoc"><p>Error return code. Associated context packet count is outside valid bounds (&gt; 0x7F). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4afdafe69e12e1192bd83c62846c20e3ab"></a>VRT_ERR_BANDWIDTH&#160;</td><td class="fielddoc"><p>Error return code. Bandwidth is negative. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a32786fa705e6c352640fc5be06694d1e"></a>VRT_ERR_SAMPLE_RATE&#160;</td><td class="fielddoc"><p>Error return code. Sample rate is negative. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a2ef9995ab6813c5b25851521dffb1ef2"></a>VRT_ERR_TEMPERATURE&#160;</td><td class="fielddoc"><p>Error return code. Temperature is below absolute zero (&lt; -273.15). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a6bdb14ce815836aa8a383aac6e9ad29d"></a>VRT_ERR_PACKING_METHOD&#160;</td><td class="fielddoc"><p>Error return code. Packing method is an invalid value. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4ad854821e0a87e56be3150e3f962b43aa"></a>VRT_ERR_REAL_OR_COMPLEX&#160;</td><td class="fielddoc"><p>Error return code. Real/Complex is an invalid value. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a2026a82fe5cfb5389fd1a136f371f340"></a>VRT_ERR_DATA_ITEM_FORMAT&#160;</td><td class="fielddoc"><p>Error return code. Data item format is an invalid value. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4ac289810d1922be0fd6e3327fbf782746"></a>VRT_ERR_EVENT_TAG_SIZE&#160;</td><td class="fielddoc"><p>Error return code. Event tag size is outside valid bounds (&gt; 0x07). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a49a49969ad24be06d079ff1e9b9cba90"></a>VRT_ERR_CHANNEL_TAG_SIZE&#160;</td><td class="fielddoc"><p>Error return code. Channel tag size is outside valid bounds (&gt; 0x0F). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a1831c080782522f9a46808aed2767411"></a>VRT_ERR_ITEM_PACKING_FIELD_SIZE&#160;</td><td class="fielddoc"><p>Error return code. Item packing fields size is outside valid bounds (&gt; 0x3F). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a0448b5384f3b6f5cde5d703d12d6f5f8"></a>VRT_ERR_DATA_ITEM_SIZE&#160;</td><td class="fielddoc"><p>Error return code. Data item size is outside valid bounds (&gt; 0x3F). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4aa494acdad4a811beaaeb189581dc2aa9"></a>VRT_ERR_INTEGER_SECOND_TIMESTAMP&#160;</td><td class="fielddoc"><p>Error return code. Integer second timestamp is not 0xFFFFFFFF when TSI is VRT_TSI_UNDEFINED. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4acbe6c204630a4995a31c637cf3256c24"></a>VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP&#160;</td><td class="fielddoc"><p>Error return code. Fractional second timestamp is not 0xFFFFFFFFFFFFFFFF when TSF is </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a8ad379d7ba6df0afaeacc25dbff2cbdb"></a>VRT_ERR_LATITUDE&#160;</td><td class="fielddoc"><p>Error return code. Latitude is outside valid bounds (&lt; -90 or &gt; 90). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a4fe71c9f8a5b896d6b98db76a7566e23"></a>VRT_ERR_LONGITUDE&#160;</td><td class="fielddoc"><p>Error return code. Longitude is outside valid bounds (&lt; -180 or &gt; 180). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4aed83e28557509e8bc92add519e084d85"></a>VRT_ERR_SPEED_OVER_GROUND&#160;</td><td class="fielddoc"><p>Error return code. Speed over ground is negative. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a781bd5ccd60db01391de3e430f7d1aa7"></a>VRT_ERR_HEADING_ANGLE&#160;</td><td class="fielddoc"><p>Error return code. Heading angle outside valid bounds (&lt; 0 or &gt; 359.999999761582). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4ade513680cd2c9f4da4022b5f5e27b4a3"></a>VRT_ERR_TRACK_ANGLE&#160;</td><td class="fielddoc"><p>Error return code. Track angle is outside valid bounds (&lt; 0 or &gt; 359.999999761582). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a651fd7aad02cfd3925a7aaca8fec61f2"></a>VRT_ERR_MAGNETIC_VARIATION&#160;</td><td class="fielddoc"><p>Error return code. Magnetic variation is outside valid bounds (&lt; -180 or &gt; 180). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a2e2e6f85277427057acbcf5c2cf79830"></a>VRT_ERR_SOURCE_LIST_SIZE&#160;</td><td class="fielddoc"><p>Error return code. Source list size is outside valid bounds (&gt; 0x01FF). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4a8ff76c027e4813408bda5a57d1adf41b"></a>VRT_ERR_SYSTEM_LIST_SIZE&#160;</td><td class="fielddoc"><p>Error return code. System list size is outside valid bounds (&gt; 0x01FF). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9abf070632d4fe3b3942f589a1576cd4af15fb76612d1feca18a3e2bbe5642488"></a>VRT_ERR_CHANNEL_LIST_SIZE&#160;</td><td class="fielddoc"><p>Error return code. Channel list size is outside valid bounds (&gt; 0x7FFF). </p>
+</td></tr>
+</table>
 
 </div>
 </div>
@@ -489,742 +574,6 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="ac891e1fa743df2b4a9b0b5e4d01f15aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac891e1fa743df2b4a9b0b5e4d01f15aa">&#9670;&nbsp;</a></span>VRT_ERR_ASSOCIATED_CONTEXT_PACKET_COUNT</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_ASSOCIATED_CONTEXT_PACKET_COUNT = -11</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Associated context packet count is outside valid bounds (&gt; 0x7F). </p>
-
-</div>
-</div>
-<a id="a4ff05e052acb4c0f417fa32171a0ffd3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ff05e052acb4c0f417fa32171a0ffd3">&#9670;&nbsp;</a></span>VRT_ERR_BANDWIDTH</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_BANDWIDTH = -12</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Bandwidth is negative. </p>
-
-</div>
-</div>
-<a id="a80af04eade8cb16dabdde55db6f88122"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80af04eade8cb16dabdde55db6f88122">&#9670;&nbsp;</a></span>VRT_ERR_BUF_SIZE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_BUF_SIZE = -1</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Buffer is too small. </p>
-
-</div>
-</div>
-<a id="a020c40bb7ca8e69c1fd0377dd41e37b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a020c40bb7ca8e69c1fd0377dd41e37b4">&#9670;&nbsp;</a></span>VRT_ERR_CHANNEL_LIST_SIZE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_CHANNEL_LIST_SIZE = -32</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Channel list size is outside valid bounds (&gt; 0x7FFF). </p>
-
-</div>
-</div>
-<a id="ab3d957f27fd1c004292fab3413ebcb5c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3d957f27fd1c004292fab3413ebcb5c">&#9670;&nbsp;</a></span>VRT_ERR_CHANNEL_TAG_SIZE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_CHANNEL_TAG_SIZE = -19</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Channel tag size is outside valid bounds (&gt; 0x0F). </p>
-
-</div>
-</div>
-<a id="a8316369c12c021d66f232a8862dd1081"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8316369c12c021d66f232a8862dd1081">&#9670;&nbsp;</a></span>VRT_ERR_DATA_ITEM_FORMAT</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_DATA_ITEM_FORMAT = -17</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Data item format is an invalid value. </p>
-
-</div>
-</div>
-<a id="aa63ab7ac146ff083d3cd1f389fddbd91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa63ab7ac146ff083d3cd1f389fddbd91">&#9670;&nbsp;</a></span>VRT_ERR_DATA_ITEM_SIZE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_DATA_ITEM_SIZE = -21</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Data item size is outside valid bounds (&gt; 0x3F). </p>
-
-</div>
-</div>
-<a id="a1dcee1c7ff8d2bc750c60cfca93ab903"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1dcee1c7ff8d2bc750c60cfca93ab903">&#9670;&nbsp;</a></span>VRT_ERR_EVENT_TAG_SIZE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_EVENT_TAG_SIZE = -18</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Event tag size is outside valid bounds (&gt; 0x07). </p>
-
-</div>
-</div>
-<a id="a82914f4311727e7feb2857ef1140cdc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82914f4311727e7feb2857ef1140cdc8">&#9670;&nbsp;</a></span>VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP = -23</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Fractional second timestamp is not 0xFFFFFFFFFFFFFFFF when TSF is </p>
-
-</div>
-</div>
-<a id="a0b15eca271b170a0725c9df239e1cf0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b15eca271b170a0725c9df239e1cf0c">&#9670;&nbsp;</a></span>VRT_ERR_HEADING_ANGLE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_HEADING_ANGLE = -27</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Heading angle outside valid bounds (&lt; 0 or &gt; 359.999999761582). </p>
-
-</div>
-</div>
-<a id="ab21203cc08d6a12392bb0368fdcfb4c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab21203cc08d6a12392bb0368fdcfb4c0">&#9670;&nbsp;</a></span>VRT_ERR_INTEGER_SECOND_TIMESTAMP</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_INTEGER_SECOND_TIMESTAMP = -22</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Integer second timestamp is not 0xFFFFFFFF when TSI is VRT_TSI_UNDEFINED. </p>
-
-</div>
-</div>
-<a id="afc305d57a466f14da464b602e46c602d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc305d57a466f14da464b602e46c602d">&#9670;&nbsp;</a></span>VRT_ERR_ITEM_PACKING_FIELD_SIZE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_ITEM_PACKING_FIELD_SIZE = -20</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Item packing fields size is outside valid bounds (&gt; 0x3F). </p>
-
-</div>
-</div>
-<a id="abaadbf13bb9691a0a1a2c3d6f4971ec8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abaadbf13bb9691a0a1a2c3d6f4971ec8">&#9670;&nbsp;</a></span>VRT_ERR_LATITUDE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_LATITUDE = -24</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Latitude is outside valid bounds (&lt; -90 or &gt; 90). </p>
-
-</div>
-</div>
-<a id="af80c3e2a6c64c4fc79dd81798cc39029"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af80c3e2a6c64c4fc79dd81798cc39029">&#9670;&nbsp;</a></span>VRT_ERR_LONGITUDE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_LONGITUDE = -25</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Longitude is outside valid bounds (&lt; -180 or &gt; 180). </p>
-
-</div>
-</div>
-<a id="ac57ec5b284102bee373742af9fb30070"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac57ec5b284102bee373742af9fb30070">&#9670;&nbsp;</a></span>VRT_ERR_MAGNETIC_VARIATION</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_MAGNETIC_VARIATION = -29</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Magnetic variation is outside valid bounds (&lt; -180 or &gt; 180). </p>
-
-</div>
-</div>
-<a id="a17341bc580cd3bb6451265cba5042956"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17341bc580cd3bb6451265cba5042956">&#9670;&nbsp;</a></span>VRT_ERR_OUI</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_OUI = -10</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. OUI is outside valid bounds (&gt; 0x00FFFFFF). </p>
-
-</div>
-</div>
-<a id="a4f715bfbecebf66f01713539355dc97b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f715bfbecebf66f01713539355dc97b">&#9670;&nbsp;</a></span>VRT_ERR_PACKET_COUNT</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_PACKET_COUNT = -9</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Packet count is outside valid bounds (&gt; 0x0F). </p>
-
-</div>
-</div>
-<a id="af7525290eb26d488e4f0a6e7286dd1c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7525290eb26d488e4f0a6e7286dd1c8">&#9670;&nbsp;</a></span>VRT_ERR_PACKET_TYPE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_PACKET_TYPE = -3</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Packet type is an invalid value. </p>
-
-</div>
-</div>
-<a id="ae6edde68417a24c83190ec9acea34ea4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6edde68417a24c83190ec9acea34ea4">&#9670;&nbsp;</a></span>VRT_ERR_PACKING_METHOD</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_PACKING_METHOD = -15</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Packing method is an invalid value. </p>
-
-</div>
-</div>
-<a id="ac05f6e93614c07d53b457cfeb6e1d5ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac05f6e93614c07d53b457cfeb6e1d5ad">&#9670;&nbsp;</a></span>VRT_ERR_REAL_OR_COMPLEX</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_REAL_OR_COMPLEX = -16</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Real/Complex is an invalid value. </p>
-
-</div>
-</div>
-<a id="ab33491366581e3b446712236e4185649"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab33491366581e3b446712236e4185649">&#9670;&nbsp;</a></span>VRT_ERR_REAL_TIME</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_REAL_TIME = -8</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Fractional seconds Real time is active but picoseconds is outside bounds. </p>
-
-</div>
-</div>
-<a id="ac931e19a84069f342f55b52bdbd78536"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac931e19a84069f342f55b52bdbd78536">&#9670;&nbsp;</a></span>VRT_ERR_RESERVED</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_RESERVED = -2</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. One or multiple reserved bits are set. </p>
-
-</div>
-</div>
-<a id="a70d654bb945e6676f13f50f6d868abc3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70d654bb945e6676f13f50f6d868abc3">&#9670;&nbsp;</a></span>VRT_ERR_SAMPLE_RATE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_SAMPLE_RATE = -13</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Sample rate is negative. </p>
-
-</div>
-</div>
-<a id="ab5a36875e95507679ddabc7319c63c80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5a36875e95507679ddabc7319c63c80">&#9670;&nbsp;</a></span>VRT_ERR_SOURCE_LIST_SIZE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_SOURCE_LIST_SIZE = -30</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Source list size is outside valid bounds (&gt; 0x01FF). </p>
-
-</div>
-</div>
-<a id="a6f0f48caaab3c5fde561907964e267ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f0f48caaab3c5fde561907964e267ac">&#9670;&nbsp;</a></span>VRT_ERR_SPEED_OVER_GROUND</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_SPEED_OVER_GROUND = -26</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Speed over ground is negative. </p>
-
-</div>
-</div>
-<a id="a446ea809712819ca0025e3caee6e2d7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a446ea809712819ca0025e3caee6e2d7a">&#9670;&nbsp;</a></span>VRT_ERR_SYSTEM_LIST_SIZE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_SYSTEM_LIST_SIZE = -31</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. System list size is outside valid bounds (&gt; 0x01FF). </p>
-
-</div>
-</div>
-<a id="a49e06a24dc4c6907faae7fa73abe98d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49e06a24dc4c6907faae7fa73abe98d8">&#9670;&nbsp;</a></span>VRT_ERR_TEMPERATURE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_TEMPERATURE = -14</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Temperature is below absolute zero (&lt; -273.15). </p>
-
-</div>
-</div>
-<a id="a02ca8084e996f0d4e90d1a843fcc9ebe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02ca8084e996f0d4e90d1a843fcc9ebe">&#9670;&nbsp;</a></span>VRT_ERR_TRACK_ANGLE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_TRACK_ANGLE = -28</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Track angle is outside valid bounds (&lt; 0 or &gt; 359.999999761582). </p>
-
-</div>
-</div>
-<a id="a53c23e6749e1ba009f0fb7e32f99ba45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53c23e6749e1ba009f0fb7e32f99ba45">&#9670;&nbsp;</a></span>VRT_ERR_TRAILER</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_TRAILER = -4</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Context packet has trailer bit set. </p>
-
-</div>
-</div>
-<a id="af5def6e423a8f26cc860dca4d86fe790"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5def6e423a8f26cc860dca4d86fe790">&#9670;&nbsp;</a></span>VRT_ERR_TSF</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_TSF = -7</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. TSF is an invalid value. </p>
-
-</div>
-</div>
-<a id="a4fa5bcce51763dbbf9128db56025329d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4fa5bcce51763dbbf9128db56025329d">&#9670;&nbsp;</a></span>VRT_ERR_TSI</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_TSI = -6</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. TSI is an invalid value. </p>
-
-</div>
-</div>
-<a id="a20106c867a5508e0e8550dfc1eaba335"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20106c867a5508e0e8550dfc1eaba335">&#9670;&nbsp;</a></span>VRT_ERR_TSM</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int32_t VRT_ERR_TSM = -5</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Error return code. Data packet has TSM bit set. </p>
-
-</div>
-</div>
 <a id="a541e0edfa3580d3802db81981c6fb8a7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a541e0edfa3580d3802db81981c6fb8a7">&#9670;&nbsp;</a></span>VRT_WORDS_HEADER</h2>
 

@@ -65,8 +65,8 @@ static void init_formatted_geolocation(vrt_formatted_geolocation* g) {
     g->oui = 0;
     /* Rule 7.1.5.19-1: When the TSI or TSF fields are zero the corresponding Timestamp of Position Fix subfield words
      * shall take the value 0xFFFFFFFF. */
-    g->integer_second_timestamp    = 0xFFFFFFFF;
-    g->fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
+    g->integer_second_timestamp    = VRT_UNSPECIFIED_TSI;
+    g->fractional_second_timestamp = VRT_UNSPECIFIED_TSF;
     /* Rule 7.1.5.19-14: The Latitude, Longitude, Altitude, Speed Over Ground, Heading, Track Angle, and Magnetic
      * Variation subfields shall take the value 0x7FFFFFFF when unspecified. */
 
@@ -78,13 +78,13 @@ static void init_formatted_geolocation(vrt_formatted_geolocation* g) {
     g->has.track_angle        = false;
     g->has.magnetic_variation = false;
 
-    g->latitude           = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    g->longitude          = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    g->altitude           = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ALTITUDE);
-    g->speed_over_ground  = vrt_fixed_point_u32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
-    g->heading_angle      = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    g->track_angle        = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    g->magnetic_variation = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    g->latitude           = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_ANGLE);
+    g->longitude          = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_ANGLE);
+    g->altitude           = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_ALTITUDE);
+    g->speed_over_ground  = vrt_fixed_point_u32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_SPEED_VELOCITY);
+    g->heading_angle      = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_ANGLE);
+    g->track_angle        = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_ANGLE);
+    g->magnetic_variation = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_ANGLE);
 }
 
 /**
@@ -110,17 +110,17 @@ static void init_ephemeris(vrt_ephemeris* e) {
     /* Rule 7.1.5.21-4: The TSI, TSF, OUI, and Timestamp of Position Fix fields shall follow the rules of the
      * corresponding Formatted GPS Geolocation fields given in Section 7.1.5.19. */
     /* Clash here between Rule 7.1.5.21-4 and Rule 7.1.5.21-8. Rule 7.1.5.21-4 seems more reasonable. */
-    e->integer_second_timestamp    = 0xFFFFFFFF;
-    e->fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
-    e->position_x                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
-    e->position_y                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
-    e->position_z                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
-    e->attitude_alpha              = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    e->attitude_beta               = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    e->attitude_phi                = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    e->velocity_dx                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
-    e->velocity_dy                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
-    e->velocity_dz                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    e->integer_second_timestamp    = VRT_UNSPECIFIED_TSI;
+    e->fractional_second_timestamp = VRT_UNSPECIFIED_TSF;
+    e->position_x                  = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_POSITION);
+    e->position_y                  = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_POSITION);
+    e->position_z                  = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_POSITION);
+    e->attitude_alpha              = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_ANGLE);
+    e->attitude_beta               = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_ANGLE);
+    e->attitude_phi                = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_ANGLE);
+    e->velocity_dx = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_SPEED_VELOCITY);
+    e->velocity_dy = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_SPEED_VELOCITY);
+    e->velocity_dz = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_SPEED_VELOCITY);
 }
 
 void vrt_init_if_context(vrt_if_context* if_context) {

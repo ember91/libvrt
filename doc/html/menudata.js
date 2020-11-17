@@ -76,8 +76,7 @@ var menudata={children:[
 {text:"Functions",url:"globals_func.html",children:[
 {text:"i",url:"globals_func.html#index_i"},
 {text:"v",url:"globals_func.html#index_v"}]},
-{text:"Variables",url:"globals_vars.html",children:[
-{text:"v",url:"globals_vars.html#index_v"}]},
+{text:"Variables",url:"globals_vars.html"},
 {text:"Typedefs",url:"globals_type.html"},
 {text:"Enumerations",url:"globals_enum.html"},
 {text:"Enumerator",url:"globals_eval.html",children:[
