@@ -68,7 +68,55 @@ TEST(InitTest, InitTrailer) {
     ASSERT_EQ(Hex(t.associated_context_packet_count), Hex(0));
 }
 
-TEST(InitTest, InitContext) {
+void test_formatted_geolocation(vrt_formatted_geolocation* g) {
+    ASSERT_EQ(Hex(g->tsi), Hex(VRT_TSI_UNDEFINED));
+    ASSERT_EQ(Hex(g->tsf), Hex(VRT_TSF_UNDEFINED));
+    ASSERT_EQ(Hex(g->oui), Hex(0));
+    ASSERT_EQ(Hex(g->integer_second_timestamp), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(g->fractional_second_timestamp), Hex(0xFFFFFFFFFFFFFFFF));
+    ASSERT_FALSE(g->has.latitude);
+    ASSERT_FALSE(g->has.longitude);
+    ASSERT_FALSE(g->has.altitude);
+    ASSERT_FALSE(g->has.speed_over_ground);
+    ASSERT_FALSE(g->has.heading_angle);
+    ASSERT_FALSE(g->has.track_angle);
+    ASSERT_FALSE(g->has.magnetic_variation);
+    ASSERT_DOUBLE_EQ(g->latitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(g->longitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(g->altitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
+    ASSERT_DOUBLE_EQ(g->speed_over_ground, vrt_fixed_point_u32_to_double(0x7FFFFFFF, 16));
+    ASSERT_DOUBLE_EQ(g->heading_angle, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(g->track_angle, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(g->magnetic_variation, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+}
+
+void test_ephemeris(vrt_ephemeris* e) {
+    ASSERT_EQ(Hex(e->tsi), Hex(VRT_TSI_UNDEFINED));
+    ASSERT_EQ(Hex(e->tsf), Hex(VRT_TSF_UNDEFINED));
+    ASSERT_EQ(Hex(e->oui), Hex(0));
+    ASSERT_EQ(Hex(e->integer_second_timestamp), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(e->fractional_second_timestamp), Hex(0xFFFFFFFFFFFFFFFF));
+    ASSERT_FALSE(e->has.position_x);
+    ASSERT_FALSE(e->has.position_y);
+    ASSERT_FALSE(e->has.position_z);
+    ASSERT_FALSE(e->has.attitude_alpha);
+    ASSERT_FALSE(e->has.attitude_beta);
+    ASSERT_FALSE(e->has.attitude_phi);
+    ASSERT_FALSE(e->has.velocity_dx);
+    ASSERT_FALSE(e->has.velocity_dy);
+    ASSERT_FALSE(e->has.velocity_dz);
+    ASSERT_DOUBLE_EQ(e->position_x, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
+    ASSERT_DOUBLE_EQ(e->position_y, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
+    ASSERT_DOUBLE_EQ(e->position_z, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
+    ASSERT_DOUBLE_EQ(e->attitude_alpha, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(e->attitude_beta, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(e->attitude_phi, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(e->velocity_dx, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
+    ASSERT_DOUBLE_EQ(e->velocity_dy, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
+    ASSERT_DOUBLE_EQ(e->velocity_dz, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
+}
+
+TEST(InitTest, InitIfContext) {
     vrt_if_context c;
     init_if_context_garbage(&c);
 
@@ -151,93 +199,11 @@ TEST(InitTest, InitContext) {
     ASSERT_EQ(Hex(c.data_packet_payload_format.repeat_count), Hex(0));
     ASSERT_EQ(Hex(c.data_packet_payload_format.vector_size), Hex(0));
 
-    ASSERT_EQ(Hex(c.formatted_gps_geolocation.tsi), Hex(VRT_TSI_UNDEFINED));
-    ASSERT_EQ(Hex(c.formatted_gps_geolocation.tsf), Hex(VRT_TSF_UNDEFINED));
-    ASSERT_EQ(Hex(c.formatted_gps_geolocation.oui), Hex(0));
-    ASSERT_EQ(Hex(c.formatted_gps_geolocation.integer_second_timestamp), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(c.formatted_gps_geolocation.fractional_second_timestamp), Hex(0xFFFFFFFFFFFFFFFF));
-    ASSERT_FALSE(c.formatted_gps_geolocation.has.latitude);
-    ASSERT_FALSE(c.formatted_gps_geolocation.has.longitude);
-    ASSERT_FALSE(c.formatted_gps_geolocation.has.altitude);
-    ASSERT_FALSE(c.formatted_gps_geolocation.has.speed_over_ground);
-    ASSERT_FALSE(c.formatted_gps_geolocation.has.heading_angle);
-    ASSERT_FALSE(c.formatted_gps_geolocation.has.track_angle);
-    ASSERT_FALSE(c.formatted_gps_geolocation.has.magnetic_variation);
-    ASSERT_DOUBLE_EQ(c.formatted_gps_geolocation.latitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.formatted_gps_geolocation.longitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.formatted_gps_geolocation.altitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(c.formatted_gps_geolocation.speed_over_ground, vrt_fixed_point_u32_to_double(0x7FFFFFFF, 16));
-    ASSERT_DOUBLE_EQ(c.formatted_gps_geolocation.heading_angle, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.formatted_gps_geolocation.track_angle, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.formatted_gps_geolocation.magnetic_variation, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    test_formatted_geolocation(&c.formatted_gps_geolocation);
+    test_formatted_geolocation(&c.formatted_ins_geolocation);
 
-    ASSERT_EQ(Hex(c.formatted_ins_geolocation.tsi), Hex(VRT_TSI_UNDEFINED));
-    ASSERT_EQ(Hex(c.formatted_ins_geolocation.tsf), Hex(VRT_TSF_UNDEFINED));
-    ASSERT_EQ(Hex(c.formatted_ins_geolocation.oui), Hex(0));
-    ASSERT_EQ(Hex(c.formatted_ins_geolocation.integer_second_timestamp), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(c.formatted_ins_geolocation.fractional_second_timestamp), Hex(0xFFFFFFFFFFFFFFFF));
-    ASSERT_FALSE(c.formatted_ins_geolocation.has.latitude);
-    ASSERT_FALSE(c.formatted_ins_geolocation.has.longitude);
-    ASSERT_FALSE(c.formatted_ins_geolocation.has.altitude);
-    ASSERT_FALSE(c.formatted_ins_geolocation.has.speed_over_ground);
-    ASSERT_FALSE(c.formatted_ins_geolocation.has.heading_angle);
-    ASSERT_FALSE(c.formatted_ins_geolocation.has.track_angle);
-    ASSERT_FALSE(c.formatted_ins_geolocation.has.magnetic_variation);
-    ASSERT_DOUBLE_EQ(c.formatted_ins_geolocation.latitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.formatted_ins_geolocation.longitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.formatted_ins_geolocation.altitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(c.formatted_ins_geolocation.speed_over_ground, vrt_fixed_point_u32_to_double(0x7FFFFFFF, 16));
-    ASSERT_DOUBLE_EQ(c.formatted_ins_geolocation.heading_angle, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.formatted_ins_geolocation.track_angle, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.formatted_ins_geolocation.magnetic_variation, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-
-    ASSERT_EQ(Hex(c.ecef_ephemeris.tsi), Hex(VRT_TSI_UNDEFINED));
-    ASSERT_EQ(Hex(c.ecef_ephemeris.tsf), Hex(VRT_TSF_UNDEFINED));
-    ASSERT_EQ(Hex(c.ecef_ephemeris.oui), Hex(0));
-    ASSERT_EQ(Hex(c.ecef_ephemeris.integer_second_timestamp), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(c.ecef_ephemeris.fractional_second_timestamp), Hex(0xFFFFFFFFFFFFFFFF));
-    ASSERT_FALSE(c.ecef_ephemeris.has.position_x);
-    ASSERT_FALSE(c.ecef_ephemeris.has.position_y);
-    ASSERT_FALSE(c.ecef_ephemeris.has.position_z);
-    ASSERT_FALSE(c.ecef_ephemeris.has.attitude_alpha);
-    ASSERT_FALSE(c.ecef_ephemeris.has.attitude_beta);
-    ASSERT_FALSE(c.ecef_ephemeris.has.attitude_phi);
-    ASSERT_FALSE(c.ecef_ephemeris.has.velocity_dx);
-    ASSERT_FALSE(c.ecef_ephemeris.has.velocity_dy);
-    ASSERT_FALSE(c.ecef_ephemeris.has.velocity_dz);
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.position_x, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.position_y, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.position_z, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.attitude_alpha, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.attitude_beta, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.attitude_phi, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.velocity_dx, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.velocity_dy, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.velocity_dz, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
-
-    ASSERT_EQ(Hex(c.relative_ephemeris.tsi), Hex(VRT_TSI_UNDEFINED));
-    ASSERT_EQ(Hex(c.relative_ephemeris.tsf), Hex(VRT_TSF_UNDEFINED));
-    ASSERT_EQ(Hex(c.relative_ephemeris.oui), Hex(0));
-    ASSERT_EQ(Hex(c.relative_ephemeris.integer_second_timestamp), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(c.relative_ephemeris.fractional_second_timestamp), Hex(0xFFFFFFFFFFFFFFFF));
-    ASSERT_FALSE(c.relative_ephemeris.has.position_x);
-    ASSERT_FALSE(c.relative_ephemeris.has.position_y);
-    ASSERT_FALSE(c.relative_ephemeris.has.position_z);
-    ASSERT_FALSE(c.relative_ephemeris.has.attitude_alpha);
-    ASSERT_FALSE(c.relative_ephemeris.has.attitude_beta);
-    ASSERT_FALSE(c.relative_ephemeris.has.attitude_phi);
-    ASSERT_FALSE(c.relative_ephemeris.has.velocity_dx);
-    ASSERT_FALSE(c.relative_ephemeris.has.velocity_dy);
-    ASSERT_FALSE(c.relative_ephemeris.has.velocity_dz);
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.position_x, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.position_y, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.position_z, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.attitude_alpha, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.attitude_beta, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.attitude_phi, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.velocity_dx, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.velocity_dy, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.velocity_dz, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
+    test_ephemeris(&c.ecef_ephemeris);
+    test_ephemeris(&c.relative_ephemeris);
 
     ASSERT_EQ(Hex(c.ephemeris_reference_identifier), Hex(0));
 

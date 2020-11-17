@@ -1,7 +1,6 @@
 * Same warning message right now for TSM bit set for data packet and TSM outside bounds.
 * Should error codes really be in common.h?
 * In write test, break out common initializations of buffer for GPS, INS, ECEF ephemeris and Relative ephemeris. 
-* Ensure there are no copied code for geolocation/ephemeris
 * Not following google style guide...
 * Compile with -fvisibility=hidden?
 * Header only library

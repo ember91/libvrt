@@ -30,6 +30,75 @@ class ReadIfContextTest : public ::testing::Test {
     std::array<uint32_t, 128> buf_;
 };
 
+static void assert_formatted_geolocation(const vrt_formatted_geolocation& g,
+                                         std::map<std::string, std::any>* val_cp,
+                                         const std::string&               base) {
+    ASSERT_EQ(Hex(g.tsi), Hex(get_val<vrt_tsi>(val_cp, base + "tsi", VRT_TSI_UNDEFINED)));
+    ASSERT_EQ(Hex(g.tsf), Hex(get_val<vrt_tsf>(val_cp, base + "tsf", VRT_TSF_UNDEFINED)));
+    ASSERT_EQ(Hex(g.oui), Hex(get_val<uint32_t>(val_cp, base + "oui", 0)));
+    ASSERT_EQ(Hex(g.integer_second_timestamp),
+              Hex(get_val<uint32_t>(val_cp, base + "integer_second_timestamp", 0xFFFFFFFF)));
+    ASSERT_EQ(Hex(g.fractional_second_timestamp),
+              Hex(get_val<uint64_t>(val_cp, base + "fractional_second_timestamp", 0xFFFFFFFFFFFFFFFF)));
+    ASSERT_EQ(g.has.latitude, get_val<bool>(val_cp, base + "has.latitude", false));
+    ASSERT_EQ(g.has.longitude, get_val<bool>(val_cp, base + "has.longitude", false));
+    ASSERT_EQ(g.has.altitude, get_val<bool>(val_cp, base + "has.altitude", false));
+    ASSERT_EQ(g.has.speed_over_ground, get_val<bool>(val_cp, base + "has.speed_over_ground", false));
+    ASSERT_EQ(g.has.heading_angle, get_val<bool>(val_cp, base + "has.heading_angle", false));
+    ASSERT_EQ(g.has.track_angle, get_val<bool>(val_cp, base + "has.track_angle", false));
+    ASSERT_EQ(g.has.magnetic_variation, get_val<bool>(val_cp, base + "has.magnetic_variation", false));
+    ASSERT_DOUBLE_EQ(g.latitude,
+                     get_val<double>(val_cp, base + "latitude", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
+    ASSERT_EQ(g.longitude, get_val<double>(val_cp, base + "longitude", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
+    ASSERT_DOUBLE_EQ(g.altitude,
+                     get_val<double>(val_cp, base + "altitude", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
+    ASSERT_DOUBLE_EQ(g.speed_over_ground, get_val<double>(val_cp, base + "speed_over_ground",
+                                                          vrt_fixed_point_u32_to_double(0x7FFFFFFF, 16)));
+    ASSERT_DOUBLE_EQ(g.heading_angle,
+                     get_val<double>(val_cp, base + "heading_angle", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
+    ASSERT_DOUBLE_EQ(g.track_angle,
+                     get_val<double>(val_cp, base + "track_angle", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
+    ASSERT_DOUBLE_EQ(g.magnetic_variation, get_val<double>(val_cp, base + "magnetic_variation",
+                                                           vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
+}
+
+static void assert_ephemeris(const vrt_ephemeris& e, std::map<std::string, std::any>* val_cp, const std::string& base) {
+    ASSERT_EQ(Hex(e.tsi), Hex(get_val<vrt_tsi>(val_cp, base + "tsi", VRT_TSI_UNDEFINED)));
+    ASSERT_EQ(Hex(e.tsf), Hex(get_val<vrt_tsf>(val_cp, base + "tsf", VRT_TSF_UNDEFINED)));
+    ASSERT_EQ(Hex(e.oui), Hex(get_val<uint32_t>(val_cp, base + "oui", 0)));
+    ASSERT_EQ(Hex(e.integer_second_timestamp),
+              Hex(get_val<uint32_t>(val_cp, base + "integer_second_timestamp", 0xFFFFFFFF)));
+    ASSERT_EQ(Hex(e.fractional_second_timestamp),
+              Hex(get_val<uint64_t>(val_cp, base + "fractional_second_timestamp", 0xFFFFFFFFFFFFFFFF)));
+    ASSERT_EQ(e.has.position_x, get_val<bool>(val_cp, base + "has.position_x", false));
+    ASSERT_EQ(e.has.position_y, get_val<bool>(val_cp, base + "has.position_y", false));
+    ASSERT_EQ(e.has.position_z, get_val<bool>(val_cp, base + "has.position_z", false));
+    ASSERT_EQ(e.has.attitude_alpha, get_val<bool>(val_cp, base + "has.attitude_alpha", false));
+    ASSERT_EQ(e.has.attitude_beta, get_val<bool>(val_cp, base + "has.attitude_beta", false));
+    ASSERT_EQ(e.has.attitude_phi, get_val<bool>(val_cp, base + "has.attitude_phi", false));
+    ASSERT_EQ(e.has.velocity_dx, get_val<bool>(val_cp, base + "has.velocity_dx", false));
+    ASSERT_EQ(e.has.velocity_dy, get_val<bool>(val_cp, base + "has.velocity_dy", false));
+    ASSERT_EQ(e.has.velocity_dz, get_val<bool>(val_cp, base + "has.velocity_dz", false));
+    ASSERT_DOUBLE_EQ(e.position_x,
+                     get_val<double>(val_cp, base + "position_x", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
+    ASSERT_DOUBLE_EQ(e.position_y,
+                     get_val<double>(val_cp, base + "position_y", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
+    ASSERT_DOUBLE_EQ(e.position_z,
+                     get_val<double>(val_cp, base + "position_z", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
+    ASSERT_DOUBLE_EQ(e.attitude_alpha,
+                     get_val<double>(val_cp, base + "attitude_alpha", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
+    ASSERT_DOUBLE_EQ(e.attitude_beta,
+                     get_val<double>(val_cp, base + "attitude_beta", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
+    ASSERT_DOUBLE_EQ(e.attitude_phi,
+                     get_val<double>(val_cp, base + "attitude_phi", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
+    ASSERT_DOUBLE_EQ(e.velocity_dx,
+                     get_val<double>(val_cp, base + "velocity_dx", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16)));
+    ASSERT_DOUBLE_EQ(e.velocity_dy,
+                     get_val<double>(val_cp, base + "velocity_dy", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16)));
+    ASSERT_DOUBLE_EQ(e.velocity_dz,
+                     get_val<double>(val_cp, base + "velocity_dz", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16)));
+}
+
 /**
  * Assert IF context values.
  *
@@ -155,178 +224,11 @@ static void assert_if_context(const vrt_if_context& c, const std::map<std::strin
     ASSERT_EQ(Hex(c.data_packet_payload_format.vector_size),
               Hex(get_val<uint16_t>(&val_cp, "data_packet_payload_format.vector_size", 0)));
 
-    ASSERT_EQ(Hex(c.formatted_gps_geolocation.tsi),
-              Hex(get_val<vrt_tsi>(&val_cp, "formatted_gps_geolocation.tsi", VRT_TSI_UNDEFINED)));
-    ASSERT_EQ(Hex(c.formatted_gps_geolocation.tsf),
-              Hex(get_val<vrt_tsf>(&val_cp, "formatted_gps_geolocation.tsf", VRT_TSF_UNDEFINED)));
-    ASSERT_EQ(Hex(c.formatted_gps_geolocation.oui),
-              Hex(get_val<uint32_t>(&val_cp, "formatted_gps_geolocation.oui", 0)));
-    ASSERT_EQ(Hex(c.formatted_gps_geolocation.integer_second_timestamp),
-              Hex(get_val<uint32_t>(&val_cp, "formatted_gps_geolocation.integer_second_timestamp", 0xFFFFFFFF)));
-    ASSERT_EQ(
-        Hex(c.formatted_gps_geolocation.fractional_second_timestamp),
-        Hex(get_val<uint64_t>(&val_cp, "formatted_gps_geolocation.fractional_second_timestamp", 0xFFFFFFFFFFFFFFFF)));
-    ASSERT_EQ(c.formatted_gps_geolocation.has.latitude,
-              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.latitude", false));
-    ASSERT_EQ(c.formatted_gps_geolocation.has.longitude,
-              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.longitude", false));
-    ASSERT_EQ(c.formatted_gps_geolocation.has.altitude,
-              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.altitude", false));
-    ASSERT_EQ(c.formatted_gps_geolocation.has.speed_over_ground,
-              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.speed_over_ground", false));
-    ASSERT_EQ(c.formatted_gps_geolocation.has.heading_angle,
-              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.heading_angle", false));
-    ASSERT_EQ(c.formatted_gps_geolocation.has.track_angle,
-              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.track_angle", false));
-    ASSERT_EQ(c.formatted_gps_geolocation.has.magnetic_variation,
-              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.magnetic_variation", false));
-    ASSERT_DOUBLE_EQ(
-        c.formatted_gps_geolocation.latitude,
-        get_val<double>(&val_cp, "formatted_gps_geolocation.latitude", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_EQ(c.formatted_gps_geolocation.longitude, get_val<double>(&val_cp, "formatted_gps_geolocation.longitude",
-                                                                     vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(
-        c.formatted_gps_geolocation.altitude,
-        get_val<double>(&val_cp, "formatted_gps_geolocation.altitude", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
-    ASSERT_DOUBLE_EQ(c.formatted_gps_geolocation.speed_over_ground,
-                     get_val<double>(&val_cp, "formatted_gps_geolocation.speed_over_ground",
-                                     vrt_fixed_point_u32_to_double(0x7FFFFFFF, 16)));
-    ASSERT_DOUBLE_EQ(c.formatted_gps_geolocation.heading_angle,
-                     get_val<double>(&val_cp, "formatted_gps_geolocation.heading_angle",
-                                     vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(c.formatted_gps_geolocation.track_angle,
-                     get_val<double>(&val_cp, "formatted_gps_geolocation.track_angle",
-                                     vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(c.formatted_gps_geolocation.magnetic_variation,
-                     get_val<double>(&val_cp, "formatted_gps_geolocation.magnetic_variation",
-                                     vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
+    assert_formatted_geolocation(c.formatted_gps_geolocation, &val_cp, "formatted_gps_geolocation.");
+    assert_formatted_geolocation(c.formatted_ins_geolocation, &val_cp, "formatted_ins_geolocation.");
 
-    ASSERT_EQ(Hex(c.formatted_ins_geolocation.tsi),
-              Hex(get_val<vrt_tsi>(&val_cp, "formatted_ins_geolocation.tsi", VRT_TSI_UNDEFINED)));
-    ASSERT_EQ(Hex(c.formatted_ins_geolocation.tsf),
-              Hex(get_val<vrt_tsf>(&val_cp, "formatted_ins_geolocation.tsf", VRT_TSF_UNDEFINED)));
-    ASSERT_EQ(Hex(c.formatted_ins_geolocation.oui),
-              Hex(get_val<uint32_t>(&val_cp, "formatted_ins_geolocation.oui", 0)));
-    ASSERT_EQ(Hex(c.formatted_ins_geolocation.integer_second_timestamp),
-              Hex(get_val<uint32_t>(&val_cp, "formatted_ins_geolocation.integer_second_timestamp", 0xFFFFFFFF)));
-    ASSERT_EQ(
-        Hex(c.formatted_ins_geolocation.fractional_second_timestamp),
-        Hex(get_val<uint64_t>(&val_cp, "formatted_ins_geolocation.fractional_second_timestamp", 0xFFFFFFFFFFFFFFFF)));
-    ASSERT_EQ(c.formatted_ins_geolocation.has.latitude,
-              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.latitude", false));
-    ASSERT_EQ(c.formatted_ins_geolocation.has.longitude,
-              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.longitude", false));
-    ASSERT_EQ(c.formatted_ins_geolocation.has.altitude,
-              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.altitude", false));
-    ASSERT_EQ(c.formatted_ins_geolocation.has.speed_over_ground,
-              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.speed_over_ground", false));
-    ASSERT_EQ(c.formatted_ins_geolocation.has.heading_angle,
-              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.heading_angle", false));
-    ASSERT_EQ(c.formatted_ins_geolocation.has.track_angle,
-              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.track_angle", false));
-    ASSERT_EQ(c.formatted_ins_geolocation.has.magnetic_variation,
-              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.magnetic_variation", false));
-    ASSERT_DOUBLE_EQ(
-        c.formatted_ins_geolocation.latitude,
-        get_val<double>(&val_cp, "formatted_ins_geolocation.latitude", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(
-        c.formatted_ins_geolocation.longitude,
-        get_val<double>(&val_cp, "formatted_ins_geolocation.longitude", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(
-        c.formatted_ins_geolocation.altitude,
-        get_val<double>(&val_cp, "formatted_ins_geolocation.altitude", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
-    ASSERT_DOUBLE_EQ(c.formatted_ins_geolocation.speed_over_ground,
-                     get_val<double>(&val_cp, "formatted_ins_geolocation.speed_over_ground",
-                                     vrt_fixed_point_u32_to_double(0x7FFFFFFF, 16)));
-    ASSERT_DOUBLE_EQ(c.formatted_ins_geolocation.heading_angle,
-                     get_val<double>(&val_cp, "formatted_ins_geolocation.heading_angle",
-                                     vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(c.formatted_ins_geolocation.track_angle,
-                     get_val<double>(&val_cp, "formatted_ins_geolocation.track_angle",
-                                     vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(c.formatted_ins_geolocation.magnetic_variation,
-                     get_val<double>(&val_cp, "formatted_ins_geolocation.magnetic_variation",
-                                     vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-
-    ASSERT_EQ(Hex(c.ecef_ephemeris.tsi), Hex(get_val<vrt_tsi>(&val_cp, "ecef_ephemeris.tsi", VRT_TSI_UNDEFINED)));
-    ASSERT_EQ(Hex(c.ecef_ephemeris.tsf), Hex(get_val<vrt_tsf>(&val_cp, "ecef_ephemeris.tsf", VRT_TSF_UNDEFINED)));
-    ASSERT_EQ(Hex(c.ecef_ephemeris.oui), Hex(get_val<uint32_t>(&val_cp, "ecef_ephemeris.oui", 0)));
-    ASSERT_EQ(Hex(c.ecef_ephemeris.integer_second_timestamp),
-              Hex(get_val<uint32_t>(&val_cp, "ecef_ephemeris.integer_second_timestamp", 0xFFFFFFFF)));
-    ASSERT_EQ(Hex(c.ecef_ephemeris.fractional_second_timestamp),
-              Hex(get_val<uint64_t>(&val_cp, "ecef_ephemeris.fractional_second_timestamp", 0xFFFFFFFFFFFFFFFF)));
-    ASSERT_EQ(c.ecef_ephemeris.has.position_x, get_val<bool>(&val_cp, "ecef_ephemeris.has.position_x", false));
-    ASSERT_EQ(c.ecef_ephemeris.has.position_y, get_val<bool>(&val_cp, "ecef_ephemeris.has.position_y", false));
-    ASSERT_EQ(c.ecef_ephemeris.has.position_z, get_val<bool>(&val_cp, "ecef_ephemeris.has.position_z", false));
-    ASSERT_EQ(c.ecef_ephemeris.has.attitude_alpha, get_val<bool>(&val_cp, "ecef_ephemeris.has.attitude_alpha", false));
-    ASSERT_EQ(c.ecef_ephemeris.has.attitude_beta, get_val<bool>(&val_cp, "ecef_ephemeris.has.attitude_beta", false));
-    ASSERT_EQ(c.ecef_ephemeris.has.attitude_phi, get_val<bool>(&val_cp, "ecef_ephemeris.has.attitude_phi", false));
-    ASSERT_EQ(c.ecef_ephemeris.has.velocity_dx, get_val<bool>(&val_cp, "ecef_ephemeris.has.velocity_dx", false));
-    ASSERT_EQ(c.ecef_ephemeris.has.velocity_dy, get_val<bool>(&val_cp, "ecef_ephemeris.has.velocity_dy", false));
-    ASSERT_EQ(c.ecef_ephemeris.has.velocity_dz, get_val<bool>(&val_cp, "ecef_ephemeris.has.velocity_dz", false));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.position_x, get_val<double>(&val_cp, "ecef_ephemeris.position_x",
-                                                                  vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.position_y, get_val<double>(&val_cp, "ecef_ephemeris.position_y",
-                                                                  vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.position_z, get_val<double>(&val_cp, "ecef_ephemeris.position_z",
-                                                                  vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.attitude_alpha, get_val<double>(&val_cp, "ecef_ephemeris.attitude_alpha",
-                                                                      vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.attitude_beta, get_val<double>(&val_cp, "ecef_ephemeris.attitude_beta",
-                                                                     vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.attitude_phi, get_val<double>(&val_cp, "ecef_ephemeris.attitude_phi",
-                                                                    vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.velocity_dx, get_val<double>(&val_cp, "ecef_ephemeris.velocity_dx",
-                                                                   vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16)));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.velocity_dy, get_val<double>(&val_cp, "ecef_ephemeris.velocity_dy",
-                                                                   vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16)));
-    ASSERT_DOUBLE_EQ(c.ecef_ephemeris.velocity_dz, get_val<double>(&val_cp, "ecef_ephemeris.velocity_dz",
-                                                                   vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16)));
-
-    ASSERT_EQ(Hex(c.relative_ephemeris.tsi),
-              Hex(get_val<vrt_tsi>(&val_cp, "relative_ephemeris.tsi", VRT_TSI_UNDEFINED)));
-    ASSERT_EQ(Hex(c.relative_ephemeris.tsf),
-              Hex(get_val<vrt_tsf>(&val_cp, "relative_ephemeris.tsf", VRT_TSF_UNDEFINED)));
-    ASSERT_EQ(Hex(c.relative_ephemeris.oui), Hex(get_val<uint32_t>(&val_cp, "relative_ephemeris.oui", 0)));
-    ASSERT_EQ(Hex(c.relative_ephemeris.integer_second_timestamp),
-              Hex(get_val<uint32_t>(&val_cp, "relative_ephemeris.integer_second_timestamp", 0xFFFFFFFF)));
-    ASSERT_EQ(Hex(c.relative_ephemeris.fractional_second_timestamp),
-              Hex(get_val<uint64_t>(&val_cp, "relative_ephemeris.fractional_second_timestamp", 0xFFFFFFFFFFFFFFFF)));
-    ASSERT_EQ(c.relative_ephemeris.has.position_x, get_val<bool>(&val_cp, "relative_ephemeris.has.position_x", false));
-    ASSERT_EQ(c.relative_ephemeris.has.position_y, get_val<bool>(&val_cp, "relative_ephemeris.has.position_y", false));
-    ASSERT_EQ(c.relative_ephemeris.has.position_z, get_val<bool>(&val_cp, "relative_ephemeris.has.position_z", false));
-    ASSERT_EQ(c.relative_ephemeris.has.attitude_alpha,
-              get_val<bool>(&val_cp, "relative_ephemeris.has.attitude_alpha", false));
-    ASSERT_EQ(c.relative_ephemeris.has.attitude_beta,
-              get_val<bool>(&val_cp, "relative_ephemeris.has.attitude_beta", false));
-    ASSERT_EQ(c.relative_ephemeris.has.attitude_phi,
-              get_val<bool>(&val_cp, "relative_ephemeris.has.attitude_phi", false));
-    ASSERT_EQ(c.relative_ephemeris.has.velocity_dx,
-              get_val<bool>(&val_cp, "relative_ephemeris.has.velocity_dx", false));
-    ASSERT_EQ(c.relative_ephemeris.has.velocity_dy,
-              get_val<bool>(&val_cp, "relative_ephemeris.has.velocity_dy", false));
-    ASSERT_EQ(c.relative_ephemeris.has.velocity_dz,
-              get_val<bool>(&val_cp, "relative_ephemeris.has.velocity_dz", false));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.position_x, get_val<double>(&val_cp, "relative_ephemeris.position_x",
-                                                                      vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.position_y, get_val<double>(&val_cp, "relative_ephemeris.position_y",
-                                                                      vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.position_z, get_val<double>(&val_cp, "relative_ephemeris.position_z",
-                                                                      vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
-    ASSERT_DOUBLE_EQ(
-        c.relative_ephemeris.attitude_alpha,
-        get_val<double>(&val_cp, "relative_ephemeris.attitude_alpha", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(
-        c.relative_ephemeris.attitude_beta,
-        get_val<double>(&val_cp, "relative_ephemeris.attitude_beta", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.attitude_phi, get_val<double>(&val_cp, "relative_ephemeris.attitude_phi",
-                                                                        vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.velocity_dx, get_val<double>(&val_cp, "relative_ephemeris.velocity_dx",
-                                                                       vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16)));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.velocity_dy, get_val<double>(&val_cp, "relative_ephemeris.velocity_dy",
-                                                                       vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16)));
-    ASSERT_DOUBLE_EQ(c.relative_ephemeris.velocity_dz, get_val<double>(&val_cp, "relative_ephemeris.velocity_dz",
-                                                                       vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16)));
+    assert_ephemeris(c.ecef_ephemeris, &val_cp, "ecef_ephemeris.");
+    assert_ephemeris(c.relative_ephemeris, &val_cp, "relative_ephemeris.");
 
     ASSERT_EQ(Hex(c.ephemeris_reference_identifier),
               Hex(get_val<uint32_t>(&val_cp, "ephemeris_reference_identifier", 0)));

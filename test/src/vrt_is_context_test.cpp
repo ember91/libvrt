@@ -2,26 +2,26 @@
 
 #include <vrt/vrt_common.h>
 
-TEST(IsContextTest, IfDataWithout) {
+TEST(IsIfContextTest, IfDataWithout) {
     ASSERT_FALSE(vrt_is_context(VRT_PT_IF_DATA_WITHOUT_STREAM_ID));
 }
 
-TEST(IsContextTest, IfDataWith) {
+TEST(IsIfContextTest, IfDataWith) {
     ASSERT_FALSE(vrt_is_context(VRT_PT_IF_DATA_WITH_STREAM_ID));
 }
 
-TEST(IsContextTest, ExtDataWithout) {
+TEST(IsIfContextTest, ExtDataWithout) {
     ASSERT_FALSE(vrt_is_context(VRT_PT_EXT_DATA_WITHOUT_STREAM_ID));
 }
 
-TEST(IsContextTest, ExtDataWith) {
+TEST(IsIfContextTest, ExtDataWith) {
     ASSERT_FALSE(vrt_is_context(VRT_PT_EXT_DATA_WITH_STREAM_ID));
 }
 
-TEST(IsContextTest, IfContext) {
+TEST(IsIfContextTest, IfContext) {
     ASSERT_TRUE(vrt_is_context(VRT_PT_IF_CONTEXT));
 }
 
-TEST(IsContextTest, ExtContext) {
+TEST(IsIfContextTest, ExtContext) {
     ASSERT_TRUE(vrt_is_context(VRT_PT_EXT_CONTEXT));
 }
