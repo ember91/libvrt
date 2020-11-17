@@ -16,7 +16,6 @@
 * Add int32_t vrt_words_body(vrt_header* h), which calculates number of words body consists of
 * float128 instead of double for fixed point?
 * Fuzzing
-* Change some use of msk into usage of & in validation in vrt_read, e.g. if (msk(b, 25, 1) != 0)
 * Remove usage of unnecessary vrt_has_integer_timestamp?
 * Check that float, double... are inside bound when writing and validating
 * Break out 0x7FFFFFFF and 0xFFFFFFFF as invalid value constants for geolocation, ephemeris...

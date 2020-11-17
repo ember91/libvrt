@@ -67,7 +67,7 @@ int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header,
                 return VRT_ERR_TSM;
             }
         }
-        if (msk(b, 25, 1) != 0) {
+        if ((b & 0x02000000U) != 0) {
             return VRT_ERR_RESERVED;
         }
     }
@@ -103,7 +103,7 @@ int32_t vrt_read_fields(const vrt_header* header,
         fields->class_id.packet_class_code      = (uint16_t)b[1];
 
         if (validate) {
-            if (msk(b[0], 24, 8) != 0) {
+            if ((b[0] & 0xFF000000U) != 0) {
                 return VRT_ERR_RESERVED;
             }
         }
@@ -278,7 +278,7 @@ static uint32_t if_context_read_indicator_field(uint32_t b, vrt_if_context* c, b
     c->has.context_association_lists      = vrt_u2b(msk(b, 8, 1));
 
     if (validate) {
-        if (msk(b, 0, 8) != 0) {
+        if ((b & 0x000000FFU) != 0) {
             return VRT_ERR_RESERVED;
         }
     }
