@@ -116,12 +116,12 @@ int32_t vrt_read_fields(const vrt_header* header,
         fields->class_id.packet_class_code      = 0;
     }
 
-    if (vrt_has_integer_timestamp(header->tsi)) {
-        fields->integer_seconds_timestamp = b[0];
-        b += 1;
-    } else {
+    if (header->tsi == VRT_TSI_NONE) {
         /* Zero integer timestamp here, just to be sure */
         fields->integer_seconds_timestamp = 0;
+    } else {
+        fields->integer_seconds_timestamp = b[0];
+        b += 1;
     }
 
     if (vrt_has_fractional_timestamp(header->tsf)) {

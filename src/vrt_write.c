@@ -115,7 +115,7 @@ int32_t vrt_write_fields(const vrt_header* header,
         b[1] = msk(fields->class_id.information_class_code, 16, 16) | fields->class_id.packet_class_code;
         b += 2;
     }
-    if (vrt_has_integer_timestamp(header->tsi)) {
+    if (header->tsi != VRT_TSI_NONE) {
         b[0] = fields->integer_seconds_timestamp;
         b += 1;
     }

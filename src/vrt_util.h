@@ -32,17 +32,6 @@ inline uint32_t vrt_u2b(uint32_t u) {
 }
 
 /**
- * Check if a packet has the integer timestamp.
- *
- * \param t TSI field.
- *
- * \return true if it has the integer timestamp.
- */
-inline bool vrt_has_integer_timestamp(vrt_tsi t) {
-    return t != VRT_TSI_NONE;
-}
-
-/**
  * Check if a packet has the fractional timestamp.
  *
  * \param t TSF field.
