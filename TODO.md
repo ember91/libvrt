@@ -6,7 +6,7 @@
 * Header only library
 * Use CMAKE_CURRENT_SOURCE_DIR
 * Breathe and sphinx?
-* Add tests that write to buffer and then read from the same buffer
+* Add tests that write to buffer and then read from the same buffer. vrt_compare_...() functions may be useful for this.
 * Add read example
 * Add int32_t vrt_write_data(vrt_header* h, vrt_fields* f, uint32_t* data, uint16_t* data_words, vrt_trailer* t)
 * Add int32_t vrt_write_if_context(vrt_header* h, vrt_fields* f, uint32_t* data, uint16_t* data_words, vrt_trailer* t)
