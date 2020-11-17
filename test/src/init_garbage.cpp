@@ -51,6 +51,66 @@ void init_trailer_garbage(vrt_trailer* t) {
     t->associated_context_packet_count     = 0x7F;
 }
 
+/**
+ * Initialize Formatted GPS/INS geolocation to an easy to spot, non-default sequence.
+ *
+ * \param g Formatted GPS/INS geolocation.
+ */
+void init_formatted_geolocation_garbage(vrt_formatted_geolocation* g) {
+    g->tsi = VRT_TSI_OTHER;
+    g->tsf = VRT_TSF_FREE_RUNNING_COUNT;
+    g->oui = 0x00FFFFFF;
+    /* Avoid FFFF... here, since that's the actual 'no value' bit sequence */
+    g->integer_second_timestamp    = 0xABABABAB;
+    g->fractional_second_timestamp = 0xABABABABABABABAB;
+    g->has.latitude                = true;
+    g->has.longitude               = true;
+    g->has.altitude                = true;
+    g->has.speed_over_ground       = true;
+    g->has.heading_angle           = true;
+    g->has.track_angle             = true;
+    g->has.magnetic_variation      = true;
+    g->latitude                    = 987.654;
+    g->longitude                   = 987.654;
+    g->altitude                    = 987.654;
+    g->speed_over_ground           = 987.654;
+    g->heading_angle               = 987.654;
+    g->track_angle                 = 987.654;
+    g->magnetic_variation          = 987.654;
+}
+
+/**
+ * Initialize ECEF/Relative ephemeris to an easy to spot, non-default sequence.
+ *
+ * \param e ECEF/Relative ephemeris.
+ */
+void init_ephemeris_garbage(vrt_ephemeris* e) {
+    e->tsi                         = VRT_TSI_OTHER;
+    e->tsf                         = VRT_TSF_FREE_RUNNING_COUNT;
+    e->oui                         = 0x00FFFFFF;
+    e->integer_second_timestamp    = 0xABABABAB;
+    e->fractional_second_timestamp = 0xABABABABABABABAB;
+    /* Avoid FFFF... here, since that's the actual 'no value' bit sequence */
+    e->has.position_x     = true;
+    e->has.position_y     = true;
+    e->has.position_z     = true;
+    e->has.attitude_alpha = true;
+    e->has.attitude_beta  = true;
+    e->has.attitude_phi   = true;
+    e->has.velocity_dx    = true;
+    e->has.velocity_dy    = true;
+    e->has.velocity_dz    = true;
+    e->position_x         = 987.654;
+    e->position_y         = 987.654;
+    e->position_z         = 987.654;
+    e->attitude_alpha     = 987.654;
+    e->attitude_beta      = 987.654;
+    e->attitude_phi       = 987.654;
+    e->velocity_dx        = 987.654;
+    e->velocity_dy        = 987.654;
+    e->velocity_dz        = 987.654;
+}
+
 void init_if_context_garbage(vrt_if_context* c) {
     c->context_field_change_indicator     = true;
     c->has.reference_point_identifier     = true;
@@ -131,65 +191,10 @@ void init_if_context_garbage(vrt_if_context* c) {
     c->data_packet_payload_format.repeat_count            = 0xFFFF;
     c->data_packet_payload_format.vector_size             = 0xFFFF;
 
-    c->formatted_gps_geolocation.tsi = VRT_TSI_OTHER;
-    c->formatted_gps_geolocation.tsf = VRT_TSF_FREE_RUNNING_COUNT;
-    c->formatted_gps_geolocation.oui = 0x00FFFFFF;
-    /* Avoid FFFF... here, since that's the actual 'no value' bit sequence */
-    c->formatted_gps_geolocation.integer_second_timestamp    = 0xABABABAB;
-    c->formatted_gps_geolocation.fractional_second_timestamp = 0xABABABABABABABAB;
-    c->formatted_gps_geolocation.latitude                    = 987.654;
-    c->formatted_gps_geolocation.longitude                   = 987.654;
-    c->formatted_gps_geolocation.altitude                    = 987.654;
-    c->formatted_gps_geolocation.speed_over_ground           = 987.654;
-    c->formatted_gps_geolocation.heading_angle               = 987.654;
-    c->formatted_gps_geolocation.track_angle                 = 987.654;
-    c->formatted_gps_geolocation.magnetic_variation          = 987.654;
-
-    c->formatted_ins_geolocation.tsi = VRT_TSI_OTHER;
-    c->formatted_ins_geolocation.tsf = VRT_TSF_FREE_RUNNING_COUNT;
-    c->formatted_ins_geolocation.oui = 0x00FFFFFF;
-    /* Avoid FFFF... here, since that's the actual 'no value' bit sequence */
-    c->formatted_ins_geolocation.integer_second_timestamp    = 0xABABABAB;
-    c->formatted_ins_geolocation.fractional_second_timestamp = 0xABABABABABABABAB;
-    c->formatted_ins_geolocation.latitude                    = 987.654;
-    c->formatted_ins_geolocation.longitude                   = 987.654;
-    c->formatted_ins_geolocation.altitude                    = 987.654;
-    c->formatted_ins_geolocation.speed_over_ground           = 987.654;
-    c->formatted_ins_geolocation.heading_angle               = 987.654;
-    c->formatted_ins_geolocation.track_angle                 = 987.654;
-    c->formatted_ins_geolocation.magnetic_variation          = 987.654;
-
-    c->ecef_ephemeris.tsi                         = VRT_TSI_OTHER;
-    c->ecef_ephemeris.tsf                         = VRT_TSF_FREE_RUNNING_COUNT;
-    c->ecef_ephemeris.oui                         = 0x00FFFFFF;
-    c->ecef_ephemeris.integer_second_timestamp    = 0xABABABAB;
-    c->ecef_ephemeris.fractional_second_timestamp = 0xABABABABABABABAB;
-    /* Avoid FFFF... here, since that's the actual 'no value' bit sequence */
-    c->ecef_ephemeris.position_x     = 987.654;
-    c->ecef_ephemeris.position_y     = 987.654;
-    c->ecef_ephemeris.position_z     = 987.654;
-    c->ecef_ephemeris.attitude_alpha = 987.654;
-    c->ecef_ephemeris.attitude_beta  = 987.654;
-    c->ecef_ephemeris.attitude_phi   = 987.654;
-    c->ecef_ephemeris.velocity_dx    = 987.654;
-    c->ecef_ephemeris.velocity_dy    = 987.654;
-    c->ecef_ephemeris.velocity_dz    = 987.654;
-
-    c->relative_ephemeris.tsi                         = VRT_TSI_OTHER;
-    c->relative_ephemeris.tsf                         = VRT_TSF_FREE_RUNNING_COUNT;
-    c->relative_ephemeris.oui                         = 0x00FFFFFF;
-    c->relative_ephemeris.integer_second_timestamp    = 0xABABABAB;
-    c->relative_ephemeris.fractional_second_timestamp = 0xABABABABABABABAB;
-    /* Avoid FFFF... here, since that's the actual 'no value' bit sequence */
-    c->relative_ephemeris.position_x     = 987.654;
-    c->relative_ephemeris.position_y     = 987.654;
-    c->relative_ephemeris.position_z     = 987.654;
-    c->relative_ephemeris.attitude_alpha = 987.654;
-    c->relative_ephemeris.attitude_beta  = 987.654;
-    c->relative_ephemeris.attitude_phi   = 987.654;
-    c->relative_ephemeris.velocity_dx    = 987.654;
-    c->relative_ephemeris.velocity_dy    = 987.654;
-    c->relative_ephemeris.velocity_dz    = 987.654;
+    init_formatted_geolocation_garbage(&c->formatted_gps_geolocation);
+    init_formatted_geolocation_garbage(&c->formatted_ins_geolocation);
+    init_ephemeris_garbage(&c->ecef_ephemeris);
+    init_ephemeris_garbage(&c->relative_ephemeris);
 
     c->ephemeris_reference_identifier = 0xFFFFFFFF;
 

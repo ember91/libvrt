@@ -54,6 +54,75 @@ void vrt_init_trailer(vrt_trailer* trailer) {
     trailer->associated_context_packet_count     = 0;
 }
 
+/**
+ * Initialize Formatted GPS/INS geolocation struct.
+ *
+ * \param g Formatted geolocation.
+ */
+static void init_formatted_geolocation(vrt_formatted_geolocation* g) {
+    g->tsi = VRT_TSI_UNDEFINED;
+    g->tsf = VRT_TSF_UNDEFINED;
+    g->oui = 0;
+    /* Rule 7.1.5.19-1: When the TSI or TSF fields are zero the corresponding Timestamp of Position Fix subfield words
+     * shall take the value 0xFFFFFFFF. */
+    g->integer_second_timestamp    = 0xFFFFFFFF;
+    g->fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
+    /* Rule 7.1.5.19-14: The Latitude, Longitude, Altitude, Speed Over Ground, Heading, Track Angle, and Magnetic
+     * Variation subfields shall take the value 0x7FFFFFFF when unspecified. */
+
+    g->has.latitude           = false;
+    g->has.longitude          = false;
+    g->has.altitude           = false;
+    g->has.speed_over_ground  = false;
+    g->has.heading_angle      = false;
+    g->has.track_angle        = false;
+    g->has.magnetic_variation = false;
+
+    g->latitude           = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    g->longitude          = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    g->altitude           = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ALTITUDE);
+    g->speed_over_ground  = vrt_fixed_point_u32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    g->heading_angle      = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    g->track_angle        = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    g->magnetic_variation = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+}
+
+/**
+ * Initialize ECEF/Relative ephemeris struct.
+ *
+ * \param c Ephemeris.
+ */
+static void init_ephemeris(vrt_ephemeris* e) {
+    e->tsi = VRT_TSI_UNDEFINED;
+    e->tsf = VRT_TSF_UNDEFINED;
+    e->oui = 0;
+
+    e->has.position_x     = false;
+    e->has.position_y     = false;
+    e->has.position_z     = false;
+    e->has.attitude_alpha = false;
+    e->has.attitude_beta  = false;
+    e->has.attitude_phi   = false;
+    e->has.velocity_dx    = false;
+    e->has.velocity_dy    = false;
+    e->has.velocity_dz    = false;
+
+    /* Rule 7.1.5.21-4: The TSI, TSF, OUI, and Timestamp of Position Fix fields shall follow the rules of the
+     * corresponding Formatted GPS Geolocation fields given in Section 7.1.5.19. */
+    /* Clash here between Rule 7.1.5.21-4 and Rule 7.1.5.21-8. Rule 7.1.5.21-4 seems more reasonable. */
+    e->integer_second_timestamp    = 0xFFFFFFFF;
+    e->fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
+    e->position_x                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
+    e->position_y                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
+    e->position_z                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
+    e->attitude_alpha              = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    e->attitude_beta               = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    e->attitude_phi                = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
+    e->velocity_dx                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    e->velocity_dy                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    e->velocity_dz                 = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+}
+
 void vrt_init_if_context(vrt_if_context* if_context) {
     if_context->context_field_change_indicator     = false;
     if_context->has.reference_point_identifier     = false;
@@ -134,79 +203,10 @@ void vrt_init_if_context(vrt_if_context* if_context) {
     if_context->data_packet_payload_format.repeat_count            = 0;
     if_context->data_packet_payload_format.vector_size             = 0;
 
-    if_context->formatted_gps_geolocation.tsi = VRT_TSI_UNDEFINED;
-    if_context->formatted_gps_geolocation.tsf = VRT_TSF_UNDEFINED;
-    if_context->formatted_gps_geolocation.oui = 0;
-    /* Rule 7.1.5.19-1: When the TSI or TSF fields are zero the corresponding Timestamp of Position Fix subfield words
-     * shall take the value 0xFFFFFFFF. */
-    if_context->formatted_gps_geolocation.integer_second_timestamp    = 0xFFFFFFFF;
-    if_context->formatted_gps_geolocation.fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
-    /* Rule 7.1.5.19-14: The Latitude, Longitude, Altitude, Speed Over Ground, Heading, Track Angle, and Magnetic
-     * Variation subfields shall take the value 0x7FFFFFFF when unspecified. */
-    if_context->formatted_gps_geolocation.latitude  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->formatted_gps_geolocation.longitude = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->formatted_gps_geolocation.altitude  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ALTITUDE);
-    if_context->formatted_gps_geolocation.speed_over_ground =
-        vrt_fixed_point_u32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
-    if_context->formatted_gps_geolocation.heading_angle = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->formatted_gps_geolocation.track_angle   = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->formatted_gps_geolocation.magnetic_variation =
-        vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-
-    if_context->formatted_ins_geolocation.tsi = VRT_TSI_UNDEFINED;
-    if_context->formatted_ins_geolocation.tsf = VRT_TSF_UNDEFINED;
-    if_context->formatted_ins_geolocation.oui = 0;
-    /* Rule 7.1.5.19-1: When the TSI or TSF fields are zero the corresponding Timestamp of Position Fix subfield words
-     * shall take the value 0xFFFFFFFF. */
-    if_context->formatted_ins_geolocation.integer_second_timestamp    = 0xFFFFFFFF;
-    if_context->formatted_ins_geolocation.fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
-    /* Rule 7.1.5.19-14: The Latitude, Longitude, Altitude, Speed Over Ground, Heading, Track Angle, and Magnetic
-     * Variation subfields shall take the value 0x7FFFFFFF when unspecified. */
-    if_context->formatted_ins_geolocation.latitude  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->formatted_ins_geolocation.longitude = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->formatted_ins_geolocation.altitude  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ALTITUDE);
-    if_context->formatted_ins_geolocation.speed_over_ground =
-        vrt_fixed_point_u32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
-    if_context->formatted_ins_geolocation.heading_angle = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->formatted_ins_geolocation.track_angle   = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->formatted_ins_geolocation.magnetic_variation =
-        vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-
-    if_context->ecef_ephemeris.tsi = VRT_TSI_UNDEFINED;
-    if_context->ecef_ephemeris.tsf = VRT_TSF_UNDEFINED;
-    if_context->ecef_ephemeris.oui = 0;
-    /* Rule 7.1.5.21-4: The TSI, TSF, OUI, and Timestamp of Position Fix fields shall follow the rules of the
-     * corresponding Formatted GPS Geolocation fields given in Section 7.1.5.19. */
-    /* Clash here between Rule 7.1.5.21-4 and Rule 7.1.5.21-8. Rule 7.1.5.21-4 seems more reasonable. */
-    if_context->ecef_ephemeris.integer_second_timestamp    = 0xFFFFFFFF;
-    if_context->ecef_ephemeris.fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
-    if_context->ecef_ephemeris.position_x     = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
-    if_context->ecef_ephemeris.position_y     = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
-    if_context->ecef_ephemeris.position_z     = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
-    if_context->ecef_ephemeris.attitude_alpha = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->ecef_ephemeris.attitude_beta  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->ecef_ephemeris.attitude_phi   = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->ecef_ephemeris.velocity_dx    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
-    if_context->ecef_ephemeris.velocity_dy    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
-    if_context->ecef_ephemeris.velocity_dz    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
-
-    if_context->relative_ephemeris.tsi = VRT_TSI_UNDEFINED;
-    if_context->relative_ephemeris.tsf = VRT_TSF_UNDEFINED;
-    if_context->relative_ephemeris.oui = 0;
-    /* Rule 7.1.5.21-4: The TSI, TSF, OUI, and Timestamp of Position Fix fields shall follow the rules of the
-     * corresponding Formatted GPS Geolocation fields given in Section 7.1.5.19. */
-    /* Clash here between Rule 7.1.5.21-4 and Rule 7.1.5.21-8. Rule 7.1.5.21-4 seems more reasonable. */
-    if_context->relative_ephemeris.integer_second_timestamp    = 0xFFFFFFFF;
-    if_context->relative_ephemeris.fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
-    if_context->relative_ephemeris.position_x     = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
-    if_context->relative_ephemeris.position_y     = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
-    if_context->relative_ephemeris.position_z     = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
-    if_context->relative_ephemeris.attitude_alpha = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->relative_ephemeris.attitude_beta  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->relative_ephemeris.attitude_phi   = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_ANGLE);
-    if_context->relative_ephemeris.velocity_dx    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
-    if_context->relative_ephemeris.velocity_dy    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
-    if_context->relative_ephemeris.velocity_dz    = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_SPEED_VELOCITY);
+    init_formatted_geolocation(&if_context->formatted_gps_geolocation);
+    init_formatted_geolocation(&if_context->formatted_ins_geolocation);
+    init_ephemeris(&if_context->ecef_ephemeris);
+    init_ephemeris(&if_context->relative_ephemeris);
 
     if_context->ephemeris_reference_identifier = 0;
 

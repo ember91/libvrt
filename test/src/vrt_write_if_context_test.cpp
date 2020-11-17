@@ -1023,47 +1023,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationLatitude) {
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x00400000));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationLatitudeInvalid1) {
-    c_.has.formatted_gps_geolocation      = true;
-    c_.formatted_gps_geolocation.latitude = -91.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LATITUDE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0xE9400000));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationLatitudeInvalid2) {
-    c_.has.formatted_gps_geolocation      = true;
-    c_.formatted_gps_geolocation.latitude = 91.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LATITUDE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x16C00000));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
@@ -1083,47 +1043,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationLongitude) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x00400000));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationLongitudeInvalid1) {
-    c_.has.formatted_gps_geolocation       = true;
-    c_.formatted_gps_geolocation.longitude = -181.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LONGITUDE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0xD2C00000));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationLongitudeInvalid2) {
-    c_.has.formatted_gps_geolocation       = true;
-    c_.formatted_gps_geolocation.longitude = 181.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LONGITUDE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x2D400000));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
@@ -1143,7 +1063,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationAltitude) {
     ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
@@ -1163,27 +1083,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationSpeedOverGround) {
     ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x00010000));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationSpeedOverGroundInvalid) {
-    c_.has.formatted_gps_geolocation               = true;
-    c_.formatted_gps_geolocation.speed_over_ground = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_SPEED_OVER_GROUND);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0xFFFF0000));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
@@ -1203,47 +1103,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationHeadingAngle) {
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x00400000));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationHeadingAngleInvalid1) {
-    c_.has.formatted_gps_geolocation           = true;
-    c_.formatted_gps_geolocation.heading_angle = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_HEADING_ANGLE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0xFFC00000));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationHeadingAngleInvalid2) {
-    c_.has.formatted_gps_geolocation           = true;
-    c_.formatted_gps_geolocation.heading_angle = 360.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_HEADING_ANGLE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x5A000000));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
@@ -1263,47 +1123,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationTrackAngle) {
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x00400000));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationTrackAngleInvalid1) {
-    c_.has.formatted_gps_geolocation         = true;
-    c_.formatted_gps_geolocation.track_angle = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TRACK_ANGLE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0xFFC00000));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationTrackAngleInvalid2) {
-    c_.has.formatted_gps_geolocation         = true;
-    c_.formatted_gps_geolocation.track_angle = 360.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TRACK_ANGLE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x5A000000));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
@@ -1323,13 +1143,343 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationMagneticVariation) {
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLatitude) {
+    c_.has.formatted_gps_geolocation          = true;
+    c_.formatted_gps_geolocation.has.latitude = true;
+    c_.formatted_gps_geolocation.latitude     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLatitudeInvalid1) {
+    c_.has.formatted_gps_geolocation          = true;
+    c_.formatted_gps_geolocation.has.latitude = true;
+    c_.formatted_gps_geolocation.latitude     = -91.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LATITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0xE9400000));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLatitudeInvalid2) {
+    c_.has.formatted_gps_geolocation          = true;
+    c_.formatted_gps_geolocation.has.latitude = true;
+    c_.formatted_gps_geolocation.latitude     = 91.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LATITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x16C00000));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLongitude) {
+    c_.has.formatted_gps_geolocation           = true;
+    c_.formatted_gps_geolocation.has.longitude = true;
+    c_.formatted_gps_geolocation.longitude     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLongitudeInvalid1) {
+    c_.has.formatted_gps_geolocation           = true;
+    c_.formatted_gps_geolocation.has.longitude = true;
+    c_.formatted_gps_geolocation.longitude     = -181.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LONGITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0xD2C00000));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLongitudeInvalid2) {
+    c_.has.formatted_gps_geolocation           = true;
+    c_.formatted_gps_geolocation.has.longitude = true;
+    c_.formatted_gps_geolocation.longitude     = 181.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LONGITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x2D400000));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothAltitude) {
+    c_.has.formatted_gps_geolocation          = true;
+    c_.formatted_gps_geolocation.has.altitude = true;
+    c_.formatted_gps_geolocation.altitude     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothSpeedOverGround) {
+    c_.has.formatted_gps_geolocation                   = true;
+    c_.formatted_gps_geolocation.has.speed_over_ground = true;
+    c_.formatted_gps_geolocation.speed_over_ground     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x00010000));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothSpeedOverGroundInvalid) {
+    c_.has.formatted_gps_geolocation                   = true;
+    c_.formatted_gps_geolocation.has.speed_over_ground = true;
+    c_.formatted_gps_geolocation.speed_over_ground     = -1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_SPEED_OVER_GROUND);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0xFFFF0000));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngle) {
+    c_.has.formatted_gps_geolocation               = true;
+    c_.formatted_gps_geolocation.has.heading_angle = true;
+    c_.formatted_gps_geolocation.heading_angle     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngleInvalid1) {
+    c_.has.formatted_gps_geolocation               = true;
+    c_.formatted_gps_geolocation.has.heading_angle = true;
+    c_.formatted_gps_geolocation.heading_angle     = -1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_HEADING_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0xFFC00000));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngleInvalid2) {
+    c_.has.formatted_gps_geolocation               = true;
+    c_.formatted_gps_geolocation.has.heading_angle = true;
+    c_.formatted_gps_geolocation.heading_angle     = 360.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_HEADING_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x5A000000));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothTrackAngle) {
+    c_.has.formatted_gps_geolocation             = true;
+    c_.formatted_gps_geolocation.has.track_angle = true;
+    c_.formatted_gps_geolocation.track_angle     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothTrackAngleInvalid1) {
+    c_.has.formatted_gps_geolocation             = true;
+    c_.formatted_gps_geolocation.has.track_angle = true;
+    c_.formatted_gps_geolocation.track_angle     = -1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TRACK_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0xFFC00000));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothTrackAngleInvalid2) {
+    c_.has.formatted_gps_geolocation             = true;
+    c_.formatted_gps_geolocation.has.track_angle = true;
+    c_.formatted_gps_geolocation.track_angle     = 360.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TRACK_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x5A000000));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariation) {
+    c_.has.formatted_gps_geolocation                    = true;
+    c_.formatted_gps_geolocation.has.magnetic_variation = true;
+    c_.formatted_gps_geolocation.magnetic_variation     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x00400000));
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationMagneticVariationInvalid1) {
-    c_.has.formatted_gps_geolocation                = true;
-    c_.formatted_gps_geolocation.magnetic_variation = -181.0;
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariationInvalid1) {
+    c_.has.formatted_gps_geolocation                    = true;
+    c_.formatted_gps_geolocation.has.magnetic_variation = true;
+    c_.formatted_gps_geolocation.magnetic_variation     = -181.0;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
@@ -1347,9 +1497,10 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationMagneticVariationInvalid1) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationMagneticVariationInvalid2) {
-    c_.has.formatted_gps_geolocation                = true;
-    c_.formatted_gps_geolocation.magnetic_variation = 181.0;
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariationInvalid2) {
+    c_.has.formatted_gps_geolocation                    = true;
+    c_.formatted_gps_geolocation.has.magnetic_variation = true;
+    c_.formatted_gps_geolocation.magnetic_variation     = 181.0;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
@@ -1636,47 +1787,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationLatitude) {
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x00400000));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedInsGeolocationLatitudeInvalid1) {
-    c_.has.formatted_ins_geolocation      = true;
-    c_.formatted_ins_geolocation.latitude = -91.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LATITUDE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0xE9400000));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedInsGeolocationLatitudeInvalid2) {
-    c_.has.formatted_ins_geolocation      = true;
-    c_.formatted_ins_geolocation.latitude = 91.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LATITUDE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x16C00000));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
@@ -1696,47 +1807,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationLongitude) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x00400000));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedInsGeolocationLongitudeInvalid1) {
-    c_.has.formatted_ins_geolocation       = true;
-    c_.formatted_ins_geolocation.longitude = -181.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LONGITUDE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0xD2C00000));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedInsGeolocationLongitudeInvalid2) {
-    c_.has.formatted_ins_geolocation       = true;
-    c_.formatted_ins_geolocation.longitude = 181.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LONGITUDE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x2D400000));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
@@ -1756,7 +1827,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationAltitude) {
     ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
@@ -1776,27 +1847,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationSpeedOverGround) {
     ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x00010000));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedInsGeolocationSpeedOverGroundInvalid) {
-    c_.has.formatted_ins_geolocation               = true;
-    c_.formatted_ins_geolocation.speed_over_ground = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_SPEED_OVER_GROUND);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0xFFFF0000));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
@@ -1816,47 +1867,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationHeadingAngle) {
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x00400000));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedInsGeolocationHeadingAngleInvalid1) {
-    c_.has.formatted_ins_geolocation           = true;
-    c_.formatted_ins_geolocation.heading_angle = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_HEADING_ANGLE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0xFFC00000));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedInsGeolocationHeadingAngleInvalid2) {
-    c_.has.formatted_ins_geolocation           = true;
-    c_.formatted_ins_geolocation.heading_angle = 360.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_HEADING_ANGLE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x5A000000));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
@@ -1876,47 +1887,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationTrackAngle) {
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x00400000));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedInsGeolocationTrackAngleInvalid1) {
-    c_.has.formatted_ins_geolocation         = true;
-    c_.formatted_ins_geolocation.track_angle = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TRACK_ANGLE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0xFFC00000));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, FormattedInsGeolocationTrackAngleInvalid2) {
-    c_.has.formatted_ins_geolocation         = true;
-    c_.formatted_ins_geolocation.track_angle = 360.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TRACK_ANGLE);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x5A000000));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
@@ -1936,13 +1907,343 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationMagneticVariation) {
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLatitude) {
+    c_.has.formatted_ins_geolocation          = true;
+    c_.formatted_ins_geolocation.has.latitude = true;
+    c_.formatted_ins_geolocation.latitude     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLatitudeInvalid1) {
+    c_.has.formatted_ins_geolocation          = true;
+    c_.formatted_ins_geolocation.has.latitude = true;
+    c_.formatted_ins_geolocation.latitude     = -91.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LATITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0xE9400000));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLatitudeInvalid2) {
+    c_.has.formatted_ins_geolocation          = true;
+    c_.formatted_ins_geolocation.has.latitude = true;
+    c_.formatted_ins_geolocation.latitude     = 91.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LATITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x16C00000));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLongitude) {
+    c_.has.formatted_ins_geolocation           = true;
+    c_.formatted_ins_geolocation.has.longitude = true;
+    c_.formatted_ins_geolocation.longitude     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLongitudeInvalid1) {
+    c_.has.formatted_ins_geolocation           = true;
+    c_.formatted_ins_geolocation.has.longitude = true;
+    c_.formatted_ins_geolocation.longitude     = -181.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LONGITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0xD2C00000));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLongitudeInvalid2) {
+    c_.has.formatted_ins_geolocation           = true;
+    c_.formatted_ins_geolocation.has.longitude = true;
+    c_.formatted_ins_geolocation.longitude     = 181.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LONGITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x2D400000));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothAltitude) {
+    c_.has.formatted_ins_geolocation          = true;
+    c_.formatted_ins_geolocation.has.altitude = true;
+    c_.formatted_ins_geolocation.altitude     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothSpeedOverGround) {
+    c_.has.formatted_ins_geolocation                   = true;
+    c_.formatted_ins_geolocation.has.speed_over_ground = true;
+    c_.formatted_ins_geolocation.speed_over_ground     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x00010000));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothSpeedOverGroundInvalid) {
+    c_.has.formatted_ins_geolocation                   = true;
+    c_.formatted_ins_geolocation.has.speed_over_ground = true;
+    c_.formatted_ins_geolocation.speed_over_ground     = -1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_SPEED_OVER_GROUND);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0xFFFF0000));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngle) {
+    c_.has.formatted_ins_geolocation               = true;
+    c_.formatted_ins_geolocation.has.heading_angle = true;
+    c_.formatted_ins_geolocation.heading_angle     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngleInvalid1) {
+    c_.has.formatted_ins_geolocation               = true;
+    c_.formatted_ins_geolocation.has.heading_angle = true;
+    c_.formatted_ins_geolocation.heading_angle     = -1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_HEADING_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0xFFC00000));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngleInvalid2) {
+    c_.has.formatted_ins_geolocation               = true;
+    c_.formatted_ins_geolocation.has.heading_angle = true;
+    c_.formatted_ins_geolocation.heading_angle     = 360.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_HEADING_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x5A000000));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothTrackAngle) {
+    c_.has.formatted_ins_geolocation             = true;
+    c_.formatted_ins_geolocation.has.track_angle = true;
+    c_.formatted_ins_geolocation.track_angle     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothTrackAngleInvalid1) {
+    c_.has.formatted_ins_geolocation             = true;
+    c_.formatted_ins_geolocation.has.track_angle = true;
+    c_.formatted_ins_geolocation.track_angle     = -1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TRACK_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0xFFC00000));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothTrackAngleInvalid2) {
+    c_.has.formatted_ins_geolocation             = true;
+    c_.formatted_ins_geolocation.has.track_angle = true;
+    c_.formatted_ins_geolocation.track_angle     = 360.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TRACK_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x5A000000));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothMagneticVariation) {
+    c_.has.formatted_ins_geolocation                    = true;
+    c_.formatted_ins_geolocation.has.magnetic_variation = true;
+    c_.formatted_ins_geolocation.magnetic_variation     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x00400000));
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationMagneticVariationInvalid1) {
-    c_.has.formatted_ins_geolocation                = true;
-    c_.formatted_ins_geolocation.magnetic_variation = -181.0;
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothMagneticVariationInvalid1) {
+    c_.has.formatted_ins_geolocation                    = true;
+    c_.formatted_ins_geolocation.has.magnetic_variation = true;
+    c_.formatted_ins_geolocation.magnetic_variation     = -181.0;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
@@ -1960,9 +2261,10 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationMagneticVariationInvalid1) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationMagneticVariationInvalid2) {
-    c_.has.formatted_ins_geolocation                = true;
-    c_.formatted_ins_geolocation.magnetic_variation = 181.0;
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothMagneticVariationInvalid2) {
+    c_.has.formatted_ins_geolocation                    = true;
+    c_.formatted_ins_geolocation.has.magnetic_variation = true;
+    c_.formatted_ins_geolocation.magnetic_variation     = 181.0;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
@@ -1980,7 +2282,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationMagneticVariationInvalid2) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisGeolocationTsi) {
+TEST_F(WriteIfContextTest, EcefEphemerisTsi) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsi = VRT_TSI_OTHER;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
@@ -2001,7 +2303,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisGeolocationTsi) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisGeolocationTsiInvalid1) {
+TEST_F(WriteIfContextTest, EcefEphemerisTsiInvalid1) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsi = static_cast<vrt_tsi>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSI);
@@ -2023,7 +2325,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisGeolocationTsiInvalid1) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisGeolocationTsiInvalid2) {
+TEST_F(WriteIfContextTest, EcefEphemerisTsiInvalid2) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsi = static_cast<vrt_tsi>(4);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSI);
@@ -2045,7 +2347,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisGeolocationTsiInvalid2) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisGeolocationTsf) {
+TEST_F(WriteIfContextTest, EcefEphemerisTsf) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsf = VRT_TSF_FREE_RUNNING_COUNT;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
@@ -2066,7 +2368,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisGeolocationTsf) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisGeolocationTsfInvalid1) {
+TEST_F(WriteIfContextTest, EcefEphemerisTsfInvalid1) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsf = static_cast<vrt_tsf>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSF);
@@ -2088,7 +2390,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisGeolocationTsfInvalid1) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisGeolocationTsfInvalid2) {
+TEST_F(WriteIfContextTest, EcefEphemerisTsfInvalid2) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsf = static_cast<vrt_tsf>(4);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSF);
@@ -2110,7 +2412,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisGeolocationTsfInvalid2) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisGeolocationOui) {
+TEST_F(WriteIfContextTest, EcefEphemerisOui) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.oui = 0x00FFFFFF;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
@@ -2131,7 +2433,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisGeolocationOui) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisGeolocationOuiInvalid) {
+TEST_F(WriteIfContextTest, EcefEphemerisOuiInvalid) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.oui = 0x01FFFFFF;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_OUI);
@@ -2153,7 +2455,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisGeolocationOuiInvalid) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisGeolocationIntegerSecondTimestamp) {
+TEST_F(WriteIfContextTest, EcefEphemerisIntegerSecondTimestamp) {
     c_.has.ecef_ephemeris                      = true;
     c_.ecef_ephemeris.tsi                      = VRT_TSI_UTC;
     c_.ecef_ephemeris.integer_second_timestamp = 0xABABABAB;
@@ -2175,7 +2477,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisGeolocationIntegerSecondTimestamp) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisGeolocationIntegerSecondTimestampInvalid) {
+TEST_F(WriteIfContextTest, EcefEphemerisIntegerSecondTimestampInvalid) {
     c_.has.ecef_ephemeris                      = true;
     c_.ecef_ephemeris.tsi                      = VRT_TSI_UNDEFINED;
     c_.ecef_ephemeris.integer_second_timestamp = 0xABABABAB;
@@ -2275,7 +2577,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisPositionX) {
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
@@ -2297,7 +2599,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisPositionY) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
@@ -2319,7 +2621,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisPositionZ) {
     ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
@@ -2341,7 +2643,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisAttitudeAlpha) {
     ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
@@ -2363,7 +2665,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisAttitudeBeta) {
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
@@ -2385,7 +2687,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisAttitudePhi) {
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
@@ -2407,7 +2709,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisVelocityDx) {
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x00010000));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
@@ -2429,7 +2731,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisVelocityDy) {
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0x00010000));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
@@ -2451,11 +2753,209 @@ TEST_F(WriteIfContextTest, EcefEphemerisVelocityDz) {
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionX) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_x = true;
+    c_.ecef_ephemeris.position_x     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionY) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_y = true;
+    c_.ecef_ephemeris.position_y     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionZ) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_z = true;
+    c_.ecef_ephemeris.position_z     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeAlpha) {
+    c_.has.ecef_ephemeris                = true;
+    c_.ecef_ephemeris.has.attitude_alpha = true;
+    c_.ecef_ephemeris.attitude_alpha     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeBeta) {
+    c_.has.ecef_ephemeris               = true;
+    c_.ecef_ephemeris.has.attitude_beta = true;
+    c_.ecef_ephemeris.attitude_beta     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudePhi) {
+    c_.has.ecef_ephemeris              = true;
+    c_.ecef_ephemeris.has.attitude_phi = true;
+    c_.ecef_ephemeris.attitude_phi     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDx) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dx = true;
+    c_.ecef_ephemeris.velocity_dx     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x00010000));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDy) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dy = true;
+    c_.ecef_ephemeris.velocity_dy     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x00010000));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDz) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dz = true;
+    c_.ecef_ephemeris.velocity_dz     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[13]), Hex(0x00010000));
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationTsi) {
+TEST_F(WriteIfContextTest, RelativeEphemerisTsi) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsi = VRT_TSI_OTHER;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
@@ -2476,7 +2976,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationTsi) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationTsiInvalid1) {
+TEST_F(WriteIfContextTest, RelativeEphemerisTsiInvalid1) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsi = static_cast<vrt_tsi>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSI);
@@ -2498,7 +2998,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationTsiInvalid1) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationTsiInvalid2) {
+TEST_F(WriteIfContextTest, RelativeEphemerisTsiInvalid2) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsi = static_cast<vrt_tsi>(4);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSI);
@@ -2520,7 +3020,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationTsiInvalid2) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationTsf) {
+TEST_F(WriteIfContextTest, RelativeEphemerisTsf) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsf = VRT_TSF_FREE_RUNNING_COUNT;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
@@ -2541,7 +3041,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationTsf) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationTsfInvalid1) {
+TEST_F(WriteIfContextTest, RelativeEphemerisTsfInvalid1) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsf = static_cast<vrt_tsf>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSF);
@@ -2563,7 +3063,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationTsfInvalid1) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationTsfInvalid2) {
+TEST_F(WriteIfContextTest, RelativeEphemerisTsfInvalid2) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsf = static_cast<vrt_tsf>(4);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSF);
@@ -2585,7 +3085,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationTsfInvalid2) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationOui) {
+TEST_F(WriteIfContextTest, RelativeEphemerisOui) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.oui = 0x00FFFFFF;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
@@ -2606,7 +3106,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationOui) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationOuiInvalid) {
+TEST_F(WriteIfContextTest, RelativeEphemerisOuiInvalid) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.oui = 0x01FFFFFF;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_OUI);
@@ -2628,7 +3128,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationOuiInvalid) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationIntegerSecondTimestamp) {
+TEST_F(WriteIfContextTest, RelativeEphemerisIntegerSecondTimestamp) {
     c_.has.relative_ephemeris                      = true;
     c_.relative_ephemeris.tsi                      = VRT_TSI_UTC;
     c_.relative_ephemeris.integer_second_timestamp = 0xABABABAB;
@@ -2650,7 +3150,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationIntegerSecondTimestamp) {
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisGeolocationIntegerSecondTimestampInvalid) {
+TEST_F(WriteIfContextTest, RelativeEphemerisIntegerSecondTimestampInvalid) {
     c_.has.relative_ephemeris                      = true;
     c_.relative_ephemeris.tsi                      = VRT_TSI_UNDEFINED;
     c_.relative_ephemeris.integer_second_timestamp = 0xABABABAB;
@@ -2750,7 +3250,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisPositionX) {
     ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(buf_[5]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
@@ -2772,7 +3272,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisPositionY) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[6]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
@@ -2794,7 +3294,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisPositionZ) {
     ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
     ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[7]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
@@ -2816,7 +3316,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisAttitudeAlpha) {
     ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[8]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
@@ -2838,7 +3338,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisAttitudeBeta) {
     ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[9]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
@@ -2860,7 +3360,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisAttitudePhi) {
     ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[10]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
@@ -2882,7 +3382,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisVelocityDx) {
     ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[11]), Hex(0x00010000));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
@@ -2904,7 +3404,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisVelocityDy) {
     ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
-    ASSERT_EQ(Hex(buf_[12]), Hex(0x00010000));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
     ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
 }
@@ -2912,6 +3412,204 @@ TEST_F(WriteIfContextTest, RelativeEphemerisVelocityDy) {
 TEST_F(WriteIfContextTest, RelativeEphemerisVelocityDz) {
     c_.has.relative_ephemeris         = true;
     c_.relative_ephemeris.velocity_dz = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionX) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_x = true;
+    c_.relative_ephemeris.position_x     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionY) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_y = true;
+    c_.relative_ephemeris.position_y     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionZ) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_z = true;
+    c_.relative_ephemeris.position_z     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x00000020));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeAlpha) {
+    c_.has.relative_ephemeris                = true;
+    c_.relative_ephemeris.has.attitude_alpha = true;
+    c_.relative_ephemeris.attitude_alpha     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeBeta) {
+    c_.has.relative_ephemeris               = true;
+    c_.relative_ephemeris.has.attitude_beta = true;
+    c_.relative_ephemeris.attitude_beta     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudePhi) {
+    c_.has.relative_ephemeris              = true;
+    c_.relative_ephemeris.has.attitude_phi = true;
+    c_.relative_ephemeris.attitude_phi     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x00400000));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDx) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dx = true;
+    c_.relative_ephemeris.velocity_dx     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x00010000));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDy) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dy = true;
+    c_.relative_ephemeris.velocity_dy     = 1.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[4]), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x00010000));
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFFFFFF));
+    ASSERT_EQ(Hex(buf_[14]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDz) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dz = true;
+    c_.relative_ephemeris.velocity_dz     = 1.0;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -3141,6 +3839,13 @@ TEST_F(WriteIfContextTest, EveryOther1) {
     c_.formatted_ins_geolocation.oui                         = 0xFFFFFFFF;
     c_.formatted_ins_geolocation.integer_second_timestamp    = 0xABABBABA;
     c_.formatted_ins_geolocation.fractional_second_timestamp = 0xBEBEBABACECECBCB;
+    c_.formatted_ins_geolocation.has.latitude                = true;
+    c_.formatted_ins_geolocation.has.longitude               = true;
+    c_.formatted_ins_geolocation.has.altitude                = true;
+    c_.formatted_ins_geolocation.has.speed_over_ground       = true;
+    c_.formatted_ins_geolocation.has.heading_angle           = true;
+    c_.formatted_ins_geolocation.has.track_angle             = true;
+    c_.formatted_ins_geolocation.has.magnetic_variation      = true;
     c_.formatted_ins_geolocation.latitude                    = -1.0;
     c_.formatted_ins_geolocation.longitude                   = -1.0;
     c_.formatted_ins_geolocation.altitude                    = -1.0;
@@ -3154,6 +3859,15 @@ TEST_F(WriteIfContextTest, EveryOther1) {
     c_.relative_ephemeris.oui                         = 0xFFFFFFFF;
     c_.relative_ephemeris.integer_second_timestamp    = 0xABABBABA;
     c_.relative_ephemeris.fractional_second_timestamp = 0xBEBEBABACECECBCB;
+    c_.relative_ephemeris.has.position_x              = true;
+    c_.relative_ephemeris.has.position_y              = true;
+    c_.relative_ephemeris.has.position_z              = true;
+    c_.relative_ephemeris.has.attitude_alpha          = true;
+    c_.relative_ephemeris.has.attitude_beta           = true;
+    c_.relative_ephemeris.has.attitude_phi            = true;
+    c_.relative_ephemeris.has.velocity_dx             = true;
+    c_.relative_ephemeris.has.velocity_dy             = true;
+    c_.relative_ephemeris.has.velocity_dz             = true;
     c_.relative_ephemeris.position_x                  = -1.0;
     c_.relative_ephemeris.position_y                  = -1.0;
     c_.relative_ephemeris.position_z                  = -1.0;
@@ -3268,6 +3982,13 @@ TEST_F(WriteIfContextTest, EveryOther2) {
     c_.formatted_gps_geolocation.oui                         = 0xFFFFFFFF;
     c_.formatted_gps_geolocation.integer_second_timestamp    = 0xABABBABA;
     c_.formatted_gps_geolocation.fractional_second_timestamp = 0xBEBEBABACECECBCB;
+    c_.formatted_gps_geolocation.has.latitude                = true;
+    c_.formatted_gps_geolocation.has.longitude               = true;
+    c_.formatted_gps_geolocation.has.altitude                = true;
+    c_.formatted_gps_geolocation.has.speed_over_ground       = true;
+    c_.formatted_gps_geolocation.has.heading_angle           = true;
+    c_.formatted_gps_geolocation.has.track_angle             = true;
+    c_.formatted_gps_geolocation.has.magnetic_variation      = true;
     c_.formatted_gps_geolocation.latitude                    = -1.0;
     c_.formatted_gps_geolocation.longitude                   = -1.0;
     c_.formatted_gps_geolocation.altitude                    = -1.0;
@@ -3281,6 +4002,15 @@ TEST_F(WriteIfContextTest, EveryOther2) {
     c_.ecef_ephemeris.oui                         = 0xFFFFFFFF;
     c_.ecef_ephemeris.integer_second_timestamp    = 0xABABBABA;
     c_.ecef_ephemeris.fractional_second_timestamp = 0xBEBEBABACECECBCB;
+    c_.ecef_ephemeris.has.position_x              = true;
+    c_.ecef_ephemeris.has.position_y              = true;
+    c_.ecef_ephemeris.has.position_z              = true;
+    c_.ecef_ephemeris.has.attitude_alpha          = true;
+    c_.ecef_ephemeris.has.attitude_beta           = true;
+    c_.ecef_ephemeris.has.attitude_phi            = true;
+    c_.ecef_ephemeris.has.velocity_dx             = true;
+    c_.ecef_ephemeris.has.velocity_dy             = true;
+    c_.ecef_ephemeris.has.velocity_dz             = true;
     c_.ecef_ephemeris.position_x                  = -1.0;
     c_.ecef_ephemeris.position_y                  = -1.0;
     c_.ecef_ephemeris.position_z                  = -1.0;
@@ -3446,6 +4176,13 @@ TEST_F(WriteIfContextTest, All) {
     c_.formatted_gps_geolocation.oui                         = 0xFFFFFFFF;
     c_.formatted_gps_geolocation.integer_second_timestamp    = 0xABABBABA;
     c_.formatted_gps_geolocation.fractional_second_timestamp = 0xBEBEBABACECECBCB;
+    c_.formatted_gps_geolocation.has.latitude                = true;
+    c_.formatted_gps_geolocation.has.longitude               = true;
+    c_.formatted_gps_geolocation.has.altitude                = true;
+    c_.formatted_gps_geolocation.has.speed_over_ground       = true;
+    c_.formatted_gps_geolocation.has.heading_angle           = true;
+    c_.formatted_gps_geolocation.has.track_angle             = true;
+    c_.formatted_gps_geolocation.has.magnetic_variation      = true;
     c_.formatted_gps_geolocation.latitude                    = -1.0;
     c_.formatted_gps_geolocation.longitude                   = -1.0;
     c_.formatted_gps_geolocation.altitude                    = -1.0;
@@ -3459,6 +4196,13 @@ TEST_F(WriteIfContextTest, All) {
     c_.formatted_ins_geolocation.oui                         = 0xFFFFFFFF;
     c_.formatted_ins_geolocation.integer_second_timestamp    = 0xABABBABA;
     c_.formatted_ins_geolocation.fractional_second_timestamp = 0xBEBEBABACECECBCB;
+    c_.formatted_ins_geolocation.has.latitude                = true;
+    c_.formatted_ins_geolocation.has.longitude               = true;
+    c_.formatted_ins_geolocation.has.altitude                = true;
+    c_.formatted_ins_geolocation.has.speed_over_ground       = true;
+    c_.formatted_ins_geolocation.has.heading_angle           = true;
+    c_.formatted_ins_geolocation.has.track_angle             = true;
+    c_.formatted_ins_geolocation.has.magnetic_variation      = true;
     c_.formatted_ins_geolocation.latitude                    = -1.0;
     c_.formatted_ins_geolocation.longitude                   = -1.0;
     c_.formatted_ins_geolocation.altitude                    = -1.0;
@@ -3472,6 +4216,15 @@ TEST_F(WriteIfContextTest, All) {
     c_.ecef_ephemeris.oui                         = 0xFFFFFFFF;
     c_.ecef_ephemeris.integer_second_timestamp    = 0xABABBABA;
     c_.ecef_ephemeris.fractional_second_timestamp = 0xBEBEBABACECECBCB;
+    c_.ecef_ephemeris.has.position_x              = true;
+    c_.ecef_ephemeris.has.position_y              = true;
+    c_.ecef_ephemeris.has.position_z              = true;
+    c_.ecef_ephemeris.has.attitude_alpha          = true;
+    c_.ecef_ephemeris.has.attitude_beta           = true;
+    c_.ecef_ephemeris.has.attitude_phi            = true;
+    c_.ecef_ephemeris.has.velocity_dx             = true;
+    c_.ecef_ephemeris.has.velocity_dy             = true;
+    c_.ecef_ephemeris.has.velocity_dz             = true;
     c_.ecef_ephemeris.position_x                  = -1.0;
     c_.ecef_ephemeris.position_y                  = -1.0;
     c_.ecef_ephemeris.position_z                  = -1.0;
@@ -3487,6 +4240,15 @@ TEST_F(WriteIfContextTest, All) {
     c_.relative_ephemeris.oui                         = 0xFFFFFFFF;
     c_.relative_ephemeris.integer_second_timestamp    = 0xABABBABA;
     c_.relative_ephemeris.fractional_second_timestamp = 0xBEBEBABACECECBCB;
+    c_.relative_ephemeris.has.position_x              = true;
+    c_.relative_ephemeris.has.position_y              = true;
+    c_.relative_ephemeris.has.position_z              = true;
+    c_.relative_ephemeris.has.attitude_alpha          = true;
+    c_.relative_ephemeris.has.attitude_beta           = true;
+    c_.relative_ephemeris.has.attitude_phi            = true;
+    c_.relative_ephemeris.has.velocity_dx             = true;
+    c_.relative_ephemeris.has.velocity_dy             = true;
+    c_.relative_ephemeris.has.velocity_dz             = true;
     c_.relative_ephemeris.position_x                  = -1.0;
     c_.relative_ephemeris.position_y                  = -1.0;
     c_.relative_ephemeris.position_z                  = -1.0;

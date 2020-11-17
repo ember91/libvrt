@@ -312,62 +312,42 @@ typedef struct vrt_state_and_event {
     /**
      * True if at least one data sample in the packet exceeds the range of a sample. Activate by setting has.over_range
      * to true. The definition of this fields changes depending on the TSM field.
-     *
-     * \note This field does not have to be persistent between context packets.
      */
     bool over_range;
     /**
      * Contains at least one sample discontinuity. Activate by setting has.sample_loss to true.
-     *
-     * \note This field does not have to be persistent between context packets.
      */
     bool sample_loss;
     /**
      * State and event bit 7. Defined by the user.
-     *
-     * \note This field does not have to be persistent between context packets.
      */
     bool user_defined7;
     /**
      * State and event bit 6. Defined by the user.
-     *
-     * \note This field does not have to be persistent between context packets.
      */
     bool user_defined6;
     /**
      * State and event bit 5. Defined by the user.
-     *
-     * \note This field does not have to be persistent between context packets.
      */
     bool user_defined5;
     /**
      * State and event bit 4. Defined by the user.
-     *
-     * \note This field does not have to be persistent between context packets.
      */
     bool user_defined4;
     /**
      * State and event bit 3. Defined by the user.
-     *
-     * \note This field does not have to be persistent between context packets.
      */
     bool user_defined3;
     /**
      * State and event bit 2. Defined by the user.
-     *
-     * \note This field does not have to be persistent between context packets.
      */
     bool user_defined2;
     /**
      * State and event bit 1. Defined by the user.
-     *
-     * \note This field does not have to be persistent between context packets.
      */
     bool user_defined1;
     /**
      * State and event bit 0. Defined by the user.
-     *
-     * \note This field does not have to be persistent between context packets.
      */
     bool user_defined0;
 } vrt_state_and_event;
@@ -454,7 +434,20 @@ typedef struct vrt_data_packet_payload_format {
 } vrt_data_packet_payload_format;
 
 /**
- * Geolocation data.
+ * Formatted GPS/INS geolocation indicators.
+ */
+typedef struct vrt_formatted_geolocation_indicators {
+    double latitude;           /**< True if it has the Latitude field. */
+    bool   longitude;          /**< True if it has the Longitude field. */
+    bool   altitude;           /**< True if it has the Altitude field */
+    bool   speed_over_ground;  /**< True if it has the Speed over ground field. */
+    bool   heading_angle;      /**< True if it has the heading angle field. */
+    bool   track_angle;        /**< True if it has the Track angle field. */
+    bool   magnetic_variation; /**< True if it has the Magnetic variation field. */
+} vrt_formatted_geolocation_indicators;
+
+/**
+ * Formatted GPS/INS geolocation data.
  */
 typedef struct vrt_formatted_geolocation {
     /** Type of integer second timestamp. */
@@ -471,21 +464,38 @@ typedef struct vrt_formatted_geolocation {
     uint32_t integer_second_timestamp;
     /** Fractional second timestamp of position fix as specified by tsf. */
     uint64_t fractional_second_timestamp;
-    /** Latitude [degrees]. */
+    /** Field presence indicators. */
+    vrt_formatted_geolocation_indicators has;
+    /** Latitude [degrees]. Activate by setting has.latitude to true. */
     double latitude;
-    /** Longitude [degrees]. */
+    /** Longitude [degrees]. Activate by setting has.longitude to true. */
     double longitude;
-    /** Altitude [m]. */
+    /** Altitude [m]. Activate by setting has.altitude to true. */
     double altitude;
-    /** Speed over ground [m/s]. */
+    /** Speed over ground [m/s]. Activate by setting has.speed_over_ground to true. */
     double speed_over_ground;
-    /** Orientation with respect to true north [degrees]. */
+    /** Orientation with respect to true north [degrees]. Activate by setting has.heading_angle to true. */
     double heading_angle;
-    /** Travel direction with respect to true north [degrees]. */
+    /** Travel direction with respect to true north [degrees]. Activate by setting has.track_angle to true. */
     double track_angle;
-    /** Magnetic variation with respect to true north [degrees]. */
+    /** Magnetic variation with respect to true north [degrees]. Activate by setting has.magnetic_variation to true. */
     double magnetic_variation;
 } vrt_formatted_geolocation;
+
+/**
+ * ECEF/Relative ephemeris indicators.
+ */
+typedef struct vrt_ephemeris_indicators {
+    double position_x;     /**< True if it has the Position X field. */
+    double position_y;     /**< True if it has the Position Y field. */
+    double position_z;     /**< True if it has the Position Z field. */
+    double attitude_alpha; /**< True if it has the Attitude alpha field. */
+    double attitude_beta;  /**< True if it has the Attitude beta field. */
+    double attitude_phi;   /**< True if it has the Attitude phi field. */
+    double velocity_dx;    /**< True if it has the Velocity dX field. */
+    double velocity_dy;    /**< True if it has the Velocity dY field. */
+    double velocity_dz;    /**< True if it has the Velocity dZ field. */
+} vrt_ephemeris_indicators;
 
 /**
  * Location in a specific coordinate system.
@@ -505,25 +515,33 @@ typedef struct vrt_ephemeris {
     uint32_t integer_second_timestamp;
     /** Fractional second timestamp of position fix  as specified by tsf. */
     uint64_t fractional_second_timestamp;
+    /** Field presence indicators. */
+    vrt_ephemeris_indicators has;
     /**
      * x-position [m]. Along earth's equator. Positive direction is intersection of equator plane and prime meridian.
+     * Activate by setting has.position_x to true.
      */
     double position_x;
-    /** y-position [m]. Completes a right-handed orthogonal system 90 degrees east of the x-axis. */
+    /** y-position [m]. Completes a right-handed orthogonal system 90 degrees east of the x-axis. Activate by setting
+     * has.position_y to true. */
     double position_y;
-    /** z-position [m]. Directed along earth's rotational axis, where north is positive. */
+    /** z-position [m]. Directed along earth's rotational axis, where north is positive. Activate by setting
+     * has.position_z to true. */
     double position_z;
-    /** Attitude coordinate about z-axis [degrees]. Positive rotation is x to y. */
+    /** Attitude coordinate about z-axis [degrees]. Positive rotation is x to y. Activate by setting has.attitude_alpha
+     * to true. */
     double attitude_alpha;
-    /** Attitude coordinate about y-axis [degrees]. Positive direction is x to z. */
+    /** Attitude coordinate about y-axis [degrees]. Positive direction is x to z. Activate by setting has.attitude_beta
+     * to true. */
     double attitude_beta;
-    /** Attitude coordinate about x-axis [degrees]. Positive direction is y to z. */
+    /** Attitude coordinate about x-axis [degrees]. Positive direction is y to z. Activate by setting has.attitude_phi
+     * to true. */
     double attitude_phi;
-    /** x-velocity [m/s]. Defined similarly to x-position. */
+    /** x-velocity [m/s]. Defined similarly to x-position. Activate by setting has.velocity_dx to true. */
     double velocity_dx;
-    /** y-velocity [m/s]. Defined similarly to y-position. */
+    /** y-velocity [m/s]. Defined similarly to y-position. Activate by setting has.velocity_dy to true. */
     double velocity_dy;
-    /** z-position [m/s]. Defined similarly to z-position. */
+    /** z-position [m/s]. Defined similarly to z-position. Activate by setting has.velocity_dz to true. */
     double velocity_dz;
 } vrt_ephemeris;
 
@@ -679,8 +697,6 @@ typedef struct vrt_if_context {
     vrt_gain gain;
     /**
      * Number of over-range samples, i.e. samples with too high amplitude.
-     *
-     * \note This field does not have to be persistent between context packets.
      */
     uint32_t over_range_count;
     /**

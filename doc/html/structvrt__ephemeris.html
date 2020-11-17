@@ -82,6 +82,8 @@ Data Fields</h2></td></tr>
 <tr class="separator:a432ef104a882335c4fe69424cf9fef14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af979cde1cec9cccf1aee71b90b128de3"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvrt__ephemeris.html#af979cde1cec9cccf1aee71b90b128de3">fractional_second_timestamp</a></td></tr>
 <tr class="separator:af979cde1cec9cccf1aee71b90b128de3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06e6cfa2d2b1c0f8173664d911e313c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structvrt__ephemeris__indicators.html">vrt_ephemeris_indicators</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvrt__ephemeris.html#a06e6cfa2d2b1c0f8173664d911e313c8">has</a></td></tr>
+<tr class="separator:a06e6cfa2d2b1c0f8173664d911e313c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0402ecf65a801fb337ac84cc24ba0123"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvrt__ephemeris.html#a0402ecf65a801fb337ac84cc24ba0123">position_x</a></td></tr>
 <tr class="separator:a0402ecf65a801fb337ac84cc24ba0123"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3fca1c8156a6181f456b53eba3fa616"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvrt__ephemeris.html#ad3fca1c8156a6181f456b53eba3fa616">position_y</a></td></tr>
@@ -115,7 +117,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Attitude coordinate about z-axis [degrees]. Positive rotation is x to y. </p>
+<p>Attitude coordinate about z-axis [degrees]. Positive rotation is x to y. Activate by setting has.attitude_alpha to true. </p>
 
 </div>
 </div>
@@ -130,7 +132,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Attitude coordinate about y-axis [degrees]. Positive direction is x to z. </p>
+<p>Attitude coordinate about y-axis [degrees]. Positive direction is x to z. Activate by setting has.attitude_beta to true. </p>
 
 </div>
 </div>
@@ -145,7 +147,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Attitude coordinate about x-axis [degrees]. Positive direction is y to z. </p>
+<p>Attitude coordinate about x-axis [degrees]. Positive direction is y to z. Activate by setting has.attitude_phi to true. </p>
 
 </div>
 </div>
@@ -161,6 +163,21 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Fractional second timestamp of position fix as specified by tsf. </p>
+
+</div>
+</div>
+<a id="a06e6cfa2d2b1c0f8173664d911e313c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06e6cfa2d2b1c0f8173664d911e313c8">&#9670;&nbsp;</a></span>has</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structvrt__ephemeris__indicators.html">vrt_ephemeris_indicators</a> vrt_ephemeris::has</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Field presence indicators. </p>
 
 </div>
 </div>
@@ -206,7 +223,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>x-position [m]. Along earth's equator. Positive direction is intersection of equator plane and prime meridian. </p>
+<p>x-position [m]. Along earth's equator. Positive direction is intersection of equator plane and prime meridian. Activate by setting has.position_x to true. </p>
 
 </div>
 </div>
@@ -221,7 +238,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>y-position [m]. Completes a right-handed orthogonal system 90 degrees east of the x-axis. </p>
+<p>y-position [m]. Completes a right-handed orthogonal system 90 degrees east of the x-axis. Activate by setting has.position_y to true. </p>
 
 </div>
 </div>
@@ -236,7 +253,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>z-position [m]. Directed along earth's rotational axis, where north is positive. </p>
+<p>z-position [m]. Directed along earth's rotational axis, where north is positive. Activate by setting has.position_z to true. </p>
 
 </div>
 </div>
@@ -281,7 +298,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>x-velocity [m/s]. Defined similarly to x-position. </p>
+<p>x-velocity [m/s]. Defined similarly to x-position. Activate by setting has.velocity_dx to true. </p>
 
 </div>
 </div>
@@ -296,7 +313,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>y-velocity [m/s]. Defined similarly to y-position. </p>
+<p>y-velocity [m/s]. Defined similarly to y-position. Activate by setting has.velocity_dy to true. </p>
 
 </div>
 </div>
@@ -311,7 +328,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>z-position [m/s]. Defined similarly to z-position. </p>
+<p>z-position [m/s]. Defined similarly to z-position. Activate by setting has.velocity_dz to true. </p>
 
 </div>
 </div>

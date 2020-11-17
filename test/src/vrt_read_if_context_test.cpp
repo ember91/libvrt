@@ -166,6 +166,20 @@ static void assert_if_context(const vrt_if_context& c, const std::map<std::strin
     ASSERT_EQ(
         Hex(c.formatted_gps_geolocation.fractional_second_timestamp),
         Hex(get_val<uint64_t>(&val_cp, "formatted_gps_geolocation.fractional_second_timestamp", 0xFFFFFFFFFFFFFFFF)));
+    ASSERT_EQ(c.formatted_gps_geolocation.has.latitude,
+              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.latitude", false));
+    ASSERT_EQ(c.formatted_gps_geolocation.has.longitude,
+              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.longitude", false));
+    ASSERT_EQ(c.formatted_gps_geolocation.has.altitude,
+              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.altitude", false));
+    ASSERT_EQ(c.formatted_gps_geolocation.has.speed_over_ground,
+              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.speed_over_ground", false));
+    ASSERT_EQ(c.formatted_gps_geolocation.has.heading_angle,
+              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.heading_angle", false));
+    ASSERT_EQ(c.formatted_gps_geolocation.has.track_angle,
+              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.track_angle", false));
+    ASSERT_EQ(c.formatted_gps_geolocation.has.magnetic_variation,
+              get_val<bool>(&val_cp, "formatted_gps_geolocation.has.magnetic_variation", false));
     ASSERT_DOUBLE_EQ(
         c.formatted_gps_geolocation.latitude,
         get_val<double>(&val_cp, "formatted_gps_geolocation.latitude", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
@@ -198,6 +212,20 @@ static void assert_if_context(const vrt_if_context& c, const std::map<std::strin
     ASSERT_EQ(
         Hex(c.formatted_ins_geolocation.fractional_second_timestamp),
         Hex(get_val<uint64_t>(&val_cp, "formatted_ins_geolocation.fractional_second_timestamp", 0xFFFFFFFFFFFFFFFF)));
+    ASSERT_EQ(c.formatted_ins_geolocation.has.latitude,
+              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.latitude", false));
+    ASSERT_EQ(c.formatted_ins_geolocation.has.longitude,
+              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.longitude", false));
+    ASSERT_EQ(c.formatted_ins_geolocation.has.altitude,
+              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.altitude", false));
+    ASSERT_EQ(c.formatted_ins_geolocation.has.speed_over_ground,
+              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.speed_over_ground", false));
+    ASSERT_EQ(c.formatted_ins_geolocation.has.heading_angle,
+              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.heading_angle", false));
+    ASSERT_EQ(c.formatted_ins_geolocation.has.track_angle,
+              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.track_angle", false));
+    ASSERT_EQ(c.formatted_ins_geolocation.has.magnetic_variation,
+              get_val<bool>(&val_cp, "formatted_ins_geolocation.has.magnetic_variation", false));
     ASSERT_DOUBLE_EQ(
         c.formatted_ins_geolocation.latitude,
         get_val<double>(&val_cp, "formatted_ins_geolocation.latitude", vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22)));
@@ -227,6 +255,15 @@ static void assert_if_context(const vrt_if_context& c, const std::map<std::strin
               Hex(get_val<uint32_t>(&val_cp, "ecef_ephemeris.integer_second_timestamp", 0xFFFFFFFF)));
     ASSERT_EQ(Hex(c.ecef_ephemeris.fractional_second_timestamp),
               Hex(get_val<uint64_t>(&val_cp, "ecef_ephemeris.fractional_second_timestamp", 0xFFFFFFFFFFFFFFFF)));
+    ASSERT_EQ(c.ecef_ephemeris.has.position_x, get_val<bool>(&val_cp, "ecef_ephemeris.has.position_x", false));
+    ASSERT_EQ(c.ecef_ephemeris.has.position_y, get_val<bool>(&val_cp, "ecef_ephemeris.has.position_y", false));
+    ASSERT_EQ(c.ecef_ephemeris.has.position_z, get_val<bool>(&val_cp, "ecef_ephemeris.has.position_z", false));
+    ASSERT_EQ(c.ecef_ephemeris.has.attitude_alpha, get_val<bool>(&val_cp, "ecef_ephemeris.has.attitude_alpha", false));
+    ASSERT_EQ(c.ecef_ephemeris.has.attitude_beta, get_val<bool>(&val_cp, "ecef_ephemeris.has.attitude_beta", false));
+    ASSERT_EQ(c.ecef_ephemeris.has.attitude_phi, get_val<bool>(&val_cp, "ecef_ephemeris.has.attitude_phi", false));
+    ASSERT_EQ(c.ecef_ephemeris.has.velocity_dx, get_val<bool>(&val_cp, "ecef_ephemeris.has.velocity_dx", false));
+    ASSERT_EQ(c.ecef_ephemeris.has.velocity_dy, get_val<bool>(&val_cp, "ecef_ephemeris.has.velocity_dy", false));
+    ASSERT_EQ(c.ecef_ephemeris.has.velocity_dz, get_val<bool>(&val_cp, "ecef_ephemeris.has.velocity_dz", false));
     ASSERT_DOUBLE_EQ(c.ecef_ephemeris.position_x, get_val<double>(&val_cp, "ecef_ephemeris.position_x",
                                                                   vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
     ASSERT_DOUBLE_EQ(c.ecef_ephemeris.position_y, get_val<double>(&val_cp, "ecef_ephemeris.position_y",
@@ -255,6 +292,21 @@ static void assert_if_context(const vrt_if_context& c, const std::map<std::strin
               Hex(get_val<uint32_t>(&val_cp, "relative_ephemeris.integer_second_timestamp", 0xFFFFFFFF)));
     ASSERT_EQ(Hex(c.relative_ephemeris.fractional_second_timestamp),
               Hex(get_val<uint64_t>(&val_cp, "relative_ephemeris.fractional_second_timestamp", 0xFFFFFFFFFFFFFFFF)));
+    ASSERT_EQ(c.relative_ephemeris.has.position_x, get_val<bool>(&val_cp, "relative_ephemeris.has.position_x", false));
+    ASSERT_EQ(c.relative_ephemeris.has.position_y, get_val<bool>(&val_cp, "relative_ephemeris.has.position_y", false));
+    ASSERT_EQ(c.relative_ephemeris.has.position_z, get_val<bool>(&val_cp, "relative_ephemeris.has.position_z", false));
+    ASSERT_EQ(c.relative_ephemeris.has.attitude_alpha,
+              get_val<bool>(&val_cp, "relative_ephemeris.has.attitude_alpha", false));
+    ASSERT_EQ(c.relative_ephemeris.has.attitude_beta,
+              get_val<bool>(&val_cp, "relative_ephemeris.has.attitude_beta", false));
+    ASSERT_EQ(c.relative_ephemeris.has.attitude_phi,
+              get_val<bool>(&val_cp, "relative_ephemeris.has.attitude_phi", false));
+    ASSERT_EQ(c.relative_ephemeris.has.velocity_dx,
+              get_val<bool>(&val_cp, "relative_ephemeris.has.velocity_dx", false));
+    ASSERT_EQ(c.relative_ephemeris.has.velocity_dy,
+              get_val<bool>(&val_cp, "relative_ephemeris.has.velocity_dy", false));
+    ASSERT_EQ(c.relative_ephemeris.has.velocity_dz,
+              get_val<bool>(&val_cp, "relative_ephemeris.has.velocity_dz", false));
     ASSERT_DOUBLE_EQ(c.relative_ephemeris.position_x, get_val<double>(&val_cp, "relative_ephemeris.position_x",
                                                                       vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5)));
     ASSERT_DOUBLE_EQ(c.relative_ephemeris.position_y, get_val<double>(&val_cp, "relative_ephemeris.position_y",
@@ -1163,7 +1215,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLatitude) {
     buf_[11] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.latitude", 1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.latitude", true},
+                           {"formatted_gps_geolocation.latitude", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationLatitudeInvalid1) {
@@ -1182,7 +1236,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLatitudeInvalid1) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LATITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.latitude", -91.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.latitude", true},
+                           {"formatted_gps_geolocation.latitude", -91.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationLatitudeInvalid2) {
@@ -1201,7 +1257,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLatitudeInvalid2) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LATITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.latitude", 91.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.latitude", true},
+                           {"formatted_gps_geolocation.latitude", 91.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitude) {
@@ -1219,7 +1277,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitude) {
     buf_[11] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.longitude", 1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.longitude", true},
+                           {"formatted_gps_geolocation.longitude", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitudeInvalid1) {
@@ -1238,7 +1298,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitudeInvalid1) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LONGITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.longitude", -181.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.longitude", true},
+                           {"formatted_gps_geolocation.longitude", -181.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitudeInvalid2) {
@@ -1257,7 +1319,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitudeInvalid2) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LONGITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.longitude", 181.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.longitude", true},
+                           {"formatted_gps_geolocation.longitude", 181.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationAltitude) {
@@ -1275,7 +1339,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationAltitude) {
     buf_[11] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.altitude", 1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.altitude", true},
+                           {"formatted_gps_geolocation.altitude", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationSpeedOverGround) {
@@ -1293,8 +1359,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationSpeedOverGround) {
     buf_[11] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.speed_over_ground", 1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.speed_over_ground", true},
+                           {"formatted_gps_geolocation.speed_over_ground", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngle) {
@@ -1312,7 +1379,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngle) {
     buf_[11] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.heading_angle", 1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.heading_angle", true},
+                           {"formatted_gps_geolocation.heading_angle", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngleInvalid1) {
@@ -1331,7 +1400,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngleInvalid1) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_HEADING_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.heading_angle", -1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.heading_angle", true},
+                           {"formatted_gps_geolocation.heading_angle", -1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngleInvalid2) {
@@ -1350,8 +1421,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngleInvalid2) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_HEADING_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.heading_angle", 360.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.heading_angle", true},
+                           {"formatted_gps_geolocation.heading_angle", 360.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngle) {
@@ -1369,7 +1441,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngle) {
     buf_[11] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.track_angle", 1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.track_angle", true},
+                           {"formatted_gps_geolocation.track_angle", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngleInvalid1) {
@@ -1388,7 +1462,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngleInvalid1) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_TRACK_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.track_angle", -1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.track_angle", true},
+                           {"formatted_gps_geolocation.track_angle", -1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngleInvalid2) {
@@ -1407,7 +1483,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngleInvalid2) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_TRACK_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.track_angle", 360.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.track_angle", true},
+                           {"formatted_gps_geolocation.track_angle", 360.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariation) {
@@ -1425,8 +1503,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariation) {
     buf_[11] = 0x00400000;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.magnetic_variation", 1.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.magnetic_variation", true},
+                           {"formatted_gps_geolocation.magnetic_variation", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariationInvalid1) {
@@ -1445,8 +1524,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariationInvalid1) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(
-        c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.magnetic_variation", -181.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.magnetic_variation", true},
+                           {"formatted_gps_geolocation.magnetic_variation", -181.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariationInvalid2) {
@@ -1465,8 +1545,9 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariationInvalid2) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(
-        c_, {{"has.formatted_gps_geolocation", true}, {"formatted_gps_geolocation.magnetic_variation", 181.0}});
+    assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
+                           {"formatted_gps_geolocation.has.magnetic_variation", true},
+                           {"formatted_gps_geolocation.magnetic_variation", 181.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedGpsGeolocationReserved) {
@@ -1663,7 +1744,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLatitude) {
     buf_[11] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.latitude", 1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.latitude", true},
+                           {"formatted_ins_geolocation.latitude", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationLatitudeInvalid1) {
@@ -1682,7 +1765,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLatitudeInvalid1) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LATITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.latitude", -91.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.latitude", true},
+                           {"formatted_ins_geolocation.latitude", -91.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationLatitudeInvalid2) {
@@ -1701,7 +1786,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLatitudeInvalid2) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LATITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.latitude", 91.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.latitude", true},
+                           {"formatted_ins_geolocation.latitude", 91.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitude) {
@@ -1719,7 +1806,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitude) {
     buf_[11] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.longitude", 1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.longitude", true},
+                           {"formatted_ins_geolocation.longitude", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitudeInvalid1) {
@@ -1738,7 +1827,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitudeInvalid1) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LONGITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.longitude", -181.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.longitude", true},
+                           {"formatted_ins_geolocation.longitude", -181.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitudeInvalid2) {
@@ -1757,7 +1848,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitudeInvalid2) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LONGITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.longitude", 181.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.longitude", true},
+                           {"formatted_ins_geolocation.longitude", 181.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationAltitude) {
@@ -1775,7 +1868,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationAltitude) {
     buf_[11] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.altitude", 1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.altitude", true},
+                           {"formatted_ins_geolocation.altitude", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationSpeedOverGround) {
@@ -1793,8 +1888,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationSpeedOverGround) {
     buf_[11] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.speed_over_ground", 1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.speed_over_ground", true},
+                           {"formatted_ins_geolocation.speed_over_ground", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngle) {
@@ -1812,7 +1908,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngle) {
     buf_[11] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.heading_angle", 1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.heading_angle", true},
+                           {"formatted_ins_geolocation.heading_angle", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngleInvalid1) {
@@ -1831,7 +1929,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngleInvalid1) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_HEADING_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.heading_angle", -1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.heading_angle", true},
+                           {"formatted_ins_geolocation.heading_angle", -1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngleInvalid2) {
@@ -1850,8 +1950,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngleInvalid2) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_HEADING_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.heading_angle", 360.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.heading_angle", true},
+                           {"formatted_ins_geolocation.heading_angle", 360.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngle) {
@@ -1869,7 +1970,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngle) {
     buf_[11] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.track_angle", 1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.track_angle", true},
+                           {"formatted_ins_geolocation.track_angle", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngleInvalid1) {
@@ -1888,7 +1991,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngleInvalid1) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_TRACK_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.track_angle", -1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.track_angle", true},
+                           {"formatted_ins_geolocation.track_angle", -1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngleInvalid2) {
@@ -1907,7 +2012,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngleInvalid2) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_TRACK_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.track_angle", 360.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.track_angle", true},
+                           {"formatted_ins_geolocation.track_angle", 360.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariation) {
@@ -1925,8 +2032,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariation) {
     buf_[11] = 0x00400000;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.magnetic_variation", 1.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.magnetic_variation", true},
+                           {"formatted_ins_geolocation.magnetic_variation", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariationInvalid1) {
@@ -1945,8 +2053,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariationInvalid1) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(
-        c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.magnetic_variation", -181.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.magnetic_variation", true},
+                           {"formatted_ins_geolocation.magnetic_variation", -181.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariationInvalid2) {
@@ -1965,8 +2074,9 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariationInvalid2) {
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(
-        c_, {{"has.formatted_ins_geolocation", true}, {"formatted_ins_geolocation.magnetic_variation", 181.0}});
+    assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
+                           {"formatted_ins_geolocation.has.magnetic_variation", true},
+                           {"formatted_ins_geolocation.magnetic_variation", 181.0}});
 }
 
 TEST_F(ReadIfContextTest, FormattedInsGeolocationReserved) {
@@ -2176,7 +2286,9 @@ TEST_F(ReadIfContextTest, EcefEphemerisPositionX) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.position_x", 1.0}});
+    assert_if_context(
+        c_,
+        {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.has.position_x", true}, {"ecef_ephemeris.position_x", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, EcefEphemerisPositionY) {
@@ -2196,7 +2308,9 @@ TEST_F(ReadIfContextTest, EcefEphemerisPositionY) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.position_y", 1.0}});
+    assert_if_context(
+        c_,
+        {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.has.position_y", true}, {"ecef_ephemeris.position_y", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, EcefEphemerisPositionZ) {
@@ -2216,7 +2330,9 @@ TEST_F(ReadIfContextTest, EcefEphemerisPositionZ) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.position_z", 1.0}});
+    assert_if_context(
+        c_,
+        {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.has.position_z", true}, {"ecef_ephemeris.position_z", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, EcefEphemerisAttitudeAlpha) {
@@ -2236,7 +2352,9 @@ TEST_F(ReadIfContextTest, EcefEphemerisAttitudeAlpha) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.attitude_alpha", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true},
+                           {"ecef_ephemeris.has.attitude_alpha", true},
+                           {"ecef_ephemeris.attitude_alpha", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, EcefEphemerisAttitudeBeta) {
@@ -2256,7 +2374,9 @@ TEST_F(ReadIfContextTest, EcefEphemerisAttitudeBeta) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.attitude_beta", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true},
+                           {"ecef_ephemeris.has.attitude_beta", true},
+                           {"ecef_ephemeris.attitude_beta", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, EcefEphemerisAttitudePhi) {
@@ -2276,7 +2396,9 @@ TEST_F(ReadIfContextTest, EcefEphemerisAttitudePhi) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.attitude_phi", 1.0}});
+    assert_if_context(c_, {{"has.ecef_ephemeris", true},
+                           {"ecef_ephemeris.has.attitude_phi", true},
+                           {"ecef_ephemeris.attitude_phi", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, EcefEphemerisVelocityDx) {
@@ -2296,7 +2418,9 @@ TEST_F(ReadIfContextTest, EcefEphemerisVelocityDx) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.velocity_dx", 1.0}});
+    assert_if_context(
+        c_,
+        {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.has.velocity_dx", true}, {"ecef_ephemeris.velocity_dx", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, EcefEphemerisVelocityDy) {
@@ -2316,7 +2440,9 @@ TEST_F(ReadIfContextTest, EcefEphemerisVelocityDy) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.velocity_dy", 1.0}});
+    assert_if_context(
+        c_,
+        {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.has.velocity_dy", true}, {"ecef_ephemeris.velocity_dy", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, EcefEphemerisVelocityDz) {
@@ -2336,7 +2462,9 @@ TEST_F(ReadIfContextTest, EcefEphemerisVelocityDz) {
     buf_[13] = 0x00010000;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.velocity_dz", 1.0}});
+    assert_if_context(
+        c_,
+        {{"has.ecef_ephemeris", true}, {"ecef_ephemeris.has.velocity_dz", true}, {"ecef_ephemeris.velocity_dz", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, EcefEphemerisReserved) {
@@ -2552,7 +2680,9 @@ TEST_F(ReadIfContextTest, RelativeEphemerisPositionX) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.position_x", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true},
+                           {"relative_ephemeris.has.position_x", true},
+                           {"relative_ephemeris.position_x", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, RelativeEphemerisPositionY) {
@@ -2572,7 +2702,9 @@ TEST_F(ReadIfContextTest, RelativeEphemerisPositionY) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.position_y", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true},
+                           {"relative_ephemeris.has.position_y", true},
+                           {"relative_ephemeris.position_y", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, RelativeEphemerisPositionZ) {
@@ -2592,7 +2724,9 @@ TEST_F(ReadIfContextTest, RelativeEphemerisPositionZ) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.position_z", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true},
+                           {"relative_ephemeris.has.position_z", true},
+                           {"relative_ephemeris.position_z", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, RelativeEphemerisAttitudeAlpha) {
@@ -2612,7 +2746,9 @@ TEST_F(ReadIfContextTest, RelativeEphemerisAttitudeAlpha) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.attitude_alpha", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true},
+                           {"relative_ephemeris.has.attitude_alpha", true},
+                           {"relative_ephemeris.attitude_alpha", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, RelativeEphemerisAttitudeBeta) {
@@ -2632,7 +2768,9 @@ TEST_F(ReadIfContextTest, RelativeEphemerisAttitudeBeta) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.attitude_beta", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true},
+                           {"relative_ephemeris.has.attitude_beta", true},
+                           {"relative_ephemeris.attitude_beta", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, RelativeEphemerisAttitudePhi) {
@@ -2652,7 +2790,9 @@ TEST_F(ReadIfContextTest, RelativeEphemerisAttitudePhi) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.attitude_phi", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true},
+                           {"relative_ephemeris.has.attitude_phi", true},
+                           {"relative_ephemeris.attitude_phi", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, RelativeEphemerisVelocityDx) {
@@ -2672,7 +2812,9 @@ TEST_F(ReadIfContextTest, RelativeEphemerisVelocityDx) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.velocity_dx", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true},
+                           {"relative_ephemeris.has.velocity_dx", true},
+                           {"relative_ephemeris.velocity_dx", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, RelativeEphemerisVelocityDy) {
@@ -2692,7 +2834,9 @@ TEST_F(ReadIfContextTest, RelativeEphemerisVelocityDy) {
     buf_[13] = 0x7FFFFFFF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.velocity_dy", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true},
+                           {"relative_ephemeris.has.velocity_dy", true},
+                           {"relative_ephemeris.velocity_dy", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, RelativeEphemerisVelocityDz) {
@@ -2712,7 +2856,9 @@ TEST_F(ReadIfContextTest, RelativeEphemerisVelocityDz) {
     buf_[13] = 0x00010000;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_, {{"has.relative_ephemeris", true}, {"relative_ephemeris.velocity_dz", 1.0}});
+    assert_if_context(c_, {{"has.relative_ephemeris", true},
+                           {"relative_ephemeris.has.velocity_dz", true},
+                           {"relative_ephemeris.velocity_dz", 1.0}});
 }
 
 TEST_F(ReadIfContextTest, RelativeEphemerisReserved) {
@@ -2948,6 +3094,13 @@ TEST_F(ReadIfContextTest, EveryOther1) {
                            {"formatted_ins_geolocation.oui", static_cast<uint32_t>(0x00FFFFFF)},
                            {"formatted_ins_geolocation.integer_second_timestamp", 0xABABABAB},
                            {"formatted_ins_geolocation.fractional_second_timestamp", 0xABABABABABABABAB},
+                           {"formatted_ins_geolocation.has.latitude", true},
+                           {"formatted_ins_geolocation.has.longitude", true},
+                           {"formatted_ins_geolocation.has.altitude", true},
+                           {"formatted_ins_geolocation.has.speed_over_ground", true},
+                           {"formatted_ins_geolocation.has.heading_angle", true},
+                           {"formatted_ins_geolocation.has.track_angle", true},
+                           {"formatted_ins_geolocation.has.magnetic_variation", true},
                            {"formatted_ins_geolocation.latitude", 1.0},
                            {"formatted_ins_geolocation.longitude", 1.0},
                            {"formatted_ins_geolocation.altitude", 1.0},
@@ -2961,6 +3114,15 @@ TEST_F(ReadIfContextTest, EveryOther1) {
                            {"relative_ephemeris.oui", static_cast<uint32_t>(0x00FFFFFF)},
                            {"relative_ephemeris.integer_second_timestamp", 0xABABABAB},
                            {"relative_ephemeris.fractional_second_timestamp", 0xABABABABABABABAB},
+                           {"relative_ephemeris.has.position_x", true},
+                           {"relative_ephemeris.has.position_y", true},
+                           {"relative_ephemeris.has.position_z", true},
+                           {"relative_ephemeris.has.attitude_alpha", true},
+                           {"relative_ephemeris.has.attitude_beta", true},
+                           {"relative_ephemeris.has.attitude_phi", true},
+                           {"relative_ephemeris.has.velocity_dx", true},
+                           {"relative_ephemeris.has.velocity_dy", true},
+                           {"relative_ephemeris.has.velocity_dz", true},
                            {"relative_ephemeris.position_x", 1.0},
                            {"relative_ephemeris.position_y", 1.0},
                            {"relative_ephemeris.position_z", 1.0},
@@ -3077,6 +3239,13 @@ TEST_F(ReadIfContextTest, EveryOther2) {
          {"formatted_gps_geolocation.oui", static_cast<uint32_t>(0x00FFFFFF)},
          {"formatted_gps_geolocation.integer_second_timestamp", 0xABABABAB},
          {"formatted_gps_geolocation.fractional_second_timestamp", 0xABABABABABABABAB},
+         {"formatted_gps_geolocation.has.latitude", true},
+         {"formatted_gps_geolocation.has.longitude", true},
+         {"formatted_gps_geolocation.has.altitude", true},
+         {"formatted_gps_geolocation.has.speed_over_ground", true},
+         {"formatted_gps_geolocation.has.heading_angle", true},
+         {"formatted_gps_geolocation.has.track_angle", true},
+         {"formatted_gps_geolocation.has.magnetic_variation", true},
          {"formatted_gps_geolocation.latitude", 1.0},
          {"formatted_gps_geolocation.longitude", 1.0},
          {"formatted_gps_geolocation.altitude", 1.0},
@@ -3090,6 +3259,15 @@ TEST_F(ReadIfContextTest, EveryOther2) {
          {"ecef_ephemeris.oui", static_cast<uint32_t>(0x00FFFFFF)},
          {"ecef_ephemeris.integer_second_timestamp", 0xABABABAB},
          {"ecef_ephemeris.fractional_second_timestamp", 0xABABABABABABABAB},
+         {"ecef_ephemeris.has.position_x", true},
+         {"ecef_ephemeris.has.position_y", true},
+         {"ecef_ephemeris.has.position_z", true},
+         {"ecef_ephemeris.has.attitude_alpha", true},
+         {"ecef_ephemeris.has.attitude_beta", true},
+         {"ecef_ephemeris.has.attitude_phi", true},
+         {"ecef_ephemeris.has.velocity_dx", true},
+         {"ecef_ephemeris.has.velocity_dy", true},
+         {"ecef_ephemeris.has.velocity_dz", true},
          {"ecef_ephemeris.position_x", 1.0},
          {"ecef_ephemeris.position_y", 1.0},
          {"ecef_ephemeris.position_z", 1.0},
@@ -3293,6 +3471,13 @@ TEST_F(ReadIfContextTest, All) {
          {"formatted_gps_geolocation.oui", static_cast<uint32_t>(0x00FFFFFF)},
          {"formatted_gps_geolocation.integer_second_timestamp", 0xABABABAB},
          {"formatted_gps_geolocation.fractional_second_timestamp", 0xABABABABABABABAB},
+         {"formatted_gps_geolocation.has.latitude", true},
+         {"formatted_gps_geolocation.has.longitude", true},
+         {"formatted_gps_geolocation.has.altitude", true},
+         {"formatted_gps_geolocation.has.speed_over_ground", true},
+         {"formatted_gps_geolocation.has.heading_angle", true},
+         {"formatted_gps_geolocation.has.track_angle", true},
+         {"formatted_gps_geolocation.has.magnetic_variation", true},
          {"formatted_gps_geolocation.latitude", 1.0},
          {"formatted_gps_geolocation.longitude", 1.0},
          {"formatted_gps_geolocation.altitude", 1.0},
@@ -3306,6 +3491,13 @@ TEST_F(ReadIfContextTest, All) {
          {"formatted_ins_geolocation.oui", static_cast<uint32_t>(0x00FFFFFF)},
          {"formatted_ins_geolocation.integer_second_timestamp", 0xABABABAB},
          {"formatted_ins_geolocation.fractional_second_timestamp", 0xABABABABABABABAB},
+         {"formatted_ins_geolocation.has.latitude", true},
+         {"formatted_ins_geolocation.has.longitude", true},
+         {"formatted_ins_geolocation.has.altitude", true},
+         {"formatted_ins_geolocation.has.speed_over_ground", true},
+         {"formatted_ins_geolocation.has.heading_angle", true},
+         {"formatted_ins_geolocation.has.track_angle", true},
+         {"formatted_ins_geolocation.has.magnetic_variation", true},
          {"formatted_ins_geolocation.latitude", 1.0},
          {"formatted_ins_geolocation.longitude", 1.0},
          {"formatted_ins_geolocation.altitude", 1.0},
@@ -3319,6 +3511,15 @@ TEST_F(ReadIfContextTest, All) {
          {"ecef_ephemeris.oui", static_cast<uint32_t>(0x00FFFFFF)},
          {"ecef_ephemeris.integer_second_timestamp", 0xABABABAB},
          {"ecef_ephemeris.fractional_second_timestamp", 0xABABABABABABABAB},
+         {"ecef_ephemeris.has.position_x", true},
+         {"ecef_ephemeris.has.position_y", true},
+         {"ecef_ephemeris.has.position_z", true},
+         {"ecef_ephemeris.has.attitude_alpha", true},
+         {"ecef_ephemeris.has.attitude_beta", true},
+         {"ecef_ephemeris.has.attitude_phi", true},
+         {"ecef_ephemeris.has.velocity_dx", true},
+         {"ecef_ephemeris.has.velocity_dy", true},
+         {"ecef_ephemeris.has.velocity_dz", true},
          {"ecef_ephemeris.position_x", 1.0},
          {"ecef_ephemeris.position_y", 1.0},
          {"ecef_ephemeris.position_z", 1.0},
@@ -3334,6 +3535,15 @@ TEST_F(ReadIfContextTest, All) {
          {"relative_ephemeris.oui", static_cast<uint32_t>(0x00FFFFFF)},
          {"relative_ephemeris.integer_second_timestamp", 0xABABABAB},
          {"relative_ephemeris.fractional_second_timestamp", 0xABABABABABABABAB},
+         {"relative_ephemeris.has.position_x", true},
+         {"relative_ephemeris.has.position_y", true},
+         {"relative_ephemeris.has.position_z", true},
+         {"relative_ephemeris.has.attitude_alpha", true},
+         {"relative_ephemeris.has.attitude_beta", true},
+         {"relative_ephemeris.has.attitude_phi", true},
+         {"relative_ephemeris.has.velocity_dx", true},
+         {"relative_ephemeris.has.velocity_dy", true},
+         {"relative_ephemeris.has.velocity_dz", true},
          {"relative_ephemeris.position_x", 1.0},
          {"relative_ephemeris.position_y", 1.0},
          {"relative_ephemeris.position_z", 1.0},

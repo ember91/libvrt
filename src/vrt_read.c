@@ -476,16 +476,26 @@ static uint32_t if_context_read_formatted_geolocation(bool                      
         g->oui                         = msk(b[0], 0, 24);
         g->integer_second_timestamp    = b[1];
         g->fractional_second_timestamp = read_uint64(b + 2);
+        g->has.latitude                = (b[4] != 0x7FFFFFFFU);
         g->latitude                    = vrt_fixed_point_i32_to_double((int32_t)b[4], VRT_RADIX_ANGLE);
+        g->has.longitude               = (b[5] != 0x7FFFFFFFU);
         g->longitude                   = vrt_fixed_point_i32_to_double((int32_t)b[5], VRT_RADIX_ANGLE);
+        g->has.altitude                = (b[6] != 0x7FFFFFFFU);
         g->altitude                    = vrt_fixed_point_i32_to_double((int32_t)b[6], VRT_RADIX_ALTITUDE);
+        g->has.speed_over_ground       = (b[7] != 0x7FFFFFFFU);
         g->speed_over_ground           = vrt_fixed_point_u32_to_double(b[7], VRT_RADIX_SPEED_VELOCITY);
+        g->has.heading_angle           = (b[8] != 0x7FFFFFFFU);
         g->heading_angle               = vrt_fixed_point_i32_to_double((int32_t)b[8], VRT_RADIX_ANGLE);
+        g->has.track_angle             = (b[9] != 0x7FFFFFFFU);
         g->track_angle                 = vrt_fixed_point_i32_to_double((int32_t)b[9], VRT_RADIX_ANGLE);
+        g->has.magnetic_variation      = (b[10] != 0x7FFFFFFFU);
         /* There seems to be an error in Rule 7.1.5.19-13. A correction seems to be 6.2.5.15-2 -> 7.1.5.19-2.*/
         g->magnetic_variation = vrt_fixed_point_i32_to_double((int32_t)b[10], VRT_RADIX_ANGLE);
 
         if (validate) {
+            if ((b[0] & 0xF0000000U) != 0) {
+                return VRT_ERR_RESERVED;
+            }
             if (g->tsi == VRT_TSI_UNDEFINED && g->integer_second_timestamp != 0xFFFFFFFFU) {
                 return VRT_ERR_INTEGER_SECOND_TIMESTAMP;
             }
@@ -495,23 +505,20 @@ static uint32_t if_context_read_formatted_geolocation(bool                      
             if (g->tsf == VRT_TSF_REAL_TIME && g->fractional_second_timestamp >= (uint64_t)1000000000000) {
                 return VRT_ERR_REAL_TIME;
             }
-            if (b[4] != 0x7FFFFFFFU && (g->latitude < -90.0 || g->latitude > 90.0)) {
+            if (g->has.latitude && (g->latitude < -90.0 || g->latitude > 90.0)) {
                 return VRT_ERR_LATITUDE;
             }
-            if (b[5] != 0x7FFFFFFFU && (g->longitude < -180.0 || g->longitude > 180.0)) {
+            if (g->has.longitude && (g->longitude < -180.0 || g->longitude > 180.0)) {
                 return VRT_ERR_LONGITUDE;
             }
-            if (b[8] != 0x7FFFFFFFU && (g->heading_angle < 0.0 || g->heading_angle > 359.999999761582)) {
+            if (g->has.heading_angle && (g->heading_angle < 0.0 || g->heading_angle > 359.999999761582)) {
                 return VRT_ERR_HEADING_ANGLE;
             }
-            if (b[9] != 0x7FFFFFFFU && (g->track_angle < 0.0 || g->track_angle > 359.999999761582)) {
+            if (g->has.track_angle && (g->track_angle < 0.0 || g->track_angle > 359.999999761582)) {
                 return VRT_ERR_TRACK_ANGLE;
             }
-            if (b[10] != 0x7FFFFFFF && (g->magnetic_variation < -180.0 || g->magnetic_variation > 180.0)) {
+            if (g->has.magnetic_variation && (g->magnetic_variation < -180.0 || g->magnetic_variation > 180.0)) {
                 return VRT_ERR_MAGNETIC_VARIATION;
-            }
-            if ((b[0] & 0xF0000000U) != 0) {
-                return VRT_ERR_RESERVED;
             }
         }
 
@@ -521,6 +528,15 @@ static uint32_t if_context_read_formatted_geolocation(bool                      
     g->tsi = VRT_TSI_UNDEFINED;
     g->tsf = VRT_TSF_UNDEFINED;
     g->oui = 0;
+
+    g->has.latitude           = false;
+    g->has.longitude          = false;
+    g->has.altitude           = false;
+    g->has.speed_over_ground  = false;
+    g->has.heading_angle      = false;
+    g->has.track_angle        = false;
+    g->has.magnetic_variation = false;
+
     /* See Rule 7.1.5.19-1: When the TSI or TSF fields are zero the corresponding Timestamp of Position Fix subfield
      * words shall take the value 0xFFFFFFFF. */
     g->integer_second_timestamp    = 0xFFFFFFFF;
@@ -553,17 +569,30 @@ static uint32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephem
         e->oui                         = msk(b[0], 0, 24);
         e->integer_second_timestamp    = b[1];
         e->fractional_second_timestamp = read_uint64(b + 2);
-        e->position_x                  = vrt_fixed_point_i32_to_double((int32_t)b[4], VRT_RADIX_POSITION);
-        e->position_y                  = vrt_fixed_point_i32_to_double((int32_t)b[5], VRT_RADIX_POSITION);
-        e->position_z                  = vrt_fixed_point_i32_to_double((int32_t)b[6], VRT_RADIX_POSITION);
-        e->attitude_alpha              = vrt_fixed_point_i32_to_double((int32_t)b[7], VRT_RADIX_ANGLE);
-        e->attitude_beta               = vrt_fixed_point_i32_to_double((int32_t)b[8], VRT_RADIX_ANGLE);
-        e->attitude_phi                = vrt_fixed_point_i32_to_double((int32_t)b[9], VRT_RADIX_ANGLE);
-        e->velocity_dx                 = vrt_fixed_point_i32_to_double((int32_t)b[10], VRT_RADIX_SPEED_VELOCITY);
-        e->velocity_dy                 = vrt_fixed_point_i32_to_double((int32_t)b[11], VRT_RADIX_SPEED_VELOCITY);
-        e->velocity_dz                 = vrt_fixed_point_i32_to_double((int32_t)b[12], VRT_RADIX_SPEED_VELOCITY);
+
+        e->has.position_x     = (b[4] != 0x7FFFFFFFU);
+        e->position_x         = vrt_fixed_point_i32_to_double((int32_t)b[4], VRT_RADIX_POSITION);
+        e->has.position_y     = (b[5] != 0x7FFFFFFFU);
+        e->position_y         = vrt_fixed_point_i32_to_double((int32_t)b[5], VRT_RADIX_POSITION);
+        e->has.position_z     = (b[6] != 0x7FFFFFFFU);
+        e->position_z         = vrt_fixed_point_i32_to_double((int32_t)b[6], VRT_RADIX_POSITION);
+        e->has.attitude_alpha = (b[7] != 0x7FFFFFFFU);
+        e->attitude_alpha     = vrt_fixed_point_i32_to_double((int32_t)b[7], VRT_RADIX_ANGLE);
+        e->has.attitude_beta  = (b[8] != 0x7FFFFFFFU);
+        e->attitude_beta      = vrt_fixed_point_i32_to_double((int32_t)b[8], VRT_RADIX_ANGLE);
+        e->has.attitude_phi   = (b[9] != 0x7FFFFFFFU);
+        e->attitude_phi       = vrt_fixed_point_i32_to_double((int32_t)b[9], VRT_RADIX_ANGLE);
+        e->has.velocity_dx    = (b[10] != 0x7FFFFFFFU);
+        e->velocity_dx        = vrt_fixed_point_i32_to_double((int32_t)b[10], VRT_RADIX_SPEED_VELOCITY);
+        e->has.velocity_dy    = (b[11] != 0x7FFFFFFFU);
+        e->velocity_dy        = vrt_fixed_point_i32_to_double((int32_t)b[11], VRT_RADIX_SPEED_VELOCITY);
+        e->has.velocity_dz    = (b[12] != 0x7FFFFFFFU);
+        e->velocity_dz        = vrt_fixed_point_i32_to_double((int32_t)b[12], VRT_RADIX_SPEED_VELOCITY);
 
         if (validate) {
+            if ((b[0] & 0xF0000000U) != 0) {
+                return VRT_ERR_RESERVED;
+            }
             if (e->tsi == VRT_TSI_UNDEFINED && e->integer_second_timestamp != 0xFFFFFFFFU) {
                 return VRT_ERR_INTEGER_SECOND_TIMESTAMP;
             }
@@ -573,21 +602,29 @@ static uint32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephem
             if (e->tsf == VRT_TSF_REAL_TIME && e->fractional_second_timestamp >= (uint64_t)1000000000000) {
                 return VRT_ERR_REAL_TIME;
             }
-            if ((b[0] & 0xF0000000U) != 0) {
-                return VRT_ERR_RESERVED;
-            }
         }
 
         return 13;
     }
 
+    e->tsi = VRT_TSI_UNDEFINED;
+    e->tsf = VRT_TSF_UNDEFINED;
+    e->oui = 0;
+
+    e->has.position_x     = false;
+    e->has.position_y     = false;
+    e->has.position_z     = false;
+    e->has.attitude_alpha = false;
+    e->has.attitude_beta  = false;
+    e->has.attitude_phi   = false;
+    e->has.velocity_dx    = false;
+    e->has.velocity_dy    = false;
+    e->has.velocity_dz    = false;
+
     /* Note that Rule 7.1.5.21-8: "Each word of the ECEF Ephemeris field shall take the value 0x7FFF FFFF when
      * unknown" clashes with Rule 7.1.5.21-4: "The TSI, TSF, OUI, and Timestamp of Position Fix fields shall follow
      * the rules of the corresponding Formatted GPS Geolocation fields given in Section 7.1.5.19". For consistency
      * with formatted GPS/INS geolocation, 0xFFFFFFFF is chosen for timestamp fields. */
-    e->tsi                         = VRT_TSI_UNDEFINED;
-    e->tsf                         = VRT_TSF_UNDEFINED;
-    e->oui                         = 0;
     e->integer_second_timestamp    = 0xFFFFFFFF;
     e->fractional_second_timestamp = 0xFFFFFFFFFFFFFFFF;
     e->position_x                  = vrt_fixed_point_i32_to_double(0x7FFFFFFF, VRT_RADIX_POSITION);
