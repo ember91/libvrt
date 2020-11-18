@@ -1,5 +1,4 @@
-* Improve documentation
-* Same warning message right now for TSM bit set for data packet and TSM outside bounds.
+* Improve documentation in sphinx
 * Should error codes really be in common.h?
 * In write test, break out common initializations of buffer for GPS, INS, ECEF ephemeris and Relative ephemeris. 
 * Not following google style guide...
@@ -14,3 +13,7 @@
 * float128 instead of double for fixed point?
 * Fuzzing
 * Check that float, double... are inside bound when writing and validating
+* Rerun static analysis tools
+* Compile again with other compilers
+* cmake format
+* vrt_string as well as documentation need to be updated since error documentation was updated

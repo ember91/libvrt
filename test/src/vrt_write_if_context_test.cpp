@@ -57,7 +57,7 @@ TEST_F(WriteIfContextTest, Bandwidth) {
 TEST_F(WriteIfContextTest, BandwidthInvalid) {
     c_.has.bandwidth = true;
     c_.bandwidth     = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BANDWIDTH);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_BANDWIDTH);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x20000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xFFFFFFFF));
@@ -147,7 +147,7 @@ TEST_F(WriteIfContextTest, SampleRate) {
 TEST_F(WriteIfContextTest, SampleRateInvalid) {
     c_.has.sample_rate = true;
     c_.sample_rate     = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_SAMPLE_RATE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_SAMPLE_RATE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00200000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xFFFFFFFF));
@@ -187,7 +187,7 @@ TEST_F(WriteIfContextTest, Temperature) {
 TEST_F(WriteIfContextTest, TemperatureInvalid) {
     c_.has.temperature = true;
     c_.temperature     = -274.0F;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_TEMPERATURE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_BOUNDS_TEMPERATURE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, false), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00040000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0000BB80));
@@ -208,7 +208,7 @@ TEST_F(WriteIfContextTest, DeviceIdentifierOuiInvalid) {
     c_.has.device_identifier         = true;
     c_.device_identifier.oui         = 0x01FFFFFF;
     c_.device_identifier.device_code = 0xABAF;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_OUI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_OUI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00020000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
@@ -535,7 +535,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatPackingMethod) {
 TEST_F(WriteIfContextTest, DataPacketPayloadFormatPackingMethodInvalid1) {
     c_.has.data_packet_payload_format            = true;
     c_.data_packet_payload_format.packing_method = static_cast<vrt_packing_method>(-1);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_PACKING_METHOD);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_PACKING_METHOD);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x80000000));
@@ -546,7 +546,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatPackingMethodInvalid1) {
 TEST_F(WriteIfContextTest, DataPacketPayloadFormatPackingMethodInvalid2) {
     c_.has.data_packet_payload_format            = true;
     c_.data_packet_payload_format.packing_method = static_cast<vrt_packing_method>(2);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_PACKING_METHOD);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_PACKING_METHOD);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -567,7 +567,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatRealOrComplex) {
 TEST_F(WriteIfContextTest, DataPacketPayloadFormatRealOrComplexInvalid1) {
     c_.has.data_packet_payload_format             = true;
     c_.data_packet_payload_format.real_or_complex = static_cast<vrt_real_complex>(-1);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_REAL_OR_COMPLEX);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_REAL_OR_COMPLEX);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x60000000));
@@ -578,7 +578,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatRealOrComplexInvalid1) {
 TEST_F(WriteIfContextTest, DataPacketPayloadFormatRealOrComplexInvalid2) {
     c_.has.data_packet_payload_format             = true;
     c_.data_packet_payload_format.real_or_complex = static_cast<vrt_real_complex>(3);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_REAL_OR_COMPLEX);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_REAL_OR_COMPLEX);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x60000000));
@@ -599,7 +599,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormat) {
 TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid1) {
     c_.has.data_packet_payload_format              = true;
     c_.data_packet_payload_format.data_item_format = static_cast<vrt_data_item_format>(-1);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_DATA_ITEM_FORMAT);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_DATA_ITEM_FORMAT);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x1F000000));
@@ -610,7 +610,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid1) {
 TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid2) {
     c_.has.data_packet_payload_format              = true;
     c_.data_packet_payload_format.data_item_format = static_cast<vrt_data_item_format>(0x07);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_DATA_ITEM_FORMAT);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_DATA_ITEM_FORMAT);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x07000000));
@@ -621,7 +621,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid2) {
 TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid3) {
     c_.has.data_packet_payload_format              = true;
     c_.data_packet_payload_format.data_item_format = static_cast<vrt_data_item_format>(0x0D);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_DATA_ITEM_FORMAT);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_DATA_ITEM_FORMAT);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0D000000));
@@ -632,7 +632,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid3) {
 TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid4) {
     c_.has.data_packet_payload_format              = true;
     c_.data_packet_payload_format.data_item_format = static_cast<vrt_data_item_format>(0x17);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_DATA_ITEM_FORMAT);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_DATA_ITEM_FORMAT);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x17000000));
@@ -663,7 +663,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatEventTagSize) {
 TEST_F(WriteIfContextTest, DataPacketPayloadFormatEventTagSizeInvalid) {
     c_.has.data_packet_payload_format            = true;
     c_.data_packet_payload_format.event_tag_size = 0x08;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_EVENT_TAG_SIZE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_EVENT_TAG_SIZE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -684,7 +684,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatChannelTagSize) {
 TEST_F(WriteIfContextTest, DataPacketPayloadFormatChannelTagSizeInvalid) {
     c_.has.data_packet_payload_format              = true;
     c_.data_packet_payload_format.channel_tag_size = 0x10;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_CHANNEL_TAG_SIZE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_CHANNEL_TAG_SIZE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -705,7 +705,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatItemPackingFieldSize) {
 TEST_F(WriteIfContextTest, DataPacketPayloadFormatItemPackingFieldSizeInvalid) {
     c_.has.data_packet_payload_format                     = true;
     c_.data_packet_payload_format.item_packing_field_size = 0x40;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_ITEM_PACKING_FIELD_SIZE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_ITEM_PACKING_FIELD_SIZE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -726,7 +726,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemSize) {
 TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemSizeInvalid) {
     c_.has.data_packet_payload_format            = true;
     c_.data_packet_payload_format.data_item_size = 0x40;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_DATA_ITEM_SIZE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_DATA_ITEM_SIZE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00008000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -776,7 +776,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsi) {
 TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsiInvalid1) {
     c_.has.formatted_gps_geolocation = true;
     c_.formatted_gps_geolocation.tsi = static_cast<vrt_tsi>(-1);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TSI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
@@ -796,7 +796,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsiInvalid1) {
 TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsiInvalid2) {
     c_.has.formatted_gps_geolocation = true;
     c_.formatted_gps_geolocation.tsi = static_cast<vrt_tsi>(4);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TSI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -835,7 +835,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsf) {
 TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsfInvalid1) {
     c_.has.formatted_gps_geolocation = true;
     c_.formatted_gps_geolocation.tsf = static_cast<vrt_tsf>(-1);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TSF);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSF);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
@@ -855,7 +855,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsfInvalid1) {
 TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsfInvalid2) {
     c_.has.formatted_gps_geolocation = true;
     c_.formatted_gps_geolocation.tsf = static_cast<vrt_tsf>(4);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TSF);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSF);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -894,7 +894,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationOui) {
 TEST_F(WriteIfContextTest, FormattedGpsGeolocationOuiInvalid) {
     c_.has.formatted_gps_geolocation = true;
     c_.formatted_gps_geolocation.oui = 0x01FFFFFF;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_OUI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_OUI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
@@ -935,7 +935,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationIntegerSecondTimestampInvalid)
     c_.has.formatted_gps_geolocation                      = true;
     c_.formatted_gps_geolocation.tsi                      = VRT_TSI_UNDEFINED;
     c_.formatted_gps_geolocation.integer_second_timestamp = 0xABABABAB;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INTEGER_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -976,7 +976,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationFractionalSecondTimestampInval
     c_.has.formatted_gps_geolocation                         = true;
     c_.formatted_gps_geolocation.tsf                         = VRT_TSF_UNDEFINED;
     c_.formatted_gps_geolocation.fractional_second_timestamp = 0x000000E8D4A50FFF;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -997,7 +997,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationFractionalSecondTimestampInval
     c_.has.formatted_gps_geolocation                         = true;
     c_.formatted_gps_geolocation.tsf                         = VRT_TSF_REAL_TIME;
     c_.formatted_gps_geolocation.fractional_second_timestamp = 0x000000E8D4A51000;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_REAL_TIME);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_REAL_TIME);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x02000000));
@@ -1171,7 +1171,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLatitudeInvalid1) {
     c_.has.formatted_gps_geolocation          = true;
     c_.formatted_gps_geolocation.has.latitude = true;
     c_.formatted_gps_geolocation.latitude     = -91.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LATITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_LATITUDE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1192,7 +1192,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLatitudeInvalid2) {
     c_.has.formatted_gps_geolocation          = true;
     c_.formatted_gps_geolocation.has.latitude = true;
     c_.formatted_gps_geolocation.latitude     = 91.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LATITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_LATITUDE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1233,7 +1233,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLongitudeInvalid1) {
     c_.has.formatted_gps_geolocation           = true;
     c_.formatted_gps_geolocation.has.longitude = true;
     c_.formatted_gps_geolocation.longitude     = -181.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LONGITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_LONGITUDE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1254,7 +1254,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLongitudeInvalid2) {
     c_.has.formatted_gps_geolocation           = true;
     c_.formatted_gps_geolocation.has.longitude = true;
     c_.formatted_gps_geolocation.longitude     = 181.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LONGITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_LONGITUDE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1315,7 +1315,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothSpeedOverGroundInvalid) {
     c_.has.formatted_gps_geolocation                   = true;
     c_.formatted_gps_geolocation.has.speed_over_ground = true;
     c_.formatted_gps_geolocation.speed_over_ground     = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_SPEED_OVER_GROUND);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_SPEED_OVER_GROUND);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1356,7 +1356,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngleInvalid1) {
     c_.has.formatted_gps_geolocation               = true;
     c_.formatted_gps_geolocation.has.heading_angle = true;
     c_.formatted_gps_geolocation.heading_angle     = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_HEADING_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_HEADING_ANGLE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1377,7 +1377,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngleInvalid2) {
     c_.has.formatted_gps_geolocation               = true;
     c_.formatted_gps_geolocation.has.heading_angle = true;
     c_.formatted_gps_geolocation.heading_angle     = 360.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_HEADING_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_HEADING_ANGLE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1418,7 +1418,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothTrackAngleInvalid1) {
     c_.has.formatted_gps_geolocation             = true;
     c_.formatted_gps_geolocation.has.track_angle = true;
     c_.formatted_gps_geolocation.track_angle     = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TRACK_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_TRACK_ANGLE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1439,7 +1439,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothTrackAngleInvalid2) {
     c_.has.formatted_gps_geolocation             = true;
     c_.formatted_gps_geolocation.has.track_angle = true;
     c_.formatted_gps_geolocation.track_angle     = 360.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TRACK_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_TRACK_ANGLE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1480,7 +1480,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariationInvalid1)
     c_.has.formatted_gps_geolocation                    = true;
     c_.formatted_gps_geolocation.has.magnetic_variation = true;
     c_.formatted_gps_geolocation.magnetic_variation     = -181.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_MAGNETIC_VARIATION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1501,7 +1501,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariationInvalid2)
     c_.has.formatted_gps_geolocation                    = true;
     c_.formatted_gps_geolocation.has.magnetic_variation = true;
     c_.formatted_gps_geolocation.magnetic_variation     = 181.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_MAGNETIC_VARIATION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1540,7 +1540,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationTsi) {
 TEST_F(WriteIfContextTest, FormattedInsGeolocationTsiInvalid1) {
     c_.has.formatted_ins_geolocation = true;
     c_.formatted_ins_geolocation.tsi = static_cast<vrt_tsi>(-1);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TSI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
@@ -1560,7 +1560,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationTsiInvalid1) {
 TEST_F(WriteIfContextTest, FormattedInsGeolocationTsiInvalid2) {
     c_.has.formatted_ins_geolocation = true;
     c_.formatted_ins_geolocation.tsi = static_cast<vrt_tsi>(4);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TSI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1599,7 +1599,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationTsf) {
 TEST_F(WriteIfContextTest, FormattedInsGeolocationTsfInvalid1) {
     c_.has.formatted_ins_geolocation = true;
     c_.formatted_ins_geolocation.tsf = static_cast<vrt_tsf>(-1);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TSF);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSF);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
@@ -1619,7 +1619,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationTsfInvalid1) {
 TEST_F(WriteIfContextTest, FormattedInsGeolocationTsfInvalid2) {
     c_.has.formatted_ins_geolocation = true;
     c_.formatted_ins_geolocation.tsf = static_cast<vrt_tsf>(4);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TSF);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSF);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1658,7 +1658,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationOui) {
 TEST_F(WriteIfContextTest, FormattedInsGeolocationOuiInvalid) {
     c_.has.formatted_ins_geolocation = true;
     c_.formatted_ins_geolocation.oui = 0x01FFFFFF;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_OUI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_OUI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
@@ -1699,7 +1699,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationIntegerSecondTimestampInvalid)
     c_.has.formatted_ins_geolocation                      = true;
     c_.formatted_ins_geolocation.tsi                      = VRT_TSI_UNDEFINED;
     c_.formatted_ins_geolocation.integer_second_timestamp = 0xABABABAB;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INTEGER_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1740,7 +1740,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationFractionalSecondTimestampInval
     c_.has.formatted_ins_geolocation                         = true;
     c_.formatted_ins_geolocation.tsf                         = VRT_TSF_UNDEFINED;
     c_.formatted_ins_geolocation.fractional_second_timestamp = 0x000000E8D4A50FFF;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1761,7 +1761,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationFractionalSecondTimestampInval
     c_.has.formatted_ins_geolocation                         = true;
     c_.formatted_ins_geolocation.tsf                         = VRT_TSF_REAL_TIME;
     c_.formatted_ins_geolocation.fractional_second_timestamp = 0x000000E8D4A51000;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_REAL_TIME);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_REAL_TIME);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x02000000));
@@ -1935,7 +1935,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLatitudeInvalid1) {
     c_.has.formatted_ins_geolocation          = true;
     c_.formatted_ins_geolocation.has.latitude = true;
     c_.formatted_ins_geolocation.latitude     = -91.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LATITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_LATITUDE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1956,7 +1956,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLatitudeInvalid2) {
     c_.has.formatted_ins_geolocation          = true;
     c_.formatted_ins_geolocation.has.latitude = true;
     c_.formatted_ins_geolocation.latitude     = 91.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LATITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_LATITUDE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -1997,7 +1997,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLongitudeInvalid1) {
     c_.has.formatted_ins_geolocation           = true;
     c_.formatted_ins_geolocation.has.longitude = true;
     c_.formatted_ins_geolocation.longitude     = -181.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LONGITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_LONGITUDE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -2018,7 +2018,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLongitudeInvalid2) {
     c_.has.formatted_ins_geolocation           = true;
     c_.formatted_ins_geolocation.has.longitude = true;
     c_.formatted_ins_geolocation.longitude     = 181.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_LONGITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_LONGITUDE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -2079,7 +2079,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothSpeedOverGroundInvalid) {
     c_.has.formatted_ins_geolocation                   = true;
     c_.formatted_ins_geolocation.has.speed_over_ground = true;
     c_.formatted_ins_geolocation.speed_over_ground     = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_SPEED_OVER_GROUND);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_SPEED_OVER_GROUND);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -2120,7 +2120,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngleInvalid1) {
     c_.has.formatted_ins_geolocation               = true;
     c_.formatted_ins_geolocation.has.heading_angle = true;
     c_.formatted_ins_geolocation.heading_angle     = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_HEADING_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_HEADING_ANGLE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -2141,7 +2141,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngleInvalid2) {
     c_.has.formatted_ins_geolocation               = true;
     c_.formatted_ins_geolocation.has.heading_angle = true;
     c_.formatted_ins_geolocation.heading_angle     = 360.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_HEADING_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_HEADING_ANGLE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -2182,7 +2182,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothTrackAngleInvalid1) {
     c_.has.formatted_ins_geolocation             = true;
     c_.formatted_ins_geolocation.has.track_angle = true;
     c_.formatted_ins_geolocation.track_angle     = -1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TRACK_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_TRACK_ANGLE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -2203,7 +2203,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothTrackAngleInvalid2) {
     c_.has.formatted_ins_geolocation             = true;
     c_.formatted_ins_geolocation.has.track_angle = true;
     c_.formatted_ins_geolocation.track_angle     = 360.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_TRACK_ANGLE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_TRACK_ANGLE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -2244,7 +2244,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothMagneticVariationInvalid1)
     c_.has.formatted_ins_geolocation                    = true;
     c_.formatted_ins_geolocation.has.magnetic_variation = true;
     c_.formatted_ins_geolocation.magnetic_variation     = -181.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_MAGNETIC_VARIATION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -2265,7 +2265,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothMagneticVariationInvalid2)
     c_.has.formatted_ins_geolocation                    = true;
     c_.formatted_ins_geolocation.has.magnetic_variation = true;
     c_.formatted_ins_geolocation.magnetic_variation     = 181.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_MAGNETIC_VARIATION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -2306,7 +2306,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisTsi) {
 TEST_F(WriteIfContextTest, EcefEphemerisTsiInvalid1) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsi = static_cast<vrt_tsi>(-1);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
@@ -2328,7 +2328,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisTsiInvalid1) {
 TEST_F(WriteIfContextTest, EcefEphemerisTsiInvalid2) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsi = static_cast<vrt_tsi>(4);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -2371,7 +2371,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisTsf) {
 TEST_F(WriteIfContextTest, EcefEphemerisTsfInvalid1) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsf = static_cast<vrt_tsf>(-1);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSF);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSF);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
@@ -2393,7 +2393,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisTsfInvalid1) {
 TEST_F(WriteIfContextTest, EcefEphemerisTsfInvalid2) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsf = static_cast<vrt_tsf>(4);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSF);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSF);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -2436,7 +2436,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisOui) {
 TEST_F(WriteIfContextTest, EcefEphemerisOuiInvalid) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.oui = 0x01FFFFFF;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_OUI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_OUI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
@@ -2481,7 +2481,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisIntegerSecondTimestampInvalid) {
     c_.has.ecef_ephemeris                      = true;
     c_.ecef_ephemeris.tsi                      = VRT_TSI_UNDEFINED;
     c_.ecef_ephemeris.integer_second_timestamp = 0xABABABAB;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INTEGER_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -2526,7 +2526,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisFractionalSecondTimestampInvalid1) {
     c_.has.ecef_ephemeris                         = true;
     c_.ecef_ephemeris.tsf                         = VRT_TSF_UNDEFINED;
     c_.ecef_ephemeris.fractional_second_timestamp = 0x000000E8D4A50FFF;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -2549,7 +2549,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisFractionalSecondTimestampInvalid2) {
     c_.has.ecef_ephemeris                         = true;
     c_.ecef_ephemeris.tsf                         = VRT_TSF_REAL_TIME;
     c_.ecef_ephemeris.fractional_second_timestamp = 0x000000E8D4A51000;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_REAL_TIME);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_REAL_TIME);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x02000000));
@@ -2979,7 +2979,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisTsi) {
 TEST_F(WriteIfContextTest, RelativeEphemerisTsiInvalid1) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsi = static_cast<vrt_tsi>(-1);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
@@ -3001,7 +3001,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisTsiInvalid1) {
 TEST_F(WriteIfContextTest, RelativeEphemerisTsiInvalid2) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsi = static_cast<vrt_tsi>(4);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -3044,7 +3044,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisTsf) {
 TEST_F(WriteIfContextTest, RelativeEphemerisTsfInvalid1) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsf = static_cast<vrt_tsf>(-1);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSF);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSF);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
@@ -3066,7 +3066,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisTsfInvalid1) {
 TEST_F(WriteIfContextTest, RelativeEphemerisTsfInvalid2) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsf = static_cast<vrt_tsf>(4);
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_TSF);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSF);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -3109,7 +3109,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisOui) {
 TEST_F(WriteIfContextTest, RelativeEphemerisOuiInvalid) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.oui = 0x01FFFFFF;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_OUI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_OUI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
@@ -3154,7 +3154,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisIntegerSecondTimestampInvalid) {
     c_.has.relative_ephemeris                      = true;
     c_.relative_ephemeris.tsi                      = VRT_TSI_UNDEFINED;
     c_.relative_ephemeris.integer_second_timestamp = 0xABABABAB;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INTEGER_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -3199,7 +3199,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisFractionalSecondTimestampInvalid1) {
     c_.has.relative_ephemeris                         = true;
     c_.relative_ephemeris.tsf                         = VRT_TSF_UNDEFINED;
     c_.relative_ephemeris.fractional_second_timestamp = 0x000000E8D4A50FFF;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -3222,7 +3222,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisFractionalSecondTimestampInvalid2) {
     c_.has.relative_ephemeris                         = true;
     c_.relative_ephemeris.tsf                         = VRT_TSF_REAL_TIME;
     c_.relative_ephemeris.fractional_second_timestamp = 0x000000E8D4A51000;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_REAL_TIME);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_REAL_TIME);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x02000000));
@@ -3650,7 +3650,7 @@ TEST_F(WriteIfContextTest, GpsAsciiOui) {
 TEST_F(WriteIfContextTest, GpsAsciiOuiInvalid) {
     c_.has.gps_ascii = true;
     c_.gps_ascii.oui = 0x01FFFFFF;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_OUI);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_OUI);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000200));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
@@ -3693,7 +3693,7 @@ TEST_F(WriteIfContextTest, ContextAssociationListsSourceInvalid) {
     l[0]                                                         = 0xABABABAB;
     l[0x1FE]                                                     = 0xCBCBCBCB;
     c_.context_association_lists.source_context_association_list = l.data();
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0x202, true), VRT_ERR_SOURCE_LIST_SIZE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0x202, true), VRT_ERR_BOUNDS_SOURCE_LIST_SIZE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0x202, false), 0x003);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000100));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -3724,7 +3724,7 @@ TEST_F(WriteIfContextTest, ContextAssociationListsSystemInvalid) {
     l[0]                                                         = 0xABABABAB;
     l[0x1FE]                                                     = 0xCBCBCBCB;
     c_.context_association_lists.system_context_association_list = l.data();
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0x202, true), VRT_ERR_SYSTEM_LIST_SIZE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0x202, true), VRT_ERR_BOUNDS_SYSTEM_LIST_SIZE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0x202, false), 0x003);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000100));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
@@ -3769,7 +3769,7 @@ TEST_F(WriteIfContextTest, ContextAssociationListsAsynchronousInvalid) {
     c_.context_association_lists.asynchronous_channel_list_size                = 0x8000;
     std::array<uint32_t, 0x1FF> l                                              = {};
     c_.context_association_lists.asynchronous_channel_context_association_list = l.data();
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0x8000, true), VRT_ERR_CHANNEL_LIST_SIZE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0x8000, true), VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE);
 }
 
 TEST_F(WriteIfContextTest, ContextAssociationListsAsynchronousTag) {

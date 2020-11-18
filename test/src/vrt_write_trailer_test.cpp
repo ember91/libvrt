@@ -314,7 +314,7 @@ TEST_F(WriteTrailerTest, BothAssociatedContextPacketCount) {
 TEST_F(WriteTrailerTest, BothAssociatedContextPacketCountInvalid) {
     t_.has.associated_context_packet_count = true;
     t_.associated_context_packet_count     = 0xFE;
-    ASSERT_EQ(vrt_write_trailer(&t_, buf_.data(), 1, true), VRT_ERR_ASSOCIATED_CONTEXT_PACKET_COUNT);
+    ASSERT_EQ(vrt_write_trailer(&t_, buf_.data(), 1, true), VRT_ERR_BOUNDS_ASSOCIATED_CONTEXT_PACKET_COUNT);
     ASSERT_EQ(vrt_write_trailer(&t_, buf_.data(), 1, false), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x000000FE));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));

@@ -56,15 +56,15 @@ int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header,
 
     if (validate) {
         if (header->packet_type > VRT_PT_EXT_CONTEXT) {
-            return VRT_ERR_PACKET_TYPE;
+            return VRT_ERR_INVALID_PACKET_TYPE;
         }
         if (vrt_is_context(header->packet_type)) {
             if (header->has.trailer) {
-                return VRT_ERR_TRAILER;
+                return VRT_ERR_TRAILER_IN_CONTEXT;
             }
         } else {
             if (header->tsm != VRT_TSM_FINE) {
-                return VRT_ERR_TSM;
+                return VRT_ERR_TSM_IN_DATA;
             }
         }
         if ((b & 0x02000000U) != 0) {
@@ -129,7 +129,7 @@ int32_t vrt_read_fields(const vrt_header* header,
 
         if (validate) {
             if (header->tsf == VRT_TSF_REAL_TIME && fields->fractional_seconds_timestamp >= (uint64_t)1000000000000) {
-                return VRT_ERR_REAL_TIME;
+                return VRT_ERR_BOUNDS_REAL_TIME;
             }
         }
 
@@ -426,12 +426,12 @@ static uint32_t if_context_read_data_packet_payload_format(bool                 
 
         if (validate) {
             if (f->real_or_complex > VRT_ROC_COMPLEX_POLAR) {
-                return VRT_ERR_REAL_OR_COMPLEX;
+                return VRT_ERR_INVALID_REAL_OR_COMPLEX;
             }
             if ((f->data_item_format > VRT_DIF_SIGNED_VRT_6_BIT_EXPONENT &&
                  f->data_item_format < VRT_DIF_IEEE_754_SINGLE_PRECISION_FLOATING_POINT) ||
                 f->data_item_format > VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT) {
-                return VRT_ERR_DATA_ITEM_FORMAT;
+                return VRT_ERR_INVALID_DATA_ITEM_FORMAT;
             }
 
             if ((b[0] & 0x0000F000U) != 0) {
@@ -497,28 +497,28 @@ static uint32_t if_context_read_formatted_geolocation(bool                      
                 return VRT_ERR_RESERVED;
             }
             if (g->tsi == VRT_TSI_UNDEFINED && g->integer_second_timestamp != VRT_UNSPECIFIED_TSI) {
-                return VRT_ERR_INTEGER_SECOND_TIMESTAMP;
+                return VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP;
             }
             if (g->tsf == VRT_TSF_UNDEFINED && g->fractional_second_timestamp != VRT_UNSPECIFIED_TSF) {
-                return VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP;
+                return VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP;
             }
             if (g->tsf == VRT_TSF_REAL_TIME && g->fractional_second_timestamp >= (uint64_t)1000000000000) {
-                return VRT_ERR_REAL_TIME;
+                return VRT_ERR_BOUNDS_REAL_TIME;
             }
             if (g->has.latitude && (g->latitude < -90.0 || g->latitude > 90.0)) {
-                return VRT_ERR_LATITUDE;
+                return VRT_ERR_BOUNDS_LATITUDE;
             }
             if (g->has.longitude && (g->longitude < -180.0 || g->longitude > 180.0)) {
-                return VRT_ERR_LONGITUDE;
+                return VRT_ERR_BOUNDS_LONGITUDE;
             }
             if (g->has.heading_angle && (g->heading_angle < 0.0 || g->heading_angle > 359.999999761582)) {
-                return VRT_ERR_HEADING_ANGLE;
+                return VRT_ERR_BOUNDS_HEADING_ANGLE;
             }
             if (g->has.track_angle && (g->track_angle < 0.0 || g->track_angle > 359.999999761582)) {
-                return VRT_ERR_TRACK_ANGLE;
+                return VRT_ERR_BOUNDS_TRACK_ANGLE;
             }
             if (g->has.magnetic_variation && (g->magnetic_variation < -180.0 || g->magnetic_variation > 180.0)) {
-                return VRT_ERR_MAGNETIC_VARIATION;
+                return VRT_ERR_BOUNDS_MAGNETIC_VARIATION;
             }
         }
 
@@ -594,13 +594,13 @@ static uint32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephem
                 return VRT_ERR_RESERVED;
             }
             if (e->tsi == VRT_TSI_UNDEFINED && e->integer_second_timestamp != VRT_UNSPECIFIED_TSI) {
-                return VRT_ERR_INTEGER_SECOND_TIMESTAMP;
+                return VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP;
             }
             if (e->tsf == VRT_TSF_UNDEFINED && e->fractional_second_timestamp != VRT_UNSPECIFIED_TSF) {
-                return VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP;
+                return VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP;
             }
             if (e->tsf == VRT_TSF_REAL_TIME && e->fractional_second_timestamp >= (uint64_t)1000000000000) {
-                return VRT_ERR_REAL_TIME;
+                return VRT_ERR_BOUNDS_REAL_TIME;
             }
         }
 
@@ -779,7 +779,7 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
 
         if (validate) {
             if (if_context->bandwidth < 0.0) {
-                return VRT_ERR_BANDWIDTH;
+                return VRT_ERR_BOUNDS_BANDWIDTH;
             }
         }
 
@@ -849,7 +849,7 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
 
         if (validate) {
             if (if_context->sample_rate < 0.0) {
-                return VRT_ERR_SAMPLE_RATE;
+                return VRT_ERR_BOUNDS_SAMPLE_RATE;
             }
         }
 
@@ -874,7 +874,7 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
 
         if (validate) {
             if (if_context->temperature < -273.15) {
-                return VRT_ERR_TEMPERATURE;
+                return VRT_ERR_BOUNDS_TEMPERATURE;
             }
             if ((b[0] & 0xFFFF0000U) != 0) {
                 return VRT_ERR_RESERVED;

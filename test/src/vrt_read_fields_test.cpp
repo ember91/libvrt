@@ -154,7 +154,7 @@ TEST_F(ReadFieldsTest, FractionalSecondsTimestampInvalid) {
     h_.tsf  = VRT_TSF_REAL_TIME;
     buf_[0] = 0x000000E8;
     buf_[1] = 0xD4A51000;
-    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 2, &f_, true), VRT_ERR_REAL_TIME);
+    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 2, &f_, true), VRT_ERR_BOUNDS_REAL_TIME);
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 2, &f_, false), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_fields(f_, {{"fractional_seconds_timestamp", static_cast<uint64_t>(0x000000E8D4A51000)}});

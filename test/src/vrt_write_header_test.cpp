@@ -33,7 +33,7 @@ TEST_F(WriteHeaderTest, PacketType) {
 
 TEST_F(WriteHeaderTest, PacketTypeInvalid1) {
     h_.packet_type = static_cast<vrt_packet_type>(-1);
-    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_PACKET_TYPE);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_INVALID_PACKET_TYPE);
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, false), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0xF0000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -41,7 +41,7 @@ TEST_F(WriteHeaderTest, PacketTypeInvalid1) {
 
 TEST_F(WriteHeaderTest, PacketTypeInvalid2) {
     h_.packet_type = static_cast<vrt_packet_type>(6);
-    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_PACKET_TYPE);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_INVALID_PACKET_TYPE);
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, false), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x60000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -64,7 +64,7 @@ TEST_F(WriteHeaderTest, HasTrailer) {
 TEST_F(WriteHeaderTest, HasTrailerInvalid) {
     h_.has.trailer = true;
     h_.packet_type = VRT_PT_EXT_CONTEXT;
-    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_TRAILER);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_TRAILER_IN_CONTEXT);
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, false), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x54000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -81,7 +81,7 @@ TEST_F(WriteHeaderTest, Tsm) {
 TEST_F(WriteHeaderTest, TsmInvalid1) {
     h_.tsm         = static_cast<vrt_tsm>(-1);
     h_.packet_type = VRT_PT_IF_CONTEXT;
-    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_TSM);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_INVALID_TSM);
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, false), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x41000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -90,7 +90,7 @@ TEST_F(WriteHeaderTest, TsmInvalid1) {
 TEST_F(WriteHeaderTest, TsmInvalid2) {
     h_.tsm         = static_cast<vrt_tsm>(2);
     h_.packet_type = VRT_PT_IF_CONTEXT;
-    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_TSM);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_INVALID_TSM);
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, false), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x40000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -99,7 +99,7 @@ TEST_F(WriteHeaderTest, TsmInvalid2) {
 TEST_F(WriteHeaderTest, TsmInvalid3) {
     h_.tsm         = VRT_TSM_COARSE;
     h_.packet_type = VRT_PT_IF_DATA_WITHOUT_STREAM_ID;
-    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_TSM);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_TSM_IN_DATA);
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, false), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x01000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -114,7 +114,7 @@ TEST_F(WriteHeaderTest, Tsi) {
 
 TEST_F(WriteHeaderTest, TsiInvalid1) {
     h_.tsi = static_cast<vrt_tsi>(-1);
-    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_TSI);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_INVALID_TSI);
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, false), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00C00000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -122,7 +122,7 @@ TEST_F(WriteHeaderTest, TsiInvalid1) {
 
 TEST_F(WriteHeaderTest, TsiInvalid2) {
     h_.tsi = static_cast<vrt_tsi>(4);
-    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_TSI);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_INVALID_TSI);
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, false), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -137,7 +137,7 @@ TEST_F(WriteHeaderTest, Tsf) {
 
 TEST_F(WriteHeaderTest, TsfInvalid1) {
     h_.tsf = static_cast<vrt_tsf>(-1);
-    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_TSF);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_INVALID_TSF);
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, false), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00300000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -145,7 +145,7 @@ TEST_F(WriteHeaderTest, TsfInvalid1) {
 
 TEST_F(WriteHeaderTest, TsfInvalid2) {
     h_.tsf = static_cast<vrt_tsf>(-1);
-    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_TSF);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_INVALID_TSF);
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, false), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00300000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -160,7 +160,7 @@ TEST_F(WriteHeaderTest, PacketCount) {
 
 TEST_F(WriteHeaderTest, PacketCountInvalid) {
     h_.packet_count = 0x1F;
-    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_PACKET_COUNT);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_BOUNDS_PACKET_COUNT);
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, false), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x000F0000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -182,7 +182,7 @@ TEST_F(WriteHeaderTest, EveryOther1) {
     h_.tsf          = VRT_TSF_NONE;
     h_.packet_count = 0xF;
     h_.packet_size  = 0x0000;
-    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_TRAILER);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, true), VRT_ERR_TRAILER_IN_CONTEXT);
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 1, false), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x444F0000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));

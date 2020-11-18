@@ -43,28 +43,28 @@ int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t buf_words
 
     if (validate) {
         if (header->packet_type < VRT_PT_IF_DATA_WITHOUT_STREAM_ID || header->packet_type > VRT_PT_EXT_CONTEXT) {
-            return VRT_ERR_PACKET_TYPE;
+            return VRT_ERR_INVALID_PACKET_TYPE;
         }
         if (header->tsm < VRT_TSM_FINE || header->tsm > VRT_TSM_COARSE) {
-            return VRT_ERR_TSM;
+            return VRT_ERR_INVALID_TSM;
         }
         if (vrt_is_context(header->packet_type)) {
             if (header->has.trailer) {
-                return VRT_ERR_TRAILER;
+                return VRT_ERR_TRAILER_IN_CONTEXT;
             }
         } else {
             if (header->tsm != VRT_TSM_FINE) {
-                return VRT_ERR_TSM;
+                return VRT_ERR_TSM_IN_DATA;
             }
         }
         if (header->tsi < VRT_TSI_NONE || header->tsi > VRT_TSI_OTHER) {
-            return VRT_ERR_TSI;
+            return VRT_ERR_INVALID_TSI;
         }
         if (header->tsf < VRT_TSF_NONE || header->tsf > VRT_TSF_FREE_RUNNING_COUNT) {
-            return VRT_ERR_TSF;
+            return VRT_ERR_INVALID_TSF;
         }
         if (header->packet_count > 0x0F) {
-            return VRT_ERR_PACKET_COUNT;
+            return VRT_ERR_BOUNDS_PACKET_COUNT;
         }
     }
 
@@ -107,7 +107,7 @@ int32_t vrt_write_fields(const vrt_header* header,
     if (header->has.class_id) {
         if (validate) {
             if (fields->class_id.oui > 0x00FFFFFFU) {
-                return VRT_ERR_OUI;
+                return VRT_ERR_BOUNDS_OUI;
             }
         }
 
@@ -122,7 +122,7 @@ int32_t vrt_write_fields(const vrt_header* header,
     if (vrt_has_fractional_timestamp(header->tsf)) {
         if (validate) {
             if (header->tsf == VRT_TSF_REAL_TIME && fields->fractional_seconds_timestamp >= 1000000000000) {
-                return VRT_ERR_REAL_TIME;
+                return VRT_ERR_BOUNDS_REAL_TIME;
             }
         }
 
@@ -199,7 +199,7 @@ int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_wo
     if (trailer->has.associated_context_packet_count) {
         if (validate) {
             if (trailer->associated_context_packet_count > 0x7F) {
-                return VRT_ERR_ASSOCIATED_CONTEXT_PACKET_COUNT;
+                return VRT_ERR_BOUNDS_ASSOCIATED_CONTEXT_PACKET_COUNT;
             }
         }
 
@@ -329,28 +329,28 @@ static int32_t if_context_write_data_packet_payload_format(bool                 
     if (has) {
         if (validate) {
             if (f->packing_method < VRT_PM_PROCESSING_EFFICIENT || f->packing_method > VRT_PM_LINK_EFFICIENT) {
-                return VRT_ERR_PACKING_METHOD;
+                return VRT_ERR_INVALID_PACKING_METHOD;
             }
             if (f->real_or_complex < VRT_ROC_REAL || f->real_or_complex > VRT_ROC_COMPLEX_POLAR) {
-                return VRT_ERR_REAL_OR_COMPLEX;
+                return VRT_ERR_INVALID_REAL_OR_COMPLEX;
             }
             if (f->data_item_format < VRT_DIF_SIGNED_FIXED_POINT ||
                 (f->data_item_format > VRT_DIF_SIGNED_VRT_6_BIT_EXPONENT &&
                  f->data_item_format < VRT_DIF_IEEE_754_SINGLE_PRECISION_FLOATING_POINT) ||
                 f->data_item_format > VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT) {
-                return VRT_ERR_DATA_ITEM_FORMAT;
+                return VRT_ERR_INVALID_DATA_ITEM_FORMAT;
             }
             if (f->event_tag_size > 0x07) {
-                return VRT_ERR_EVENT_TAG_SIZE;
+                return VRT_ERR_BOUNDS_EVENT_TAG_SIZE;
             }
             if (f->channel_tag_size > 0x0F) {
-                return VRT_ERR_CHANNEL_TAG_SIZE;
+                return VRT_ERR_BOUNDS_CHANNEL_TAG_SIZE;
             }
             if (f->item_packing_field_size > 0x3F) {
-                return VRT_ERR_ITEM_PACKING_FIELD_SIZE;
+                return VRT_ERR_BOUNDS_ITEM_PACKING_FIELD_SIZE;
             }
             if (f->data_item_size > 0x3F) {
-                return VRT_ERR_DATA_ITEM_SIZE;
+                return VRT_ERR_BOUNDS_DATA_ITEM_SIZE;
             }
         }
 
@@ -391,40 +391,40 @@ static int32_t if_context_write_formatted_geolocation(bool                      
     if (has) {
         if (validate) {
             if (g->tsi < VRT_TSI_NONE || g->tsi > VRT_TSI_OTHER) {
-                return VRT_ERR_TSI;
+                return VRT_ERR_INVALID_TSI;
             }
             if (g->tsf < VRT_TSF_NONE || g->tsf > VRT_TSF_FREE_RUNNING_COUNT) {
-                return VRT_ERR_TSF;
+                return VRT_ERR_INVALID_TSF;
             }
             if (g->oui > 0x00FFFFFF) {
-                return VRT_ERR_OUI;
+                return VRT_ERR_BOUNDS_OUI;
             }
             if (g->tsi == VRT_TSI_UNDEFINED && g->integer_second_timestamp != VRT_UNSPECIFIED_TSI) {
-                return VRT_ERR_INTEGER_SECOND_TIMESTAMP;
+                return VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP;
             }
             if (g->tsf == VRT_TSF_UNDEFINED && g->fractional_second_timestamp != VRT_UNSPECIFIED_TSF) {
-                return VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP;
+                return VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP;
             }
             if (g->tsf == VRT_TSF_REAL_TIME && g->fractional_second_timestamp >= 1000000000000) {
-                return VRT_ERR_REAL_TIME;
+                return VRT_ERR_BOUNDS_REAL_TIME;
             }
             if (g->has.latitude && (g->latitude < -90.0 || g->latitude > 90.0)) {
-                return VRT_ERR_LATITUDE;
+                return VRT_ERR_BOUNDS_LATITUDE;
             }
             if (g->has.longitude && (g->longitude < -180.0 || g->longitude > 180.0)) {
-                return VRT_ERR_LONGITUDE;
+                return VRT_ERR_BOUNDS_LONGITUDE;
             }
             if (g->has.speed_over_ground && g->speed_over_ground < 0.0) {
-                return VRT_ERR_SPEED_OVER_GROUND;
+                return VRT_ERR_BOUNDS_SPEED_OVER_GROUND;
             }
             if (g->has.heading_angle && (g->heading_angle < 0.0 || g->heading_angle > 359.999999761582)) {
-                return VRT_ERR_HEADING_ANGLE;
+                return VRT_ERR_BOUNDS_HEADING_ANGLE;
             }
             if (g->has.track_angle && (g->track_angle < 0.0 || g->track_angle > 359.999999761582)) {
-                return VRT_ERR_TRACK_ANGLE;
+                return VRT_ERR_BOUNDS_TRACK_ANGLE;
             }
             if (g->has.magnetic_variation && (g->magnetic_variation < -180.0 || g->magnetic_variation > 180.0)) {
-                return VRT_ERR_MAGNETIC_VARIATION;
+                return VRT_ERR_BOUNDS_MAGNETIC_VARIATION;
             }
         }
 
@@ -473,22 +473,22 @@ static int32_t if_context_write_ephemeris(bool has, const vrt_ephemeris* e, uint
     if (has) {
         if (validate) {
             if (e->tsi < VRT_TSI_NONE || e->tsi > VRT_TSI_OTHER) {
-                return VRT_ERR_TSI;
+                return VRT_ERR_INVALID_TSI;
             }
             if (e->tsf < VRT_TSF_NONE || e->tsf > VRT_TSF_FREE_RUNNING_COUNT) {
-                return VRT_ERR_TSF;
+                return VRT_ERR_INVALID_TSF;
             }
             if (e->oui > 0x00FFFFFF) {
-                return VRT_ERR_OUI;
+                return VRT_ERR_BOUNDS_OUI;
             }
             if (e->tsi == VRT_TSI_UNDEFINED && e->integer_second_timestamp != VRT_UNSPECIFIED_TSI) {
-                return VRT_ERR_INTEGER_SECOND_TIMESTAMP;
+                return VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP;
             }
             if (e->tsf == VRT_TSF_UNDEFINED && e->fractional_second_timestamp != VRT_UNSPECIFIED_TSF) {
-                return VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP;
+                return VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP;
             }
             if (e->tsf == VRT_TSF_REAL_TIME && e->fractional_second_timestamp >= 1000000000000) {
-                return VRT_ERR_REAL_TIME;
+                return VRT_ERR_BOUNDS_REAL_TIME;
             }
         }
 
@@ -539,7 +539,7 @@ static int32_t if_context_write_gps_ascii(bool has, const vrt_gps_ascii* g, uint
     if (has) {
         if (validate) {
             if (g->oui > 0x00FFFFFF) {
-                return VRT_ERR_OUI;
+                return VRT_ERR_BOUNDS_OUI;
             }
         }
 
@@ -574,13 +574,13 @@ static int32_t if_context_write_context_association_lists(bool                  
     if (has) {
         if (validate) {
             if (l->source_list_size > 0x01FF) {
-                return VRT_ERR_SOURCE_LIST_SIZE;
+                return VRT_ERR_BOUNDS_SOURCE_LIST_SIZE;
             }
             if (l->system_list_size > 0x01FF) {
-                return VRT_ERR_SYSTEM_LIST_SIZE;
+                return VRT_ERR_BOUNDS_SYSTEM_LIST_SIZE;
             }
             if (l->asynchronous_channel_list_size > 0x7FFF) {
-                return VRT_ERR_CHANNEL_LIST_SIZE;
+                return VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE;
             }
         }
 
@@ -634,7 +634,7 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32
     if (if_context->has.bandwidth) {
         if (validate) {
             if (if_context->bandwidth < 0.0) {
-                return VRT_ERR_BANDWIDTH;
+                return VRT_ERR_BOUNDS_BANDWIDTH;
             }
         }
 
@@ -678,7 +678,7 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32
     if (if_context->has.sample_rate) {
         if (validate) {
             if (if_context->sample_rate < 0.0) {
-                return VRT_ERR_SAMPLE_RATE;
+                return VRT_ERR_BOUNDS_SAMPLE_RATE;
             }
         }
 
@@ -696,7 +696,7 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32
     if (if_context->has.temperature) {
         if (validate) {
             if (if_context->temperature < -273.15) {
-                return VRT_ERR_TEMPERATURE;
+                return VRT_ERR_BOUNDS_TEMPERATURE;
             }
         }
 
@@ -706,7 +706,7 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32
     if (if_context->has.device_identifier) {
         if (validate) {
             if (if_context->device_identifier.oui > 0x00FFFFFF) {
-                return VRT_ERR_OUI;
+                return VRT_ERR_BOUNDS_OUI;
             }
         }
 

@@ -92,7 +92,7 @@ TEST_F(WriteFieldsTest, ClassIdInvalid) {
     f_.class_id.oui                    = 0xFFFEDCBA;
     f_.class_id.information_class_code = 0xFEDC;
     f_.class_id.packet_class_code      = 0xBA98;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2, true), VRT_ERR_OUI);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2, true), VRT_ERR_BOUNDS_OUI);
     ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2, false), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00FEDCBA));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xFEDCBA98));
@@ -119,7 +119,7 @@ TEST_F(WriteFieldsTest, FractionalSecondsTimestamp) {
 TEST_F(WriteFieldsTest, FractionalSecondsTimestampInvalid) {
     h_.tsf                          = VRT_TSF_REAL_TIME;
     f_.fractional_seconds_timestamp = 0x000000E8D4A51000;
-    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2, true), VRT_ERR_REAL_TIME);
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2, true), VRT_ERR_BOUNDS_REAL_TIME);
     ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 2, false), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x000000E8));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xD4A51000));

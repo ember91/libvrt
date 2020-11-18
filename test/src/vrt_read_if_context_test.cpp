@@ -310,7 +310,7 @@ TEST_F(ReadIfContextTest, BandwidthInvalid) {
     buf_[0] = 0x20000000;
     buf_[1] = 0xFFFFFFFF;
     buf_[2] = 0xFFF00000;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, true), VRT_ERR_BANDWIDTH);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, true), VRT_ERR_BOUNDS_BANDWIDTH);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, false), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.bandwidth", true}, {"bandwidth", -1.0}});
@@ -398,7 +398,7 @@ TEST_F(ReadIfContextTest, SampleRateInvalid) {
     buf_[0] = 0x00200000;
     buf_[1] = 0xFFFFFFFF;
     buf_[2] = 0xFFF00000;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, true), VRT_ERR_SAMPLE_RATE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, true), VRT_ERR_BOUNDS_SAMPLE_RATE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, false), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.sample_rate", true}, {"sample_rate", -1.0}});
@@ -434,7 +434,7 @@ TEST_F(ReadIfContextTest, Temperature) {
 TEST_F(ReadIfContextTest, TemperatureInvalid) {
     buf_[0] = 0x00040000;
     buf_[1] = 0x0000BB80;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), VRT_ERR_TEMPERATURE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), VRT_ERR_BOUNDS_TEMPERATURE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, false), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.temperature", true}, {"temperature", -274.0F}});
@@ -812,7 +812,7 @@ TEST_F(ReadIfContextTest, DataPacketPayloadFormatRealOrComplexInvalid) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x60000000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, true), VRT_ERR_REAL_OR_COMPLEX);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, true), VRT_ERR_INVALID_REAL_OR_COMPLEX);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, false), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.data_packet_payload_format", true},
@@ -833,7 +833,7 @@ TEST_F(ReadIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid1) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x07000000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, true), VRT_ERR_DATA_ITEM_FORMAT);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, true), VRT_ERR_INVALID_DATA_ITEM_FORMAT);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, false), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.data_packet_payload_format", true},
@@ -844,7 +844,7 @@ TEST_F(ReadIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid2) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x0D000000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, true), VRT_ERR_DATA_ITEM_FORMAT);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, true), VRT_ERR_INVALID_DATA_ITEM_FORMAT);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, false), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.data_packet_payload_format", true},
@@ -855,7 +855,7 @@ TEST_F(ReadIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid3) {
     buf_[0] = 0x00008000;
     buf_[1] = 0x17000000;
     buf_[2] = 0x00000000;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, true), VRT_ERR_DATA_ITEM_FORMAT);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, true), VRT_ERR_INVALID_DATA_ITEM_FORMAT);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 3, &c_, false), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.data_packet_payload_format", true},
@@ -1031,7 +1031,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationIntegerSecondTimestampInvalid) 
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_INTEGER_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
@@ -1072,7 +1072,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationFractionalSecondTimestampInvali
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(
@@ -1093,7 +1093,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationFractionalSecondTimestampInvali
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_REAL_TIME);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_REAL_TIME);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(
@@ -1135,7 +1135,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLatitudeInvalid1) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LATITUDE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_LATITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
@@ -1156,7 +1156,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLatitudeInvalid2) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LATITUDE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_LATITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
@@ -1197,7 +1197,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitudeInvalid1) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LONGITUDE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_LONGITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
@@ -1218,7 +1218,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitudeInvalid2) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LONGITUDE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_LONGITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
@@ -1299,7 +1299,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngleInvalid1) {
     buf_[9]  = 0xFFC00000;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_HEADING_ANGLE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_HEADING_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
@@ -1320,7 +1320,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngleInvalid2) {
     buf_[9]  = 0x5A000000;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_HEADING_ANGLE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_HEADING_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
@@ -1361,7 +1361,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngleInvalid1) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0xFFC00000;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_TRACK_ANGLE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_TRACK_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
@@ -1382,7 +1382,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngleInvalid2) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x5A000000;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_TRACK_ANGLE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_TRACK_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
@@ -1423,7 +1423,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariationInvalid1) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0xD2C00000;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_MAGNETIC_VARIATION);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
@@ -1444,7 +1444,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariationInvalid2) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x2D400000;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_MAGNETIC_VARIATION);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_gps_geolocation", true},
@@ -1560,7 +1560,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationIntegerSecondTimestampInvalid) 
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_INTEGER_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
@@ -1601,7 +1601,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationFractionalSecondTimestampInvali
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(
@@ -1622,7 +1622,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationFractionalSecondTimestampInvali
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_REAL_TIME);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_REAL_TIME);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(
@@ -1664,7 +1664,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLatitudeInvalid1) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LATITUDE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_LATITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
@@ -1685,7 +1685,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLatitudeInvalid2) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LATITUDE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_LATITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
@@ -1726,7 +1726,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitudeInvalid1) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LONGITUDE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_LONGITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
@@ -1747,7 +1747,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitudeInvalid2) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_LONGITUDE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_LONGITUDE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
@@ -1828,7 +1828,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngleInvalid1) {
     buf_[9]  = 0xFFC00000;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_HEADING_ANGLE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_HEADING_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
@@ -1849,7 +1849,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngleInvalid2) {
     buf_[9]  = 0x5A000000;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_HEADING_ANGLE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_HEADING_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
@@ -1890,7 +1890,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngleInvalid1) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0xFFC00000;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_TRACK_ANGLE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_TRACK_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
@@ -1911,7 +1911,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngleInvalid2) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x5A000000;
     buf_[11] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_TRACK_ANGLE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_TRACK_ANGLE);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
@@ -1952,7 +1952,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariationInvalid1) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0xD2C00000;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_MAGNETIC_VARIATION);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
@@ -1973,7 +1973,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariationInvalid2) {
     buf_[9]  = 0x7FFFFFFF;
     buf_[10] = 0x7FFFFFFF;
     buf_[11] = 0x2D400000;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_MAGNETIC_VARIATION);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, true), VRT_ERR_BOUNDS_MAGNETIC_VARIATION);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 12, &c_, false), 12);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.formatted_ins_geolocation", true},
@@ -2097,7 +2097,7 @@ TEST_F(ReadIfContextTest, EcefEphemerisIntegerSecondTimestampInvalid) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), VRT_ERR_INTEGER_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, false), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.ecef_ephemeris", true},
@@ -2141,7 +2141,7 @@ TEST_F(ReadIfContextTest, EcefEphemerisFractionalSecondTimestampInvalid1) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, false), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.ecef_ephemeris", true},
@@ -2163,7 +2163,7 @@ TEST_F(ReadIfContextTest, EcefEphemerisFractionalSecondTimestampInvalid2) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), VRT_ERR_REAL_TIME);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), VRT_ERR_BOUNDS_REAL_TIME);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, false), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.ecef_ephemeris", true},
@@ -2488,7 +2488,7 @@ TEST_F(ReadIfContextTest, RelativeEphemerisIntegerSecondTimestampInvalid) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), VRT_ERR_INTEGER_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, false), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.relative_ephemeris", true},
@@ -2533,7 +2533,7 @@ TEST_F(ReadIfContextTest, RelativeEphemerisFractionalSecondTimestampInvalid1) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), VRT_ERR_FRACTIONAL_SECOND_TIMESTAMP);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, false), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_,
@@ -2556,7 +2556,7 @@ TEST_F(ReadIfContextTest, RelativeEphemerisFractionalSecondTimestampInvalid2) {
     buf_[11] = 0x7FFFFFFF;
     buf_[12] = 0x7FFFFFFF;
     buf_[13] = 0x7FFFFFFF;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), VRT_ERR_REAL_TIME);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, true), VRT_ERR_BOUNDS_REAL_TIME);
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 14, &c_, false), 14);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_,

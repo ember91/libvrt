@@ -60,7 +60,7 @@ TEST_F(ReadHeaderTest, PacketType) {
 
 TEST_F(ReadHeaderTest, PacketTypeInvalid) {
     buf_[0] = 0xF0000000;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), VRT_ERR_PACKET_TYPE);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), VRT_ERR_INVALID_PACKET_TYPE);
     ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, false), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"packet_type", static_cast<vrt_packet_type>(0xF)}});
@@ -82,7 +82,7 @@ TEST_F(ReadHeaderTest, HasTrailer) {
 
 TEST_F(ReadHeaderTest, HasTrailerInvalid) {
     buf_[0] = 0x44000000;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), VRT_ERR_TRAILER);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), VRT_ERR_TRAILER_IN_CONTEXT);
     ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, false), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"packet_type", VRT_PT_IF_CONTEXT}, {"has.trailer", true}});
@@ -97,7 +97,7 @@ TEST_F(ReadHeaderTest, Tsm) {
 
 TEST_F(ReadHeaderTest, TsmInvalid) {
     buf_[0] = 0x01000000;
-    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), VRT_ERR_TSM);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), VRT_ERR_TSM_IN_DATA);
     ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, false), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(h_, {{"tsm", VRT_TSM_COARSE}});
