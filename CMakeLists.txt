@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(vrt VERSION 1.0 LANGUAGES C DESCRIPTION "Read/write library of packets following the VITA Radio Transport (VRT) standard, i.e. VITA-49.0.")
+project(vrt LANGUAGES C DESCRIPTION "Read/write library of packets following the VITA Radio Transport (VRT) standard, i.e. VITA-49.0.")
 
 # Search for packages in doc directory as well
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/doc")
