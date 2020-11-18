@@ -1,0 +1,362 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structvrt__context__indicators" kind="struct" language="C++" prot="public">
+    <compoundname>vrt_context_indicators</compoundname>
+    <includes refid="vrt__types_8h" local="no">vrt_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvrt__context__indicators_1a1cd456a7525415776764241d3f15ed31" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::reference_point_identifier</definition>
+        <argsstring></argsstring>
+        <name>reference_point_identifier</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Reference point identifier field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="230" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="230" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1a900a8a1615b2eb448d5ab283f1453304" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::bandwidth</definition>
+        <argsstring></argsstring>
+        <name>bandwidth</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Bandwidth field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="231" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="231" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1ac8b986bf69a25948b8f484c6f5d096ff" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::if_reference_frequency</definition>
+        <argsstring></argsstring>
+        <name>if_reference_frequency</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the IF reference frequency field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="232" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="232" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1aca2f8c58889e9fd4b5ff9c106e7d739b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::rf_reference_frequency</definition>
+        <argsstring></argsstring>
+        <name>rf_reference_frequency</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the RF reference frequency field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="233" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="233" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1ab2904c2e4c19cb61f7f14dbd96147dc8" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::rf_reference_frequency_offset</definition>
+        <argsstring></argsstring>
+        <name>rf_reference_frequency_offset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the RF reference frequency offset field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="234" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1af2206733a0799c5f2b524d95ddcc7088" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::if_band_offset</definition>
+        <argsstring></argsstring>
+        <name>if_band_offset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the IF band offset field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="235" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1a37a7fdf7b4590a31cd450c8343495f4e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::reference_level</definition>
+        <argsstring></argsstring>
+        <name>reference_level</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Reference level field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="236" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1adf121b8e4c8ec45e7f4ef29e099bb970" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::gain</definition>
+        <argsstring></argsstring>
+        <name>gain</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Gain stage 1 and 2 fields. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="237" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1acf023bcde77e497ec4355af6cb23aa19" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::over_range_count</definition>
+        <argsstring></argsstring>
+        <name>over_range_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Over-range count field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="238" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1ac37112e72578bdd925830aaf80814f18" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::sample_rate</definition>
+        <argsstring></argsstring>
+        <name>sample_rate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Sample rate field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="239" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="239" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1a5a46e083f824d20aa11451788d27cd5e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::timestamp_adjustment</definition>
+        <argsstring></argsstring>
+        <name>timestamp_adjustment</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Timestamp adjustment field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="240" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="240" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1adc32daa82410c992b28629739a5902e4" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::timestamp_calibration_time</definition>
+        <argsstring></argsstring>
+        <name>timestamp_calibration_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Timestamp calibration time field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="241" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1aaf7df5451e6f5216b3d19de5489b70fb" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::temperature</definition>
+        <argsstring></argsstring>
+        <name>temperature</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Temperature field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="242" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="242" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1a2f5521d718f31d4b8fc71c387aab6cce" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::device_identifier</definition>
+        <argsstring></argsstring>
+        <name>device_identifier</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Device identifier field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="243" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="243" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1a8b785c926d439a93bb73dffee8123f33" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::state_and_event_indicators</definition>
+        <argsstring></argsstring>
+        <name>state_and_event_indicators</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the State and event indicators field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="244" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1ab5c7bbc56d4b1d855afdd1e247deab78" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::data_packet_payload_format</definition>
+        <argsstring></argsstring>
+        <name>data_packet_payload_format</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Data packet payload format field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="245" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="245" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1a1ee6c5292bf1ea6c0a03ebc8dc1340fe" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::formatted_gps_geolocation</definition>
+        <argsstring></argsstring>
+        <name>formatted_gps_geolocation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Formatted GPS geolocation field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="246" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="246" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1a065ed536474ad76d437fc3b6a3afc75d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::formatted_ins_geolocation</definition>
+        <argsstring></argsstring>
+        <name>formatted_ins_geolocation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Formatted INS geolocation field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="247" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="247" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1a084dcfeb87fcbd9bcc0328cf997b6199" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::ecef_ephemeris</definition>
+        <argsstring></argsstring>
+        <name>ecef_ephemeris</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the ECEF ephemeris field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="248" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="248" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1a59659a368384e220da89bf83622b5bb0" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::relative_ephemeris</definition>
+        <argsstring></argsstring>
+        <name>relative_ephemeris</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Relative ephemeris field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="249" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1adf461c235c909c8a4c2f233dc362f917" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::ephemeris_reference_identifier</definition>
+        <argsstring></argsstring>
+        <name>ephemeris_reference_identifier</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Ephemeris reference identifier field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="250" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="250" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1aa189b036e803839f4c3b56c1869aabb5" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::gps_ascii</definition>
+        <argsstring></argsstring>
+        <name>gps_ascii</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the GPS ASCII field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="251" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="251" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__indicators_1afa46266dd9b054b0bf8cc0c77e701ddc" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_indicators::context_association_lists</definition>
+        <argsstring></argsstring>
+        <name>context_association_lists</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Context association list field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="252" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="252" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Indicates presence of context fields. </para>
+    </detaileddescription>
+    <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="229" column="37" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="229" bodyend="253"/>
+    <listofallmembers>
+      <member refid="structvrt__context__indicators_1a900a8a1615b2eb448d5ab283f1453304" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>bandwidth</name></member>
+      <member refid="structvrt__context__indicators_1afa46266dd9b054b0bf8cc0c77e701ddc" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>context_association_lists</name></member>
+      <member refid="structvrt__context__indicators_1ab5c7bbc56d4b1d855afdd1e247deab78" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>data_packet_payload_format</name></member>
+      <member refid="structvrt__context__indicators_1a2f5521d718f31d4b8fc71c387aab6cce" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>device_identifier</name></member>
+      <member refid="structvrt__context__indicators_1a084dcfeb87fcbd9bcc0328cf997b6199" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>ecef_ephemeris</name></member>
+      <member refid="structvrt__context__indicators_1adf461c235c909c8a4c2f233dc362f917" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>ephemeris_reference_identifier</name></member>
+      <member refid="structvrt__context__indicators_1a1ee6c5292bf1ea6c0a03ebc8dc1340fe" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>formatted_gps_geolocation</name></member>
+      <member refid="structvrt__context__indicators_1a065ed536474ad76d437fc3b6a3afc75d" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>formatted_ins_geolocation</name></member>
+      <member refid="structvrt__context__indicators_1adf121b8e4c8ec45e7f4ef29e099bb970" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>gain</name></member>
+      <member refid="structvrt__context__indicators_1aa189b036e803839f4c3b56c1869aabb5" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>gps_ascii</name></member>
+      <member refid="structvrt__context__indicators_1af2206733a0799c5f2b524d95ddcc7088" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>if_band_offset</name></member>
+      <member refid="structvrt__context__indicators_1ac8b986bf69a25948b8f484c6f5d096ff" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>if_reference_frequency</name></member>
+      <member refid="structvrt__context__indicators_1acf023bcde77e497ec4355af6cb23aa19" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>over_range_count</name></member>
+      <member refid="structvrt__context__indicators_1a37a7fdf7b4590a31cd450c8343495f4e" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>reference_level</name></member>
+      <member refid="structvrt__context__indicators_1a1cd456a7525415776764241d3f15ed31" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>reference_point_identifier</name></member>
+      <member refid="structvrt__context__indicators_1a59659a368384e220da89bf83622b5bb0" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>relative_ephemeris</name></member>
+      <member refid="structvrt__context__indicators_1aca2f8c58889e9fd4b5ff9c106e7d739b" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>rf_reference_frequency</name></member>
+      <member refid="structvrt__context__indicators_1ab2904c2e4c19cb61f7f14dbd96147dc8" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>rf_reference_frequency_offset</name></member>
+      <member refid="structvrt__context__indicators_1ac37112e72578bdd925830aaf80814f18" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>sample_rate</name></member>
+      <member refid="structvrt__context__indicators_1a8b785c926d439a93bb73dffee8123f33" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>state_and_event_indicators</name></member>
+      <member refid="structvrt__context__indicators_1aaf7df5451e6f5216b3d19de5489b70fb" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>temperature</name></member>
+      <member refid="structvrt__context__indicators_1a5a46e083f824d20aa11451788d27cd5e" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>timestamp_adjustment</name></member>
+      <member refid="structvrt__context__indicators_1adc32daa82410c992b28629739a5902e4" prot="public" virt="non-virtual"><scope>vrt_context_indicators</scope><name>timestamp_calibration_time</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

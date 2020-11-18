@@ -1,3 +1,4 @@
+* Improve documentation
 * Same warning message right now for TSM bit set for data packet and TSM outside bounds.
 * Should error codes really be in common.h?
 * In write test, break out common initializations of buffer for GPS, INS, ECEF ephemeris and Relative ephemeris. 
@@ -5,7 +6,6 @@
 * Compile with -fvisibility=hidden?
 * Header only library
 * Use CMAKE_CURRENT_SOURCE_DIR
-* Breathe and sphinx?
 * Add tests that write to buffer and then read from the same buffer. vrt_compare_...() functions may be useful for this.
 * Add read example
 * Add int32_t vrt_write_data(vrt_header* h, vrt_fields* f, uint32_t* data, uint16_t* data_words, vrt_trailer* t)
@@ -16,3 +16,4 @@
 * Fuzzing
 * Check that float, double... are inside bound when writing and validating
 * Geolocation and ephemeris has a common base. Maybe use that somehow?
+* is_platform_little_endian needs vrt_ prefix

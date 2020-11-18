@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structvrt__gps__ascii" kind="struct" language="C++" prot="public">
+    <compoundname>vrt_gps_ascii</compoundname>
+    <includes refid="vrt__types_8h" local="no">vrt_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvrt__gps__ascii_1abf1522ca0f474a9ec246f21fc4849e34" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t vrt_gps_ascii::oui</definition>
+        <argsstring></argsstring>
+        <name>oui</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>IEEE Organizationally Unique Identifier of GPS/INS manufacturer.</para>
+<para><simplesect kind="note"><para>Only the 24 least significant bits are used. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="557" column="14" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="557" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__gps__ascii_1aed0c8e9fea9bf7ce8ce9d52d9df7c8c4" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t vrt_gps_ascii::number_of_words</definition>
+        <argsstring></argsstring>
+        <name>number_of_words</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Number of 32-bit words used for the GPS ASCII. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="559" column="14" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="559" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__gps__ascii_1a9ba10742e7df773d21529add3f5629d8" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* vrt_gps_ascii::ascii</definition>
+        <argsstring></argsstring>
+        <name>ascii</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>GPS ASCII sentences. Padded with null characters so it&apos;s a multiple of 4 B. Pointer may be null when not defined.</para>
+<para><simplesect kind="warning"><para>Will point into the buffer when the field is read. Deallocating the buffer will render the pointer invalid. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="567" column="16" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="567" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>GPS device ASCII. </para>
+    </detaileddescription>
+    <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="551" column="28" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="551" bodyend="568"/>
+    <listofallmembers>
+      <member refid="structvrt__gps__ascii_1a9ba10742e7df773d21529add3f5629d8" prot="public" virt="non-virtual"><scope>vrt_gps_ascii</scope><name>ascii</name></member>
+      <member refid="structvrt__gps__ascii_1aed0c8e9fea9bf7ce8ce9d52d9df7c8c4" prot="public" virt="non-virtual"><scope>vrt_gps_ascii</scope><name>number_of_words</name></member>
+      <member refid="structvrt__gps__ascii_1abf1522ca0f474a9ec246f21fc4849e34" prot="public" virt="non-virtual"><scope>vrt_gps_ascii</scope><name>oui</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

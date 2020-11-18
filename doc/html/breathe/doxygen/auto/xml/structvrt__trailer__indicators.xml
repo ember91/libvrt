@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structvrt__trailer__indicators" kind="struct" language="C++" prot="public">
+    <compoundname>vrt_trailer_indicators</compoundname>
+    <includes refid="vrt__types_8h" local="no">vrt_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvrt__trailer__indicators_1a98bded9e543137e1fa3f427ad24055a6" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer_indicators::calibrated_time</definition>
+        <argsstring></argsstring>
+        <name>calibrated_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Calibrated time indicator field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="162" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer__indicators_1a4aa01e073865d662045966ccff2ce2de" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer_indicators::valid_data</definition>
+        <argsstring></argsstring>
+        <name>valid_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Valid data indicator field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="163" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer__indicators_1a3c5b568a6ad56f2c83b6ea844b3bb90a" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer_indicators::reference_lock</definition>
+        <argsstring></argsstring>
+        <name>reference_lock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Reference lock indicator field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="164" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer__indicators_1a64c47fe5f4eaeeedb1fe4bfc1f8294e5" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer_indicators::agc_or_mgc</definition>
+        <argsstring></argsstring>
+        <name>agc_or_mgc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the AGC/MGC indicator field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="165" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer__indicators_1a8693b49f03b8fd3885832c8254c61897" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer_indicators::detected_signal</definition>
+        <argsstring></argsstring>
+        <name>detected_signal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Detected signal indicator field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="166" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer__indicators_1a7dc05eef4036f33cf7e9a162ea7bd562" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer_indicators::spectral_inversion</definition>
+        <argsstring></argsstring>
+        <name>spectral_inversion</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Spectral inversion indicator field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="167" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer__indicators_1aaeecd9b2ef7341767fe12df5ded17ccc" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer_indicators::over_range</definition>
+        <argsstring></argsstring>
+        <name>over_range</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Over-range indicator field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="168" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer__indicators_1a81dfcf37c6fbd571b2614c290a2ba9e0" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer_indicators::sample_loss</definition>
+        <argsstring></argsstring>
+        <name>sample_loss</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Sample loss indicator field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="169" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer__indicators_1a83cb677162e0ece353fd74b3736dc567" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer_indicators::user_defined11</definition>
+        <argsstring></argsstring>
+        <name>user_defined11</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the User defined bit 11 indicator field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="170" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer__indicators_1a5bdca4727fae33a0fd77e3625f13dfb1" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer_indicators::user_defined10</definition>
+        <argsstring></argsstring>
+        <name>user_defined10</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the User defined bit 10 indicator field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="171" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer__indicators_1aebdc8e17145087496b6b864fc005d60b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer_indicators::user_defined9</definition>
+        <argsstring></argsstring>
+        <name>user_defined9</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the User defined bit 9 indicator field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="172" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer__indicators_1af527a2ee8f70485ce2ce5091a3e01e32" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer_indicators::user_defined8</definition>
+        <argsstring></argsstring>
+        <name>user_defined8</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the User defined bit 8 indicator field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="173" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer__indicators_1a41af3c32ed3b4e94cfd69447f9362fc0" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer_indicators::associated_context_packet_count</definition>
+        <argsstring></argsstring>
+        <name>associated_context_packet_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Associated context packet count field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="174" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Indicates presence of trailer fields. </para>
+    </detaileddescription>
+    <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="161" column="37" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="161" bodyend="175"/>
+    <listofallmembers>
+      <member refid="structvrt__trailer__indicators_1a64c47fe5f4eaeeedb1fe4bfc1f8294e5" prot="public" virt="non-virtual"><scope>vrt_trailer_indicators</scope><name>agc_or_mgc</name></member>
+      <member refid="structvrt__trailer__indicators_1a41af3c32ed3b4e94cfd69447f9362fc0" prot="public" virt="non-virtual"><scope>vrt_trailer_indicators</scope><name>associated_context_packet_count</name></member>
+      <member refid="structvrt__trailer__indicators_1a98bded9e543137e1fa3f427ad24055a6" prot="public" virt="non-virtual"><scope>vrt_trailer_indicators</scope><name>calibrated_time</name></member>
+      <member refid="structvrt__trailer__indicators_1a8693b49f03b8fd3885832c8254c61897" prot="public" virt="non-virtual"><scope>vrt_trailer_indicators</scope><name>detected_signal</name></member>
+      <member refid="structvrt__trailer__indicators_1aaeecd9b2ef7341767fe12df5ded17ccc" prot="public" virt="non-virtual"><scope>vrt_trailer_indicators</scope><name>over_range</name></member>
+      <member refid="structvrt__trailer__indicators_1a3c5b568a6ad56f2c83b6ea844b3bb90a" prot="public" virt="non-virtual"><scope>vrt_trailer_indicators</scope><name>reference_lock</name></member>
+      <member refid="structvrt__trailer__indicators_1a81dfcf37c6fbd571b2614c290a2ba9e0" prot="public" virt="non-virtual"><scope>vrt_trailer_indicators</scope><name>sample_loss</name></member>
+      <member refid="structvrt__trailer__indicators_1a7dc05eef4036f33cf7e9a162ea7bd562" prot="public" virt="non-virtual"><scope>vrt_trailer_indicators</scope><name>spectral_inversion</name></member>
+      <member refid="structvrt__trailer__indicators_1a5bdca4727fae33a0fd77e3625f13dfb1" prot="public" virt="non-virtual"><scope>vrt_trailer_indicators</scope><name>user_defined10</name></member>
+      <member refid="structvrt__trailer__indicators_1a83cb677162e0ece353fd74b3736dc567" prot="public" virt="non-virtual"><scope>vrt_trailer_indicators</scope><name>user_defined11</name></member>
+      <member refid="structvrt__trailer__indicators_1af527a2ee8f70485ce2ce5091a3e01e32" prot="public" virt="non-virtual"><scope>vrt_trailer_indicators</scope><name>user_defined8</name></member>
+      <member refid="structvrt__trailer__indicators_1aebdc8e17145087496b6b864fc005d60b" prot="public" virt="non-virtual"><scope>vrt_trailer_indicators</scope><name>user_defined9</name></member>
+      <member refid="structvrt__trailer__indicators_1a4aa01e073865d662045966ccff2ce2de" prot="public" virt="non-virtual"><scope>vrt_trailer_indicators</scope><name>valid_data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

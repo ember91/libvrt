@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structvrt__header" kind="struct" language="C++" prot="public">
+    <compoundname>vrt_header</compoundname>
+    <includes refid="vrt__types_8h" local="no">vrt_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvrt__header_1a1f49e447592ab6780d4349159be3bb83" prot="public" static="no" mutable="no">
+        <type>vrt_packet_type</type>
+        <definition>vrt_packet_type vrt_header::packet_type</definition>
+        <argsstring></argsstring>
+        <name>packet_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Type of packet. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="80" column="21" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__header_1a01d307ed3e8c6ee5654d23c6366d23d2" prot="public" static="no" mutable="no">
+        <type><ref refid="structvrt__header__indicators" kindref="compound">vrt_header_indicators</ref></type>
+        <definition>vrt_header_indicators vrt_header::has</definition>
+        <argsstring></argsstring>
+        <name>has</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Indicates presence of extra fields. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="82" column="27" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__header_1a7ca65c871e3a6ced1d430a3c25e89243" prot="public" static="no" mutable="no">
+        <type>vrt_tsm</type>
+        <definition>vrt_tsm vrt_header::tsm</definition>
+        <argsstring></argsstring>
+        <name>tsm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Timestamp mode. Whether timestamps are with fine or coarse resolution. Coarse if an event happened sometime in the data sampling interval.</para>
+<para><simplesect kind="note"><para>True is only valid for context packets. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="89" column="13" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__header_1a08cf5039c8f4785b1c376a6df2099793" prot="public" static="no" mutable="no">
+        <type>vrt_tsi</type>
+        <definition>vrt_tsi vrt_header::tsi</definition>
+        <argsstring></argsstring>
+        <name>tsi</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Type of integer second timestamp.</para>
+<para><simplesect kind="note"><para>Rule 6.1.1-7: All the packets in an IF Data Packet Stream shall have the same TSI code, and thus the same Integer-seconds Timestamp. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="96" column="13" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__header_1a0dc05ea419f1f1e7685c18603921bc0f" prot="public" static="no" mutable="no">
+        <type>vrt_tsf</type>
+        <definition>vrt_tsf vrt_header::tsf</definition>
+        <argsstring></argsstring>
+        <name>tsf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Type of fractional second timestamp.</para>
+<para><simplesect kind="note"><para>Rule 6.1.1-10: All the packets in an IF Data Packet Stream shall have the same TSF code, and thus the same Fractional-seconds Timestamp. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="103" column="13" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__header_1a22f059df8d482963a46c528fe4902e70" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t vrt_header::packet_count</definition>
+        <argsstring></argsstring>
+        <name>packet_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Modulo-16 count of packets for the specified stream. Can (to some degree) be used to determine packet loss.</para>
+<para><simplesect kind="note"><para>Only the 4 least significant bits are used. </para>
+</simplesect>
+<simplesect kind="note"><para>Rule 6.1.1-11: The Packet Count shall increment in each consecutive IF Data packet having the same Stream Identifier and the same packet type. The count shall roll over from “1111” to “0000”. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="111" column="13" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__header_1af05fea630bbe4a06c9191b7ccfc98262" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t vrt_header::packet_size</definition>
+        <argsstring></argsstring>
+        <name>packet_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Total number of 32-bit words in the packet.</para>
+<para><simplesect kind="note"><para>May vary from packet to packet. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="117" column="14" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Header data. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>vrt_header_indicators</label>
+        <link refid="structvrt__header__indicators"/>
+      </node>
+      <node id="1">
+        <label>vrt_header</label>
+        <link refid="structvrt__header"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>has</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="78" column="25" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="78" bodyend="118"/>
+    <listofallmembers>
+      <member refid="structvrt__header_1a01d307ed3e8c6ee5654d23c6366d23d2" prot="public" virt="non-virtual"><scope>vrt_header</scope><name>has</name></member>
+      <member refid="structvrt__header_1a22f059df8d482963a46c528fe4902e70" prot="public" virt="non-virtual"><scope>vrt_header</scope><name>packet_count</name></member>
+      <member refid="structvrt__header_1af05fea630bbe4a06c9191b7ccfc98262" prot="public" virt="non-virtual"><scope>vrt_header</scope><name>packet_size</name></member>
+      <member refid="structvrt__header_1a1f49e447592ab6780d4349159be3bb83" prot="public" virt="non-virtual"><scope>vrt_header</scope><name>packet_type</name></member>
+      <member refid="structvrt__header_1a0dc05ea419f1f1e7685c18603921bc0f" prot="public" virt="non-virtual"><scope>vrt_header</scope><name>tsf</name></member>
+      <member refid="structvrt__header_1a08cf5039c8f4785b1c376a6df2099793" prot="public" virt="non-virtual"><scope>vrt_header</scope><name>tsi</name></member>
+      <member refid="structvrt__header_1a7ca65c871e3a6ced1d430a3c25e89243" prot="public" virt="non-virtual"><scope>vrt_header</scope><name>tsm</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

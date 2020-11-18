@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structvrt__trailer" kind="struct" language="C++" prot="public">
+    <compoundname>vrt_trailer</compoundname>
+    <includes refid="vrt__types_8h" local="no">vrt_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvrt__trailer_1a79beaf42b0a052f855032bfd827a61f6" prot="public" static="no" mutable="no">
+        <type><ref refid="structvrt__trailer__indicators" kindref="compound">vrt_trailer_indicators</ref></type>
+        <definition>vrt_trailer_indicators vrt_trailer::has</definition>
+        <argsstring></argsstring>
+        <name>has</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Field presence indicators. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="187" column="28" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer_1a6eaa55a7389193c4c619a55e016a7f1c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer::calibrated_time</definition>
+        <argsstring></argsstring>
+        <name>calibrated_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if the timestamp is calibrated to an external reference. Activate by setting has.calibrated_time to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="191" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer_1a1f1464c05473d054ca4428a312374a31" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer::valid_data</definition>
+        <argsstring></argsstring>
+        <name>valid_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if the packet data is valid. Activate by setting has.valid_data to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="193" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer_1a2a6f5e0d2ea3c03a6fdaf923f8282686" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer::reference_lock</definition>
+        <argsstring></argsstring>
+        <name>reference_lock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if the reference is phase locked and stable. Activate by setting has.reference_lock to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="195" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer_1a814d559fc0f7331aa3e4d7d901f79166" prot="public" static="no" mutable="no">
+        <type>vrt_agc_or_mgc</type>
+        <definition>vrt_agc_or_mgc vrt_trailer::agc_or_mgc</definition>
+        <argsstring></argsstring>
+        <name>agc_or_mgc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Whether AGC or MGC is active. Activate by setting has.agc_or_mgc to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="197" column="20" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer_1a57cd29191c2bae424c6f72249fdd9c5c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer::detected_signal</definition>
+        <argsstring></argsstring>
+        <name>detected_signal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if a signal is detected in the packet. Activate by setting has.detected_signal to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="199" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer_1a56884aeeb40abd10ae3cde90ab15ab6b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer::spectral_inversion</definition>
+        <argsstring></argsstring>
+        <name>spectral_inversion</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if the signal has an inverted spectrum. Activate by setting has.spectral_inversion to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="201" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="201" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer_1a8b7473834e52bfc764f8c039eb280466" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer::over_range</definition>
+        <argsstring></argsstring>
+        <name>over_range</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if at least one data sample in the packet exceeds the range of a sample. Activate by setting has.over_range to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="206" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="206" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer_1a372a862c7b0afb9b034ab4f90330daae" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer::sample_loss</definition>
+        <argsstring></argsstring>
+        <name>sample_loss</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Contains at least one sample discontinuity. Activate by setting has.sample_loss to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="208" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer_1a1e140435bf053952d0d9edb8792e58be" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer::user_defined11</definition>
+        <argsstring></argsstring>
+        <name>user_defined11</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Bit 11 in the trailer word. Defined by the user. Activate by setting has.user_defined11 to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="210" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="210" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer_1aa37183abb3fb505ef03c4fb60e1be8de" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer::user_defined10</definition>
+        <argsstring></argsstring>
+        <name>user_defined10</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Bit 10 in the trailer word. Defined by the user. Activate by setting has.user_defined10 to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="212" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="212" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer_1aa18c1f9197c838289e4483ce40fd3fcc" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer::user_defined9</definition>
+        <argsstring></argsstring>
+        <name>user_defined9</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Bit 9 in the trailer word. Defined by the user. Activate by setting has.user_defined9 to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="214" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer_1ab165957bac058ef53c1e0a4fde7574e1" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_trailer::user_defined8</definition>
+        <argsstring></argsstring>
+        <name>user_defined8</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Bit 8 in the trailer word. Defined by the user. Activate by setting has.user_defined8 to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="216" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__trailer_1a63f09ec8a6c8fee58a5a01c0b1d89226" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t vrt_trailer::associated_context_packet_count</definition>
+        <argsstring></argsstring>
+        <name>associated_context_packet_count</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Number of context packets associated to this packet. Activate by setting has.associated_context_packet_count to True.</para>
+<para><simplesect kind="note"><para>Only the 7 least significant bits are used. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="223" column="13" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Trailer section data. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>vrt_trailer</label>
+        <link refid="structvrt__trailer"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>has</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vrt_trailer_indicators</label>
+        <link refid="structvrt__trailer__indicators"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="185" column="26" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="185" bodyend="224"/>
+    <listofallmembers>
+      <member refid="structvrt__trailer_1a814d559fc0f7331aa3e4d7d901f79166" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>agc_or_mgc</name></member>
+      <member refid="structvrt__trailer_1a63f09ec8a6c8fee58a5a01c0b1d89226" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>associated_context_packet_count</name></member>
+      <member refid="structvrt__trailer_1a6eaa55a7389193c4c619a55e016a7f1c" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>calibrated_time</name></member>
+      <member refid="structvrt__trailer_1a57cd29191c2bae424c6f72249fdd9c5c" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>detected_signal</name></member>
+      <member refid="structvrt__trailer_1a79beaf42b0a052f855032bfd827a61f6" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>has</name></member>
+      <member refid="structvrt__trailer_1a8b7473834e52bfc764f8c039eb280466" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>over_range</name></member>
+      <member refid="structvrt__trailer_1a2a6f5e0d2ea3c03a6fdaf923f8282686" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>reference_lock</name></member>
+      <member refid="structvrt__trailer_1a372a862c7b0afb9b034ab4f90330daae" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>sample_loss</name></member>
+      <member refid="structvrt__trailer_1a56884aeeb40abd10ae3cde90ab15ab6b" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>spectral_inversion</name></member>
+      <member refid="structvrt__trailer_1aa37183abb3fb505ef03c4fb60e1be8de" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>user_defined10</name></member>
+      <member refid="structvrt__trailer_1a1e140435bf053952d0d9edb8792e58be" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>user_defined11</name></member>
+      <member refid="structvrt__trailer_1ab165957bac058ef53c1e0a4fde7574e1" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>user_defined8</name></member>
+      <member refid="structvrt__trailer_1aa18c1f9197c838289e4483ce40fd3fcc" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>user_defined9</name></member>
+      <member refid="structvrt__trailer_1a1f1464c05473d054ca4428a312374a31" prot="public" virt="non-virtual"><scope>vrt_trailer</scope><name>valid_data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

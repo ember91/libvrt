@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.0)
 
 project(vrt VERSION 1.0 LANGUAGES C DESCRIPTION "Read/write library of packets following the VITA Radio Transport (VRT) standard, i.e. VITA-49.0.")
 
+# Search for packages in doc directory as well
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/doc")
+
 # Default to 'Release'
 if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build, options are: Debug Release RelWithDebInfo MinSizeRel." FORCE)
@@ -17,6 +20,20 @@ option(DOCUMENTATION    "Build doxygen documentation"   OFF)
 option(IWYU             "Include what you use"          OFF)
 option(TEST             "Compile test suite"            OFF)
 
+find_package(Doxygen)
+find_package(Breathe)
+find_package(Sphinx)
+
+if (NOT DOXYGEN_FOUND)
+    message(WARNING "Doxygen is required for documentation generation")
+endif()
+if (NOT BREATHE_FOUND)
+    message(WARNING "Breathe is required for documentation generation")
+endif()
+if (NOT SPHINX_FOUND)
+    message(WARNING "Sphinx is required for documentation generation")
+endif()
+
 # Check if options are set
 if (${CLANG_TIDY})
     message(STATUS "Enabling clang-tidy for C")
@@ -30,24 +47,47 @@ if (${CPPLINT})
     message(STATUS "Enabling cpplint for C")
     set(CMAKE_C_CPPLINT "cpplint;--linelength=120;--filter=-legal/copyright,-build/include_subdir")
 endif()
-find_package(Doxygen)
 if (DOCUMENTATION)
-    if (DOXYGEN_FOUND)
+    if (DOXYGEN_FOUND AND BREATHE_FOUND AND SPHINX_FOUND)
         # Set input and output files
         set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in)
-        set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+        set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/doc/Doxyfile)
 
-        # Request to configure the file
-        configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
-        message(STATUS "Doxygen build started")
+        # Copy configuration files
+        configure_file(
+            ${DOXYGEN_IN}
+            ${DOXYGEN_OUT}
+            @ONLY)
+        configure_file(
+            "${CMAKE_CURRENT_SOURCE_DIR}/doc/conf.py.in"
+            "${CMAKE_CURRENT_BINARY_DIR}/doc/conf.py"
+            @ONLY)
+        configure_file(
+            "${CMAKE_CURRENT_SOURCE_DIR}/doc/index.rst.in"
+            "${CMAKE_CURRENT_BINARY_DIR}/doc/index.rst"
+            @ONLY)
 
         # Option ALL allows building documentation together with the application
-        add_custom_target(doc_doxygen ALL
+        add_custom_target(doxygen ALL
             COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             VERBATIM)
-    else()
-        message(WARNING "Doxygen with dot component is required for documentation generation")
+
+        if(NOT DEFINED SPHINX_THEME)
+            set(SPHINX_THEME default)
+        endif()
+
+        if(NOT DEFINED SPHINX_THEME_DIR)
+            set(SPHINX_THEME_DIR)
+        endif()
+
+        add_custom_target(sphinx ALL
+            ${SPHINX_EXECUTABLE}
+                -q -b html
+                -c "${CMAKE_CURRENT_BINARY_DIR}/doc"
+                "${CMAKE_CURRENT_BINARY_DIR}/doc"
+                "${CMAKE_CURRENT_SOURCE_DIR}/doc/html"
+            COMMENT "Building HTML documentation with Sphinx" VERBATIM)
     endif()
 endif()
 if (${IWYU})

@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structvrt__formatted__geolocation__indicators" kind="struct" language="C++" prot="public">
+    <compoundname>vrt_formatted_geolocation_indicators</compoundname>
+    <includes refid="vrt__types_8h" local="no">vrt_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvrt__formatted__geolocation__indicators_1a54307cc5fc718f2d4c32c21af275fe70" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double vrt_formatted_geolocation_indicators::latitude</definition>
+        <argsstring></argsstring>
+        <name>latitude</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Latitude field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="440" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="440" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__formatted__geolocation__indicators_1ab68fdcbbf610fbb75d0f5776d09abf70" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_formatted_geolocation_indicators::longitude</definition>
+        <argsstring></argsstring>
+        <name>longitude</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Longitude field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="441" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="441" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__formatted__geolocation__indicators_1abea4cdc91e32108f0b12d20ab4e5f57e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_formatted_geolocation_indicators::altitude</definition>
+        <argsstring></argsstring>
+        <name>altitude</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Altitude field </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="442" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="442" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__formatted__geolocation__indicators_1a6ee293c21ea15a864c7f5de21da15bdd" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_formatted_geolocation_indicators::speed_over_ground</definition>
+        <argsstring></argsstring>
+        <name>speed_over_ground</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Speed over ground field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="443" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="443" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__formatted__geolocation__indicators_1a52a8fd8a5ce23674abc718682b29d4a4" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_formatted_geolocation_indicators::heading_angle</definition>
+        <argsstring></argsstring>
+        <name>heading_angle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the heading angle field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="444" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="444" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__formatted__geolocation__indicators_1ac9a92f57df3c03096b68b8c3f137a5b0" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_formatted_geolocation_indicators::track_angle</definition>
+        <argsstring></argsstring>
+        <name>track_angle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Track angle field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="445" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="445" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__formatted__geolocation__indicators_1a99f47ac49508c7e2e869171e8d7e7f3f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_formatted_geolocation_indicators::magnetic_variation</definition>
+        <argsstring></argsstring>
+        <name>magnetic_variation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Magnetic variation field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="446" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="446" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Formatted GPS/INS geolocation indicators. </para>
+    </detaileddescription>
+    <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="439" column="51" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="439" bodyend="447"/>
+    <listofallmembers>
+      <member refid="structvrt__formatted__geolocation__indicators_1abea4cdc91e32108f0b12d20ab4e5f57e" prot="public" virt="non-virtual"><scope>vrt_formatted_geolocation_indicators</scope><name>altitude</name></member>
+      <member refid="structvrt__formatted__geolocation__indicators_1a52a8fd8a5ce23674abc718682b29d4a4" prot="public" virt="non-virtual"><scope>vrt_formatted_geolocation_indicators</scope><name>heading_angle</name></member>
+      <member refid="structvrt__formatted__geolocation__indicators_1a54307cc5fc718f2d4c32c21af275fe70" prot="public" virt="non-virtual"><scope>vrt_formatted_geolocation_indicators</scope><name>latitude</name></member>
+      <member refid="structvrt__formatted__geolocation__indicators_1ab68fdcbbf610fbb75d0f5776d09abf70" prot="public" virt="non-virtual"><scope>vrt_formatted_geolocation_indicators</scope><name>longitude</name></member>
+      <member refid="structvrt__formatted__geolocation__indicators_1a99f47ac49508c7e2e869171e8d7e7f3f" prot="public" virt="non-virtual"><scope>vrt_formatted_geolocation_indicators</scope><name>magnetic_variation</name></member>
+      <member refid="structvrt__formatted__geolocation__indicators_1a6ee293c21ea15a864c7f5de21da15bdd" prot="public" virt="non-virtual"><scope>vrt_formatted_geolocation_indicators</scope><name>speed_over_ground</name></member>
+      <member refid="structvrt__formatted__geolocation__indicators_1ac9a92f57df3c03096b68b8c3f137a5b0" prot="public" virt="non-virtual"><scope>vrt_formatted_geolocation_indicators</scope><name>track_angle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

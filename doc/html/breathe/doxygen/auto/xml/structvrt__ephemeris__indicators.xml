@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structvrt__ephemeris__indicators" kind="struct" language="C++" prot="public">
+    <compoundname>vrt_ephemeris_indicators</compoundname>
+    <includes refid="vrt__types_8h" local="no">vrt_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvrt__ephemeris__indicators_1a13f362f75ac316794c204205062787a8" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double vrt_ephemeris_indicators::position_x</definition>
+        <argsstring></argsstring>
+        <name>position_x</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Position X field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="489" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="489" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__ephemeris__indicators_1ac121190324df270ee7b7a370de4cfa60" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double vrt_ephemeris_indicators::position_y</definition>
+        <argsstring></argsstring>
+        <name>position_y</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Position Y field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="490" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="490" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__ephemeris__indicators_1a82870f20a56a93cb9430b7234987c00e" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double vrt_ephemeris_indicators::position_z</definition>
+        <argsstring></argsstring>
+        <name>position_z</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Position Z field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="491" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="491" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__ephemeris__indicators_1a9e86bb3ef08c0c126af2d5317257a120" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double vrt_ephemeris_indicators::attitude_alpha</definition>
+        <argsstring></argsstring>
+        <name>attitude_alpha</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Attitude alpha field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="492" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="492" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__ephemeris__indicators_1acc882747c2167a68be54674cf2975fe5" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double vrt_ephemeris_indicators::attitude_beta</definition>
+        <argsstring></argsstring>
+        <name>attitude_beta</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Attitude beta field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="493" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="493" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__ephemeris__indicators_1a68ba1e34a8e95de6e50fc851bb16f1a6" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double vrt_ephemeris_indicators::attitude_phi</definition>
+        <argsstring></argsstring>
+        <name>attitude_phi</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Attitude phi field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="494" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="494" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__ephemeris__indicators_1afb25862718327066fb6f9f1e5d46543a" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double vrt_ephemeris_indicators::velocity_dx</definition>
+        <argsstring></argsstring>
+        <name>velocity_dx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Velocity dX field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="495" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="495" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__ephemeris__indicators_1aac8dc829a3807970ba45ac870eb96319" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double vrt_ephemeris_indicators::velocity_dy</definition>
+        <argsstring></argsstring>
+        <name>velocity_dy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Velocity dY field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="496" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="496" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__ephemeris__indicators_1a87c6889f3ad6fac289a765d499475a0e" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double vrt_ephemeris_indicators::velocity_dz</definition>
+        <argsstring></argsstring>
+        <name>velocity_dz</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if it has the Velocity dZ field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="497" column="12" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="497" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>ECEF/Relative ephemeris indicators. </para>
+    </detaileddescription>
+    <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="488" column="39" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="488" bodyend="498"/>
+    <listofallmembers>
+      <member refid="structvrt__ephemeris__indicators_1a9e86bb3ef08c0c126af2d5317257a120" prot="public" virt="non-virtual"><scope>vrt_ephemeris_indicators</scope><name>attitude_alpha</name></member>
+      <member refid="structvrt__ephemeris__indicators_1acc882747c2167a68be54674cf2975fe5" prot="public" virt="non-virtual"><scope>vrt_ephemeris_indicators</scope><name>attitude_beta</name></member>
+      <member refid="structvrt__ephemeris__indicators_1a68ba1e34a8e95de6e50fc851bb16f1a6" prot="public" virt="non-virtual"><scope>vrt_ephemeris_indicators</scope><name>attitude_phi</name></member>
+      <member refid="structvrt__ephemeris__indicators_1a13f362f75ac316794c204205062787a8" prot="public" virt="non-virtual"><scope>vrt_ephemeris_indicators</scope><name>position_x</name></member>
+      <member refid="structvrt__ephemeris__indicators_1ac121190324df270ee7b7a370de4cfa60" prot="public" virt="non-virtual"><scope>vrt_ephemeris_indicators</scope><name>position_y</name></member>
+      <member refid="structvrt__ephemeris__indicators_1a82870f20a56a93cb9430b7234987c00e" prot="public" virt="non-virtual"><scope>vrt_ephemeris_indicators</scope><name>position_z</name></member>
+      <member refid="structvrt__ephemeris__indicators_1afb25862718327066fb6f9f1e5d46543a" prot="public" virt="non-virtual"><scope>vrt_ephemeris_indicators</scope><name>velocity_dx</name></member>
+      <member refid="structvrt__ephemeris__indicators_1aac8dc829a3807970ba45ac870eb96319" prot="public" virt="non-virtual"><scope>vrt_ephemeris_indicators</scope><name>velocity_dy</name></member>
+      <member refid="structvrt__ephemeris__indicators_1a87c6889f3ad6fac289a765d499475a0e" prot="public" virt="non-virtual"><scope>vrt_ephemeris_indicators</scope><name>velocity_dz</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

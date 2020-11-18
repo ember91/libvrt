@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structvrt__state__and__event" kind="struct" language="C++" prot="public">
+    <compoundname>vrt_state_and_event</compoundname>
+    <includes refid="vrt__types_8h" local="no">vrt_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvrt__state__and__event_1a7bbc474a56567f24754f0830d5187759" prot="public" static="no" mutable="no">
+        <type><ref refid="structvrt__state__and__event__indicators" kindref="compound">vrt_state_and_event_indicators</ref></type>
+        <definition>vrt_state_and_event_indicators vrt_state_and_event::has</definition>
+        <argsstring></argsstring>
+        <name>has</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Field presence indicators. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="297" column="36" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="297" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1a28dd00f941d5808fa40176a08df5028f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::calibrated_time</definition>
+        <argsstring></argsstring>
+        <name>calibrated_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if the timestamp is calibrated to an external reference. Activate by setting has.calibrated_time to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="301" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="301" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1af48f548739ba43838de898e5e2c04274" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::valid_data</definition>
+        <argsstring></argsstring>
+        <name>valid_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if the packet data is valid. Activate by setting has.valid_data to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="303" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="303" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1a5680bb5f8a903ae3a226b5778530f58d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::reference_lock</definition>
+        <argsstring></argsstring>
+        <name>reference_lock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if the reference is phase locked and stable. Activate by setting has.reference_lock to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="305" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="305" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1aef8a3bd96062ee3e22e4558e291fb188" prot="public" static="no" mutable="no">
+        <type>vrt_agc_or_mgc</type>
+        <definition>vrt_agc_or_mgc vrt_state_and_event::agc_or_mgc</definition>
+        <argsstring></argsstring>
+        <name>agc_or_mgc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Whether AGC or MGC is active. Activate by setting has.agc_or_mgc to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="307" column="20" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="307" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1a56355374b8213d7e4827962e4abcc2f5" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::detected_signal</definition>
+        <argsstring></argsstring>
+        <name>detected_signal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if a signal is detected in the packet. Activate by setting has.detected_signal to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="309" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="309" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1ad1ad3c1951c7d1ee4c509be2d4f10518" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::spectral_inversion</definition>
+        <argsstring></argsstring>
+        <name>spectral_inversion</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if a signal in the data has an inverted spectrum. Activate by setting has.spectral_inversion to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="311" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="311" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1a32f6e2e7d8c58bb50d898a67a8e9a4fc" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::over_range</definition>
+        <argsstring></argsstring>
+        <name>over_range</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if at least one data sample in the packet exceeds the range of a sample. Activate by setting has.over_range to true. The definition of this fields changes depending on the TSM field. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="316" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="316" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1adad0dcb822fefc3938532af2e057da62" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::sample_loss</definition>
+        <argsstring></argsstring>
+        <name>sample_loss</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Contains at least one sample discontinuity. Activate by setting has.sample_loss to true. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="320" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="320" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1a5bd5954521eefe0156b1414c53d665a2" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::user_defined7</definition>
+        <argsstring></argsstring>
+        <name>user_defined7</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>State and event bit 7. Defined by the user. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="324" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="324" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1a62832098895d998f3b34bda64cdd451d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::user_defined6</definition>
+        <argsstring></argsstring>
+        <name>user_defined6</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>State and event bit 6. Defined by the user. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="328" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="328" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1a063228e49904d19b4fb7094222d6f797" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::user_defined5</definition>
+        <argsstring></argsstring>
+        <name>user_defined5</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>State and event bit 5. Defined by the user. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="332" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="332" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1aafad166ed997f54c76e8315c6497590d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::user_defined4</definition>
+        <argsstring></argsstring>
+        <name>user_defined4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>State and event bit 4. Defined by the user. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="336" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="336" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1a0be8cddd5f26404c87f9fc9ee2813d31" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::user_defined3</definition>
+        <argsstring></argsstring>
+        <name>user_defined3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>State and event bit 3. Defined by the user. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="340" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="340" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1ae0a7244ce1aaf40499fb8a8fc6d4d58c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::user_defined2</definition>
+        <argsstring></argsstring>
+        <name>user_defined2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>State and event bit 2. Defined by the user. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="344" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="344" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1a8fd12e4bca94ce9f216d211044daf8ff" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::user_defined1</definition>
+        <argsstring></argsstring>
+        <name>user_defined1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>State and event bit 1. Defined by the user. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="348" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="348" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__state__and__event_1a37e2b0ec97029c39d168cfbe2077c570" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_state_and_event::user_defined0</definition>
+        <argsstring></argsstring>
+        <name>user_defined0</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>State and event bit 0. Defined by the user. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="352" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="352" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Binary state and event indicators. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>vrt_state_and_event</label>
+        <link refid="structvrt__state__and__event"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>has</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vrt_state_and_event_indicators</label>
+        <link refid="structvrt__state__and__event__indicators"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="295" column="34" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="295" bodyend="353"/>
+    <listofallmembers>
+      <member refid="structvrt__state__and__event_1aef8a3bd96062ee3e22e4558e291fb188" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>agc_or_mgc</name></member>
+      <member refid="structvrt__state__and__event_1a28dd00f941d5808fa40176a08df5028f" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>calibrated_time</name></member>
+      <member refid="structvrt__state__and__event_1a56355374b8213d7e4827962e4abcc2f5" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>detected_signal</name></member>
+      <member refid="structvrt__state__and__event_1a7bbc474a56567f24754f0830d5187759" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>has</name></member>
+      <member refid="structvrt__state__and__event_1a32f6e2e7d8c58bb50d898a67a8e9a4fc" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>over_range</name></member>
+      <member refid="structvrt__state__and__event_1a5680bb5f8a903ae3a226b5778530f58d" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>reference_lock</name></member>
+      <member refid="structvrt__state__and__event_1adad0dcb822fefc3938532af2e057da62" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>sample_loss</name></member>
+      <member refid="structvrt__state__and__event_1ad1ad3c1951c7d1ee4c509be2d4f10518" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>spectral_inversion</name></member>
+      <member refid="structvrt__state__and__event_1a37e2b0ec97029c39d168cfbe2077c570" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>user_defined0</name></member>
+      <member refid="structvrt__state__and__event_1a8fd12e4bca94ce9f216d211044daf8ff" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>user_defined1</name></member>
+      <member refid="structvrt__state__and__event_1ae0a7244ce1aaf40499fb8a8fc6d4d58c" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>user_defined2</name></member>
+      <member refid="structvrt__state__and__event_1a0be8cddd5f26404c87f9fc9ee2813d31" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>user_defined3</name></member>
+      <member refid="structvrt__state__and__event_1aafad166ed997f54c76e8315c6497590d" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>user_defined4</name></member>
+      <member refid="structvrt__state__and__event_1a063228e49904d19b4fb7094222d6f797" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>user_defined5</name></member>
+      <member refid="structvrt__state__and__event_1a62832098895d998f3b34bda64cdd451d" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>user_defined6</name></member>
+      <member refid="structvrt__state__and__event_1a5bd5954521eefe0156b1414c53d665a2" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>user_defined7</name></member>
+      <member refid="structvrt__state__and__event_1af48f548739ba43838de898e5e2c04274" prot="public" virt="non-virtual"><scope>vrt_state_and_event</scope><name>valid_data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

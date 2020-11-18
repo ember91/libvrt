@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structvrt__context__association__lists__indicators" kind="struct" language="C++" prot="public">
+    <compoundname>vrt_context_association_lists_indicators</compoundname>
+    <includes refid="vrt__types_8h" local="no">vrt_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvrt__context__association__lists__indicators_1a11a9286977d1eef4f394ecf0a7e975d7" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_context_association_lists_indicators::asynchronous_channel_tag_list</definition>
+        <argsstring></argsstring>
+        <name>asynchronous_channel_tag_list</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if asynchronous_channel_tag_list is included. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="575" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="575" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Indicator fields for Context. </para>
+    </detaileddescription>
+    <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="573" column="55" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="573" bodyend="576"/>
+    <listofallmembers>
+      <member refid="structvrt__context__association__lists__indicators_1a11a9286977d1eef4f394ecf0a7e975d7" prot="public" virt="non-virtual"><scope>vrt_context_association_lists_indicators</scope><name>asynchronous_channel_tag_list</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

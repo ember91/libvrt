@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structvrt__gain" kind="struct" language="C++" prot="public">
+    <compoundname>vrt_gain</compoundname>
+    <includes refid="vrt__types_8h" local="no">vrt_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvrt__gain_1a4068d259929074d6bb2938c3083f0c42" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float vrt_gain::stage1</definition>
+        <argsstring></argsstring>
+        <name>stage1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Front-end or RF gain [dB]. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="259" column="11" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="259" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__gain_1a4e13889a65d81eae68baf6fede7f0e13" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float vrt_gain::stage2</definition>
+        <argsstring></argsstring>
+        <name>stage2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Back-end or IF gain [dB]. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="260" column="11" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="260" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Signal gain or attenuation. </para>
+    </detaileddescription>
+    <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="258" column="23" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="258" bodyend="261"/>
+    <listofallmembers>
+      <member refid="structvrt__gain_1a4068d259929074d6bb2938c3083f0c42" prot="public" virt="non-virtual"><scope>vrt_gain</scope><name>stage1</name></member>
+      <member refid="structvrt__gain_1a4e13889a65d81eae68baf6fede7f0e13" prot="public" virt="non-virtual"><scope>vrt_gain</scope><name>stage2</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

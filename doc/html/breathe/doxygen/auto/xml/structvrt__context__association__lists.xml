@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structvrt__context__association__lists" kind="struct" language="C++" prot="public">
+    <compoundname>vrt_context_association_lists</compoundname>
+    <includes refid="vrt__types_8h" local="no">vrt_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvrt__context__association__lists_1a53723b606a12e35370a1f6e7ddadefde" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t vrt_context_association_lists::source_list_size</definition>
+        <argsstring></argsstring>
+        <name>source_list_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Number of Stream IDs in source context association list.</para>
+<para><simplesect kind="note"><para>Only the 9 least significant bits are used. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="587" column="14" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="587" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__association__lists_1a46d37d3d7e159f3390ac8fee16b12574" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t vrt_context_association_lists::system_list_size</definition>
+        <argsstring></argsstring>
+        <name>system_list_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Number of Stream IDs in system context association list.</para>
+<para><simplesect kind="note"><para>Only the 9 least significant bits are used. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="593" column="14" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="593" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__association__lists_1a2a99f856e4ab14d4931de7686ba19cfb" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t vrt_context_association_lists::vector_component_list_size</definition>
+        <argsstring></argsstring>
+        <name>vector_component_list_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Number of Stream IDs in vector-component association list. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="595" column="14" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="595" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__association__lists_1aa19a39dd07b2d7e3abd57c2b1700defd" prot="public" static="no" mutable="no">
+        <type><ref refid="structvrt__context__association__lists__indicators" kindref="compound">vrt_context_association_lists_indicators</ref></type>
+        <definition>vrt_context_association_lists_indicators vrt_context_association_lists::has</definition>
+        <argsstring></argsstring>
+        <name>has</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Field presence indicators. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="597" column="46" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="597" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__association__lists_1ae1c6f6c4e5a366f89d904e6f943deba9" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t vrt_context_association_lists::asynchronous_channel_list_size</definition>
+        <argsstring></argsstring>
+        <name>asynchronous_channel_list_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Number of Stream IDs in asynchronous-channel context association list.</para>
+<para><simplesect kind="note"><para>Only the 15 least significant bits are used. </para>
+</simplesect>
+<simplesect kind="note"><para>Must have as many entries as sample vector dimension. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="604" column="14" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="604" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__association__lists_1a68f0a98cf81188b57f1060917333f833" prot="public" static="no" mutable="no">
+        <type>const uint32_t *</type>
+        <definition>const uint32_t* vrt_context_association_lists::source_context_association_list</definition>
+        <argsstring></argsstring>
+        <name>source_context_association_list</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Producer metadata.</para>
+<para><simplesect kind="warning"><para>Will point into the buffer when the field is read. Deallocating the buffer will render the pointer invalid. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="611" column="20" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="611" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__association__lists_1a1e46632a0618fd0c85aeb24834175017" prot="public" static="no" mutable="no">
+        <type>const uint32_t *</type>
+        <definition>const uint32_t* vrt_context_association_lists::system_context_association_list</definition>
+        <argsstring></argsstring>
+        <name>system_context_association_list</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Additional metadata not covered by other context association lists.</para>
+<para><simplesect kind="warning"><para>Will point into the buffer when the field is read. Deallocating the buffer will render the pointer invalid. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="618" column="20" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="618" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__association__lists_1aa34886918e72aa337c5346231db7e746" prot="public" static="no" mutable="no">
+        <type>const uint32_t *</type>
+        <definition>const uint32_t* vrt_context_association_lists::vector_component_context_association_list</definition>
+        <argsstring></argsstring>
+        <name>vector_component_context_association_list</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Holds metadata for data packet stream sample vectors.</para>
+<para><simplesect kind="warning"><para>Will point into the buffer when the field is read. Deallocating the buffer will render the pointer invalid. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="625" column="20" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="625" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__association__lists_1a6c1b67a7bdaed6bcd79c491803ec618c" prot="public" static="no" mutable="no">
+        <type>const uint32_t *</type>
+        <definition>const uint32_t* vrt_context_association_lists::asynchronous_channel_context_association_list</definition>
+        <argsstring></argsstring>
+        <name>asynchronous_channel_context_association_list</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Associates a stream with each channel when channel tags are used in a data packet stream.</para>
+<para><simplesect kind="warning"><para>Will point into the buffer when the field is read. Deallocating the buffer will render the pointer invalid. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="632" column="20" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="632" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__context__association__lists_1a1605e54a7ea0bdf3e4073ac1e8bab8a4" prot="public" static="no" mutable="no">
+        <type>const uint32_t *</type>
+        <definition>const uint32_t* vrt_context_association_lists::asynchronous_channel_tag_list</definition>
+        <argsstring></argsstring>
+        <name>asynchronous_channel_tag_list</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>All channel tags used in paired data packet stream.</para>
+<para><simplesect kind="warning"><para>Will point into the buffer when the field is read. Deallocating the buffer will render the pointer invalid. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="639" column="20" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="639" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Contains association lists. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>vrt_context_association_lists</label>
+        <link refid="structvrt__context__association__lists"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>has</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vrt_context_association_lists_indicators</label>
+        <link refid="structvrt__context__association__lists__indicators"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="581" column="44" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="581" bodyend="641"/>
+    <listofallmembers>
+      <member refid="structvrt__context__association__lists_1a6c1b67a7bdaed6bcd79c491803ec618c" prot="public" virt="non-virtual"><scope>vrt_context_association_lists</scope><name>asynchronous_channel_context_association_list</name></member>
+      <member refid="structvrt__context__association__lists_1ae1c6f6c4e5a366f89d904e6f943deba9" prot="public" virt="non-virtual"><scope>vrt_context_association_lists</scope><name>asynchronous_channel_list_size</name></member>
+      <member refid="structvrt__context__association__lists_1a1605e54a7ea0bdf3e4073ac1e8bab8a4" prot="public" virt="non-virtual"><scope>vrt_context_association_lists</scope><name>asynchronous_channel_tag_list</name></member>
+      <member refid="structvrt__context__association__lists_1aa19a39dd07b2d7e3abd57c2b1700defd" prot="public" virt="non-virtual"><scope>vrt_context_association_lists</scope><name>has</name></member>
+      <member refid="structvrt__context__association__lists_1a68f0a98cf81188b57f1060917333f833" prot="public" virt="non-virtual"><scope>vrt_context_association_lists</scope><name>source_context_association_list</name></member>
+      <member refid="structvrt__context__association__lists_1a53723b606a12e35370a1f6e7ddadefde" prot="public" virt="non-virtual"><scope>vrt_context_association_lists</scope><name>source_list_size</name></member>
+      <member refid="structvrt__context__association__lists_1a1e46632a0618fd0c85aeb24834175017" prot="public" virt="non-virtual"><scope>vrt_context_association_lists</scope><name>system_context_association_list</name></member>
+      <member refid="structvrt__context__association__lists_1a46d37d3d7e159f3390ac8fee16b12574" prot="public" virt="non-virtual"><scope>vrt_context_association_lists</scope><name>system_list_size</name></member>
+      <member refid="structvrt__context__association__lists_1aa34886918e72aa337c5346231db7e746" prot="public" virt="non-virtual"><scope>vrt_context_association_lists</scope><name>vector_component_context_association_list</name></member>
+      <member refid="structvrt__context__association__lists_1a2a99f856e4ab14d4931de7686ba19cfb" prot="public" virt="non-virtual"><scope>vrt_context_association_lists</scope><name>vector_component_list_size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

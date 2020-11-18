@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_792d09d72ab8ab998969340ba4e6a252" kind="dir">
+    <compoundname>/home/emil/libvrt/include/vrt</compoundname>
+    <innerfile refid="vrt__common_8h">vrt_common.h</innerfile>
+    <innerfile refid="vrt__read_8h">vrt_read.h</innerfile>
+    <innerfile refid="vrt__string_8h">vrt_string.h</innerfile>
+    <innerfile refid="vrt__types_8h">vrt_types.h</innerfile>
+    <innerfile refid="vrt__write_8h">vrt_write.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/emil/libvrt/include/vrt/"/>
+  </compounddef>
+</doxygen>

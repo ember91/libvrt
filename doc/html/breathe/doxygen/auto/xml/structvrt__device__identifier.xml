@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structvrt__device__identifier" kind="struct" language="C++" prot="public">
+    <compoundname>vrt_device_identifier</compoundname>
+    <includes refid="vrt__types_8h" local="no">vrt_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvrt__device__identifier_1a01823787fe6579fc7edf965dc74f0363" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t vrt_device_identifier::oui</definition>
+        <argsstring></argsstring>
+        <name>oui</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>IEEE Organizationally Unique Identifier (company identifier) of device.</para>
+<para><simplesect kind="note"><para>Only the 24 least significant bits are used. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="272" column="14" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="272" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__device__identifier_1a611e2564787d3f32cf7daf0e158476b0" prot="public" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t vrt_device_identifier::device_code</definition>
+        <argsstring></argsstring>
+        <name>device_code</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Model identification. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="274" column="14" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="274" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Identifies manufacturer and model of device generating context stream. </para>
+    </detaileddescription>
+    <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="266" column="36" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="266" bodyend="275"/>
+    <listofallmembers>
+      <member refid="structvrt__device__identifier_1a611e2564787d3f32cf7daf0e158476b0" prot="public" virt="non-virtual"><scope>vrt_device_identifier</scope><name>device_code</name></member>
+      <member refid="structvrt__device__identifier_1a01823787fe6579fc7edf965dc74f0363" prot="public" virt="non-virtual"><scope>vrt_device_identifier</scope><name>oui</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

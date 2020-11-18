@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structvrt__header__indicators" kind="struct" language="C++" prot="public">
+    <compoundname>vrt_header_indicators</compoundname>
+    <includes refid="vrt__types_8h" local="no">vrt_types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structvrt__header__indicators_1a6ea79eb6461130588bb4781e394d7749" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_header_indicators::class_id</definition>
+        <argsstring></argsstring>
+        <name>class_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if there is class identifier information. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="30" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvrt__header__indicators_1ae38a2c1a204659f205b867a03fc34985" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool vrt_header_indicators::trailer</definition>
+        <argsstring></argsstring>
+        <name>trailer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>True if there is a trailer word.</para>
+<para><simplesect kind="note"><para>True is only valid for IF and Extension data packets. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="36" column="10" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Indicates presence of header fields. </para>
+    </detaileddescription>
+    <location file="/home/emil/libvrt/include/vrt/vrt_types.h" line="28" column="36" bodyfile="/home/emil/libvrt/include/vrt/vrt_types.h" bodystart="28" bodyend="37"/>
+    <listofallmembers>
+      <member refid="structvrt__header__indicators_1a6ea79eb6461130588bb4781e394d7749" prot="public" virt="non-virtual"><scope>vrt_header_indicators</scope><name>class_id</name></member>
+      <member refid="structvrt__header__indicators_1ae38a2c1a204659f205b867a03fc34985" prot="public" virt="non-virtual"><scope>vrt_header_indicators</scope><name>trailer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
