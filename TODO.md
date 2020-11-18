@@ -15,4 +15,3 @@
 * float128 instead of double for fixed point?
 * Fuzzing
 * Check that float, double... are inside bound when writing and validating
-* Geolocation and ephemeris has a common base. Maybe use that somehow?
