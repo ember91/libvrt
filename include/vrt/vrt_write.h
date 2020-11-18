@@ -20,7 +20,7 @@ extern "C" {
  * \return Number of written 32-bit words (always 1), or a negative number if error.
  * \retval VRT_ERR_BUF_SIZE             Buffer is too small.
  * \retval VRT_ERR_INVALID_PACKET_TYPE  Packet type is an invalid value.
- * \retval VRT_ERR_INVALID_TSM          Data packet has TSM bit set.
+ * \retval VRT_ERR_INVALID_TSM          TSM is an invalid value.
  * \retval VRT_ERR_TSM_IN_DATA          Data packet has TSM bit set.
  * \retval VRT_ERR_INVALID_TSI          TSI is an invalid value.
  * \retval VRT_ERR_INVALID_TSF          TSF is an invalid value.
@@ -42,7 +42,8 @@ int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t buf_words
  *
  * \return Number of written 32-bit words, or a negative number if error.
  * \retval VRT_ERR_BUF_SIZE         Buffer is too small.
- * \retval VRT_ERR_BOUNDS_REAL_TIME Fractional seconds Real time is activated but picoseconds is outside bounds.
+ * \retval VRT_ERR_BOUNDS_REAL_TIME TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds
+ *                                  (> 999999999999 ps).
  * \retval VRT_ERR_BOUNDS_OUI       OUI is outside valid bounds (> 0x00FFFFFF).
  */
 int32_t vrt_write_fields(const vrt_header* header,
@@ -78,9 +79,9 @@ int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_wo
  *
  * \return Number of written 32-bit words, or a negative number if error.
  * \retval VRT_ERR_BUF_SIZE                             Buffer is too small.
- * \retval VRT_ERR_BOUNDS_BANDWIDTH                     Bandwidth is negative.
- * \retval VRT_ERR_BOUNDS_SAMPLE_RATE                   Sample rate is negative.
- * \retval VRT_ERR_BOUNDS_TEMPERATURE                   Temperature is below absolute zero (< -273.15).
+ * \retval VRT_ERR_BOUNDS_BANDWIDTH                     Bandwidth is outside valid bounds (< 0 Hz).
+ * \retval VRT_ERR_BOUNDS_SAMPLE_RATE                   Sample rate is outside valid bounds (< 0 Hz).
+ * \retval VRT_ERR_BOUNDS_TEMPERATURE                   Temperature is outside valid bounds (< -273.15 degrees).
  * \retval VRT_ERR_BOUNDS_OUI                           OUI is outside valid bounds (> 0x00FFFFFF).
  * \retval VRT_ERR_INVALID_PACKING_METHOD               Packing method is an invalid value.
  * \retval VRT_ERR_INVALID_REAL_OR_COMPLEX              Real/Complex is an invalid value.
@@ -93,16 +94,19 @@ int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_wo
  * \retval VRT_ERR_INVALID_TSF                          TSF is an invalid value.
  * \retval VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP         Integer second timestamp is not 0xFFFFFFFF when TSI is
  *                                                      VRT_TSI_UNDEFINED.
- * \retval VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP      Fractional second timestamp is not 0xFFFFFFFFFFFFFFFF when TSF
- *                                                      is VRT_TSF_UNDEFINED.
- * \retval VRT_ERR_BOUNDS_REAL_TIME                     Fractional seconds Real time is active but picoseconds is
- *                                                      outside bounds.
- * \retval VRT_ERR_BOUNDS_LATITUDE                      Latitude is outside valid bounds (< -90 or > 90).
- * \retval VRT_ERR_BOUNDS_LONGITUDE                     Longitude is outside valid bounds (< -180 or > 180).
- * \retval VRT_ERR_BOUNDS_SPEED_OVER_GROUND             Speed over ground is negative.
- * \retval VRT_ERR_BOUNDS_HEADING_ANGLE                 Heading angle outside valid bounds (< 0 or > 359.999999761582).
- * \retval VRT_ERR_BOUNDS_TRACK_ANGLE                   Track angle is outside valid bounds (< 0 or > 359.999999761582).
- * \retval VRT_ERR_BOUNDS_MAGNETIC_VARIATION            Magnetic variation is outside valid bounds (< -180 or > 180).
+ * \retval VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP      Integer second timestamp is not 0xFFFFFFFF when TSI is
+ *                                                      VRT_TSI_UNDEFINED.
+ * \retval VRT_ERR_BOUNDS_REAL_TIME                     TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds
+ *                                                      (> 999999999999 ps).
+ * \retval VRT_ERR_BOUNDS_LATITUDE                      Latitude is outside valid bounds (< -90 or > 90 degrees).
+ * \retval VRT_ERR_BOUNDS_LONGITUDE                     Longitude is outside valid bounds (< -180 or > 180 degrees).
+ * \retval VRT_ERR_BOUNDS_SPEED_OVER_GROUND             Speed over ground is outside valid bounds (< 0 m/s).
+ * \retval VRT_ERR_BOUNDS_HEADING_ANGLE                 Heading angle outside valid bounds (< 0 or > 359.999999761582
+ *                                                      degrees).
+ * \retval VRT_ERR_BOUNDS_TRACK_ANGLE                   Track angle is outside valid bounds (< 0 or > 359.999999761582
+ *                                                      degrees).
+ * \retval VRT_ERR_BOUNDS_MAGNETIC_VARIATION            Magnetic variation is outside valid bounds (< -180 or > 180
+ *                                                      degrees).
  * \retval VRT_ERR_BOUNDS_SOURCE_LIST_SIZE              Source list size is outside valid bounds (> 0x01FF).
  * \retval VRT_ERR_BOUNDS_SYSTEM_LIST_SIZE              System list size is outside valid bounds (> 0x01FF).
  * \retval VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE             Channel list size is outside valid bounds (> 0x7FFF).

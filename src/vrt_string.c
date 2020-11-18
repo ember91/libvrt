@@ -148,12 +148,14 @@ const char* vrt_string_error(int32_t error) {
             return "Context packet has trailer bit set";
         case VRT_ERR_TSM_IN_DATA:
             return "Data packet has TSM bit set";
+        case VRT_ERR_INVALID_TSM:
+            return "TSM is an invalid value";
         case VRT_ERR_INVALID_TSI:
             return "TSI is an invalid value";
         case VRT_ERR_INVALID_TSF:
             return "TSF is an invalid value";
         case VRT_ERR_BOUNDS_REAL_TIME:
-            return "Fractional seconds Real time is active but picoseconds is outside bounds";
+            return "TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds (> 999999999999 ps)";
         case VRT_ERR_BOUNDS_PACKET_COUNT:
             return "Packet count is outside valid bounds (> 0x0F)";
         case VRT_ERR_BOUNDS_OUI:
@@ -161,11 +163,11 @@ const char* vrt_string_error(int32_t error) {
         case VRT_ERR_BOUNDS_ASSOCIATED_CONTEXT_PACKET_COUNT:
             return "Associated context packet count is outside valid bounds (> 0x7F)";
         case VRT_ERR_BOUNDS_BANDWIDTH:
-            return "Bandwidth is negative";
+            return "Bandwidth is outside valid bounds (< 0 Hz)";
         case VRT_ERR_BOUNDS_SAMPLE_RATE:
-            return "Sample rate is negative";
+            return "Sample rate is outside valid bounds (< 0 Hz)";
         case VRT_ERR_BOUNDS_TEMPERATURE:
-            return "Temperature is below absolute zero (< -273.15)";
+            return "Temperature is outside valid bounds (< -273.15 degrees C)";
         case VRT_ERR_INVALID_PACKING_METHOD:
             return "Packing method is an invalid value";
         case VRT_ERR_INVALID_REAL_OR_COMPLEX:
@@ -183,19 +185,19 @@ const char* vrt_string_error(int32_t error) {
         case VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP:
             return "Integer second timestamp is not 0xFFFFFFFF when TSI is VRT_TSI_UNDEFINED";
         case VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP:
-            return "Fractional second timestamp is not 0xFFFFFFFFFFFFFFFF when TSF i";
+            return "Fractional second timestamp is not 0xFFFFFFFFFFFFFFFF when TSF is VRT_TSF_UNDEFINED";
         case VRT_ERR_BOUNDS_LATITUDE:
-            return "Latitude is outside valid bounds (< -90 or > 90)";
+            return "Latitude is outside valid bounds (< -90 or > 90 degrees)";
         case VRT_ERR_BOUNDS_LONGITUDE:
-            return "Longitude is outside valid bounds (< -180 or > 180)";
+            return "Longitude is outside valid bounds (< -180 or > 180 degrees)";
         case VRT_ERR_BOUNDS_SPEED_OVER_GROUND:
-            return "Speed over ground is negative";
+            return "Speed over ground is outside valid bounds (< 0 m/s)";
         case VRT_ERR_BOUNDS_HEADING_ANGLE:
-            return "Heading angle outside valid bounds (< 0 or > 359.999999761582)";
+            return "Heading angle outside valid bounds (< 0 or > 359.999999761582 degrees)";
         case VRT_ERR_BOUNDS_TRACK_ANGLE:
-            return "Track angle is outside valid bounds (< 0 or > 359.999999761582)";
+            return "Track angle is outside valid bounds (< 0 or > 359.999999761582 degrees)";
         case VRT_ERR_BOUNDS_MAGNETIC_VARIATION:
-            return "Magnetic variation is outside valid bounds (< -180 or > 180)";
+            return "Magnetic variation is outside valid bounds (< -180 or > 180 degrees)";
         case VRT_ERR_BOUNDS_SOURCE_LIST_SIZE:
             return "Source list size is outside valid bounds (> 0x01FF)";
         case VRT_ERR_BOUNDS_SYSTEM_LIST_SIZE:

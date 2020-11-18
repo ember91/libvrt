@@ -1699,7 +1699,7 @@
 <dl class="cpp enumerator">
 <dt id="_CPPv4N14vrt_error_code19VRT_ERR_INVALID_TSME">
 <span id="_CPPv3N14vrt_error_code19VRT_ERR_INVALID_TSME"></span><span id="_CPPv2N14vrt_error_code19VRT_ERR_INVALID_TSME"></span><span class="target" id="vrt__common_8h_1a9abf070632d4fe3b3942f589a1576cd4ae21921620274a5d80d480316b5474483"></span><em class="property">enumerator </em><code class="sig-name descname">VRT_ERR_INVALID_TSM</code><a class="headerlink" href="#_CPPv4N14vrt_error_code19VRT_ERR_INVALID_TSME" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Error return code. TSI is an invalid value. </p>
+<dd><p>Error return code. TSM is an invalid value. </p>
 </dd></dl>
 
 <dl class="cpp enumerator">
@@ -1753,7 +1753,7 @@
 <dl class="cpp enumerator">
 <dt id="_CPPv4N14vrt_error_code26VRT_ERR_BOUNDS_TEMPERATUREE">
 <span id="_CPPv3N14vrt_error_code26VRT_ERR_BOUNDS_TEMPERATUREE"></span><span id="_CPPv2N14vrt_error_code26VRT_ERR_BOUNDS_TEMPERATUREE"></span><span class="target" id="vrt__common_8h_1a9abf070632d4fe3b3942f589a1576cd4ae57723c637d88d59be7f2bfbffc6e512"></span><em class="property">enumerator </em><code class="sig-name descname">VRT_ERR_BOUNDS_TEMPERATURE</code><a class="headerlink" href="#_CPPv4N14vrt_error_code26VRT_ERR_BOUNDS_TEMPERATUREE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Error return code. Temperature is below absolute zero (&lt; -273.15 degrees). </p>
+<dd><p>Error return code. Temperature is outside valid bounds (&lt; -273.15 degrees C). </p>
 </dd></dl>
 
 <dl class="cpp enumerator">
@@ -2068,10 +2068,10 @@
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUF_SIZE</span></code>: Buffer is too small. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_RESERVED</span></code>: One or multiple reserved bits are set. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_PACKET_TYPE</span></code>: Packet type is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_TRAILER_IN_CONTEXT</span></code>: Context packet has trailer bit set. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_TSM_IN_DATA</span></code>: Data packet has TSM bit set. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_RESERVED</span></code>: Reserved bits are set.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_TSM_IN_DATA</span></code>: Data packet has TSM bit set.</p></li>
 </ul>
 </dd>
 </dl>
@@ -2095,8 +2095,8 @@
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUF_SIZE</span></code>: Buffer is too small. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: Fractional seconds Real time is activated but picoseconds is outside bounds. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_RESERVED</span></code>: A reserved field was written to. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_RESERVED</span></code>: One or multiple reserved bits are set. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds (&gt; 999999999999 ps). </p></li>
 </ul>
 </dd>
 </dl>
@@ -2144,20 +2144,20 @@
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUF_SIZE</span></code>: Buffer is too small. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_BANDWIDTH</span></code>: Bandwidth is negative. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SAMPLE_RATE</span></code>: Sample rate is negative. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TEMPERATURE</span></code>: Temperature is below absolute zero (&lt; -273.15). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_RESERVED</span></code>: One or multiple reserved bits are set. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_BANDWIDTH</span></code>: Bandwidth is outside valid bounds (&lt; 0 Hz). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SAMPLE_RATE</span></code>: Sample rate is outside valid bounds (&lt; 0 Hz). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TEMPERATURE</span></code>: Temperature is outside valid bounds (&lt; -273.15 degrees). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_REAL_OR_COMPLEX</span></code>: Real/Complex is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_DATA_ITEM_FORMAT</span></code>: Data item format is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP</span></code>: Integer second timestamp is not 0xFFFFFFFF when TSI is VRT_TSI_UNDEFINED. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP</span></code>: Fractional second timestamp is not 0xFFFFFFFFFFFFFFFF when TSF is VRT_TSF_UNDEFINED. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: Fractional seconds Real time is active but picoseconds is outside bounds. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LATITUDE</span></code>: Latitude is outside valid bounds (&lt; -90 or &gt; 90). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LONGITUDE</span></code>: Longitude is outside valid bounds (&lt;-180 or &gt; 180). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_HEADING_ANGLE</span></code>: Heading angle outside valid bounds (&lt; 0 or &gt;359.999999761582). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TRACK_ANGLE</span></code>: Track angle is outside valid bounds (&lt; 0 or &gt;359.999999761582). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_MAGNETIC_VARIATION</span></code>: Magnetic variation is outside valid bounds (&lt;-180 or &gt; 180). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_RESERVED</span></code>: A reserved field was written to.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds (&gt; 999999999999 ps). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LATITUDE</span></code>: Latitude is outside valid bounds (&lt; -90 or &gt; 90 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LONGITUDE</span></code>: Longitude is outside valid bounds (&lt; -180 or &gt; 180 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_HEADING_ANGLE</span></code>: Heading angle outside valid bounds (&lt; 0 or &gt; 359.999999761582 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TRACK_ANGLE</span></code>: Track angle is outside valid bounds (&lt; 0 or &gt; 359.999999761582 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_MAGNETIC_VARIATION</span></code>: Magnetic variation is outside valid bounds (&lt; -180 or &gt; 180 degrees).</p></li>
 </ul>
 </dd>
 </dl>
@@ -2846,7 +2846,7 @@
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUF_SIZE</span></code>: Buffer is too small. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_PACKET_TYPE</span></code>: Packet type is an invalid value. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_TSM</span></code>: Data packet has TSM bit set. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_TSM</span></code>: TSM is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_TSM_IN_DATA</span></code>: Data packet has TSM bit set. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_TSI</span></code>: TSI is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_TSF</span></code>: TSF is an invalid value. </p></li>
@@ -2874,7 +2874,7 @@
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUF_SIZE</span></code>: Buffer is too small. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: Fractional seconds Real time is activated but picoseconds is outside bounds. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds (&gt; 999999999999 ps). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_OUI</span></code>: OUI is outside valid bounds (&gt; 0x00FFFFFF). </p></li>
 </ul>
 </dd>
@@ -2923,9 +2923,9 @@
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUF_SIZE</span></code>: Buffer is too small. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_BANDWIDTH</span></code>: Bandwidth is negative. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SAMPLE_RATE</span></code>: Sample rate is negative. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TEMPERATURE</span></code>: Temperature is below absolute zero (&lt; -273.15). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_BANDWIDTH</span></code>: Bandwidth is outside valid bounds (&lt; 0 Hz). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SAMPLE_RATE</span></code>: Sample rate is outside valid bounds (&lt; 0 Hz). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TEMPERATURE</span></code>: Temperature is outside valid bounds (&lt; -273.15 degrees). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_OUI</span></code>: OUI is outside valid bounds (&gt; 0x00FFFFFF). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_PACKING_METHOD</span></code>: Packing method is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_REAL_OR_COMPLEX</span></code>: Real/Complex is an invalid value. </p></li>
@@ -2937,14 +2937,14 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_TSI</span></code>: TSI is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_TSF</span></code>: TSF is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP</span></code>: Integer second timestamp is not 0xFFFFFFFF when TSI is VRT_TSI_UNDEFINED. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP</span></code>: Fractional second timestamp is not 0xFFFFFFFFFFFFFFFF when TSF is VRT_TSF_UNDEFINED. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: Fractional seconds Real time is active but picoseconds is outside bounds. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LATITUDE</span></code>: Latitude is outside valid bounds (&lt; -90 or &gt; 90). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LONGITUDE</span></code>: Longitude is outside valid bounds (&lt; -180 or &gt; 180). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SPEED_OVER_GROUND</span></code>: Speed over ground is negative. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_HEADING_ANGLE</span></code>: Heading angle outside valid bounds (&lt; 0 or &gt; 359.999999761582). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TRACK_ANGLE</span></code>: Track angle is outside valid bounds (&lt; 0 or &gt; 359.999999761582). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_MAGNETIC_VARIATION</span></code>: Magnetic variation is outside valid bounds (&lt; -180 or &gt; 180). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP</span></code>: Integer second timestamp is not 0xFFFFFFFF when TSI is VRT_TSI_UNDEFINED. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds (&gt; 999999999999 ps). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LATITUDE</span></code>: Latitude is outside valid bounds (&lt; -90 or &gt; 90 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LONGITUDE</span></code>: Longitude is outside valid bounds (&lt; -180 or &gt; 180 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SPEED_OVER_GROUND</span></code>: Speed over ground is outside valid bounds (&lt; 0 m/s). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_HEADING_ANGLE</span></code>: Heading angle outside valid bounds (&lt; 0 or &gt; 359.999999761582 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TRACK_ANGLE</span></code>: Track angle is outside valid bounds (&lt; 0 or &gt; 359.999999761582 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_MAGNETIC_VARIATION</span></code>: Magnetic variation is outside valid bounds (&lt; -180 or &gt; 180 degrees). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SOURCE_LIST_SIZE</span></code>: Source list size is outside valid bounds (&gt; 0x01FF). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SYSTEM_LIST_SIZE</span></code>: System list size is outside valid bounds (&gt; 0x01FF). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE</span></code>: Channel list size is outside valid bounds (&gt; 0x7FFF).</p></li>
