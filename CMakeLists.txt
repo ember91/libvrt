@@ -11,7 +11,7 @@ if (NOT CMAKE_BUILD_TYPE)
 endif()
 
 # Name target the same as project
-set(TARGET_NAME ${PROJECT_NAME})
+set(TARGET_NAME "${PROJECT_NAME}")
 
 # Add options
 option(CPPLINT          "Use google style guide linter" OFF)
@@ -50,8 +50,8 @@ endif()
 if (DOCUMENTATION)
     if (DOXYGEN_FOUND AND BREATHE_FOUND AND SPHINX_FOUND)
         # Set input and output files
-        set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in)
-        set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/doc/Doxyfile)
+        set(DOXYGEN_IN "${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in")
+        set(DOXYGEN_OUT "${CMAKE_CURRENT_BINARY_DIR}/doc/Doxyfile")
 
         # Copy configuration files
         configure_file(
@@ -101,7 +101,7 @@ if (${TEST})
 endif()
 
 # Add source files
-file(GLOB FILES_SRC src/*.c)
+file(GLOB FILES_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 add_library(${TARGET_NAME} STATIC ${FILES_SRC})
 
 # Set warning levels
@@ -127,11 +127,11 @@ set_target_properties(${TARGET_NAME} PROPERTIES C_STANDARD 99)
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
 
 # Install library headers
-file(GLOB FILES_HEADER include/${PROJECT_NAME}/*.h)
+file(GLOB FILES_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}/*.h")
 install(FILES ${FILES_HEADER} DESTINATION include/${PROJECT_NAME})
 
 # Copy documentation as well
 if (UNIX)
-    install(DIRECTORY doc/html DESTINATION share/doc/${PROJECT_NAME})
-    install(FILES doc/index.html DESTINATION share/doc/${PROJECT_NAME})
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/doc/html" DESTINATION "share/doc/${PROJECT_NAME}")
+    install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/doc/index.html" DESTINATION "share/doc/${PROJECT_NAME}")
 endif()

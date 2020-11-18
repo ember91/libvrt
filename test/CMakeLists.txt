@@ -27,7 +27,7 @@ if (${IWYU})
 endif()
 
 # Add test source files
-file(GLOB SRC_FILES CONFIGURE_DEPENDS ../test/src/*.cpp)
+file(GLOB SRC_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 add_executable(${TARGET_NAME} ${SRC_FILES})
 
 # Setup testing
@@ -49,7 +49,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # Add include directory
-target_include_directories(${TARGET_NAME} PUBLIC ../include/)
+target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../include/")
 
 # Link executable
 target_link_libraries(${TARGET_NAME} vrt ${GTEST_LIBRARIES} pthread)
