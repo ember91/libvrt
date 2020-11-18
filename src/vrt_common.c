@@ -283,4 +283,4 @@ uint32_t vrt_words_if_context(const vrt_if_context* if_context) {
 /* Defined inline in header */
 extern bool vrt_is_context(vrt_packet_type type);
 extern bool vrt_has_stream_id(vrt_packet_type type);
-extern bool is_platform_little_endian();
+extern bool vrt_is_platform_little_endian();

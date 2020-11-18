@@ -16,4 +16,3 @@
 * Fuzzing
 * Check that float, double... are inside bound when writing and validating
 * Geolocation and ephemeris has a common base. Maybe use that somehow?
-* is_platform_little_endian needs vrt_ prefix

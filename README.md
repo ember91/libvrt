@@ -177,8 +177,8 @@ vrt_string_data_item_format(data_item_format)
 And others:
 ```
 vrt_is_context(type)
-inline bool vrt_has_stream_id(type)
-inline bool is_platform_little_endian()
+vrt_has_stream_id(type)
+vrt_is_platform_little_endian()
 ```
 More documentation is found in the source code, or in the generated documentation found in `doc/index.html`.
 

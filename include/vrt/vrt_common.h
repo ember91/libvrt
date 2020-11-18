@@ -260,11 +260,11 @@ inline bool vrt_has_stream_id(vrt_packet_type type) {
 }
 
 /**
- * Check if platform is big endian.
+ * Check if platform is little endian. May be used to detect if byte swap is required for VRT data.
  *
- * \return True if big endian.
+ * \return True if little endian.
  */
-inline bool is_platform_little_endian() {
+inline bool vrt_is_platform_little_endian() {
     volatile uint32_t i = 0x01234567; /* Ensure written to memory */
     return *(uint8_t*)(&i) == 0x67;
 }
