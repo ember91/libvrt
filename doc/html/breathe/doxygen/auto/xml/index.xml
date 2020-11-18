@@ -277,7 +277,7 @@
     <member refid="vrt__common_8h_1abb62bd0691de8842da2c3e1a6fe47ef0" kind="function"><name>vrt_words_if_context</name></member>
     <member refid="vrt__common_8h_1a02b3ce76d3e1969a9338c05dc15f52e0" kind="function"><name>vrt_is_context</name></member>
     <member refid="vrt__common_8h_1ad623c6295952d8d38af85f3a6419067e" kind="function"><name>vrt_has_stream_id</name></member>
-    <member refid="vrt__common_8h_1ab3d611820863cf24034efefa69f9942f" kind="function"><name>is_platform_little_endian</name></member>
+    <member refid="vrt__common_8h_1aceb67c8bb9922e9588d19f87209faadc" kind="function"><name>vrt_is_platform_little_endian</name></member>
   </compound>
   <compound refid="vrt__read_8h" kind="file"><name>vrt_read.h</name>
     <member refid="vrt__read_8h_1a68cca84c9f6dab3f67f57b754f22a0fe" kind="function"><name>vrt_read_header</name></member>

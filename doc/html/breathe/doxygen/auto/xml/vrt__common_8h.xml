@@ -694,16 +694,16 @@
         </inbodydescription>
         <location file="/home/emil/libvrt/include/vrt/vrt_common.h" line="258" column="13" bodyfile="/home/emil/libvrt/include/vrt/vrt_common.h" bodystart="258" bodyend="260"/>
       </memberdef>
-      <memberdef kind="function" id="vrt__common_8h_1ab3d611820863cf24034efefa69f9942f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="vrt__common_8h_1aceb67c8bb9922e9588d19f87209faadc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
-        <definition>bool is_platform_little_endian</definition>
+        <definition>bool vrt_is_platform_little_endian</definition>
         <argsstring>()</argsstring>
-        <name>is_platform_little_endian</name>
+        <name>vrt_is_platform_little_endian</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Check if platform is big endian.</para>
-<para><simplesect kind="return"><para>True if big endian. </para>
+<para>Check if platform is little endian. May be used to detect if byte swap is required for VRT data.</para>
+<para><simplesect kind="return"><para>True if little endian. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -800,7 +800,7 @@
 <codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(STATIC_CAST(uint32_t,<sp/>type)<sp/>&amp;<sp/>0x5U)<sp/>!=<sp/>0;</highlight></codeline>
 <codeline lineno="260"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="261"><highlight class="normal"></highlight></codeline>
-<codeline lineno="267"><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_platform_little_endian()<sp/>{</highlight></codeline>
+<codeline lineno="267"><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>vrt_is_platform_little_endian()<sp/>{</highlight></codeline>
 <codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/>uint32_t<sp/>i<sp/>=<sp/>0x01234567;<sp/></highlight><highlight class="comment">/*<sp/>Ensure<sp/>written<sp/>to<sp/>memory<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*(uint8_t*)(&amp;i)<sp/>==<sp/>0x67;</highlight></codeline>
 <codeline lineno="270"><highlight class="normal">}</highlight></codeline>

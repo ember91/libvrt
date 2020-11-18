@@ -85,6 +85,7 @@ if (DOCUMENTATION)
             ${SPHINX_EXECUTABLE}
                 -q -b html
                 -c "${CMAKE_CURRENT_BINARY_DIR}/doc"
+                -d "${CMAKE_CURRENT_BINARY_DIR}/doc/.doctrees"
                 "${CMAKE_CURRENT_BINARY_DIR}/doc"
                 "${CMAKE_CURRENT_SOURCE_DIR}/doc/html"
             COMMENT "Building HTML documentation with Sphinx" VERBATIM)
