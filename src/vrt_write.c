@@ -589,7 +589,7 @@ static int32_t if_context_write_context_association_lists(bool                  
         uint16_t sz3 = l->vector_component_list_size;
         uint16_t sz4 = (uint16_t)msk(l->asynchronous_channel_list_size, 0, 15);
 
-        int32_t words = 2 + sz1 + sz2 + sz3 + sz4 + l->has.asynchronous_channel_tag_list ? sz4 : 0;
+        int32_t words = 2 + sz1 + sz2 + sz3 + sz4 + (l->has.asynchronous_channel_tag_list ? sz4 : 0);
 
         b[0] = sz1 << 16U | sz2;
         b[1] = sz3 << 16U | vrt_b2u(l->has.asynchronous_channel_tag_list) << 15U | sz4;
