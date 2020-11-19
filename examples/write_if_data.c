@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <vrt/vrt_common.h>
+#include <vrt/vrt_init.h>
 #include <vrt/vrt_string.h>
 #include <vrt/vrt_write.h>
 

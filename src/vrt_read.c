@@ -5,7 +5,7 @@
 #include <vrt/vrt_common.h>
 
 #include "vrt_fixed_point.h"
-#include "vrt_util.h"
+#include "vrt_util_internal.h"
 
 /**
  * Mask and shift a specified number of consecutive bits from a specified position in a word.
