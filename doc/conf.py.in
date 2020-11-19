@@ -82,6 +82,7 @@ subprocess.call("doxygen", shell=True)
 
 # -- Options for HTML output -------------------------------------------------
 
+# May need to install with 'sudo pip3 install sphinx_rtd_theme' for 'sudo make install'
 if not on_rtd:  # only import and set the theme if we're building docs locally
     import sphinx_rtd_theme
 

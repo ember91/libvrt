@@ -1,4 +1,4 @@
-* Cannot run sudo make install with sphinx
+* It seems like find_package works with locally instead breathe and read the docs, but needs sudo pip3 install breathe, ... for sudo make install
 * Improve documentation in sphinx
 * Should error codes really be in common.h?
 * In write test, break out common initializations of buffer for GPS, INS, ECEF ephemeris and Relative ephemeris. 

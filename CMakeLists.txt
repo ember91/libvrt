@@ -31,7 +31,11 @@ option(IWYU "Include what you use" OFF)
 option(TEST "Compile test suite" OFF)
 
 find_package(Doxygen)
+# Note that Breathe may located with find_package but may not work with sudo
+# make install. Install with 'sudo pip3 install breathe'.
 find_package(Breathe)
+# Note that Sphinx may located with find_package but may not work with sudo make
+# install. Install with 'sudo pip3 install sphinx_rtd_theme'.
 find_package(Sphinx)
 
 if(NOT DOXYGEN_FOUND)
