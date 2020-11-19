@@ -2,7 +2,9 @@
 
 #include <string.h>
 
-#include <vrt/vrt_common.h>
+#include <vrt/vrt_error_code.h>
+#include <vrt/vrt_util.h>
+#include <vrt/vrt_words.h>
 
 #include "vrt_fixed_point.h"
 #include "vrt_util_internal.h"
@@ -34,7 +36,7 @@ static inline void write_uint64(uint64_t val, uint32_t* b) {
 
 int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t buf_words, bool validate) {
     /* Number of words are always 1 */
-    const uint32_t words = 1;
+    const int32_t words = 1;
 
     /* Check if buf size is sufficient */
     if (buf_words < words) {
@@ -91,10 +93,10 @@ int32_t vrt_write_fields(const vrt_header* header,
                          void*             buf,
                          uint32_t          buf_words,
                          bool              validate) {
-    const uint32_t words = vrt_words_fields(header);
+    const int32_t words = (int32_t)vrt_words_fields(header);
 
     /* Check if buf size is sufficient */
-    if (buf_words < words) {
+    if (buf_words < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
@@ -135,7 +137,7 @@ int32_t vrt_write_fields(const vrt_header* header,
 
 int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_words, bool validate) {
     /* Number of words are always 1 */
-    const uint32_t words = 1;
+    const int32_t words = 1;
 
     /* Check if buf size is sufficient */
     if (buf_words < words) {
@@ -613,10 +615,10 @@ static int32_t if_context_write_context_association_lists(bool                  
 }
 
 int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32_t buf_words, bool validate) {
-    const uint32_t words = vrt_words_if_context(if_context);
+    const int32_t words = vrt_words_if_context(if_context);
 
     /* Check if buf size is sufficient */
-    if (buf_words < words) {
+    if (buf_words < (int32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
@@ -695,7 +697,7 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32
     }
     if (if_context->has.temperature) {
         if (validate) {
-            if (if_context->temperature < -273.15) {
+            if (if_context->temperature < -273.15F) {
                 return VRT_ERR_BOUNDS_TEMPERATURE;
             }
         }

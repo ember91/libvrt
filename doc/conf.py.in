@@ -124,6 +124,6 @@ if not on_rtd:  # only import and set the theme if we're building docs locally
 breathe_projects_source = {
     "auto": (
         "@CMAKE_CURRENT_SOURCE_DIR@/include/vrt",
-        ["vrt_common.h", "vrt_read.h", "vrt_string.h", "vrt_types.h", "vrt_write.h"],
+        ["vrt_error_code.h", "vrt_init.h", "vrt_read.h", "vrt_string.h", "vrt_types.h", "vrt_util.h", "vrt_write.h", "vrt_write.h"],
     )
 }

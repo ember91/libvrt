@@ -1,7 +1,5 @@
 #include <vrt/vrt_string.h>
 
-#include <vrt/vrt_common.h>
-
 const char* vrt_string_packet_type(vrt_packet_type packet_type) {
     switch (packet_type) {
         case VRT_PT_IF_DATA_WITHOUT_STREAM_ID:
@@ -136,7 +134,7 @@ const char* vrt_string_data_item_format(vrt_data_item_format data_item_format) {
     }
 }
 
-const char* vrt_string_error(int32_t error) {
+const char* vrt_string_error(vrt_error_code error) {
     switch (error) {
         case VRT_ERR_BUF_SIZE:
             return "Buffer is too small";

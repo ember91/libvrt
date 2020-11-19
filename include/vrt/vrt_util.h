@@ -11,9 +11,11 @@ extern "C" {
 
 /* Silence warnings when using C++ */
 #ifdef __cplusplus
-#define STATIC_CAST(T, X) static_cast<T>(X)
+#define STATIC_CAST(T, X)      static_cast<T>(X)
+#define REINTERPRET_CAST(T, X) reinterpret_cast<T>(X)
 #else
-#define STATIC_CAST(T, X) (T)(X)
+#define STATIC_CAST(T, X)      (T)(X)
+#define REINTERPRET_CAST(T, X) (T)(X)
 #endif
 
 /**
@@ -49,7 +51,7 @@ inline bool vrt_has_stream_id(vrt_packet_type type) {
  */
 inline bool vrt_is_platform_little_endian() {
     volatile uint32_t i = 0x01234567; /* Ensure written to memory */
-    return *(uint8_t*)(&i) == 0x67;
+    return *REINTERPRET_CAST(volatile uint8_t*, &i) == 0x67;
 }
 
 #ifdef __cplusplus

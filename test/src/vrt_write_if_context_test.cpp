@@ -3,7 +3,8 @@
 #include <array>
 #include <cstring>
 
-#include <vrt/vrt_common.h>
+#include <vrt/vrt_error_code.h>
+#include <vrt/vrt_init.h>
 #include <vrt/vrt_write.h>
 
 #include "hex.h"
@@ -29,7 +30,9 @@ class WriteIfContextTest : public ::testing::Test {
  * \param ignore List of indices to ignore.
  * \param use11  True if 11 values (GPS/INS geolocation) should be used instead of 13 (ECEF/Relative ephemeris).
  */
-static void buf_cmp_geolocation_ephemeris(const std::array<uint32_t, 1024>& buf, std::set<size_t> ignore, bool use11) {
+static void buf_cmp_geolocation_ephemeris(const std::array<uint32_t, 1024>& buf,
+                                          const std::set<size_t>&           ignore,
+                                          bool                              use11) {
     if (ignore.count(1) == 0) {
         ASSERT_EQ(Hex(buf[1]), Hex(0x00000000));
     }
@@ -814,7 +817,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsi) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{1}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {1}, true);
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
 }
 
@@ -825,7 +828,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsiInvalid1) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{1}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {1}, true);
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
 }
 
@@ -845,7 +848,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsf) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{1}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {1}, true);
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
 }
 
@@ -856,7 +859,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsfInvalid1) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{1}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {1}, true);
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
 }
 
@@ -876,7 +879,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationOui) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{1}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {1}, true);
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
 }
 
@@ -887,7 +890,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationOuiInvalid) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{1}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {1}, true);
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
 }
 
@@ -911,7 +914,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationIntegerSecondTimestampInvalid)
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{2}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {2}, true);
     ASSERT_EQ(Hex(buf_[2]), Hex(0xABABABAB));
 }
 
@@ -1232,7 +1235,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationTsi) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{1}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {1}, true);
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
 }
 
@@ -1243,7 +1246,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationTsiInvalid1) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{1}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {1}, true);
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
 }
 
@@ -1263,7 +1266,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationTsf) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{1}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {1}, true);
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
 }
 
@@ -1274,7 +1277,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationTsfInvalid1) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{1}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {1}, true);
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
 }
 
@@ -1294,7 +1297,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationOui) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{1}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {1}, true);
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
 }
 
@@ -1305,7 +1308,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationOuiInvalid) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{1}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {1}, true);
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00FFFFFF));
 }
 
@@ -1329,7 +1332,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationIntegerSecondTimestampInvalid)
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {{2}}, true);
+    buf_cmp_geolocation_ephemeris(buf_, {2}, true);
     ASSERT_EQ(Hex(buf_[2]), Hex(0xABABABAB));
 }
 

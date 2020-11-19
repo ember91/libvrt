@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <vrt/vrt_common.h>
+#include <vrt/vrt_util.h>
 
 TEST(HasStreamIdTest, IfDataWithout) {
     ASSERT_FALSE(vrt_has_stream_id(VRT_PT_IF_DATA_WITHOUT_STREAM_ID));

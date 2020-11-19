@@ -2,7 +2,9 @@
 
 #include <stddef.h>
 
-#include <vrt/vrt_common.h>
+#include <vrt/vrt_error_code.h>
+#include <vrt/vrt_util.h>
+#include <vrt/vrt_words.h>
 
 #include "vrt_fixed_point.h"
 #include "vrt_util_internal.h"
@@ -34,7 +36,7 @@ static inline uint64_t read_uint64(const uint32_t* b) {
 
 int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header, bool validate) {
     /* Size is always 1 */
-    const uint32_t words = 1;
+    const int32_t words = 1;
 
     /* Check if buf size is sufficient */
     if (buf_words < words) {
@@ -144,7 +146,7 @@ int32_t vrt_read_fields(const vrt_header* header,
 
 int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trailer) {
     /* Number of words are always 1 */
-    const uint32_t words = 1;
+    const int32_t words = 1;
 
     /* Check if buf size is sufficient */
     if (buf_words < words) {
@@ -251,7 +253,7 @@ int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trail
  *
  * \return Number of read words, or a negative number if error.
  */
-static uint32_t if_context_read_indicator_field(uint32_t b, vrt_if_context* c, bool validate) {
+static int32_t if_context_read_indicator_field(uint32_t b, vrt_if_context* c, bool validate) {
     c->context_field_change_indicator     = vrt_u2b(msk(b, 31, 1));
     c->has.reference_point_identifier     = vrt_u2b(msk(b, 30, 1));
     c->has.bandwidth                      = vrt_u2b(msk(b, 29, 1));
@@ -296,10 +298,7 @@ static uint32_t if_context_read_indicator_field(uint32_t b, vrt_if_context* c, b
  *
  * \return Number of read words, or a negative number if error.
  */
-static uint32_t if_context_read_state_and_event_indicators(bool                 has,
-                                                           uint32_t             b,
-                                                           vrt_state_and_event* s,
-                                                           bool                 validate) {
+static int32_t if_context_read_state_and_event_indicators(bool has, uint32_t b, vrt_state_and_event* s, bool validate) {
     if (has) {
         s->has.calibrated_time    = vrt_u2b(msk(b, 31, 1));
         s->has.valid_data         = vrt_u2b(msk(b, 30, 1));
@@ -407,10 +406,10 @@ static uint32_t if_context_read_state_and_event_indicators(bool                 
  *
  * \return Number of read words, or a negative number if error.
  */
-static uint32_t if_context_read_data_packet_payload_format(bool                            has,
-                                                           const uint32_t*                 b,
-                                                           vrt_data_packet_payload_format* f,
-                                                           bool                            validate) {
+static int32_t if_context_read_data_packet_payload_format(bool                            has,
+                                                          const uint32_t*                 b,
+                                                          vrt_data_packet_payload_format* f,
+                                                          bool                            validate) {
     if (has) {
         f->packing_method          = (vrt_packing_method)msk(b[0], 31, 1);
         f->real_or_complex         = (vrt_real_complex)msk(b[0], 29, 2);
@@ -466,10 +465,10 @@ static uint32_t if_context_read_data_packet_payload_format(bool                 
  *
  * \return Number of read words, or a negative number if error.
  */
-static uint32_t if_context_read_formatted_geolocation(bool                       has,
-                                                      const uint32_t*            b,
-                                                      vrt_formatted_geolocation* g,
-                                                      bool                       validate) {
+static int32_t if_context_read_formatted_geolocation(bool                       has,
+                                                     const uint32_t*            b,
+                                                     vrt_formatted_geolocation* g,
+                                                     bool                       validate) {
     if (has) {
         g->tsi                         = (vrt_tsi)msk(b[0], 26, 2);
         g->tsf                         = (vrt_tsf)msk(b[0], 24, 2);
@@ -562,7 +561,7 @@ static uint32_t if_context_read_formatted_geolocation(bool                      
  *
  * \return Number of read words, or a negative number if error.
  */
-static uint32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephemeris* e, bool validate) {
+static int32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephemeris* e, bool validate) {
     if (has) {
         e->tsi                         = (vrt_tsi)msk(b[0], 26, 2);
         e->tsf                         = (vrt_tsf)msk(b[0], 24, 2);
@@ -650,7 +649,7 @@ static uint32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephem
  *
  * \return Number of read words, or a negative number if error.
  */
-static uint32_t if_context_read_gps_ascii(bool has, const uint32_t* b, vrt_gps_ascii* g, bool validate) {
+static int32_t if_context_read_gps_ascii(bool has, const uint32_t* b, vrt_gps_ascii* g, bool validate) {
     if (has) {
         g->oui             = msk(b[0], 0, 24);
         g->number_of_words = b[1];
@@ -685,7 +684,7 @@ static uint32_t if_context_read_gps_ascii(bool has, const uint32_t* b, vrt_gps_a
  *
  * \return Number of read words.
  */
-static uint32_t if_context_read_association_lists(bool has, const uint32_t* b, vrt_context_association_lists* l) {
+static int32_t if_context_read_association_lists(bool has, const uint32_t* b, vrt_context_association_lists* l) {
     if (has) {
         l->source_list_size                  = (uint16_t)msk(b[0], 16, 9);
         l->system_list_size                  = (uint16_t)msk(b[0], 0, 9);
@@ -693,7 +692,7 @@ static uint32_t if_context_read_association_lists(bool has, const uint32_t* b, v
         l->has.asynchronous_channel_tag_list = vrt_u2b(msk(b[1], 15, 1));
         l->asynchronous_channel_list_size    = (uint16_t)msk(b[1], 0, 15);
 
-        uint32_t words = 2;
+        int32_t words = 2;
         if (l->source_list_size == 0) {
             l->source_context_association_list = NULL;
         } else {
@@ -747,9 +746,9 @@ static uint32_t if_context_read_association_lists(bool has, const uint32_t* b, v
 int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context* if_context, bool validate) {
     /* Cannot count words here since the IF context section hasn't been read yet */
 
-    uint32_t words = 1;
+    int32_t words = 1;
 
-    if (buf_words < words) {
+    if (buf_words < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
@@ -764,7 +763,7 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
 
     /* Replace context_words here instead of increasing it */
     words = vrt_words_if_context_indicator(&if_context->has);
-    if (buf_words < words) {
+    if (buf_words < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
@@ -873,7 +872,7 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
         if_context->temperature = vrt_fixed_point_i16_to_float(b[0] & 0x0000FFFFU, VRT_RADIX_TEMPERATURE);
 
         if (validate) {
-            if (if_context->temperature < -273.15) {
+            if (if_context->temperature < -273.15F) {
                 return VRT_ERR_BOUNDS_TEMPERATURE;
             }
             if ((b[0] & 0xFFFF0000U) != 0) {
@@ -956,5 +955,5 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
     }
     words += rv;
 
-    return (int32_t)words;
+    return words;
 }

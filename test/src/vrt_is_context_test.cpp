@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <vrt/vrt_common.h>
+#include <vrt/vrt_util.h>
 
 TEST(IsIfContextTest, IfDataWithout) {
     ASSERT_FALSE(vrt_is_context(VRT_PT_IF_DATA_WITHOUT_STREAM_ID));

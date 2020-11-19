@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <vrt/vrt_common.h>
+#include <vrt/vrt_init.h>
 
 /* This is not nice, but whatever... */
 #include <../src/vrt_fixed_point.h>
@@ -68,7 +68,7 @@ TEST(InitTest, InitTrailer) {
     ASSERT_EQ(Hex(t.associated_context_packet_count), Hex(0));
 }
 
-void test_formatted_geolocation(vrt_formatted_geolocation* g) {
+static void test_formatted_geolocation(vrt_formatted_geolocation* g) {
     ASSERT_EQ(Hex(g->tsi), Hex(VRT_TSI_UNDEFINED));
     ASSERT_EQ(Hex(g->tsf), Hex(VRT_TSF_UNDEFINED));
     ASSERT_EQ(Hex(g->oui), Hex(0));
@@ -90,7 +90,7 @@ void test_formatted_geolocation(vrt_formatted_geolocation* g) {
     ASSERT_DOUBLE_EQ(g->magnetic_variation, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
 }
 
-void test_ephemeris(vrt_ephemeris* e) {
+static void test_ephemeris(vrt_ephemeris* e) {
     ASSERT_EQ(Hex(e->tsi), Hex(VRT_TSI_UNDEFINED));
     ASSERT_EQ(Hex(e->tsf), Hex(VRT_TSF_UNDEFINED));
     ASSERT_EQ(Hex(e->oui), Hex(0));

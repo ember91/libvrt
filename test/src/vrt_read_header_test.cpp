@@ -5,7 +5,7 @@
 #include <map>
 #include <string>
 
-#include <vrt/vrt_common.h>
+#include <vrt/vrt_error_code.h>
 #include <vrt/vrt_read.h>
 
 #include "hex.h"

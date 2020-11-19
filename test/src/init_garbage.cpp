@@ -56,7 +56,7 @@ void init_trailer_garbage(vrt_trailer* t) {
  *
  * \param g Formatted GPS/INS geolocation.
  */
-void init_formatted_geolocation_garbage(vrt_formatted_geolocation* g) {
+static void init_formatted_geolocation_garbage(vrt_formatted_geolocation* g) {
     g->tsi = VRT_TSI_OTHER;
     g->tsf = VRT_TSF_FREE_RUNNING_COUNT;
     g->oui = 0x00FFFFFF;
@@ -84,7 +84,7 @@ void init_formatted_geolocation_garbage(vrt_formatted_geolocation* g) {
  *
  * \param e ECEF/Relative ephemeris.
  */
-void init_ephemeris_garbage(vrt_ephemeris* e) {
+static void init_ephemeris_garbage(vrt_ephemeris* e) {
     e->tsi                         = VRT_TSI_OTHER;
     e->tsf                         = VRT_TSF_FREE_RUNNING_COUNT;
     e->oui                         = 0x00FFFFFF;

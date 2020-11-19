@@ -437,13 +437,13 @@ typedef struct vrt_data_packet_payload_format {
  * Formatted GPS/INS geolocation indicators.
  */
 typedef struct vrt_formatted_geolocation_indicators {
-    double latitude;           /**< True if it has the Latitude field. */
-    bool   longitude;          /**< True if it has the Longitude field. */
-    bool   altitude;           /**< True if it has the Altitude field */
-    bool   speed_over_ground;  /**< True if it has the Speed over ground field. */
-    bool   heading_angle;      /**< True if it has the heading angle field. */
-    bool   track_angle;        /**< True if it has the Track angle field. */
-    bool   magnetic_variation; /**< True if it has the Magnetic variation field. */
+    bool latitude;           /**< True if it has the Latitude field. */
+    bool longitude;          /**< True if it has the Longitude field. */
+    bool altitude;           /**< True if it has the Altitude field */
+    bool speed_over_ground;  /**< True if it has the Speed over ground field. */
+    bool heading_angle;      /**< True if it has the heading angle field. */
+    bool track_angle;        /**< True if it has the Track angle field. */
+    bool magnetic_variation; /**< True if it has the Magnetic variation field. */
 } vrt_formatted_geolocation_indicators;
 
 /**
@@ -486,15 +486,15 @@ typedef struct vrt_formatted_geolocation {
  * ECEF/Relative ephemeris indicators.
  */
 typedef struct vrt_ephemeris_indicators {
-    double position_x;     /**< True if it has the Position X field. */
-    double position_y;     /**< True if it has the Position Y field. */
-    double position_z;     /**< True if it has the Position Z field. */
-    double attitude_alpha; /**< True if it has the Attitude alpha field. */
-    double attitude_beta;  /**< True if it has the Attitude beta field. */
-    double attitude_phi;   /**< True if it has the Attitude phi field. */
-    double velocity_dx;    /**< True if it has the Velocity dX field. */
-    double velocity_dy;    /**< True if it has the Velocity dY field. */
-    double velocity_dz;    /**< True if it has the Velocity dZ field. */
+    bool position_x;     /**< True if it has the Position X field. */
+    bool position_y;     /**< True if it has the Position Y field. */
+    bool position_z;     /**< True if it has the Position Z field. */
+    bool attitude_alpha; /**< True if it has the Attitude alpha field. */
+    bool attitude_beta;  /**< True if it has the Attitude beta field. */
+    bool attitude_phi;   /**< True if it has the Attitude phi field. */
+    bool velocity_dx;    /**< True if it has the Velocity dX field. */
+    bool velocity_dy;    /**< True if it has the Velocity dY field. */
+    bool velocity_dz;    /**< True if it has the Velocity dZ field. */
 } vrt_ephemeris_indicators;
 
 /**

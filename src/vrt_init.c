@@ -90,7 +90,7 @@ static void init_formatted_geolocation(vrt_formatted_geolocation* g) {
 /**
  * Initialize ECEF/Relative ephemeris struct.
  *
- * \param c Ephemeris.
+ * \param e Ephemeris.
  */
 static void init_ephemeris(vrt_ephemeris* e) {
     e->tsi = VRT_TSI_UNDEFINED;

@@ -3,6 +3,8 @@
 
 #include <vrt/vrt_types.h>
 
+#include <vrt/vrt_error_code.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -104,7 +106,7 @@ const char* vrt_string_data_item_format(vrt_data_item_format data_item_format);
  *
  * \note Inputting an unknown error code returns "Unknown".
  */
-const char* vrt_string_error(int32_t error);
+const char* vrt_string_error(vrt_error_code error);
 
 #ifdef __cplusplus
 }
