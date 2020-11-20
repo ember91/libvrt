@@ -1,9 +1,9 @@
 #ifndef INCLUDE_VRT_VRT_STRING_H_
 #define INCLUDE_VRT_VRT_STRING_H_
 
-#include <vrt/vrt_types.h>
+#include <stdint.h>
 
-#include <vrt/vrt_error_code.h>
+#include <vrt/vrt_types.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include <vrt/vrt_types.h>
 #include <vrt/vrt_util.h>
 
 TEST(IsIfContextTest, IfDataWithout) {

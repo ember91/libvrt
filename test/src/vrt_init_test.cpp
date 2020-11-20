@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include <vrt/vrt_init.h>
+#include <vrt/vrt_types.h>
 
 /* This is not nice, but whatever... */
 #include <../src/vrt_fixed_point.h>

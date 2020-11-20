@@ -1,6 +1,9 @@
 #include <vrt/vrt_init.h>
 
+#include <stdbool.h>
 #include <stddef.h>
+
+#include <vrt/vrt_types.h>
 
 #include "vrt_fixed_point.h"
 #include "vrt_util_internal.h"

@@ -9,6 +9,7 @@
 
 #include <vrt/vrt_error_code.h>
 #include <vrt/vrt_read.h>
+#include <vrt/vrt_types.h>
 
 /* This is not nice, but whatever... */
 #include <../src/vrt_fixed_point.h>

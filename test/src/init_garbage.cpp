@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+#include <vrt/vrt_types.h>
+
 void init_header_garbage(vrt_header* h) {
     h->packet_type  = static_cast<vrt_packet_type>(0xFFFFFFFF);
     h->has.class_id = true;

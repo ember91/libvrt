@@ -3,6 +3,7 @@
 #include <stddef.h>
 
 #include <vrt/vrt_error_code.h>
+#include <vrt/vrt_types.h>
 #include <vrt/vrt_util.h>
 #include <vrt/vrt_words.h>
 

@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include <vrt/vrt_init.h>
+#include <vrt/vrt_types.h>
 #include <vrt/vrt_words.h>
 
 class WordsIfContextTest : public ::testing::Test {

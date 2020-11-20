@@ -11,6 +11,7 @@
 
 #include <vrt/vrt_init.h>
 #include <vrt/vrt_string.h>
+#include <vrt/vrt_util.h>
 #include <vrt/vrt_write.h>
 
 /* Size of packet in 32-bit words */

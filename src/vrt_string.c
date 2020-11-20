@@ -1,5 +1,8 @@
 #include <vrt/vrt_string.h>
 
+#include <vrt/vrt_error_code.h>
+#include <vrt/vrt_types.h>
+
 const char* vrt_string_packet_type(vrt_packet_type packet_type) {
     switch (packet_type) {
         case VRT_PT_IF_DATA_WITHOUT_STREAM_ID:

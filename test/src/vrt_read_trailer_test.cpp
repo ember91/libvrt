@@ -8,6 +8,7 @@
 
 #include <vrt/vrt_error_code.h>
 #include <vrt/vrt_read.h>
+#include <vrt/vrt_types.h>
 
 #include "hex.h"
 #include "init_garbage.h"

@@ -1,6 +1,7 @@
 #ifndef SRC_VRT_UTIL_H_
 #define SRC_VRT_UTIL_H_
 
+#include <stdbool.h>
 #include <stdint.h>
 
 #include <vrt/vrt_types.h>
