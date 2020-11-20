@@ -1,6 +1,6 @@
 #include "vrt_util_internal.h"
 
-#include <vrt/vrt_types.h>
+#include "vrt_types.h"
 
 /* Defined inline in header */
 extern uint32_t vrt_b2u(bool b);

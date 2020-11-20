@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include <vrt/vrt_types.h>
+#include "vrt_types.h"
 
 #ifdef __cplusplus
 extern "C" {

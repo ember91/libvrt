@@ -1,7 +1,7 @@
-#include <vrt/vrt_words.h>
+#include "vrt_words.h"
 
-#include <vrt/vrt_types.h>
-#include <vrt/vrt_util.h>
+#include "vrt_types.h"
+#include "vrt_util.h"
 
 #include "vrt_util_internal.h"
 

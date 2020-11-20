@@ -1,8 +1,8 @@
 #ifndef INCLUDE_VRT_VRT_ERROR_CODE_H_
 #define INCLUDE_VRT_VRT_ERROR_CODE_H_
 
-#include <vrt/vrt_error_code.h>
-#include <vrt/vrt_types.h>
+#include "vrt_error_code.h"
+#include "vrt_types.h"
 
 #ifdef __cplusplus
 extern "C" {

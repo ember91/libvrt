@@ -1,6 +1,6 @@
-#include <vrt/vrt_util.h>
+#include "vrt_util.h"
 
-#include <vrt/vrt_types.h>
+#include "vrt_types.h"
 
 /* Defined inline in header */
 extern bool vrt_is_context(vrt_packet_type type);

@@ -1,7 +1,7 @@
 #ifndef INCLUDE_VRT_VRT_INIT_H_
 #define INCLUDE_VRT_VRT_INIT_H_
 
-#include <vrt/vrt_types.h>
+#include "vrt_types.h"
 
 #ifdef __cplusplus
 extern "C" {

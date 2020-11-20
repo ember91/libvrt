@@ -141,7 +141,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # Add include directory
-target_include_directories(${TARGET_NAME} PUBLIC include/)
+target_include_directories(${TARGET_NAME} PUBLIC include/vrt/)
 
 # Set C standard
 set_target_properties(${TARGET_NAME} PROPERTIES C_STANDARD 99)
