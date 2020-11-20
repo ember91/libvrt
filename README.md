@@ -94,7 +94,7 @@ int main() {
 
     /* Write header */
     int32_t offset = 0;
-    int32_t rv     = vrt_write_header(&h, b + offset, SIZE, true);
+    int32_t rv     = vrt_write_header(&h, b + offset, SIZE - offset, true);
     if (rv < 0) {
         fprintf(stderr, "Failed to write header: %s\n", vrt_string_error(rv));
         return EXIT_FAILURE;
