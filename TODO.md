@@ -11,7 +11,5 @@
 
 * Check that float, double... are inside bound when writing and validating
 
-* cmake format
 * Rerun static analysis tools
 * Compile again with other compilers
-* Not following google style guide...
