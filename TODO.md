@@ -1,8 +1,6 @@
-* It seems like find_package works with locally instead breathe and read the docs, but needs sudo pip3 install breathe, ... for sudo make install
 * VS code doesn't look for local headers
 * Improve documentation in sphinx
 * Compile with -fvisibility=hidden?
-* Header only library
 * Add tests that write to buffer and then read from the same buffer. vrt_compare_...() functions may be useful for this.
 
 * Add read example
