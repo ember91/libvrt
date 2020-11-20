@@ -40,7 +40,7 @@ int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header,
     const int32_t words = 1;
 
     /* Check if buf size is sufficient */
-    if (buf_words < words) {
+    if (buf_words < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
@@ -83,10 +83,10 @@ int32_t vrt_read_fields(const vrt_header* header,
                         uint32_t          buf_words,
                         vrt_fields*       fields,
                         bool              validate) {
-    const uint32_t words = vrt_words_fields(header);
+    const int32_t words = (int32_t)vrt_words_fields(header);
 
     /* Check if buf size is sufficient */
-    if (buf_words < words) {
+    if (buf_words < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
@@ -150,7 +150,7 @@ int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trail
     const int32_t words = 1;
 
     /* Check if buf size is sufficient */
-    if (buf_words < words) {
+    if (buf_words < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
