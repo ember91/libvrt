@@ -91,5 +91,10 @@ int main() {
     }
     fclose(fp);
 
+    /* Warn if not standards compliant */
+    if (vrt_is_platform_little_endian()) {
+        printf("Warning: Written packet is little endian. It is NOT compliant with the VRT standard.\n");
+    }
+
     return EXIT_SUCCESS;
 }

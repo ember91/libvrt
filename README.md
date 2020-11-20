@@ -55,6 +55,7 @@ Generate a packet with:
 
 #include <vrt/vrt_init.h>
 #include <vrt/vrt_string.h>
+#include <vrt/vrt_util.h>
 #include <vrt/vrt_write.h>
 
 /* Size of packet in 32-bit words */
@@ -133,6 +134,11 @@ int main() {
         return EXIT_FAILURE;
     }
     fclose(fp);
+
+    /* Warn if not standards compliant */
+    if (vrt_is_platform_little_endian()) {
+        printf("Warning: Written packet is little endian. It is NOT compliant with the VRT standard.\n");
+    }
 
     return EXIT_SUCCESS;
 }
