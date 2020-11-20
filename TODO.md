@@ -11,5 +11,7 @@
 
 * Check that float, double... are inside bound when writing and validating
 
-* Rerun static analysis tools
 * Compile again with other compilers
+
+# Future
+* Add support for 128 bit float
