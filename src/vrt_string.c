@@ -134,7 +134,7 @@ const char* vrt_string_data_item_format(vrt_data_item_format data_item_format) {
     }
 }
 
-const char* vrt_string_error(vrt_error_code error) {
+const char* vrt_string_error(int32_t error) {
     switch (error) {
         case VRT_ERR_BUF_SIZE:
             return "Buffer is too small";
