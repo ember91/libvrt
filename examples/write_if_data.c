@@ -78,7 +78,7 @@ int main() {
     }
 
     /* Write generated packet to file */
-    FILE* fp = fopen("signal.vrt", "w");
+    FILE* fp = fopen("signal.vrt", "wb");
     if (fp == NULL) {
         fprintf(stderr, "Failed to open file\n");
         return EXIT_FAILURE;
