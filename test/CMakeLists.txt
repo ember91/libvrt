@@ -30,7 +30,7 @@ if(${CPPLINT})
 endif()
 if(${IWYU})
   message(STATUS "Enabling Include-what-you-use for C++")
-  set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "iwyu;--transitive_includes_only")
+  set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "/usr/local/bin/include-what-you-use")
 endif()
 
 # Add test source files
