@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 #include "vrt_types.h"
+#include "vrt_util.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,6 +30,7 @@ extern "C" {
  *
  * \note May requires output buffer data to be byte swapped if platform endianess isn't big endian (network order).
  */
+VRT_WARN_UNUSED
 int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t buf_words, bool validate);
 
 /**
@@ -47,6 +49,7 @@ int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t buf_words
  *                                  (> 999999999999 ps).
  * \retval VRT_ERR_BOUNDS_OUI       OUI is outside valid bounds (> 0x00FFFFFF).
  */
+VRT_WARN_UNUSED
 int32_t vrt_write_fields(const vrt_header* header,
                          const vrt_fields* fields,
                          void*             buf,
@@ -67,6 +70,7 @@ int32_t vrt_write_fields(const vrt_header* header,
  * \retval VRT_ERR_BOUNDS_ASSOCIATED_CONTEXT_PACKET_COUNT   Associated context packet count is outside valid bounds
  *                                                          (>0x7F).
  */
+VRT_WARN_UNUSED
 int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_words, bool validate);
 
 /**
@@ -116,6 +120,7 @@ int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_wo
  *          if_reference_frequency, rf_reference_frequency, rf_reference_frequency_offset, if_band_offset, and
  *          sample_rate, may in rare cases lose precision since double only has 53 bits of precision.
  */
+VRT_WARN_UNUSED
 int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32_t buf_words, bool validate);
 
 #ifdef __cplusplus

@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 #include "vrt_types.h"
+#include "vrt_util.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,6 +28,7 @@ extern "C" {
  *
  * \note Requires input buffer data to be byte swapped if platform endianess isn't big endian (network order).
  */
+VRT_WARN_UNUSED
 int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header, bool validate);
 
 /**
@@ -45,6 +47,7 @@ int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header,
  * \retval VRT_ERR_BOUNDS_REAL_TIME TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds
  *                                  (> 999999999999 ps).
  */
+VRT_WARN_UNUSED
 int32_t vrt_read_fields(const vrt_header* header,
                         const void*       buf,
                         uint32_t          buf_words,
@@ -64,6 +67,7 @@ int32_t vrt_read_fields(const vrt_header* header,
  *
  * \note Unlike other read functions, there is nothing to validate, so no 'validate' parameter here.
  */
+VRT_WARN_UNUSED
 int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trailer);
 
 /**
@@ -101,6 +105,7 @@ int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trail
  *          if_reference_frequency, rf_reference_frequency, rf_reference_frequency_offset, if_band_offset, and
  *          sample_rate, may in rare cases lose precision since double only has 53 bits of precision.
  */
+VRT_WARN_UNUSED
 int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context* if_context, bool validate);
 
 #ifdef __cplusplus
