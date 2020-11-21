@@ -37,7 +37,7 @@ This installs a static library. It can now be linked, e.g. with:
 |----------------|-------------------------------------|
 | gcc            | gcc example.c -lvrt -o example      |
 | clang          | clang example.c -lvrt -o example    |
-| icc            |                                     |
+| icc            | icc example.c -lvrt -o example      |
 | Visual Studio  | cl example.c vrt.lib                |
 
 Generate a packet with:
