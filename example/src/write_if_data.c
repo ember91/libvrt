@@ -1,6 +1,6 @@
 /*
- * Generate signal and write VRT IF data packet to file. Note that this won't generate a big endian-format packet if on
- * a little endian platform, so the generated packet may be non-standard.
+ * Generate signal and write VRT IF data packet to file. Note that this will not generate a big endian-format, i.e.
+ * standard conforming, packet on a little endian platform.
  */
 
 #include <math.h>
@@ -93,7 +93,7 @@ int main() {
 
     /* Warn if not standards compliant */
     if (vrt_is_platform_little_endian()) {
-        printf("Warning: Written packet is little endian. It is NOT compliant with the VRT standard.\n");
+        fprintf(stderr, "Warning: Written packet is little endian. It is NOT compliant with the VRT standard.\n");
     }
 
     return EXIT_SUCCESS;

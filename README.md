@@ -143,7 +143,7 @@ int main() {
     return EXIT_SUCCESS;
 }
 ```
-This example can be found in [examples/write_if_data.c](examples/write_if_data.c).
+Examples can be found in [example/](example/).
 
 Useful functions for initializing structs to default values are:
 ```

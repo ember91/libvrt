@@ -30,6 +30,7 @@ option(CLANG_TIDY "Enable clang-tidy" OFF)
 option(DOCUMENTATION "Build doxygen documentation" OFF)
 option(IWYU "Include what you use" OFF)
 option(TEST "Compile test suite" OFF)
+option(EXAMPLE "Compile example suite" OFF)
 
 find_package(Doxygen)
 # Note that Breathe may located with find_package but may not work with sudo
@@ -119,6 +120,10 @@ endif()
 if(${TEST})
   message(STATUS "Compiling test suite")
   add_subdirectory(test)
+endif()
+if(${EXAMPLE})
+  message(STATUS "Compiling example suite")
+  add_subdirectory(example)
 endif()
 
 # Add source files
