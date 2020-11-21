@@ -68,15 +68,16 @@
 		},
 		"doxdocgen.cpp.tparamTemplate": "\\tparam {param} ",
 		"doxdocgen.file.fileTemplate": "\\file {name}",
-		"doxdocgen.generic.briefTemplate": "\\brief {text}",
+		"doxdocgen.generic.briefTemplate": "",
 		"doxdocgen.generic.dateTemplate": "\\date {date}",
 		"doxdocgen.generic.paramTemplate": "\\param {param} ",
-		"doxdocgen.generic.returnTemplate": "\\return {type} ",
+		"doxdocgen.generic.returnTemplate": "\\return",
 		"doxdocgen.file.versionTag": "\\version 0.1",
 		"cmake.buildDirectory": "${workspaceFolder}/${buildType}",
 		"cmake.configureArgs": [
 			"-DTEST=On"
 		],
-		"files.insertFinalNewline": true
+		"files.insertFinalNewline": true,
+		"doxdocgen.generic.authorTag": "\\author {author} ({email})"
 	}
 }
