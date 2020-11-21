@@ -50,14 +50,14 @@ const char* vrt_string_tsi(vrt_tsi tsi) {
 
 const char* vrt_string_tsf(vrt_tsf tsf) {
     switch (tsf) {
-        case VRT_TSI_NONE:
+        case VRT_TSF_NONE:
             return "None/Undefined";
-        case VRT_TSI_UTC:
+        case VRT_TSF_SAMPLE_COUNT:
             return "Sample Count";
-        case VRT_TSI_GPS:
+        case VRT_TSF_REAL_TIME:
             return "Real Time";
-        case VRT_TSI_OTHER:
-            return "Free Running";
+        case VRT_TSF_FREE_RUNNING_COUNT:
+            return "Free Running Count";
         default:
             return "Unknown";
     }
