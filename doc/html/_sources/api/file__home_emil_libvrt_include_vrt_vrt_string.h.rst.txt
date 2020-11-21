@@ -1,0 +1,62 @@
+
+.. _file__home_emil_libvrt_include_vrt_vrt_string.h:
+
+File vrt_string.h
+=================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_emil_libvrt_include_vrt>` (``/home/emil/libvrt/include/vrt``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/emil/libvrt/include/vrt/vrt_string.h``)
+-----------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_emil_libvrt_include_vrt_vrt_string.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``stdint.h``
+
+- ``vrt_types.h`` (:ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`)
+
+
+
+
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_vrt__string_8h_1a99c9ae304a4b8d079cf2bd89eb8c3970`
+
+- :ref:`exhale_function_vrt__string_8h_1a69be6997674761912825d90bf058032a`
+
+- :ref:`exhale_function_vrt__string_8h_1a781ac0482f2437dd9b76043f87350e5d`
+
+- :ref:`exhale_function_vrt__string_8h_1aa2b99569815d0971f22687df7392d3e6`
+
+- :ref:`exhale_function_vrt__string_8h_1abd44330e5a4dbca145b5918fc29b7b00`
+
+- :ref:`exhale_function_vrt__string_8h_1a3996420d201f8b5b94a380a72036576a`
+
+- :ref:`exhale_function_vrt__string_8h_1ac3d84d0157b350448d87a68b8349ae6e`
+
+- :ref:`exhale_function_vrt__string_8h_1a3b3850641b61ac8c3a3809d628e6eb2e`
+
+- :ref:`exhale_function_vrt__string_8h_1af2eb78df73c725620b77e457f2bcfbea`
+

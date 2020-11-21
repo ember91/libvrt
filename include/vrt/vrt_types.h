@@ -175,7 +175,7 @@ typedef struct vrt_trailer_indicators {
 } vrt_trailer_indicators;
 
 /**
- * Indicates if AGC or MGC is active.
+ * Indicates if AGC (Automatic Gain Control) or MGC (Manual Gain Control) is active.
  */
 typedef enum vrt_agc_or_mgc { VRT_AOM_MGC = 0x0, VRT_AOM_AGC = 0x1 } vrt_agc_or_mgc;
 

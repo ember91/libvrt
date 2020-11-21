@@ -1,0 +1,13 @@
+.. _exhale_typedef_vrt__types_8h_1a35510365a5dde291c074ec18b9d5e3cf:
+
+Typedef vrt_agc_or_mgc
+======================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: vrt_agc_or_mgc

@@ -1,0 +1,13 @@
+.. _exhale_enum_vrt__types_8h_1a230b878e56adcc1bfd2b712608e46732:
+
+Enum vrt_tsi
+============
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Enum Documentation
+------------------
+
+
+.. doxygenenum:: vrt_tsi

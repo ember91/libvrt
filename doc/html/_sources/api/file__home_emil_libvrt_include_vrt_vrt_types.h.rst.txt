@@ -1,0 +1,184 @@
+
+.. _file__home_emil_libvrt_include_vrt_vrt_types.h:
+
+File vrt_types.h
+================
+
+|exhale_lsh| :ref:`Parent directory <dir__home_emil_libvrt_include_vrt>` (``/home/emil/libvrt/include/vrt``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/emil/libvrt/include/vrt/vrt_types.h``)
+----------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_emil_libvrt_include_vrt_vrt_types.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``stdbool.h``
+
+- ``stdint.h``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file__home_emil_libvrt_include_vrt_vrt_error_code.h`
+
+- :ref:`file__home_emil_libvrt_include_vrt_vrt_init.h`
+
+- :ref:`file__home_emil_libvrt_include_vrt_vrt_read.h`
+
+- :ref:`file__home_emil_libvrt_include_vrt_vrt_string.h`
+
+- :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+- :ref:`file__home_emil_libvrt_include_vrt_vrt_words.h`
+
+- :ref:`file__home_emil_libvrt_include_vrt_vrt_write.h`
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structvrt__class__identifier`
+
+- :ref:`exhale_struct_structvrt__context__association__lists`
+
+- :ref:`exhale_struct_structvrt__context__association__lists__indicators`
+
+- :ref:`exhale_struct_structvrt__context__indicators`
+
+- :ref:`exhale_struct_structvrt__data__packet__payload__format`
+
+- :ref:`exhale_struct_structvrt__device__identifier`
+
+- :ref:`exhale_struct_structvrt__ephemeris`
+
+- :ref:`exhale_struct_structvrt__ephemeris__indicators`
+
+- :ref:`exhale_struct_structvrt__fields`
+
+- :ref:`exhale_struct_structvrt__formatted__geolocation`
+
+- :ref:`exhale_struct_structvrt__formatted__geolocation__indicators`
+
+- :ref:`exhale_struct_structvrt__gain`
+
+- :ref:`exhale_struct_structvrt__gps__ascii`
+
+- :ref:`exhale_struct_structvrt__header`
+
+- :ref:`exhale_struct_structvrt__header__indicators`
+
+- :ref:`exhale_struct_structvrt__if__context`
+
+- :ref:`exhale_struct_structvrt__state__and__event`
+
+- :ref:`exhale_struct_structvrt__state__and__event__indicators`
+
+- :ref:`exhale_struct_structvrt__trailer`
+
+- :ref:`exhale_struct_structvrt__trailer__indicators`
+
+
+Enums
+-----
+
+
+- :ref:`exhale_enum_vrt__types_8h_1ad3f5248585002368996827c559fa7e8d`
+
+- :ref:`exhale_enum_vrt__types_8h_1acce62a86ec3b0ab63965523b148aca47`
+
+- :ref:`exhale_enum_vrt__types_8h_1a8b7e0ca74814ff290cb1afee9acc2504`
+
+- :ref:`exhale_enum_vrt__types_8h_1a1eb06fc8779386f52d587f2b04e75e9d`
+
+- :ref:`exhale_enum_vrt__types_8h_1a6365e6b8a67f083b3df3a232861207db`
+
+- :ref:`exhale_enum_vrt__types_8h_1ae1c62c112b979fe098ab58e8d3a1fe45`
+
+- :ref:`exhale_enum_vrt__types_8h_1a230b878e56adcc1bfd2b712608e46732`
+
+- :ref:`exhale_enum_vrt__types_8h_1ac8c1f87a8c133971b31f0a9b3f2b2352`
+
+
+Typedefs
+--------
+
+
+- :ref:`exhale_typedef_vrt__types_8h_1a35510365a5dde291c074ec18b9d5e3cf`
+
+- :ref:`exhale_typedef_vrt__types_8h_1ae612e4cd21a6812207f4b602138b207e`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a88f6de98f2f63ebed0de46b31ee70573`
+
+- :ref:`exhale_typedef_vrt__types_8h_1ab2ad005e6f35f6132c52f054108d727f`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a15f7ae6dc252cb49d04167cb2c3a9938`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a7cb74df26973af4163f6a454bfac1752`
+
+- :ref:`exhale_typedef_vrt__types_8h_1abfc30cf041cd83e0d7330161b44acbb6`
+
+- :ref:`exhale_typedef_vrt__types_8h_1af9cb4b17ea0361f305020bf8b00ef45e`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a7ecf86c7448f1053a4e427a8e5124f03`
+
+- :ref:`exhale_typedef_vrt__types_8h_1adc2595101b556c8a626f0e15d756bebd`
+
+- :ref:`exhale_typedef_vrt__types_8h_1af8bc036edb7d29f5dcd8963a4bf365e2`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a0fb6ed22138cbd5a2e6ade1374a5cab6`
+
+- :ref:`exhale_typedef_vrt__types_8h_1ae46fca03125d928bf4301c24bc214ce1`
+
+- :ref:`exhale_typedef_vrt__types_8h_1abc5ac592b2dbfab1303919e4fb0a99c3`
+
+- :ref:`exhale_typedef_vrt__types_8h_1ace732908c30469bc10bbc2a536d8fac5`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a911ea976d33838e89b7a25ecf7e3cea9`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a6322281affed3e99968831f769eb3946`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a2848c63ec869af030cd4aa26a1591f16`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a0e6dfcb09c9e0f88410bebe4392d2932`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a6841f73b1f5dcf36581e9dd81f00f0d6`
+
+- :ref:`exhale_typedef_vrt__types_8h_1ac840da71ca6440bf4cf20d3556fd0b54`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a1ed6ad1422a5da88af10093c1ccf2884`
+
+- :ref:`exhale_typedef_vrt__types_8h_1ab73faf0b3544528a5163b98d12878686`
+
+- :ref:`exhale_typedef_vrt__types_8h_1ad68ac10e9a6971eb3c535612fb17606e`
+
+- :ref:`exhale_typedef_vrt__types_8h_1ae85a56a4ebbc758432fd426c2ed920f7`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a19358442082642e99f2b1e8f2d777418`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a4f18056135a2d71940e1177b3f5850f8`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a0254369bdf6a1ed031376a62a9309dfd`
+

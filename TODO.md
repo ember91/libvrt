@@ -1,4 +1,3 @@
-* Improve documentation in sphinx
 * Compile with -fvisibility=hidden?
 * Add tests that write to buffer and then read from the same buffer. vrt_compare_...() functions may be useful for this.
 

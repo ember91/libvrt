@@ -1,0 +1,16 @@
+.. _exhale_struct_structvrt__gps__ascii:
+
+Struct vrt_gps_ascii
+====================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: vrt_gps_ascii
+   :members:
+   :protected-members:
+   :undoc-members:

@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__read_8h_1a4f5a71874451e0182e7e7d35a9b8e3d7:
+
+Function vrt_read_fields
+========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_read.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_read_fields(const vrt_header *, const void *, uint32_t, vrt_fields *, bool)

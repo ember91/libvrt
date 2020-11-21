@@ -1,0 +1,13 @@
+.. _exhale_typedef_vrt__error__code_8h_1a3e44610f267afc6441a1c149083be04b:
+
+Typedef vrt_error_code
+======================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_error_code.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: vrt_error_code

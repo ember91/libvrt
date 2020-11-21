@@ -40,6 +40,7 @@ author = "Emil Berg"
 # ones.
 extensions = [
     "breathe",
+    "exhale"
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -116,14 +117,27 @@ if not on_rtd:  # only import and set the theme if we're building docs locally
 
 # otherwise, readthedocs.org uses their theme by default, so no need to specify it
 
+# Tell sphinx what the primary language being documented is.
+primary_domain = 'c'
+
+# Tell sphinx what the pygments highlight language should be.
+highlight_language = 'c'
 
 # -- Extension configuration -------------------------------------------------
 
-# breathe_projects = {"libvrt": "_build/xml"}
+breathe_projects = {"libvrt": "doxygen/xml"}
+breathe_default_project = "libvrt"
 
-breathe_projects_source = {
-    "auto": (
-        "@CMAKE_CURRENT_SOURCE_DIR@/include/vrt",
-        ["vrt_error_code.h", "vrt_init.h", "vrt_read.h", "vrt_string.h", "vrt_types.h", "vrt_util.h", "vrt_write.h"],
-    )
+exhale_args = {
+    # These arguments are required
+    "containmentFolder":     "./api",
+    "rootFileName":          "library_root.rst",
+    "rootFileTitle":         "Library API",
+    "doxygenStripFromPath":  "..",
+    # Suggested optional arguments
+    # "createTreeView":        True,
+    # TIP: if using the sphinx-bootstrap-theme, you need
+    # "treeViewIsBootstrap": True,
+    # "exhaleExecutesDoxygen": True,
+    # "exhaleDoxygenStdin":    "INPUT = @CMAKE_CURRENT_SOURCE_DIR@/include/vrt"
 }

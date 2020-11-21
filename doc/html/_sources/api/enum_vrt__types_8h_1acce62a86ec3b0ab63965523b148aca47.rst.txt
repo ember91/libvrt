@@ -1,0 +1,13 @@
+.. _exhale_enum_vrt__types_8h_1acce62a86ec3b0ab63965523b148aca47:
+
+Enum vrt_data_item_format
+=========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Enum Documentation
+------------------
+
+
+.. doxygenenum:: vrt_data_item_format

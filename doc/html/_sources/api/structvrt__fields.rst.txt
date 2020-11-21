@@ -1,0 +1,16 @@
+.. _exhale_struct_structvrt__fields:
+
+Struct vrt_fields
+=================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: vrt_fields
+   :members:
+   :protected-members:
+   :undoc-members:

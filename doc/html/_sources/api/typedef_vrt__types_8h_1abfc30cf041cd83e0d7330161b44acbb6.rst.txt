@@ -1,0 +1,13 @@
+.. _exhale_typedef_vrt__types_8h_1abfc30cf041cd83e0d7330161b44acbb6:
+
+Typedef vrt_data_packet_payload_format
+======================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: vrt_data_packet_payload_format

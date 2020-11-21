@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__init_8h_1ac48207b4c8fe750f09efca40d5d12130:
+
+Function vrt_init_trailer
+=========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_init.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_init_trailer(vrt_trailer *)

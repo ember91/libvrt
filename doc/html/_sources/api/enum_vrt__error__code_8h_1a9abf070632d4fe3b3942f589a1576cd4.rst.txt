@@ -1,0 +1,13 @@
+.. _exhale_enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4:
+
+Enum vrt_error_code
+===================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_error_code.h`
+
+
+Enum Documentation
+------------------
+
+
+.. doxygenenum:: vrt_error_code

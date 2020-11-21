@@ -1,0 +1,16 @@
+.. _exhale_struct_structvrt__gain:
+
+Struct vrt_gain
+===============
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: vrt_gain
+   :members:
+   :protected-members:
+   :undoc-members:

@@ -1,0 +1,63 @@
+
+.. _program_listing_file__home_emil_libvrt_include_vrt_vrt_error_code.h:
+
+Program Listing for File vrt_error_code.h
+=========================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_emil_libvrt_include_vrt_vrt_error_code.h>` (``/home/emil/libvrt/include/vrt/vrt_error_code.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #ifndef INCLUDE_VRT_VRT_ERROR_CODE_H_
+   #define INCLUDE_VRT_VRT_ERROR_CODE_H_
+   
+   #include "vrt_error_code.h"
+   #include "vrt_types.h"
+   
+   #ifdef __cplusplus
+   extern "C" {
+   #endif
+   
+   typedef enum vrt_error_code {
+       VRT_ERR_BUF_SIZE = -1,
+       VRT_ERR_RESERVED = -2,
+       VRT_ERR_INVALID_PACKET_TYPE = -3,
+       VRT_ERR_TRAILER_IN_CONTEXT = -4,
+       VRT_ERR_TSM_IN_DATA = -5,
+       VRT_ERR_INVALID_TSM = -6,
+       VRT_ERR_INVALID_TSI = -7,
+       VRT_ERR_INVALID_TSF = -8,
+       VRT_ERR_BOUNDS_REAL_TIME = -9,
+       VRT_ERR_BOUNDS_PACKET_COUNT = -10,
+       VRT_ERR_BOUNDS_OUI = -11,
+       VRT_ERR_BOUNDS_ASSOCIATED_CONTEXT_PACKET_COUNT = -12,
+       VRT_ERR_BOUNDS_BANDWIDTH = -13,
+       VRT_ERR_BOUNDS_SAMPLE_RATE = -14,
+       VRT_ERR_BOUNDS_TEMPERATURE = -15,
+       VRT_ERR_INVALID_PACKING_METHOD = -16,
+       VRT_ERR_INVALID_REAL_OR_COMPLEX = -17,
+       VRT_ERR_INVALID_DATA_ITEM_FORMAT = -18,
+       VRT_ERR_BOUNDS_EVENT_TAG_SIZE = -19,
+       VRT_ERR_BOUNDS_CHANNEL_TAG_SIZE = -20,
+       VRT_ERR_BOUNDS_ITEM_PACKING_FIELD_SIZE = -21,
+       VRT_ERR_BOUNDS_DATA_ITEM_SIZE = -22,
+       VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP = -23,
+       VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP = -24,
+       VRT_ERR_BOUNDS_LATITUDE = -25,
+       VRT_ERR_BOUNDS_LONGITUDE = -26,
+       VRT_ERR_BOUNDS_SPEED_OVER_GROUND = -27,
+       VRT_ERR_BOUNDS_HEADING_ANGLE = -28,
+       VRT_ERR_BOUNDS_TRACK_ANGLE = -29,
+       VRT_ERR_BOUNDS_MAGNETIC_VARIATION = -30,
+       VRT_ERR_BOUNDS_SOURCE_LIST_SIZE = -31,
+       VRT_ERR_BOUNDS_SYSTEM_LIST_SIZE = -32,
+       VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE = -33
+   } vrt_error_code;
+   
+   #ifdef __cplusplus
+   }
+   #endif
+   
+   #endif

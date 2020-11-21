@@ -1,0 +1,258 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Struct vrt_fields &mdash; libvrt  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Struct vrt_formatted_geolocation" href="structvrt__formatted__geolocation.html" />
+    <link rel="prev" title="Struct vrt_ephemeris_indicators" href="structvrt__ephemeris__indicators.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> libvrt
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">libvrt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_root.html">Library API</a> &raquo;</li>
+        
+      <li>Struct vrt_fields</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/structvrt__fields.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="struct-vrt-fields">
+<span id="exhale-struct-structvrt-fields"></span><h1>Struct vrt_fields<a class="headerlink" href="#struct-vrt-fields" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_types.h.html#file-home-emil-libvrt-include-vrt-vrt-types-h"><span class="std std-ref">File vrt_types.h</span></a></p></li>
+</ul>
+<div class="section" id="struct-documentation">
+<h2>Struct Documentation<a class="headerlink" href="#struct-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp struct">
+<dt id="_CPPv410vrt_fields">
+<span id="_CPPv310vrt_fields"></span><span id="_CPPv210vrt_fields"></span><span id="vrt_fields"></span><span class="target" id="structvrt__fields"></span><em class="property">struct </em><code class="sig-name descname">vrt_fields</code><a class="headerlink" href="#_CPPv410vrt_fields" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Field data. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N10vrt_fields9stream_idE">
+<span id="_CPPv3N10vrt_fields9stream_idE"></span><span id="_CPPv2N10vrt_fields9stream_idE"></span><span id="vrt_fields::stream_id__uint32_t"></span><span class="target" id="structvrt__fields_1aedacde9429ebcf8c55a5c5d527610f40"></span>uint32_t <code class="sig-name descname">stream_id</code><a class="headerlink" href="#_CPPv4N10vrt_fields9stream_idE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Identifies which stream it belongs to. Activate by setting packet_type accordingly.</p>
+<p><dl class="simple">
+<dt><strong>Note</strong></dt><dd><p>Although this field is optional for IF data packets it is required for context packets. </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N10vrt_fields8class_idE">
+<span id="_CPPv3N10vrt_fields8class_idE"></span><span id="_CPPv2N10vrt_fields8class_idE"></span><span id="vrt_fields::class_id__vrt_class_identifier"></span><span class="target" id="structvrt__fields_1a3aee395277e4f93c67200620c51dcf22"></span><a class="reference internal" href="structvrt__class__identifier.html#_CPPv420vrt_class_identifier" title="vrt_class_identifier">vrt_class_identifier</a> <code class="sig-name descname">class_id</code><a class="headerlink" href="#_CPPv4N10vrt_fields8class_idE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Determines data origin. Activate by setting has.class_id. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N10vrt_fields25integer_seconds_timestampE">
+<span id="_CPPv3N10vrt_fields25integer_seconds_timestampE"></span><span id="_CPPv2N10vrt_fields25integer_seconds_timestampE"></span><span id="vrt_fields::integer_seconds_timestamp__uint32_t"></span><span class="target" id="structvrt__fields_1af0abc01e6eb521f814253986423ad9d0"></span>uint32_t <code class="sig-name descname">integer_seconds_timestamp</code><a class="headerlink" href="#_CPPv4N10vrt_fields25integer_seconds_timestampE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Integer second timestamp as specified by tsi. Activate by setting tsi to anything but VRT_TSI_NONE/VRT_TSI_UNDEFINED. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N10vrt_fields28fractional_seconds_timestampE">
+<span id="_CPPv3N10vrt_fields28fractional_seconds_timestampE"></span><span id="_CPPv2N10vrt_fields28fractional_seconds_timestampE"></span><span id="vrt_fields::fractional_seconds_timestamp__uint64_t"></span><span class="target" id="structvrt__fields_1a1205d40fdec5780cbd69100a58dce97b"></span>uint64_t <code class="sig-name descname">fractional_seconds_timestamp</code><a class="headerlink" href="#_CPPv4N10vrt_fields28fractional_seconds_timestampE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Fractional second timestamp as specified by tsf. Activate by setting tsf to anything but VRT_TSF_NONE/VRT_TSF_UNDEFINED. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="structvrt__formatted__geolocation.html" class="btn btn-neutral float-right" title="Struct vrt_formatted_geolocation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="structvrt__ephemeris__indicators.html" class="btn btn-neutral float-left" title="Struct vrt_ephemeris_indicators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Emil Berg
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

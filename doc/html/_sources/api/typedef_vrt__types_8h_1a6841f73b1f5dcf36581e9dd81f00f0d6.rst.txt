@@ -1,0 +1,13 @@
+.. _exhale_typedef_vrt__types_8h_1a6841f73b1f5dcf36581e9dd81f00f0d6:
+
+Typedef vrt_packing_method
+==========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: vrt_packing_method

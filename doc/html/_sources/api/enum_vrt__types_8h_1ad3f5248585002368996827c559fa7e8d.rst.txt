@@ -1,0 +1,13 @@
+.. _exhale_enum_vrt__types_8h_1ad3f5248585002368996827c559fa7e8d:
+
+Enum vrt_agc_or_mgc
+===================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Enum Documentation
+------------------
+
+
+.. doxygenenum:: vrt_agc_or_mgc

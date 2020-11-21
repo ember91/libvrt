@@ -1,0 +1,1136 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Library API &mdash; libvrt  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Struct vrt_class_identifier" href="structvrt__class__identifier.html" />
+    <link rel="prev" title="Welcome to libvrt’s documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> libvrt
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Library API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#full-api">Full API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__class__identifier.html">Struct vrt_class_identifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__context__association__lists.html">Struct vrt_context_association_lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__context__association__lists__indicators.html">Struct vrt_context_association_lists_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__context__indicators.html">Struct vrt_context_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__data__packet__payload__format.html">Struct vrt_data_packet_payload_format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__device__identifier.html">Struct vrt_device_identifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__ephemeris.html">Struct vrt_ephemeris</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__ephemeris__indicators.html">Struct vrt_ephemeris_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__fields.html">Struct vrt_fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__formatted__geolocation.html">Struct vrt_formatted_geolocation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__formatted__geolocation__indicators.html">Struct vrt_formatted_geolocation_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__gain.html">Struct vrt_gain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__gps__ascii.html">Struct vrt_gps_ascii</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__header.html">Struct vrt_header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__header__indicators.html">Struct vrt_header_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__if__context.html">Struct vrt_if_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__state__and__event.html">Struct vrt_state_and_event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__state__and__event__indicators.html">Struct vrt_state_and_event_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__trailer.html">Struct vrt_trailer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__trailer__indicators.html">Struct vrt_trailer_indicators</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#enums">Enums</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="enum_vrt__types_8h_1ad3f5248585002368996827c559fa7e8d.html">Enum vrt_agc_or_mgc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="enum_vrt__types_8h_1acce62a86ec3b0ab63965523b148aca47.html">Enum vrt_data_item_format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4.html">Enum vrt_error_code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="enum_vrt__types_8h_1a8b7e0ca74814ff290cb1afee9acc2504.html">Enum vrt_packet_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="enum_vrt__types_8h_1a1eb06fc8779386f52d587f2b04e75e9d.html">Enum vrt_packing_method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="enum_vrt__types_8h_1a6365e6b8a67f083b3df3a232861207db.html">Enum vrt_real_complex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="enum_vrt__types_8h_1ae1c62c112b979fe098ab58e8d3a1fe45.html">Enum vrt_tsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="enum_vrt__types_8h_1a230b878e56adcc1bfd2b712608e46732.html">Enum vrt_tsi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="enum_vrt__types_8h_1ac8c1f87a8c133971b31f0a9b3f2b2352.html">Enum vrt_tsm</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__util_8h_1ad623c6295952d8d38af85f3a6419067e.html">Function vrt_has_stream_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__init_8h_1a9f7f55ea8ca949ef2f0f2033e8b9e896.html">Function vrt_init_fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__init_8h_1a8e9c2e8dde51136486cc2e7d9728f6f5.html">Function vrt_init_header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__init_8h_1a17707913c26e86919ef357b8ee303fb8.html">Function vrt_init_if_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__init_8h_1ac48207b4c8fe750f09efca40d5d12130.html">Function vrt_init_trailer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__util_8h_1a02b3ce76d3e1969a9338c05dc15f52e0.html">Function vrt_is_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__util_8h_1aceb67c8bb9922e9588d19f87209faadc.html">Function vrt_is_platform_little_endian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__read_8h_1a4f5a71874451e0182e7e7d35a9b8e3d7.html">Function vrt_read_fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__read_8h_1a68cca84c9f6dab3f67f57b754f22a0fe.html">Function vrt_read_header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__read_8h_1af24c0ea733e405ca910b64341376df99.html">Function vrt_read_if_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__read_8h_1a9a690ebdf60501d53f39c64bd0db0198.html">Function vrt_read_trailer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__string_8h_1a99c9ae304a4b8d079cf2bd89eb8c3970.html">Function vrt_string_agc_or_mgc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__string_8h_1a69be6997674761912825d90bf058032a.html">Function vrt_string_data_item_format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__string_8h_1a781ac0482f2437dd9b76043f87350e5d.html">Function vrt_string_error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__string_8h_1aa2b99569815d0971f22687df7392d3e6.html">Function vrt_string_packet_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__string_8h_1abd44330e5a4dbca145b5918fc29b7b00.html">Function vrt_string_packing_method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__string_8h_1a3996420d201f8b5b94a380a72036576a.html">Function vrt_string_real_or_complex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__string_8h_1ac3d84d0157b350448d87a68b8349ae6e.html">Function vrt_string_tsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__string_8h_1a3b3850641b61ac8c3a3809d628e6eb2e.html">Function vrt_string_tsi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__string_8h_1af2eb78df73c725620b77e457f2bcfbea.html">Function vrt_string_tsm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__words_8h_1a8070a11ce64da478e93bd0ec74aaaa89.html">Function vrt_words_fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__words_8h_1abb62bd0691de8842da2c3e1a6fe47ef0.html">Function vrt_words_if_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__words_8h_1a18ac9dbeb45b0a28b97160cb30dd3e12.html">Function vrt_words_trailer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__write_8h_1a674809acda7b0baf66659388402a5918.html">Function vrt_write_fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__write_8h_1af2ee55c43a41c7f91efefd85b5f82314.html">Function vrt_write_header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__write_8h_1a00473fbc35757974a8451f3420423f85.html">Function vrt_write_if_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__write_8h_1a9727ae1e20fd1d29bf74b1ca266aa928.html">Function vrt_write_trailer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="variable_vrt__words_8h_1a541e0edfa3580d3802db81981c6fb8a7.html">Variable VRT_WORDS_HEADER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_vrt__words_8h_1a4b1c2b7216a6c475736a8916f2356486.html">Variable VRT_WORDS_MAX_FIELDS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_vrt__words_8h_1a03403462eb9cd5829ec720aa91b3ae10.html">Variable VRT_WORDS_MAX_PACKET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_vrt__words_8h_1a307bdc8029b624dc288a4745f3fee0b4.html">Variable VRT_WORDS_MAX_TRAILER</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">Defines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="define_vrt__util_8h_1ada868775661be67e4faac7fb851aa362.html">Define REINTERPRET_CAST</a></li>
+<li class="toctree-l4"><a class="reference internal" href="define_vrt__util_8h_1ae4cbfd2e2ff73da3b5ac98171e4626d3.html">Define STATIC_CAST</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#typedefs">Typedefs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a35510365a5dde291c074ec18b9d5e3cf.html">Typedef vrt_agc_or_mgc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1ae612e4cd21a6812207f4b602138b207e.html">Typedef vrt_class_identifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a88f6de98f2f63ebed0de46b31ee70573.html">Typedef vrt_context_association_lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1ab2ad005e6f35f6132c52f054108d727f.html">Typedef vrt_context_association_lists_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a15f7ae6dc252cb49d04167cb2c3a9938.html">Typedef vrt_context_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a7cb74df26973af4163f6a454bfac1752.html">Typedef vrt_data_item_format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1abfc30cf041cd83e0d7330161b44acbb6.html">Typedef vrt_data_packet_payload_format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1af9cb4b17ea0361f305020bf8b00ef45e.html">Typedef vrt_device_identifier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a7ecf86c7448f1053a4e427a8e5124f03.html">Typedef vrt_ephemeris</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1adc2595101b556c8a626f0e15d756bebd.html">Typedef vrt_ephemeris_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__error__code_8h_1a3e44610f267afc6441a1c149083be04b.html">Typedef vrt_error_code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1af8bc036edb7d29f5dcd8963a4bf365e2.html">Typedef vrt_fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a0fb6ed22138cbd5a2e6ade1374a5cab6.html">Typedef vrt_formatted_geolocation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1ae46fca03125d928bf4301c24bc214ce1.html">Typedef vrt_formatted_geolocation_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1abc5ac592b2dbfab1303919e4fb0a99c3.html">Typedef vrt_gain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1ace732908c30469bc10bbc2a536d8fac5.html">Typedef vrt_gps_ascii</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a911ea976d33838e89b7a25ecf7e3cea9.html">Typedef vrt_header</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a6322281affed3e99968831f769eb3946.html">Typedef vrt_header_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a2848c63ec869af030cd4aa26a1591f16.html">Typedef vrt_if_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a0e6dfcb09c9e0f88410bebe4392d2932.html">Typedef vrt_packet_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a6841f73b1f5dcf36581e9dd81f00f0d6.html">Typedef vrt_packing_method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1ac840da71ca6440bf4cf20d3556fd0b54.html">Typedef vrt_real_complex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a1ed6ad1422a5da88af10093c1ccf2884.html">Typedef vrt_state_and_event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1ab73faf0b3544528a5163b98d12878686.html">Typedef vrt_state_and_event_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1ad68ac10e9a6971eb3c535612fb17606e.html">Typedef vrt_trailer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1ae85a56a4ebbc758432fd426c2ed920f7.html">Typedef vrt_trailer_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a19358442082642e99f2b1e8f2d777418.html">Typedef vrt_tsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a4f18056135a2d71940e1177b3f5850f8.html">Typedef vrt_tsi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_vrt__types_8h_1a0254369bdf6a1ed031376a62a9309dfd.html">Typedef vrt_tsm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">libvrt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Library API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/library_root.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="library-api">
+<h1>Library API<a class="headerlink" href="#library-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-hierarchy">
+<h2>Class Hierarchy<a class="headerlink" href="#class-hierarchy" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="structvrt__class__identifier.html#exhale-struct-structvrt-class-identifier"><span class="std std-ref">Struct vrt_class_identifier</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__context__association__lists.html#exhale-struct-structvrt-context-association-lists"><span class="std std-ref">Struct vrt_context_association_lists</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__context__association__lists__indicators.html#exhale-struct-structvrt-context-association-lists-indicators"><span class="std std-ref">Struct vrt_context_association_lists_indicators</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__context__indicators.html#exhale-struct-structvrt-context-indicators"><span class="std std-ref">Struct vrt_context_indicators</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__data__packet__payload__format.html#exhale-struct-structvrt-data-packet-payload-format"><span class="std std-ref">Struct vrt_data_packet_payload_format</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__device__identifier.html#exhale-struct-structvrt-device-identifier"><span class="std std-ref">Struct vrt_device_identifier</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__ephemeris.html#exhale-struct-structvrt-ephemeris"><span class="std std-ref">Struct vrt_ephemeris</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__ephemeris__indicators.html#exhale-struct-structvrt-ephemeris-indicators"><span class="std std-ref">Struct vrt_ephemeris_indicators</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__fields.html#exhale-struct-structvrt-fields"><span class="std std-ref">Struct vrt_fields</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__formatted__geolocation.html#exhale-struct-structvrt-formatted-geolocation"><span class="std std-ref">Struct vrt_formatted_geolocation</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__formatted__geolocation__indicators.html#exhale-struct-structvrt-formatted-geolocation-indicators"><span class="std std-ref">Struct vrt_formatted_geolocation_indicators</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__gain.html#exhale-struct-structvrt-gain"><span class="std std-ref">Struct vrt_gain</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__gps__ascii.html#exhale-struct-structvrt-gps-ascii"><span class="std std-ref">Struct vrt_gps_ascii</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__header.html#exhale-struct-structvrt-header"><span class="std std-ref">Struct vrt_header</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__header__indicators.html#exhale-struct-structvrt-header-indicators"><span class="std std-ref">Struct vrt_header_indicators</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__if__context.html#exhale-struct-structvrt-if-context"><span class="std std-ref">Struct vrt_if_context</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__state__and__event.html#exhale-struct-structvrt-state-and-event"><span class="std std-ref">Struct vrt_state_and_event</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__state__and__event__indicators.html#exhale-struct-structvrt-state-and-event-indicators"><span class="std std-ref">Struct vrt_state_and_event_indicators</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__trailer.html#exhale-struct-structvrt-trailer"><span class="std std-ref">Struct vrt_trailer</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__trailer__indicators.html#exhale-struct-structvrt-trailer-indicators"><span class="std std-ref">Struct vrt_trailer_indicators</span></a></p></li>
+<li><p><a class="reference internal" href="enum_vrt__types_8h_1ad3f5248585002368996827c559fa7e8d.html#exhale-enum-vrt-types-8h-1ad3f5248585002368996827c559fa7e8d"><span class="std std-ref">Enum vrt_agc_or_mgc</span></a></p></li>
+<li><p><a class="reference internal" href="enum_vrt__types_8h_1acce62a86ec3b0ab63965523b148aca47.html#exhale-enum-vrt-types-8h-1acce62a86ec3b0ab63965523b148aca47"><span class="std std-ref">Enum vrt_data_item_format</span></a></p></li>
+<li><p><a class="reference internal" href="enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4.html#exhale-enum-vrt-error-code-8h-1a9abf070632d4fe3b3942f589a1576cd4"><span class="std std-ref">Enum vrt_error_code</span></a></p></li>
+<li><p><a class="reference internal" href="enum_vrt__types_8h_1a8b7e0ca74814ff290cb1afee9acc2504.html#exhale-enum-vrt-types-8h-1a8b7e0ca74814ff290cb1afee9acc2504"><span class="std std-ref">Enum vrt_packet_type</span></a></p></li>
+<li><p><a class="reference internal" href="enum_vrt__types_8h_1a1eb06fc8779386f52d587f2b04e75e9d.html#exhale-enum-vrt-types-8h-1a1eb06fc8779386f52d587f2b04e75e9d"><span class="std std-ref">Enum vrt_packing_method</span></a></p></li>
+<li><p><a class="reference internal" href="enum_vrt__types_8h_1a6365e6b8a67f083b3df3a232861207db.html#exhale-enum-vrt-types-8h-1a6365e6b8a67f083b3df3a232861207db"><span class="std std-ref">Enum vrt_real_complex</span></a></p></li>
+<li><p><a class="reference internal" href="enum_vrt__types_8h_1ae1c62c112b979fe098ab58e8d3a1fe45.html#exhale-enum-vrt-types-8h-1ae1c62c112b979fe098ab58e8d3a1fe45"><span class="std std-ref">Enum vrt_tsf</span></a></p></li>
+<li><p><a class="reference internal" href="enum_vrt__types_8h_1a230b878e56adcc1bfd2b712608e46732.html#exhale-enum-vrt-types-8h-1a230b878e56adcc1bfd2b712608e46732"><span class="std std-ref">Enum vrt_tsi</span></a></p></li>
+<li><p><a class="reference internal" href="enum_vrt__types_8h_1ac8c1f87a8c133971b31f0a9b3f2b2352.html#exhale-enum-vrt-types-8h-1ac8c1f87a8c133971b31f0a9b3f2b2352"><span class="std std-ref">Enum vrt_tsm</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="file-hierarchy">
+<h2>File Hierarchy<a class="headerlink" href="#file-hierarchy" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference internal" href="dir__home_emil_libvrt_include.html#dir-home-emil-libvrt-include"><span class="std std-ref">Directory include</span></a></dt><dd><ul>
+<li><dl class="simple">
+<dt><a class="reference internal" href="dir__home_emil_libvrt_include_vrt.html#dir-home-emil-libvrt-include-vrt"><span class="std std-ref">Directory vrt</span></a></dt><dd><ul>
+<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_error_code.h.html#file-home-emil-libvrt-include-vrt-vrt-error-code-h"><span class="std std-ref">File vrt_error_code.h</span></a></p></li>
+<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_init.h.html#file-home-emil-libvrt-include-vrt-vrt-init-h"><span class="std std-ref">File vrt_init.h</span></a></p></li>
+<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_read.h.html#file-home-emil-libvrt-include-vrt-vrt-read-h"><span class="std std-ref">File vrt_read.h</span></a></p></li>
+<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_string.h.html#file-home-emil-libvrt-include-vrt-vrt-string-h"><span class="std std-ref">File vrt_string.h</span></a></p></li>
+<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_types.h.html#file-home-emil-libvrt-include-vrt-vrt-types-h"><span class="std std-ref">File vrt_types.h</span></a></p></li>
+<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_util.h.html#file-home-emil-libvrt-include-vrt-vrt-util-h"><span class="std std-ref">File vrt_util.h</span></a></p></li>
+<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_words.h.html#file-home-emil-libvrt-include-vrt-vrt-words-h"><span class="std std-ref">File vrt_words.h</span></a></p></li>
+<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_write.h.html#file-home-emil-libvrt-include-vrt-vrt-write-h"><span class="std std-ref">File vrt_write.h</span></a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="full-api">
+<h2>Full API<a class="headerlink" href="#full-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classes-and-structs">
+<h3>Classes and Structs<a class="headerlink" href="#classes-and-structs" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__class__identifier.html">Struct vrt_class_identifier</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__class__identifier.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__context__association__lists.html">Struct vrt_context_association_lists</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__context__association__lists.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__context__association__lists__indicators.html">Struct vrt_context_association_lists_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__context__association__lists__indicators.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__context__indicators.html">Struct vrt_context_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__context__indicators.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__data__packet__payload__format.html">Struct vrt_data_packet_payload_format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__data__packet__payload__format.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__device__identifier.html">Struct vrt_device_identifier</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__device__identifier.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__ephemeris.html">Struct vrt_ephemeris</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__ephemeris.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__ephemeris__indicators.html">Struct vrt_ephemeris_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__ephemeris__indicators.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__fields.html">Struct vrt_fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__fields.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__formatted__geolocation.html">Struct vrt_formatted_geolocation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__formatted__geolocation.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__formatted__geolocation__indicators.html">Struct vrt_formatted_geolocation_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__formatted__geolocation__indicators.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__gain.html">Struct vrt_gain</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__gain.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__gps__ascii.html">Struct vrt_gps_ascii</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__gps__ascii.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__header.html">Struct vrt_header</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__header.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__header__indicators.html">Struct vrt_header_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__header__indicators.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__if__context.html">Struct vrt_if_context</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__if__context.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__state__and__event.html">Struct vrt_state_and_event</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__state__and__event.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__state__and__event__indicators.html">Struct vrt_state_and_event_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__state__and__event__indicators.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__trailer.html">Struct vrt_trailer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__trailer.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__trailer__indicators.html">Struct vrt_trailer_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__trailer__indicators.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="enums">
+<h3>Enums<a class="headerlink" href="#enums" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="enum_vrt__types_8h_1ad3f5248585002368996827c559fa7e8d.html">Enum vrt_agc_or_mgc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enum_vrt__types_8h_1ad3f5248585002368996827c559fa7e8d.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="enum_vrt__types_8h_1acce62a86ec3b0ab63965523b148aca47.html">Enum vrt_data_item_format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enum_vrt__types_8h_1acce62a86ec3b0ab63965523b148aca47.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4.html">Enum vrt_error_code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="enum_vrt__types_8h_1a8b7e0ca74814ff290cb1afee9acc2504.html">Enum vrt_packet_type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enum_vrt__types_8h_1a8b7e0ca74814ff290cb1afee9acc2504.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="enum_vrt__types_8h_1a1eb06fc8779386f52d587f2b04e75e9d.html">Enum vrt_packing_method</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enum_vrt__types_8h_1a1eb06fc8779386f52d587f2b04e75e9d.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="enum_vrt__types_8h_1a6365e6b8a67f083b3df3a232861207db.html">Enum vrt_real_complex</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enum_vrt__types_8h_1a6365e6b8a67f083b3df3a232861207db.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="enum_vrt__types_8h_1ae1c62c112b979fe098ab58e8d3a1fe45.html">Enum vrt_tsf</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enum_vrt__types_8h_1ae1c62c112b979fe098ab58e8d3a1fe45.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="enum_vrt__types_8h_1a230b878e56adcc1bfd2b712608e46732.html">Enum vrt_tsi</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enum_vrt__types_8h_1a230b878e56adcc1bfd2b712608e46732.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="enum_vrt__types_8h_1ac8c1f87a8c133971b31f0a9b3f2b2352.html">Enum vrt_tsm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enum_vrt__types_8h_1ac8c1f87a8c133971b31f0a9b3f2b2352.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__util_8h_1ad623c6295952d8d38af85f3a6419067e.html">Function vrt_has_stream_id</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__util_8h_1ad623c6295952d8d38af85f3a6419067e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__init_8h_1a9f7f55ea8ca949ef2f0f2033e8b9e896.html">Function vrt_init_fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__init_8h_1a9f7f55ea8ca949ef2f0f2033e8b9e896.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__init_8h_1a8e9c2e8dde51136486cc2e7d9728f6f5.html">Function vrt_init_header</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__init_8h_1a8e9c2e8dde51136486cc2e7d9728f6f5.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__init_8h_1a17707913c26e86919ef357b8ee303fb8.html">Function vrt_init_if_context</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__init_8h_1a17707913c26e86919ef357b8ee303fb8.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__init_8h_1ac48207b4c8fe750f09efca40d5d12130.html">Function vrt_init_trailer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__init_8h_1ac48207b4c8fe750f09efca40d5d12130.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__util_8h_1a02b3ce76d3e1969a9338c05dc15f52e0.html">Function vrt_is_context</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__util_8h_1a02b3ce76d3e1969a9338c05dc15f52e0.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__util_8h_1aceb67c8bb9922e9588d19f87209faadc.html">Function vrt_is_platform_little_endian</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__util_8h_1aceb67c8bb9922e9588d19f87209faadc.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__read_8h_1a4f5a71874451e0182e7e7d35a9b8e3d7.html">Function vrt_read_fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__read_8h_1a4f5a71874451e0182e7e7d35a9b8e3d7.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__read_8h_1a68cca84c9f6dab3f67f57b754f22a0fe.html">Function vrt_read_header</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__read_8h_1a68cca84c9f6dab3f67f57b754f22a0fe.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__read_8h_1af24c0ea733e405ca910b64341376df99.html">Function vrt_read_if_context</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__read_8h_1af24c0ea733e405ca910b64341376df99.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__read_8h_1a9a690ebdf60501d53f39c64bd0db0198.html">Function vrt_read_trailer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__read_8h_1a9a690ebdf60501d53f39c64bd0db0198.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__string_8h_1a99c9ae304a4b8d079cf2bd89eb8c3970.html">Function vrt_string_agc_or_mgc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__string_8h_1a99c9ae304a4b8d079cf2bd89eb8c3970.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__string_8h_1a69be6997674761912825d90bf058032a.html">Function vrt_string_data_item_format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__string_8h_1a69be6997674761912825d90bf058032a.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__string_8h_1a781ac0482f2437dd9b76043f87350e5d.html">Function vrt_string_error</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__string_8h_1a781ac0482f2437dd9b76043f87350e5d.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__string_8h_1aa2b99569815d0971f22687df7392d3e6.html">Function vrt_string_packet_type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__string_8h_1aa2b99569815d0971f22687df7392d3e6.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__string_8h_1abd44330e5a4dbca145b5918fc29b7b00.html">Function vrt_string_packing_method</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__string_8h_1abd44330e5a4dbca145b5918fc29b7b00.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__string_8h_1a3996420d201f8b5b94a380a72036576a.html">Function vrt_string_real_or_complex</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__string_8h_1a3996420d201f8b5b94a380a72036576a.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__string_8h_1ac3d84d0157b350448d87a68b8349ae6e.html">Function vrt_string_tsf</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__string_8h_1ac3d84d0157b350448d87a68b8349ae6e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__string_8h_1a3b3850641b61ac8c3a3809d628e6eb2e.html">Function vrt_string_tsi</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__string_8h_1a3b3850641b61ac8c3a3809d628e6eb2e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__string_8h_1af2eb78df73c725620b77e457f2bcfbea.html">Function vrt_string_tsm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__string_8h_1af2eb78df73c725620b77e457f2bcfbea.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__words_8h_1a8070a11ce64da478e93bd0ec74aaaa89.html">Function vrt_words_fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__words_8h_1a8070a11ce64da478e93bd0ec74aaaa89.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__words_8h_1abb62bd0691de8842da2c3e1a6fe47ef0.html">Function vrt_words_if_context</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__words_8h_1abb62bd0691de8842da2c3e1a6fe47ef0.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__words_8h_1a18ac9dbeb45b0a28b97160cb30dd3e12.html">Function vrt_words_trailer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__words_8h_1a18ac9dbeb45b0a28b97160cb30dd3e12.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__write_8h_1a674809acda7b0baf66659388402a5918.html">Function vrt_write_fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__write_8h_1a674809acda7b0baf66659388402a5918.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__write_8h_1af2ee55c43a41c7f91efefd85b5f82314.html">Function vrt_write_header</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__write_8h_1af2ee55c43a41c7f91efefd85b5f82314.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__write_8h_1a00473fbc35757974a8451f3420423f85.html">Function vrt_write_if_context</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__write_8h_1a00473fbc35757974a8451f3420423f85.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__write_8h_1a9727ae1e20fd1d29bf74b1ca266aa928.html">Function vrt_write_trailer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__write_8h_1a9727ae1e20fd1d29bf74b1ca266aa928.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_vrt__words_8h_1a541e0edfa3580d3802db81981c6fb8a7.html">Variable VRT_WORDS_HEADER</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="variable_vrt__words_8h_1a541e0edfa3580d3802db81981c6fb8a7.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_vrt__words_8h_1a4b1c2b7216a6c475736a8916f2356486.html">Variable VRT_WORDS_MAX_FIELDS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="variable_vrt__words_8h_1a4b1c2b7216a6c475736a8916f2356486.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_vrt__words_8h_1a03403462eb9cd5829ec720aa91b3ae10.html">Variable VRT_WORDS_MAX_PACKET</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="variable_vrt__words_8h_1a03403462eb9cd5829ec720aa91b3ae10.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_vrt__words_8h_1a307bdc8029b624dc288a4745f3fee0b4.html">Variable VRT_WORDS_MAX_TRAILER</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="variable_vrt__words_8h_1a307bdc8029b624dc288a4745f3fee0b4.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="defines">
+<h3>Defines<a class="headerlink" href="#defines" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="define_vrt__util_8h_1ada868775661be67e4faac7fb851aa362.html">Define REINTERPRET_CAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="define_vrt__util_8h_1ada868775661be67e4faac7fb851aa362.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="define_vrt__util_8h_1ae4cbfd2e2ff73da3b5ac98171e4626d3.html">Define STATIC_CAST</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="define_vrt__util_8h_1ae4cbfd2e2ff73da3b5ac98171e4626d3.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="typedefs">
+<h3>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a35510365a5dde291c074ec18b9d5e3cf.html">Typedef vrt_agc_or_mgc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a35510365a5dde291c074ec18b9d5e3cf.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1ae612e4cd21a6812207f4b602138b207e.html">Typedef vrt_class_identifier</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1ae612e4cd21a6812207f4b602138b207e.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a88f6de98f2f63ebed0de46b31ee70573.html">Typedef vrt_context_association_lists</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a88f6de98f2f63ebed0de46b31ee70573.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1ab2ad005e6f35f6132c52f054108d727f.html">Typedef vrt_context_association_lists_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1ab2ad005e6f35f6132c52f054108d727f.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a15f7ae6dc252cb49d04167cb2c3a9938.html">Typedef vrt_context_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a15f7ae6dc252cb49d04167cb2c3a9938.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a7cb74df26973af4163f6a454bfac1752.html">Typedef vrt_data_item_format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a7cb74df26973af4163f6a454bfac1752.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1abfc30cf041cd83e0d7330161b44acbb6.html">Typedef vrt_data_packet_payload_format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1abfc30cf041cd83e0d7330161b44acbb6.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1af9cb4b17ea0361f305020bf8b00ef45e.html">Typedef vrt_device_identifier</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1af9cb4b17ea0361f305020bf8b00ef45e.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a7ecf86c7448f1053a4e427a8e5124f03.html">Typedef vrt_ephemeris</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a7ecf86c7448f1053a4e427a8e5124f03.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1adc2595101b556c8a626f0e15d756bebd.html">Typedef vrt_ephemeris_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1adc2595101b556c8a626f0e15d756bebd.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__error__code_8h_1a3e44610f267afc6441a1c149083be04b.html">Typedef vrt_error_code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__error__code_8h_1a3e44610f267afc6441a1c149083be04b.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1af8bc036edb7d29f5dcd8963a4bf365e2.html">Typedef vrt_fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1af8bc036edb7d29f5dcd8963a4bf365e2.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a0fb6ed22138cbd5a2e6ade1374a5cab6.html">Typedef vrt_formatted_geolocation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a0fb6ed22138cbd5a2e6ade1374a5cab6.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1ae46fca03125d928bf4301c24bc214ce1.html">Typedef vrt_formatted_geolocation_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1ae46fca03125d928bf4301c24bc214ce1.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1abc5ac592b2dbfab1303919e4fb0a99c3.html">Typedef vrt_gain</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1abc5ac592b2dbfab1303919e4fb0a99c3.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1ace732908c30469bc10bbc2a536d8fac5.html">Typedef vrt_gps_ascii</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1ace732908c30469bc10bbc2a536d8fac5.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a911ea976d33838e89b7a25ecf7e3cea9.html">Typedef vrt_header</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a911ea976d33838e89b7a25ecf7e3cea9.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a6322281affed3e99968831f769eb3946.html">Typedef vrt_header_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a6322281affed3e99968831f769eb3946.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a2848c63ec869af030cd4aa26a1591f16.html">Typedef vrt_if_context</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a2848c63ec869af030cd4aa26a1591f16.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a0e6dfcb09c9e0f88410bebe4392d2932.html">Typedef vrt_packet_type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a0e6dfcb09c9e0f88410bebe4392d2932.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a6841f73b1f5dcf36581e9dd81f00f0d6.html">Typedef vrt_packing_method</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a6841f73b1f5dcf36581e9dd81f00f0d6.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1ac840da71ca6440bf4cf20d3556fd0b54.html">Typedef vrt_real_complex</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1ac840da71ca6440bf4cf20d3556fd0b54.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a1ed6ad1422a5da88af10093c1ccf2884.html">Typedef vrt_state_and_event</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a1ed6ad1422a5da88af10093c1ccf2884.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1ab73faf0b3544528a5163b98d12878686.html">Typedef vrt_state_and_event_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1ab73faf0b3544528a5163b98d12878686.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1ad68ac10e9a6971eb3c535612fb17606e.html">Typedef vrt_trailer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1ad68ac10e9a6971eb3c535612fb17606e.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1ae85a56a4ebbc758432fd426c2ed920f7.html">Typedef vrt_trailer_indicators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1ae85a56a4ebbc758432fd426c2ed920f7.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a19358442082642e99f2b1e8f2d777418.html">Typedef vrt_tsf</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a19358442082642e99f2b1e8f2d777418.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a4f18056135a2d71940e1177b3f5850f8.html">Typedef vrt_tsi</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a4f18056135a2d71940e1177b3f5850f8.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_vrt__types_8h_1a0254369bdf6a1ed031376a62a9309dfd.html">Typedef vrt_tsm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef_vrt__types_8h_1a0254369bdf6a1ed031376a62a9309dfd.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="structvrt__class__identifier.html" class="btn btn-neutral float-right" title="Struct vrt_class_identifier" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to libvrt’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Emil Berg
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

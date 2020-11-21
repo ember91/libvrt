@@ -1,0 +1,13 @@
+.. _exhale_typedef_vrt__types_8h_1a7cb74df26973af4163f6a454bfac1752:
+
+Typedef vrt_data_item_format
+============================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: vrt_data_item_format

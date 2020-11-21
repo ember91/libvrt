@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__util_8h_1ad623c6295952d8d38af85f3a6419067e:
+
+Function vrt_has_stream_id
+==========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_has_stream_id(vrt_packet_type)

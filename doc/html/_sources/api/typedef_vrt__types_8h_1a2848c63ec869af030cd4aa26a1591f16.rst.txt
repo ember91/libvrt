@@ -1,0 +1,13 @@
+.. _exhale_typedef_vrt__types_8h_1a2848c63ec869af030cd4aa26a1591f16:
+
+Typedef vrt_if_context
+======================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: vrt_if_context

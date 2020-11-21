@@ -1,0 +1,16 @@
+.. _dir__home_emil_libvrt_include:
+
+
+Directory include
+=================
+
+
+*Directory path:* ``/home/emil/libvrt/include``
+
+Subdirectories
+--------------
+
+- :ref:`dir__home_emil_libvrt_include_vrt`
+
+
+

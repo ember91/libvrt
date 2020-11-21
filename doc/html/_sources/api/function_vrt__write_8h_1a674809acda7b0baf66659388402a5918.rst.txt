@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__write_8h_1a674809acda7b0baf66659388402a5918:
+
+Function vrt_write_fields
+=========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_write.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_write_fields(const vrt_header *, const vrt_fields *, void *, uint32_t, bool)

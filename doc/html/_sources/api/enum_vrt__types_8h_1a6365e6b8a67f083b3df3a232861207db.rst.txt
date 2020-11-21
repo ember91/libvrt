@@ -1,0 +1,13 @@
+.. _exhale_enum_vrt__types_8h_1a6365e6b8a67f083b3df3a232861207db:
+
+Enum vrt_real_complex
+=====================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Enum Documentation
+------------------
+
+
+.. doxygenenum:: vrt_real_complex

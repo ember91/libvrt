@@ -1,0 +1,13 @@
+.. _exhale_variable_vrt__words_8h_1a03403462eb9cd5829ec720aa91b3ae10:
+
+Variable VRT_WORDS_MAX_PACKET
+=============================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_words.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: VRT_WORDS_MAX_PACKET

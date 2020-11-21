@@ -1,0 +1,46 @@
+
+.. _program_listing_file__home_emil_libvrt_include_vrt_vrt_string.h:
+
+Program Listing for File vrt_string.h
+=====================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_emil_libvrt_include_vrt_vrt_string.h>` (``/home/emil/libvrt/include/vrt/vrt_string.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #ifndef INCLUDE_VRT_VRT_STRING_H_
+   #define INCLUDE_VRT_VRT_STRING_H_
+   
+   #include <stdint.h>
+   
+   #include "vrt_types.h"
+   
+   #ifdef __cplusplus
+   extern "C" {
+   #endif
+   
+   const char* vrt_string_packet_type(vrt_packet_type packet_type);
+   
+   const char* vrt_string_tsm(vrt_tsm tsm);
+   
+   const char* vrt_string_tsi(vrt_tsi tsi);
+   
+   const char* vrt_string_tsf(vrt_tsf tsf);
+   
+   const char* vrt_string_agc_or_mgc(vrt_agc_or_mgc agc_or_mgc);
+   
+   const char* vrt_string_packing_method(vrt_packing_method packing_method);
+   
+   const char* vrt_string_real_or_complex(vrt_real_complex real_or_complex);
+   
+   const char* vrt_string_data_item_format(vrt_data_item_format data_item_format);
+   
+   const char* vrt_string_error(int32_t error);
+   
+   #ifdef __cplusplus
+   }
+   #endif
+   
+   #endif

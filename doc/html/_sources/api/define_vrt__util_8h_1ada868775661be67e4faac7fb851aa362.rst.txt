@@ -1,0 +1,13 @@
+.. _exhale_define_vrt__util_8h_1ada868775661be67e4faac7fb851aa362:
+
+Define REINTERPRET_CAST
+=======================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: REINTERPRET_CAST

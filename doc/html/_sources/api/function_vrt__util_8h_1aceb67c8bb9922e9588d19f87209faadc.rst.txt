@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__util_8h_1aceb67c8bb9922e9588d19f87209faadc:
+
+Function vrt_is_platform_little_endian
+======================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_is_platform_little_endian()

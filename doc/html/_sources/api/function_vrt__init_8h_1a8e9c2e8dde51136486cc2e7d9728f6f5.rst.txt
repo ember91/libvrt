@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__init_8h_1a8e9c2e8dde51136486cc2e7d9728f6f5:
+
+Function vrt_init_header
+========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_init.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_init_header(vrt_header *)

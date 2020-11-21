@@ -75,12 +75,18 @@ if(DOCUMENTATION)
     set(DOXYGEN_IN "${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in")
     set(DOXYGEN_OUT "${CMAKE_CURRENT_BINARY_DIR}/doc/Doxyfile")
 
-    # Copy configuration files
-    configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
-    configure_file("${CMAKE_CURRENT_SOURCE_DIR}/doc/conf.py.in"
-                   "${CMAKE_CURRENT_BINARY_DIR}/doc/conf.py" @ONLY)
-    configure_file("${CMAKE_CURRENT_SOURCE_DIR}/doc/index.rst.in"
-                   "${CMAKE_CURRENT_BINARY_DIR}/doc/index.rst" @ONLY)
+    # Copy all configuration files with file extension ".in"
+    file(
+      GLOB TEMPLATE_FILES
+      RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/"
+      "${CMAKE_CURRENT_SOURCE_DIR}/doc/*.in")
+    foreach(FILE ${TEMPLATE_FILES})
+      string(LENGTH ${FILE} LEN)
+      math(EXPR LEN "${LEN} - 3")
+      string(SUBSTRING ${FILE} 0 ${LEN} FILE_NO_EXT)
+      configure_file(${CMAKE_CURRENT_SOURCE_DIR}/${FILE}
+                     ${CMAKE_CURRENT_BINARY_DIR}/${FILE_NO_EXT})
+    endforeach()
 
     # Option ALL allows building documentation together with the application
     add_custom_target(

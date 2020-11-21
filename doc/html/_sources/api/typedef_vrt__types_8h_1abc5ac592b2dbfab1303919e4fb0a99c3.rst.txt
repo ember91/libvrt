@@ -1,0 +1,13 @@
+.. _exhale_typedef_vrt__types_8h_1abc5ac592b2dbfab1303919e4fb0a99c3:
+
+Typedef vrt_gain
+================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: vrt_gain

@@ -1,0 +1,16 @@
+.. _exhale_struct_structvrt__header__indicators:
+
+Struct vrt_header_indicators
+============================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: vrt_header_indicators
+   :members:
+   :protected-members:
+   :undoc-members:

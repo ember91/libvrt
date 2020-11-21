@@ -1,0 +1,13 @@
+.. _exhale_enum_vrt__types_8h_1a8b7e0ca74814ff290cb1afee9acc2504:
+
+Enum vrt_packet_type
+====================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Enum Documentation
+------------------
+
+
+.. doxygenenum:: vrt_packet_type

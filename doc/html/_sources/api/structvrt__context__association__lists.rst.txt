@@ -1,0 +1,16 @@
+.. _exhale_struct_structvrt__context__association__lists:
+
+Struct vrt_context_association_lists
+====================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: vrt_context_association_lists
+   :members:
+   :protected-members:
+   :undoc-members:

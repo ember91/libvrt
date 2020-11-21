@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__string_8h_1a781ac0482f2437dd9b76043f87350e5d:
+
+Function vrt_string_error
+=========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_string.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_string_error(int32_t)

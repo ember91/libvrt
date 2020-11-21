@@ -1,0 +1,50 @@
+
+.. _file__home_emil_libvrt_include_vrt_vrt_init.h:
+
+File vrt_init.h
+===============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_emil_libvrt_include_vrt>` (``/home/emil/libvrt/include/vrt``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/emil/libvrt/include/vrt/vrt_init.h``)
+---------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_emil_libvrt_include_vrt_vrt_init.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``vrt_types.h`` (:ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`)
+
+
+
+
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_vrt__init_8h_1a9f7f55ea8ca949ef2f0f2033e8b9e896`
+
+- :ref:`exhale_function_vrt__init_8h_1a8e9c2e8dde51136486cc2e7d9728f6f5`
+
+- :ref:`exhale_function_vrt__init_8h_1a17707913c26e86919ef357b8ee303fb8`
+
+- :ref:`exhale_function_vrt__init_8h_1ac48207b4c8fe750f09efca40d5d12130`
+

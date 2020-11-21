@@ -1,0 +1,13 @@
+.. _exhale_typedef_vrt__types_8h_1ad68ac10e9a6971eb3c535612fb17606e:
+
+Typedef vrt_trailer
+===================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: vrt_trailer

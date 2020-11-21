@@ -1,0 +1,13 @@
+.. _exhale_variable_vrt__words_8h_1a541e0edfa3580d3802db81981c6fb8a7:
+
+Variable VRT_WORDS_HEADER
+=========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_words.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: VRT_WORDS_HEADER

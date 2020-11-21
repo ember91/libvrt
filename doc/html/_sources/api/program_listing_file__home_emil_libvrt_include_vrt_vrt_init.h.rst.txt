@@ -1,0 +1,34 @@
+
+.. _program_listing_file__home_emil_libvrt_include_vrt_vrt_init.h:
+
+Program Listing for File vrt_init.h
+===================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_emil_libvrt_include_vrt_vrt_init.h>` (``/home/emil/libvrt/include/vrt/vrt_init.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #ifndef INCLUDE_VRT_VRT_INIT_H_
+   #define INCLUDE_VRT_VRT_INIT_H_
+   
+   #include "vrt_types.h"
+   
+   #ifdef __cplusplus
+   extern "C" {
+   #endif
+   
+   void vrt_init_header(vrt_header* header);
+   
+   void vrt_init_fields(vrt_fields* fields);
+   
+   void vrt_init_trailer(vrt_trailer* trailer);
+   
+   void vrt_init_if_context(vrt_if_context* if_context);
+   
+   #ifdef __cplusplus
+   }
+   #endif
+   
+   #endif

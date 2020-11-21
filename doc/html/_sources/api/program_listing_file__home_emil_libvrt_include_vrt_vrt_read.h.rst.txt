@@ -1,0 +1,41 @@
+
+.. _program_listing_file__home_emil_libvrt_include_vrt_vrt_read.h:
+
+Program Listing for File vrt_read.h
+===================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_emil_libvrt_include_vrt_vrt_read.h>` (``/home/emil/libvrt/include/vrt/vrt_read.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #ifndef INCLUDE_VRT_VRT_READ_H_
+   #define INCLUDE_VRT_VRT_READ_H_
+   
+   #include <stdbool.h>
+   #include <stdint.h>
+   
+   #include "vrt_types.h"
+   
+   #ifdef __cplusplus
+   extern "C" {
+   #endif
+   
+   int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header, bool validate);
+   
+   int32_t vrt_read_fields(const vrt_header* header,
+                           const void*       buf,
+                           uint32_t          buf_words,
+                           vrt_fields*       fields,
+                           bool              validate);
+   
+   int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trailer);
+   
+   int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context* if_context, bool validate);
+   
+   #ifdef __cplusplus
+   }
+   #endif
+   
+   #endif

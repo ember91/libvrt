@@ -1,0 +1,16 @@
+.. _exhale_struct_structvrt__class__identifier:
+
+Struct vrt_class_identifier
+===========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: vrt_class_identifier
+   :members:
+   :protected-members:
+   :undoc-members:

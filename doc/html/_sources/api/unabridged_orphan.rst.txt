@@ -1,0 +1,63 @@
+:orphan:
+
+
+Full API
+========
+
+Directories
+***********
+
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_emil_libvrt_include.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   dir__home_emil_libvrt_include_vrt.rst
+
+Files
+*****
+
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_emil_libvrt_include_vrt_vrt_error_code.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_emil_libvrt_include_vrt_vrt_init.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_emil_libvrt_include_vrt_vrt_read.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_emil_libvrt_include_vrt_vrt_string.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_emil_libvrt_include_vrt_vrt_types.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_emil_libvrt_include_vrt_vrt_util.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_emil_libvrt_include_vrt_vrt_words.h.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   file__home_emil_libvrt_include_vrt_vrt_write.h.rst

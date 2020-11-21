@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__string_8h_1a99c9ae304a4b8d079cf2bd89eb8c3970:
+
+Function vrt_string_agc_or_mgc
+==============================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_string.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_string_agc_or_mgc(vrt_agc_or_mgc)

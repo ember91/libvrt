@@ -1,0 +1,13 @@
+.. _exhale_typedef_vrt__types_8h_1a911ea976d33838e89b7a25ecf7e3cea9:
+
+Typedef vrt_header
+==================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: vrt_header

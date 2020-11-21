@@ -1,0 +1,335 @@
+
+.. _program_listing_file__home_emil_libvrt_include_vrt_vrt_types.h:
+
+Program Listing for File vrt_types.h
+====================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_emil_libvrt_include_vrt_vrt_types.h>` (``/home/emil/libvrt/include/vrt/vrt_types.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #ifndef INCLUDE_VRT_VRT_TYPES_H_
+   #define INCLUDE_VRT_VRT_TYPES_H_
+   
+   #include <stdbool.h>
+   #include <stdint.h>
+   
+   #ifdef __cplusplus
+   extern "C" {
+   #endif
+   
+   typedef enum vrt_packet_type {
+       VRT_PT_IF_DATA_WITHOUT_STREAM_ID  = 0x0, 
+       VRT_PT_IF_DATA_WITH_STREAM_ID     = 0x1, 
+       VRT_PT_EXT_DATA_WITHOUT_STREAM_ID = 0x2, 
+       VRT_PT_EXT_DATA_WITH_STREAM_ID    = 0x3, 
+       VRT_PT_IF_CONTEXT                 = 0x4, 
+       VRT_PT_EXT_CONTEXT                = 0x5  
+   } vrt_packet_type;
+   
+   typedef struct vrt_header_indicators {
+       bool class_id;
+       bool trailer;
+   } vrt_header_indicators;
+   
+   typedef enum vrt_tsm {
+       VRT_TSM_FINE   = 0x0,
+       VRT_TSM_COARSE = 0x1,
+   } vrt_tsm;
+   
+   typedef enum vrt_tsi {
+       VRT_TSI_NONE      = 0x0, 
+       VRT_TSI_UNDEFINED = 0x0, 
+       VRT_TSI_UTC       = 0x1, 
+       VRT_TSI_GPS       = 0x2, 
+       VRT_TSI_OTHER     = 0x3  
+   } vrt_tsi;
+   
+   typedef enum vrt_tsf {
+       VRT_TSF_NONE               = 0x0, 
+       VRT_TSF_UNDEFINED          = 0x0, 
+       VRT_TSF_SAMPLE_COUNT       = 0x1, 
+       VRT_TSF_REAL_TIME          = 0x2, 
+       VRT_TSF_FREE_RUNNING_COUNT = 0x3  
+   } vrt_tsf;
+   
+   typedef struct vrt_header {
+       vrt_packet_type packet_type;
+       vrt_header_indicators has;
+       vrt_tsm tsm;
+       vrt_tsi tsi;
+       vrt_tsf tsf;
+       uint8_t packet_count;
+       uint16_t packet_size;
+   } vrt_header;
+   
+   typedef struct vrt_class_identifier {
+       uint32_t oui;
+       uint16_t information_class_code;
+       uint16_t packet_class_code;
+   } vrt_class_identifier;
+   
+   typedef struct vrt_fields {
+       uint32_t stream_id;
+       vrt_class_identifier class_id;
+       uint32_t integer_seconds_timestamp;
+       uint64_t fractional_seconds_timestamp;
+   } vrt_fields;
+   
+   typedef struct vrt_trailer_indicators {
+       bool calibrated_time;                 
+       bool valid_data;                      
+       bool reference_lock;                  
+       bool agc_or_mgc;                      
+       bool detected_signal;                 
+       bool spectral_inversion;              
+       bool over_range;                      
+       bool sample_loss;                     
+       bool user_defined11;                  
+       bool user_defined10;                  
+       bool user_defined9;                   
+       bool user_defined8;                   
+       bool associated_context_packet_count; 
+   } vrt_trailer_indicators;
+   
+   typedef enum vrt_agc_or_mgc { VRT_AOM_MGC = 0x0, VRT_AOM_AGC = 0x1 } vrt_agc_or_mgc;
+   
+   typedef struct vrt_trailer {
+       vrt_trailer_indicators has;
+       bool calibrated_time;
+       bool valid_data;
+       bool reference_lock;
+       vrt_agc_or_mgc agc_or_mgc;
+       bool detected_signal;
+       bool spectral_inversion;
+       bool over_range;
+       bool sample_loss;
+       bool user_defined11;
+       bool user_defined10;
+       bool user_defined9;
+       bool user_defined8;
+       uint8_t associated_context_packet_count;
+   } vrt_trailer;
+   
+   typedef struct vrt_context_indicators {
+       bool reference_point_identifier;     
+       bool bandwidth;                      
+       bool if_reference_frequency;         
+       bool rf_reference_frequency;         
+       bool rf_reference_frequency_offset;  
+       bool if_band_offset;                 
+       bool reference_level;                
+       bool gain;                           
+       bool over_range_count;               
+       bool sample_rate;                    
+       bool timestamp_adjustment;           
+       bool timestamp_calibration_time;     
+       bool temperature;                    
+       bool device_identifier;              
+       bool state_and_event_indicators;     
+       bool data_packet_payload_format;     
+       bool formatted_gps_geolocation;      
+       bool formatted_ins_geolocation;      
+       bool ecef_ephemeris;                 
+       bool relative_ephemeris;             
+       bool ephemeris_reference_identifier; 
+       bool gps_ascii;                      
+       bool context_association_lists;      
+   } vrt_context_indicators;
+   
+   typedef struct vrt_gain {
+       float stage1; 
+       float stage2; 
+   } vrt_gain;
+   
+   typedef struct vrt_device_identifier {
+       uint32_t oui;
+       uint16_t device_code;
+   } vrt_device_identifier;
+   
+   typedef struct vrt_state_and_event_indicators {
+       bool calibrated_time;    
+       bool valid_data;         
+       bool reference_lock;     
+       bool agc_or_mgc;         
+       bool detected_signal;    
+       bool spectral_inversion; 
+       bool over_range;         
+       bool sample_loss;        
+   } vrt_state_and_event_indicators;
+   
+   typedef struct vrt_state_and_event {
+       vrt_state_and_event_indicators has;
+       bool calibrated_time;
+       bool valid_data;
+       bool reference_lock;
+       vrt_agc_or_mgc agc_or_mgc;
+       bool detected_signal;
+       bool spectral_inversion;
+       bool over_range;
+       bool sample_loss;
+       bool user_defined7;
+       bool user_defined6;
+       bool user_defined5;
+       bool user_defined4;
+       bool user_defined3;
+       bool user_defined2;
+       bool user_defined1;
+       bool user_defined0;
+   } vrt_state_and_event;
+   
+   typedef enum vrt_packing_method { VRT_PM_PROCESSING_EFFICIENT = 0x0, VRT_PM_LINK_EFFICIENT = 0x1 } vrt_packing_method;
+   
+   typedef enum vrt_real_complex {
+       VRT_ROC_REAL              = 0x0, 
+       VRT_ROC_COMPLEX_CARTESIAN = 0x1, 
+       VRT_ROC_COMPLEX_POLAR     = 0x2  
+   } vrt_real_complex;
+   
+   typedef enum vrt_data_item_format {
+       VRT_DIF_SIGNED_FIXED_POINT                       = 0x00,
+       VRT_DIF_SIGNED_VRT_1_BIT_EXPONENT                = 0x01,
+       VRT_DIF_SIGNED_VRT_2_BIT_EXPONENT                = 0x02,
+       VRT_DIF_SIGNED_VRT_3_BIT_EXPONENT                = 0x03,
+       VRT_DIF_SIGNED_VRT_4_BIT_EXPONENT                = 0x04,
+       VRT_DIF_SIGNED_VRT_5_BIT_EXPONENT                = 0x05,
+       VRT_DIF_SIGNED_VRT_6_BIT_EXPONENT                = 0x06,
+       VRT_DIF_IEEE_754_SINGLE_PRECISION_FLOATING_POINT = 0x0E,
+       VRT_DIF_IEEE_754_DOUBLE_PRECISION_FLOATING_POINT = 0x0F,
+       VRT_DIF_UNSIGNED_FIXED_POINT                     = 0x10,
+       VRT_DIF_UNSIGNED_VRT_1_BIT_EXPONENT              = 0x11,
+       VRT_DIF_UNSIGNED_VRT_2_BIT_EXPONENT              = 0x12,
+       VRT_DIF_UNSIGNED_VRT_3_BIT_EXPONENT              = 0x13,
+       VRT_DIF_UNSIGNED_VRT_4_BIT_EXPONENT              = 0x14,
+       VRT_DIF_UNSIGNED_VRT_5_BIT_EXPONENT              = 0x15,
+       VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT              = 0x16
+   } vrt_data_item_format;
+   
+   typedef struct vrt_data_packet_payload_format {
+       vrt_packing_method packing_method;
+       vrt_real_complex real_or_complex;
+       vrt_data_item_format data_item_format;
+       bool sample_component_repeat;
+       uint8_t event_tag_size;
+       uint8_t channel_tag_size;
+       uint8_t item_packing_field_size;
+       uint8_t data_item_size;
+       uint16_t repeat_count;
+       uint16_t vector_size;
+   } vrt_data_packet_payload_format;
+   
+   typedef struct vrt_formatted_geolocation_indicators {
+       bool latitude;           
+       bool longitude;          
+       bool altitude;           
+       bool speed_over_ground;  
+       bool heading_angle;      
+       bool track_angle;        
+       bool magnetic_variation; 
+   } vrt_formatted_geolocation_indicators;
+   
+   typedef struct vrt_formatted_geolocation {
+       vrt_tsi tsi;
+       vrt_tsf tsf;
+       uint32_t oui;
+       uint32_t integer_second_timestamp;
+       uint64_t fractional_second_timestamp;
+       vrt_formatted_geolocation_indicators has;
+       double latitude;
+       double longitude;
+       double altitude;
+       double speed_over_ground;
+       double heading_angle;
+       double track_angle;
+       double magnetic_variation;
+   } vrt_formatted_geolocation;
+   
+   typedef struct vrt_ephemeris_indicators {
+       bool position_x;     
+       bool position_y;     
+       bool position_z;     
+       bool attitude_alpha; 
+       bool attitude_beta;  
+       bool attitude_phi;   
+       bool velocity_dx;    
+       bool velocity_dy;    
+       bool velocity_dz;    
+   } vrt_ephemeris_indicators;
+   
+   typedef struct vrt_ephemeris {
+       vrt_tsi tsi;
+       vrt_tsf tsf;
+       uint32_t oui;
+       uint32_t integer_second_timestamp;
+       uint64_t fractional_second_timestamp;
+       vrt_ephemeris_indicators has;
+       double position_x;
+       double position_y;
+       double position_z;
+       double attitude_alpha;
+       double attitude_beta;
+       double attitude_phi;
+       double velocity_dx;
+       double velocity_dy;
+       double velocity_dz;
+   } vrt_ephemeris;
+   
+   typedef struct vrt_gps_ascii {
+       uint32_t oui;
+       uint32_t number_of_words;
+       const char* ascii;
+   } vrt_gps_ascii;
+   
+   typedef struct vrt_context_association_lists_indicators {
+       bool asynchronous_channel_tag_list;
+   } vrt_context_association_lists_indicators;
+   
+   typedef struct vrt_context_association_lists {
+       uint16_t source_list_size;
+       uint16_t system_list_size;
+       uint16_t vector_component_list_size;
+       vrt_context_association_lists_indicators has;
+       uint16_t asynchronous_channel_list_size;
+       const uint32_t* source_context_association_list;
+       const uint32_t* system_context_association_list;
+       const uint32_t* vector_component_context_association_list;
+       const uint32_t* asynchronous_channel_context_association_list;
+       const uint32_t* asynchronous_channel_tag_list;
+   
+   } vrt_context_association_lists;
+   
+   typedef struct vrt_if_context {
+       bool context_field_change_indicator;
+       vrt_context_indicators has;
+       uint32_t reference_point_identifier;
+       double bandwidth;
+       double if_reference_frequency;
+       double rf_reference_frequency;
+       double rf_reference_frequency_offset;
+       double if_band_offset;
+       float reference_level;
+       vrt_gain gain;
+       uint32_t over_range_count;
+       double sample_rate;
+       uint64_t timestamp_adjustment;
+       uint32_t timestamp_calibration_time;
+       float temperature;
+       vrt_device_identifier device_identifier;
+       vrt_state_and_event state_and_event_indicators;
+       vrt_data_packet_payload_format data_packet_payload_format;
+       vrt_formatted_geolocation formatted_gps_geolocation;
+       vrt_formatted_geolocation formatted_ins_geolocation;
+       vrt_ephemeris ecef_ephemeris;
+       vrt_ephemeris relative_ephemeris;
+       uint32_t ephemeris_reference_identifier;
+       vrt_gps_ascii gps_ascii;
+       vrt_context_association_lists context_association_lists;
+   } vrt_if_context;
+   
+   #ifdef __cplusplus
+   }
+   #endif
+   
+   #endif

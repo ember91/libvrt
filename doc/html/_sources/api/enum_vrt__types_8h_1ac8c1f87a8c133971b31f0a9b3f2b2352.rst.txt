@@ -1,0 +1,13 @@
+.. _exhale_enum_vrt__types_8h_1ac8c1f87a8c133971b31f0a9b3f2b2352:
+
+Enum vrt_tsm
+============
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Enum Documentation
+------------------
+
+
+.. doxygenenum:: vrt_tsm

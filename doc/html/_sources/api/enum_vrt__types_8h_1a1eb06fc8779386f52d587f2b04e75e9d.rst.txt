@@ -1,0 +1,13 @@
+.. _exhale_enum_vrt__types_8h_1a1eb06fc8779386f52d587f2b04e75e9d:
+
+Enum vrt_packing_method
+=======================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Enum Documentation
+------------------
+
+
+.. doxygenenum:: vrt_packing_method

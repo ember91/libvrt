@@ -1,0 +1,13 @@
+.. _exhale_typedef_vrt__types_8h_1ae46fca03125d928bf4301c24bc214ce1:
+
+Typedef vrt_formatted_geolocation_indicators
+============================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: vrt_formatted_geolocation_indicators

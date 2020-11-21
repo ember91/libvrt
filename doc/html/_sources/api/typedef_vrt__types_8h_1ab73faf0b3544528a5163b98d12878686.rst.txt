@@ -1,0 +1,13 @@
+.. _exhale_typedef_vrt__types_8h_1ab73faf0b3544528a5163b98d12878686:
+
+Typedef vrt_state_and_event_indicators
+======================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: vrt_state_and_event_indicators

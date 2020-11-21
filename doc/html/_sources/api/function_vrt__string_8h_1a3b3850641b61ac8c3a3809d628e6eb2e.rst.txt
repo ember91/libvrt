@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__string_8h_1a3b3850641b61ac8c3a3809d628e6eb2e:
+
+Function vrt_string_tsi
+=======================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_string.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_string_tsi(vrt_tsi)

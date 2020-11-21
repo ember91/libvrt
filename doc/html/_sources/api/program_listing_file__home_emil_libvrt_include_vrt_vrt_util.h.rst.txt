@@ -1,0 +1,51 @@
+
+.. _program_listing_file__home_emil_libvrt_include_vrt_vrt_util.h:
+
+Program Listing for File vrt_util.h
+===================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_emil_libvrt_include_vrt_vrt_util.h>` (``/home/emil/libvrt/include/vrt/vrt_util.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #ifndef INCLUDE_VRT_VRT_UTIL_H_
+   #define INCLUDE_VRT_VRT_UTIL_H_
+   
+   #include <stdbool.h>
+   #include <stdint.h>
+   
+   #include "vrt_types.h"
+   
+   #ifdef __cplusplus
+   extern "C" {
+   #endif
+   
+   /* Silence warnings when using C++ */
+   #ifdef __cplusplus
+   #define STATIC_CAST(T, X)      static_cast<T>(X)
+   #define REINTERPRET_CAST(T, X) reinterpret_cast<T>(X)
+   #else
+   #define STATIC_CAST(T, X)      (T)(X)
+   #define REINTERPRET_CAST(T, X) (T)(X)
+   #endif
+   
+   inline bool vrt_is_context(vrt_packet_type type) {
+       return (STATIC_CAST(uint32_t, type) & 0x4U) != 0;
+   }
+   
+   inline bool vrt_has_stream_id(vrt_packet_type type) {
+       return (STATIC_CAST(uint32_t, type) & 0x5U) != 0;
+   }
+   
+   inline bool vrt_is_platform_little_endian() {
+       volatile uint32_t i = 0x01234567; /* Ensure written to memory */
+       return *REINTERPRET_CAST(volatile uint8_t*, &i) == 0x67;
+   }
+   
+   #ifdef __cplusplus
+   }
+   #endif
+   
+   #endif

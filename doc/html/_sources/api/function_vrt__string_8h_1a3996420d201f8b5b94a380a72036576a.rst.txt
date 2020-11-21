@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__string_8h_1a3996420d201f8b5b94a380a72036576a:
+
+Function vrt_string_real_or_complex
+===================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_string.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_string_real_or_complex(vrt_real_complex)

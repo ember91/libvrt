@@ -1,0 +1,13 @@
+.. _exhale_typedef_vrt__types_8h_1a19358442082642e99f2b1e8f2d777418:
+
+Typedef vrt_tsf
+===============
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: vrt_tsf

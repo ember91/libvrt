@@ -1,0 +1,13 @@
+.. _exhale_define_vrt__util_8h_1ae4cbfd2e2ff73da3b5ac98171e4626d3:
+
+Define STATIC_CAST
+==================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: STATIC_CAST
