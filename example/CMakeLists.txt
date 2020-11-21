@@ -5,6 +5,8 @@ project(
   LANGUAGES C
   DESCRIPTION "Example suite for libvrt.")
 
+find_package(StandardMathLibrary)
+
 # Add executables
 add_executable(read ${CMAKE_CURRENT_SOURCE_DIR}/src/read_if_data.c)
 add_executable(write ${CMAKE_CURRENT_SOURCE_DIR}/src/write_if_data.c)
@@ -40,4 +42,4 @@ target_include_directories(write
 
 # Add libraries to link to
 target_link_libraries(read vrt)
-target_link_libraries(write vrt m)
+target_link_libraries(write vrt ${STANDARD_MATH_LIBRARY})

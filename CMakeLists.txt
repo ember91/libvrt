@@ -8,7 +8,8 @@ project(
 )
 
 # Search for packages in doc directory as well
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/doc")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
+                      "${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules")
 
 # Default to 'Release'
 if(NOT CMAKE_BUILD_TYPE)
