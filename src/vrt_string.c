@@ -137,7 +137,12 @@ const char* vrt_string_data_item_format(vrt_data_item_format data_item_format) {
     }
 }
 
-const char* vrt_string_error(int32_t error) {
+const char* vrt_string_error(int32_t error /* Do NOT use vrt_error_code, since it isn't returned by any function */) {
+    /* No error */
+    if (error >= 0) {
+        return "Success";
+    }
+
     switch (error) {
         case VRT_ERR_BUF_SIZE:
             return "Buffer is too small";
