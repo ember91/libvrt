@@ -5,8 +5,6 @@
 
 * Check that float, double... are inside bounds when writing and validating
 
-* Compile again with other compilers
-
 # Future
 * Add support for 128 bit float
 * Add single header library?
