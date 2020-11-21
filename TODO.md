@@ -1,4 +1,3 @@
-* Compile with -fvisibility=hidden?
 * Add tests that write to buffer and then read from the same buffer. vrt_compare_...() functions may be useful for this.
 
 * Add int32_t vrt_write_data(vrt_header* h, vrt_fields* f, uint32_t* data, uint16_t* data_words, vrt_trailer* t)
