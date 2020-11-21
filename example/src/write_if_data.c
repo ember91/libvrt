@@ -30,7 +30,7 @@ int main() {
     /* Generate signal data */
     float s[SIZE - 3];
     for (int i = 0; i < SIZE - 3; ++i) {
-        s[i] = sinf(2.0F * PI * CENTER_FREQUENCY * i / SAMPLE_RATE);
+        s[i] = sinf(2.0F * PI * CENTER_FREQUENCY * (float)i / SAMPLE_RATE);
     }
 
     /* Initialize to reasonable values */

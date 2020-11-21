@@ -25,7 +25,7 @@ Where a 'word' in this context is 32 bits long.
 ## Getting Started
 
 In project root folder (`libvrt/`):
-```
+```bash
 mkdir Release
 cd Release
 cmake ..
@@ -41,7 +41,7 @@ This installs a static library. It can now be linked, e.g. with:
 | Visual Studio  | cl example.c vrt.lib                |
 
 Generate a packet with:
-```
+```c++
 /*
  * Generate signal and write VRT IF data packet to file. Note that this won't generate a big endian-format packet if on
  * a little endian platform, so the generated packet may be non-standard.
@@ -74,7 +74,7 @@ int main() {
     /* Generate signal data */
     float s[SIZE - 3];
     for (int i = 0; i < SIZE - 3; ++i) {
-        s[i] = sinf(2.0F * PI * CENTER_FREQUENCY * i / SAMPLE_RATE);
+        s[i] = sinf(2.0F * PI * CENTER_FREQUENCY * (float)i / SAMPLE_RATE);
     }
 
     /* Initialize to reasonable values */
@@ -204,7 +204,7 @@ To follow the standard fully one must byte swap before reading and after writing
 ## Running tests
 
 Compile and run the test suite:
-```
+```bash
 mkdir Debug
 cd Debug
 cmake -DCMAKE_BUILD_TYPE=Debug -DTEST=On ..
