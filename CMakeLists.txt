@@ -7,7 +7,7 @@ project(
     "Read/write library of packets following the VITA Radio Transport (VRT) standard, i.e. VITA-49.0."
 )
 
-# Search for packages in doc directory as well
+# Search for packages in module directory as well
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
                       "${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules")
 
