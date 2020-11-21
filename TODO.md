@@ -7,7 +7,7 @@
 * Add int32_t vrt_read_all(vrt_header* h, vrt_fields* f, uint32_t* body, uint16_t* body_words, vrt_if_context* c, vrt_trailer* t)
 * Add int32_t vrt_words_body(vrt_header* h), which calculates number of words body consists of
 
-* Check that float, double... are inside bound when writing and validating
+* Check that float, double... are inside bounds when writing and validating
 
 * Compile again with other compilers
 
