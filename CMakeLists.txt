@@ -17,7 +17,7 @@ if(NOT CMAKE_BUILD_TYPE)
       "Release"
       CACHE
         STRING
-        "Choose the type of build, options are: Debug Release RelWithDebInfo MinSizeRel."
+        "Choose the type of build. Options are: Debug, Release, RelWithDebInfo, MinSizeRel."
         FORCE)
 endif()
 
@@ -78,7 +78,8 @@ endif()
 if(DOCUMENTATION)
   if(DOXYGEN_FOUND
      AND BREATHE_FOUND
-     AND SPHINX_FOUND)
+     AND SPHINX_FOUND
+     AND EXHALE_FOUND)
     # Set input and output files
     set(DOXYGEN_IN "${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in")
     set(DOXYGEN_OUT "${CMAKE_CURRENT_BINARY_DIR}/doc/Doxyfile")
