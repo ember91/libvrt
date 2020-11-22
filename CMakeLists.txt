@@ -54,15 +54,18 @@ endif()
 # Check if options are set
 if(${CLANG_TIDY})
   message(STATUS "Enabling clang-tidy for C")
+  # Note that CMAKE_CXX_CLANG_TIDY is set in CMakeLists.txt in 'test' directory
   set(CMAKE_C_CLANG_TIDY
-      "clang-tidy;-checks=*,-readability-magic-numbers,-cppcoreguidelines-avoid-magic-numbers,-hicpp-signed-bitwise"
+      "clang-tidy;-checks=*,-readability-magic-numbers,-cppcoreguidelines-avoid-magic-numbers,-hicpp-signed-bitwise,-android-cloexec-fopen"
   )
 endif()
 if(${CPPCHECK})
+  # Note that CMAKE_CXX_CPPCHECK is set in CMakeLists.txt in 'test' directory
   message(STATUS "Enabling Cppcheck for C")
   set(CMAKE_C_CPPCHECK "cppcheck;--std=c99")
 endif()
 if(${CPPLINT})
+  # Note that CMAKE_CXX_CPPLINT is set in CMakeLists.txt in 'test' directory
   message(STATUS "Enabling cpplint for C")
   set(CMAKE_C_CPPLINT
       "cpplint;--linelength=120;--filter=-legal/copyright,-build/include_subdir"

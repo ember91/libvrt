@@ -83,7 +83,6 @@ int main() {
             fprintf(stderr, "Failed to read IF context section: %s\n", vrt_string_error(rv));
             return EXIT_FAILURE;
         }
-        offset += rv;
 
         /* Print some IF context information */
         if (c.has.bandwidth) {
@@ -99,7 +98,6 @@ int main() {
             fprintf(stderr, "Failed to read IF context section: %s\n", vrt_string_error(rv));
             return EXIT_FAILURE;
         }
-        offset += rv;
 
         /* Print some trailer information */
         if (t.has.reference_lock) {

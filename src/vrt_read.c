@@ -142,7 +142,7 @@ int32_t vrt_read_fields(const vrt_header* header,
         fields->fractional_seconds_timestamp = 0;
     }
 
-    return (int32_t)words;
+    return words;
 }
 
 int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trailer) {

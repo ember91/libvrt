@@ -133,7 +133,7 @@ int32_t vrt_write_fields(const vrt_header* header,
         /* No point in increasing b pointer here */
     }
 
-    return (int32_t)words;
+    return words;
 }
 
 int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_words, bool validate) {
@@ -767,5 +767,5 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32
         return rv;
     }
 
-    return (int32_t)words;
+    return words;
 }

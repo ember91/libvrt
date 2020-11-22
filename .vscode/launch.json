@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Unit tests",
+            "name": "Launch unit tests",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/Debug/test/run_unit_tests",
@@ -24,10 +24,29 @@
             ]
         },
         {
-            "name": "Launch Example",
+            "name": "Launch read example",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/examples/write_if_data",
+            "program": "${workspaceFolder}/Debug/example/read",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Launch write example",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Debug/example/write",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
