@@ -40,6 +40,7 @@ find_package(Breathe)
 # Note that Sphinx may located with find_package but may not work with sudo make
 # install. Install with 'sudo pip3 install sphinx_rtd_theme'.
 find_package(Sphinx)
+find_package(Exhale)
 
 if(NOT DOXYGEN_FOUND)
   message(WARNING "Doxygen is required for documentation generation")
@@ -49,6 +50,9 @@ if(NOT BREATHE_FOUND)
 endif()
 if(NOT SPHINX_FOUND)
   message(WARNING "Sphinx is required for documentation generation")
+endif()
+if(NOT EXHALE_FOUND)
+  message(WARNING "Exhale is required for documentation generation")
 endif()
 
 # Check if options are set
