@@ -127,9 +127,11 @@ typedef struct vrt_class_identifier {
      * \note Only the 24 least significant bits are used.
      */
     uint32_t oui;
-    /** Information class to which this packet stream belongs. */
+    /** Information class to which this packet stream belongs. A value of zero in this field shall indicate that the
+     * Information Class is unspecified. */
     uint16_t information_class_code;
-    /** Packet class of company to which this packet stream belongs. */
+    /** Packet class of company to which this packet stream belongs. A value of zero in this field shall indicate that
+     * the Packet Class is unspecified. */
     uint16_t packet_class_code;
 } vrt_class_identifier;
 
@@ -648,6 +650,8 @@ typedef struct vrt_if_context {
      * True if this packet contains new context information.
      *
      * \note This is sometimes called named indicator and sometimes identifier.
+     * \note Since over-range count isn't a persistent field, and individual user-defined fields may not be persistent,
+     *       do not mark a packet as changed when only those field changes.
      */
     bool context_field_change_indicator;
     /** Field presence indicators. */

@@ -174,13 +174,34 @@ TEST_F(WriteIfContextTest, ReferenceLevel) {
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, Gain) {
+TEST_F(WriteIfContextTest, Gain1) {
     c_.has.gain    = true;
     c_.gain.stage1 = -1.0F;
     c_.gain.stage2 = 1.0F;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00800000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0080FF80));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, Gain2) {
+    c_.has.gain    = true;
+    c_.gain.stage1 = -1.0F;
+    c_.gain.stage2 = 0.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00800000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x0000FF80));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, GainInvalid) {
+    c_.has.gain    = true;
+    c_.gain.stage1 = 0.0F;
+    c_.gain.stage2 = 1.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_GAIN_STAGE2_SET);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, false), 2);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00800000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00800000));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 

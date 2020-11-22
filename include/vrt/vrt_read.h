@@ -82,6 +82,8 @@ int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trail
  * \retval VRT_ERR_BUF_SIZE                             Buffer is too small.
  * \retval VRT_ERR_RESERVED                             One or multiple reserved bits are set.
  * \retval VRT_ERR_BOUNDS_BANDWIDTH                     Bandwidth is outside valid bounds (< 0 Hz).
+ * \retval VRT_ERR_GAIN_STAGE2_SET                      Gain stage 1 must be used instead of stage 2 when only one is
+ *                                                      set.
  * \retval VRT_ERR_BOUNDS_SAMPLE_RATE                   Sample rate is outside valid bounds (< 0 Hz).
  * \retval VRT_ERR_BOUNDS_TEMPERATURE                   Temperature is outside valid bounds (< -273.15 degrees).
  * \retval VRT_ERR_INVALID_REAL_OR_COMPLEX              Real/Complex is an invalid value.

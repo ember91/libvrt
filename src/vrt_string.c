@@ -170,6 +170,8 @@ const char* vrt_string_error(int32_t error /* Do NOT use vrt_error_code, since i
             return "Associated context packet count is outside valid bounds (> 0x7F)";
         case VRT_ERR_BOUNDS_BANDWIDTH:
             return "Bandwidth is outside valid bounds (< 0 Hz)";
+        case VRT_ERR_GAIN_STAGE2_SET:
+            return "Gain stage 1 must be used instead of stage 2 when only one is set";
         case VRT_ERR_BOUNDS_SAMPLE_RATE:
             return "Sample rate is outside valid bounds (< 0 Hz)";
         case VRT_ERR_BOUNDS_TEMPERATURE:

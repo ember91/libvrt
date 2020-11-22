@@ -370,12 +370,29 @@ TEST_F(ReadIfContextTest, ReferenceLevelReserved) {
     assert_if_context(c_, {{"has.reference_level", true}, {"reference_level", -1.0F}});
 }
 
-TEST_F(ReadIfContextTest, Gain) {
+TEST_F(ReadIfContextTest, Gain1) {
     buf_[0] = 0x00800000;
     buf_[1] = 0xFF80FF80;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.gain", true}, {"gain.stage2", -1.0F}, {"gain.stage1", -1.0F}});
+}
+
+TEST_F(ReadIfContextTest, Gain2) {
+    buf_[0] = 0x00800000;
+    buf_[1] = 0x0000FF80;
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), 2);
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    assert_if_context(c_, {{"has.gain", true}, {"gain.stage2", 0.0F}, {"gain.stage1", -1.0F}});
+}
+
+TEST_F(ReadIfContextTest, GainInvalid) {
+    buf_[0] = 0x00800000;
+    buf_[1] = 0xFF800000;
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), VRT_ERR_GAIN_STAGE2_SET);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, false), 2);
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    assert_if_context(c_, {{"has.gain", true}, {"gain.stage2", -1.0F}, {"gain.stage1", 0.0F}});
 }
 
 TEST_F(ReadIfContextTest, OverRangeCount) {

@@ -669,6 +669,14 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32
         b += 1;
     }
     if (if_context->has.gain) {
+        if (validate) {
+            /* Rule 7.1.5.10-6: Equipment whose gain can be described with a single number shall use the Stage 1 Gain
+             * subfield. The Stage 2 Gain subfield shall be set to zero. */
+            if (if_context->gain.stage2 != 0.0F && if_context->gain.stage1 == 0.0F) {
+                return VRT_ERR_GAIN_STAGE2_SET;
+            }
+        }
+
         b[0] =
             ((int32_t)msk(vrt_float_to_fixed_point_i16(if_context->gain.stage2, VRT_RADIX_GAIN), 16, 16) & 0xFFFF0000) |
             ((int32_t)vrt_float_to_fixed_point_i16(if_context->gain.stage1, VRT_RADIX_GAIN) & 0x0000FFFF);
