@@ -1,0 +1,13 @@
+.. _exhale_define_vrt__util_8h_1a5f3ca533aadf44ad610a9082a03f2970:
+
+Define VRT_WARN_UNUSED
+======================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: VRT_WARN_UNUSED

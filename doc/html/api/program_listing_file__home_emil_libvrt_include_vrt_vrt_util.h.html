@@ -162,6 +162,17 @@
 <span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="p">{</span>
 <span class="cp">#endif</span>
 
+<span class="cm">/* Force compiler to warn when return values are ignored */</span>
+<span class="cp">#ifdef __GNUC__</span>
+<span class="cp">#define VRT_WARN_UNUSED __attribute__((warn_unused_result))</span>
+<span class="cp">#elif __clang__</span>
+<span class="cp">#define VRT_WARN_UNUSED __attribute__((warn_unused_result))</span>
+<span class="cp">#elif _MSC_VER</span>
+<span class="cp">#define VRT_WARN_UNUSED _Check_return_</span>
+<span class="cp">#else</span>
+<span class="cp">#define VRT_WARN_UNUSED</span>
+<span class="cp">#endif</span>
+
 <span class="cm">/* Silence warnings when using C++ */</span>
 <span class="cp">#ifdef __cplusplus</span>
 <span class="cp">#define STATIC_CAST(T, X)      static_cast&lt;T&gt;(X)</span>

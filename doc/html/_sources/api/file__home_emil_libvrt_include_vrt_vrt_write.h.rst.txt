@@ -35,6 +35,8 @@ Includes
 
 - ``vrt_types.h`` (:ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`)
 
+- ``vrt_util.h`` (:ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`)
+
 
 
 
@@ -44,11 +46,11 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_vrt__write_8h_1a674809acda7b0baf66659388402a5918`
+- :ref:`exhale_function_vrt__write_8h_1a8e4c27187a1be53966ac0abf957d6503`
 
-- :ref:`exhale_function_vrt__write_8h_1af2ee55c43a41c7f91efefd85b5f82314`
+- :ref:`exhale_function_vrt__write_8h_1a6693684d7854dac7dfb854217769edc3`
 
-- :ref:`exhale_function_vrt__write_8h_1a00473fbc35757974a8451f3420423f85`
+- :ref:`exhale_function_vrt__write_8h_1a3947aff3624170f2c9bb683043ddfac7`
 
-- :ref:`exhale_function_vrt__write_8h_1a9727ae1e20fd1d29bf74b1ca266aa928`
+- :ref:`exhale_function_vrt__write_8h_1a636ea7e3ab975e50ef99f3bff4b512ae`
 

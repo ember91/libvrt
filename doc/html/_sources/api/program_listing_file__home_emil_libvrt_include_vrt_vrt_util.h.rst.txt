@@ -22,6 +22,17 @@ Program Listing for File vrt_util.h
    extern "C" {
    #endif
    
+   /* Force compiler to warn when return values are ignored */
+   #ifdef __GNUC__
+   #define VRT_WARN_UNUSED __attribute__((warn_unused_result))
+   #elif __clang__
+   #define VRT_WARN_UNUSED __attribute__((warn_unused_result))
+   #elif _MSC_VER
+   #define VRT_WARN_UNUSED _Check_return_
+   #else
+   #define VRT_WARN_UNUSED
+   #endif
+   
    /* Silence warnings when using C++ */
    #ifdef __cplusplus
    #define STATIC_CAST(T, X)      static_cast<T>(X)

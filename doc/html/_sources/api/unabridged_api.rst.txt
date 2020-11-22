@@ -197,22 +197,22 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__read_8h_1a4f5a71874451e0182e7e7d35a9b8e3d7.rst
+   function_vrt__read_8h_1a75ac115aa95b795d951d81122eb4f44e.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__read_8h_1a68cca84c9f6dab3f67f57b754f22a0fe.rst
+   function_vrt__read_8h_1a98c737f3b478e9e4e48d62a171ab358d.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__read_8h_1af24c0ea733e405ca910b64341376df99.rst
+   function_vrt__read_8h_1aa11c304cc2738b29338295ded96ef3d9.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__read_8h_1a9a690ebdf60501d53f39c64bd0db0198.rst
+   function_vrt__read_8h_1a15f839ddc3bfd62631e61622a5635223.rst
 
 .. toctree::
    :maxdepth: 5
@@ -277,22 +277,22 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__write_8h_1a674809acda7b0baf66659388402a5918.rst
+   function_vrt__write_8h_1a8e4c27187a1be53966ac0abf957d6503.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__write_8h_1af2ee55c43a41c7f91efefd85b5f82314.rst
+   function_vrt__write_8h_1a6693684d7854dac7dfb854217769edc3.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__write_8h_1a00473fbc35757974a8451f3420423f85.rst
+   function_vrt__write_8h_1a3947aff3624170f2c9bb683043ddfac7.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__write_8h_1a9727ae1e20fd1d29bf74b1ca266aa928.rst
+   function_vrt__write_8h_1a636ea7e3ab975e50ef99f3bff4b512ae.rst
 
 Variables
 *********
@@ -331,6 +331,11 @@ Defines
    :maxdepth: 5
 
    define_vrt__util_8h_1ae4cbfd2e2ff73da3b5ac98171e4626d3.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   define_vrt__util_8h_1a5f3ca533aadf44ad610a9082a03f2970.rst
 
 Typedefs
 ********

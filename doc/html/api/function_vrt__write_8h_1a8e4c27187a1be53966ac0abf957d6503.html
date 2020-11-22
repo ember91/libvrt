@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Define STATIC_CAST &mdash; libvrt  documentation</title>
+  <title>Function vrt_write_fields &mdash; libvrt  documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Define VRT_WARN_UNUSED" href="define_vrt__util_8h_1a5f3ca533aadf44ad610a9082a03f2970.html" />
-    <link rel="prev" title="Define REINTERPRET_CAST" href="define_vrt__util_8h_1ada868775661be67e4faac7fb851aa362.html" /> 
+    <link rel="next" title="Function vrt_write_header" href="function_vrt__write_8h_1a6693684d7854dac7dfb854217769edc3.html" />
+    <link rel="prev" title="Function vrt_words_trailer" href="function_vrt__words_8h_1a18ac9dbeb45b0a28b97160cb30dd3e12.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -132,13 +132,13 @@
         
           <li><a href="library_root.html">Library API</a> &raquo;</li>
         
-      <li>Define STATIC_CAST</li>
+      <li>Function vrt_write_fields</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/api/define_vrt__util_8h_1ae4cbfd2e2ff73da3b5ac98171e4626d3.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/function_vrt__write_8h_1a8e4c27187a1be53966ac0abf957d6503.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -151,17 +151,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="define-static-cast">
-<span id="exhale-define-vrt-util-8h-1ae4cbfd2e2ff73da3b5ac98171e4626d3"></span><h1>Define STATIC_CAST<a class="headerlink" href="#define-static-cast" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="function-vrt-write-fields">
+<span id="exhale-function-vrt-write-8h-1a8e4c27187a1be53966ac0abf957d6503"></span><h1>Function vrt_write_fields<a class="headerlink" href="#function-vrt-write-fields" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><p>Defined in <a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_util.h.html#file-home-emil-libvrt-include-vrt-vrt-util-h"><span class="std std-ref">File vrt_util.h</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_write.h.html#file-home-emil-libvrt-include-vrt-vrt-write-h"><span class="std std-ref">File vrt_write.h</span></a></p></li>
 </ul>
-<div class="section" id="define-documentation">
-<h2>Define Documentation<a class="headerlink" href="#define-documentation" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp macro">
-<dt id="c.STATIC_CAST">
-<span class="target" id="vrt__util_8h_1ae4cbfd2e2ff73da3b5ac98171e4626d3"></span><code class="sig-name descname">STATIC_CAST</code><span class="sig-paren">(</span><em>T</em>, <em>X</em><span class="sig-paren">)</span><a class="headerlink" href="#c.STATIC_CAST" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<div class="section" id="function-documentation">
+<h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt>
+<span class="target" id="vrt__write_8h_1a8e4c27187a1be53966ac0abf957d6503"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_write_fields (const vrt_header *header, const vrt_fields *fields, void *buf, uint32_t buf_words, bool validate)</code></dt>
+<dd><p>Low-level function that writes VRT fields section.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Number of written 32-bit words, or a negative number if error. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">header</span></code>: Header. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fields</span></code>: Fields to write. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Buffer to write to. This must point to the start of the fields section, i.e. directly following the header word. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buf_words</span></code>: Size of buf in 32-bit words. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validate</span></code>: True if validation should be done. If false, only buffer size is validated.</p></li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUF_SIZE</span></code>: Buffer is too small. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds (&gt; 999999999999 ps). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_OUI</span></code>: OUI is outside valid bounds (&gt; 0x00FFFFFF). </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 </div>
 </div>
@@ -174,10 +194,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="define_vrt__util_8h_1a5f3ca533aadf44ad610a9082a03f2970.html" class="btn btn-neutral float-right" title="Define VRT_WARN_UNUSED" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="function_vrt__write_8h_1a6693684d7854dac7dfb854217769edc3.html" class="btn btn-neutral float-right" title="Function vrt_write_header" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="define_vrt__util_8h_1ada868775661be67e4faac7fb851aa362.html" class="btn btn-neutral float-left" title="Define REINTERPRET_CAST" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="function_vrt__words_8h_1a18ac9dbeb45b0a28b97160cb30dd3e12.html" class="btn btn-neutral float-left" title="Function vrt_words_trailer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
