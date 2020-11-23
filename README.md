@@ -4,7 +4,7 @@ C implementation of an encoder and decoder of the ANSI/VITA 49.0 Radio Transport
 
 **Features:**
 * Well tested - High test code coverage, analyzed with static analysis tools
-* Compatible - Tested with GCC, Clang, Visual Studio and ICC
+* Compatible - Tested with GCC, Clang, Visual Studio, and ICC
 * Well documented - Doxygen style
 * Low-level - A high degree of control
 * Portable - Written in plain C99
@@ -12,6 +12,8 @@ C implementation of an encoder and decoder of the ANSI/VITA 49.0 Radio Transport
 * Easy to install - Use CMake, with no external dependencies
 * Complete - Implements full VRT standard
 * Heap friendly - No heap allocations
+* No printf - Neither stdout nor stderr output
+* Packet validation - But only if you want
 
 This library uses a packet terminology as follows:
 | Header: 1 word       |
