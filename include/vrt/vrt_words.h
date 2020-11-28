@@ -20,9 +20,9 @@ static const uint16_t VRT_WORDS_HEADER = 1;
  */
 static const uint16_t VRT_WORDS_MAX_FIELDS = 6;
 /**
- * Maximum size of trailer in 32-bit words.
+ * Size of trailer in 32-bit words. Always 1.
  */
-static const uint16_t VRT_WORDS_MAX_TRAILER = 1;
+static const uint16_t VRT_WORDS_TRAILER = 1;
 /**
  * Maximum size of a VRT packet in 32-bit words.
  */
