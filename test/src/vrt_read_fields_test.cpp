@@ -50,6 +50,10 @@ static void assert_fields(const vrt_fields& f, const std::map<std::string, std::
     check_remaining(val_cp);
 }
 
+TEST_F(ReadFieldsTest, NegativeSizeBuffer) {
+    ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), -1, &f_, true), VRT_ERR_BUFFER_SIZE);
+}
+
 TEST_F(ReadFieldsTest, None) {
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_, true), 0);
 }

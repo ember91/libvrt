@@ -25,6 +25,10 @@ class WriteFieldsTest : public ::testing::Test {
     std::array<uint32_t, 8> buf_;
 };
 
+TEST_F(WriteFieldsTest, NegativeSizeBuffer) {
+    ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), -1, true), VRT_ERR_BUFFER_SIZE);
+}
+
 TEST_F(WriteFieldsTest, None) {
     ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0, true), 0);
 }

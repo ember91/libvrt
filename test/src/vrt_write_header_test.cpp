@@ -22,6 +22,10 @@ class WriteHeaderTest : public ::testing::Test {
     std::array<uint32_t, 2> buf_;
 };
 
+TEST_F(WriteHeaderTest, NegativeSizeBuffer) {
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), -1, true), VRT_ERR_BUFFER_SIZE);
+}
+
 TEST_F(WriteHeaderTest, ZeroSizeBuffer) {
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 0, true), VRT_ERR_BUFFER_SIZE);
 }

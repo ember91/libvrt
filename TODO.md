@@ -1,6 +1,5 @@
 * Add vrt_words_packet
 * When testing buffer size error, check both with and without validation
-* Add tests that test negative buffer size
 * vrt_is_context and similar functions should take header as parameter
 * Add int32_t vrt_read_packet(vrt_packet* p, void* buf, int32_t words_buf validate)
 * Add int32_t vrt_words_body(vrt_header* h), which calculates number of words body consists of

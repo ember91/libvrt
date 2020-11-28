@@ -23,6 +23,10 @@ class WriteTrailerTest : public ::testing::Test {
     std::array<uint32_t, 2> buf_;
 };
 
+TEST_F(WriteTrailerTest, NegativeSizeBuffer) {
+    ASSERT_EQ(vrt_write_trailer(&t_, buf_.data(), -1, true), VRT_ERR_BUFFER_SIZE);
+}
+
 TEST_F(WriteTrailerTest, ZeroSizeBuffer) {
     ASSERT_EQ(vrt_write_trailer(&t_, buf_.data(), 0, true), VRT_ERR_BUFFER_SIZE);
 }
