@@ -15,7 +15,7 @@ extern "C" {
  * Low-level function that reads VRT header section.
  *
  * \param buf       Buffer to read from.
- * \param buf_words Size of buf in 32-bit words.
+ * \param words_buf Size of buf in 32-bit words.
  * \param header    Header to read into.
  * \param validate  True if validation should be done. If false, only buffer size is validated.
  *
@@ -29,7 +29,7 @@ extern "C" {
  * \note Requires input buffer data to be byte swapped if platform endianess isn't big endian (network order).
  */
 VRT_WARN_UNUSED
-int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header, bool validate);
+int32_t vrt_read_header(const void* buf, uint32_t words_buf, vrt_header* header, bool validate);
 
 /**
  * Low-level function that reads VRT fields section.
@@ -37,7 +37,7 @@ int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header,
  * \param header    Header.
  * \param buf       Buffer to read from. This must point to the first field in the sequence, i.e. directly following the
  *                  header word.
- * \param buf_words Size of buf in 32-bit words.
+ * \param words_buf Size of buf in 32-bit words.
  * \param fields    Fields to read into.
  * \param validate  True if validation should be done. If false, only buffer size is validated.
  *
@@ -50,7 +50,7 @@ int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header,
 VRT_WARN_UNUSED
 int32_t vrt_read_fields(const vrt_header* header,
                         const void*       buf,
-                        uint32_t          buf_words,
+                        uint32_t          words_buf,
                         vrt_fields*       fields,
                         bool              validate);
 
@@ -59,7 +59,7 @@ int32_t vrt_read_fields(const vrt_header* header,
  *
  * \param buf       Buffer to read from. This must point to the position of the trailer word, i.e. the last word in the
  *                  packet.
- * \param buf_words Size of buf in 32-bit words.
+ * \param words_buf Size of buf in 32-bit words.
  * \param trailer   Trailer to read into.
  *
  * \return Number of read 32-bit words, i.e. 1, or a negative number if error.
@@ -68,13 +68,13 @@ int32_t vrt_read_fields(const vrt_header* header,
  * \note Unlike other read functions, there is nothing to validate, so no 'validate' parameter here.
  */
 VRT_WARN_UNUSED
-int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trailer);
+int32_t vrt_read_trailer(const void* buf, uint32_t words_buf, vrt_trailer* trailer);
 
 /**
  * Low-level function that reads VRT IF context section.
  *
  * \param buf        Buffer to read from.
- * \param buf_words  Size of buf in 32-bit words. Starting from the header word.
+ * \param words_buf  Size of buf in 32-bit words. Starting from the header word.
  * \param if_context IF context struct to read into.
  * \param validate  True if validation should be done. If false, only buffer size is validated.
  *
@@ -108,7 +108,7 @@ int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trail
  *          sample_rate, may in rare cases lose precision since double only has 53 bits of precision.
  */
 VRT_WARN_UNUSED
-int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context* if_context, bool validate);
+int32_t vrt_read_if_context(const void* buf, uint32_t words_buf, vrt_if_context* if_context, bool validate);
 
 #ifdef __cplusplus
 }

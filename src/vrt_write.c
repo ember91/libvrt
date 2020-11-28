@@ -35,12 +35,12 @@ static inline void write_uint64(uint64_t val, uint32_t* b) {
     b[1] = (uint32_t)val;
 }
 
-int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t buf_words, bool validate) {
+int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t words_buf, bool validate) {
     /* Number of words are always 1 */
     const int32_t words = 1;
 
     /* Check if buf size is sufficient */
-    if (buf_words < (uint32_t)words) {
+    if (words_buf < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
@@ -92,12 +92,12 @@ int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t buf_words
 int32_t vrt_write_fields(const vrt_header* header,
                          const vrt_fields* fields,
                          void*             buf,
-                         uint32_t          buf_words,
+                         uint32_t          words_buf,
                          bool              validate) {
     const int32_t words = (int32_t)vrt_words_fields(header);
 
     /* Check if buf size is sufficient */
-    if (buf_words < (uint32_t)words) {
+    if (words_buf < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
@@ -136,12 +136,12 @@ int32_t vrt_write_fields(const vrt_header* header,
     return words;
 }
 
-int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_words, bool validate) {
+int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t words_buf, bool validate) {
     /* Number of words are always 1 */
     const int32_t words = 1;
 
     /* Check if buf size is sufficient */
-    if (buf_words < (uint32_t)words) {
+    if (words_buf < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
@@ -615,11 +615,11 @@ static int32_t if_context_write_context_association_lists(bool                  
     return 0;
 }
 
-int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32_t buf_words, bool validate) {
+int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32_t words_buf, bool validate) {
     const int32_t words = vrt_words_if_context(if_context);
 
     /* Check if buf size is sufficient */
-    if (buf_words < (uint32_t)words) {
+    if (words_buf < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 

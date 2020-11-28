@@ -162,17 +162,17 @@ vrt_words_if_context(if_context)
 ```
 For reading:
 ```
-vrt_read_header(buf, buf_words, header, validate)
-vrt_read_fields(header, buf, buf_words, fields, validate)
-vrt_read_trailer(buf, buf_words, trailer)
-vrt_read_if_context(buf, buf_words, if_context, validate)
+vrt_read_header(buf, words_buf, header, validate)
+vrt_read_fields(header, buf, words_buf, fields, validate)
+vrt_read_trailer(buf, words_buf, trailer)
+vrt_read_if_context(buf, words_buf, if_context, validate)
 ```
 For writing:
 ```
-vrt_write_header(header, buf, buf_words, validate)
-vrt_write_fields(header, fields, buf, buf_words, validate)
-vrt_write_trailer(const trailer, buf, buf_words, validate)
-vrt_write_if_context(const if_context, buf, buf_words, validate)
+vrt_write_header(header, buf, words_buf, validate)
+vrt_write_fields(header, fields, buf, words_buf, validate)
+vrt_write_trailer(const trailer, buf, words_buf, validate)
+vrt_write_if_context(const if_context, buf, words_buf, validate)
 ```
 For making string representations:
 ```

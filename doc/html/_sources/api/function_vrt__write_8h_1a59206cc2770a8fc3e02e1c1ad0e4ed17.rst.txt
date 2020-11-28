@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__write_8h_1a59206cc2770a8fc3e02e1c1ad0e4ed17:
+
+Function vrt_write_packet_if_context
+====================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_write.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_write_packet_if_context(const vrt_header *, const vrt_fields *, const vrt_if_context *, bool)

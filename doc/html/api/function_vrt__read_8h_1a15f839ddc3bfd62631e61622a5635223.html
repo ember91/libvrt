@@ -35,9 +35,7 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Function vrt_string_agc_or_mgc" href="function_vrt__string_8h_1a99c9ae304a4b8d079cf2bd89eb8c3970.html" />
-    <link rel="prev" title="Function vrt_read_if_context" href="function_vrt__read_8h_1aa11c304cc2738b29338295ded96ef3d9.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -130,8 +128,6 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="library_root.html">Library API</a> &raquo;</li>
-        
       <li>Function vrt_read_trailer</li>
     
     
@@ -160,7 +156,7 @@
 <h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
 <dt>
-<span class="target" id="vrt__read_8h_1a15f839ddc3bfd62631e61622a5635223"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_read_trailer (const void *buf, uint32_t buf_words, vrt_trailer *trailer)</code></dt>
+<span class="target" id="vrt__read_8h_1a80e23ab16cc74c754e2586368cb78308"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_read_trailer (const void *buf, uint32_t words_buf, vrt_trailer *trailer)</code></dt>
 <dd><p>Low-level function that reads VRT trailer section.</p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>Number of read 32-bit words, i.e. 1, or a negative number if error. </p>
@@ -169,7 +165,7 @@
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Buffer to read from. This must point to the position of the trailer word, i.e. the last word in the packet. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">buf_words</span></code>: Size of buf in 32-bit words. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">words_buf</span></code>: Size of buf in 32-bit words. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">trailer</span></code>: Trailer to read into.</p></li>
 </ul>
 </dd>
@@ -189,15 +185,6 @@
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="function_vrt__string_8h_1a99c9ae304a4b8d079cf2bd89eb8c3970.html" class="btn btn-neutral float-right" title="Function vrt_string_agc_or_mgc" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="function_vrt__read_8h_1aa11c304cc2738b29338295ded96ef3d9.html" class="btn btn-neutral float-left" title="Function vrt_read_if_context" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

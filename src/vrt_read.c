@@ -35,12 +35,12 @@ static inline uint64_t read_uint64(const uint32_t* b) {
     return (uint64_t)b[0] << 32U | (uint64_t)b[1];
 }
 
-int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header, bool validate) {
+int32_t vrt_read_header(const void* buf, uint32_t words_buf, vrt_header* header, bool validate) {
     /* Size is always 1 */
     const int32_t words = 1;
 
     /* Check if buf size is sufficient */
-    if (buf_words < (uint32_t)words) {
+    if (words_buf < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
@@ -80,13 +80,13 @@ int32_t vrt_read_header(const void* buf, uint32_t buf_words, vrt_header* header,
 
 int32_t vrt_read_fields(const vrt_header* header,
                         const void*       buf,
-                        uint32_t          buf_words,
+                        uint32_t          words_buf,
                         vrt_fields*       fields,
                         bool              validate) {
     const int32_t words = (int32_t)vrt_words_fields(header);
 
     /* Check if buf size is sufficient */
-    if (buf_words < (uint32_t)words) {
+    if (words_buf < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
@@ -145,12 +145,12 @@ int32_t vrt_read_fields(const vrt_header* header,
     return words;
 }
 
-int32_t vrt_read_trailer(const void* buf, uint32_t buf_words, vrt_trailer* trailer) {
+int32_t vrt_read_trailer(const void* buf, uint32_t words_buf, vrt_trailer* trailer) {
     /* Number of words are always 1 */
     const int32_t words = 1;
 
     /* Check if buf size is sufficient */
-    if (buf_words < (uint32_t)words) {
+    if (words_buf < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
@@ -744,12 +744,12 @@ static int32_t if_context_read_association_lists(bool has, const uint32_t* b, vr
     return 0;
 }
 
-int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context* if_context, bool validate) {
+int32_t vrt_read_if_context(const void* buf, uint32_t words_buf, vrt_if_context* if_context, bool validate) {
     /* Cannot count words here since the IF context section hasn't been read yet */
 
     int32_t words = 1;
 
-    if (buf_words < (uint32_t)words) {
+    if (words_buf < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 
@@ -764,7 +764,7 @@ int32_t vrt_read_if_context(const void* buf, uint32_t buf_words, vrt_if_context*
 
     /* Replace context_words here instead of increasing it */
     words = vrt_words_if_context_indicator(&if_context->has);
-    if (buf_words < (uint32_t)words) {
+    if (words_buf < (uint32_t)words) {
         return VRT_ERR_BUF_SIZE;
     }
 

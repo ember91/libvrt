@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__write_8h_1aee79e2ab0c9a8cee38f434eb070eba43:
+
+Function vrt_write_packet_ext_context
+=====================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_write.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_write_packet_ext_context(const vrt_header *, const vrt_fields *, const void *, uint32_t, void *, uint32_t, bool)

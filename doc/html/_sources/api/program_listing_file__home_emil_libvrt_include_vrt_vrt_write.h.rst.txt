@@ -24,20 +24,20 @@ Program Listing for File vrt_write.h
    #endif
    
    VRT_WARN_UNUSED
-   int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t buf_words, bool validate);
+   int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t words_buf, bool validate);
    
    VRT_WARN_UNUSED
    int32_t vrt_write_fields(const vrt_header* header,
                             const vrt_fields* fields,
                             void*             buf,
-                            uint32_t          buf_words,
+                            uint32_t          words_buf,
                             bool              validate);
    
    VRT_WARN_UNUSED
-   int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t buf_words, bool validate);
+   int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t words_buf, bool validate);
    
    VRT_WARN_UNUSED
-   int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32_t buf_words, bool validate);
+   int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32_t words_buf, bool validate);
    
    #ifdef __cplusplus
    }

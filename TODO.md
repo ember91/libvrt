@@ -1,6 +1,5 @@
-* Add int32_t vrt_write_data(vrt_header* h, vrt_fields* f, uint32_t* data, uint16_t* data_words, vrt_trailer* t)
-* Add int32_t vrt_write_if_context(vrt_header* h, vrt_fields* f, uint32_t* data, uint16_t* data_words, vrt_trailer* t)
-* Add int32_t vrt_read_all(vrt_header* h, vrt_fields* f, uint32_t* body, uint16_t* body_words, vrt_if_context* c, vrt_trailer* t)
+* Add int32_t vrt_write_if_context(vrt_header* h, vrt_fields* f, uint32_t* data, uint16_t* words_data, vrt_trailer* t)
+* Add int32_t vrt_read_all(vrt_header* h, vrt_fields* f, uint32_t* body, uint16_t* words_body, vrt_if_context* c, vrt_trailer* t)
 * Add int32_t vrt_words_body(vrt_header* h), which calculates number of words body consists of
 
 * Trailer: Permission 6.1.7-1: The user-defined indicators may be used for any purpose. They may be used together as well
