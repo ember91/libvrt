@@ -58,3 +58,29 @@ int32_t vrt_words_if_context(const vrt_if_context* if_context) {
 
     return words;
 }
+
+int32_t vrt_words_packet(const vrt_packet* packet) {
+    int32_t words = VRT_WORDS_HEADER;
+    words += vrt_words_fields(&packet->header);
+    switch (packet->header.packet_type) {
+        case VRT_PT_IF_DATA_WITHOUT_STREAM_ID:
+        case VRT_PT_IF_DATA_WITH_STREAM_ID:
+        case VRT_PT_EXT_DATA_WITHOUT_STREAM_ID:
+        case VRT_PT_EXT_DATA_WITH_STREAM_ID:
+        case VRT_PT_EXT_CONTEXT: {
+            words += packet->words_body;
+            break;
+        }
+        case VRT_PT_IF_CONTEXT: {
+            words += vrt_words_if_context(&packet->if_context);
+            break;
+        }
+        default: {
+            /* Do nothing here */
+            break;
+        }
+    }
+    words += vrt_words_trailer(&packet->header);
+
+    return words;
+}

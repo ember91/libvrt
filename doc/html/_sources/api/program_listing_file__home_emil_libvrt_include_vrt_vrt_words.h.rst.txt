@@ -34,6 +34,8 @@ Program Listing for File vrt_words.h
    
    int32_t vrt_words_if_context(const vrt_if_context* if_context);
    
+   int32_t vrt_words_packet(const vrt_packet* packet);
+   
    #ifdef __cplusplus
    }
    #endif

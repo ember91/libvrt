@@ -46,6 +46,8 @@ Functions
 
 - :ref:`exhale_function_vrt__words_8h_1aeb1517bbc6cf8dedf0718a8966ee2121`
 
+- :ref:`exhale_function_vrt__words_8h_1af0ac31d95069ccf042c8f1cce35aaefd`
+
 - :ref:`exhale_function_vrt__words_8h_1a13c1af1da879e131bab326a503c6cfe9`
 
 

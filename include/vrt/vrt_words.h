@@ -57,6 +57,17 @@ int32_t vrt_words_trailer(const vrt_header* header);
  */
 int32_t vrt_words_if_context(const vrt_if_context* if_context);
 
+/**
+ * Calculate size of VRT packet in 32-bit words.
+ *
+ * \note This does not look at the packet_size field in the header.
+ *
+ * \param packet VRT packet.
+ *
+ * \return Number of 32-bit words it consists of.
+ */
+int32_t vrt_words_packet(const vrt_packet* packet);
+
 #ifdef __cplusplus
 }
 #endif

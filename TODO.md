@@ -1,7 +1,7 @@
-* Add vrt_words_packet
 * When testing buffer size error, check both with and without validation
 * Add int32_t vrt_read_packet(vrt_packet* p, void* buf, int32_t words_buf validate)
 * Add int32_t vrt_words_body(vrt_header* h), which calculates number of words body consists of
+* Add examples that showcase both the low and high level ways of reading and writing
 
 * Trailer: Permission 6.1.7-1: The user-defined indicators may be used for any purpose. They may be used together as well
 as individually.
