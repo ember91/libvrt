@@ -45,8 +45,8 @@ This installs a static library. It can now be linked, e.g. with:
 Generate a packet with:
 ```c++
 /*
- * Generate signal and write VRT IF data packet to file. Note that this won't generate a big endian-format packet if on
- * a little endian platform, so the generated packet may be non-standard.
+ * Generate signal and write VRT IF data packet to file. Note that this will not generate a big endian-format, i.e.
+ * standard conforming, packet on a little endian platform.
  */
 
 #include <math.h>
@@ -80,47 +80,23 @@ int main() {
     }
 
     /* Initialize to reasonable values */
-    vrt_header  h;
-    vrt_fields  f;
-    vrt_trailer t;
-    vrt_init_header(&h);
-    vrt_init_fields(&f);
-    vrt_init_trailer(&t);
+    vrt_packet p;
+    vrt_init_packet(&p);
 
     /* Configure */
-    h.packet_type        = VRT_PT_IF_DATA_WITH_STREAM_ID;
-    h.has.trailer        = true;
-    h.packet_size        = SIZE;
-    f.stream_id          = 0xDEADBEEF;
-    t.has.reference_lock = true;
-    t.reference_lock     = true;
+    p.header.packet_type         = VRT_PT_IF_DATA_WITH_STREAM_ID;
+    p.header.has.trailer         = true;
+    p.header.packet_size         = SIZE;
+    p.fields.stream_id           = 0xDEADBEEF;
+    p.words_body                 = SIZE - 3;
+    p.body                       = s;
+    p.trailer.has.reference_lock = true;
+    p.trailer.reference_lock     = true;
 
-    /* Write header */
-    int32_t offset = 0;
-    int32_t rv     = vrt_write_header(&h, b + offset, SIZE - offset, true);
+    /* Write to buffer */
+    int32_t rv = vrt_write_packet(&p, b, SIZE, true);
     if (rv < 0) {
-        fprintf(stderr, "Failed to write header: %s\n", vrt_string_error(rv));
-        return EXIT_FAILURE;
-    }
-    offset += rv;
-
-    /* Write fields, which in this case is Stream ID */
-    rv = vrt_write_fields(&h, &f, b + offset, SIZE - offset, true);
-    if (rv < 0) {
-        fprintf(stderr, "Failed to write fields section: %s\n", vrt_string_error(rv));
-        return EXIT_FAILURE;
-    }
-    offset += rv;
-
-    /* Copy signal data from signal to packet buffer.
-     * This could also have been written directly into the buffer. */
-    memcpy(b + offset, s, sizeof(float) * (SIZE - 3));
-    offset += SIZE - 3;
-
-    /* Write trailer */
-    rv = vrt_write_trailer(&t, b + offset, SIZE - offset, true);
-    if (rv < 0) {
-        fprintf(stderr, "Failed to write trailer: %s\n", vrt_string_error(rv));
+        fprintf(stderr, "Failed to write packet: %s\n", vrt_string_error(rv));
         return EXIT_FAILURE;
     }
 
@@ -139,7 +115,7 @@ int main() {
 
     /* Warn if not standards compliant */
     if (vrt_is_platform_little_endian()) {
-        printf("Warning: Written packet is little endian. It is NOT compliant with the VRT standard.\n");
+        fprintf(stderr, "Warning: Written packet is little endian. It is NOT compliant with the VRT standard.\n");
     }
 
     return EXIT_SUCCESS;
