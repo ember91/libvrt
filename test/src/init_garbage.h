@@ -31,4 +31,11 @@ void init_trailer_garbage(vrt_trailer* t);
  */
 void init_if_context_garbage(vrt_if_context* c);
 
+/**
+ * Initialize VRT packet to an easy to spot, non-default sequence.
+ *
+ * \param p VRT packet.
+ */
+void init_packet_garbage(vrt_packet* p);
+
 #endif

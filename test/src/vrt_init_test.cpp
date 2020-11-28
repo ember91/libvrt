@@ -9,11 +9,7 @@
 #include "hex.h"
 #include "init_garbage.h"
 
-TEST(InitTest, InitHeader) {
-    vrt_header h;
-    init_header_garbage(&h);
-
-    vrt_init_header(&h);
+static void test_header(const vrt_header& h) {
     ASSERT_EQ(h.packet_type, 0);
     ASSERT_FALSE(h.has.class_id);
     ASSERT_FALSE(h.has.trailer);
@@ -24,11 +20,7 @@ TEST(InitTest, InitHeader) {
     ASSERT_EQ(Hex(h.packet_size), Hex(0));
 }
 
-TEST(InitTest, InitFields) {
-    vrt_fields f;
-    init_fields_garbage(&f);
-
-    vrt_init_fields(&f);
+static void test_fields(const vrt_fields& f) {
     ASSERT_EQ(Hex(f.class_id.oui), Hex(0));
     ASSERT_EQ(Hex(f.class_id.information_class_code), Hex(0));
     ASSERT_EQ(Hex(f.class_id.packet_class_code), Hex(0));
@@ -36,11 +28,7 @@ TEST(InitTest, InitFields) {
     ASSERT_EQ(Hex(f.fractional_seconds_timestamp), Hex(0));
 }
 
-TEST(InitTest, InitTrailer) {
-    vrt_trailer t;
-    init_trailer_garbage(&t);
-
-    vrt_init_trailer(&t);
+static void test_trailer(const vrt_trailer& t) {
     ASSERT_FALSE(t.has.calibrated_time);
     ASSERT_FALSE(t.has.valid_data);
     ASSERT_FALSE(t.has.reference_lock);
@@ -69,59 +57,55 @@ TEST(InitTest, InitTrailer) {
     ASSERT_EQ(Hex(t.associated_context_packet_count), Hex(0));
 }
 
-static void test_formatted_geolocation(vrt_formatted_geolocation* g) {
-    ASSERT_EQ(Hex(g->tsi), Hex(VRT_TSI_UNDEFINED));
-    ASSERT_EQ(Hex(g->tsf), Hex(VRT_TSF_UNDEFINED));
-    ASSERT_EQ(Hex(g->oui), Hex(0));
-    ASSERT_EQ(Hex(g->integer_second_timestamp), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(g->fractional_second_timestamp), Hex(0xFFFFFFFFFFFFFFFF));
-    ASSERT_FALSE(g->has.latitude);
-    ASSERT_FALSE(g->has.longitude);
-    ASSERT_FALSE(g->has.altitude);
-    ASSERT_FALSE(g->has.speed_over_ground);
-    ASSERT_FALSE(g->has.heading_angle);
-    ASSERT_FALSE(g->has.track_angle);
-    ASSERT_FALSE(g->has.magnetic_variation);
-    ASSERT_DOUBLE_EQ(g->latitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(g->longitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(g->altitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(g->speed_over_ground, vrt_fixed_point_u32_to_double(0x7FFFFFFF, 16));
-    ASSERT_DOUBLE_EQ(g->heading_angle, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(g->track_angle, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(g->magnetic_variation, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+static void test_formatted_geolocation(const vrt_formatted_geolocation& g) {
+    ASSERT_EQ(Hex(g.tsi), Hex(VRT_TSI_UNDEFINED));
+    ASSERT_EQ(Hex(g.tsf), Hex(VRT_TSF_UNDEFINED));
+    ASSERT_EQ(Hex(g.oui), Hex(0));
+    ASSERT_EQ(Hex(g.integer_second_timestamp), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(g.fractional_second_timestamp), Hex(0xFFFFFFFFFFFFFFFF));
+    ASSERT_FALSE(g.has.latitude);
+    ASSERT_FALSE(g.has.longitude);
+    ASSERT_FALSE(g.has.altitude);
+    ASSERT_FALSE(g.has.speed_over_ground);
+    ASSERT_FALSE(g.has.heading_angle);
+    ASSERT_FALSE(g.has.track_angle);
+    ASSERT_FALSE(g.has.magnetic_variation);
+    ASSERT_DOUBLE_EQ(g.latitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(g.longitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(g.altitude, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
+    ASSERT_DOUBLE_EQ(g.speed_over_ground, vrt_fixed_point_u32_to_double(0x7FFFFFFF, 16));
+    ASSERT_DOUBLE_EQ(g.heading_angle, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(g.track_angle, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(g.magnetic_variation, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
 }
 
-static void test_ephemeris(vrt_ephemeris* e) {
-    ASSERT_EQ(Hex(e->tsi), Hex(VRT_TSI_UNDEFINED));
-    ASSERT_EQ(Hex(e->tsf), Hex(VRT_TSF_UNDEFINED));
-    ASSERT_EQ(Hex(e->oui), Hex(0));
-    ASSERT_EQ(Hex(e->integer_second_timestamp), Hex(0xFFFFFFFF));
-    ASSERT_EQ(Hex(e->fractional_second_timestamp), Hex(0xFFFFFFFFFFFFFFFF));
-    ASSERT_FALSE(e->has.position_x);
-    ASSERT_FALSE(e->has.position_y);
-    ASSERT_FALSE(e->has.position_z);
-    ASSERT_FALSE(e->has.attitude_alpha);
-    ASSERT_FALSE(e->has.attitude_beta);
-    ASSERT_FALSE(e->has.attitude_phi);
-    ASSERT_FALSE(e->has.velocity_dx);
-    ASSERT_FALSE(e->has.velocity_dy);
-    ASSERT_FALSE(e->has.velocity_dz);
-    ASSERT_DOUBLE_EQ(e->position_x, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(e->position_y, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(e->position_z, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
-    ASSERT_DOUBLE_EQ(e->attitude_alpha, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(e->attitude_beta, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(e->attitude_phi, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
-    ASSERT_DOUBLE_EQ(e->velocity_dx, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
-    ASSERT_DOUBLE_EQ(e->velocity_dy, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
-    ASSERT_DOUBLE_EQ(e->velocity_dz, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
+static void test_ephemeris(const vrt_ephemeris& e) {
+    ASSERT_EQ(Hex(e.tsi), Hex(VRT_TSI_UNDEFINED));
+    ASSERT_EQ(Hex(e.tsf), Hex(VRT_TSF_UNDEFINED));
+    ASSERT_EQ(Hex(e.oui), Hex(0));
+    ASSERT_EQ(Hex(e.integer_second_timestamp), Hex(0xFFFFFFFF));
+    ASSERT_EQ(Hex(e.fractional_second_timestamp), Hex(0xFFFFFFFFFFFFFFFF));
+    ASSERT_FALSE(e.has.position_x);
+    ASSERT_FALSE(e.has.position_y);
+    ASSERT_FALSE(e.has.position_z);
+    ASSERT_FALSE(e.has.attitude_alpha);
+    ASSERT_FALSE(e.has.attitude_beta);
+    ASSERT_FALSE(e.has.attitude_phi);
+    ASSERT_FALSE(e.has.velocity_dx);
+    ASSERT_FALSE(e.has.velocity_dy);
+    ASSERT_FALSE(e.has.velocity_dz);
+    ASSERT_DOUBLE_EQ(e.position_x, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
+    ASSERT_DOUBLE_EQ(e.position_y, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
+    ASSERT_DOUBLE_EQ(e.position_z, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 5));
+    ASSERT_DOUBLE_EQ(e.attitude_alpha, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(e.attitude_beta, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(e.attitude_phi, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 22));
+    ASSERT_DOUBLE_EQ(e.velocity_dx, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
+    ASSERT_DOUBLE_EQ(e.velocity_dy, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
+    ASSERT_DOUBLE_EQ(e.velocity_dz, vrt_fixed_point_i32_to_double(0x7FFFFFFF, 16));
 }
 
-TEST(InitTest, InitIfContext) {
-    vrt_if_context c;
-    init_if_context_garbage(&c);
-
-    vrt_init_if_context(&c);
+static void test_if_context(const vrt_if_context& c) {
     ASSERT_FALSE(c.context_field_change_indicator);
     ASSERT_FALSE(c.has.reference_point_identifier);
     ASSERT_FALSE(c.has.bandwidth);
@@ -200,11 +184,11 @@ TEST(InitTest, InitIfContext) {
     ASSERT_EQ(Hex(c.data_packet_payload_format.repeat_count), Hex(0));
     ASSERT_EQ(Hex(c.data_packet_payload_format.vector_size), Hex(0));
 
-    test_formatted_geolocation(&c.formatted_gps_geolocation);
-    test_formatted_geolocation(&c.formatted_ins_geolocation);
+    test_formatted_geolocation(c.formatted_gps_geolocation);
+    test_formatted_geolocation(c.formatted_ins_geolocation);
 
-    test_ephemeris(&c.ecef_ephemeris);
-    test_ephemeris(&c.relative_ephemeris);
+    test_ephemeris(c.ecef_ephemeris);
+    test_ephemeris(c.relative_ephemeris);
 
     ASSERT_EQ(Hex(c.ephemeris_reference_identifier), Hex(0));
 
@@ -222,4 +206,53 @@ TEST(InitTest, InitIfContext) {
     ASSERT_EQ(c.context_association_lists.vector_component_context_association_list, nullptr);
     ASSERT_EQ(c.context_association_lists.asynchronous_channel_context_association_list, nullptr);
     ASSERT_EQ(c.context_association_lists.asynchronous_channel_tag_list, nullptr);
+}
+
+static void test_packet(const vrt_packet& p) {
+    test_header(p.header);
+    test_fields(p.fields);
+    ASSERT_EQ(p.words_body, 0);
+    ASSERT_EQ(p.body, nullptr);
+    test_trailer(p.trailer);
+    test_if_context(p.if_context);
+}
+
+TEST(InitTest, InitHeader) {
+    vrt_header h;
+    init_header_garbage(&h);
+    vrt_init_header(&h);
+
+    test_header(h);
+}
+
+TEST(InitTest, InitFields) {
+    vrt_fields f;
+    init_fields_garbage(&f);
+    vrt_init_fields(&f);
+
+    test_fields(f);
+}
+
+TEST(InitTest, InitTrailer) {
+    vrt_trailer t;
+    init_trailer_garbage(&t);
+    vrt_init_trailer(&t);
+
+    test_trailer(t);
+}
+
+TEST(InitTest, InitIfContext) {
+    vrt_if_context c;
+    init_if_context_garbage(&c);
+    vrt_init_if_context(&c);
+
+    test_if_context(c);
+}
+
+TEST(InitTest, InitPacket) {
+    vrt_packet p;
+    init_packet_garbage(&p);
+    vrt_init_packet(&p);
+
+    test_packet(p);
 }

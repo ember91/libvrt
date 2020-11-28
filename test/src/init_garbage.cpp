@@ -209,9 +209,18 @@ void init_if_context_garbage(vrt_if_context* c) {
     c->context_association_lists.system_list_size                              = 0x01FF;
     c->context_association_lists.vector_component_list_size                    = 0xFFFF;
     c->context_association_lists.asynchronous_channel_list_size                = 0xFFFF;
-    c->context_association_lists.source_context_association_list               = reinterpret_cast<uint32_t*>(&c);
-    c->context_association_lists.system_context_association_list               = reinterpret_cast<uint32_t*>(&c);
-    c->context_association_lists.vector_component_context_association_list     = reinterpret_cast<uint32_t*>(&c);
-    c->context_association_lists.asynchronous_channel_context_association_list = reinterpret_cast<uint32_t*>(&c);
-    c->context_association_lists.asynchronous_channel_tag_list                 = reinterpret_cast<uint32_t*>(&c);
+    c->context_association_lists.source_context_association_list               = reinterpret_cast<uint32_t*>(c);
+    c->context_association_lists.system_context_association_list               = reinterpret_cast<uint32_t*>(c);
+    c->context_association_lists.vector_component_context_association_list     = reinterpret_cast<uint32_t*>(c);
+    c->context_association_lists.asynchronous_channel_context_association_list = reinterpret_cast<uint32_t*>(c);
+    c->context_association_lists.asynchronous_channel_tag_list                 = reinterpret_cast<uint32_t*>(c);
+}
+
+void init_packet_garbage(vrt_packet* p) {
+    init_header_garbage(&p->header);
+    init_fields_garbage(&p->fields);
+    p->words_body = 0x0000FFFF;
+    p->body       = reinterpret_cast<uint32_t*>(p);
+    init_trailer_garbage(&p->trailer);
+    init_if_context_garbage(&p->if_context);
 }
