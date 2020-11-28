@@ -63,7 +63,7 @@ int32_t vrt_read_header(const void* buf, int32_t words_buf, vrt_header* header, 
         if (header->packet_type > VRT_PT_EXT_CONTEXT) {
             return VRT_ERR_INVALID_PACKET_TYPE;
         }
-        if (vrt_is_context(header->packet_type)) {
+        if (vrt_is_context(header)) {
             if (header->has.trailer) {
                 return VRT_ERR_TRAILER_IN_CONTEXT;
             }
@@ -94,7 +94,7 @@ int32_t vrt_read_fields(const vrt_header* header,
 
     const uint32_t* b = ((const uint32_t*)buf);
 
-    if (vrt_has_stream_id(header->packet_type)) {
+    if (vrt_has_stream_id(header)) {
         fields->stream_id = b[0];
         b += 1;
     } else {

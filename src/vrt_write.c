@@ -53,7 +53,7 @@ int32_t vrt_write_header(const vrt_header* header, void* buf, int32_t words_buf,
         if (header->tsm < VRT_TSM_FINE || header->tsm > VRT_TSM_COARSE) {
             return VRT_ERR_INVALID_TSM;
         }
-        if (vrt_is_context(header->packet_type)) {
+        if (vrt_is_context(header)) {
             if (header->has.trailer) {
                 return VRT_ERR_TRAILER_IN_CONTEXT;
             }
@@ -105,7 +105,7 @@ int32_t vrt_write_fields(const vrt_header* header,
 
     uint32_t* b = ((uint32_t*)buf);
 
-    if (vrt_has_stream_id(header->packet_type)) {
+    if (vrt_has_stream_id(header)) {
         b[0] = fields->stream_id;
         b += 1;
     }
@@ -833,7 +833,7 @@ int32_t vrt_write_packet(const vrt_packet* packet, void* buf, int32_t words_buf,
     }
 
     /* Trailer */
-    if (!vrt_is_context(packet->header.packet_type) && packet->header.has.trailer) {
+    if (!vrt_is_context(&packet->header) && packet->header.has.trailer) {
         int32_t words_trailer = vrt_write_trailer(&packet->trailer, b + words_total, words_buf - words_total, validate);
         if (words_trailer < 0) {
             return words_trailer;

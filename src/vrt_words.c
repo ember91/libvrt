@@ -7,7 +7,7 @@
 
 int32_t vrt_words_fields(const vrt_header* header) {
     int32_t words = 0;
-    if (vrt_has_stream_id(header->packet_type)) {
+    if (vrt_has_stream_id(header)) {
         words += 1;
     }
     if (header->has.class_id) {
@@ -24,7 +24,7 @@ int32_t vrt_words_fields(const vrt_header* header) {
 
 int32_t vrt_words_trailer(const vrt_header* header) {
     /* Context packets cannot have a trailer */
-    if (vrt_is_context(header->packet_type)) {
+    if (vrt_is_context(header)) {
         return 0;
     }
     return vrt_b2u(header->has.trailer);

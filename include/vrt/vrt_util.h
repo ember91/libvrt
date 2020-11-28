@@ -31,29 +31,29 @@ extern "C" {
 #endif
 
 /**
- * Check if a specific packet type means it is a context packet.
+ * Check if a header indicates it is a context packet.
  *
- * \param type Packet type.
+ * \param header Packet header.
  *
  * \return True if it is a IF or Ext context packet.
  *
  * \warning Undefined behaviour if type is outside bounds.
  */
-inline bool vrt_is_context(vrt_packet_type type) {
-    return (STATIC_CAST(uint32_t, type) & 0x4U) != 0;
+inline bool vrt_is_context(const vrt_header* header) {
+    return (STATIC_CAST(uint32_t, header->packet_type) & 0x4U) != 0;
 }
 
 /**
- * Check if a specific packet type means it has the Stream ID field.
+ * Check if a indicates it has the Stream ID field.
  *
- * \param type Packet type.
+ * \param header Packet header.
  *
  * \return True if it has the Stream ID field.
  *
  * \warning Undefined behaviour if type is outside bounds.
  */
-inline bool vrt_has_stream_id(vrt_packet_type type) {
-    return (STATIC_CAST(uint32_t, type) & 0x5U) != 0;
+inline bool vrt_has_stream_id(const vrt_header* header) {
+    return (STATIC_CAST(uint32_t, header->packet_type) & 0x5U) != 0;
 }
 
 /**

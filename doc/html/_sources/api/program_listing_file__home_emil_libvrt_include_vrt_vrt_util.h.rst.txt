@@ -42,12 +42,12 @@ Program Listing for File vrt_util.h
    #define REINTERPRET_CAST(T, X) (T)(X)
    #endif
    
-   inline bool vrt_is_context(vrt_packet_type type) {
-       return (STATIC_CAST(uint32_t, type) & 0x4U) != 0;
+   inline bool vrt_is_context(const vrt_header* header) {
+       return (STATIC_CAST(uint32_t, header->packet_type) & 0x4U) != 0;
    }
    
-   inline bool vrt_has_stream_id(vrt_packet_type type) {
-       return (STATIC_CAST(uint32_t, type) & 0x5U) != 0;
+   inline bool vrt_has_stream_id(const vrt_header* header) {
+       return (STATIC_CAST(uint32_t, header->packet_type) & 0x5U) != 0;
    }
    
    inline bool vrt_is_platform_little_endian() {

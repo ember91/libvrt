@@ -167,7 +167,7 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__util_8h_1ad623c6295952d8d38af85f3a6419067e.rst
+   function_vrt__util_8h_1a30582a8973527846758281f72d6bafd2.rst
 
 .. toctree::
    :maxdepth: 5
@@ -197,7 +197,7 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__util_8h_1a02b3ce76d3e1969a9338c05dc15f52e0.rst
+   function_vrt__util_8h_1afdd285193b37fbbb286b8b3347abe770.rst
 
 .. toctree::
    :maxdepth: 5

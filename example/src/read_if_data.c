@@ -68,7 +68,7 @@ int main() {
     offset += rv;
 
     /* Print some field information */
-    if (vrt_has_stream_id(h.packet_type)) {
+    if (vrt_has_stream_id(&h)) {
         printf("Stream ID: 0x%x\n", f.stream_id);
     } else {
         printf("No Stream ID\n");
