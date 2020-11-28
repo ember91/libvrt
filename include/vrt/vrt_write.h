@@ -28,7 +28,7 @@ extern "C" {
  * \retval VRT_ERR_INVALID_TSF          TSF is an invalid value.
  * \retval VRT_ERR_BOUNDS_PACKET_COUNT  Packet count is outside valid bounds (> 0x0F).
  *
- * \note May requires output buffer data to be byte swapped if platform endianess isn't big endian (network order).
+ * \note May require output buffer data to be byte swapped if platform endianess isn't big endian (network order).
  */
 VRT_WARN_UNUSED
 int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t words_buf, bool validate);
