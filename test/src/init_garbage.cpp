@@ -173,14 +173,7 @@ void init_garbage_if_context(vrt_if_context* c) {
     c->state_and_event_indicators.spectral_inversion     = true;
     c->state_and_event_indicators.over_range             = true;
     c->state_and_event_indicators.sample_loss            = true;
-    c->state_and_event_indicators.user_defined7          = true;
-    c->state_and_event_indicators.user_defined6          = true;
-    c->state_and_event_indicators.user_defined5          = true;
-    c->state_and_event_indicators.user_defined4          = true;
-    c->state_and_event_indicators.user_defined3          = true;
-    c->state_and_event_indicators.user_defined2          = true;
-    c->state_and_event_indicators.user_defined1          = true;
-    c->state_and_event_indicators.user_defined0          = true;
+    c->state_and_event_indicators.user_defined           = 0xFF;
 
     c->data_packet_payload_format.packing_method          = VRT_PM_LINK_EFFICIENT;
     c->data_packet_payload_format.real_or_complex         = VRT_ROC_COMPLEX_POLAR;

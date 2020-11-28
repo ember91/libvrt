@@ -170,14 +170,7 @@ Program Listing for File vrt_types.h
        bool spectral_inversion;
        bool over_range;
        bool sample_loss;
-       bool user_defined7;
-       bool user_defined6;
-       bool user_defined5;
-       bool user_defined4;
-       bool user_defined3;
-       bool user_defined2;
-       bool user_defined1;
-       bool user_defined0;
+       uint8_t user_defined;
    } vrt_state_and_event;
    
    typedef enum vrt_packing_method { VRT_PM_PROCESSING_EFFICIENT = 0x0, VRT_PM_LINK_EFFICIENT = 0x1 } vrt_packing_method;

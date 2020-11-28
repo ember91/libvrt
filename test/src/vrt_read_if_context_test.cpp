@@ -185,22 +185,8 @@ static void assert_if_context(const vrt_if_context& c, const std::map<std::strin
               get_val<bool>(&val_cp, "state_and_event_indicators.over_range", false));
     ASSERT_EQ(c.state_and_event_indicators.sample_loss,
               get_val<bool>(&val_cp, "state_and_event_indicators.sample_loss", false));
-    ASSERT_EQ(c.state_and_event_indicators.user_defined7,
-              get_val<bool>(&val_cp, "state_and_event_indicators.user_defined7", false));
-    ASSERT_EQ(c.state_and_event_indicators.user_defined6,
-              get_val<bool>(&val_cp, "state_and_event_indicators.user_defined6", false));
-    ASSERT_EQ(c.state_and_event_indicators.user_defined5,
-              get_val<bool>(&val_cp, "state_and_event_indicators.user_defined5", false));
-    ASSERT_EQ(c.state_and_event_indicators.user_defined4,
-              get_val<bool>(&val_cp, "state_and_event_indicators.user_defined4", false));
-    ASSERT_EQ(c.state_and_event_indicators.user_defined3,
-              get_val<bool>(&val_cp, "state_and_event_indicators.user_defined3", false));
-    ASSERT_EQ(c.state_and_event_indicators.user_defined2,
-              get_val<bool>(&val_cp, "state_and_event_indicators.user_defined2", false));
-    ASSERT_EQ(c.state_and_event_indicators.user_defined1,
-              get_val<bool>(&val_cp, "state_and_event_indicators.user_defined1", false));
-    ASSERT_EQ(c.state_and_event_indicators.user_defined0,
-              get_val<bool>(&val_cp, "state_and_event_indicators.user_defined0", false));
+    ASSERT_EQ(c.state_and_event_indicators.user_defined,
+              get_val<uint8_t>(&val_cp, "state_and_event_indicators.user_defined", 0));
 
     ASSERT_EQ(
         c.data_packet_payload_format.packing_method,
@@ -721,86 +707,13 @@ TEST_F(ReadIfContextTest, StateAndEventIndicatorsBothOverRange) {
                            {"state_and_event_indicators.over_range", true}});
 }
 
-TEST_F(ReadIfContextTest, StateAndEventIndicatorsBothSampleLoss) {
+TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined) {
     buf_[0] = 0x00010000;
-    buf_[1] = 0x01001000;
+    buf_[1] = 0x000000FF;
     ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), 2);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_if_context(c_, {{"has.state_and_event_indicators", true},
-                           {"state_and_event_indicators.has.sample_loss", true},
-                           {"state_and_event_indicators.sample_loss", true}});
-}
-
-TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined7) {
-    buf_[0] = 0x00010000;
-    buf_[1] = 0x00000080;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), 2);
-    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined7", true}});
-}
-
-TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined6) {
-    buf_[0] = 0x00010000;
-    buf_[1] = 0x00000040;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), 2);
-    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined6", true}});
-}
-
-TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined5) {
-    buf_[0] = 0x00010000;
-    buf_[1] = 0x00000020;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), 2);
-    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined5", true}});
-}
-
-TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefine4) {
-    buf_[0] = 0x00010000;
-    buf_[1] = 0x00000010;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), 2);
-    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined4", true}});
-}
-
-TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined3) {
-    buf_[0] = 0x00010000;
-    buf_[1] = 0x00000008;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), 2);
-    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined3", true}});
-}
-
-TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined2) {
-    buf_[0] = 0x00010000;
-    buf_[1] = 0x00000004;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), 2);
-    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined2", true}});
-}
-
-TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined1) {
-    buf_[0] = 0x00010000;
-    buf_[1] = 0x00000002;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), 2);
-    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined1", true}});
-}
-
-TEST_F(ReadIfContextTest, StateAndEventIndicatorsUserDefined0) {
-    buf_[0] = 0x00010000;
-    buf_[1] = 0x00000001;
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 2, &c_, true), 2);
-    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_if_context(c_,
-                      {{"has.state_and_event_indicators", true}, {"state_and_event_indicators.user_defined0", true}});
+                           {"state_and_event_indicators.user_defined", static_cast<uint8_t>(0xFF)}});
 }
 
 TEST_F(ReadIfContextTest, StateAndEventIndicatorsReserved) {
@@ -3151,14 +3064,7 @@ TEST_F(ReadIfContextTest, EveryOther2) {
          {"state_and_event_indicators.spectral_inversion", true},
          {"state_and_event_indicators.over_range", true},
          {"state_and_event_indicators.sample_loss", true},
-         {"state_and_event_indicators.user_defined7", true},
-         {"state_and_event_indicators.user_defined6", true},
-         {"state_and_event_indicators.user_defined5", true},
-         {"state_and_event_indicators.user_defined4", true},
-         {"state_and_event_indicators.user_defined3", true},
-         {"state_and_event_indicators.user_defined2", true},
-         {"state_and_event_indicators.user_defined1", true},
-         {"state_and_event_indicators.user_defined0", true},
+         {"state_and_event_indicators.user_defined", static_cast<uint8_t>(0xFF)},
 
          {"formatted_gps_geolocation.tsi", VRT_TSI_OTHER},
          {"formatted_gps_geolocation.tsf", VRT_TSF_FREE_RUNNING_COUNT},
@@ -3372,14 +3278,7 @@ TEST_F(ReadIfContextTest, All) {
          {"state_and_event_indicators.spectral_inversion", true},
          {"state_and_event_indicators.over_range", true},
          {"state_and_event_indicators.sample_loss", true},
-         {"state_and_event_indicators.user_defined7", true},
-         {"state_and_event_indicators.user_defined6", true},
-         {"state_and_event_indicators.user_defined5", true},
-         {"state_and_event_indicators.user_defined4", true},
-         {"state_and_event_indicators.user_defined3", true},
-         {"state_and_event_indicators.user_defined2", true},
-         {"state_and_event_indicators.user_defined1", true},
-         {"state_and_event_indicators.user_defined0", true},
+         {"state_and_event_indicators.user_defined", static_cast<uint8_t>(0xFF)},
 
          {"data_packet_payload_format.packing_method", VRT_PM_LINK_EFFICIENT},
          {"data_packet_payload_format.real_or_complex", VRT_ROC_COMPLEX_POLAR},

@@ -539,75 +539,12 @@ TEST_F(WriteIfContextTest, StateAndEventIndicatorsBothSampleLoss) {
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, StateAndEventIndicatorsBothUserDefined7) {
-    c_.has.state_and_event_indicators           = true;
-    c_.state_and_event_indicators.user_defined7 = true;
+TEST_F(WriteIfContextTest, StateAndEventIndicatorsBothUserDefined) {
+    c_.has.state_and_event_indicators          = true;
+    c_.state_and_event_indicators.user_defined = 0xFF;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000080));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, StateAndEventIndicatorsBothUserDefined6) {
-    c_.has.state_and_event_indicators           = true;
-    c_.state_and_event_indicators.user_defined6 = true;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000040));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, StateAndEventIndicatorsBothUserDefined5) {
-    c_.has.state_and_event_indicators           = true;
-    c_.state_and_event_indicators.user_defined5 = true;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000020));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, StateAndEventIndicatorsBothUserDefined4) {
-    c_.has.state_and_event_indicators           = true;
-    c_.state_and_event_indicators.user_defined4 = true;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000010));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, StateAndEventIndicatorsBothUserDefined3) {
-    c_.has.state_and_event_indicators           = true;
-    c_.state_and_event_indicators.user_defined3 = true;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000008));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, StateAndEventIndicatorsBothUserDefined2) {
-    c_.has.state_and_event_indicators           = true;
-    c_.state_and_event_indicators.user_defined2 = true;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000004));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, StateAndEventIndicatorsBothUserDefined1) {
-    c_.has.state_and_event_indicators           = true;
-    c_.state_and_event_indicators.user_defined1 = true;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000002));
-    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
-}
-
-TEST_F(WriteIfContextTest, StateAndEventIndicatorsBothUserDefined0) {
-    c_.has.state_and_event_indicators           = true;
-    c_.state_and_event_indicators.user_defined0 = true;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00010000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000001));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x000000FF));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
@@ -2675,14 +2612,7 @@ TEST_F(WriteIfContextTest, EveryOther2) {
     c_.state_and_event_indicators.spectral_inversion     = true;
     c_.state_and_event_indicators.over_range             = true;
     c_.state_and_event_indicators.sample_loss            = true;
-    c_.state_and_event_indicators.user_defined7          = true;
-    c_.state_and_event_indicators.user_defined6          = true;
-    c_.state_and_event_indicators.user_defined5          = true;
-    c_.state_and_event_indicators.user_defined4          = true;
-    c_.state_and_event_indicators.user_defined3          = true;
-    c_.state_and_event_indicators.user_defined2          = true;
-    c_.state_and_event_indicators.user_defined1          = true;
-    c_.state_and_event_indicators.user_defined0          = true;
+    c_.state_and_event_indicators.user_defined           = 0xFF;
 
     c_.formatted_gps_geolocation.tsi                         = VRT_TSI_OTHER;
     c_.formatted_gps_geolocation.tsf                         = VRT_TSF_FREE_RUNNING_COUNT;
@@ -2858,14 +2788,7 @@ TEST_F(WriteIfContextTest, All) {
     c_.state_and_event_indicators.spectral_inversion     = true;
     c_.state_and_event_indicators.over_range             = true;
     c_.state_and_event_indicators.sample_loss            = true;
-    c_.state_and_event_indicators.user_defined7          = true;
-    c_.state_and_event_indicators.user_defined6          = true;
-    c_.state_and_event_indicators.user_defined5          = true;
-    c_.state_and_event_indicators.user_defined4          = true;
-    c_.state_and_event_indicators.user_defined3          = true;
-    c_.state_and_event_indicators.user_defined2          = true;
-    c_.state_and_event_indicators.user_defined1          = true;
-    c_.state_and_event_indicators.user_defined0          = true;
+    c_.state_and_event_indicators.user_defined           = 0xFF;
 
     c_.data_packet_payload_format.packing_method          = VRT_PM_LINK_EFFICIENT;
     c_.data_packet_payload_format.real_or_complex         = VRT_ROC_COMPLEX_POLAR;

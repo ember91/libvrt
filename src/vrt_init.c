@@ -186,14 +186,7 @@ void vrt_init_if_context(vrt_if_context* if_context) {
     if_context->state_and_event_indicators.spectral_inversion     = false;
     if_context->state_and_event_indicators.over_range             = false;
     if_context->state_and_event_indicators.sample_loss            = false;
-    if_context->state_and_event_indicators.user_defined7          = false;
-    if_context->state_and_event_indicators.user_defined6          = false;
-    if_context->state_and_event_indicators.user_defined5          = false;
-    if_context->state_and_event_indicators.user_defined4          = false;
-    if_context->state_and_event_indicators.user_defined3          = false;
-    if_context->state_and_event_indicators.user_defined2          = false;
-    if_context->state_and_event_indicators.user_defined1          = false;
-    if_context->state_and_event_indicators.user_defined0          = false;
+    if_context->state_and_event_indicators.user_defined           = 0;
 
     if_context->data_packet_payload_format.packing_method          = VRT_PM_PROCESSING_EFFICIENT;
     if_context->data_packet_payload_format.real_or_complex         = VRT_ROC_REAL;

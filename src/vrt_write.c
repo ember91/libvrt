@@ -302,14 +302,7 @@ static int32_t if_context_write_state_and_event_indicator_field(bool has, const 
             b[0] |= msk(vrt_b2u(s->sample_loss), 12, 1);
         }
 
-        b[0] |= msk(vrt_b2u(s->user_defined7), 7, 1);
-        b[0] |= msk(vrt_b2u(s->user_defined6), 6, 1);
-        b[0] |= msk(vrt_b2u(s->user_defined5), 5, 1);
-        b[0] |= msk(vrt_b2u(s->user_defined4), 4, 1);
-        b[0] |= msk(vrt_b2u(s->user_defined3), 3, 1);
-        b[0] |= msk(vrt_b2u(s->user_defined2), 2, 1);
-        b[0] |= msk(vrt_b2u(s->user_defined1), 1, 1);
-        b[0] |= msk(vrt_b2u(s->user_defined0), 0, 1);
+        b[0] |= msk(s->user_defined, 0, 8);
 
         return 1;
     }

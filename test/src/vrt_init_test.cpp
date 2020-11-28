@@ -164,14 +164,7 @@ static void test_if_context(const vrt_if_context& c) {
     ASSERT_FALSE(c.state_and_event_indicators.spectral_inversion);
     ASSERT_FALSE(c.state_and_event_indicators.over_range);
     ASSERT_FALSE(c.state_and_event_indicators.sample_loss);
-    ASSERT_FALSE(c.state_and_event_indicators.user_defined7);
-    ASSERT_FALSE(c.state_and_event_indicators.user_defined6);
-    ASSERT_FALSE(c.state_and_event_indicators.user_defined5);
-    ASSERT_FALSE(c.state_and_event_indicators.user_defined4);
-    ASSERT_FALSE(c.state_and_event_indicators.user_defined3);
-    ASSERT_FALSE(c.state_and_event_indicators.user_defined2);
-    ASSERT_FALSE(c.state_and_event_indicators.user_defined1);
-    ASSERT_FALSE(c.state_and_event_indicators.user_defined0);
+    ASSERT_EQ(Hex(c.state_and_event_indicators.user_defined), Hex(0));
 
     ASSERT_EQ(c.data_packet_payload_format.packing_method, VRT_PM_PROCESSING_EFFICIENT);
     ASSERT_EQ(Hex(c.data_packet_payload_format.real_or_complex), Hex(VRT_ROC_REAL));

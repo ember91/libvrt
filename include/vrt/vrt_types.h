@@ -321,37 +321,9 @@ typedef struct vrt_state_and_event {
      */
     bool sample_loss;
     /**
-     * State and event bit 7. Defined by the user.
+     * State and event bits 7-0. Defined by the user.
      */
-    bool user_defined7;
-    /**
-     * State and event bit 6. Defined by the user.
-     */
-    bool user_defined6;
-    /**
-     * State and event bit 5. Defined by the user.
-     */
-    bool user_defined5;
-    /**
-     * State and event bit 4. Defined by the user.
-     */
-    bool user_defined4;
-    /**
-     * State and event bit 3. Defined by the user.
-     */
-    bool user_defined3;
-    /**
-     * State and event bit 2. Defined by the user.
-     */
-    bool user_defined2;
-    /**
-     * State and event bit 1. Defined by the user.
-     */
-    bool user_defined1;
-    /**
-     * State and event bit 0. Defined by the user.
-     */
-    bool user_defined0;
+    uint8_t user_defined;
 } vrt_state_and_event;
 
 /**

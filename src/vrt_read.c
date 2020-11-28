@@ -353,14 +353,7 @@ static int32_t if_context_read_state_and_event_indicators(bool has, uint32_t b, 
             s->sample_loss = 0;
         }
 
-        s->user_defined7 = vrt_u2b(msk(b, 7, 1));
-        s->user_defined6 = vrt_u2b(msk(b, 6, 1));
-        s->user_defined5 = vrt_u2b(msk(b, 5, 1));
-        s->user_defined4 = vrt_u2b(msk(b, 4, 1));
-        s->user_defined3 = vrt_u2b(msk(b, 3, 1));
-        s->user_defined2 = vrt_u2b(msk(b, 2, 1));
-        s->user_defined1 = vrt_u2b(msk(b, 1, 1));
-        s->user_defined0 = vrt_u2b(msk(b, 0, 1));
+        s->user_defined = (uint8_t)msk(b, 0, 8);
 
         if (validate) {
             if ((b & 0x00F00F00U) != 0) {
@@ -387,14 +380,7 @@ static int32_t if_context_read_state_and_event_indicators(bool has, uint32_t b, 
     s->spectral_inversion     = false;
     s->over_range             = false;
     s->sample_loss            = false;
-    s->user_defined7          = false;
-    s->user_defined6          = false;
-    s->user_defined5          = false;
-    s->user_defined4          = false;
-    s->user_defined3          = false;
-    s->user_defined2          = false;
-    s->user_defined1          = false;
-    s->user_defined0          = false;
+    s->user_defined           = 0;
 
     return 0;
 }
