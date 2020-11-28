@@ -4,7 +4,7 @@
 
 #include <vrt/vrt_types.h>
 
-void init_header_garbage(vrt_header* h) {
+void init_garbage_header(vrt_header* h) {
     h->packet_type  = static_cast<vrt_packet_type>(0xFFFFFFFF);
     h->has.class_id = true;
     h->has.trailer  = true;
@@ -15,7 +15,7 @@ void init_header_garbage(vrt_header* h) {
     h->packet_size  = 0xFFFF;
 }
 
-void init_fields_garbage(vrt_fields* f) {
+void init_garbage_fields(vrt_fields* f) {
     f->stream_id                       = 0xFFFFFFFF;
     f->class_id.oui                    = 0x00FFFFFF;
     f->class_id.information_class_code = 0xFFFF;
@@ -24,7 +24,7 @@ void init_fields_garbage(vrt_fields* f) {
     f->fractional_seconds_timestamp    = 0xFFFFFFFFFFFFFFFF;
 }
 
-void init_trailer_garbage(vrt_trailer* t) {
+void init_garbage_trailer(vrt_trailer* t) {
     t->has.calibrated_time                 = true;
     t->has.valid_data                      = true;
     t->has.reference_lock                  = true;
@@ -58,7 +58,7 @@ void init_trailer_garbage(vrt_trailer* t) {
  *
  * \param g Formatted GPS/INS geolocation.
  */
-static void init_formatted_geolocation_garbage(vrt_formatted_geolocation* g) {
+static void init_garbage_formatted_geolocation(vrt_formatted_geolocation* g) {
     g->tsi = VRT_TSI_OTHER;
     g->tsf = VRT_TSF_FREE_RUNNING_COUNT;
     g->oui = 0x00FFFFFF;
@@ -86,7 +86,7 @@ static void init_formatted_geolocation_garbage(vrt_formatted_geolocation* g) {
  *
  * \param e ECEF/Relative ephemeris.
  */
-static void init_ephemeris_garbage(vrt_ephemeris* e) {
+static void init_garbage_ephemeris(vrt_ephemeris* e) {
     e->tsi                         = VRT_TSI_OTHER;
     e->tsf                         = VRT_TSF_FREE_RUNNING_COUNT;
     e->oui                         = 0x00FFFFFF;
@@ -113,7 +113,7 @@ static void init_ephemeris_garbage(vrt_ephemeris* e) {
     e->velocity_dz        = 987.654;
 }
 
-void init_if_context_garbage(vrt_if_context* c) {
+void init_garbage_if_context(vrt_if_context* c) {
     c->context_field_change_indicator     = true;
     c->has.reference_point_identifier     = true;
     c->has.bandwidth                      = true;
@@ -193,10 +193,10 @@ void init_if_context_garbage(vrt_if_context* c) {
     c->data_packet_payload_format.repeat_count            = 0xFFFF;
     c->data_packet_payload_format.vector_size             = 0xFFFF;
 
-    init_formatted_geolocation_garbage(&c->formatted_gps_geolocation);
-    init_formatted_geolocation_garbage(&c->formatted_ins_geolocation);
-    init_ephemeris_garbage(&c->ecef_ephemeris);
-    init_ephemeris_garbage(&c->relative_ephemeris);
+    init_garbage_formatted_geolocation(&c->formatted_gps_geolocation);
+    init_garbage_formatted_geolocation(&c->formatted_ins_geolocation);
+    init_garbage_ephemeris(&c->ecef_ephemeris);
+    init_garbage_ephemeris(&c->relative_ephemeris);
 
     c->ephemeris_reference_identifier = 0xFFFFFFFF;
 
@@ -216,11 +216,11 @@ void init_if_context_garbage(vrt_if_context* c) {
     c->context_association_lists.asynchronous_channel_tag_list                 = reinterpret_cast<uint32_t*>(c);
 }
 
-void init_packet_garbage(vrt_packet* p) {
-    init_header_garbage(&p->header);
-    init_fields_garbage(&p->fields);
+void init_garbage_packet(vrt_packet* p) {
+    init_garbage_header(&p->header);
+    init_garbage_fields(&p->fields);
     p->words_body = 0x0000FFFF;
     p->body       = reinterpret_cast<uint32_t*>(p);
-    init_trailer_garbage(&p->trailer);
-    init_if_context_garbage(&p->if_context);
+    init_garbage_trailer(&p->trailer);
+    init_garbage_if_context(&p->if_context);
 }

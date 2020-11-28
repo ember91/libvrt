@@ -21,7 +21,7 @@ class ReadFieldsTest : public ::testing::Test {
 
     void SetUp() override {
         vrt_init_header(&h_);
-        init_fields_garbage(&f_);
+        init_garbage_fields(&f_);
         buf_.fill(0xBAADF00D);
     }
 

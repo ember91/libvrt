@@ -18,7 +18,7 @@ class ReadHeaderTest : public ::testing::Test {
     ReadHeaderTest() : h_(), buf_() {}
 
     void SetUp() override {
-        init_header_garbage(&h_);
+        init_garbage_header(&h_);
         buf_.fill(0xBAADF00D);
     }
 

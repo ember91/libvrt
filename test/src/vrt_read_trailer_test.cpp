@@ -19,7 +19,7 @@ class ReadTrailerTest : public ::testing::Test {
     ReadTrailerTest() : t_(), buf_() {}
 
     void SetUp() override {
-        init_trailer_garbage(&t_);
+        init_garbage_trailer(&t_);
         buf_.fill(0xBAADF00D);
     }
 

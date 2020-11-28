@@ -1,5 +1,4 @@
 * Add vrt_words_packet
-* Rename init_header_garbage... to init_garbage_header
 * When testing buffer size error, check both with and without validation
 * Add tests that test negative buffer size
 * vrt_is_context and similar functions should take header as parameter

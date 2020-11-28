@@ -23,7 +23,7 @@ class ReadIfContextTest : public ::testing::Test {
     ReadIfContextTest() : c_(), buf_() {}
 
     void SetUp() override {
-        init_if_context_garbage(&c_);
+        init_garbage_if_context(&c_);
         buf_.fill(0xBAADF00D);
     }
 
