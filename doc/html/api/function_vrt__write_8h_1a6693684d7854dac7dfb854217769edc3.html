@@ -156,7 +156,7 @@
 <h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
 <dt>
-<span class="target" id="vrt__write_8h_1a32bcf2e03927270500fe961c15897305"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_write_header (const vrt_header *header, void *buf, uint32_t words_buf, bool validate)</code></dt>
+<span class="target" id="vrt__write_8h_1a02e577357aea4177b2189849be8a978a"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_write_header (const vrt_header *header, void *buf, int32_t words_buf, bool validate)</code></dt>
 <dd><p>Low-level function that writes VRT header section.</p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>Number of written 32-bit words (always 1), or a negative number if error. </p>
@@ -171,7 +171,7 @@
 </ul>
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUF_SIZE</span></code>: Buffer is too small. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUFFER_SIZE</span></code>: Buffer is too small. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_PACKET_TYPE</span></code>: Packet type is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_TSM</span></code>: TSM is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_TSM_IN_DATA</span></code>: Data packet has TSM bit set. </p></li>

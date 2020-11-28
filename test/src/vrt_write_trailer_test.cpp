@@ -24,7 +24,7 @@ class WriteTrailerTest : public ::testing::Test {
 };
 
 TEST_F(WriteTrailerTest, ZeroSizeBuffer) {
-    ASSERT_EQ(vrt_write_trailer(&t_, buf_.data(), 0, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_write_trailer(&t_, buf_.data(), 0, true), VRT_ERR_BUFFER_SIZE);
 }
 
 TEST_F(WriteTrailerTest, HasCalibratedTime) {

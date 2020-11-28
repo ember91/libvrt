@@ -328,6 +328,15 @@ Program Listing for File vrt_types.h
        vrt_context_association_lists context_association_lists;
    } vrt_if_context;
    
+   typedef struct vrt_packet {
+       vrt_header     header;     
+       vrt_fields     fields;     
+       void*          body;       
+       uint32_t       words_body; 
+       vrt_trailer    trailer;    
+       vrt_if_context if_context; 
+   } vrt_packet;
+   
    #ifdef __cplusplus
    }
    #endif

@@ -144,7 +144,7 @@ const char* vrt_string_error(int32_t error /* Do NOT use vrt_error_code, since i
     }
 
     switch (error) {
-        case VRT_ERR_BUF_SIZE:
+        case VRT_ERR_BUFFER_SIZE:
             return "Buffer is too small";
         case VRT_ERR_RESERVED:
             return "One or multiple reserved bits are set";
@@ -212,6 +212,8 @@ const char* vrt_string_error(int32_t error /* Do NOT use vrt_error_code, since i
             return "System list size is outside valid bounds (> 0x01FF)";
         case VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE:
             return "Channel list size is outside valid bounds (> 0x7FFF)";
+        case VRT_ERR_BOUNDS_PACKET_SIZE:
+            return "Calculated packet size is outside valid bounds (> 0xFFFF).";
         default:
             return "Unknown";
     }

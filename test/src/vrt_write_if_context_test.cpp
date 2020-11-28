@@ -81,7 +81,7 @@ static void buf_cmp_geolocation_ephemeris(const std::array<uint32_t, 1024>& buf,
 }
 
 TEST_F(WriteIfContextTest, None) {
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0, true), VRT_ERR_BUFFER_SIZE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 1, true), 1);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
@@ -2580,7 +2580,7 @@ TEST_F(WriteIfContextTest, EveryOther1) {
     c_.gps_ascii.number_of_words = 3;
     c_.gps_ascii.ascii           = "Lorem ipsum!";
 
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 43, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 43, true), VRT_ERR_BUFFER_SIZE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 44, false), 44);
     ASSERT_EQ(Hex(buf_[0]), Hex(0xAAAAAA00)); /* Context indicators */
     ASSERT_EQ(Hex(buf_[1]), Hex(0xFFFFFFFF)); /* Bandwidth */
@@ -2737,7 +2737,7 @@ TEST_F(WriteIfContextTest, EveryOther2) {
     c_.context_association_lists.asynchronous_channel_context_association_list = l4.data();
     c_.context_association_lists.asynchronous_channel_tag_list                 = l5.data();
 
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 48, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 48, true), VRT_ERR_BUFFER_SIZE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 49, false), 49);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x55555500)); /* Context indicators */
     ASSERT_EQ(Hex(buf_[1]), Hex(0xACACACAC)); /* Reference point identifier */
@@ -2979,7 +2979,7 @@ TEST_F(WriteIfContextTest, All) {
     c_.context_association_lists.asynchronous_channel_context_association_list = l4.data();
     c_.context_association_lists.asynchronous_channel_tag_list                 = l5.data();
 
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 91, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 91, true), VRT_ERR_BUFFER_SIZE);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 92, false), 92);
     ASSERT_EQ(Hex(buf_[0]), Hex(0xFFFFFF00)); /* Context indicators */
     ASSERT_EQ(Hex(buf_[1]), Hex(0xACACACAC)); /* Reference point identifier */

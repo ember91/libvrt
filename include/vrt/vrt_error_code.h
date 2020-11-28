@@ -15,7 +15,7 @@ typedef enum vrt_error_code {
     /**
      * Error return code. Buffer is too small.
      */
-    VRT_ERR_BUF_SIZE = -1,
+    VRT_ERR_BUFFER_SIZE = -1,
     /**
      * Error return code. One or multiple reserved bits are set.
      */
@@ -147,7 +147,11 @@ typedef enum vrt_error_code {
     /**
      * Error return code. Channel list size is outside valid bounds (> 0x7FFF).
      */
-    VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE = -34
+    VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE = -34,
+    /**
+     * Error return code. Calculated packet size is outside valid bounds (> 0xFFFF).
+     */
+    VRT_ERR_BOUNDS_PACKET_SIZE = -35
 } vrt_error_code;
 
 #ifdef __cplusplus

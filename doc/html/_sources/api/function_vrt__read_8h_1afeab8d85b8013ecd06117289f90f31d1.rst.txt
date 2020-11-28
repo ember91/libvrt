@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__read_8h_1afeab8d85b8013ecd06117289f90f31d1:
+
+Function vrt_read_header
+========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_read.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_read_header(const void *, int32_t, vrt_header *, bool)

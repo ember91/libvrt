@@ -5,8 +5,8 @@
 
 #include "vrt_util_internal.h"
 
-uint32_t vrt_words_fields(const vrt_header* header) {
-    uint32_t words = 0;
+int32_t vrt_words_fields(const vrt_header* header) {
+    int32_t words = 0;
     if (vrt_has_stream_id(header->packet_type)) {
         words += 1;
     }
@@ -22,7 +22,7 @@ uint32_t vrt_words_fields(const vrt_header* header) {
     return words;
 }
 
-uint32_t vrt_words_trailer(const vrt_header* header) {
+int32_t vrt_words_trailer(const vrt_header* header) {
     /* Context packets cannot have a trailer */
     if (vrt_is_context(header->packet_type)) {
         return 0;
@@ -30,9 +30,9 @@ uint32_t vrt_words_trailer(const vrt_header* header) {
     return vrt_b2u(header->has.trailer);
 }
 
-uint32_t vrt_words_if_context(const vrt_if_context* if_context) {
+int32_t vrt_words_if_context(const vrt_if_context* if_context) {
     /* Count non-variable words */
-    uint32_t words = vrt_words_if_context_indicator(&if_context->has);
+    int32_t words = vrt_words_if_context_indicator(&if_context->has);
 
     /* Count variable words */
     if (if_context->has.gps_ascii) {

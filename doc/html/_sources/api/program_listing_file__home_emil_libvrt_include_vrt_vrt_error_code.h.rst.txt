@@ -21,7 +21,7 @@ Program Listing for File vrt_error_code.h
    #endif
    
    typedef enum vrt_error_code {
-       VRT_ERR_BUF_SIZE = -1,
+       VRT_ERR_BUFFER_SIZE = -1,
        VRT_ERR_RESERVED = -2,
        VRT_ERR_INVALID_PACKET_TYPE = -3,
        VRT_ERR_TRAILER_IN_CONTEXT = -4,
@@ -54,7 +54,8 @@ Program Listing for File vrt_error_code.h
        VRT_ERR_BOUNDS_MAGNETIC_VARIATION = -31,
        VRT_ERR_BOUNDS_SOURCE_LIST_SIZE = -32,
        VRT_ERR_BOUNDS_SYSTEM_LIST_SIZE = -33,
-       VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE = -34
+       VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE = -34,
+       VRT_ERR_BOUNDS_PACKET_SIZE = -35
    } vrt_error_code;
    
    #ifdef __cplusplus

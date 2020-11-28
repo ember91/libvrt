@@ -92,6 +92,8 @@ Classes
 
 - :ref:`exhale_struct_structvrt__if__context`
 
+- :ref:`exhale_struct_structvrt__packet`
+
 - :ref:`exhale_struct_structvrt__state__and__event`
 
 - :ref:`exhale_struct_structvrt__state__and__event__indicators`
@@ -161,6 +163,8 @@ Typedefs
 - :ref:`exhale_typedef_vrt__types_8h_1a6322281affed3e99968831f769eb3946`
 
 - :ref:`exhale_typedef_vrt__types_8h_1a2848c63ec869af030cd4aa26a1591f16`
+
+- :ref:`exhale_typedef_vrt__types_8h_1a621cf5da99465b58c13006741e4bfef1`
 
 - :ref:`exhale_typedef_vrt__types_8h_1a0e6dfcb09c9e0f88410bebe4392d2932`
 

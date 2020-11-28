@@ -18,6 +18,7 @@ Class Hierarchy
 - :ref:`exhale_struct_structvrt__header`
 - :ref:`exhale_struct_structvrt__header__indicators`
 - :ref:`exhale_struct_structvrt__if__context`
+- :ref:`exhale_struct_structvrt__packet`
 - :ref:`exhale_struct_structvrt__state__and__event`
 - :ref:`exhale_struct_structvrt__state__and__event__indicators`
 - :ref:`exhale_struct_structvrt__trailer`

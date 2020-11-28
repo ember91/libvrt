@@ -1,5 +1,9 @@
-* Add int32_t vrt_write_if_context(vrt_header* h, vrt_fields* f, uint32_t* data, uint16_t* words_data, vrt_trailer* t)
-* Add int32_t vrt_read_all(vrt_header* h, vrt_fields* f, uint32_t* body, uint16_t* words_body, vrt_if_context* c, vrt_trailer* t)
+* Add vrt_words_packet
+* Add tests for vrt_init_packet
+* When testing buffer size error, check both with and without validation
+* Add tests that test negative buffer size
+* vrt_is_context and similar functions should take header as parameter
+* Add int32_t vrt_read_packet(vrt_packet* p, void* buf, int32_t words_buf validate)
 * Add int32_t vrt_words_body(vrt_header* h), which calculates number of words body consists of
 
 * Trailer: Permission 6.1.7-1: The user-defined indicators may be used for any purpose. They may be used together as well
@@ -10,5 +14,6 @@ can be represented in the 8-bit field.
 
 * Check that float, double... are inside bounds when writing and validating
 # Future
+* Restrict keyword?
 * Add support for 128 bit float
 * Add single header library?

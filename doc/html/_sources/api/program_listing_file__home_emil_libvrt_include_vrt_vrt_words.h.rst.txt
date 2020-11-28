@@ -25,14 +25,14 @@ Program Listing for File vrt_words.h
    
    static const uint16_t VRT_WORDS_HEADER = 1;
    static const uint16_t VRT_WORDS_MAX_FIELDS = 6;
-   static const uint16_t VRT_WORDS_MAX_TRAILER = 1;
+   static const uint16_t VRT_WORDS_TRAILER = 1;
    static const uint16_t VRT_WORDS_MAX_PACKET = UINT16_MAX;
    
-   uint32_t vrt_words_fields(const vrt_header* header);
+   int32_t vrt_words_fields(const vrt_header* header);
    
-   uint32_t vrt_words_trailer(const vrt_header* header);
+   int32_t vrt_words_trailer(const vrt_header* header);
    
-   uint32_t vrt_words_if_context(const vrt_if_context* if_context);
+   int32_t vrt_words_if_context(const vrt_if_context* if_context);
    
    #ifdef __cplusplus
    }

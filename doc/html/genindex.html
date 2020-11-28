@@ -447,6 +447,8 @@
 </li>
       <li><a href="api/enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4.html#_CPPv4N14vrt_error_code27VRT_ERR_BOUNDS_PACKET_COUNTE">vrt_error_code::VRT_ERR_BOUNDS_PACKET_COUNT (C++ enumerator)</a>
 </li>
+      <li><a href="api/enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4.html#_CPPv4N14vrt_error_code26VRT_ERR_BOUNDS_PACKET_SIZEE">vrt_error_code::VRT_ERR_BOUNDS_PACKET_SIZE (C++ enumerator)</a>
+</li>
       <li><a href="api/enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4.html#_CPPv4N14vrt_error_code24VRT_ERR_BOUNDS_REAL_TIMEE">vrt_error_code::VRT_ERR_BOUNDS_REAL_TIME (C++ enumerator)</a>
 </li>
       <li><a href="api/enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4.html#_CPPv4N14vrt_error_code26VRT_ERR_BOUNDS_SAMPLE_RATEE">vrt_error_code::VRT_ERR_BOUNDS_SAMPLE_RATE (C++ enumerator)</a>
@@ -461,7 +463,7 @@
 </li>
       <li><a href="api/enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4.html#_CPPv4N14vrt_error_code26VRT_ERR_BOUNDS_TRACK_ANGLEE">vrt_error_code::VRT_ERR_BOUNDS_TRACK_ANGLE (C++ enumerator)</a>
 </li>
-      <li><a href="api/enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4.html#_CPPv4N14vrt_error_code16VRT_ERR_BUF_SIZEE">vrt_error_code::VRT_ERR_BUF_SIZE (C++ enumerator)</a>
+      <li><a href="api/enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4.html#_CPPv4N14vrt_error_code19VRT_ERR_BUFFER_SIZEE">vrt_error_code::VRT_ERR_BUFFER_SIZE (C++ enumerator)</a>
 </li>
       <li><a href="api/enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4.html#_CPPv4N14vrt_error_code23VRT_ERR_GAIN_STAGE2_SETE">vrt_error_code::VRT_ERR_GAIN_STAGE2_SET (C++ enumerator)</a>
 </li>
@@ -545,8 +547,6 @@
 </li>
       <li><a href="api/structvrt__formatted__geolocation__indicators.html#_CPPv4N36vrt_formatted_geolocation_indicators13heading_angleE">vrt_formatted_geolocation_indicators::heading_angle (C++ member)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/structvrt__formatted__geolocation__indicators.html#_CPPv4N36vrt_formatted_geolocation_indicators8latitudeE">vrt_formatted_geolocation_indicators::latitude (C++ member)</a>
 </li>
       <li><a href="api/structvrt__formatted__geolocation__indicators.html#_CPPv4N36vrt_formatted_geolocation_indicators9longitudeE">vrt_formatted_geolocation_indicators::longitude (C++ member)</a>
@@ -555,6 +555,8 @@
 </li>
       <li><a href="api/structvrt__formatted__geolocation__indicators.html#_CPPv4N36vrt_formatted_geolocation_indicators17speed_over_groundE">vrt_formatted_geolocation_indicators::speed_over_ground (C++ member)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/structvrt__formatted__geolocation__indicators.html#_CPPv4N36vrt_formatted_geolocation_indicators11track_angleE">vrt_formatted_geolocation_indicators::track_angle (C++ member)</a>
 </li>
       <li><a href="api/structvrt__gain.html#_CPPv48vrt_gain">vrt_gain (C++ struct)</a>
@@ -673,11 +675,31 @@
 </li>
       <li><a href="api/function_vrt__init_8h_1a17707913c26e86919ef357b8ee303fb8.html#_CPPv419vrt_init_if_contextP14vrt_if_context">vrt_init_if_context (C++ function)</a>
 </li>
+      <li><a href="api/function_vrt__init_8h_1a2dbcaf0926d3f1a4ef7eb8a6fdc3d471.html#_CPPv415vrt_init_packetP10vrt_packet">vrt_init_packet (C++ function)</a>
+</li>
       <li><a href="api/function_vrt__init_8h_1ac48207b4c8fe750f09efca40d5d12130.html#_CPPv416vrt_init_trailerP11vrt_trailer">vrt_init_trailer (C++ function)</a>
 </li>
       <li><a href="api/function_vrt__util_8h_1a02b3ce76d3e1969a9338c05dc15f52e0.html#_CPPv414vrt_is_context15vrt_packet_type">vrt_is_context (C++ function)</a>
 </li>
       <li><a href="api/function_vrt__util_8h_1aceb67c8bb9922e9588d19f87209faadc.html#_CPPv429vrt_is_platform_little_endianv">vrt_is_platform_little_endian (C++ function)</a>
+</li>
+      <li><a href="api/structvrt__packet.html#_CPPv410vrt_packet">vrt_packet (C++ struct)</a>
+
+      <ul>
+        <li><a href="api/typedef_vrt__types_8h_1a621cf5da99465b58c13006741e4bfef1.html#_CPPv410vrt_packet">(C++ type)</a>
+</li>
+      </ul></li>
+      <li><a href="api/structvrt__packet.html#_CPPv4N10vrt_packet4bodyE">vrt_packet::body (C++ member)</a>
+</li>
+      <li><a href="api/structvrt__packet.html#_CPPv4N10vrt_packet6fieldsE">vrt_packet::fields (C++ member)</a>
+</li>
+      <li><a href="api/structvrt__packet.html#_CPPv4N10vrt_packet6headerE">vrt_packet::header (C++ member)</a>
+</li>
+      <li><a href="api/structvrt__packet.html#_CPPv4N10vrt_packet10if_contextE">vrt_packet::if_context (C++ member)</a>
+</li>
+      <li><a href="api/structvrt__packet.html#_CPPv4N10vrt_packet7trailerE">vrt_packet::trailer (C++ member)</a>
+</li>
+      <li><a href="api/structvrt__packet.html#_CPPv4N10vrt_packet10words_bodyE">vrt_packet::words_body (C++ member)</a>
 </li>
       <li><a href="api/enum_vrt__types_8h_1a8b7e0ca74814ff290cb1afee9acc2504.html#_CPPv415vrt_packet_type">vrt_packet_type (C++ enum)</a>
 
@@ -909,19 +931,19 @@
 </li>
       <li><a href="api/define_vrt__util_8h_1a5f3ca533aadf44ad610a9082a03f2970.html#c.VRT_WARN_UNUSED">VRT_WARN_UNUSED (C macro)</a>
 </li>
-      <li><a href="api/function_vrt__words_8h_1a8070a11ce64da478e93bd0ec74aaaa89.html#_CPPv416vrt_words_fieldsPK10vrt_header">vrt_words_fields (C++ function)</a>
+      <li><a href="api/function_vrt__words_8h_1a43d81453b982dac8675b2535f503510b.html#_CPPv416vrt_words_fieldsPK10vrt_header">vrt_words_fields (C++ function)</a>, <a href="api/function_vrt__words_8h_1a8070a11ce64da478e93bd0ec74aaaa89.html#_CPPv416vrt_words_fieldsPK10vrt_header">[1]</a>
 </li>
       <li><a href="api/variable_vrt__words_8h_1a541e0edfa3580d3802db81981c6fb8a7.html#_CPPv416VRT_WORDS_HEADER">VRT_WORDS_HEADER (C++ member)</a>
 </li>
-      <li><a href="api/function_vrt__words_8h_1abb62bd0691de8842da2c3e1a6fe47ef0.html#_CPPv420vrt_words_if_contextPK14vrt_if_context">vrt_words_if_context (C++ function)</a>
+      <li><a href="api/function_vrt__words_8h_1abb62bd0691de8842da2c3e1a6fe47ef0.html#_CPPv420vrt_words_if_contextPK14vrt_if_context">vrt_words_if_context (C++ function)</a>, <a href="api/function_vrt__words_8h_1aeb1517bbc6cf8dedf0718a8966ee2121.html#_CPPv420vrt_words_if_contextPK14vrt_if_context">[1]</a>
 </li>
       <li><a href="api/variable_vrt__words_8h_1a4b1c2b7216a6c475736a8916f2356486.html#_CPPv420VRT_WORDS_MAX_FIELDS">VRT_WORDS_MAX_FIELDS (C++ member)</a>
 </li>
       <li><a href="api/variable_vrt__words_8h_1a03403462eb9cd5829ec720aa91b3ae10.html#_CPPv420VRT_WORDS_MAX_PACKET">VRT_WORDS_MAX_PACKET (C++ member)</a>
 </li>
-      <li><a href="api/variable_vrt__words_8h_1a307bdc8029b624dc288a4745f3fee0b4.html#_CPPv421VRT_WORDS_MAX_TRAILER">VRT_WORDS_MAX_TRAILER (C++ member)</a>
+      <li><a href="api/function_vrt__words_8h_1a13c1af1da879e131bab326a503c6cfe9.html#_CPPv417vrt_words_trailerPK10vrt_header">vrt_words_trailer (C++ function)</a>, <a href="api/function_vrt__words_8h_1a18ac9dbeb45b0a28b97160cb30dd3e12.html#_CPPv417vrt_words_trailerPK10vrt_header">[1]</a>
 </li>
-      <li><a href="api/function_vrt__words_8h_1a18ac9dbeb45b0a28b97160cb30dd3e12.html#_CPPv417vrt_words_trailerPK10vrt_header">vrt_words_trailer (C++ function)</a>
+      <li><a href="api/variable_vrt__words_8h_1a2f8fa0f6c0217dc4098cea6c8e39e484.html#_CPPv417VRT_WORDS_TRAILER">VRT_WORDS_TRAILER (C++ member)</a>
 </li>
   </ul></td>
 </tr></table>

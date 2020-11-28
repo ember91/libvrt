@@ -46,5 +46,7 @@ Functions
 
 - :ref:`exhale_function_vrt__init_8h_1a17707913c26e86919ef357b8ee303fb8`
 
+- :ref:`exhale_function_vrt__init_8h_1a2dbcaf0926d3f1a4ef7eb8a6fdc3d471`
+
 - :ref:`exhale_function_vrt__init_8h_1ac48207b4c8fe750f09efca40d5d12130`
 

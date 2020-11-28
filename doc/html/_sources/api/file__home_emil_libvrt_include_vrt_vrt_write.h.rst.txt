@@ -46,11 +46,13 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_vrt__write_8h_1a1f0031a6033c7c6ee7d5080bd657cbd8`
+- :ref:`exhale_function_vrt__write_8h_1aa3826d4ba59dd0e787d97f06bd2e65b8`
 
-- :ref:`exhale_function_vrt__write_8h_1a32bcf2e03927270500fe961c15897305`
+- :ref:`exhale_function_vrt__write_8h_1a02e577357aea4177b2189849be8a978a`
 
-- :ref:`exhale_function_vrt__write_8h_1acb8a287c66e878338b0a2e686d931caf`
+- :ref:`exhale_function_vrt__write_8h_1ae9a12b1a22b88bd495be8afaac351b60`
 
-- :ref:`exhale_function_vrt__write_8h_1a9086faedcc70d4756bfc90683e9f4157`
+- :ref:`exhale_function_vrt__write_8h_1a77d52f0b5bbf0e7680305a63a7d4601a`
+
+- :ref:`exhale_function_vrt__write_8h_1a5e15a065fd85bb8a09a5598f2a693d09`
 

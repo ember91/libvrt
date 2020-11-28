@@ -67,7 +67,7 @@ inline bool vrt_has_fractional_timestamp(vrt_tsf t) {
  *
  * \return Number of 32-bit words it consists of.
  */
-uint32_t vrt_words_if_context_indicator(const vrt_context_indicators* ind);
+int32_t vrt_words_if_context_indicator(const vrt_context_indicators* ind);
 
 #ifdef __cplusplus
 }

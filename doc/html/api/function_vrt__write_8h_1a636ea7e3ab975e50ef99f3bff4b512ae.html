@@ -156,7 +156,7 @@
 <h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
 <dt>
-<span class="target" id="vrt__write_8h_1a9086faedcc70d4756bfc90683e9f4157"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_write_trailer (const vrt_trailer *trailer, void *buf, uint32_t words_buf, bool validate)</code></dt>
+<span class="target" id="vrt__write_8h_1a5e15a065fd85bb8a09a5598f2a693d09"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_write_trailer (const vrt_trailer *trailer, void *buf, int32_t words_buf, bool validate)</code></dt>
 <dd><p>Low-level function that writes VRT trailer section.</p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>Number of written 32-bit words, or a negative number if error. </p>
@@ -169,7 +169,7 @@
 </ul>
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUF_SIZE</span></code>: Buffer is too small. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUFFER_SIZE</span></code>: Buffer is too small. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_ASSOCIATED_CONTEXT_PACKET_COUNT</span></code>: Associated context packet count is outside valid bounds (&gt;0x7F). </p></li>
 </ul>
 </dd>

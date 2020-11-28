@@ -20,7 +20,7 @@ extern "C" {
  * \param validate  True if validation should be done. If false, only buffer size is validated.
  *
  * \return Number of read 32-bit words, or a negative number if error.
- * \retval VRT_ERR_BUF_SIZE             Buffer is too small.
+ * \retval VRT_ERR_BUFFER_SIZE          Buffer is too small.
  * \retval VRT_ERR_RESERVED             One or multiple reserved bits are set.
  * \retval VRT_ERR_INVALID_PACKET_TYPE  Packet type is an invalid value.
  * \retval VRT_ERR_TRAILER_IN_CONTEXT   Context packet has trailer bit set.
@@ -29,7 +29,7 @@ extern "C" {
  * \note Requires input buffer data to be byte swapped if platform endianess isn't big endian (network order).
  */
 VRT_WARN_UNUSED
-int32_t vrt_read_header(const void* buf, uint32_t words_buf, vrt_header* header, bool validate);
+int32_t vrt_read_header(const void* buf, int32_t words_buf, vrt_header* header, bool validate);
 
 /**
  * Low-level function that reads VRT fields section.
@@ -42,7 +42,7 @@ int32_t vrt_read_header(const void* buf, uint32_t words_buf, vrt_header* header,
  * \param validate  True if validation should be done. If false, only buffer size is validated.
  *
  * \return Number of read 32-bit words, or a negative number if error.
- * \retval VRT_ERR_BUF_SIZE         Buffer is too small.
+ * \retval VRT_ERR_BUFFER_SIZE      Buffer is too small.
  * \retval VRT_ERR_RESERVED         One or multiple reserved bits are set.
  * \retval VRT_ERR_BOUNDS_REAL_TIME TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds
  *                                  (> 999999999999 ps).
@@ -50,7 +50,7 @@ int32_t vrt_read_header(const void* buf, uint32_t words_buf, vrt_header* header,
 VRT_WARN_UNUSED
 int32_t vrt_read_fields(const vrt_header* header,
                         const void*       buf,
-                        uint32_t          words_buf,
+                        int32_t           words_buf,
                         vrt_fields*       fields,
                         bool              validate);
 
@@ -63,12 +63,12 @@ int32_t vrt_read_fields(const vrt_header* header,
  * \param trailer   Trailer to read into.
  *
  * \return Number of read 32-bit words, i.e. 1, or a negative number if error.
- * \retval VRT_ERR_BUF_SIZE Buffer is too small.
+ * \retval VRT_ERR_BUFFER_SIZE Buffer is too small.
  *
  * \note Unlike other read functions, there is nothing to validate, so no 'validate' parameter here.
  */
 VRT_WARN_UNUSED
-int32_t vrt_read_trailer(const void* buf, uint32_t words_buf, vrt_trailer* trailer);
+int32_t vrt_read_trailer(const void* buf, int32_t words_buf, vrt_trailer* trailer);
 
 /**
  * Low-level function that reads VRT IF context section.
@@ -79,7 +79,7 @@ int32_t vrt_read_trailer(const void* buf, uint32_t words_buf, vrt_trailer* trail
  * \param validate  True if validation should be done. If false, only buffer size is validated.
  *
  * \return Number of read 32-bit words, or a negative number if error.
- * \retval VRT_ERR_BUF_SIZE                             Buffer is too small.
+ * \retval VRT_ERR_BUFFER_SIZE                          Buffer is too small.
  * \retval VRT_ERR_RESERVED                             One or multiple reserved bits are set.
  * \retval VRT_ERR_BOUNDS_BANDWIDTH                     Bandwidth is outside valid bounds (< 0 Hz).
  * \retval VRT_ERR_GAIN_STAGE2_SET                      Gain stage 1 must be used instead of stage 2 when only one is
@@ -108,7 +108,7 @@ int32_t vrt_read_trailer(const void* buf, uint32_t words_buf, vrt_trailer* trail
  *          sample_rate, may in rare cases lose precision since double only has 53 bits of precision.
  */
 VRT_WARN_UNUSED
-int32_t vrt_read_if_context(const void* buf, uint32_t words_buf, vrt_if_context* if_context, bool validate);
+int32_t vrt_read_if_context(const void* buf, int32_t words_buf, vrt_if_context* if_context, bool validate);
 
 #ifdef __cplusplus
 }

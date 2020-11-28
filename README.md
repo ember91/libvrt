@@ -147,14 +147,36 @@ int main() {
 ```
 Examples can be found in [example/](example/).
 
-Useful functions for initializing structs to default values are:
+For initializing a packet struct to default values:
+```
+vrt_init_packet(packet, buf, words_buf, validate)
+```
+For calculating the size of a packet:
+```
+vrt_words_packet(packet)
+```
+For reading:
+```
+vrt_read_packet(buf, words_buf, packet, validate)
+```
+For writing:
+```
+vrt_write_packet(packet, buf, words_buf, validate)
+```
+For getting a string representation of an error:
+```
+vrt_string_error(error)
+```
+
+Other useful lower level functions:
+For initializing structs to default values:
 ```
 vrt_init_header(header)
 vrt_init_fields(fields)
 vrt_init_trailer(trailer)
 vrt_init_if_context(if_context)
 ```
-For counting size of a packet:
+For counting serialized struct sizes:
 ```
 vrt_words_fields(header)
 vrt_words_trailer(header)
@@ -182,7 +204,7 @@ vrt_string_tsf(tsf)
 vrt_string_real_or_complex(real_or_complex)
 vrt_string_data_item_format(data_item_format)
 ```
-And others:
+And other helper functions:
 ```
 vrt_is_context(type)
 vrt_has_stream_id(type)

@@ -35,9 +35,7 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Function vrt_write_header" href="function_vrt__write_8h_1a32bcf2e03927270500fe961c15897305.html" />
-    <link rel="prev" title="Function vrt_words_trailer" href="function_vrt__words_8h_1a18ac9dbeb45b0a28b97160cb30dd3e12.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -130,8 +128,6 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="library_root.html">Library API</a> &raquo;</li>
-        
       <li>Function vrt_write_fields</li>
     
     
@@ -160,7 +156,7 @@
 <h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
 <dt>
-<span class="target" id="vrt__write_8h_1a1f0031a6033c7c6ee7d5080bd657cbd8"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_write_fields (const vrt_header *header, const vrt_fields *fields, void *buf, uint32_t words_buf, bool validate)</code></dt>
+<span class="target" id="vrt__write_8h_1aa3826d4ba59dd0e787d97f06bd2e65b8"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_write_fields (const vrt_header *header, const vrt_fields *fields, void *buf, int32_t words_buf, bool validate)</code></dt>
 <dd><p>Low-level function that writes VRT fields section.</p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>Number of written 32-bit words, or a negative number if error. </p>
@@ -174,7 +170,7 @@
 </ul>
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUF_SIZE</span></code>: Buffer is too small. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUFFER_SIZE</span></code>: Buffer is too small. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds (&gt; 999999999999 ps). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_OUI</span></code>: OUI is outside valid bounds (&gt; 0x00FFFFFF). </p></li>
 </ul>
@@ -191,15 +187,6 @@
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="function_vrt__write_8h_1a32bcf2e03927270500fe961c15897305.html" class="btn btn-neutral float-right" title="Function vrt_write_header" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="function_vrt__words_8h_1a18ac9dbeb45b0a28b97160cb30dd3e12.html" class="btn btn-neutral float-left" title="Function vrt_words_trailer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

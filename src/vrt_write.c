@@ -35,13 +35,15 @@ static inline void write_uint64(uint64_t val, uint32_t* b) {
     b[1] = (uint32_t)val;
 }
 
-int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t words_buf, bool validate) {
+int32_t vrt_write_header(const vrt_header* header, void* buf, int32_t words_buf, bool validate) {
+    /* Note that it makes sense to have words_buf as signed, to avoid overflow for words_buf - offset */
+
     /* Number of words are always 1 */
     const int32_t words = 1;
 
     /* Check if buf size is sufficient */
-    if (words_buf < (uint32_t)words) {
-        return VRT_ERR_BUF_SIZE;
+    if (words_buf < words) {
+        return VRT_ERR_BUFFER_SIZE;
     }
 
     if (validate) {
@@ -92,13 +94,13 @@ int32_t vrt_write_header(const vrt_header* header, void* buf, uint32_t words_buf
 int32_t vrt_write_fields(const vrt_header* header,
                          const vrt_fields* fields,
                          void*             buf,
-                         uint32_t          words_buf,
+                         int32_t           words_buf,
                          bool              validate) {
     const int32_t words = (int32_t)vrt_words_fields(header);
 
     /* Check if buf size is sufficient */
-    if (words_buf < (uint32_t)words) {
-        return VRT_ERR_BUF_SIZE;
+    if (words_buf < words) {
+        return VRT_ERR_BUFFER_SIZE;
     }
 
     uint32_t* b = ((uint32_t*)buf);
@@ -136,13 +138,13 @@ int32_t vrt_write_fields(const vrt_header* header,
     return words;
 }
 
-int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, uint32_t words_buf, bool validate) {
+int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, int32_t words_buf, bool validate) {
     /* Number of words are always 1 */
     const int32_t words = 1;
 
     /* Check if buf size is sufficient */
-    if (words_buf < (uint32_t)words) {
-        return VRT_ERR_BUF_SIZE;
+    if (words_buf < words) {
+        return VRT_ERR_BUFFER_SIZE;
     }
 
     uint32_t* b = (uint32_t*)buf;
@@ -615,12 +617,12 @@ static int32_t if_context_write_context_association_lists(bool                  
     return 0;
 }
 
-int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32_t words_buf, bool validate) {
+int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_t words_buf, bool validate) {
     const int32_t words = vrt_words_if_context(if_context);
 
     /* Check if buf size is sufficient */
-    if (words_buf < (uint32_t)words) {
-        return VRT_ERR_BUF_SIZE;
+    if (words_buf < words) {
+        return VRT_ERR_BUFFER_SIZE;
     }
 
     uint32_t* b = (uint32_t*)buf;
@@ -776,4 +778,77 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, uint32
     }
 
     return words;
+}
+
+int32_t vrt_write_packet(const vrt_packet* packet, void* buf, int32_t words_buf, bool validate) {
+    uint32_t* b = (uint32_t*)buf;
+
+    /* Header */
+    int32_t words_header = vrt_write_header(&packet->header, b, words_buf, validate);
+    if (words_header < 0) {
+        return words_header;
+    }
+    int32_t words_total = words_header;
+
+    /* Fields */
+    int32_t words_fields =
+        vrt_write_fields(&packet->header, &packet->fields, b + words_total, words_buf - words_total, validate);
+    if (words_fields < 0) {
+        return words_fields;
+    }
+    words_total += words_fields;
+
+    /* Body */
+    switch (packet->header.packet_type) {
+        case VRT_PT_IF_DATA_WITHOUT_STREAM_ID:
+        case VRT_PT_IF_DATA_WITH_STREAM_ID:
+        case VRT_PT_EXT_DATA_WITHOUT_STREAM_ID:
+        case VRT_PT_EXT_DATA_WITH_STREAM_ID:
+        case VRT_PT_EXT_CONTEXT: {
+            /* Check bounds */
+            if (packet->words_body > words_buf - words_total) {
+                return VRT_ERR_BUFFER_SIZE;
+            }
+
+            /* Body is actually optional */
+            if (packet->words_body != 0) {
+                memcpy(b + words_total, packet->body, sizeof(uint32_t) * packet->words_body);
+            }
+            words_total += packet->words_body;
+            break;
+        }
+        case VRT_PT_IF_CONTEXT: {
+            int32_t words_if_context =
+                vrt_write_if_context(&packet->if_context, b + words_total, words_buf - words_total, validate);
+            if (words_if_context < 0) {
+                return words_if_context;
+            }
+            words_total += words_if_context;
+            break;
+        }
+        default: {
+            /* Do nothing here. Note that validation must be false to end up here. */
+            break;
+        }
+    }
+
+    /* Trailer */
+    if (!vrt_is_context(packet->header.packet_type) && packet->header.has.trailer) {
+        int32_t words_trailer = vrt_write_trailer(&packet->trailer, b + words_total, words_buf - words_total, validate);
+        if (words_trailer < 0) {
+            return words_trailer;
+        }
+        words_total += words_trailer;
+    }
+
+    /* Sanity check */
+    if (words_total > UINT16_MAX) {
+        return VRT_ERR_BOUNDS_PACKET_SIZE;
+    }
+
+    /* Write packet size directly into buffer to avoid copying const header */
+    b[0] &= 0xFFFF0000;
+    b[0] |= (uint16_t)words_total;
+
+    return words_total;
 }

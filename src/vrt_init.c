@@ -228,3 +228,12 @@ void vrt_init_if_context(vrt_if_context* if_context) {
     if_context->context_association_lists.asynchronous_channel_context_association_list = NULL;
     if_context->context_association_lists.asynchronous_channel_tag_list                 = NULL;
 }
+
+void vrt_init_packet(vrt_packet* packet) {
+    vrt_init_header(&packet->header);
+    vrt_init_fields(&packet->fields);
+    packet->body       = NULL;
+    packet->words_body = 0;
+    vrt_init_trailer(&packet->trailer);
+    vrt_init_if_context(&packet->if_context);
+}

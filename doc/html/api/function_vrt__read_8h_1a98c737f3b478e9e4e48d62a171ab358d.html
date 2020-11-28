@@ -156,7 +156,7 @@
 <h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
 <dt>
-<span class="target" id="vrt__read_8h_1ab6686f14b73292f14304c2e36f174c7f"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_read_header (const void *buf, uint32_t words_buf, vrt_header *header, bool validate)</code></dt>
+<span class="target" id="vrt__read_8h_1afeab8d85b8013ecd06117289f90f31d1"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_read_header (const void *buf, int32_t words_buf, vrt_header *header, bool validate)</code></dt>
 <dd><p>Low-level function that reads VRT header section.</p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>Number of read 32-bit words, or a negative number if error. </p>
@@ -171,7 +171,7 @@
 </ul>
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUF_SIZE</span></code>: Buffer is too small. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUFFER_SIZE</span></code>: Buffer is too small. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_RESERVED</span></code>: One or multiple reserved bits are set. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_PACKET_TYPE</span></code>: Packet type is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_TRAILER_IN_CONTEXT</span></code>: Context packet has trailer bit set. </p></li>

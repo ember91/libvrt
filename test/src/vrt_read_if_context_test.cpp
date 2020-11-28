@@ -265,7 +265,7 @@ static void assert_if_context(const vrt_if_context& c, const std::map<std::strin
 }
 
 TEST_F(ReadIfContextTest, ZeroSizeBuffer) {
-    ASSERT_EQ(vrt_read_if_context(buf_.data(), 0, &c_, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_read_if_context(buf_.data(), 0, &c_, true), VRT_ERR_BUFFER_SIZE);
 }
 
 TEST_F(ReadIfContextTest, None) {

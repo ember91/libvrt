@@ -156,7 +156,7 @@
 <h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
 <dt>
-<span class="target" id="vrt__read_8h_1a666f0e6b3447dbed83ea63785ccc4f10"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_read_if_context (const void *buf, uint32_t words_buf, vrt_if_context *if_context, bool validate)</code></dt>
+<span class="target" id="vrt__read_8h_1a7b0934183b6fc69cb6dc157413f8664e"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_read_if_context (const void *buf, int32_t words_buf, vrt_if_context *if_context, bool validate)</code></dt>
 <dd><p>Low-level function that reads VRT IF context section.</p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>Number of read 32-bit words, or a negative number if error. </p>
@@ -171,7 +171,7 @@
 </ul>
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUF_SIZE</span></code>: Buffer is too small. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUFFER_SIZE</span></code>: Buffer is too small. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_RESERVED</span></code>: One or multiple reserved bits are set. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_BANDWIDTH</span></code>: Bandwidth is outside valid bounds (&lt; 0 Hz). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_GAIN_STAGE2_SET</span></code>: Gain stage 1 must be used instead of stage 2 when only one is set. </p></li>

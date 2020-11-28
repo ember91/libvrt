@@ -27,6 +27,8 @@ Program Listing for File vrt_init.h
    
    void vrt_init_if_context(vrt_if_context* if_context);
    
+   void vrt_init_packet(vrt_packet* packet);
+   
    #ifdef __cplusplus
    }
    #endif

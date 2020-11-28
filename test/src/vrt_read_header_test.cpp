@@ -49,7 +49,7 @@ static void assert_header(const vrt_header& h, const std::map<std::string, std::
 }
 
 TEST_F(ReadHeaderTest, ZeroSizeBuffer) {
-    ASSERT_EQ(vrt_read_header(buf_.data(), 0, &h_, true), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_read_header(buf_.data(), 0, &h_, true), VRT_ERR_BUFFER_SIZE);
 }
 
 TEST_F(ReadHeaderTest, PacketType) {

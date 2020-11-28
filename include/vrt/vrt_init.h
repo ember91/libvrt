@@ -37,6 +37,13 @@ void vrt_init_trailer(vrt_trailer* trailer);
  */
 void vrt_init_if_context(vrt_if_context* if_context);
 
+/**
+ * Initialize VRT packet to a reasonable default state.
+ *
+ * \param packet VRT packet.
+ */
+void vrt_init_packet(vrt_packet* packet);
+
 #ifdef __cplusplus
 }
 #endif

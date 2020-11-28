@@ -8,9 +8,9 @@ extern uint32_t vrt_u2b(uint32_t u);
 extern bool     vrt_has_stream_id(vrt_packet_type type);
 extern bool     vrt_has_fractional_timestamp(vrt_tsf t);
 
-uint32_t vrt_words_if_context_indicator(const vrt_context_indicators* ind) {
+int32_t vrt_words_if_context_indicator(const vrt_context_indicators* ind) {
     /* For context indicator field */
-    uint32_t words = 1;
+    int32_t words = 1;
 
     /* Note that Context Field Change Identifier contributes with 0 words, since it's only in
      * the context indicator field. */

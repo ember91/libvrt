@@ -69,7 +69,7 @@ static void assert_trailer(const vrt_trailer& t, const std::map<std::string, std
 }
 
 TEST_F(ReadTrailerTest, ZeroSizeBuffer) {
-    ASSERT_EQ(vrt_read_trailer(buf_.data(), 0, &t_), VRT_ERR_BUF_SIZE);
+    ASSERT_EQ(vrt_read_trailer(buf_.data(), 0, &t_), VRT_ERR_BUFFER_SIZE);
 }
 
 TEST_F(ReadTrailerTest, None) {

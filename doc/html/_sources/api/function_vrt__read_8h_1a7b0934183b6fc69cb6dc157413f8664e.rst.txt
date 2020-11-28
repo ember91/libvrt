@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__read_8h_1a7b0934183b6fc69cb6dc157413f8664e:
+
+Function vrt_read_if_context
+============================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_read.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_read_if_context(const void *, int32_t, vrt_if_context *, bool)

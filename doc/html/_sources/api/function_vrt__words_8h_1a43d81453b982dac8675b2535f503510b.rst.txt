@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__words_8h_1a43d81453b982dac8675b2535f503510b:
+
+Function vrt_words_fields
+=========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_words.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_words_fields(const vrt_header *)
