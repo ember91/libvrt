@@ -3,10 +3,20 @@
 # Requires matplotlib and numpy
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 
 sample_rate = 44100
 
-with open("signal.vrt", "rb") as f:
+# Parse command line arguments
+if len(sys.argv) == 1:
+    file_path = "signal.vrt"
+if len(sys.argv) == 2:
+    file_path = sys.argv[1]
+else:
+    print("Usage: {} [file]".format(sys.argv[0]))
+    exit()
+
+with open(file_path, "rb") as f:
     # Read little endian float32 from file
     s = np.fromfile(f, "<f4")
 
