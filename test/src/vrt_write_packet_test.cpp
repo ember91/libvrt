@@ -24,10 +24,12 @@ class WritePacketTest : public ::testing::Test {
 
 TEST_F(WritePacketTest, NegativeSizeBuffer) {
     ASSERT_EQ(vrt_write_packet(&p_, buf_.data(), -1, true), VRT_ERR_BUFFER_SIZE);
+    ASSERT_EQ(vrt_write_packet(&p_, buf_.data(), -1, false), VRT_ERR_BUFFER_SIZE);
 }
 
 TEST_F(WritePacketTest, ZeroSizeBuffer) {
     ASSERT_EQ(vrt_write_packet(&p_, buf_.data(), 0, true), VRT_ERR_BUFFER_SIZE);
+    ASSERT_EQ(vrt_write_packet(&p_, buf_.data(), 0, false), VRT_ERR_BUFFER_SIZE);
 }
 
 TEST_F(WritePacketTest, EmptyIfDataWithoutStreamId) {

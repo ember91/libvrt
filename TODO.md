@@ -1,4 +1,3 @@
-* When testing buffer size error, check both with and without validation
 * Add int32_t vrt_read_packet(vrt_packet* p, void* buf, int32_t words_buf validate)
 * Add int32_t vrt_words_body(vrt_header* h), which calculates number of words body consists of
 * Add examples that showcase both the low and high level ways of reading and writing

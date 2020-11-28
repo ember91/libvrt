@@ -82,10 +82,12 @@ static void buf_cmp_geolocation_ephemeris(const std::array<uint32_t, 1024>& buf,
 
 TEST_F(WriteIfContextTest, NegativeSizeBuffer) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), -1, true), VRT_ERR_BUFFER_SIZE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), -1, false), VRT_ERR_BUFFER_SIZE);
 }
 
 TEST_F(WriteIfContextTest, ZeroSizeBuffer) {
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0, true), VRT_ERR_BUFFER_SIZE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 0, false), VRT_ERR_BUFFER_SIZE);
 }
 
 TEST_F(WriteIfContextTest, None) {

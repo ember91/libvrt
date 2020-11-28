@@ -24,10 +24,12 @@ class WriteHeaderTest : public ::testing::Test {
 
 TEST_F(WriteHeaderTest, NegativeSizeBuffer) {
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), -1, true), VRT_ERR_BUFFER_SIZE);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), -1, false), VRT_ERR_BUFFER_SIZE);
 }
 
 TEST_F(WriteHeaderTest, ZeroSizeBuffer) {
     ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 0, true), VRT_ERR_BUFFER_SIZE);
+    ASSERT_EQ(vrt_write_header(&h_, buf_.data(), 0, false), VRT_ERR_BUFFER_SIZE);
 }
 
 TEST_F(WriteHeaderTest, PacketType) {
