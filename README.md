@@ -144,7 +144,7 @@ For getting a string representation of an error:
 vrt_string_error(error)
 ```
 
-**Other useful lower level functions:**
+**Other useful lower level functions:**\
 For initializing structs to default values:
 ```
 vrt_init_header(header)
