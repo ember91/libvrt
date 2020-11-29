@@ -3,16 +3,14 @@
 #include <any>
 #include <array>
 #include <cstdint>
-#include <map>
 #include <string>
 
 #include <vrt/vrt_error_code.h>
 #include <vrt/vrt_read.h>
 #include <vrt/vrt_types.h>
 
-#include "hex.h"
 #include "init_garbage.h"
-#include "read_util.h"
+#include "read_assertions.h"
 
 class ReadHeaderTest : public ::testing::Test {
    protected:
@@ -26,28 +24,6 @@ class ReadHeaderTest : public ::testing::Test {
     vrt_header              h_;
     std::array<uint32_t, 2> buf_;
 };
-
-/**
- * Assert header values.
- *
- * \param h      Header.
- * \param values Lists non-default values, i.e. values that differ from the vrt_init_header() state, as field name ->
- *               field value.
- */
-static void assert_header(const vrt_header& h, const std::map<std::string, std::any>& values) {
-    std::map<std::string, std::any> val_cp(values);
-    ASSERT_EQ(Hex(h.packet_type),
-              Hex(get_val<vrt_packet_type>(&val_cp, "packet_type", VRT_PT_IF_DATA_WITHOUT_STREAM_ID)));
-    ASSERT_EQ(h.has.class_id, get_val<bool>(&val_cp, "has.class_id", false));
-    ASSERT_EQ(h.has.trailer, get_val<bool>(&val_cp, "has.trailer", false));
-    ASSERT_EQ(h.tsm, get_val<vrt_tsm>(&val_cp, "tsm", VRT_TSM_FINE));
-    ASSERT_EQ(Hex(h.tsi), Hex(get_val<vrt_tsi>(&val_cp, "tsi", VRT_TSI_NONE)));
-    ASSERT_EQ(Hex(h.tsf), Hex(get_val<vrt_tsf>(&val_cp, "tsf", VRT_TSF_NONE)));
-    ASSERT_EQ(Hex(h.packet_count), Hex(get_val<uint8_t>(&val_cp, "packet_count", 0)));
-    ASSERT_EQ(Hex(h.packet_size), Hex(get_val<uint16_t>(&val_cp, "packet_size", 0)));
-
-    check_remaining(val_cp);
-}
 
 TEST_F(ReadHeaderTest, NegativeSizeBuffer) {
     ASSERT_EQ(vrt_read_header(buf_.data(), -1, &h_, true), VRT_ERR_BUFFER_SIZE);

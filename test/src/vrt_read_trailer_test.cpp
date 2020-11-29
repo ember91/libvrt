@@ -3,16 +3,14 @@
 #include <any>
 #include <array>
 #include <cstdint>
-#include <map>
 #include <string>
 
 #include <vrt/vrt_error_code.h>
 #include <vrt/vrt_read.h>
 #include <vrt/vrt_types.h>
 
-#include "hex.h"
 #include "init_garbage.h"
-#include "read_util.h"
+#include "read_assertions.h"
 
 class ReadTrailerTest : public ::testing::Test {
    protected:
@@ -26,47 +24,6 @@ class ReadTrailerTest : public ::testing::Test {
     vrt_trailer             t_;
     std::array<uint32_t, 2> buf_;
 };
-
-/**
- * Assert trailer values.
- *
- * \param t      Trailer.
- * \param values Lists non-default values, i.e. values that differ from the vrt_init_trailer() state, as field name ->
- *               field value.
- */
-static void assert_trailer(const vrt_trailer& t, const std::map<std::string, std::any>& values) {
-    std::map<std::string, std::any> val_cp(values);
-    ASSERT_EQ(t.has.calibrated_time, get_val<bool>(&val_cp, "has.calibrated_time", false));
-    ASSERT_EQ(t.has.valid_data, get_val<bool>(&val_cp, "has.valid_data", false));
-    ASSERT_EQ(t.has.reference_lock, get_val<bool>(&val_cp, "has.reference_lock", false));
-    ASSERT_EQ(t.has.agc_or_mgc, get_val<bool>(&val_cp, "has.agc_or_mgc", false));
-    ASSERT_EQ(t.has.detected_signal, get_val<bool>(&val_cp, "has.detected_signal", false));
-    ASSERT_EQ(t.has.spectral_inversion, get_val<bool>(&val_cp, "has.spectral_inversion", false));
-    ASSERT_EQ(t.has.over_range, get_val<bool>(&val_cp, "has.over_range", false));
-    ASSERT_EQ(t.has.sample_loss, get_val<bool>(&val_cp, "has.sample_loss", false));
-    ASSERT_EQ(t.has.user_defined11, get_val<bool>(&val_cp, "has.user_defined11", false));
-    ASSERT_EQ(t.has.user_defined10, get_val<bool>(&val_cp, "has.user_defined10", false));
-    ASSERT_EQ(t.has.user_defined9, get_val<bool>(&val_cp, "has.user_defined9", false));
-    ASSERT_EQ(t.has.user_defined8, get_val<bool>(&val_cp, "has.user_defined8", false));
-    ASSERT_EQ(t.calibrated_time, get_val<bool>(&val_cp, "calibrated_time", false));
-    ASSERT_EQ(t.valid_data, get_val<bool>(&val_cp, "valid_data", false));
-    ASSERT_EQ(t.reference_lock, get_val<bool>(&val_cp, "reference_lock", false));
-    ASSERT_EQ(t.agc_or_mgc, get_val<vrt_agc_or_mgc>(&val_cp, "agc_or_mgc", VRT_AOM_MGC));
-    ASSERT_EQ(t.detected_signal, get_val<bool>(&val_cp, "detected_signal", false));
-    ASSERT_EQ(t.spectral_inversion, get_val<bool>(&val_cp, "spectral_inversion", false));
-    ASSERT_EQ(t.over_range, get_val<bool>(&val_cp, "over_range", false));
-    ASSERT_EQ(t.sample_loss, get_val<bool>(&val_cp, "sample_loss", false));
-    ASSERT_EQ(t.user_defined11, get_val<bool>(&val_cp, "user_defined11", false));
-    ASSERT_EQ(t.user_defined10, get_val<bool>(&val_cp, "user_defined10", false));
-    ASSERT_EQ(t.user_defined9, get_val<bool>(&val_cp, "user_defined9", false));
-    ASSERT_EQ(t.user_defined8, get_val<bool>(&val_cp, "user_defined8", false));
-    ASSERT_EQ(t.has.associated_context_packet_count,
-              get_val<bool>(&val_cp, "has.associated_context_packet_count", false));
-    ASSERT_EQ(Hex(t.associated_context_packet_count),
-              Hex(get_val<uint8_t>(&val_cp, "associated_context_packet_count", 0)));
-
-    check_remaining(val_cp);
-}
 
 TEST_F(ReadTrailerTest, NegativeSizeBuffer) {
     ASSERT_EQ(vrt_read_trailer(buf_.data(), -1, &t_), VRT_ERR_BUFFER_SIZE);

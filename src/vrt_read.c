@@ -986,15 +986,13 @@ int32_t vrt_read_packet(void* buf, int32_t words_buf, vrt_packet* packet, bool v
             packet->words_body = packet->header.packet_size - words_total - (has_trailer ? 1 : 0);
 
             /* Body is actually optional */
-            if (packet->words_body < 0) {
+            if (validate && packet->words_body < 0) {
                 if (validate) {
                     return VRT_ERR_PACKET_SIZE_MISMATCH;
                 }
-
-                packet->body = NULL;
-            } else {
-                packet->body = b + words_total;
             }
+
+            packet->body = packet->words_body > 0 ? b + words_total : NULL;
 
             /* Check bounds */
             if (packet->words_body > words_buf - words_total) {

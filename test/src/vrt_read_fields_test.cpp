@@ -3,7 +3,6 @@
 #include <any>
 #include <array>
 #include <cstdint>
-#include <map>
 #include <string>
 
 #include <vrt/vrt_error_code.h>
@@ -11,9 +10,8 @@
 #include <vrt/vrt_read.h>
 #include <vrt/vrt_types.h>
 
-#include "hex.h"
 #include "init_garbage.h"
-#include "read_util.h"
+#include "read_assertions.h"
 
 class ReadFieldsTest : public ::testing::Test {
    protected:
@@ -29,26 +27,6 @@ class ReadFieldsTest : public ::testing::Test {
     vrt_fields              f_;
     std::array<uint32_t, 8> buf_;
 };
-
-/**
- * Assert fields section values.
- *
- * \param f      Fields.
- * \param values Lists non-default values, i.e. values that differ from the vrt_init_fields() state, as field name ->
- *               field value.
- */
-static void assert_fields(const vrt_fields& f, const std::map<std::string, std::any>& values) {
-    std::map<std::string, std::any> val_cp(values);
-    ASSERT_EQ(Hex(f.stream_id), Hex(get_val<uint32_t>(&val_cp, "stream_id", 0)));
-    ASSERT_EQ(Hex(f.class_id.oui), Hex(get_val<uint32_t>(&val_cp, "class_id.oui", 0)));
-    ASSERT_EQ(Hex(f.class_id.information_class_code),
-              Hex(get_val<uint16_t>(&val_cp, "class_id.information_class_code", 0)));
-    ASSERT_EQ(Hex(f.class_id.packet_class_code), Hex(get_val<uint16_t>(&val_cp, "class_id.packet_class_code", 0)));
-    ASSERT_EQ(Hex(f.integer_seconds_timestamp), Hex(get_val<uint32_t>(&val_cp, "integer_seconds_timestamp", 0)));
-    ASSERT_EQ(Hex(f.fractional_seconds_timestamp), Hex(get_val<uint64_t>(&val_cp, "fractional_seconds_timestamp", 0)));
-
-    check_remaining(val_cp);
-}
 
 TEST_F(ReadFieldsTest, NegativeSizeBuffer) {
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), -1, &f_, true), VRT_ERR_BUFFER_SIZE);
