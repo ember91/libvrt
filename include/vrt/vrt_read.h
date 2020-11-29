@@ -74,9 +74,9 @@ int32_t vrt_read_trailer(const void* buf, int32_t words_buf, vrt_trailer* traile
  * Low-level function that reads VRT IF context section.
  *
  * \param buf        Buffer to read from.
- * \param words_buf  Size of buf in 32-bit words. Starting from the header word.
+ * \param words_buf  Size of buf in 32-bit words.
  * \param if_context IF context struct to read into.
- * \param validate  True if validation should be done. If false, only buffer size is validated.
+ * \param validate   True if validation should be done. If false, only buffer size is validated.
  *
  * \return Number of read 32-bit words, or a negative number if error.
  * \retval VRT_ERR_BUFFER_SIZE                          Buffer is too small.
