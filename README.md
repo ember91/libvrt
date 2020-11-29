@@ -121,7 +121,7 @@ int main() {
     return EXIT_SUCCESS;
 }
 ```
-Examples can be found in [example/](example/).
+Examples can be found [here](example/src).
 
 For initializing a packet struct to default values:
 ```
@@ -144,7 +144,7 @@ For getting a string representation of an error:
 vrt_string_error(error)
 ```
 
-Other useful lower level functions:
+**Other useful lower level functions:**
 For initializing structs to default values:
 ```
 vrt_init_header(header)
