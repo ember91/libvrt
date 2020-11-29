@@ -147,13 +147,13 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, vrt_if_context* 
  *                                                      degrees).
  * \retval VRT_ERR_PACKET_SIZE_MISMATCH                 Packet size in header and calculated packet size do not match.
  *
- * \warning The packet body pointer will point into buffer buf.
+ * \warning The packet body pointer will point into buf. That's why buf isn't const.
  * \warning Fields represented as double but with an underlying 64-bit fixed precision format, i.e. bandwidth,
  *          if_reference_frequency, rf_reference_frequency, rf_reference_frequency_offset, if_band_offset, and
  *          sample_rate, may in rare cases lose precision since double only has 53 bits of precision.
  */
 VRT_WARN_UNUSED
-int32_t vrt_read_packet(const void* buf, int32_t words_buf, vrt_packet* packet, bool validate);
+int32_t vrt_read_packet(void* buf, int32_t words_buf, vrt_packet* packet, bool validate);
 
 #ifdef __cplusplus
 }

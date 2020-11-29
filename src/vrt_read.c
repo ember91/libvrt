@@ -956,8 +956,8 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, vrt_if_context* 
     return words;
 }
 
-int32_t vrt_read_packet(const void* buf, int32_t words_buf, vrt_packet* packet, bool validate) {
-    const uint32_t* b = (const uint32_t*)buf;
+int32_t vrt_read_packet(void* buf, int32_t words_buf, vrt_packet* packet, bool validate) {
+    uint32_t* b = (uint32_t*)buf;
 
     /* Header */
     int32_t words_header = vrt_read_header(b, words_buf, &packet->header, validate);

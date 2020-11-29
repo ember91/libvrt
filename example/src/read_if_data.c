@@ -3,11 +3,13 @@
  * packet on a little endian platform.
  */
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include <vrt/vrt_read.h>
 #include <vrt/vrt_string.h>
+#include <vrt/vrt_types.h>
 #include <vrt/vrt_util.h>
 
 /* Size of buffer in 32-bit words */

@@ -29,17 +29,9 @@ Includes
 --------
 
 
-- ``vrt_error_code.h`` (:ref:`file__home_emil_libvrt_include_vrt_vrt_error_code.h`)
-
 - ``vrt_types.h`` (:ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`)
 
 
-
-Included By
------------
-
-
-- :ref:`file__home_emil_libvrt_include_vrt_vrt_error_code.h`
 
 
 

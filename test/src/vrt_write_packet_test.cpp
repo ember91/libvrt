@@ -1,6 +1,9 @@
 #include <gtest/gtest.h>
 
 #include <array>
+#include <cstdint>
+#include <limits>
+#include <vector>
 
 #include <vrt/vrt_error_code.h>
 #include <vrt/vrt_init.h>

@@ -52,7 +52,7 @@ Functions
 
 - :ref:`exhale_function_vrt__read_8h_1a7b0934183b6fc69cb6dc157413f8664e`
 
-- :ref:`exhale_function_vrt__read_8h_1a27be3279fe35c507c17bdc9effe0574c`
+- :ref:`exhale_function_vrt__read_8h_1a3bd8d8ecbcff87f65615e4bec9a5f651`
 
 - :ref:`exhale_function_vrt__read_8h_1a643dc4ef9230bfded6aac41491d34078`
 
