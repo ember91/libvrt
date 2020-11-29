@@ -87,13 +87,13 @@ TEST_F(WritePacketTest, EmptyExtContext) {
 }
 
 TEST_F(WritePacketTest, BodyIfDataWithoutStreamId) {
-    p_.header.packet_type = VRT_PT_IF_DATA_WITHOUT_STREAM_ID;
-    std::array<uint32_t, 3> body;
-    body[0]       = 0xCECECECE;
-    body[1]       = 0xFEFEFEFE;
-    body[2]       = 0xDEDEDEDE;
-    p_.words_body = body.size();
-    p_.body       = body.data();
+    p_.header.packet_type        = VRT_PT_IF_DATA_WITHOUT_STREAM_ID;
+    std::array<uint32_t, 3> body = {};
+    body[0]                      = 0xCECECECE;
+    body[1]                      = 0xFEFEFEFE;
+    body[2]                      = 0xDEDEDEDE;
+    p_.words_body                = body.size();
+    p_.body                      = body.data();
     ASSERT_EQ(vrt_write_packet(&p_, buf_.data(), 4, true), 4);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00000004));
     ASSERT_EQ(Hex(buf_[1]), Hex(0xCECECECE));
