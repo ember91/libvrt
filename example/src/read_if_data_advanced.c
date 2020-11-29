@@ -39,6 +39,7 @@ int main() {
         fclose(fp);
         return EXIT_FAILURE;
     }
+    fclose(fp);
 
     /* Read header */
     int32_t    offset = 0;
