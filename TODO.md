@@ -6,6 +6,5 @@
 * Check that float, double... are inside bounds when writing and validating
 
 # Future
-* Restrict keyword?
 * Add support for 128 bit float
 * Add single header library?
