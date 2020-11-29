@@ -325,7 +325,7 @@ Program Listing for File vrt_types.h
        vrt_header     header;     
        vrt_fields     fields;     
        void*          body;       
-       uint32_t       words_body; 
+       int32_t        words_body; 
        vrt_trailer    trailer;    
        vrt_if_context if_context; 
    } vrt_packet;

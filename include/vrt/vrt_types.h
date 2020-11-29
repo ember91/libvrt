@@ -723,7 +723,7 @@ typedef struct vrt_packet {
     vrt_header     header;     /**< Header. */
     vrt_fields     fields;     /**< Fields. */
     void*          body;       /**< Data payload for data packets, or custom context section for Ext context packets. */
-    uint32_t       words_body; /**< Number of 32-bit words used for body. */
+    int32_t        words_body; /**< Number of 32-bit words used for body. */
     vrt_trailer    trailer;    /**< Trailer. */
     vrt_if_context if_context; /**< IF context. */
 } vrt_packet;

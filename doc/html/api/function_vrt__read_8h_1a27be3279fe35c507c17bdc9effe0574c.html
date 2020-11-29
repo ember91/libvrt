@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Function vrt_read_if_context &mdash; libvrt  documentation</title>
+  <title>Function vrt_read_packet &mdash; libvrt  documentation</title>
   
 
   
@@ -35,7 +35,9 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Function vrt_read_trailer" href="function_vrt__read_8h_1a643dc4ef9230bfded6aac41491d34078.html" />
+    <link rel="prev" title="Function vrt_read_if_context" href="function_vrt__read_8h_1a7b0934183b6fc69cb6dc157413f8664e.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -128,13 +130,15 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Function vrt_read_if_context</li>
+          <li><a href="library_root.html">Library API</a> &raquo;</li>
+        
+      <li>Function vrt_read_packet</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/api/function_vrt__read_8h_1a666f0e6b3447dbed83ea63785ccc4f10.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/function_vrt__read_8h_1a27be3279fe35c507c17bdc9effe0574c.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -147,8 +151,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="function-vrt-read-if-context">
-<span id="exhale-function-vrt-read-8h-1a666f0e6b3447dbed83ea63785ccc4f10"></span><h1>Function vrt_read_if_context<a class="headerlink" href="#function-vrt-read-if-context" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="function-vrt-read-packet">
+<span id="exhale-function-vrt-read-8h-1a27be3279fe35c507c17bdc9effe0574c"></span><h1>Function vrt_read_packet<a class="headerlink" href="#function-vrt-read-packet" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>Defined in <a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_read.h.html#file-home-emil-libvrt-include-vrt-vrt-read-h"><span class="std std-ref">File vrt_read.h</span></a></p></li>
 </ul>
@@ -156,23 +160,29 @@
 <h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="cpp function">
 <dt>
-<span class="target" id="vrt__read_8h_1a7b0934183b6fc69cb6dc157413f8664e"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_read_if_context (const void *buf, int32_t words_buf, vrt_if_context *if_context, bool validate)</code></dt>
-<dd><p>Low-level function that reads VRT IF context section.</p>
+<span class="target" id="vrt__read_8h_1a27be3279fe35c507c17bdc9effe0574c"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_read_packet (const void *buf, int32_t words_buf, vrt_packet *packet, bool validate)</code></dt>
+<dd><p>Higher-level function that reads a full VRT packet.</p>
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>Number of read 32-bit words, or a negative number if error. </p>
+</dd>
+<dt><strong>Warning</strong></dt><dd><p>The packet body pointer will point into buffer buf. </p>
 </dd>
 <dt><strong>Warning</strong></dt><dd><p>Fields represented as double but with an underlying 64-bit fixed precision format, i.e. bandwidth, if_reference_frequency, rf_reference_frequency, rf_reference_frequency_offset, if_band_offset, and sample_rate, may in rare cases lose precision since double only has 53 bits of precision. </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Buffer to read from. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">words_buf</span></code>: Size of buf in 32-bit words. Starting from the header word. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if_context</span></code>: IF context struct to read into. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">words_buf</span></code>: Size of buf in 32-bit words. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">packet</span></code>: Packet struct to read into. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">validate</span></code>: True if validation should be done. If false, only buffer size is validated.</p></li>
 </ul>
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUFFER_SIZE</span></code>: Buffer is too small. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_RESERVED</span></code>: One or multiple reserved bits are set. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_PACKET_TYPE</span></code>: Packet type is an invalid value. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_TRAILER_IN_CONTEXT</span></code>: Context packet has trailer bit set. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_TSM_IN_DATA</span></code>: Data packet has TSM bit set. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds (&gt; 999999999999 ps). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_BANDWIDTH</span></code>: Bandwidth is outside valid bounds (&lt; 0 Hz). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_GAIN_STAGE2_SET</span></code>: Gain stage 1 must be used instead of stage 2 when only one is set. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SAMPLE_RATE</span></code>: Sample rate is outside valid bounds (&lt; 0 Hz). </p></li>
@@ -181,12 +191,12 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_DATA_ITEM_FORMAT</span></code>: Data item format is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP</span></code>: Integer second timestamp is not 0xFFFFFFFF when TSI is VRT_TSI_UNDEFINED. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP</span></code>: Fractional second timestamp is not 0xFFFFFFFFFFFFFFFF when TSF is VRT_TSF_UNDEFINED. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds (&gt; 999999999999 ps). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LATITUDE</span></code>: Latitude is outside valid bounds (&lt; -90 or &gt; 90 degrees). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LONGITUDE</span></code>: Longitude is outside valid bounds (&lt; -180 or &gt; 180 degrees). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_HEADING_ANGLE</span></code>: Heading angle outside valid bounds (&lt; 0 or &gt; 359.999999761582 degrees). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TRACK_ANGLE</span></code>: Track angle is outside valid bounds (&lt; 0 or &gt; 359.999999761582 degrees). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_MAGNETIC_VARIATION</span></code>: Magnetic variation is outside valid bounds (&lt; -180 or &gt; 180 degrees).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_MAGNETIC_VARIATION</span></code>: Magnetic variation is outside valid bounds (&lt; -180 or &gt; 180 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_PACKET_SIZE_MISMATCH</span></code>: Packet size in header and calculated packet size do not match.</p></li>
 </ul>
 </dd>
 </dl>
@@ -201,6 +211,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="function_vrt__read_8h_1a643dc4ef9230bfded6aac41491d34078.html" class="btn btn-neutral float-right" title="Function vrt_read_trailer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="function_vrt__read_8h_1a7b0934183b6fc69cb6dc157413f8664e.html" class="btn btn-neutral float-left" title="Function vrt_read_if_context" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

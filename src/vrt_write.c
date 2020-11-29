@@ -811,6 +811,7 @@ int32_t vrt_write_packet(const vrt_packet* packet, void* buf, int32_t words_buf,
             break;
         }
         case VRT_PT_IF_CONTEXT: {
+            /* IF context */
             int32_t words_if_context =
                 vrt_write_if_context(&packet->if_context, b + words_total, words_buf - words_total, validate);
             if (words_if_context < 0) {

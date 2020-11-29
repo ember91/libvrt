@@ -955,3 +955,89 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, vrt_if_context* 
 
     return words;
 }
+
+int32_t vrt_read_packet(const void* buf, int32_t words_buf, vrt_packet* packet, bool validate) {
+    const uint32_t* b = (const uint32_t*)buf;
+
+    /* Header */
+    int32_t words_header = vrt_read_header(b, words_buf, &packet->header, validate);
+    if (words_header < 0) {
+        return words_header;
+    }
+    int32_t words_total = words_header;
+
+    /* Fields */
+    int32_t words_fields =
+        vrt_read_fields(&packet->header, b + words_total, words_buf - words_total, &packet->fields, validate);
+    if (words_fields < 0) {
+        return words_fields;
+    }
+    words_total += words_fields;
+
+    bool has_trailer = !vrt_is_context(&packet->header) && packet->header.has.trailer;
+
+    /* Body */
+    switch (packet->header.packet_type) {
+        case VRT_PT_IF_DATA_WITHOUT_STREAM_ID:
+        case VRT_PT_IF_DATA_WITH_STREAM_ID:
+        case VRT_PT_EXT_DATA_WITHOUT_STREAM_ID:
+        case VRT_PT_EXT_DATA_WITH_STREAM_ID:
+        case VRT_PT_EXT_CONTEXT: {
+            packet->words_body = packet->header.packet_size - words_total - (has_trailer ? 1 : 0);
+
+            /* Body is actually optional */
+            if (packet->words_body < 0) {
+                if (validate) {
+                    return VRT_ERR_PACKET_SIZE_MISMATCH;
+                }
+
+                packet->body = NULL;
+            } else {
+                packet->body = b + words_total;
+            }
+
+            /* Check bounds */
+            if (packet->words_body > words_buf - words_total) {
+                return VRT_ERR_BUFFER_SIZE;
+            }
+
+            words_total += packet->words_body;
+            break;
+        }
+        case VRT_PT_IF_CONTEXT: {
+            /* IF context */
+            int32_t words_if_context =
+                vrt_read_if_context(b + words_total, words_buf - words_total, &packet->if_context, validate);
+            if (words_if_context < 0) {
+                return words_if_context;
+            }
+            words_total += words_if_context;
+
+            /* Set some words to default */
+            packet->words_body = 0;
+            packet->body       = NULL;
+
+            break;
+        }
+        default: {
+            /* Do nothing here. Note that validation must be false to end up here. */
+            break;
+        }
+    }
+
+    /* Trailer */
+    if (has_trailer) {
+        int32_t words_trailer = vrt_read_trailer(b + words_total, words_buf - words_total, &packet->trailer);
+        if (words_trailer < 0) {
+            return words_trailer;
+        }
+        words_total += words_trailer;
+    }
+
+    /* Sanity checks */
+    if (validate && packet->header.packet_size != words_total) {
+        return VRT_ERR_PACKET_SIZE_MISMATCH;
+    }
+
+    return words_total;
+}

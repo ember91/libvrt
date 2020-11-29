@@ -305,7 +305,7 @@ TEST_F(WritePacketTest, ValidationIfContext) {
     ASSERT_EQ(Hex(buf_[5]), Hex(0xBAADF00D));
 }
 
-TEST_F(WritePacketTest, ValidationBody) {
+TEST_F(WritePacketTest, ValidationBoundsPacketSize) {
     /* Use heap allocated vectors instead here to avoid stack overflow */
     std::vector<uint32_t> buf_big;
     buf_big.resize(std::numeric_limits<uint16_t>::max() + 100);

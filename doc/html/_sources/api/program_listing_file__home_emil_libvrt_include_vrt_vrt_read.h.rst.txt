@@ -39,6 +39,9 @@ Program Listing for File vrt_read.h
    VRT_WARN_UNUSED
    int32_t vrt_read_if_context(const void* buf, int32_t words_buf, vrt_if_context* if_context, bool validate);
    
+   VRT_WARN_UNUSED
+   int32_t vrt_read_packet(const void* buf, int32_t words_buf, vrt_packet* packet, bool validate);
+   
    #ifdef __cplusplus
    }
    #endif
