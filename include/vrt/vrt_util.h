@@ -23,11 +23,11 @@ extern "C" {
 
 /* Silence warnings when using C++ */
 #ifdef __cplusplus
-#define STATIC_CAST(T, X)      static_cast<T>(X)
-#define REINTERPRET_CAST(T, X) reinterpret_cast<T>(X)
+#define VRT_STATIC_CAST(T, X)      static_cast<T>(X)
+#define VRT_REINTERPRET_CAST(T, X) reinterpret_cast<T>(X)
 #else
-#define STATIC_CAST(T, X)      (T)(X)
-#define REINTERPRET_CAST(T, X) (T)(X)
+#define VRT_STATIC_CAST(T, X)      (T)(X)
+#define VRT_REINTERPRET_CAST(T, X) (T)(X)
 #endif
 
 /**
@@ -40,7 +40,7 @@ extern "C" {
  * \warning Undefined behaviour if type is outside bounds.
  */
 inline bool vrt_is_context(const vrt_header* header) {
-    return (STATIC_CAST(uint32_t, header->packet_type) & 0x4U) != 0;
+    return (VRT_STATIC_CAST(uint32_t, header->packet_type) & 0x4U) != 0;
 }
 
 /**
@@ -53,7 +53,7 @@ inline bool vrt_is_context(const vrt_header* header) {
  * \warning Undefined behaviour if type is outside bounds.
  */
 inline bool vrt_has_stream_id(const vrt_header* header) {
-    return (STATIC_CAST(uint32_t, header->packet_type) & 0x5U) != 0;
+    return (VRT_STATIC_CAST(uint32_t, header->packet_type) & 0x5U) != 0;
 }
 
 /**
@@ -63,7 +63,7 @@ inline bool vrt_has_stream_id(const vrt_header* header) {
  */
 inline bool vrt_is_platform_little_endian() {
     volatile uint32_t i = 0x01234567; /* Ensure written to memory */
-    return *REINTERPRET_CAST(volatile uint8_t*, &i) == 0x67;
+    return *VRT_REINTERPRET_CAST(volatile uint8_t*, &i) == 0x67;
 }
 
 #ifdef __cplusplus
