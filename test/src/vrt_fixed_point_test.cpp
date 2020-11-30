@@ -21,7 +21,7 @@ TEST(FixedPointTest, I16ToFloat) {
     ASSERT_FLOAT_EQ(vrt_fixed_point_i16_to_float(static_cast<int16_t>(0xFFC0), 6), -1.0F);
     ASSERT_FLOAT_EQ(vrt_fixed_point_i16_to_float(static_cast<int16_t>(0x0040), 6), 1.0F);
     ASSERT_FLOAT_EQ(vrt_fixed_point_i16_to_float(static_cast<int16_t>(0x8000), 6), -512.0F);
-    ASSERT_FLOAT_EQ(vrt_fixed_point_i16_to_float(static_cast<int16_t>(0x7FFF), 6), 512.F - 0.015625F);
+    ASSERT_FLOAT_EQ(vrt_fixed_point_i16_to_float(static_cast<int16_t>(0x7FFF), 6), 512.0F - 0.015625F);
     ASSERT_FLOAT_EQ(vrt_fixed_point_i16_to_float(static_cast<int16_t>(0xFFFF), 6), -0.015625F);
     ASSERT_FLOAT_EQ(vrt_fixed_point_i16_to_float(static_cast<int16_t>(0x0001), 6), 0.015625F);
 }
