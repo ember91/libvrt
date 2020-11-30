@@ -2,6 +2,7 @@
 
 #include <stddef.h>
 
+#include "vrt_bounds.h"
 #include "vrt_error_code.h"
 #include "vrt_types.h"
 #include "vrt_util.h"
