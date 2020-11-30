@@ -123,7 +123,27 @@ TEST_F(WriteIfContextTest, Bandwidth) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, BandwidthInvalid) {
+TEST_F(WriteIfContextTest, BandwidthSmall) {
+    c_.has.bandwidth = true;
+    c_.bandwidth     = 0.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), 3);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x20000000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, BandwidthLarge) {
+    c_.has.bandwidth = true;
+    c_.bandwidth     = 8.79e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), 3);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x20000000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x7FE94D3D));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xC0000000));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, BandwidthInvalidSmall) {
     c_.has.bandwidth = true;
     c_.bandwidth     = -1.0;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_BANDWIDTH);
@@ -133,6 +153,13 @@ TEST_F(WriteIfContextTest, BandwidthInvalid) {
     /* Due to low precision of double when converting to fixed point, don't do the comparison below */
     /*ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));*/
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, BandwidthInvalidLarge) {
+    c_.has.bandwidth = true;
+    c_.bandwidth     = 8.80e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_BANDWIDTH);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
 }
 
 TEST_F(WriteIfContextTest, IfReferenceFrequency) {
@@ -145,6 +172,40 @@ TEST_F(WriteIfContextTest, IfReferenceFrequency) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
+TEST_F(WriteIfContextTest, IfReferenceFrequencySmall) {
+    c_.has.if_reference_frequency = true;
+    c_.if_reference_frequency     = -8.79e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), 3);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x10000000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x8016B2C2));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0x40000000));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, IfReferenceFrequencyLarge) {
+    c_.has.if_reference_frequency = true;
+    c_.if_reference_frequency     = 8.79e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), 3);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x10000000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x7FE94D3D));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xC0000000));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, IfReferenceFrequencyInvalidSmall) {
+    c_.has.if_reference_frequency = true;
+    c_.if_reference_frequency     = -8.80e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_IF_REFERENCE_FREQUENCY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
+}
+
+TEST_F(WriteIfContextTest, IfReferenceFrequencyInvalidLarge) {
+    c_.has.if_reference_frequency = true;
+    c_.if_reference_frequency     = 8.80e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_IF_REFERENCE_FREQUENCY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
+}
+
 TEST_F(WriteIfContextTest, RfReferenceFrequency) {
     c_.has.rf_reference_frequency = true;
     c_.rf_reference_frequency     = 4097.0;
@@ -153,6 +214,40 @@ TEST_F(WriteIfContextTest, RfReferenceFrequency) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x00000001));
     ASSERT_EQ(Hex(buf_[2]), Hex(0x00100000));
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RfReferenceFrequencySmall) {
+    c_.has.rf_reference_frequency = true;
+    c_.rf_reference_frequency     = -8.79e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), 3);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x08000000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x8016B2C2));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0x40000000));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RfReferenceFrequencyLarge) {
+    c_.has.rf_reference_frequency = true;
+    c_.rf_reference_frequency     = 8.79e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), 3);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x08000000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x7FE94D3D));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xC0000000));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RfReferenceFrequencyInvalidSmall) {
+    c_.has.rf_reference_frequency = true;
+    c_.rf_reference_frequency     = -8.80e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
+}
+
+TEST_F(WriteIfContextTest, RfReferenceFrequencyInvalidLarge) {
+    c_.has.rf_reference_frequency = true;
+    c_.rf_reference_frequency     = 8.80e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
 }
 
 TEST_F(WriteIfContextTest, RfReferenceFrequencyOffset) {
@@ -165,6 +260,40 @@ TEST_F(WriteIfContextTest, RfReferenceFrequencyOffset) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
+TEST_F(WriteIfContextTest, RfReferenceFrequencyOffsetSmall) {
+    c_.has.rf_reference_frequency_offset = true;
+    c_.rf_reference_frequency_offset     = -8.79e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), 3);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x04000000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x8016B2C2));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0x40000000));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RfReferenceFrequencyOffsetLarge) {
+    c_.has.rf_reference_frequency_offset = true;
+    c_.rf_reference_frequency_offset     = 8.79e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), 3);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x04000000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x7FE94D3D));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xC0000000));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, RfReferenceFrequencyOffsetInvalidSmall) {
+    c_.has.rf_reference_frequency_offset = true;
+    c_.rf_reference_frequency_offset     = -8.80e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY_OFFSET);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
+}
+
+TEST_F(WriteIfContextTest, RfReferenceFrequencyOffsetInvalidLarge) {
+    c_.has.rf_reference_frequency_offset = true;
+    c_.rf_reference_frequency_offset     = 8.80e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY_OFFSET);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
+}
+
 TEST_F(WriteIfContextTest, IfBandOffset) {
     c_.has.if_band_offset = true;
     c_.if_band_offset     = 4097.0;
@@ -175,6 +304,40 @@ TEST_F(WriteIfContextTest, IfBandOffset) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
+TEST_F(WriteIfContextTest, IfBandOffsetSmall) {
+    c_.has.if_band_offset = true;
+    c_.if_band_offset     = -8.79e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), 3);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x02000000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x8016B2C2));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0x40000000));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, IfBandOffsetLarge) {
+    c_.has.if_band_offset = true;
+    c_.if_band_offset     = 8.79e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), 3);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x02000000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x7FE94D3D));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xC0000000));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, IfBandOffsetInvalidSmall) {
+    c_.has.if_band_offset = true;
+    c_.if_band_offset     = -8.80e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_IF_BAND_OFFSET);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
+}
+
+TEST_F(WriteIfContextTest, IfBandOffsetInvalidLarge) {
+    c_.has.if_band_offset = true;
+    c_.if_band_offset     = 8.80e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_IF_BAND_OFFSET);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
+}
+
 TEST_F(WriteIfContextTest, ReferenceLevel) {
     c_.has.reference_level = true;
     c_.reference_level     = -1.0F;
@@ -182,6 +345,38 @@ TEST_F(WriteIfContextTest, ReferenceLevel) {
     ASSERT_EQ(Hex(buf_[0]), Hex(0x01000000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0000FF80));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, ReferenceLevelSmall) {
+    c_.has.reference_level = true;
+    c_.reference_level     = -256.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x01000000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00008000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, ReferenceLevelLarge) {
+    c_.has.reference_level = true;
+    c_.reference_level     = 256.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x01000000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00008000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, ReferenceLevelInvalidSmall) {
+    c_.has.reference_level = true;
+    c_.reference_level     = -257.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_BOUNDS_REFERENCE_LEVEL);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, false), 2);
+}
+
+TEST_F(WriteIfContextTest, ReferenceLevelInvalidLarge) {
+    c_.has.reference_level = true;
+    c_.reference_level     = 257.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_BOUNDS_REFERENCE_LEVEL);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, false), 2);
 }
 
 TEST_F(WriteIfContextTest, Gain1) {
@@ -204,7 +399,59 @@ TEST_F(WriteIfContextTest, Gain2) {
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, GainInvalid) {
+TEST_F(WriteIfContextTest, GainSmall) {
+    c_.has.gain    = true;
+    c_.gain.stage1 = -256.0F;
+    c_.gain.stage2 = -256.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00800000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x80008000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, GainLarge) {
+    c_.has.gain    = true;
+    c_.gain.stage1 = 256.0F;
+    c_.gain.stage2 = 256.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00800000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x80008000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, GainStage1InvalidSmall) {
+    c_.has.gain    = true;
+    c_.gain.stage1 = -257.0F;
+    c_.gain.stage2 = 1.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_BOUNDS_GAIN);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, false), 2);
+}
+
+TEST_F(WriteIfContextTest, GainStage2InvalidSmall) {
+    c_.has.gain    = true;
+    c_.gain.stage1 = 1.0F;
+    c_.gain.stage2 = -257.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_BOUNDS_GAIN);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, false), 2);
+}
+
+TEST_F(WriteIfContextTest, GainStage1InvalidLarge) {
+    c_.has.gain    = true;
+    c_.gain.stage1 = 257.0F;
+    c_.gain.stage2 = 1.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_BOUNDS_GAIN);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, false), 2);
+}
+
+TEST_F(WriteIfContextTest, GainStage2InvalidLarge) {
+    c_.has.gain    = true;
+    c_.gain.stage1 = 1.0F;
+    c_.gain.stage2 = 257.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_BOUNDS_GAIN);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, false), 2);
+}
+
+TEST_F(WriteIfContextTest, GainInvalidStage2Set) {
     c_.has.gain    = true;
     c_.gain.stage1 = 0.0F;
     c_.gain.stage2 = 1.0F;
@@ -234,7 +481,27 @@ TEST_F(WriteIfContextTest, SampleRate) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, SampleRateInvalid) {
+TEST_F(WriteIfContextTest, SampleRateSmall) {
+    c_.has.sample_rate = true;
+    c_.sample_rate     = 0.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), 3);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00200000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0x00000000));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, SampleRateLarge) {
+    c_.has.sample_rate = true;
+    c_.sample_rate     = 8.79e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), 3);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00200000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x7FE94D3D));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xC0000000));
+    ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, SampleRateInvalidSmall) {
     c_.has.sample_rate = true;
     c_.sample_rate     = -1.0;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_SAMPLE_RATE);
@@ -244,6 +511,13 @@ TEST_F(WriteIfContextTest, SampleRateInvalid) {
     /* Due to low precision of double when converting to fixed point, don't do the comparison below */
     /*ASSERT_EQ(Hex(buf_[2]), Hex(0xFFFFFFFF));*/
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, SampleRateInvalidLarge) {
+    c_.has.sample_rate = true;
+    c_.sample_rate     = 8.80e12;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_BOUNDS_SAMPLE_RATE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, false), 3);
 }
 
 TEST_F(WriteIfContextTest, TimestampAdjustment) {
@@ -274,7 +548,25 @@ TEST_F(WriteIfContextTest, Temperature) {
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, TemperatureInvalid) {
+TEST_F(WriteIfContextTest, TemperatureSmall) {
+    c_.has.temperature = true;
+    c_.temperature     = -273.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00040000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x0000BBC0));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, TemperatureLarge) {
+    c_.has.temperature = true;
+    c_.temperature     = 511.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00040000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00007FC0));
+    ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, TemperatureInvalidSmall) {
     c_.has.temperature = true;
     c_.temperature     = -274.0F;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_BOUNDS_TEMPERATURE);
@@ -282,6 +574,13 @@ TEST_F(WriteIfContextTest, TemperatureInvalid) {
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00040000));
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0000BB80));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
+}
+
+TEST_F(WriteIfContextTest, TemperatureInvalidLarge) {
+    c_.has.temperature = true;
+    c_.temperature     = 512.0F;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_BOUNDS_TEMPERATURE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, false), 2);
 }
 
 TEST_F(WriteIfContextTest, DeviceIdentifierOui) {
@@ -559,7 +858,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatPackingMethod) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, DataPacketPayloadFormatPackingMethodInvalid1) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatPackingMethodInvalidSmall) {
     c_.has.data_packet_payload_format            = true;
     c_.data_packet_payload_format.packing_method = static_cast<vrt_packing_method>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_PACKING_METHOD);
@@ -570,7 +869,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatPackingMethodInvalid1) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, DataPacketPayloadFormatPackingMethodInvalid2) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatPackingMethodInvalidLarge) {
     c_.has.data_packet_payload_format            = true;
     c_.data_packet_payload_format.packing_method = static_cast<vrt_packing_method>(2);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_PACKING_METHOD);
@@ -591,7 +890,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatRealOrComplex) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, DataPacketPayloadFormatRealOrComplexInvalid1) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatRealOrComplexInvalidSmall) {
     c_.has.data_packet_payload_format             = true;
     c_.data_packet_payload_format.real_or_complex = static_cast<vrt_real_complex>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_REAL_OR_COMPLEX);
@@ -602,7 +901,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatRealOrComplexInvalid1) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, DataPacketPayloadFormatRealOrComplexInvalid2) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatRealOrComplexInvalidLarge) {
     c_.has.data_packet_payload_format             = true;
     c_.data_packet_payload_format.real_or_complex = static_cast<vrt_real_complex>(3);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_REAL_OR_COMPLEX);
@@ -623,7 +922,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormat) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid1) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalidSmall) {
     c_.has.data_packet_payload_format              = true;
     c_.data_packet_payload_format.data_item_format = static_cast<vrt_data_item_format>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_DATA_ITEM_FORMAT);
@@ -634,7 +933,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid1) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid2) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalidLarge) {
     c_.has.data_packet_payload_format              = true;
     c_.data_packet_payload_format.data_item_format = static_cast<vrt_data_item_format>(0x07);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_DATA_ITEM_FORMAT);
@@ -791,7 +1090,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsi) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsiInvalid1) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsiInvalidSmall) {
     c_.has.formatted_gps_geolocation = true;
     c_.formatted_gps_geolocation.tsi = static_cast<vrt_tsi>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSI);
@@ -802,7 +1101,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsiInvalid1) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsiInvalid2) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsiInvalidLarge) {
     c_.has.formatted_gps_geolocation = true;
     c_.formatted_gps_geolocation.tsi = static_cast<vrt_tsi>(4);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSI);
@@ -822,7 +1121,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsf) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsfInvalid1) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsfInvalidSmall) {
     c_.has.formatted_gps_geolocation = true;
     c_.formatted_gps_geolocation.tsf = static_cast<vrt_tsf>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSF);
@@ -833,7 +1132,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsfInvalid1) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsfInvalid2) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationTsfInvalidLarge) {
     c_.has.formatted_gps_geolocation = true;
     c_.formatted_gps_geolocation.tsf = static_cast<vrt_tsf>(4);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSF);
@@ -1002,7 +1301,29 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLatitude) {
     ASSERT_EQ(Hex(buf_[5]), Hex(0x00400000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLatitudeInvalid1) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLatitudeSmall) {
+    c_.has.formatted_gps_geolocation          = true;
+    c_.formatted_gps_geolocation.has.latitude = true;
+    c_.formatted_gps_geolocation.latitude     = -90.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {5}, true);
+    ASSERT_EQ(Hex(buf_[5]), Hex(0xE9800000));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLatitudeLarge) {
+    c_.has.formatted_gps_geolocation          = true;
+    c_.formatted_gps_geolocation.has.latitude = true;
+    c_.formatted_gps_geolocation.latitude     = 90.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {5}, true);
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x16800000));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLatitudeInvalidSmall) {
     c_.has.formatted_gps_geolocation          = true;
     c_.formatted_gps_geolocation.has.latitude = true;
     c_.formatted_gps_geolocation.latitude     = -91.0;
@@ -1014,7 +1335,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLatitudeInvalid1) {
     ASSERT_EQ(Hex(buf_[5]), Hex(0xE9400000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLatitudeInvalid2) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLatitudeInvalidLarge) {
     c_.has.formatted_gps_geolocation          = true;
     c_.formatted_gps_geolocation.has.latitude = true;
     c_.formatted_gps_geolocation.latitude     = 91.0;
@@ -1037,7 +1358,29 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLongitude) {
     ASSERT_EQ(Hex(buf_[6]), Hex(0x00400000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLongitudeInvalid1) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLongitudeSmall) {
+    c_.has.formatted_gps_geolocation           = true;
+    c_.formatted_gps_geolocation.has.longitude = true;
+    c_.formatted_gps_geolocation.longitude     = -180.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {6}, true);
+    ASSERT_EQ(Hex(buf_[6]), Hex(0xD3000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLongitudeLarge) {
+    c_.has.formatted_gps_geolocation           = true;
+    c_.formatted_gps_geolocation.has.longitude = true;
+    c_.formatted_gps_geolocation.longitude     = 180.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {6}, true);
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x2D000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLongitudeInvalidSmall) {
     c_.has.formatted_gps_geolocation           = true;
     c_.formatted_gps_geolocation.has.longitude = true;
     c_.formatted_gps_geolocation.longitude     = -181.0;
@@ -1049,7 +1392,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLongitudeInvalid1) {
     ASSERT_EQ(Hex(buf_[6]), Hex(0xD2C00000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLongitudeInvalid2) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothLongitudeInvalidLarge) {
     c_.has.formatted_gps_geolocation           = true;
     c_.formatted_gps_geolocation.has.longitude = true;
     c_.formatted_gps_geolocation.longitude     = 181.0;
@@ -1072,6 +1415,44 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothAltitude) {
     ASSERT_EQ(Hex(buf_[7]), Hex(0x00000020));
 }
 
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothAltitudeSmall) {
+    c_.has.formatted_gps_geolocation          = true;
+    c_.formatted_gps_geolocation.has.altitude = true;
+    c_.formatted_gps_geolocation.altitude     = -67108e3;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {7}, true);
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x80006C00));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothAltitudeLarge) {
+    c_.has.formatted_gps_geolocation          = true;
+    c_.formatted_gps_geolocation.has.altitude = true;
+    c_.formatted_gps_geolocation.altitude     = 67108e3;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {7}, true);
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFF9400));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothAltitudeInvalidSmall) {
+    c_.has.formatted_gps_geolocation          = true;
+    c_.formatted_gps_geolocation.has.altitude = true;
+    c_.formatted_gps_geolocation.altitude     = -67109e3;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_ALTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothAltitudeInvalidLarge) {
+    c_.has.formatted_gps_geolocation          = true;
+    c_.formatted_gps_geolocation.has.altitude = true;
+    c_.formatted_gps_geolocation.altitude     = 67109e3;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_ALTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+}
+
 TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothSpeedOverGround) {
     c_.has.formatted_gps_geolocation                   = true;
     c_.formatted_gps_geolocation.has.speed_over_ground = true;
@@ -1083,7 +1464,29 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothSpeedOverGround) {
     ASSERT_EQ(Hex(buf_[8]), Hex(0x00010000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothSpeedOverGroundInvalid) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothSpeedOverGroundSmall) {
+    c_.has.formatted_gps_geolocation                   = true;
+    c_.formatted_gps_geolocation.has.speed_over_ground = true;
+    c_.formatted_gps_geolocation.speed_over_ground     = 0.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {8}, true);
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x00000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothSpeedOverGroundLarge) {
+    c_.has.formatted_gps_geolocation                   = true;
+    c_.formatted_gps_geolocation.has.speed_over_ground = true;
+    c_.formatted_gps_geolocation.speed_over_ground     = 65535.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {8}, true);
+    ASSERT_EQ(Hex(buf_[8]), Hex(0xFFFF0000));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothSpeedOverGroundInvalidSmall) {
     c_.has.formatted_gps_geolocation                   = true;
     c_.formatted_gps_geolocation.has.speed_over_ground = true;
     c_.formatted_gps_geolocation.speed_over_ground     = -1.0;
@@ -1093,6 +1496,14 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothSpeedOverGroundInvalid) {
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     buf_cmp_geolocation_ephemeris(buf_, {8}, true);
     ASSERT_EQ(Hex(buf_[8]), Hex(0xFFFF0000));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothSpeedOverGroundInvalidLarge) {
+    c_.has.formatted_gps_geolocation                   = true;
+    c_.formatted_gps_geolocation.has.speed_over_ground = true;
+    c_.formatted_gps_geolocation.speed_over_ground     = 65536.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_SPEED_OVER_GROUND);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
 }
 
 TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngle) {
@@ -1106,7 +1517,29 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngle) {
     ASSERT_EQ(Hex(buf_[9]), Hex(0x00400000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngleInvalid1) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngleSmall) {
+    c_.has.formatted_gps_geolocation               = true;
+    c_.formatted_gps_geolocation.has.heading_angle = true;
+    c_.formatted_gps_geolocation.heading_angle     = 0.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {9}, true);
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x00000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngleLarge) {
+    c_.has.formatted_gps_geolocation               = true;
+    c_.formatted_gps_geolocation.has.heading_angle = true;
+    c_.formatted_gps_geolocation.heading_angle     = 359.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {9}, true);
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x59C00000));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngleInvalidSmall) {
     c_.has.formatted_gps_geolocation               = true;
     c_.formatted_gps_geolocation.has.heading_angle = true;
     c_.formatted_gps_geolocation.heading_angle     = -1.0;
@@ -1118,7 +1551,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngleInvalid1) {
     ASSERT_EQ(Hex(buf_[9]), Hex(0xFFC00000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngleInvalid2) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothHeadingAngleInvalidLarge) {
     c_.has.formatted_gps_geolocation               = true;
     c_.formatted_gps_geolocation.has.heading_angle = true;
     c_.formatted_gps_geolocation.heading_angle     = 360.0;
@@ -1141,7 +1574,29 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothTrackAngle) {
     ASSERT_EQ(Hex(buf_[10]), Hex(0x00400000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothTrackAngleInvalid1) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothTrackAngleSmall) {
+    c_.has.formatted_gps_geolocation             = true;
+    c_.formatted_gps_geolocation.has.track_angle = true;
+    c_.formatted_gps_geolocation.track_angle     = 0.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {10}, true);
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x00000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothTrackAngleLarge) {
+    c_.has.formatted_gps_geolocation             = true;
+    c_.formatted_gps_geolocation.has.track_angle = true;
+    c_.formatted_gps_geolocation.track_angle     = 359.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {10}, true);
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x59C00000));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothTrackAngleInvalidSmall) {
     c_.has.formatted_gps_geolocation             = true;
     c_.formatted_gps_geolocation.has.track_angle = true;
     c_.formatted_gps_geolocation.track_angle     = -1.0;
@@ -1153,7 +1608,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothTrackAngleInvalid1) {
     ASSERT_EQ(Hex(buf_[10]), Hex(0xFFC00000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothTrackAngleInvalid2) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothTrackAngleInvalidLarge) {
     c_.has.formatted_gps_geolocation             = true;
     c_.formatted_gps_geolocation.has.track_angle = true;
     c_.formatted_gps_geolocation.track_angle     = 360.0;
@@ -1176,7 +1631,29 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariation) {
     ASSERT_EQ(Hex(buf_[11]), Hex(0x00400000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariationInvalid1) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariationSmall) {
+    c_.has.formatted_gps_geolocation                    = true;
+    c_.formatted_gps_geolocation.has.magnetic_variation = true;
+    c_.formatted_gps_geolocation.magnetic_variation     = -180.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {11}, true);
+    ASSERT_EQ(Hex(buf_[11]), Hex(0xD3000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariationLarge) {
+    c_.has.formatted_gps_geolocation                    = true;
+    c_.formatted_gps_geolocation.has.magnetic_variation = true;
+    c_.formatted_gps_geolocation.magnetic_variation     = 180.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00004000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {11}, true);
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x2D000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariationInvalidSmall) {
     c_.has.formatted_gps_geolocation                    = true;
     c_.formatted_gps_geolocation.has.magnetic_variation = true;
     c_.formatted_gps_geolocation.magnetic_variation     = -181.0;
@@ -1188,7 +1665,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariationInvalid1)
     ASSERT_EQ(Hex(buf_[11]), Hex(0xD2C00000));
 }
 
-TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariationInvalid2) {
+TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariationInvalidLarge) {
     c_.has.formatted_gps_geolocation                    = true;
     c_.formatted_gps_geolocation.has.magnetic_variation = true;
     c_.formatted_gps_geolocation.magnetic_variation     = 181.0;
@@ -1199,6 +1676,7 @@ TEST_F(WriteIfContextTest, FormattedGpsGeolocationBothMagneticVariationInvalid2)
     buf_cmp_geolocation_ephemeris(buf_, {11}, true);
     ASSERT_EQ(Hex(buf_[11]), Hex(0x2D400000));
 }
+
 TEST_F(WriteIfContextTest, FormattedInsGeolocationTsi) {
     c_.has.formatted_ins_geolocation = true;
     c_.formatted_ins_geolocation.tsi = VRT_TSI_OTHER;
@@ -1209,7 +1687,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationTsi) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationTsiInvalid1) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationTsiInvalidSmall) {
     c_.has.formatted_ins_geolocation = true;
     c_.formatted_ins_geolocation.tsi = static_cast<vrt_tsi>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSI);
@@ -1220,7 +1698,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationTsiInvalid1) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationTsiInvalid2) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationTsiInvalidLarge) {
     c_.has.formatted_ins_geolocation = true;
     c_.formatted_ins_geolocation.tsi = static_cast<vrt_tsi>(4);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSI);
@@ -1240,7 +1718,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationTsf) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationTsfInvalid1) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationTsfInvalidSmall) {
     c_.has.formatted_ins_geolocation = true;
     c_.formatted_ins_geolocation.tsf = static_cast<vrt_tsf>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSF);
@@ -1251,7 +1729,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationTsfInvalid1) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationTsfInvalid2) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationTsfInvalidLarge) {
     c_.has.formatted_ins_geolocation = true;
     c_.formatted_ins_geolocation.tsf = static_cast<vrt_tsf>(4);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_INVALID_TSF);
@@ -1420,7 +1898,29 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLatitude) {
     ASSERT_EQ(Hex(buf_[5]), Hex(0x00400000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLatitudeInvalid1) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLatitudeSmall) {
+    c_.has.formatted_ins_geolocation          = true;
+    c_.formatted_ins_geolocation.has.latitude = true;
+    c_.formatted_ins_geolocation.latitude     = -90.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {5}, true);
+    ASSERT_EQ(Hex(buf_[5]), Hex(0xE9800000));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLatitudeLarge) {
+    c_.has.formatted_ins_geolocation          = true;
+    c_.formatted_ins_geolocation.has.latitude = true;
+    c_.formatted_ins_geolocation.latitude     = 90.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {5}, true);
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x16800000));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLatitudeInvalidSmall) {
     c_.has.formatted_ins_geolocation          = true;
     c_.formatted_ins_geolocation.has.latitude = true;
     c_.formatted_ins_geolocation.latitude     = -91.0;
@@ -1432,7 +1932,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLatitudeInvalid1) {
     ASSERT_EQ(Hex(buf_[5]), Hex(0xE9400000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLatitudeInvalid2) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLatitudeInvalidLarge) {
     c_.has.formatted_ins_geolocation          = true;
     c_.formatted_ins_geolocation.has.latitude = true;
     c_.formatted_ins_geolocation.latitude     = 91.0;
@@ -1455,7 +1955,29 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLongitude) {
     ASSERT_EQ(Hex(buf_[6]), Hex(0x00400000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLongitudeInvalid1) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLongitudeSmall) {
+    c_.has.formatted_ins_geolocation           = true;
+    c_.formatted_ins_geolocation.has.longitude = true;
+    c_.formatted_ins_geolocation.longitude     = -180.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {6}, true);
+    ASSERT_EQ(Hex(buf_[6]), Hex(0xD3000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLongitudeLarge) {
+    c_.has.formatted_ins_geolocation           = true;
+    c_.formatted_ins_geolocation.has.longitude = true;
+    c_.formatted_ins_geolocation.longitude     = 180.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {6}, true);
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x2D000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLongitudeInvalidSmall) {
     c_.has.formatted_ins_geolocation           = true;
     c_.formatted_ins_geolocation.has.longitude = true;
     c_.formatted_ins_geolocation.longitude     = -181.0;
@@ -1467,7 +1989,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLongitudeInvalid1) {
     ASSERT_EQ(Hex(buf_[6]), Hex(0xD2C00000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLongitudeInvalid2) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothLongitudeInvalidLarge) {
     c_.has.formatted_ins_geolocation           = true;
     c_.formatted_ins_geolocation.has.longitude = true;
     c_.formatted_ins_geolocation.longitude     = 181.0;
@@ -1490,6 +2012,44 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothAltitude) {
     ASSERT_EQ(Hex(buf_[7]), Hex(0x00000020));
 }
 
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothAltitudeSmall) {
+    c_.has.formatted_ins_geolocation          = true;
+    c_.formatted_ins_geolocation.has.altitude = true;
+    c_.formatted_ins_geolocation.altitude     = -67108e3;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {7}, true);
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x80006C00));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothAltitudeLarge) {
+    c_.has.formatted_ins_geolocation          = true;
+    c_.formatted_ins_geolocation.has.altitude = true;
+    c_.formatted_ins_geolocation.altitude     = 67108e3;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {7}, true);
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFF9400));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothAltitudeInvalidSmall) {
+    c_.has.formatted_ins_geolocation          = true;
+    c_.formatted_ins_geolocation.has.altitude = true;
+    c_.formatted_ins_geolocation.altitude     = -67109e3;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_ALTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothAltitudeInvalidLarge) {
+    c_.has.formatted_ins_geolocation          = true;
+    c_.formatted_ins_geolocation.has.altitude = true;
+    c_.formatted_ins_geolocation.altitude     = 67109e3;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_ALTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
+}
+
 TEST_F(WriteIfContextTest, FormattedInsGeolocationBothSpeedOverGround) {
     c_.has.formatted_ins_geolocation                   = true;
     c_.formatted_ins_geolocation.has.speed_over_ground = true;
@@ -1501,7 +2061,29 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothSpeedOverGround) {
     ASSERT_EQ(Hex(buf_[8]), Hex(0x00010000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationBothSpeedOverGroundInvalid) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothSpeedOverGroundSmall) {
+    c_.has.formatted_ins_geolocation                   = true;
+    c_.formatted_ins_geolocation.has.speed_over_ground = true;
+    c_.formatted_ins_geolocation.speed_over_ground     = 0.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {8}, true);
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x00000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothSpeedOverGroundLarge) {
+    c_.has.formatted_ins_geolocation                   = true;
+    c_.formatted_ins_geolocation.has.speed_over_ground = true;
+    c_.formatted_ins_geolocation.speed_over_ground     = 65535.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {8}, true);
+    ASSERT_EQ(Hex(buf_[8]), Hex(0xFFFF0000));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothSpeedOverGroundInvalidSmall) {
     c_.has.formatted_ins_geolocation                   = true;
     c_.formatted_ins_geolocation.has.speed_over_ground = true;
     c_.formatted_ins_geolocation.speed_over_ground     = -1.0;
@@ -1511,6 +2093,14 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothSpeedOverGroundInvalid) {
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     buf_cmp_geolocation_ephemeris(buf_, {8}, true);
     ASSERT_EQ(Hex(buf_[8]), Hex(0xFFFF0000));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothSpeedOverGroundInvalidLarge) {
+    c_.has.formatted_ins_geolocation                   = true;
+    c_.formatted_ins_geolocation.has.speed_over_ground = true;
+    c_.formatted_ins_geolocation.speed_over_ground     = 65536.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), VRT_ERR_BOUNDS_SPEED_OVER_GROUND);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, false), 12);
 }
 
 TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngle) {
@@ -1524,7 +2114,29 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngle) {
     ASSERT_EQ(Hex(buf_[9]), Hex(0x00400000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngleInvalid1) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngleSmall) {
+    c_.has.formatted_ins_geolocation               = true;
+    c_.formatted_ins_geolocation.has.heading_angle = true;
+    c_.formatted_ins_geolocation.heading_angle     = 0.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {9}, true);
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x00000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngleLarge) {
+    c_.has.formatted_ins_geolocation               = true;
+    c_.formatted_ins_geolocation.has.heading_angle = true;
+    c_.formatted_ins_geolocation.heading_angle     = 359.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {9}, true);
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x59C00000));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngleInvalidSmall) {
     c_.has.formatted_ins_geolocation               = true;
     c_.formatted_ins_geolocation.has.heading_angle = true;
     c_.formatted_ins_geolocation.heading_angle     = -1.0;
@@ -1536,7 +2148,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngleInvalid1) {
     ASSERT_EQ(Hex(buf_[9]), Hex(0xFFC00000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngleInvalid2) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothHeadingAngleInvalidLarge) {
     c_.has.formatted_ins_geolocation               = true;
     c_.formatted_ins_geolocation.has.heading_angle = true;
     c_.formatted_ins_geolocation.heading_angle     = 360.0;
@@ -1559,7 +2171,29 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothTrackAngle) {
     ASSERT_EQ(Hex(buf_[10]), Hex(0x00400000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationBothTrackAngleInvalid1) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothTrackAngleSmall) {
+    c_.has.formatted_ins_geolocation             = true;
+    c_.formatted_ins_geolocation.has.track_angle = true;
+    c_.formatted_ins_geolocation.track_angle     = 0.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {10}, true);
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x00000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothTrackAngleLarge) {
+    c_.has.formatted_ins_geolocation             = true;
+    c_.formatted_ins_geolocation.has.track_angle = true;
+    c_.formatted_ins_geolocation.track_angle     = 359.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {10}, true);
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x59C00000));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothTrackAngleInvalidSmall) {
     c_.has.formatted_ins_geolocation             = true;
     c_.formatted_ins_geolocation.has.track_angle = true;
     c_.formatted_ins_geolocation.track_angle     = -1.0;
@@ -1571,7 +2205,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothTrackAngleInvalid1) {
     ASSERT_EQ(Hex(buf_[10]), Hex(0xFFC00000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationBothTrackAngleInvalid2) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothTrackAngleInvalidLarge) {
     c_.has.formatted_ins_geolocation             = true;
     c_.formatted_ins_geolocation.has.track_angle = true;
     c_.formatted_ins_geolocation.track_angle     = 360.0;
@@ -1594,7 +2228,29 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothMagneticVariation) {
     ASSERT_EQ(Hex(buf_[11]), Hex(0x00400000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationBothMagneticVariationInvalid1) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothMagneticVariationSmall) {
+    c_.has.formatted_ins_geolocation                    = true;
+    c_.formatted_ins_geolocation.has.magnetic_variation = true;
+    c_.formatted_ins_geolocation.magnetic_variation     = -180.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {11}, true);
+    ASSERT_EQ(Hex(buf_[11]), Hex(0xD3000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothMagneticVariationLarge) {
+    c_.has.formatted_ins_geolocation                    = true;
+    c_.formatted_ins_geolocation.has.magnetic_variation = true;
+    c_.formatted_ins_geolocation.magnetic_variation     = 180.0;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 12, true), 12);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00002000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {11}, true);
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x2D000000));
+}
+
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothMagneticVariationInvalidSmall) {
     c_.has.formatted_ins_geolocation                    = true;
     c_.formatted_ins_geolocation.has.magnetic_variation = true;
     c_.formatted_ins_geolocation.magnetic_variation     = -181.0;
@@ -1606,7 +2262,7 @@ TEST_F(WriteIfContextTest, FormattedInsGeolocationBothMagneticVariationInvalid1)
     ASSERT_EQ(Hex(buf_[11]), Hex(0xD2C00000));
 }
 
-TEST_F(WriteIfContextTest, FormattedInsGeolocationBothMagneticVariationInvalid2) {
+TEST_F(WriteIfContextTest, FormattedInsGeolocationBothMagneticVariationInvalidLarge) {
     c_.has.formatted_ins_geolocation                    = true;
     c_.formatted_ins_geolocation.has.magnetic_variation = true;
     c_.formatted_ins_geolocation.magnetic_variation     = 181.0;
@@ -1628,7 +2284,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisTsi) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisTsiInvalid1) {
+TEST_F(WriteIfContextTest, EcefEphemerisTsiInvalidSmall) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsi = static_cast<vrt_tsi>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSI);
@@ -1639,7 +2295,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisTsiInvalid1) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisTsiInvalid2) {
+TEST_F(WriteIfContextTest, EcefEphemerisTsiInvalidLarge) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsi = static_cast<vrt_tsi>(4);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSI);
@@ -1659,7 +2315,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisTsf) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisTsfInvalid1) {
+TEST_F(WriteIfContextTest, EcefEphemerisTsfInvalidSmall) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsf = static_cast<vrt_tsf>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSF);
@@ -1670,7 +2326,7 @@ TEST_F(WriteIfContextTest, EcefEphemerisTsfInvalid1) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
 }
 
-TEST_F(WriteIfContextTest, EcefEphemerisTsfInvalid2) {
+TEST_F(WriteIfContextTest, EcefEphemerisTsfInvalidLarge) {
     c_.has.ecef_ephemeris = true;
     c_.ecef_ephemeris.tsf = static_cast<vrt_tsf>(4);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSF);
@@ -1774,6 +2430,15 @@ TEST_F(WriteIfContextTest, EcefEphemerisPositionX) {
     buf_cmp_geolocation_ephemeris(buf_, {}, false);
 }
 
+TEST_F(WriteIfContextTest, EcefEphemerisPositionXSmall) {
+    c_.has.ecef_ephemeris        = true;
+    c_.ecef_ephemeris.position_x = -67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {}, false);
+}
+
 TEST_F(WriteIfContextTest, EcefEphemerisPositionY) {
     c_.has.ecef_ephemeris        = true;
     c_.ecef_ephemeris.position_y = 1.0;
@@ -1858,6 +2523,44 @@ TEST_F(WriteIfContextTest, EcefEphemerisBothPositionX) {
     ASSERT_EQ(Hex(buf_[5]), Hex(0x00000020));
 }
 
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionXSmall) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_x = true;
+    c_.ecef_ephemeris.position_x     = -67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {5}, false);
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionXLarge) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_x = true;
+    c_.ecef_ephemeris.position_x     = 67108863;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {5}, false);
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFE0));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionXInvalidSmall) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_x = true;
+    c_.ecef_ephemeris.position_x     = -67108865;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_POSITION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionXInvalidLarge) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_x = true;
+    c_.ecef_ephemeris.position_x     = 67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_POSITION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
 TEST_F(WriteIfContextTest, EcefEphemerisBothPositionY) {
     c_.has.ecef_ephemeris            = true;
     c_.ecef_ephemeris.has.position_y = true;
@@ -1867,6 +2570,44 @@ TEST_F(WriteIfContextTest, EcefEphemerisBothPositionY) {
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     buf_cmp_geolocation_ephemeris(buf_, {6}, false);
     ASSERT_EQ(Hex(buf_[6]), Hex(0x00000020));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionYSmall) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_y = true;
+    c_.ecef_ephemeris.position_y     = -67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {6}, false);
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionYLarge) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_y = true;
+    c_.ecef_ephemeris.position_y     = 67108863;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {6}, false);
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFE0));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionYInvalidSmall) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_y = true;
+    c_.ecef_ephemeris.position_y     = -67108865;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_POSITION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionYInvalidLarge) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_y = true;
+    c_.ecef_ephemeris.position_y     = 67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_POSITION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
 }
 
 TEST_F(WriteIfContextTest, EcefEphemerisBothPositionZ) {
@@ -1880,6 +2621,44 @@ TEST_F(WriteIfContextTest, EcefEphemerisBothPositionZ) {
     ASSERT_EQ(Hex(buf_[7]), Hex(0x00000020));
 }
 
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionZSmall) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_z = true;
+    c_.ecef_ephemeris.position_z     = -67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {7}, false);
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionZLarge) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_z = true;
+    c_.ecef_ephemeris.position_z     = 67108863;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {7}, false);
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFE0));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionZInvalidSmall) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_z = true;
+    c_.ecef_ephemeris.position_z     = -67108865;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_POSITION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothPositionZInvalidLarge) {
+    c_.has.ecef_ephemeris            = true;
+    c_.ecef_ephemeris.has.position_z = true;
+    c_.ecef_ephemeris.position_z     = 67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_POSITION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
 TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeAlpha) {
     c_.has.ecef_ephemeris                = true;
     c_.ecef_ephemeris.has.attitude_alpha = true;
@@ -1889,6 +2668,44 @@ TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeAlpha) {
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     buf_cmp_geolocation_ephemeris(buf_, {8}, false);
     ASSERT_EQ(Hex(buf_[8]), Hex(0x00400000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeAlphaSmall) {
+    c_.has.ecef_ephemeris                = true;
+    c_.ecef_ephemeris.has.attitude_alpha = true;
+    c_.ecef_ephemeris.attitude_alpha     = -512;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {8}, false);
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeAlphaLarge) {
+    c_.has.ecef_ephemeris                = true;
+    c_.ecef_ephemeris.has.attitude_alpha = true;
+    c_.ecef_ephemeris.attitude_alpha     = 511;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {8}, false);
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FC00000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeAlphaInvalidSmall) {
+    c_.has.ecef_ephemeris                = true;
+    c_.ecef_ephemeris.has.attitude_alpha = true;
+    c_.ecef_ephemeris.attitude_alpha     = -513;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_ATTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeAlphaInvalidLarge) {
+    c_.has.ecef_ephemeris                = true;
+    c_.ecef_ephemeris.has.attitude_alpha = true;
+    c_.ecef_ephemeris.attitude_alpha     = 512;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_ATTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
 }
 
 TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeBeta) {
@@ -1902,6 +2719,44 @@ TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeBeta) {
     ASSERT_EQ(Hex(buf_[9]), Hex(0x00400000));
 }
 
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeBetaSmall) {
+    c_.has.ecef_ephemeris               = true;
+    c_.ecef_ephemeris.has.attitude_beta = true;
+    c_.ecef_ephemeris.attitude_beta     = -512;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {9}, false);
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeBetaLarge) {
+    c_.has.ecef_ephemeris               = true;
+    c_.ecef_ephemeris.has.attitude_beta = true;
+    c_.ecef_ephemeris.attitude_beta     = 511;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {9}, false);
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FC00000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeBetaInvalidSmall) {
+    c_.has.ecef_ephemeris               = true;
+    c_.ecef_ephemeris.has.attitude_beta = true;
+    c_.ecef_ephemeris.attitude_beta     = -513;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_ATTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudeBetaInvalidLarge) {
+    c_.has.ecef_ephemeris               = true;
+    c_.ecef_ephemeris.has.attitude_beta = true;
+    c_.ecef_ephemeris.attitude_beta     = 512;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_ATTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
 TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudePhi) {
     c_.has.ecef_ephemeris              = true;
     c_.ecef_ephemeris.has.attitude_phi = true;
@@ -1911,6 +2766,44 @@ TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudePhi) {
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     buf_cmp_geolocation_ephemeris(buf_, {10}, false);
     ASSERT_EQ(Hex(buf_[10]), Hex(0x00400000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudePhiSmall) {
+    c_.has.ecef_ephemeris              = true;
+    c_.ecef_ephemeris.has.attitude_phi = true;
+    c_.ecef_ephemeris.attitude_phi     = -512;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {10}, false);
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudePhiLarge) {
+    c_.has.ecef_ephemeris              = true;
+    c_.ecef_ephemeris.has.attitude_phi = true;
+    c_.ecef_ephemeris.attitude_phi     = 511;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {10}, false);
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FC00000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudePhiInvalidSmall) {
+    c_.has.ecef_ephemeris              = true;
+    c_.ecef_ephemeris.has.attitude_phi = true;
+    c_.ecef_ephemeris.attitude_phi     = -513;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_ATTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothAttitudePhiInvalidLarge) {
+    c_.has.ecef_ephemeris              = true;
+    c_.ecef_ephemeris.has.attitude_phi = true;
+    c_.ecef_ephemeris.attitude_phi     = 512;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_ATTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
 }
 
 TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDx) {
@@ -1924,6 +2817,44 @@ TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDx) {
     ASSERT_EQ(Hex(buf_[11]), Hex(0x00010000));
 }
 
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDxSmall) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dx = true;
+    c_.ecef_ephemeris.velocity_dx     = -32768;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {11}, false);
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDxLarge) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dx = true;
+    c_.ecef_ephemeris.velocity_dx     = 32767;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {11}, false);
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFF0000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDxInvalidSmall) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dx = true;
+    c_.ecef_ephemeris.velocity_dx     = -32769;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_VELOCITY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDxInvalidLarge) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dx = true;
+    c_.ecef_ephemeris.velocity_dx     = 32768;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_VELOCITY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
 TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDy) {
     c_.has.ecef_ephemeris             = true;
     c_.ecef_ephemeris.has.velocity_dy = true;
@@ -1933,6 +2864,44 @@ TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDy) {
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     buf_cmp_geolocation_ephemeris(buf_, {12}, false);
     ASSERT_EQ(Hex(buf_[12]), Hex(0x00010000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDySmall) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dy = true;
+    c_.ecef_ephemeris.velocity_dy     = -32768;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {12}, false);
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDyLarge) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dy = true;
+    c_.ecef_ephemeris.velocity_dy     = 32767;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {12}, false);
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFF0000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDyInvalidSmall) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dy = true;
+    c_.ecef_ephemeris.velocity_dy     = -32769;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_VELOCITY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDyInvalidLarge) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dy = true;
+    c_.ecef_ephemeris.velocity_dy     = 32768;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_VELOCITY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
 }
 
 TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDz) {
@@ -1945,6 +2914,45 @@ TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDz) {
     buf_cmp_geolocation_ephemeris(buf_, {13}, false);
     ASSERT_EQ(Hex(buf_[13]), Hex(0x00010000));
 }
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDzSmall) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dz = true;
+    c_.ecef_ephemeris.velocity_dz     = -32768;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {13}, false);
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDzLarge) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dz = true;
+    c_.ecef_ephemeris.velocity_dz     = 32767;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {13}, false);
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFF0000));
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDzInvalidSmall) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dz = true;
+    c_.ecef_ephemeris.velocity_dz     = -32769;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_VELOCITY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, EcefEphemerisBothVelocityDzInvalidLarge) {
+    c_.has.ecef_ephemeris             = true;
+    c_.ecef_ephemeris.has.velocity_dz = true;
+    c_.ecef_ephemeris.velocity_dz     = 32768;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_VELOCITY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
 TEST_F(WriteIfContextTest, RelativeEphemerisTsi) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsi = VRT_TSI_OTHER;
@@ -1955,7 +2963,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisTsi) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisTsiInvalid1) {
+TEST_F(WriteIfContextTest, RelativeEphemerisTsiInvalidSmall) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsi = static_cast<vrt_tsi>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSI);
@@ -1966,7 +2974,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisTsiInvalid1) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x0C000000));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisTsiInvalid2) {
+TEST_F(WriteIfContextTest, RelativeEphemerisTsiInvalidLarge) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsi = static_cast<vrt_tsi>(4);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSI);
@@ -1986,7 +2994,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisTsf) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisTsfInvalid1) {
+TEST_F(WriteIfContextTest, RelativeEphemerisTsfInvalidSmall) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsf = static_cast<vrt_tsf>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSF);
@@ -1997,7 +3005,7 @@ TEST_F(WriteIfContextTest, RelativeEphemerisTsfInvalid1) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0x03000000));
 }
 
-TEST_F(WriteIfContextTest, RelativeEphemerisTsfInvalid2) {
+TEST_F(WriteIfContextTest, RelativeEphemerisTsfInvalidLarge) {
     c_.has.relative_ephemeris = true;
     c_.relative_ephemeris.tsf = static_cast<vrt_tsf>(4);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_INVALID_TSF);
@@ -2101,6 +3109,15 @@ TEST_F(WriteIfContextTest, RelativeEphemerisPositionX) {
     buf_cmp_geolocation_ephemeris(buf_, {}, false);
 }
 
+TEST_F(WriteIfContextTest, RelativeEphemerisPositionXSmall) {
+    c_.has.relative_ephemeris        = true;
+    c_.relative_ephemeris.position_x = -67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {}, false);
+}
+
 TEST_F(WriteIfContextTest, RelativeEphemerisPositionY) {
     c_.has.relative_ephemeris        = true;
     c_.relative_ephemeris.position_y = 1.0;
@@ -2185,6 +3202,44 @@ TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionX) {
     ASSERT_EQ(Hex(buf_[5]), Hex(0x00000020));
 }
 
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionXSmall) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_x = true;
+    c_.relative_ephemeris.position_x     = -67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {5}, false);
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionXLarge) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_x = true;
+    c_.relative_ephemeris.position_x     = 67108863;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {5}, false);
+    ASSERT_EQ(Hex(buf_[5]), Hex(0x7FFFFFE0));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionXInvalidSmall) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_x = true;
+    c_.relative_ephemeris.position_x     = -67108865;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_POSITION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionXInvalidLarge) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_x = true;
+    c_.relative_ephemeris.position_x     = 67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_POSITION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
 TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionY) {
     c_.has.relative_ephemeris            = true;
     c_.relative_ephemeris.has.position_y = true;
@@ -2194,6 +3249,44 @@ TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionY) {
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     buf_cmp_geolocation_ephemeris(buf_, {6}, false);
     ASSERT_EQ(Hex(buf_[6]), Hex(0x00000020));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionYSmall) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_y = true;
+    c_.relative_ephemeris.position_y     = -67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {6}, false);
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionYLarge) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_y = true;
+    c_.relative_ephemeris.position_y     = 67108863;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {6}, false);
+    ASSERT_EQ(Hex(buf_[6]), Hex(0x7FFFFFE0));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionYInvalidSmall) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_y = true;
+    c_.relative_ephemeris.position_y     = -67108865;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_POSITION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionYInvalidLarge) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_y = true;
+    c_.relative_ephemeris.position_y     = 67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_POSITION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
 }
 
 TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionZ) {
@@ -2207,6 +3300,44 @@ TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionZ) {
     ASSERT_EQ(Hex(buf_[7]), Hex(0x00000020));
 }
 
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionZSmall) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_z = true;
+    c_.relative_ephemeris.position_z     = -67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {7}, false);
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionZLarge) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_z = true;
+    c_.relative_ephemeris.position_z     = 67108863;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {7}, false);
+    ASSERT_EQ(Hex(buf_[7]), Hex(0x7FFFFFE0));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionZInvalidSmall) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_z = true;
+    c_.relative_ephemeris.position_z     = -67108865;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_POSITION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothPositionZInvalidLarge) {
+    c_.has.relative_ephemeris            = true;
+    c_.relative_ephemeris.has.position_z = true;
+    c_.relative_ephemeris.position_z     = 67108864;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_POSITION);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
 TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeAlpha) {
     c_.has.relative_ephemeris                = true;
     c_.relative_ephemeris.has.attitude_alpha = true;
@@ -2216,6 +3347,44 @@ TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeAlpha) {
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     buf_cmp_geolocation_ephemeris(buf_, {8}, false);
     ASSERT_EQ(Hex(buf_[8]), Hex(0x00400000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeAlphaSmall) {
+    c_.has.relative_ephemeris                = true;
+    c_.relative_ephemeris.has.attitude_alpha = true;
+    c_.relative_ephemeris.attitude_alpha     = -512;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {8}, false);
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeAlphaLarge) {
+    c_.has.relative_ephemeris                = true;
+    c_.relative_ephemeris.has.attitude_alpha = true;
+    c_.relative_ephemeris.attitude_alpha     = 511;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {8}, false);
+    ASSERT_EQ(Hex(buf_[8]), Hex(0x7FC00000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeAlphaInvalidSmall) {
+    c_.has.relative_ephemeris                = true;
+    c_.relative_ephemeris.has.attitude_alpha = true;
+    c_.relative_ephemeris.attitude_alpha     = -513;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_ATTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeAlphaInvalidLarge) {
+    c_.has.relative_ephemeris                = true;
+    c_.relative_ephemeris.has.attitude_alpha = true;
+    c_.relative_ephemeris.attitude_alpha     = 512;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_ATTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
 }
 
 TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeBeta) {
@@ -2229,6 +3398,44 @@ TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeBeta) {
     ASSERT_EQ(Hex(buf_[9]), Hex(0x00400000));
 }
 
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeBetaSmall) {
+    c_.has.relative_ephemeris               = true;
+    c_.relative_ephemeris.has.attitude_beta = true;
+    c_.relative_ephemeris.attitude_beta     = -512;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {9}, false);
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeBetaLarge) {
+    c_.has.relative_ephemeris               = true;
+    c_.relative_ephemeris.has.attitude_beta = true;
+    c_.relative_ephemeris.attitude_beta     = 511;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {9}, false);
+    ASSERT_EQ(Hex(buf_[9]), Hex(0x7FC00000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeBetaInvalidSmall) {
+    c_.has.relative_ephemeris               = true;
+    c_.relative_ephemeris.has.attitude_beta = true;
+    c_.relative_ephemeris.attitude_beta     = -513;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_ATTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudeBetaInvalidLarge) {
+    c_.has.relative_ephemeris               = true;
+    c_.relative_ephemeris.has.attitude_beta = true;
+    c_.relative_ephemeris.attitude_beta     = 512;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_ATTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
 TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudePhi) {
     c_.has.relative_ephemeris              = true;
     c_.relative_ephemeris.has.attitude_phi = true;
@@ -2238,6 +3445,44 @@ TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudePhi) {
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     buf_cmp_geolocation_ephemeris(buf_, {10}, false);
     ASSERT_EQ(Hex(buf_[10]), Hex(0x00400000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudePhiSmall) {
+    c_.has.relative_ephemeris              = true;
+    c_.relative_ephemeris.has.attitude_phi = true;
+    c_.relative_ephemeris.attitude_phi     = -512;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {10}, false);
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudePhiLarge) {
+    c_.has.relative_ephemeris              = true;
+    c_.relative_ephemeris.has.attitude_phi = true;
+    c_.relative_ephemeris.attitude_phi     = 511;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {10}, false);
+    ASSERT_EQ(Hex(buf_[10]), Hex(0x7FC00000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudePhiInvalidSmall) {
+    c_.has.relative_ephemeris              = true;
+    c_.relative_ephemeris.has.attitude_phi = true;
+    c_.relative_ephemeris.attitude_phi     = -513;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_ATTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothAttitudePhiInvalidLarge) {
+    c_.has.relative_ephemeris              = true;
+    c_.relative_ephemeris.has.attitude_phi = true;
+    c_.relative_ephemeris.attitude_phi     = 512;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_ATTITUDE);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
 }
 
 TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDx) {
@@ -2251,6 +3496,44 @@ TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDx) {
     ASSERT_EQ(Hex(buf_[11]), Hex(0x00010000));
 }
 
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDxSmall) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dx = true;
+    c_.relative_ephemeris.velocity_dx     = -32768;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {11}, false);
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDxLarge) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dx = true;
+    c_.relative_ephemeris.velocity_dx     = 32767;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {11}, false);
+    ASSERT_EQ(Hex(buf_[11]), Hex(0x7FFF0000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDxInvalidSmall) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dx = true;
+    c_.relative_ephemeris.velocity_dx     = -32769;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_VELOCITY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDxInvalidLarge) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dx = true;
+    c_.relative_ephemeris.velocity_dx     = 32768;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_VELOCITY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
 TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDy) {
     c_.has.relative_ephemeris             = true;
     c_.relative_ephemeris.has.velocity_dy = true;
@@ -2262,6 +3545,44 @@ TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDy) {
     ASSERT_EQ(Hex(buf_[12]), Hex(0x00010000));
 }
 
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDySmall) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dy = true;
+    c_.relative_ephemeris.velocity_dy     = -32768;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {12}, false);
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDyLarge) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dy = true;
+    c_.relative_ephemeris.velocity_dy     = 32767;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {12}, false);
+    ASSERT_EQ(Hex(buf_[12]), Hex(0x7FFF0000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDyInvalidSmall) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dy = true;
+    c_.relative_ephemeris.velocity_dy     = -32769;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_VELOCITY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDyInvalidLarge) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dy = true;
+    c_.relative_ephemeris.velocity_dy     = 32768;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_VELOCITY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
 TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDz) {
     c_.has.relative_ephemeris             = true;
     c_.relative_ephemeris.has.velocity_dz = true;
@@ -2271,6 +3592,44 @@ TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDz) {
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     buf_cmp_geolocation_ephemeris(buf_, {13}, false);
     ASSERT_EQ(Hex(buf_[13]), Hex(0x00010000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDzSmall) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dz = true;
+    c_.relative_ephemeris.velocity_dz     = -32768;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {13}, false);
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x80000000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDzLarge) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dz = true;
+    c_.relative_ephemeris.velocity_dz     = 32767;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
+    ASSERT_EQ(Hex(buf_[0]), Hex(0x00000800));
+    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
+    buf_cmp_geolocation_ephemeris(buf_, {13}, false);
+    ASSERT_EQ(Hex(buf_[13]), Hex(0x7FFF0000));
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDzInvalidSmall) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dz = true;
+    c_.relative_ephemeris.velocity_dz     = -32769;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_VELOCITY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
+}
+
+TEST_F(WriteIfContextTest, RelativeEphemerisBothVelocityDzInvalidLarge) {
+    c_.has.relative_ephemeris             = true;
+    c_.relative_ephemeris.has.velocity_dz = true;
+    c_.relative_ephemeris.velocity_dz     = 32768;
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), VRT_ERR_BOUNDS_VELOCITY);
+    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, false), 14);
 }
 
 TEST_F(WriteIfContextTest, EphemerisReferenceIdentifier) {

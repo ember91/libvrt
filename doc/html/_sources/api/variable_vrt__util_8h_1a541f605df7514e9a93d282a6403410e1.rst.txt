@@ -1,0 +1,13 @@
+.. _exhale_variable_vrt__util_8h_1a541f605df7514e9a93d282a6403410e1:
+
+Variable VRT_MINMAX_RF_REFERENCE_FREQUENCY
+==========================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: VRT_MINMAX_RF_REFERENCE_FREQUENCY

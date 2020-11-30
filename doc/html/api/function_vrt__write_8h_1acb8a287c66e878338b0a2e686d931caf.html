@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Function vrt_write_if_context &mdash; libvrt  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> libvrt
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">libvrt</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Function vrt_write_if_context</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/function_vrt__write_8h_1acb8a287c66e878338b0a2e686d931caf.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="function-vrt-write-if-context">
+<span id="exhale-function-vrt-write-8h-1acb8a287c66e878338b0a2e686d931caf"></span><h1>Function vrt_write_if_context<a class="headerlink" href="#function-vrt-write-if-context" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_write.h.html#file-home-emil-libvrt-include-vrt-vrt-write-h"><span class="std std-ref">File vrt_write.h</span></a></p></li>
+</ul>
+<div class="section" id="function-documentation">
+<h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp function">
+<dt>
+<span class="target" id="vrt__write_8h_1ae9a12b1a22b88bd495be8afaac351b60"></span><code class="sig-name descname">VRT_WARN_UNUSED int32_t vrt_write_if_context (const vrt_if_context *if_context, void *buf, int32_t words_buf, bool validate)</code></dt>
+<dd><p>Low-level function that writes VRT IF context section.</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>Number of written 32-bit words, or a negative number if error. </p>
+</dd>
+<dt><strong>Warning</strong></dt><dd><p>Fields represented as double but with an underlying 64-bit fixed precision format, i.e. bandwidth, if_reference_frequency, rf_reference_frequency, rf_reference_frequency_offset, if_band_offset, and sample_rate, may in rare cases lose precision since double only has 53 bits of precision. </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">if_context</span></code>: IF context to write. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Buffer to write to. This must point to the first context section word in the packet, i.e. directly following the fields section. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">words_buf</span></code>: Size of buf in 32-bit words. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validate</span></code>: True if validation should be done. If false, only buffer size is validated.</p></li>
+</ul>
+</dd>
+<dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUFFER_SIZE</span></code>: Buffer is too small. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_BANDWIDTH</span></code>: Bandwidth is outside valid bounds (&lt; 0 Hz). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_GAIN_STAGE2_SET</span></code>: Gain stage 1 must be used instead of stage 2 when only one is set. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SAMPLE_RATE</span></code>: Sample rate is outside valid bounds (&lt; 0 Hz). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TEMPERATURE</span></code>: Temperature is outside valid bounds (&lt; -273.15 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_OUI</span></code>: OUI is outside valid bounds (&gt; 0x00FFFFFF). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_PACKING_METHOD</span></code>: Packing method is an invalid value. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_REAL_OR_COMPLEX</span></code>: Real/Complex is an invalid value. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_DATA_ITEM_FORMAT</span></code>: Data item format is an invalid value. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_EVENT_TAG_SIZE</span></code>: Event tag size is outside valid bounds (&gt; 0x07). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_CHANNEL_TAG_SIZE</span></code>: Channel tag size is outside valid bounds (&gt; 0x0F). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_ITEM_PACKING_FIELD_SIZE</span></code>: Item packing fields size is outside valid bounds (&gt; 0x3F). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_DATA_ITEM_SIZE</span></code>: Data item size is outside valid bounds (&gt; 0x3F). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_TSI</span></code>: TSI is an invalid value. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_TSF</span></code>: TSF is an invalid value. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_SET_INTEGER_SECOND_TIMESTAMP</span></code>: Integer second timestamp is not 0xFFFFFFFF when TSI is VRT_TSI_UNDEFINED. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP</span></code>: Integer second timestamp is not 0xFFFFFFFF when TSI is VRT_TSI_UNDEFINED. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds (&gt; 999999999999 ps). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LATITUDE</span></code>: Latitude is outside valid bounds (&lt; -90 or &gt; 90 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LONGITUDE</span></code>: Longitude is outside valid bounds (&lt; -180 or &gt; 180 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SPEED_OVER_GROUND</span></code>: Speed over ground is outside valid bounds (&lt; 0 m/s). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_HEADING_ANGLE</span></code>: Heading angle outside valid bounds (&lt; 0 or &gt; 359.999999761582 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TRACK_ANGLE</span></code>: Track angle is outside valid bounds (&lt; 0 or &gt; 359.999999761582 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_MAGNETIC_VARIATION</span></code>: Magnetic variation is outside valid bounds (&lt; -180 or &gt; 180 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SOURCE_LIST_SIZE</span></code>: Source list size is outside valid bounds (&gt; 0x01FF). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SYSTEM_LIST_SIZE</span></code>: System list size is outside valid bounds (&gt; 0x01FF). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE</span></code>: Channel list size is outside valid bounds (&gt; 0x7FFF).</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Emil Berg
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

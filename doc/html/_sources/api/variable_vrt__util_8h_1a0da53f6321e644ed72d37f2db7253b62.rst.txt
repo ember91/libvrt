@@ -1,0 +1,13 @@
+.. _exhale_variable_vrt__util_8h_1a0da53f6321e644ed72d37f2db7253b62:
+
+Variable VRT_MIN_HEADING_ANGLE
+==============================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: VRT_MIN_HEADING_ANGLE

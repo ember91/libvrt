@@ -493,20 +493,22 @@ static int32_t if_context_read_formatted_geolocation(bool                       
             if (g->tsf == VRT_TSF_REAL_TIME && g->fractional_second_timestamp >= (uint64_t)1000000000000) {
                 return VRT_ERR_BOUNDS_REAL_TIME;
             }
-            if (g->has.latitude && (g->latitude < -90.0 || g->latitude > 90.0)) {
-                return VRT_ERR_BOUNDS_LATITUDE;
+            if (g->has.latitude) {
+                VRT_BOUNDS(-VRT_MINMAX_LATITUDE, g->latitude, VRT_MINMAX_LATITUDE, VRT_ERR_BOUNDS_LATITUDE);
             }
-            if (g->has.longitude && (g->longitude < -180.0 || g->longitude > 180.0)) {
-                return VRT_ERR_BOUNDS_LONGITUDE;
+            if (g->has.longitude) {
+                VRT_BOUNDS(-VRT_MINMAX_LONGITUDE, g->longitude, VRT_MINMAX_LONGITUDE, VRT_ERR_BOUNDS_LONGITUDE);
             }
-            if (g->has.heading_angle && (g->heading_angle < 0.0 || g->heading_angle > 359.999999761582)) {
-                return VRT_ERR_BOUNDS_HEADING_ANGLE;
+            if (g->has.heading_angle) {
+                VRT_BOUNDS(VRT_MIN_HEADING_ANGLE, g->heading_angle, VRT_MAX_HEADING_ANGLE,
+                           VRT_ERR_BOUNDS_HEADING_ANGLE);
             }
-            if (g->has.track_angle && (g->track_angle < 0.0 || g->track_angle > 359.999999761582)) {
-                return VRT_ERR_BOUNDS_TRACK_ANGLE;
+            if (g->has.track_angle) {
+                VRT_BOUNDS(VRT_MIN_TRACK_ANGLE, g->track_angle, VRT_MAX_TRACK_ANGLE, VRT_ERR_BOUNDS_TRACK_ANGLE);
             }
-            if (g->has.magnetic_variation && (g->magnetic_variation < -180.0 || g->magnetic_variation > 180.0)) {
-                return VRT_ERR_BOUNDS_MAGNETIC_VARIATION;
+            if (g->has.magnetic_variation) {
+                VRT_BOUNDS(-VRT_MINMAX_MAGNETIC_VARIATION, g->magnetic_variation, VRT_MINMAX_MAGNETIC_VARIATION,
+                           VRT_ERR_BOUNDS_MAGNETIC_VARIATION);
             }
         }
 
@@ -845,7 +847,7 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, vrt_if_context* 
         if_context->sample_rate = vrt_fixed_point_i64_to_double((int64_t)read_uint64(b), VRT_RADIX_FREQUENCY);
 
         if (validate) {
-            if (if_context->sample_rate < 0.0) {
+            if (if_context->sample_rate < VRT_MIN_SAMPLE_RATE) {
                 return VRT_ERR_BOUNDS_SAMPLE_RATE;
             }
         }
@@ -870,7 +872,7 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, vrt_if_context* 
         if_context->temperature = vrt_fixed_point_i16_to_float(b[0] & 0x0000FFFFU, VRT_RADIX_TEMPERATURE);
 
         if (validate) {
-            if (if_context->temperature < -273.15F) {
+            if (if_context->temperature < VRT_MIN_TEMPERATURE) {
                 return VRT_ERR_BOUNDS_TEMPERATURE;
             }
             if ((b[0] & 0xFFFF0000U) != 0) {

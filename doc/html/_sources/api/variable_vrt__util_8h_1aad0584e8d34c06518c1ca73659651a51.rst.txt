@@ -1,0 +1,13 @@
+.. _exhale_variable_vrt__util_8h_1aad0584e8d34c06518c1ca73659651a51:
+
+Variable VRT_MIN_ATTITUDE
+=========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: VRT_MIN_ATTITUDE

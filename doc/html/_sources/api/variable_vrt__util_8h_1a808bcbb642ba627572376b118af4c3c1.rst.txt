@@ -1,0 +1,13 @@
+.. _exhale_variable_vrt__util_8h_1a808bcbb642ba627572376b118af4c3c1:
+
+Variable VRT_MIN_TRACK_ANGLE
+============================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: VRT_MIN_TRACK_ANGLE

@@ -835,7 +835,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLatitude) {
                            {"formatted_gps_geolocation.latitude", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedGpsGeolocationLatitudeInvalid1) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationLatitudeInvalidSmall) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -856,7 +856,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLatitudeInvalid1) {
                            {"formatted_gps_geolocation.latitude", -91.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedGpsGeolocationLatitudeInvalid2) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationLatitudeInvalidLarge) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -897,7 +897,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitude) {
                            {"formatted_gps_geolocation.longitude", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitudeInvalid1) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitudeInvalidSmall) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -918,7 +918,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitudeInvalid1) {
                            {"formatted_gps_geolocation.longitude", -181.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitudeInvalid2) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationLongitudeInvalidLarge) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -999,7 +999,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngle) {
                            {"formatted_gps_geolocation.heading_angle", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngleInvalid1) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngleInvalidSmall) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1020,7 +1020,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngleInvalid1) {
                            {"formatted_gps_geolocation.heading_angle", -1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngleInvalid2) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationHeadingAngleInvalidLarge) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1061,7 +1061,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngle) {
                            {"formatted_gps_geolocation.track_angle", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngleInvalid1) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngleInvalidSmall) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1082,7 +1082,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngleInvalid1) {
                            {"formatted_gps_geolocation.track_angle", -1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngleInvalid2) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationTrackAngleInvalidLarge) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1123,7 +1123,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariation) {
                            {"formatted_gps_geolocation.magnetic_variation", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariationInvalid1) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariationInvalidSmall) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1144,7 +1144,7 @@ TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariationInvalid1) {
                            {"formatted_gps_geolocation.magnetic_variation", -181.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariationInvalid2) {
+TEST_F(ReadIfContextTest, FormattedGpsGeolocationMagneticVariationInvalidLarge) {
     buf_[0]  = 0x00004000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1364,7 +1364,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLatitude) {
                            {"formatted_ins_geolocation.latitude", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedInsGeolocationLatitudeInvalid1) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationLatitudeInvalidSmall) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1385,7 +1385,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLatitudeInvalid1) {
                            {"formatted_ins_geolocation.latitude", -91.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedInsGeolocationLatitudeInvalid2) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationLatitudeInvalidLarge) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1426,7 +1426,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitude) {
                            {"formatted_ins_geolocation.longitude", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitudeInvalid1) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitudeInvalidSmall) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1447,7 +1447,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitudeInvalid1) {
                            {"formatted_ins_geolocation.longitude", -181.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitudeInvalid2) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationLongitudeInvalidLarge) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1528,7 +1528,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngle) {
                            {"formatted_ins_geolocation.heading_angle", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngleInvalid1) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngleSmall) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1549,7 +1549,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngleInvalid1) {
                            {"formatted_ins_geolocation.heading_angle", -1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngleInvalid2) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationHeadingAngleInvalidLarge) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1590,7 +1590,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngle) {
                            {"formatted_ins_geolocation.track_angle", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngleInvalid1) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngleInvalidSmall) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1611,7 +1611,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngleInvalid1) {
                            {"formatted_ins_geolocation.track_angle", -1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngleInvalid2) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationTrackAngleInvalidLarge) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1652,7 +1652,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariation) {
                            {"formatted_ins_geolocation.magnetic_variation", 1.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariationInvalid1) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariationInvalidSmall) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;
@@ -1673,7 +1673,7 @@ TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariationInvalid1) {
                            {"formatted_ins_geolocation.magnetic_variation", -181.0}});
 }
 
-TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariationInvalid2) {
+TEST_F(ReadIfContextTest, FormattedInsGeolocationMagneticVariationInvalidLarge) {
     buf_[0]  = 0x00002000;
     buf_[1]  = 0x00000000;
     buf_[2]  = 0xFFFFFFFF;

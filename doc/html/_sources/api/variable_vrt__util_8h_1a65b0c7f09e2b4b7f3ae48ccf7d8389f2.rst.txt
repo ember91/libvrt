@@ -1,0 +1,13 @@
+.. _exhale_variable_vrt__util_8h_1a65b0c7f09e2b4b7f3ae48ccf7d8389f2:
+
+Variable VRT_MAX_TEMPERATURE
+============================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: VRT_MAX_TEMPERATURE

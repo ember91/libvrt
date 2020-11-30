@@ -169,13 +169,25 @@ const char* vrt_string_error(int32_t error /* Do NOT use vrt_error_code, since i
         case VRT_ERR_BOUNDS_ASSOCIATED_CONTEXT_PACKET_COUNT:
             return "Associated context packet count is outside valid bounds (> 0x7F)";
         case VRT_ERR_BOUNDS_BANDWIDTH:
-            return "Bandwidth is outside valid bounds (< 0 Hz)";
+            return "Bandwidth is outside valid bounds (< 0 Hz or > 8.79 THz)";
+        case VRT_ERR_BOUNDS_IF_REFERENCE_FREQUENCY:
+            return "IF reference frequency is outside valid bounds (< -8.79 or > 8.79 THz)";
+        case VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY:
+            return "RF reference frequency is outside valid bounds (< -8.79 or > 8.79 THz)";
+        case VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY_OFFSET:
+            return "RF reference frequency offset is outside valid bounds (< -8.79 or > 8.79 THz)";
+        case VRT_ERR_BOUNDS_IF_BAND_OFFSET:
+            return "IF band offset is outside valid bounds (< -8.79 or > 8.79 THz)";
+        case VRT_ERR_BOUNDS_REFERENCE_LEVEL:
+            return "Reference level is outside valid bounds (< -256 or > 256 dBm)";
+        case VRT_ERR_BOUNDS_GAIN:
+            return "Gain stage 1 or 2 outside valid bounds (< -256 or > 256 dB)";
         case VRT_ERR_GAIN_STAGE2_SET:
             return "Gain stage 1 must be used instead of stage 2 when only one is set";
         case VRT_ERR_BOUNDS_SAMPLE_RATE:
-            return "Sample rate is outside valid bounds (< 0 Hz)";
+            return "Sample rate is outside valid bounds (< 0 Hz or > 8.79 THz)";
         case VRT_ERR_BOUNDS_TEMPERATURE:
-            return "Temperature is outside valid bounds (< -273.15 degrees C)";
+            return "Temperature is outside valid bounds (< -273.15 or > 511.984375 degrees C)";
         case VRT_ERR_INVALID_PACKING_METHOD:
             return "Packing method is an invalid value";
         case VRT_ERR_INVALID_REAL_OR_COMPLEX:
@@ -198,14 +210,22 @@ const char* vrt_string_error(int32_t error /* Do NOT use vrt_error_code, since i
             return "Latitude is outside valid bounds (< -90 or > 90 degrees)";
         case VRT_ERR_BOUNDS_LONGITUDE:
             return "Longitude is outside valid bounds (< -180 or > 180 degrees)";
+        case VRT_ERR_BOUNDS_ALTITUDE:
+            return "Altitude is outside valid bounds (< -67108 or > 67108 km)";
         case VRT_ERR_BOUNDS_SPEED_OVER_GROUND:
-            return "Speed over ground is outside valid bounds (< 0 m/s)";
+            return "Speed over ground is outside valid bounds (< 0 or > 65536 m/s)";
         case VRT_ERR_BOUNDS_HEADING_ANGLE:
             return "Heading angle outside valid bounds (< 0 or > 359.999999761582 degrees)";
         case VRT_ERR_BOUNDS_TRACK_ANGLE:
             return "Track angle is outside valid bounds (< 0 or > 359.999999761582 degrees)";
         case VRT_ERR_BOUNDS_MAGNETIC_VARIATION:
             return "Magnetic variation is outside valid bounds (< -180 or > 180 degrees)";
+        case VRT_ERR_BOUNDS_POSITION:
+            return "Position x, y, or z is outside valid bounds (< -67108864 or > 67108863 m)";
+        case VRT_ERR_BOUNDS_ATTITUDE:
+            return "Attitude alpha, beta, or gamma is outside valid bounds (< -511 or > 512 degrees)";
+        case VRT_ERR_BOUNDS_VELOCITY:
+            return "Velocity dx, dy, or dz is outside valid bounds (< -32768 or > 32767 m/s)";
         case VRT_ERR_BOUNDS_SOURCE_LIST_SIZE:
             return "Source list size is outside valid bounds (> 0x01FF)";
         case VRT_ERR_BOUNDS_SYSTEM_LIST_SIZE:

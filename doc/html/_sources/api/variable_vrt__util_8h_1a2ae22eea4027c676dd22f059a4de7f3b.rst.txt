@@ -1,0 +1,13 @@
+.. _exhale_variable_vrt__util_8h_1a2ae22eea4027c676dd22f059a4de7f3b:
+
+Variable VRT_MAX_HEADING_ANGLE
+==============================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: VRT_MAX_HEADING_ANGLE

@@ -1,0 +1,13 @@
+.. _exhale_variable_vrt__util_8h_1adbac83ff6b8235c5a57ac53bc4f0214d:
+
+Variable VRT_MIN_SPEED_OVER_GROUND
+==================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: VRT_MIN_SPEED_OVER_GROUND
