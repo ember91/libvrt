@@ -96,9 +96,9 @@ int32_t vrt_read_trailer(const void* buf, int32_t words_buf, vrt_trailer* traile
  *                                                      (> 999999999999 ps).
  * \retval VRT_ERR_BOUNDS_LATITUDE                      Latitude is outside valid bounds (< -90 or > 90 degrees).
  * \retval VRT_ERR_BOUNDS_LONGITUDE                     Longitude is outside valid bounds (< -180 or > 180 degrees).
- * \retval VRT_ERR_BOUNDS_HEADING_ANGLE                 Heading angle outside valid bounds (< 0 or > 359.999999761582
+ * \retval VRT_ERR_BOUNDS_HEADING_ANGLE                 Heading angle outside valid bounds (< 0 or > ~360
  *                                                      degrees).
- * \retval VRT_ERR_BOUNDS_TRACK_ANGLE                   Track angle is outside valid bounds (< 0 or > 359.999999761582
+ * \retval VRT_ERR_BOUNDS_TRACK_ANGLE                   Track angle is outside valid bounds (< 0 or > ~360
  *                                                      degrees).
  * \retval VRT_ERR_BOUNDS_MAGNETIC_VARIATION            Magnetic variation is outside valid bounds (< -180 or > 180
  *                                                      degrees).
@@ -139,9 +139,9 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, vrt_if_context* 
  *                                                      is VRT_TSF_UNDEFINED.
  * \retval VRT_ERR_BOUNDS_LATITUDE                      Latitude is outside valid bounds (< -90 or > 90 degrees).
  * \retval VRT_ERR_BOUNDS_LONGITUDE                     Longitude is outside valid bounds (< -180 or > 180 degrees).
- * \retval VRT_ERR_BOUNDS_HEADING_ANGLE                 Heading angle outside valid bounds (< 0 or > 359.999999761582
+ * \retval VRT_ERR_BOUNDS_HEADING_ANGLE                 Heading angle outside valid bounds (< 0 or > ~360
  *                                                      degrees).
- * \retval VRT_ERR_BOUNDS_TRACK_ANGLE                   Track angle is outside valid bounds (< 0 or > 359.999999761582
+ * \retval VRT_ERR_BOUNDS_TRACK_ANGLE                   Track angle is outside valid bounds (< 0 or > ~360
  *                                                      degrees).
  * \retval VRT_ERR_BOUNDS_MAGNETIC_VARIATION            Magnetic variation is outside valid bounds (< -180 or > 180
  *                                                      degrees).

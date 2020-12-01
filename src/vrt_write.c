@@ -408,13 +408,13 @@ static int32_t if_context_write_formatted_geolocation(bool                      
                 return VRT_ERR_BOUNDS_REAL_TIME;
             }
             if (g->has.latitude) {
-                VRT_BOUNDS(-VRT_MINMAX_LATITUDE, g->latitude, VRT_MINMAX_LATITUDE, VRT_ERR_BOUNDS_LATITUDE);
+                VRT_BOUNDS(VRT_MIN_LATITUDE, g->latitude, VRT_MAX_LATITUDE, VRT_ERR_BOUNDS_LATITUDE);
             }
             if (g->has.longitude) {
-                VRT_BOUNDS(-VRT_MINMAX_LONGITUDE, g->longitude, VRT_MINMAX_LONGITUDE, VRT_ERR_BOUNDS_LONGITUDE);
+                VRT_BOUNDS(VRT_MIN_LONGITUDE, g->longitude, VRT_MAX_LONGITUDE, VRT_ERR_BOUNDS_LONGITUDE);
             }
             if (g->has.altitude) {
-                VRT_BOUNDS(-VRT_MINMAX_ALTITUDE, g->altitude, VRT_MINMAX_ALTITUDE, VRT_ERR_BOUNDS_ALTITUDE);
+                VRT_BOUNDS(VRT_MIN_ALTITUDE, g->altitude, VRT_MAX_ALTITUDE, VRT_ERR_BOUNDS_ALTITUDE);
             }
             if (g->has.speed_over_ground) {
                 VRT_BOUNDS(VRT_MIN_SPEED_OVER_GROUND, g->speed_over_ground, VRT_MAX_SPEED_OVER_GROUND,
@@ -428,7 +428,7 @@ static int32_t if_context_write_formatted_geolocation(bool                      
                 VRT_BOUNDS(VRT_MIN_TRACK_ANGLE, g->track_angle, VRT_MAX_TRACK_ANGLE, VRT_ERR_BOUNDS_TRACK_ANGLE);
             }
             if (g->has.magnetic_variation) {
-                VRT_BOUNDS(-VRT_MINMAX_MAGNETIC_VARIATION, g->magnetic_variation, VRT_MINMAX_MAGNETIC_VARIATION,
+                VRT_BOUNDS(VRT_MIN_MAGNETIC_VARIATION, g->magnetic_variation, VRT_MAX_MAGNETIC_VARIATION,
                            VRT_ERR_BOUNDS_MAGNETIC_VARIATION);
             }
         }
@@ -665,9 +665,7 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_
     }
     if (if_context->has.bandwidth) {
         if (validate) {
-            if (if_context->bandwidth < VRT_MIN_BANDWIDTH || if_context->bandwidth > VRT_MAX_BANDWIDTH) {
-                return VRT_ERR_BOUNDS_BANDWIDTH;
-            }
+            VRT_BOUNDS(VRT_MIN_BANDWIDTH, if_context->bandwidth, VRT_MAX_BANDWIDTH, VRT_ERR_BOUNDS_BANDWIDTH);
         }
 
         write_uint64((uint64_t)vrt_double_to_fixed_point_i64(if_context->bandwidth, VRT_RADIX_FREQUENCY), b);
@@ -675,10 +673,8 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_
     }
     if (if_context->has.if_reference_frequency) {
         if (validate) {
-            if (if_context->if_reference_frequency < -VRT_MINMAX_IF_REFERENCE_FREQUENCY ||
-                if_context->if_reference_frequency > VRT_MINMAX_IF_REFERENCE_FREQUENCY) {
-                return VRT_ERR_BOUNDS_IF_REFERENCE_FREQUENCY;
-            }
+            VRT_BOUNDS(VRT_MIN_IF_REFERENCE_FREQUENCY, if_context->if_reference_frequency,
+                       VRT_MAX_IF_REFERENCE_FREQUENCY, VRT_ERR_BOUNDS_IF_REFERENCE_FREQUENCY);
         }
 
         write_uint64((uint64_t)vrt_double_to_fixed_point_i64(if_context->if_reference_frequency, VRT_RADIX_FREQUENCY),
@@ -687,10 +683,8 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_
     }
     if (if_context->has.rf_reference_frequency) {
         if (validate) {
-            if (if_context->rf_reference_frequency < -VRT_MINMAX_RF_REFERENCE_FREQUENCY ||
-                if_context->rf_reference_frequency > VRT_MINMAX_RF_REFERENCE_FREQUENCY) {
-                return VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY;
-            }
+            VRT_BOUNDS(VRT_MIN_RF_REFERENCE_FREQUENCY, if_context->rf_reference_frequency,
+                       VRT_MAX_RF_REFERENCE_FREQUENCY, VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY);
         }
 
         write_uint64((uint64_t)vrt_double_to_fixed_point_i64(if_context->rf_reference_frequency, VRT_RADIX_FREQUENCY),
@@ -699,10 +693,8 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_
     }
     if (if_context->has.rf_reference_frequency_offset) {
         if (validate) {
-            if (if_context->rf_reference_frequency_offset < -VRT_MINMAX_RF_REFERENCE_FREQUENCY_OFFSET ||
-                if_context->rf_reference_frequency_offset > VRT_MINMAX_RF_REFERENCE_FREQUENCY_OFFSET) {
-                return VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY_OFFSET;
-            }
+            VRT_BOUNDS(VRT_MIN_RF_REFERENCE_FREQUENCY_OFFSET, if_context->rf_reference_frequency_offset,
+                       VRT_MAX_RF_REFERENCE_FREQUENCY_OFFSET, VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY_OFFSET);
         }
 
         write_uint64(
@@ -711,10 +703,8 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_
     }
     if (if_context->has.if_band_offset) {
         if (validate) {
-            if (if_context->if_band_offset < -VRT_MINMAX_IF_BAND_OFFSET ||
-                if_context->if_band_offset > VRT_MINMAX_IF_BAND_OFFSET) {
-                return VRT_ERR_BOUNDS_IF_BAND_OFFSET;
-            }
+            VRT_BOUNDS(VRT_MIN_IF_BAND_OFFSET, if_context->if_band_offset, VRT_MAX_IF_BAND_OFFSET,
+                       VRT_ERR_BOUNDS_IF_BAND_OFFSET);
         }
 
         write_uint64((uint64_t)vrt_double_to_fixed_point_i64(if_context->if_band_offset, VRT_RADIX_FREQUENCY), b);
@@ -722,10 +712,8 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_
     }
     if (if_context->has.reference_level) {
         if (validate) {
-            if (if_context->reference_level < -VRT_MINMAX_REFERENCE_LEVEL ||
-                if_context->reference_level > VRT_MINMAX_REFERENCE_LEVEL) {
-                return VRT_ERR_BOUNDS_REFERENCE_LEVEL;
-            }
+            VRT_BOUNDS(VRT_MIN_REFERENCE_LEVEL, if_context->reference_level, VRT_MAX_REFERENCE_LEVEL,
+                       VRT_ERR_BOUNDS_REFERENCE_LEVEL);
         }
 
         b[0] = (uint32_t)vrt_float_to_fixed_point_i16(if_context->reference_level, VRT_RADIX_REFERENCE_LEVEL) &
@@ -734,8 +722,8 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_
     }
     if (if_context->has.gain) {
         if (validate) {
-            if (if_context->gain.stage1 < -VRT_MINMAX_GAIN || if_context->gain.stage1 > VRT_MINMAX_GAIN ||
-                if_context->gain.stage2 < -VRT_MINMAX_GAIN || if_context->gain.stage2 > VRT_MINMAX_GAIN) {
+            if (if_context->gain.stage1 < VRT_MIN_GAIN || if_context->gain.stage1 > VRT_MAX_GAIN ||
+                if_context->gain.stage2 < VRT_MIN_GAIN || if_context->gain.stage2 > VRT_MAX_GAIN) {
                 return VRT_ERR_BOUNDS_GAIN;
             }
 
@@ -757,9 +745,7 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_
     }
     if (if_context->has.sample_rate) {
         if (validate) {
-            if (if_context->sample_rate < VRT_MIN_SAMPLE_RATE || if_context->sample_rate > VRT_MAX_SAMPLE_RATE) {
-                return VRT_ERR_BOUNDS_SAMPLE_RATE;
-            }
+            VRT_BOUNDS(VRT_MIN_SAMPLE_RATE, if_context->sample_rate, VRT_MAX_SAMPLE_RATE, VRT_ERR_BOUNDS_SAMPLE_RATE);
         }
 
         write_uint64((uint64_t)vrt_double_to_fixed_point_i64(if_context->sample_rate, VRT_RADIX_FREQUENCY), b);
@@ -775,9 +761,7 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_
     }
     if (if_context->has.temperature) {
         if (validate) {
-            if (if_context->temperature < VRT_MIN_TEMPERATURE || if_context->temperature > VRT_MAX_TEMPERATURE) {
-                return VRT_ERR_BOUNDS_TEMPERATURE;
-            }
+            VRT_BOUNDS(VRT_MIN_TEMPERATURE, if_context->temperature, VRT_MAX_TEMPERATURE, VRT_ERR_BOUNDS_TEMPERATURE);
         }
 
         b[0] = (int32_t)vrt_float_to_fixed_point_i16(if_context->temperature, VRT_RADIX_TEMPERATURE) & 0x0000FFFF;

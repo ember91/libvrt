@@ -60,31 +60,31 @@ typedef enum vrt_error_code {
      */
     VRT_ERR_BOUNDS_ASSOCIATED_CONTEXT_PACKET_COUNT = -12,
     /**
-     * Bandwidth is outside valid bounds (< 0 Hz or > 8.79 THz).
+     * Bandwidth is outside valid bounds (< 0 Hz or > ~8.79 THz).
      */
     VRT_ERR_BOUNDS_BANDWIDTH = -13,
     /**
-     * IF reference frequency is outside valid bounds (< -8.79 or > 8.79 THz).
+     * IF reference frequency is outside valid bounds (< ~-8.79 or > ~8.79 THz).
      */
     VRT_ERR_BOUNDS_IF_REFERENCE_FREQUENCY = -14,
     /**
-     * RF reference frequency is outside valid bounds (< -8.79 or > 8.79 THz).
+     * RF reference frequency is outside valid bounds (< ~-8.79 or > ~8.79 THz).
      */
     VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY = -15,
     /**
-     * RF reference frequency offset is outside valid bounds (< -8.79 or > 8.79 THz).
+     * RF reference frequency offset is outside valid bounds (< ~-8.79 or > ~8.79 THz).
      */
     VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY_OFFSET = -16,
     /**
-     * IF band offset is outside valid bounds (< -8.79 or > 8.79 THz).
+     * IF band offset is outside valid bounds (< ~-8.79 or > ~8.79 THz).
      */
     VRT_ERR_BOUNDS_IF_BAND_OFFSET = -17,
     /**
-     * Reference level is outside valid bounds (< -256 or > 256 dBm).
+     * Reference level is outside valid bounds (< -256 or > ~256 dBm).
      */
     VRT_ERR_BOUNDS_REFERENCE_LEVEL = -18,
     /**
-     * Gain stage 1 or 2 outside valid bounds (< -256 or > 256 dB).
+     * Gain stage 1 or 2 outside valid bounds (< -256 or > ~256 dB).
      */
     VRT_ERR_BOUNDS_GAIN = -19,
     /**
@@ -92,11 +92,11 @@ typedef enum vrt_error_code {
      */
     VRT_ERR_GAIN_STAGE2_SET = -20,
     /**
-     * Sample rate is outside valid bounds (< 0 Hz or > 8.79 THz).
+     * Sample rate is outside valid bounds (< 0 Hz or > ~8.79 THz).
      */
     VRT_ERR_BOUNDS_SAMPLE_RATE = -21,
     /**
-     * Temperature is outside valid bounds (< -273.15 or > 511.984375 degrees C).
+     * Temperature is outside valid bounds (< -273.15 or > ~512 degrees C).
      */
     VRT_ERR_BOUNDS_TEMPERATURE = -22,
     /**
@@ -144,19 +144,19 @@ typedef enum vrt_error_code {
      */
     VRT_ERR_BOUNDS_LONGITUDE = -33,
     /**
-     * Altitude is outside valid bounds (< -67108 or > 67108 km).
+     * Altitude is outside valid bounds (< ~-67108 or > ~67108 km).
      */
     VRT_ERR_BOUNDS_ALTITUDE = -34,
     /**
-     * Speed over ground is outside valid bounds (< 0 or > 65536 m/s).
+     * Speed over ground is outside valid bounds (< 0 or > ~65536 m/s).
      */
     VRT_ERR_BOUNDS_SPEED_OVER_GROUND = -35,
     /**
-     * Heading angle outside valid bounds (< 0 or > 359.999999761582 degrees).
+     * Heading angle outside valid bounds (< 0 or > ~360 degrees).
      */
     VRT_ERR_BOUNDS_HEADING_ANGLE = -36,
     /**
-     * Track angle is outside valid bounds (< 0 or > 359.999999761582 degrees).
+     * Track angle is outside valid bounds (< 0 or > ~360 degrees).
      */
     VRT_ERR_BOUNDS_TRACK_ANGLE = -37,
     /**
@@ -164,15 +164,15 @@ typedef enum vrt_error_code {
      */
     VRT_ERR_BOUNDS_MAGNETIC_VARIATION = -38,
     /**
-     * Position x, y, or z is outside valid bounds (< -67108864 or > 67108863 m).
+     * Position x, y, or z is outside valid bounds (< ~-67108 or > ~67108 km).
      */
     VRT_ERR_BOUNDS_POSITION = -39,
     /**
-     * Attitude alpha, beta, or gamma is outside valid bounds (< -511 or > 512 degrees).
+     * Attitude alpha, beta, or gamma is outside valid bounds (< -512 or > ~512 degrees).
      */
     VRT_ERR_BOUNDS_ATTITUDE = -40,
     /**
-     * Velocity dx, dy, or dz is outside valid bounds (< -32768 or > 32767 m/s).
+     * Velocity dx, dy, or dz is outside valid bounds (< -32768 or > ~32768 m/s).
      */
     VRT_ERR_BOUNDS_VELOCITY = -41,
     /**

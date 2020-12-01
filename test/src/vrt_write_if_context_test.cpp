@@ -358,10 +358,10 @@ TEST_F(WriteIfContextTest, ReferenceLevelSmall) {
 
 TEST_F(WriteIfContextTest, ReferenceLevelLarge) {
     c_.has.reference_level = true;
-    c_.reference_level     = 256.0F;
+    c_.reference_level     = 255.0F;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x01000000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x00008000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x00007F80));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
@@ -374,7 +374,7 @@ TEST_F(WriteIfContextTest, ReferenceLevelInvalidSmall) {
 
 TEST_F(WriteIfContextTest, ReferenceLevelInvalidLarge) {
     c_.has.reference_level = true;
-    c_.reference_level     = 257.0F;
+    c_.reference_level     = 256.0F;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_BOUNDS_REFERENCE_LEVEL);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, false), 2);
 }
@@ -411,11 +411,11 @@ TEST_F(WriteIfContextTest, GainSmall) {
 
 TEST_F(WriteIfContextTest, GainLarge) {
     c_.has.gain    = true;
-    c_.gain.stage1 = 256.0F;
-    c_.gain.stage2 = 256.0F;
+    c_.gain.stage1 = 255.0F;
+    c_.gain.stage2 = 255.0F;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), 2);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00800000));
-    ASSERT_EQ(Hex(buf_[1]), Hex(0x80008000));
+    ASSERT_EQ(Hex(buf_[1]), Hex(0x7F807F80));
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
@@ -437,7 +437,7 @@ TEST_F(WriteIfContextTest, GainStage2InvalidSmall) {
 
 TEST_F(WriteIfContextTest, GainStage1InvalidLarge) {
     c_.has.gain    = true;
-    c_.gain.stage1 = 257.0F;
+    c_.gain.stage1 = 256.0F;
     c_.gain.stage2 = 1.0F;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_BOUNDS_GAIN);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, false), 2);
@@ -446,7 +446,7 @@ TEST_F(WriteIfContextTest, GainStage1InvalidLarge) {
 TEST_F(WriteIfContextTest, GainStage2InvalidLarge) {
     c_.has.gain    = true;
     c_.gain.stage1 = 1.0F;
-    c_.gain.stage2 = 257.0F;
+    c_.gain.stage2 = 256.0F;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, true), VRT_ERR_BOUNDS_GAIN);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 2, false), 2);
 }
@@ -2424,15 +2424,6 @@ TEST_F(WriteIfContextTest, EcefEphemerisFractionalSecondTimestampInvalid2) {
 TEST_F(WriteIfContextTest, EcefEphemerisPositionX) {
     c_.has.ecef_ephemeris        = true;
     c_.ecef_ephemeris.position_x = 1.0;
-    ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
-    ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
-    SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    buf_cmp_geolocation_ephemeris(buf_, {}, false);
-}
-
-TEST_F(WriteIfContextTest, EcefEphemerisPositionXSmall) {
-    c_.has.ecef_ephemeris        = true;
-    c_.ecef_ephemeris.position_x = -67108864;
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 14, true), 14);
     ASSERT_EQ(Hex(buf_[0]), Hex(0x00001000));
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());

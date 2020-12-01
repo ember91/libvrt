@@ -92,11 +92,23 @@ TEST(FixedPointTest, DoubleToI32) {
     ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(512.0 - 2.38e-7, 22)), Hex(static_cast<int32_t>(0x7FFFFFFF)));
     ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(-2.38e-7, 22)), Hex(static_cast<int32_t>(0xFFFFFFFF)));
     ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(2.38e-7, 22)), Hex(static_cast<int32_t>(0x00000001)));
-    /* Figure 7.1.5.19-3 */
+    /* Figure 7.1.5.19-3 & 7.1.5.21-3a */
     ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(-67108864.0, 5)), Hex(static_cast<int32_t>(0x80000000)));
     ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(67108864.0 - 0.031, 5)), Hex(static_cast<int32_t>(0x7FFFFFFF)));
-    ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(-0.031, 5)), Hex(static_cast<int32_t>(0xFFFFFFFF)));
-    ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(0.031, 5)), Hex(static_cast<int32_t>(0x00000001)));
+    ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(-0.03125, 5)), Hex(static_cast<int32_t>(0xFFFFFFFF)));
+    ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(0.03125, 5)), Hex(static_cast<int32_t>(0x00000001)));
+    /* Figure 7.1.5.21-3b */
+    ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(-512.0, 22)), Hex(static_cast<int32_t>(0x80000000)));
+    ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(512 - 2.384185791015625e-07, 22)),
+              Hex(static_cast<int32_t>(0x7FFFFFFF)));
+    ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(-2.384185791015625e-07, 22)), Hex(static_cast<int32_t>(0xFFFFFFFF)));
+    ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(2.384185791015625e-07, 22)), Hex(static_cast<int32_t>(0x00000001)));
+    /* Figure 7.1.5.21-3c */
+    ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(-32768.0, 16)), Hex(static_cast<int32_t>(0x80000000)));
+    ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(32768.0 - 1.52587890625e-05, 16)),
+              Hex(static_cast<int32_t>(0x7FFFFFFF)));
+    ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(-1.52587890625e-05, 16)), Hex(static_cast<int32_t>(0xFFFFFFFF)));
+    ASSERT_EQ(Hex(vrt_double_to_fixed_point_i32(1.52587890625e-05, 16)), Hex(static_cast<int32_t>(0x00000001)));
 }
 
 TEST(FixedPointTest, DoubleToU32) {

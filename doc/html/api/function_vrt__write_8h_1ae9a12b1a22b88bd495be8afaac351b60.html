@@ -177,15 +177,15 @@
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUFFER_SIZE</span></code>: Buffer is too small. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_BANDWIDTH</span></code>: Bandwidth is outside valid bounds (&lt; 0 Hz or &gt; 8.79 THz). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_IF_REFERENCE_FREQUENCY</span></code>: IF reference frequency is outside valid bounds (&lt; -8.79 or &gt; 8.79 THz). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY</span></code>: RF reference frequency is outside valid bounds (&lt; -8.79 or &gt; 8.79 THz). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY_OFFSET</span></code>: RF reference frequency offset is outside valid bounds (&lt; -8.79 or &gt; 8.79 THz). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_IF_BAND_OFFSET</span></code>: IF band offset is outside valid bounds (&lt; -8.79 or &gt; 8.79 THz). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REFERENCE_LEVEL</span></code>: Reference level is outside valid bounds (&lt; -256 or &gt; 256 dBm). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_GAIN</span></code>: Gain stage 1 or 2 outside valid bounds (&lt; -256 or &gt; 256 dB). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_IF_REFERENCE_FREQUENCY</span></code>: IF reference frequency is outside valid bounds (&lt; ~-8.79 or &gt; ~8.79 THz). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY</span></code>: RF reference frequency is outside valid bounds (&lt; ~-8.79 or &gt; ~8.79 THz). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_RF_REFERENCE_FREQUENCY_OFFSET</span></code>: RF reference frequency offset is outside valid bounds (&lt; ~-8.79 or &gt; ~8.79 THz). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_IF_BAND_OFFSET</span></code>: IF band offset is outside valid bounds (&lt; ~-8.79 or &gt; ~8.79 THz). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REFERENCE_LEVEL</span></code>: Reference level is outside valid bounds (&lt; -256 or &gt; ~256 dBm). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_GAIN</span></code>: Gain stage 1 or 2 outside valid bounds (&lt; -256 or &gt; ~256 dB). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_GAIN_STAGE2_SET</span></code>: Gain stage 1 must be used instead of stage 2 when only one is set. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SAMPLE_RATE</span></code>: Sample rate is outside valid bounds (&lt; 0 Hz or &gt; 8.79 THz). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TEMPERATURE</span></code>: Temperature is outside valid bounds (&lt; -273.15 or &gt; 511.984375 degrees C). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SAMPLE_RATE</span></code>: Sample rate is outside valid bounds (&lt; 0 Hz or &gt; ~8.79 THz). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TEMPERATURE</span></code>: Temperature is outside valid bounds (&lt; -273.15 or &gt; ~512 degrees C). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_OUI</span></code>: OUI is outside valid bounds (&gt; 0x00FFFFFF). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_PACKING_METHOD</span></code>: Packing method is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_REAL_OR_COMPLEX</span></code>: Real/Complex is an invalid value. </p></li>
@@ -201,14 +201,14 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds (&gt; 999999999999 ps). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LATITUDE</span></code>: Latitude is outside valid bounds (&lt; -90 or &gt; 90 degrees). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_LONGITUDE</span></code>: Longitude is outside valid bounds (&lt; -180 or &gt; 180 degrees). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_ALTITUDE</span></code>: Altitude is outside valid bounds (&lt; -67108 or &gt; 67108 km). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SPEED_OVER_GROUND</span></code>: Speed over ground is outside valid bounds (&lt; 0 or &gt; 65536 m/s). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_HEADING_ANGLE</span></code>: Heading angle outside valid bounds (&lt; 0 or &gt; 359.999999761582 degrees). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TRACK_ANGLE</span></code>: Track angle is outside valid bounds (&lt; 0 or &gt; 359.999999761582 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_ALTITUDE</span></code>: Altitude is outside valid bounds (&lt; ~-67108 or &gt; ~67108 km). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SPEED_OVER_GROUND</span></code>: Speed over ground is outside valid bounds (&lt; 0 or &gt; ~65536 m/s). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_HEADING_ANGLE</span></code>: Heading angle outside valid bounds (&lt; 0 or &gt; ~360 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TRACK_ANGLE</span></code>: Track angle is outside valid bounds (&lt; 0 or &gt; ~360 degrees). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_MAGNETIC_VARIATION</span></code>: Magnetic variation is outside valid bounds (&lt; -180 or &gt; 180 degrees). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_POSITION</span></code>: Position x, y, or z is outside valid bounds (&lt; -67108864 or &gt; 67108863 m). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_ATTITUDE</span></code>: Attitude alpha, beta, or gamma is outside valid bounds (&lt; -511 or &gt; 512 degrees). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_VELOCITY</span></code>: Velocity dx, dy, or dz is outside valid bounds (&lt; -32768 or &gt; 32767 m/s). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_POSITION</span></code>: Position x, y, or z is outside valid bounds (&lt; ~-67108 or &gt; ~67108 km). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_ATTITUDE</span></code>: Attitude alpha, beta, or gamma is outside valid bounds (&lt; -512 or &gt; ~512 degrees). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_VELOCITY</span></code>: Velocity dx, dy, or dz is outside valid bounds (&lt; -32768 or &gt; ~32768 m/s). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SOURCE_LIST_SIZE</span></code>: Source list size is outside valid bounds (&gt; 0x01FF). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SYSTEM_LIST_SIZE</span></code>: System list size is outside valid bounds (&gt; 0x01FF). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE</span></code>: Channel list size is outside valid bounds (&gt; 0x7FFF).</p></li>

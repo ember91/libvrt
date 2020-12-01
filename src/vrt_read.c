@@ -495,10 +495,10 @@ static int32_t if_context_read_formatted_geolocation(bool                       
                 return VRT_ERR_BOUNDS_REAL_TIME;
             }
             if (g->has.latitude) {
-                VRT_BOUNDS(-VRT_MINMAX_LATITUDE, g->latitude, VRT_MINMAX_LATITUDE, VRT_ERR_BOUNDS_LATITUDE);
+                VRT_BOUNDS(VRT_MIN_LATITUDE, g->latitude, VRT_MAX_LATITUDE, VRT_ERR_BOUNDS_LATITUDE);
             }
             if (g->has.longitude) {
-                VRT_BOUNDS(-VRT_MINMAX_LONGITUDE, g->longitude, VRT_MINMAX_LONGITUDE, VRT_ERR_BOUNDS_LONGITUDE);
+                VRT_BOUNDS(VRT_MIN_LONGITUDE, g->longitude, VRT_MAX_LONGITUDE, VRT_ERR_BOUNDS_LONGITUDE);
             }
             if (g->has.heading_angle) {
                 VRT_BOUNDS(VRT_MIN_HEADING_ANGLE, g->heading_angle, VRT_MAX_HEADING_ANGLE,
@@ -508,7 +508,7 @@ static int32_t if_context_read_formatted_geolocation(bool                       
                 VRT_BOUNDS(VRT_MIN_TRACK_ANGLE, g->track_angle, VRT_MAX_TRACK_ANGLE, VRT_ERR_BOUNDS_TRACK_ANGLE);
             }
             if (g->has.magnetic_variation) {
-                VRT_BOUNDS(-VRT_MINMAX_MAGNETIC_VARIATION, g->magnetic_variation, VRT_MINMAX_MAGNETIC_VARIATION,
+                VRT_BOUNDS(VRT_MIN_MAGNETIC_VARIATION, g->magnetic_variation, VRT_MAX_MAGNETIC_VARIATION,
                            VRT_ERR_BOUNDS_MAGNETIC_VARIATION);
             }
         }
