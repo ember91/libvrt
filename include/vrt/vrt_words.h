@@ -1,5 +1,5 @@
-#ifndef INCLUDE_VRT_VRT_COMMON_H_
-#define INCLUDE_VRT_VRT_COMMON_H_
+#ifndef INCLUDE_VRT_VRT_WORDS_H_
+#define INCLUDE_VRT_VRT_WORDS_H_
 
 #include <stdint.h>
 
