@@ -8,7 +8,7 @@
 #include "vrt_fixed_point.h"
 #include "vrt_util_internal.h"
 
-void vrt_init_header(vrt_header* header) {
+void vrt_init_header(struct vrt_header* header) {
     header->packet_type  = VRT_PT_IF_DATA_WITHOUT_STREAM_ID;
     header->has.class_id = false;
     header->has.trailer  = false;
@@ -19,7 +19,7 @@ void vrt_init_header(vrt_header* header) {
     header->packet_size  = 0;
 }
 
-void vrt_init_fields(vrt_fields* fields) {
+void vrt_init_fields(struct vrt_fields* fields) {
     fields->stream_id                       = 0;
     fields->class_id.oui                    = 0;
     fields->class_id.information_class_code = 0;
@@ -28,7 +28,7 @@ void vrt_init_fields(vrt_fields* fields) {
     fields->fractional_seconds_timestamp    = 0;
 }
 
-void vrt_init_trailer(vrt_trailer* trailer) {
+void vrt_init_trailer(struct vrt_trailer* trailer) {
     trailer->has.calibrated_time                 = false;
     trailer->has.valid_data                      = false;
     trailer->has.reference_lock                  = false;
@@ -62,7 +62,7 @@ void vrt_init_trailer(vrt_trailer* trailer) {
  *
  * \param g Formatted geolocation.
  */
-static void init_formatted_geolocation(vrt_formatted_geolocation* g) {
+static void init_formatted_geolocation(struct vrt_formatted_geolocation* g) {
     g->tsi = VRT_TSI_UNDEFINED;
     g->tsf = VRT_TSF_UNDEFINED;
     g->oui = 0;
@@ -95,7 +95,7 @@ static void init_formatted_geolocation(vrt_formatted_geolocation* g) {
  *
  * \param e Ephemeris.
  */
-static void init_ephemeris(vrt_ephemeris* e) {
+static void init_ephemeris(struct vrt_ephemeris* e) {
     e->tsi = VRT_TSI_UNDEFINED;
     e->tsf = VRT_TSF_UNDEFINED;
     e->oui = 0;
@@ -126,7 +126,7 @@ static void init_ephemeris(vrt_ephemeris* e) {
     e->velocity_dz = vrt_fixed_point_i32_to_double(VRT_UNSPECIFIED_FIXED_POINT, VRT_RADIX_SPEED_VELOCITY);
 }
 
-void vrt_init_if_context(vrt_if_context* if_context) {
+void vrt_init_if_context(struct vrt_if_context* if_context) {
     if_context->context_field_change_indicator     = false;
     if_context->has.reference_point_identifier     = false;
     if_context->has.bandwidth                      = false;
@@ -222,7 +222,7 @@ void vrt_init_if_context(vrt_if_context* if_context) {
     if_context->context_association_lists.asynchronous_channel_tag_list                 = NULL;
 }
 
-void vrt_init_packet(vrt_packet* packet) {
+void vrt_init_packet(struct vrt_packet* packet) {
     vrt_init_header(&packet->header);
     vrt_init_fields(&packet->fields);
     packet->body       = NULL;

@@ -5,7 +5,7 @@
 
 #include "vrt_util_internal.h"
 
-int32_t vrt_words_fields(const vrt_header* header) {
+int32_t vrt_words_fields(const struct vrt_header* header) {
     int32_t words = 0;
     if (vrt_has_stream_id(header)) {
         words += 1;
@@ -22,7 +22,7 @@ int32_t vrt_words_fields(const vrt_header* header) {
     return words;
 }
 
-int32_t vrt_words_trailer(const vrt_header* header) {
+int32_t vrt_words_trailer(const struct vrt_header* header) {
     /* Context packets cannot have a trailer */
     if (vrt_is_context(header)) {
         return 0;
@@ -30,7 +30,7 @@ int32_t vrt_words_trailer(const vrt_header* header) {
     return vrt_b2u(header->has.trailer);
 }
 
-int32_t vrt_words_if_context(const vrt_if_context* if_context) {
+int32_t vrt_words_if_context(const struct vrt_if_context* if_context) {
     /* Count non-variable words */
     int32_t words = vrt_words_if_context_indicator(&if_context->has);
 
@@ -40,11 +40,11 @@ int32_t vrt_words_if_context(const vrt_if_context* if_context) {
         words += if_context->gps_ascii.number_of_words & 0x00FFFFFFU;
     }
     if (if_context->has.context_association_lists) {
-        const vrt_context_association_lists* cal = &if_context->context_association_lists;
-        const uint16_t                       sz1 = cal->source_list_size & 0x01FFU;
-        const uint16_t                       sz2 = cal->system_list_size & 0x01FFU;
-        const uint16_t                       sz3 = cal->vector_component_list_size;
-        const uint16_t                       sz4 = cal->asynchronous_channel_list_size & 0x7FFFU;
+        const struct vrt_context_association_lists* cal = &if_context->context_association_lists;
+        const uint16_t                              sz1 = cal->source_list_size & 0x01FFU;
+        const uint16_t                              sz2 = cal->system_list_size & 0x01FFU;
+        const uint16_t                              sz3 = cal->vector_component_list_size;
+        const uint16_t                              sz4 = cal->asynchronous_channel_list_size & 0x7FFFU;
 
         words += 2;
         words += sz1;
@@ -59,7 +59,7 @@ int32_t vrt_words_if_context(const vrt_if_context* if_context) {
     return words;
 }
 
-int32_t vrt_words_packet(const vrt_packet* packet) {
+int32_t vrt_words_packet(const struct vrt_packet* packet) {
     int32_t words = VRT_WORDS_HEADER;
     words += vrt_words_fields(&packet->header);
     switch (packet->header.packet_type) {

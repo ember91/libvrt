@@ -36,7 +36,7 @@ static inline void write_uint64(uint64_t val, uint32_t* b) {
     b[1] = (uint32_t)val;
 }
 
-int32_t vrt_write_header(const vrt_header* header, void* buf, int32_t words_buf, bool validate) {
+int32_t vrt_write_header(const struct vrt_header* header, void* buf, int32_t words_buf, bool validate) {
     /* Note that it makes sense to have words_buf as signed, to avoid overflow for words_buf - offset */
 
     /* Number of words are always 1 */
@@ -92,11 +92,11 @@ int32_t vrt_write_header(const vrt_header* header, void* buf, int32_t words_buf,
     return words;
 }
 
-int32_t vrt_write_fields(const vrt_header* header,
-                         const vrt_fields* fields,
-                         void*             buf,
-                         int32_t           words_buf,
-                         bool              validate) {
+int32_t vrt_write_fields(const struct vrt_header* header,
+                         const struct vrt_fields* fields,
+                         void*                    buf,
+                         int32_t                  words_buf,
+                         bool                     validate) {
     const int32_t words = (int32_t)vrt_words_fields(header);
 
     /* Check if buf size is sufficient */
@@ -139,7 +139,7 @@ int32_t vrt_write_fields(const vrt_header* header,
     return words;
 }
 
-int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, int32_t words_buf, bool validate) {
+int32_t vrt_write_trailer(const struct vrt_trailer* trailer, void* buf, int32_t words_buf, bool validate) {
     /* Number of words are always 1 */
     const int32_t words = 1;
 
@@ -224,7 +224,7 @@ int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, int32_t words_b
  *
  * \return Number of written words, or a negative number if error.
  */
-static int32_t if_context_write_context_indicator_field(const vrt_if_context* c, uint32_t* b) {
+static int32_t if_context_write_context_indicator_field(const struct vrt_if_context* c, uint32_t* b) {
     /* Zero reserved bits */
     b[0] = 0;
 
@@ -265,7 +265,9 @@ static int32_t if_context_write_context_indicator_field(const vrt_if_context* c,
  *
  * \return Number of written words, or a negative number if error.
  */
-static int32_t if_context_write_state_and_event_indicator_field(bool has, const vrt_state_and_event* s, uint32_t* b) {
+static int32_t if_context_write_state_and_event_indicator_field(bool                              has,
+                                                                const struct vrt_state_and_event* s,
+                                                                uint32_t*                         b) {
     if (has) {
         /* Zero reserved bits */
         b[0] = 0;
@@ -321,10 +323,10 @@ static int32_t if_context_write_state_and_event_indicator_field(bool has, const 
  *
  * \return Number of written words, or a negative number if error.
  */
-static int32_t if_context_write_data_packet_payload_format(bool                                  has,
-                                                           const vrt_data_packet_payload_format* f,
-                                                           uint32_t*                             b,
-                                                           bool                                  validate) {
+static int32_t if_context_write_data_packet_payload_format(bool                                         has,
+                                                           const struct vrt_data_packet_payload_format* f,
+                                                           uint32_t*                                    b,
+                                                           bool                                         validate) {
     if (has) {
         if (validate) {
             if (f->packing_method < VRT_PM_PROCESSING_EFFICIENT || f->packing_method > VRT_PM_LINK_EFFICIENT) {
@@ -383,10 +385,10 @@ static int32_t if_context_write_data_packet_payload_format(bool                 
  *
  * \return Number of written words, or a negative number if error.
  */
-static int32_t if_context_write_formatted_geolocation(bool                             has,
-                                                      const vrt_formatted_geolocation* g,
-                                                      uint32_t*                        b,
-                                                      bool                             validate) {
+static int32_t if_context_write_formatted_geolocation(bool                                    has,
+                                                      const struct vrt_formatted_geolocation* g,
+                                                      uint32_t*                               b,
+                                                      bool                                    validate) {
     if (has) {
         if (validate) {
             if (g->tsi < VRT_TSI_NONE || g->tsi > VRT_TSI_OTHER) {
@@ -474,7 +476,7 @@ static int32_t if_context_write_formatted_geolocation(bool                      
  *
  * \return Number of written words, or a negative number if error.
  */
-static int32_t if_context_write_ephemeris(bool has, const vrt_ephemeris* e, uint32_t* b, bool validate) {
+static int32_t if_context_write_ephemeris(bool has, const struct vrt_ephemeris* e, uint32_t* b, bool validate) {
     if (has) {
         if (validate) {
             if (e->tsi < VRT_TSI_NONE || e->tsi > VRT_TSI_OTHER) {
@@ -567,7 +569,7 @@ static int32_t if_context_write_ephemeris(bool has, const vrt_ephemeris* e, uint
  *
  * \return Number of written words, or a negative number if error.
  */
-static int32_t if_context_write_gps_ascii(bool has, const vrt_gps_ascii* g, uint32_t* b, bool validate) {
+static int32_t if_context_write_gps_ascii(bool has, const struct vrt_gps_ascii* g, uint32_t* b, bool validate) {
     if (has) {
         if (validate) {
             if (g->oui > 0x00FFFFFF) {
@@ -599,10 +601,10 @@ static int32_t if_context_write_gps_ascii(bool has, const vrt_gps_ascii* g, uint
  *
  * \return Number of written words, or a negative number if error.
  */
-static int32_t if_context_write_context_association_lists(bool                                 has,
-                                                          const vrt_context_association_lists* l,
-                                                          uint32_t*                            b,
-                                                          bool                                 validate) {
+static int32_t if_context_write_context_association_lists(bool                                        has,
+                                                          const struct vrt_context_association_lists* l,
+                                                          uint32_t*                                   b,
+                                                          bool                                        validate) {
     if (has) {
         if (validate) {
             if (l->source_list_size > 0x01FF) {
@@ -644,7 +646,7 @@ static int32_t if_context_write_context_association_lists(bool                  
     return 0;
 }
 
-int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_t words_buf, bool validate) {
+int32_t vrt_write_if_context(const struct vrt_if_context* if_context, void* buf, int32_t words_buf, bool validate) {
     const int32_t words = vrt_words_if_context(if_context);
 
     /* Check if buf size is sufficient */
@@ -831,7 +833,7 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_
     return words;
 }
 
-int32_t vrt_write_packet(const vrt_packet* packet, void* buf, int32_t words_buf, bool validate) {
+int32_t vrt_write_packet(const struct vrt_packet* packet, void* buf, int32_t words_buf, bool validate) {
     uint32_t* b = (uint32_t*)buf;
 
     /* Header */

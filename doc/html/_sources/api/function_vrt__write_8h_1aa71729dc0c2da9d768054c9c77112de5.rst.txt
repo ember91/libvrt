@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__write_8h_1aa71729dc0c2da9d768054c9c77112de5:
+
+Function vrt_write_if_context
+=============================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_write.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_write_if_context(const struct vrt_if_context *, void *, int32_t, bool)

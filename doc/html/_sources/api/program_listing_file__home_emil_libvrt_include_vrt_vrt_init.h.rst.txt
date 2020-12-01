@@ -19,15 +19,15 @@ Program Listing for File vrt_init.h
    extern "C" {
    #endif
    
-   void vrt_init_header(vrt_header* header);
+   void vrt_init_header(struct vrt_header* header);
    
-   void vrt_init_fields(vrt_fields* fields);
+   void vrt_init_fields(struct vrt_fields* fields);
    
-   void vrt_init_trailer(vrt_trailer* trailer);
+   void vrt_init_trailer(struct vrt_trailer* trailer);
    
-   void vrt_init_if_context(vrt_if_context* if_context);
+   void vrt_init_if_context(struct vrt_if_context* if_context);
    
-   void vrt_init_packet(vrt_packet* packet);
+   void vrt_init_packet(struct vrt_packet* packet);
    
    #ifdef __cplusplus
    }

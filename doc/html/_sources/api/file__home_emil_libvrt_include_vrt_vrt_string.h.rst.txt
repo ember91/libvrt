@@ -42,21 +42,21 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_vrt__string_8h_1a99c9ae304a4b8d079cf2bd89eb8c3970`
+- :ref:`exhale_function_vrt__string_8h_1a52bfe40a317266e3bce607b9fabc65b6`
 
-- :ref:`exhale_function_vrt__string_8h_1a69be6997674761912825d90bf058032a`
+- :ref:`exhale_function_vrt__string_8h_1a385655b416a1f6d72d3927fae1ada6f3`
 
 - :ref:`exhale_function_vrt__string_8h_1a781ac0482f2437dd9b76043f87350e5d`
 
-- :ref:`exhale_function_vrt__string_8h_1aa2b99569815d0971f22687df7392d3e6`
+- :ref:`exhale_function_vrt__string_8h_1a8d0d7ceab1489973ea4b1b37529c9a59`
 
-- :ref:`exhale_function_vrt__string_8h_1abd44330e5a4dbca145b5918fc29b7b00`
+- :ref:`exhale_function_vrt__string_8h_1aabd7dfceee3960163a4cad85fa3b351e`
 
-- :ref:`exhale_function_vrt__string_8h_1a3996420d201f8b5b94a380a72036576a`
+- :ref:`exhale_function_vrt__string_8h_1a172b4cc982cfedb708f12cf6db96c779`
 
-- :ref:`exhale_function_vrt__string_8h_1ac3d84d0157b350448d87a68b8349ae6e`
+- :ref:`exhale_function_vrt__string_8h_1ae1610ff777b25da6f25d9ad532e0a677`
 
-- :ref:`exhale_function_vrt__string_8h_1a3b3850641b61ac8c3a3809d628e6eb2e`
+- :ref:`exhale_function_vrt__string_8h_1ad6e0b8635a01cf095539730003587dcd`
 
-- :ref:`exhale_function_vrt__string_8h_1af2eb78df73c725620b77e457f2bcfbea`
+- :ref:`exhale_function_vrt__string_8h_1ab8a34e8a55ffcf05cffceddbb9be6ac1`
 

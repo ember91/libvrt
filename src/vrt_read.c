@@ -36,7 +36,7 @@ static inline uint64_t read_uint64(const uint32_t* b) {
     return (uint64_t)b[0] << 32U | (uint64_t)b[1];
 }
 
-int32_t vrt_read_header(const void* buf, int32_t words_buf, vrt_header* header, bool validate) {
+int32_t vrt_read_header(const void* buf, int32_t words_buf, struct vrt_header* header, bool validate) {
     /* Note that it makes sense to have words_buf as signed, to avoid overflow for words_buf - offset */
 
     /* Size is always 1 */
@@ -51,12 +51,12 @@ int32_t vrt_read_header(const void* buf, int32_t words_buf, vrt_header* header, 
     uint32_t b = *((const uint32_t*)buf);
 
     /* Decode in order from msb to lsb */
-    header->packet_type  = (vrt_packet_type)msk(b, 28, 4);
+    header->packet_type  = (enum vrt_packet_type)msk(b, 28, 4);
     header->has.class_id = vrt_u2b(msk(b, 27, 1));
     header->has.trailer  = vrt_u2b(msk(b, 26, 1));
-    header->tsm          = (vrt_tsm)msk(b, 24, 1);
-    header->tsi          = (vrt_tsi)msk(b, 22, 2);
-    header->tsf          = (vrt_tsf)msk(b, 20, 2);
+    header->tsm          = (enum vrt_tsm)msk(b, 24, 1);
+    header->tsi          = (enum vrt_tsi)msk(b, 22, 2);
+    header->tsf          = (enum vrt_tsf)msk(b, 20, 2);
     header->packet_count = (uint8_t)msk(b, 16, 4);
     header->packet_size  = (uint16_t)msk(b, 0, 16);
 
@@ -81,11 +81,11 @@ int32_t vrt_read_header(const void* buf, int32_t words_buf, vrt_header* header, 
     return words;
 }
 
-int32_t vrt_read_fields(const vrt_header* header,
-                        const void*       buf,
-                        int32_t           words_buf,
-                        vrt_fields*       fields,
-                        bool              validate) {
+int32_t vrt_read_fields(const struct vrt_header* header,
+                        const void*              buf,
+                        int32_t                  words_buf,
+                        struct vrt_fields*       fields,
+                        bool                     validate) {
     const int32_t words = (int32_t)vrt_words_fields(header);
 
     /* Check if buf size is sufficient */
@@ -148,7 +148,7 @@ int32_t vrt_read_fields(const vrt_header* header,
     return words;
 }
 
-int32_t vrt_read_trailer(const void* buf, int32_t words_buf, vrt_trailer* trailer) {
+int32_t vrt_read_trailer(const void* buf, int32_t words_buf, struct vrt_trailer* trailer) {
     /* Number of words are always 1 */
     const int32_t words = 1;
 
@@ -189,7 +189,7 @@ int32_t vrt_read_trailer(const void* buf, int32_t words_buf, vrt_trailer* traile
         trailer->reference_lock = false;
     }
     if (trailer->has.agc_or_mgc) {
-        trailer->agc_or_mgc = (vrt_agc_or_mgc)msk(b, 16, 1);
+        trailer->agc_or_mgc = (enum vrt_agc_or_mgc)msk(b, 16, 1);
     } else {
         trailer->agc_or_mgc = VRT_AOM_MGC;
     }
@@ -257,7 +257,7 @@ int32_t vrt_read_trailer(const void* buf, int32_t words_buf, vrt_trailer* traile
  *
  * \return Number of read words, or a negative number if error.
  */
-static int32_t if_context_read_indicator_field(uint32_t b, vrt_if_context* c, bool validate) {
+static int32_t if_context_read_indicator_field(uint32_t b, struct vrt_if_context* c, bool validate) {
     c->context_field_change_indicator     = vrt_u2b(msk(b, 31, 1));
     c->has.reference_point_identifier     = vrt_u2b(msk(b, 30, 1));
     c->has.bandwidth                      = vrt_u2b(msk(b, 29, 1));
@@ -302,7 +302,10 @@ static int32_t if_context_read_indicator_field(uint32_t b, vrt_if_context* c, bo
  *
  * \return Number of read words, or a negative number if error.
  */
-static int32_t if_context_read_state_and_event_indicators(bool has, uint32_t b, vrt_state_and_event* s, bool validate) {
+static int32_t if_context_read_state_and_event_indicators(bool                        has,
+                                                          uint32_t                    b,
+                                                          struct vrt_state_and_event* s,
+                                                          bool                        validate) {
     if (has) {
         s->has.calibrated_time    = vrt_u2b(msk(b, 31, 1));
         s->has.valid_data         = vrt_u2b(msk(b, 30, 1));
@@ -329,7 +332,7 @@ static int32_t if_context_read_state_and_event_indicators(bool has, uint32_t b, 
             s->reference_lock = 0;
         }
         if (s->has.agc_or_mgc) {
-            s->agc_or_mgc = (vrt_agc_or_mgc)msk(b, 16, 1);
+            s->agc_or_mgc = (enum vrt_agc_or_mgc)msk(b, 16, 1);
         } else {
             s->agc_or_mgc = VRT_AOM_MGC;
         }
@@ -396,14 +399,14 @@ static int32_t if_context_read_state_and_event_indicators(bool has, uint32_t b, 
  *
  * \return Number of read words, or a negative number if error.
  */
-static int32_t if_context_read_data_packet_payload_format(bool                            has,
-                                                          const uint32_t*                 b,
-                                                          vrt_data_packet_payload_format* f,
-                                                          bool                            validate) {
+static int32_t if_context_read_data_packet_payload_format(bool                                   has,
+                                                          const uint32_t*                        b,
+                                                          struct vrt_data_packet_payload_format* f,
+                                                          bool                                   validate) {
     if (has) {
-        f->packing_method          = (vrt_packing_method)msk(b[0], 31, 1);
-        f->real_or_complex         = (vrt_real_complex)msk(b[0], 29, 2);
-        f->data_item_format        = (vrt_data_item_format)msk(b[0], 24, 5);
+        f->packing_method          = (enum vrt_packing_method)msk(b[0], 31, 1);
+        f->real_or_complex         = (enum vrt_real_complex)msk(b[0], 29, 2);
+        f->data_item_format        = (enum vrt_data_item_format)msk(b[0], 24, 5);
         f->sample_component_repeat = vrt_u2b(msk(b[0], 23, 1));
         f->event_tag_size          = (uint8_t)msk(b[0], 20, 3);
         f->channel_tag_size        = (uint8_t)msk(b[0], 16, 4);
@@ -455,13 +458,13 @@ static int32_t if_context_read_data_packet_payload_format(bool                  
  *
  * \return Number of read words, or a negative number if error.
  */
-static int32_t if_context_read_formatted_geolocation(bool                       has,
-                                                     const uint32_t*            b,
-                                                     vrt_formatted_geolocation* g,
-                                                     bool                       validate) {
+static int32_t if_context_read_formatted_geolocation(bool                              has,
+                                                     const uint32_t*                   b,
+                                                     struct vrt_formatted_geolocation* g,
+                                                     bool                              validate) {
     if (has) {
-        g->tsi                         = (vrt_tsi)msk(b[0], 26, 2);
-        g->tsf                         = (vrt_tsf)msk(b[0], 24, 2);
+        g->tsi                         = (enum vrt_tsi)msk(b[0], 26, 2);
+        g->tsf                         = (enum vrt_tsf)msk(b[0], 24, 2);
         g->oui                         = msk(b[0], 0, 24);
         g->integer_second_timestamp    = b[1];
         g->fractional_second_timestamp = read_uint64(b + 2);
@@ -553,10 +556,10 @@ static int32_t if_context_read_formatted_geolocation(bool                       
  *
  * \return Number of read words, or a negative number if error.
  */
-static int32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_ephemeris* e, bool validate) {
+static int32_t if_context_read_ephemeris(bool has, const uint32_t* b, struct vrt_ephemeris* e, bool validate) {
     if (has) {
-        e->tsi                         = (vrt_tsi)msk(b[0], 26, 2);
-        e->tsf                         = (vrt_tsf)msk(b[0], 24, 2);
+        e->tsi                         = (enum vrt_tsi)msk(b[0], 26, 2);
+        e->tsf                         = (enum vrt_tsf)msk(b[0], 24, 2);
         e->oui                         = msk(b[0], 0, 24);
         e->integer_second_timestamp    = b[1];
         e->fractional_second_timestamp = read_uint64(b + 2);
@@ -641,7 +644,7 @@ static int32_t if_context_read_ephemeris(bool has, const uint32_t* b, vrt_epheme
  *
  * \return Number of read words, or a negative number if error.
  */
-static int32_t if_context_read_gps_ascii(bool has, const uint32_t* b, vrt_gps_ascii* g, bool validate) {
+static int32_t if_context_read_gps_ascii(bool has, const uint32_t* b, struct vrt_gps_ascii* g, bool validate) {
     if (has) {
         g->oui             = msk(b[0], 0, 24);
         g->number_of_words = b[1];
@@ -676,7 +679,7 @@ static int32_t if_context_read_gps_ascii(bool has, const uint32_t* b, vrt_gps_as
  *
  * \return Number of read words.
  */
-static int32_t if_context_read_association_lists(bool has, const uint32_t* b, vrt_context_association_lists* l) {
+static int32_t if_context_read_association_lists(bool has, const uint32_t* b, struct vrt_context_association_lists* l) {
     if (has) {
         l->source_list_size                  = (uint16_t)msk(b[0], 16, 9);
         l->system_list_size                  = (uint16_t)msk(b[0], 0, 9);
@@ -735,7 +738,7 @@ static int32_t if_context_read_association_lists(bool has, const uint32_t* b, vr
     return 0;
 }
 
-int32_t vrt_read_if_context(const void* buf, int32_t words_buf, vrt_if_context* if_context, bool validate) {
+int32_t vrt_read_if_context(const void* buf, int32_t words_buf, struct vrt_if_context* if_context, bool validate) {
     /* Cannot count words here since the IF context section hasn't been read yet */
 
     int32_t words = 1;
@@ -959,7 +962,7 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, vrt_if_context* 
     return words;
 }
 
-int32_t vrt_read_packet(void* buf, int32_t words_buf, vrt_packet* packet, bool validate) {
+int32_t vrt_read_packet(void* buf, int32_t words_buf, struct vrt_packet* packet, bool validate) {
     uint32_t* b = (uint32_t*)buf;
 
     /* Header */

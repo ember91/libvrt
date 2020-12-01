@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__words_8h_1aa7cb266b18ae3dd0e849a5ec0e4da142:
+
+Function vrt_words_packet
+=========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_words.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_words_packet(const struct vrt_packet *)

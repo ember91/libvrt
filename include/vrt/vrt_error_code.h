@@ -10,7 +10,7 @@ extern "C" {
 /**
  * Error code constants.
  */
-typedef enum vrt_error_code {
+enum vrt_error_code {
     /**
      * Buffer is too small.
      */
@@ -195,7 +195,7 @@ typedef enum vrt_error_code {
      * Packet size in header and calculated packet size do not match.
      */
     VRT_ERR_PACKET_SIZE_MISMATCH = -46
-} vrt_error_code;
+};
 
 #ifdef __cplusplus
 }

@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__words_8h_1a1e0b54c1074eca5a163321d622c8de2b:
+
+Function vrt_words_trailer
+==========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_words.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_words_trailer(const struct vrt_header *)

@@ -160,65 +160,65 @@
 <span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="p">{</span>
 <span class="cp">#endif</span>
 
-<span class="k">typedef</span> <span class="k">enum</span> <span class="n">vrt_packet_type</span> <span class="p">{</span>
+<span class="k">enum</span> <span class="n">vrt_packet_type</span> <span class="p">{</span>
     <span class="n">VRT_PT_IF_DATA_WITHOUT_STREAM_ID</span>  <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span>
     <span class="n">VRT_PT_IF_DATA_WITH_STREAM_ID</span>     <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span>
     <span class="n">VRT_PT_EXT_DATA_WITHOUT_STREAM_ID</span> <span class="o">=</span> <span class="mh">0x2</span><span class="p">,</span>
     <span class="n">VRT_PT_EXT_DATA_WITH_STREAM_ID</span>    <span class="o">=</span> <span class="mh">0x3</span><span class="p">,</span>
     <span class="n">VRT_PT_IF_CONTEXT</span>                 <span class="o">=</span> <span class="mh">0x4</span><span class="p">,</span>
     <span class="n">VRT_PT_EXT_CONTEXT</span>                <span class="o">=</span> <span class="mh">0x5</span>
-<span class="p">}</span> <span class="n">vrt_packet_type</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_header_indicators</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_header_indicators</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">class_id</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">trailer</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_header_indicators</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">enum</span> <span class="n">vrt_tsm</span> <span class="p">{</span>
+<span class="k">enum</span> <span class="n">vrt_tsm</span> <span class="p">{</span>
     <span class="n">VRT_TSM_FINE</span>   <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span>
     <span class="n">VRT_TSM_COARSE</span> <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span>
-<span class="p">}</span> <span class="n">vrt_tsm</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">enum</span> <span class="n">vrt_tsi</span> <span class="p">{</span>
+<span class="k">enum</span> <span class="n">vrt_tsi</span> <span class="p">{</span>
     <span class="n">VRT_TSI_NONE</span>      <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span>
     <span class="n">VRT_TSI_UNDEFINED</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span>
     <span class="n">VRT_TSI_UTC</span>       <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span>
     <span class="n">VRT_TSI_GPS</span>       <span class="o">=</span> <span class="mh">0x2</span><span class="p">,</span>
     <span class="n">VRT_TSI_OTHER</span>     <span class="o">=</span> <span class="mh">0x3</span>
-<span class="p">}</span> <span class="n">vrt_tsi</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">enum</span> <span class="n">vrt_tsf</span> <span class="p">{</span>
+<span class="k">enum</span> <span class="n">vrt_tsf</span> <span class="p">{</span>
     <span class="n">VRT_TSF_NONE</span>               <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span>
     <span class="n">VRT_TSF_UNDEFINED</span>          <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span>
     <span class="n">VRT_TSF_SAMPLE_COUNT</span>       <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span>
     <span class="n">VRT_TSF_REAL_TIME</span>          <span class="o">=</span> <span class="mh">0x2</span><span class="p">,</span>
     <span class="n">VRT_TSF_FREE_RUNNING_COUNT</span> <span class="o">=</span> <span class="mh">0x3</span>
-<span class="p">}</span> <span class="n">vrt_tsf</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_header</span> <span class="p">{</span>
-    <span class="n">vrt_packet_type</span> <span class="n">packet_type</span><span class="p">;</span>
-    <span class="n">vrt_header_indicators</span> <span class="n">has</span><span class="p">;</span>
-    <span class="n">vrt_tsm</span> <span class="n">tsm</span><span class="p">;</span>
-    <span class="n">vrt_tsi</span> <span class="n">tsi</span><span class="p">;</span>
-    <span class="n">vrt_tsf</span> <span class="n">tsf</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">vrt_header</span> <span class="p">{</span>
+    <span class="k">enum</span> <span class="n">vrt_packet_type</span> <span class="n">packet_type</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_header_indicators</span> <span class="n">has</span><span class="p">;</span>
+    <span class="k">enum</span> <span class="n">vrt_tsm</span> <span class="n">tsm</span><span class="p">;</span>
+    <span class="k">enum</span> <span class="n">vrt_tsi</span> <span class="n">tsi</span><span class="p">;</span>
+    <span class="k">enum</span> <span class="n">vrt_tsf</span> <span class="n">tsf</span><span class="p">;</span>
     <span class="kt">uint8_t</span> <span class="n">packet_count</span><span class="p">;</span>
     <span class="kt">uint16_t</span> <span class="n">packet_size</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_header</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_class_identifier</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_class_identifier</span> <span class="p">{</span>
     <span class="kt">uint32_t</span> <span class="n">oui</span><span class="p">;</span>
     <span class="kt">uint16_t</span> <span class="n">information_class_code</span><span class="p">;</span>
     <span class="kt">uint16_t</span> <span class="n">packet_class_code</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_class_identifier</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_fields</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_fields</span> <span class="p">{</span>
     <span class="kt">uint32_t</span> <span class="n">stream_id</span><span class="p">;</span>
-    <span class="n">vrt_class_identifier</span> <span class="n">class_id</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_class_identifier</span> <span class="n">class_id</span><span class="p">;</span>
     <span class="kt">uint32_t</span> <span class="n">integer_seconds_timestamp</span><span class="p">;</span>
     <span class="kt">uint64_t</span> <span class="n">fractional_seconds_timestamp</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_fields</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_trailer_indicators</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_trailer_indicators</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">calibrated_time</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">valid_data</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">reference_lock</span><span class="p">;</span>
@@ -232,16 +232,16 @@
     <span class="kt">bool</span> <span class="n">user_defined9</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">user_defined8</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">associated_context_packet_count</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_trailer_indicators</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">enum</span> <span class="n">vrt_agc_or_mgc</span> <span class="p">{</span> <span class="n">VRT_AOM_MGC</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">VRT_AOM_AGC</span> <span class="o">=</span> <span class="mh">0x1</span> <span class="p">}</span> <span class="n">vrt_agc_or_mgc</span><span class="p">;</span>
+<span class="k">enum</span> <span class="n">vrt_agc_or_mgc</span> <span class="p">{</span> <span class="n">VRT_AOM_MGC</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">VRT_AOM_AGC</span> <span class="o">=</span> <span class="mh">0x1</span> <span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_trailer</span> <span class="p">{</span>
-    <span class="n">vrt_trailer_indicators</span> <span class="n">has</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">vrt_trailer</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">vrt_trailer_indicators</span> <span class="n">has</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">calibrated_time</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">valid_data</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">reference_lock</span><span class="p">;</span>
-    <span class="n">vrt_agc_or_mgc</span> <span class="n">agc_or_mgc</span><span class="p">;</span>
+    <span class="k">enum</span> <span class="n">vrt_agc_or_mgc</span> <span class="n">agc_or_mgc</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">detected_signal</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">spectral_inversion</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">over_range</span><span class="p">;</span>
@@ -251,9 +251,9 @@
     <span class="kt">bool</span> <span class="n">user_defined9</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">user_defined8</span><span class="p">;</span>
     <span class="kt">uint8_t</span> <span class="n">associated_context_packet_count</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_trailer</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_context_indicators</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_context_indicators</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">reference_point_identifier</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">bandwidth</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">if_reference_frequency</span><span class="p">;</span>
@@ -277,19 +277,19 @@
     <span class="kt">bool</span> <span class="n">ephemeris_reference_identifier</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">gps_ascii</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">context_association_lists</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_context_indicators</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_gain</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_gain</span> <span class="p">{</span>
     <span class="kt">float</span> <span class="n">stage1</span><span class="p">;</span>
     <span class="kt">float</span> <span class="n">stage2</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_gain</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_device_identifier</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_device_identifier</span> <span class="p">{</span>
     <span class="kt">uint32_t</span> <span class="n">oui</span><span class="p">;</span>
     <span class="kt">uint16_t</span> <span class="n">device_code</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_device_identifier</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_state_and_event_indicators</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_state_and_event_indicators</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">calibrated_time</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">valid_data</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">reference_lock</span><span class="p">;</span>
@@ -298,30 +298,30 @@
     <span class="kt">bool</span> <span class="n">spectral_inversion</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">over_range</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">sample_loss</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_state_and_event_indicators</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_state_and_event</span> <span class="p">{</span>
-    <span class="n">vrt_state_and_event_indicators</span> <span class="n">has</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">vrt_state_and_event</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">vrt_state_and_event_indicators</span> <span class="n">has</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">calibrated_time</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">valid_data</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">reference_lock</span><span class="p">;</span>
-    <span class="n">vrt_agc_or_mgc</span> <span class="n">agc_or_mgc</span><span class="p">;</span>
+    <span class="k">enum</span> <span class="n">vrt_agc_or_mgc</span> <span class="n">agc_or_mgc</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">detected_signal</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">spectral_inversion</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">over_range</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">sample_loss</span><span class="p">;</span>
     <span class="kt">uint8_t</span> <span class="n">user_defined</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_state_and_event</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">enum</span> <span class="n">vrt_packing_method</span> <span class="p">{</span> <span class="n">VRT_PM_PROCESSING_EFFICIENT</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">VRT_PM_LINK_EFFICIENT</span> <span class="o">=</span> <span class="mh">0x1</span> <span class="p">}</span> <span class="n">vrt_packing_method</span><span class="p">;</span>
+<span class="k">enum</span> <span class="n">vrt_packing_method</span> <span class="p">{</span> <span class="n">VRT_PM_PROCESSING_EFFICIENT</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">VRT_PM_LINK_EFFICIENT</span> <span class="o">=</span> <span class="mh">0x1</span> <span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">enum</span> <span class="n">vrt_real_complex</span> <span class="p">{</span>
+<span class="k">enum</span> <span class="n">vrt_real_complex</span> <span class="p">{</span>
     <span class="n">VRT_ROC_REAL</span>              <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span>
     <span class="n">VRT_ROC_COMPLEX_CARTESIAN</span> <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span>
     <span class="n">VRT_ROC_COMPLEX_POLAR</span>     <span class="o">=</span> <span class="mh">0x2</span>
-<span class="p">}</span> <span class="n">vrt_real_complex</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">enum</span> <span class="n">vrt_data_item_format</span> <span class="p">{</span>
+<span class="k">enum</span> <span class="n">vrt_data_item_format</span> <span class="p">{</span>
     <span class="n">VRT_DIF_SIGNED_FIXED_POINT</span>                       <span class="o">=</span> <span class="mh">0x00</span><span class="p">,</span>
     <span class="n">VRT_DIF_SIGNED_VRT_1_BIT_EXPONENT</span>                <span class="o">=</span> <span class="mh">0x01</span><span class="p">,</span>
     <span class="n">VRT_DIF_SIGNED_VRT_2_BIT_EXPONENT</span>                <span class="o">=</span> <span class="mh">0x02</span><span class="p">,</span>
@@ -338,12 +338,12 @@
     <span class="n">VRT_DIF_UNSIGNED_VRT_4_BIT_EXPONENT</span>              <span class="o">=</span> <span class="mh">0x14</span><span class="p">,</span>
     <span class="n">VRT_DIF_UNSIGNED_VRT_5_BIT_EXPONENT</span>              <span class="o">=</span> <span class="mh">0x15</span><span class="p">,</span>
     <span class="n">VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT</span>              <span class="o">=</span> <span class="mh">0x16</span>
-<span class="p">}</span> <span class="n">vrt_data_item_format</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_data_packet_payload_format</span> <span class="p">{</span>
-    <span class="n">vrt_packing_method</span> <span class="n">packing_method</span><span class="p">;</span>
-    <span class="n">vrt_real_complex</span> <span class="n">real_or_complex</span><span class="p">;</span>
-    <span class="n">vrt_data_item_format</span> <span class="n">data_item_format</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">vrt_data_packet_payload_format</span> <span class="p">{</span>
+    <span class="k">enum</span> <span class="n">vrt_packing_method</span> <span class="n">packing_method</span><span class="p">;</span>
+    <span class="k">enum</span> <span class="n">vrt_real_complex</span> <span class="n">real_or_complex</span><span class="p">;</span>
+    <span class="k">enum</span> <span class="n">vrt_data_item_format</span> <span class="n">data_item_format</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">sample_component_repeat</span><span class="p">;</span>
     <span class="kt">uint8_t</span> <span class="n">event_tag_size</span><span class="p">;</span>
     <span class="kt">uint8_t</span> <span class="n">channel_tag_size</span><span class="p">;</span>
@@ -351,9 +351,9 @@
     <span class="kt">uint8_t</span> <span class="n">data_item_size</span><span class="p">;</span>
     <span class="kt">uint16_t</span> <span class="n">repeat_count</span><span class="p">;</span>
     <span class="kt">uint16_t</span> <span class="n">vector_size</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_data_packet_payload_format</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_formatted_geolocation_indicators</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_formatted_geolocation_indicators</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">latitude</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">longitude</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">altitude</span><span class="p">;</span>
@@ -361,15 +361,15 @@
     <span class="kt">bool</span> <span class="n">heading_angle</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">track_angle</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">magnetic_variation</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_formatted_geolocation_indicators</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_formatted_geolocation</span> <span class="p">{</span>
-    <span class="n">vrt_tsi</span> <span class="n">tsi</span><span class="p">;</span>
-    <span class="n">vrt_tsf</span> <span class="n">tsf</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">vrt_formatted_geolocation</span> <span class="p">{</span>
+    <span class="k">enum</span> <span class="n">vrt_tsi</span> <span class="n">tsi</span><span class="p">;</span>
+    <span class="k">enum</span> <span class="n">vrt_tsf</span> <span class="n">tsf</span><span class="p">;</span>
     <span class="kt">uint32_t</span> <span class="n">oui</span><span class="p">;</span>
     <span class="kt">uint32_t</span> <span class="n">integer_second_timestamp</span><span class="p">;</span>
     <span class="kt">uint64_t</span> <span class="n">fractional_second_timestamp</span><span class="p">;</span>
-    <span class="n">vrt_formatted_geolocation_indicators</span> <span class="n">has</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_formatted_geolocation_indicators</span> <span class="n">has</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">latitude</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">longitude</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">altitude</span><span class="p">;</span>
@@ -377,9 +377,9 @@
     <span class="kt">double</span> <span class="n">heading_angle</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">track_angle</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">magnetic_variation</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_formatted_geolocation</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_ephemeris_indicators</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_ephemeris_indicators</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">position_x</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">position_y</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">position_z</span><span class="p">;</span>
@@ -389,15 +389,15 @@
     <span class="kt">bool</span> <span class="n">velocity_dx</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">velocity_dy</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">velocity_dz</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_ephemeris_indicators</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_ephemeris</span> <span class="p">{</span>
-    <span class="n">vrt_tsi</span> <span class="n">tsi</span><span class="p">;</span>
-    <span class="n">vrt_tsf</span> <span class="n">tsf</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">vrt_ephemeris</span> <span class="p">{</span>
+    <span class="k">enum</span> <span class="n">vrt_tsi</span> <span class="n">tsi</span><span class="p">;</span>
+    <span class="k">enum</span> <span class="n">vrt_tsf</span> <span class="n">tsf</span><span class="p">;</span>
     <span class="kt">uint32_t</span> <span class="n">oui</span><span class="p">;</span>
     <span class="kt">uint32_t</span> <span class="n">integer_second_timestamp</span><span class="p">;</span>
     <span class="kt">uint64_t</span> <span class="n">fractional_second_timestamp</span><span class="p">;</span>
-    <span class="n">vrt_ephemeris_indicators</span> <span class="n">has</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_ephemeris_indicators</span> <span class="n">has</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">position_x</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">position_y</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">position_z</span><span class="p">;</span>
@@ -407,35 +407,34 @@
     <span class="kt">double</span> <span class="n">velocity_dx</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">velocity_dy</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">velocity_dz</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_ephemeris</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_gps_ascii</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_gps_ascii</span> <span class="p">{</span>
     <span class="kt">uint32_t</span> <span class="n">oui</span><span class="p">;</span>
     <span class="kt">uint32_t</span> <span class="n">number_of_words</span><span class="p">;</span>
     <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">ascii</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_gps_ascii</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_context_association_lists_indicators</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_context_association_lists_indicators</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">asynchronous_channel_tag_list</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_context_association_lists_indicators</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_context_association_lists</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_context_association_lists</span> <span class="p">{</span>
     <span class="kt">uint16_t</span> <span class="n">source_list_size</span><span class="p">;</span>
     <span class="kt">uint16_t</span> <span class="n">system_list_size</span><span class="p">;</span>
     <span class="kt">uint16_t</span> <span class="n">vector_component_list_size</span><span class="p">;</span>
-    <span class="n">vrt_context_association_lists_indicators</span> <span class="n">has</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_context_association_lists_indicators</span> <span class="n">has</span><span class="p">;</span>
     <span class="kt">uint16_t</span> <span class="n">asynchronous_channel_list_size</span><span class="p">;</span>
     <span class="k">const</span> <span class="kt">uint32_t</span><span class="o">*</span> <span class="n">source_context_association_list</span><span class="p">;</span>
     <span class="k">const</span> <span class="kt">uint32_t</span><span class="o">*</span> <span class="n">system_context_association_list</span><span class="p">;</span>
     <span class="k">const</span> <span class="kt">uint32_t</span><span class="o">*</span> <span class="n">vector_component_context_association_list</span><span class="p">;</span>
     <span class="k">const</span> <span class="kt">uint32_t</span><span class="o">*</span> <span class="n">asynchronous_channel_context_association_list</span><span class="p">;</span>
     <span class="k">const</span> <span class="kt">uint32_t</span><span class="o">*</span> <span class="n">asynchronous_channel_tag_list</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="p">}</span> <span class="n">vrt_context_association_lists</span><span class="p">;</span>
-
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_if_context</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">vrt_if_context</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">context_field_change_indicator</span><span class="p">;</span>
-    <span class="n">vrt_context_indicators</span> <span class="n">has</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_context_indicators</span> <span class="n">has</span><span class="p">;</span>
     <span class="kt">uint32_t</span> <span class="n">reference_point_identifier</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">bandwidth</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">if_reference_frequency</span><span class="p">;</span>
@@ -443,32 +442,32 @@
     <span class="kt">double</span> <span class="n">rf_reference_frequency_offset</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">if_band_offset</span><span class="p">;</span>
     <span class="kt">float</span> <span class="n">reference_level</span><span class="p">;</span>
-    <span class="n">vrt_gain</span> <span class="n">gain</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_gain</span> <span class="n">gain</span><span class="p">;</span>
     <span class="kt">uint32_t</span> <span class="n">over_range_count</span><span class="p">;</span>
     <span class="kt">double</span> <span class="n">sample_rate</span><span class="p">;</span>
     <span class="kt">uint64_t</span> <span class="n">timestamp_adjustment</span><span class="p">;</span>
     <span class="kt">uint32_t</span> <span class="n">timestamp_calibration_time</span><span class="p">;</span>
     <span class="kt">float</span> <span class="n">temperature</span><span class="p">;</span>
-    <span class="n">vrt_device_identifier</span> <span class="n">device_identifier</span><span class="p">;</span>
-    <span class="n">vrt_state_and_event</span> <span class="n">state_and_event_indicators</span><span class="p">;</span>
-    <span class="n">vrt_data_packet_payload_format</span> <span class="n">data_packet_payload_format</span><span class="p">;</span>
-    <span class="n">vrt_formatted_geolocation</span> <span class="n">formatted_gps_geolocation</span><span class="p">;</span>
-    <span class="n">vrt_formatted_geolocation</span> <span class="n">formatted_ins_geolocation</span><span class="p">;</span>
-    <span class="n">vrt_ephemeris</span> <span class="n">ecef_ephemeris</span><span class="p">;</span>
-    <span class="n">vrt_ephemeris</span> <span class="n">relative_ephemeris</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_device_identifier</span> <span class="n">device_identifier</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_state_and_event</span> <span class="n">state_and_event_indicators</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_data_packet_payload_format</span> <span class="n">data_packet_payload_format</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_formatted_geolocation</span> <span class="n">formatted_gps_geolocation</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_formatted_geolocation</span> <span class="n">formatted_ins_geolocation</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_ephemeris</span> <span class="n">ecef_ephemeris</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_ephemeris</span> <span class="n">relative_ephemeris</span><span class="p">;</span>
     <span class="kt">uint32_t</span> <span class="n">ephemeris_reference_identifier</span><span class="p">;</span>
-    <span class="n">vrt_gps_ascii</span> <span class="n">gps_ascii</span><span class="p">;</span>
-    <span class="n">vrt_context_association_lists</span> <span class="n">context_association_lists</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_if_context</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_gps_ascii</span> <span class="n">gps_ascii</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_context_association_lists</span> <span class="n">context_association_lists</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">vrt_packet</span> <span class="p">{</span>
-    <span class="n">vrt_header</span>     <span class="n">header</span><span class="p">;</span>
-    <span class="n">vrt_fields</span>     <span class="n">fields</span><span class="p">;</span>
-    <span class="kt">void</span><span class="o">*</span>          <span class="n">body</span><span class="p">;</span>
-    <span class="kt">int32_t</span>        <span class="n">words_body</span><span class="p">;</span>
-    <span class="n">vrt_trailer</span>    <span class="n">trailer</span><span class="p">;</span>
-    <span class="n">vrt_if_context</span> <span class="n">if_context</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vrt_packet</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">vrt_packet</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">vrt_header</span>  <span class="n">header</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_fields</span>  <span class="n">fields</span><span class="p">;</span>
+    <span class="kt">void</span><span class="o">*</span>              <span class="n">body</span><span class="p">;</span>
+    <span class="kt">int32_t</span>            <span class="n">words_body</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_trailer</span> <span class="n">trailer</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">vrt_if_context</span> <span class="n">if_context</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="cp">#ifdef __cplusplus</span>
 <span class="p">}</span>

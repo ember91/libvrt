@@ -159,7 +159,7 @@
 <span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="p">{</span>
 <span class="cp">#endif</span>
 
-<span class="k">typedef</span> <span class="k">enum</span> <span class="n">vrt_error_code</span> <span class="p">{</span>
+<span class="k">enum</span> <span class="n">vrt_error_code</span> <span class="p">{</span>
     <span class="n">VRT_ERR_BUFFER_SIZE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">VRT_ERR_RESERVED</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span>
     <span class="n">VRT_ERR_INVALID_PACKET_TYPE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span>
@@ -206,7 +206,7 @@
     <span class="n">VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">44</span><span class="p">,</span>
     <span class="n">VRT_ERR_BOUNDS_PACKET_SIZE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">45</span><span class="p">,</span>
     <span class="n">VRT_ERR_PACKET_SIZE_MISMATCH</span> <span class="o">=</span> <span class="o">-</span><span class="mi">46</span>
-<span class="p">}</span> <span class="n">vrt_error_code</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="cp">#ifdef __cplusplus</span>
 <span class="p">}</span>

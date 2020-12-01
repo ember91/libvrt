@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__string_8h_1aabd7dfceee3960163a4cad85fa3b351e:
+
+Function vrt_string_packing_method
+==================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_string.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_string_packing_method(enum vrt_packing_method)

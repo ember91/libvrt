@@ -35,7 +35,7 @@ static const uint16_t VRT_WORDS_MAX_PACKET = UINT16_MAX;
  *
  * \return Number of 32-bit words the fields section consists of.
  */
-int32_t vrt_words_fields(const vrt_header* header);
+int32_t vrt_words_fields(const struct vrt_header* header);
 
 /**
  * Calculate size of trailer in 32-bit words.
@@ -46,7 +46,7 @@ int32_t vrt_words_fields(const vrt_header* header);
  *
  * \note If packet type is missing support for the trailer type, such as a context packet, this returns 0.
  */
-int32_t vrt_words_trailer(const vrt_header* header);
+int32_t vrt_words_trailer(const struct vrt_header* header);
 
 /**
  * Calculate size of IF context section in 32-bit words.
@@ -55,7 +55,7 @@ int32_t vrt_words_trailer(const vrt_header* header);
  *
  * \return Number of 32-bit words it consists of.
  */
-int32_t vrt_words_if_context(const vrt_if_context* if_context);
+int32_t vrt_words_if_context(const struct vrt_if_context* if_context);
 
 /**
  * Calculate size of VRT packet in 32-bit words.
@@ -66,7 +66,7 @@ int32_t vrt_words_if_context(const vrt_if_context* if_context);
  *
  * \return Number of 32-bit words it consists of.
  */
-int32_t vrt_words_packet(const vrt_packet* packet);
+int32_t vrt_words_packet(const struct vrt_packet* packet);
 
 #ifdef __cplusplus
 }

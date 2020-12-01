@@ -31,7 +31,7 @@ extern "C" {
  * \note May require output buffer data to be byte swapped if platform endianess isn't big endian (network order).
  */
 VRT_WARN_UNUSED
-int32_t vrt_write_header(const vrt_header* header, void* buf, int32_t words_buf, bool validate);
+int32_t vrt_write_header(const struct vrt_header* header, void* buf, int32_t words_buf, bool validate);
 
 /**
  * Low-level function that writes VRT fields section.
@@ -50,11 +50,11 @@ int32_t vrt_write_header(const vrt_header* header, void* buf, int32_t words_buf,
  * \retval VRT_ERR_BOUNDS_OUI       OUI is outside valid bounds (> 0x00FFFFFF).
  */
 VRT_WARN_UNUSED
-int32_t vrt_write_fields(const vrt_header* header,
-                         const vrt_fields* fields,
-                         void*             buf,
-                         int32_t           words_buf,
-                         bool              validate);
+int32_t vrt_write_fields(const struct vrt_header* header,
+                         const struct vrt_fields* fields,
+                         void*                    buf,
+                         int32_t                  words_buf,
+                         bool                     validate);
 
 /**
  * Low-level function that writes VRT trailer section.
@@ -71,7 +71,7 @@ int32_t vrt_write_fields(const vrt_header* header,
  *                                                          (>0x7F).
  */
 VRT_WARN_UNUSED
-int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, int32_t words_buf, bool validate);
+int32_t vrt_write_trailer(const struct vrt_trailer* trailer, void* buf, int32_t words_buf, bool validate);
 
 /**
  * Low-level function that writes VRT IF context section.
@@ -141,7 +141,7 @@ int32_t vrt_write_trailer(const vrt_trailer* trailer, void* buf, int32_t words_b
  *          sample_rate, may in rare cases lose precision since double only has 53 bits of precision.
  */
 VRT_WARN_UNUSED
-int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_t words_buf, bool validate);
+int32_t vrt_write_if_context(const struct vrt_if_context* if_context, void* buf, int32_t words_buf, bool validate);
 
 /**
  * Higher-level function that writes a full VRT packet.
@@ -222,7 +222,7 @@ int32_t vrt_write_if_context(const vrt_if_context* if_context, void* buf, int32_
  * \note Will copy body data. For a zero-copy write, use the low-level routines.
  */
 VRT_WARN_UNUSED
-int32_t vrt_write_packet(const vrt_packet* packet, void* buf, int32_t words_buf, bool validate);
+int32_t vrt_write_packet(const struct vrt_packet* packet, void* buf, int32_t words_buf, bool validate);
 
 #ifdef __cplusplus
 }

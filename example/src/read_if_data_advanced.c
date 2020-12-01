@@ -42,9 +42,9 @@ int main() {
     fclose(fp);
 
     /* Read header */
-    int32_t    offset = 0;
-    vrt_header h;
-    int32_t    rv = vrt_read_header(b + offset, SIZE - offset, &h, true);
+    int32_t           offset = 0;
+    struct vrt_header h;
+    int32_t           rv = vrt_read_header(b + offset, SIZE - offset, &h, true);
     if (rv < 0) {
         fprintf(stderr, "Failed to read header: %s\n", vrt_string_error(rv));
         return EXIT_FAILURE;
@@ -63,7 +63,7 @@ int main() {
     fclose(fp);
 
     /* Read fields */
-    vrt_fields f;
+    struct vrt_fields f;
     rv = vrt_read_fields(&h, b + offset, SIZE - offset, &f, true);
     if (rv < 0) {
         fprintf(stderr, "Failed to read fields section: %s\n", vrt_string_error(rv));
@@ -81,7 +81,7 @@ int main() {
     /* Skip signal data if any */
 
     if (h.packet_type == VRT_PT_IF_CONTEXT) {
-        vrt_if_context c;
+        struct vrt_if_context c;
         rv = vrt_read_if_context(b + offset, SIZE - offset, &c, true);
         if (rv < 0) {
             fprintf(stderr, "Failed to read IF context section: %s\n", vrt_string_error(rv));
@@ -96,7 +96,7 @@ int main() {
         }
     }
     if (h.has.trailer) {
-        vrt_trailer t;
+        struct vrt_trailer t;
         rv = vrt_read_trailer(b + h.packet_size - 1, SIZE - (h.packet_size) + 1, &t);
         if (rv < 0) {
             fprintf(stderr, "Failed to read IF context section: %s\n", vrt_string_error(rv));

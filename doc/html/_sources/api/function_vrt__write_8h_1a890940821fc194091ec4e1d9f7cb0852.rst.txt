@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__write_8h_1a890940821fc194091ec4e1d9f7cb0852:
+
+Function vrt_write_header
+=========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_write.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_write_header(const struct vrt_header *, void *, int32_t, bool)

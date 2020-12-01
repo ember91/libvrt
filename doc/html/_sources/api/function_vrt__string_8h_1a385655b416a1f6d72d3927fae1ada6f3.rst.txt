@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__string_8h_1a385655b416a1f6d72d3927fae1ada6f3:
+
+Function vrt_string_data_item_format
+====================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_string.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_string_data_item_format(enum vrt_data_item_format)

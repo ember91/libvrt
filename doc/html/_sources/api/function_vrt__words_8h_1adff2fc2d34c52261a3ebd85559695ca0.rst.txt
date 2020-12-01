@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__words_8h_1adff2fc2d34c52261a3ebd85559695ca0:
+
+Function vrt_words_if_context
+=============================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_words.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_words_if_context(const struct vrt_if_context *)

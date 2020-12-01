@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__read_8h_1aaf4fc4ffd25f1f50cef27fffa289f570:
+
+Function vrt_read_trailer
+=========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_read.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_read_trailer(const void *, int32_t, struct vrt_trailer *)

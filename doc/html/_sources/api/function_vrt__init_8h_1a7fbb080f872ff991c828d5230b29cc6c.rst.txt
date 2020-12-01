@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__init_8h_1a7fbb080f872ff991c828d5230b29cc6c:
+
+Function vrt_init_if_context
+============================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_init.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_init_if_context(struct vrt_if_context *)

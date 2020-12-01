@@ -13,19 +13,19 @@ extern "C" {
  *
  * \note Remaining values are reserved for future packet types.
  */
-typedef enum vrt_packet_type {
+enum vrt_packet_type {
     VRT_PT_IF_DATA_WITHOUT_STREAM_ID  = 0x0, /**< IF data packet without stream identifier. */
     VRT_PT_IF_DATA_WITH_STREAM_ID     = 0x1, /**< IF data packet with stream identifier. */
     VRT_PT_EXT_DATA_WITHOUT_STREAM_ID = 0x2, /**< Extension data packet without stream identifier. */
     VRT_PT_EXT_DATA_WITH_STREAM_ID    = 0x3, /**< Extension data packet with stream identifier. */
     VRT_PT_IF_CONTEXT                 = 0x4, /**< IF context packet. */
     VRT_PT_EXT_CONTEXT                = 0x5  /**< Extension context packet. */
-} vrt_packet_type;
+};
 
 /**
  * Indicates presence of header fields.
  */
-typedef struct vrt_header_indicators {
+struct vrt_header_indicators {
     /** True if there is class identifier information. */
     bool class_id;
     /**
@@ -34,15 +34,15 @@ typedef struct vrt_header_indicators {
      * \note True is only valid for IF and Extension data packets.
      */
     bool trailer;
-} vrt_header_indicators;
+};
 
 /**
  * Timestamp mode. Resolution of timestamps.
  */
-typedef enum vrt_tsm {
+enum vrt_tsm {
     VRT_TSM_FINE   = 0x0,
     VRT_TSM_COARSE = 0x1,
-} vrt_tsm;
+};
 
 /**
  * Reference-point time in resolution of a second.
@@ -50,13 +50,13 @@ typedef enum vrt_tsm {
  * \note Rule 6.1.1-7: All the packets in an IF Data Packet Stream shall have the same TSI code, and thus the same
  *       Integer-seconds Timestamp.
  */
-typedef enum vrt_tsi {
+enum vrt_tsi {
     VRT_TSI_NONE      = 0x0, /**< No one-second resolution time. */
     VRT_TSI_UNDEFINED = 0x0, /**< Replaces NONE in the Formatted GPS/INS geolocation fields. */
     VRT_TSI_UTC       = 0x1, /**< Seconds since January 1, 1970, GMT. */
     VRT_TSI_GPS       = 0x2, /**< Seconds since January 6, 1980. */
     VRT_TSI_OTHER     = 0x3  /**< Some other time reference. */
-} vrt_tsi;
+};
 
 /**
  * Reference-point time in subsecond resolution.
@@ -64,43 +64,43 @@ typedef enum vrt_tsi {
  * \note Rule 6.1.1-10: All the packets in an IF Data Packet Stream shall have the same TSF code, and thus the same
  *       Fractional-seconds Timestamp.
  */
-typedef enum vrt_tsf {
+enum vrt_tsf {
     VRT_TSF_NONE               = 0x0, /**< No subsecond time resolution. */
     VRT_TSF_UNDEFINED          = 0x0, /**< Replaces NONE in the Formatted GPS/INS geolocation fields. */
     VRT_TSF_SAMPLE_COUNT       = 0x1, /**< Number of samples since last second shift. */
     VRT_TSF_REAL_TIME          = 0x2, /**< Picoseconds since last second shift. */
     VRT_TSF_FREE_RUNNING_COUNT = 0x3  /**< Counts samples from the first sample. Will eventually roll over. */
-} vrt_tsf;
+};
 
 /**
  * Header data.
  */
-typedef struct vrt_header {
+struct vrt_header {
     /** Type of packet. */
-    vrt_packet_type packet_type;
+    enum vrt_packet_type packet_type;
     /** Indicates presence of extra fields. */
-    vrt_header_indicators has;
+    struct vrt_header_indicators has;
     /**
      * Timestamp mode. Whether timestamps are with fine or coarse resolution. Coarse if an event happened sometime in
      * the data sampling interval.
      *
      * \note True is only valid for context packets.
      */
-    vrt_tsm tsm;
+    enum vrt_tsm tsm;
     /**
      * Type of integer second timestamp.
      *
      * \note Rule 6.1.1-7: All the packets in an IF Data Packet Stream shall have the same TSI code, and thus the same
      *       Integer-seconds Timestamp.
      */
-    vrt_tsi tsi;
+    enum vrt_tsi tsi;
     /**
      * Type of fractional second timestamp.
      *
      * \note Rule 6.1.1-10: All the packets in an IF Data Packet Stream shall have the same TSF code, and thus the same
      *       Fractional-seconds Timestamp.
      */
-    vrt_tsf tsf;
+    enum vrt_tsf tsf;
     /**
      * Modulo-16 count of packets for the specified stream. Can (to some degree) be used to determine packet loss.
      *
@@ -115,12 +115,12 @@ typedef struct vrt_header {
      * \note May vary from packet to packet.
      */
     uint16_t packet_size;
-} vrt_header;
+};
 
 /**
  * Class identifier. Determines data origin.
  */
-typedef struct vrt_class_identifier {
+struct vrt_class_identifier {
     /**
      * IEEE Organizationally Unique Identifier. Identifies a company.
      *
@@ -133,19 +133,19 @@ typedef struct vrt_class_identifier {
     /** Packet class of company to which this packet stream belongs. A value of zero in this field shall indicate that
      * the Packet Class is unspecified. */
     uint16_t packet_class_code;
-} vrt_class_identifier;
+};
 
 /**
  * Field data.
  */
-typedef struct vrt_fields {
+struct vrt_fields {
     /** Identifies which stream it belongs to. Activate by setting packet_type accordingly.
      *
      * \note Although this field is optional for IF data packets it is required for context packets.
      */
     uint32_t stream_id;
     /** Determines data origin. Activate by setting has.class_id. */
-    vrt_class_identifier class_id;
+    struct vrt_class_identifier class_id;
     /**
      * Integer second timestamp as specified by tsi. Activate by setting tsi to anything but
      * VRT_TSI_NONE/VRT_TSI_UNDEFINED.
@@ -155,12 +155,12 @@ typedef struct vrt_fields {
      * VRT_TSF_NONE/VRT_TSF_UNDEFINED.
      */
     uint64_t fractional_seconds_timestamp;
-} vrt_fields;
+};
 
 /**
  * Indicates presence of trailer fields.
  */
-typedef struct vrt_trailer_indicators {
+struct vrt_trailer_indicators {
     bool calibrated_time;                 /**< True if it has the Calibrated time indicator field. */
     bool valid_data;                      /**< True if it has the Valid data indicator field. */
     bool reference_lock;                  /**< True if it has the Reference lock indicator field. */
@@ -174,19 +174,19 @@ typedef struct vrt_trailer_indicators {
     bool user_defined9;                   /**< True if it has the User defined bit 9 indicator field. */
     bool user_defined8;                   /**< True if it has the User defined bit 8 indicator field. */
     bool associated_context_packet_count; /**< True if it has the Associated context packet count field. */
-} vrt_trailer_indicators;
+};
 
 /**
  * Indicates if AGC (Automatic Gain Control) or MGC (Manual Gain Control) is active.
  */
-typedef enum vrt_agc_or_mgc { VRT_AOM_MGC = 0x0, VRT_AOM_AGC = 0x1 } vrt_agc_or_mgc;
+enum vrt_agc_or_mgc { VRT_AOM_MGC = 0x0, VRT_AOM_AGC = 0x1 };
 
 /**
  * Trailer section data.
  */
-typedef struct vrt_trailer {
+struct vrt_trailer {
     /** Field presence indicators. */
-    vrt_trailer_indicators has;
+    struct vrt_trailer_indicators has;
     /**
      * True if the timestamp is calibrated to an external reference. Activate by setting has.calibrated_time to true.
      */
@@ -196,7 +196,7 @@ typedef struct vrt_trailer {
     /** True if the reference is phase locked and stable. Activate by setting has.reference_lock to true. */
     bool reference_lock;
     /** Whether AGC or MGC is active. Activate by setting has.agc_or_mgc to true. */
-    vrt_agc_or_mgc agc_or_mgc;
+    enum vrt_agc_or_mgc agc_or_mgc;
     /** True if a signal is detected in the packet. Activate by setting has.detected_signal to true. */
     bool detected_signal;
     /** True if the signal has an inverted spectrum. Activate by setting has.spectral_inversion to true. */
@@ -223,12 +223,12 @@ typedef struct vrt_trailer {
      * \note Only the 7 least significant bits are used.
      */
     uint8_t associated_context_packet_count;
-} vrt_trailer;
+};
 
 /**
  * Indicates presence of context fields.
  */
-typedef struct vrt_context_indicators {
+struct vrt_context_indicators {
     bool reference_point_identifier;     /**< True if it has the Reference point identifier field. */
     bool bandwidth;                      /**< True if it has the Bandwidth field. */
     bool if_reference_frequency;         /**< True if it has the IF reference frequency field. */
@@ -252,20 +252,20 @@ typedef struct vrt_context_indicators {
     bool ephemeris_reference_identifier; /**< True if it has the Ephemeris reference identifier field. */
     bool gps_ascii;                      /**< True if it has the GPS ASCII field. */
     bool context_association_lists;      /**< True if it has the Context association list field. */
-} vrt_context_indicators;
+};
 
 /**
  * Signal gain or attenuation.
  */
-typedef struct vrt_gain {
+struct vrt_gain {
     float stage1; /**< Front-end or RF gain [dB]. */
     float stage2; /**< Back-end or IF gain [dB]. */
-} vrt_gain;
+};
 
 /**
  * Identifies manufacturer and model of device generating context stream.
  */
-typedef struct vrt_device_identifier {
+struct vrt_device_identifier {
     /**
      * IEEE Organizationally Unique Identifier (company identifier) of device.
      *
@@ -274,12 +274,12 @@ typedef struct vrt_device_identifier {
     uint32_t oui;
     /** Model identification. */
     uint16_t device_code;
-} vrt_device_identifier;
+};
 
 /**
  * Indicates presence of vrt_state_and_event fields.
  */
-typedef struct vrt_state_and_event_indicators {
+struct vrt_state_and_event_indicators {
     bool calibrated_time;    /**< True if it has the Calibrated time indicator field. */
     bool valid_data;         /**< True if it has the Valid data indicator field. */
     bool reference_lock;     /**< True if it has the Reference lock indicator field. */
@@ -288,15 +288,14 @@ typedef struct vrt_state_and_event_indicators {
     bool spectral_inversion; /**< True if it has the Spectral inversion indicator field. */
     bool over_range;         /**< True if it has the Over-range indicator field. */
     bool sample_loss;        /**< True if it has the Sample loss indicator field. */
-
-} vrt_state_and_event_indicators;
+};
 
 /**
  * Binary state and event indicators.
  */
-typedef struct vrt_state_and_event {
+struct vrt_state_and_event {
     /** Field presence indicators. */
-    vrt_state_and_event_indicators has;
+    struct vrt_state_and_event_indicators has;
     /**
      * True if the timestamp is calibrated to an external reference. Activate by setting has.calibrated_time to true.
      */
@@ -306,7 +305,7 @@ typedef struct vrt_state_and_event {
     /** True if the reference is phase locked and stable. Activate by setting has.reference_lock to true. */
     bool reference_lock;
     /** Whether AGC or MGC is active. Activate by setting has.agc_or_mgc to true. */
-    vrt_agc_or_mgc agc_or_mgc;
+    enum vrt_agc_or_mgc agc_or_mgc;
     /** True if a signal is detected in the packet. Activate by setting has.detected_signal to true. */
     bool detected_signal;
     /** True if a signal in the data has an inverted spectrum. Activate by setting has.spectral_inversion to true. */
@@ -324,26 +323,26 @@ typedef struct vrt_state_and_event {
      * State and event bits 7-0. Defined by the user.
      */
     uint8_t user_defined;
-} vrt_state_and_event;
+};
 
 /**
  * Packing method.
  */
-typedef enum vrt_packing_method { VRT_PM_PROCESSING_EFFICIENT = 0x0, VRT_PM_LINK_EFFICIENT = 0x1 } vrt_packing_method;
+enum vrt_packing_method { VRT_PM_PROCESSING_EFFICIENT = 0x0, VRT_PM_LINK_EFFICIENT = 0x1 };
 
 /**
  * Indicates data sample type.
  */
-typedef enum vrt_real_complex {
+enum vrt_real_complex {
     VRT_ROC_REAL              = 0x0, /**< Real number. */
     VRT_ROC_COMPLEX_CARTESIAN = 0x1, /**< Cartesian complex number. */
     VRT_ROC_COMPLEX_POLAR     = 0x2  /**< Polar complex number. */
-} vrt_real_complex;
+};
 
 /**
  * Sample format type.
  */
-typedef enum vrt_data_item_format {
+enum vrt_data_item_format {
     VRT_DIF_SIGNED_FIXED_POINT                       = 0x00,
     VRT_DIF_SIGNED_VRT_1_BIT_EXPONENT                = 0x01,
     VRT_DIF_SIGNED_VRT_2_BIT_EXPONENT                = 0x02,
@@ -360,7 +359,7 @@ typedef enum vrt_data_item_format {
     VRT_DIF_UNSIGNED_VRT_4_BIT_EXPONENT              = 0x14,
     VRT_DIF_UNSIGNED_VRT_5_BIT_EXPONENT              = 0x15,
     VRT_DIF_UNSIGNED_VRT_6_BIT_EXPONENT              = 0x16
-} vrt_data_item_format;
+};
 
 /**
  * Format of data packet payload.
@@ -368,13 +367,13 @@ typedef enum vrt_data_item_format {
  * \note Some fields regarding size contain a number that is one less than the actual size, while some contain a number
  *       equal to the actual size.
  */
-typedef struct vrt_data_packet_payload_format {
+struct vrt_data_packet_payload_format {
     /** If link-efficient or processing-efficient packing is used. */
-    vrt_packing_method packing_method;
+    enum vrt_packing_method packing_method;
     /** Data sample type. */
-    vrt_real_complex real_or_complex;
+    enum vrt_real_complex real_or_complex;
     /** Data sample format. */
-    vrt_data_item_format data_item_format;
+    enum vrt_data_item_format data_item_format;
     /** True when sample component repeating is used. */
     bool sample_component_repeat;
     /**
@@ -405,12 +404,12 @@ typedef struct vrt_data_packet_payload_format {
     uint16_t repeat_count;
     /** One less than vector size in paired channel data stream. */
     uint16_t vector_size;
-} vrt_data_packet_payload_format;
+};
 
 /**
  * Formatted GPS/INS geolocation indicators.
  */
-typedef struct vrt_formatted_geolocation_indicators {
+struct vrt_formatted_geolocation_indicators {
     bool latitude;           /**< True if it has the Latitude field. */
     bool longitude;          /**< True if it has the Longitude field. */
     bool altitude;           /**< True if it has the Altitude field */
@@ -418,16 +417,16 @@ typedef struct vrt_formatted_geolocation_indicators {
     bool heading_angle;      /**< True if it has the heading angle field. */
     bool track_angle;        /**< True if it has the Track angle field. */
     bool magnetic_variation; /**< True if it has the Magnetic variation field. */
-} vrt_formatted_geolocation_indicators;
+};
 
 /**
  * Formatted GPS/INS geolocation data.
  */
-typedef struct vrt_formatted_geolocation {
+struct vrt_formatted_geolocation {
     /** Type of integer second timestamp. */
-    vrt_tsi tsi;
+    enum vrt_tsi tsi;
     /** Type of fractional second timestamp. */
-    vrt_tsf tsf;
+    enum vrt_tsf tsf;
     /**
      * IEEE Organizationally Unique Identifier of GPS/INS manufacturer.
      *
@@ -439,7 +438,7 @@ typedef struct vrt_formatted_geolocation {
     /** Fractional second timestamp of position fix as specified by tsf. */
     uint64_t fractional_second_timestamp;
     /** Field presence indicators. */
-    vrt_formatted_geolocation_indicators has;
+    struct vrt_formatted_geolocation_indicators has;
     /** Latitude [degrees]. Activate by setting has.latitude to true. */
     double latitude;
     /** Longitude [degrees]. Activate by setting has.longitude to true. */
@@ -454,12 +453,12 @@ typedef struct vrt_formatted_geolocation {
     double track_angle;
     /** Magnetic variation with respect to true north [degrees]. Activate by setting has.magnetic_variation to true. */
     double magnetic_variation;
-} vrt_formatted_geolocation;
+};
 
 /**
  * ECEF/Relative ephemeris indicators.
  */
-typedef struct vrt_ephemeris_indicators {
+struct vrt_ephemeris_indicators {
     bool position_x;     /**< True if it has the Position X field. */
     bool position_y;     /**< True if it has the Position Y field. */
     bool position_z;     /**< True if it has the Position Z field. */
@@ -469,16 +468,16 @@ typedef struct vrt_ephemeris_indicators {
     bool velocity_dx;    /**< True if it has the Velocity dX field. */
     bool velocity_dy;    /**< True if it has the Velocity dY field. */
     bool velocity_dz;    /**< True if it has the Velocity dZ field. */
-} vrt_ephemeris_indicators;
+};
 
 /**
  * Location in a specific coordinate system.
  */
-typedef struct vrt_ephemeris {
+struct vrt_ephemeris {
     /** Type of integer second timestamp. */
-    vrt_tsi tsi;
+    enum vrt_tsi tsi;
     /** Type of fractional second timestamp. */
-    vrt_tsf tsf;
+    enum vrt_tsf tsf;
     /**
      * IEEE Organizationally Unique Identifier of GPS/INS manufacturer.
      *
@@ -490,7 +489,7 @@ typedef struct vrt_ephemeris {
     /** Fractional second timestamp of position fix  as specified by tsf. */
     uint64_t fractional_second_timestamp;
     /** Field presence indicators. */
-    vrt_ephemeris_indicators has;
+    struct vrt_ephemeris_indicators has;
     /**
      * x-position [m]. Along earth's equator. Positive direction is intersection of equator plane and prime meridian.
      * Activate by setting has.position_x to true.
@@ -517,12 +516,12 @@ typedef struct vrt_ephemeris {
     double velocity_dy;
     /** z-position [m/s]. Defined similarly to z-position. Activate by setting has.velocity_dz to true. */
     double velocity_dz;
-} vrt_ephemeris;
+};
 
 /**
  * GPS device ASCII.
  */
-typedef struct vrt_gps_ascii {
+struct vrt_gps_ascii {
     /**
      * IEEE Organizationally Unique Identifier of GPS/INS manufacturer.
      *
@@ -539,20 +538,20 @@ typedef struct vrt_gps_ascii {
      *          invalid.
      */
     const char* ascii;
-} vrt_gps_ascii;
+};
 
 /**
  * Indicator fields for Context.
  */
-typedef struct vrt_context_association_lists_indicators {
+struct vrt_context_association_lists_indicators {
     /** True if asynchronous_channel_tag_list is included. */
     bool asynchronous_channel_tag_list;
-} vrt_context_association_lists_indicators;
+};
 
 /**
  * Contains association lists.
  */
-typedef struct vrt_context_association_lists {
+struct vrt_context_association_lists {
     /**
      * Number of Stream IDs in source context association list.
      *
@@ -568,7 +567,7 @@ typedef struct vrt_context_association_lists {
     /** Number of Stream IDs in vector-component association list. */
     uint16_t vector_component_list_size;
     /** Field presence indicators. */
-    vrt_context_association_lists_indicators has;
+    struct vrt_context_association_lists_indicators has;
     /**
      * Number of Stream IDs in asynchronous-channel context association list.
      *
@@ -611,13 +610,12 @@ typedef struct vrt_context_association_lists {
      *          invalid.
      */
     const uint32_t* asynchronous_channel_tag_list;
-
-} vrt_context_association_lists;
+};
 
 /**
  * Context section data.
  */
-typedef struct vrt_if_context {
+struct vrt_if_context {
     /**
      * True if this packet contains new context information.
      *
@@ -627,7 +625,7 @@ typedef struct vrt_if_context {
      */
     bool context_field_change_indicator;
     /** Field presence indicators. */
-    vrt_context_indicators has;
+    struct vrt_context_indicators has;
     /** Stream ID of for which the context packet applies. */
     uint32_t reference_point_identifier;
     /**
@@ -670,7 +668,7 @@ typedef struct vrt_if_context {
     /** Physical signal amplitude at the Reference Point [dBm]. */
     float reference_level;
     /** Gain. */
-    vrt_gain gain;
+    struct vrt_gain gain;
     /**
      * Number of over-range samples, i.e. samples with too high amplitude.
      */
@@ -691,42 +689,42 @@ typedef struct vrt_if_context {
     /** Temperature of some component in the signal chain that may affect the signal. */
     float temperature;
     /** Identifies device carrying a context packet stream. */
-    vrt_device_identifier device_identifier;
+    struct vrt_device_identifier device_identifier;
     /** Conveys state information. */
-    vrt_state_and_event state_and_event_indicators;
+    struct vrt_state_and_event state_and_event_indicators;
     /** Describes formatting of data stream in data packets. */
-    vrt_data_packet_payload_format data_packet_payload_format;
+    struct vrt_data_packet_payload_format data_packet_payload_format;
     /** GPS information. */
-    vrt_formatted_geolocation formatted_gps_geolocation;
+    struct vrt_formatted_geolocation formatted_gps_geolocation;
     /** INS information. */
-    vrt_formatted_geolocation formatted_ins_geolocation;
+    struct vrt_formatted_geolocation formatted_ins_geolocation;
     /** ECEF (earth-centered, earth-fixed) coordinates. */
-    vrt_ephemeris ecef_ephemeris;
+    struct vrt_ephemeris ecef_ephemeris;
     /** Coordinates with user defined point of reference. */
-    vrt_ephemeris relative_ephemeris;
+    struct vrt_ephemeris relative_ephemeris;
     /** Stream ID of relative ephemeris origin. */
     uint32_t ephemeris_reference_identifier;
     /** GPS ASCII positional information. */
-    vrt_gps_ascii gps_ascii;
+    struct vrt_gps_ascii gps_ascii;
     /**
      * Describes which data packets are associated to this context packet.
      *
      * \note This is sometimes called lists and sometimes list.
      */
-    vrt_context_association_lists context_association_lists;
-} vrt_if_context;
+    struct vrt_context_association_lists context_association_lists;
+};
 
 /**
  * VRT packet data.
  */
-typedef struct vrt_packet {
-    vrt_header     header;     /**< Header. */
-    vrt_fields     fields;     /**< Fields. */
-    void*          body;       /**< Data payload for data packets, or custom context section for Ext context packets. */
-    int32_t        words_body; /**< Number of 32-bit words used for body. */
-    vrt_trailer    trailer;    /**< Trailer. */
-    vrt_if_context if_context; /**< IF context. */
-} vrt_packet;
+struct vrt_packet {
+    struct vrt_header  header; /**< Header. */
+    struct vrt_fields  fields; /**< Fields. */
+    void*              body;   /**< Data payload for data packets, or custom context section for Ext context packets. */
+    int32_t            words_body;    /**< Number of 32-bit words used for body. */
+    struct vrt_trailer trailer;       /**< Trailer. */
+    struct vrt_if_context if_context; /**< IF context. */
+};
 
 #ifdef __cplusplus
 }

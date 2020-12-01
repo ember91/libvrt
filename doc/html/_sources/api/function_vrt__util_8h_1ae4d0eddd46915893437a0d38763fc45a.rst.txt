@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__util_8h_1ae4d0eddd46915893437a0d38763fc45a:
+
+Function vrt_is_context
+=======================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_is_context(const struct vrt_header *)

@@ -36,9 +36,9 @@ int main() {
     }
 
     /* Initialize to reasonable values */
-    vrt_header  h;
-    vrt_fields  f;
-    vrt_trailer t;
+    struct vrt_header  h;
+    struct vrt_fields  f;
+    struct vrt_trailer t;
     vrt_init_header(&h);
     vrt_init_fields(&f);
     vrt_init_trailer(&t);

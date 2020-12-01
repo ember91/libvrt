@@ -39,7 +39,7 @@ extern "C" {
  *
  * \warning Undefined behaviour if type is outside bounds.
  */
-inline bool vrt_is_context(const vrt_header* header) {
+inline bool vrt_is_context(const struct vrt_header* header) {
     return (VRT_STATIC_CAST(uint32_t, header->packet_type) & 0x4U) != 0;
 }
 
@@ -52,7 +52,7 @@ inline bool vrt_is_context(const vrt_header* header) {
  *
  * \warning Undefined behaviour if type is outside bounds.
  */
-inline bool vrt_has_stream_id(const vrt_header* header) {
+inline bool vrt_has_stream_id(const struct vrt_header* header) {
     return (VRT_STATIC_CAST(uint32_t, header->packet_type) & 0x5U) != 0;
 }
 

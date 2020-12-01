@@ -182,11 +182,11 @@
 <span class="cp">#define VRT_REINTERPRET_CAST(T, X) (T)(X)</span>
 <span class="cp">#endif</span>
 
-<span class="kr">inline</span> <span class="kt">bool</span> <span class="n">vrt_is_context</span><span class="p">(</span><span class="k">const</span> <span class="n">vrt_header</span><span class="o">*</span> <span class="n">header</span><span class="p">)</span> <span class="p">{</span>
+<span class="kr">inline</span> <span class="kt">bool</span> <span class="n">vrt_is_context</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_header</span><span class="o">*</span> <span class="n">header</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">VRT_STATIC_CAST</span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">,</span> <span class="n">header</span><span class="o">-&gt;</span><span class="n">packet_type</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x4U</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kr">inline</span> <span class="kt">bool</span> <span class="n">vrt_has_stream_id</span><span class="p">(</span><span class="k">const</span> <span class="n">vrt_header</span><span class="o">*</span> <span class="n">header</span><span class="p">)</span> <span class="p">{</span>
+<span class="kr">inline</span> <span class="kt">bool</span> <span class="n">vrt_has_stream_id</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_header</span><span class="o">*</span> <span class="n">header</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">VRT_STATIC_CAST</span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">,</span> <span class="n">header</span><span class="o">-&gt;</span><span class="n">packet_type</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x5U</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 

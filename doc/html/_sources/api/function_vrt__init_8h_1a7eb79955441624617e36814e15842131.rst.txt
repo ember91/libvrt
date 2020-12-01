@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__init_8h_1a7eb79955441624617e36814e15842131:
+
+Function vrt_init_fields
+========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_init.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_init_fields(struct vrt_fields *)

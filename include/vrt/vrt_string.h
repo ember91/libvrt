@@ -18,7 +18,7 @@ extern "C" {
  *
  * \note Inputting an unknown packet type returns "Unknown".
  */
-const char* vrt_string_packet_type(vrt_packet_type packet_type);
+const char* vrt_string_packet_type(enum vrt_packet_type packet_type);
 
 /**
  * Get a string representation of TSM (Timestamp mode) enum.
@@ -29,7 +29,7 @@ const char* vrt_string_packet_type(vrt_packet_type packet_type);
  *
  * \note Inputting an unknown TSM returns "Unknown".
  */
-const char* vrt_string_tsm(vrt_tsm tsm);
+const char* vrt_string_tsm(enum vrt_tsm tsm);
 
 /**
  * Get a string representation of TSI (Timestamp integer) enum.
@@ -40,7 +40,7 @@ const char* vrt_string_tsm(vrt_tsm tsm);
  *
  * \note Inputting an unknown TSI returns "Unknown".
  */
-const char* vrt_string_tsi(vrt_tsi tsi);
+const char* vrt_string_tsi(enum vrt_tsi tsi);
 
 /**
  * Get a string representation of TSF (Timestamp fractional) enum.
@@ -51,7 +51,7 @@ const char* vrt_string_tsi(vrt_tsi tsi);
  *
  * \note Inputting an unknown TSF returns "Unknown".
  */
-const char* vrt_string_tsf(vrt_tsf tsf);
+const char* vrt_string_tsf(enum vrt_tsf tsf);
 
 /**
  * Get a string representation of AGC/MGC enum.
@@ -62,7 +62,7 @@ const char* vrt_string_tsf(vrt_tsf tsf);
  *
  * \note Inputting an unknown AGC/MGC returns "Unknown".
  */
-const char* vrt_string_agc_or_mgc(vrt_agc_or_mgc agc_or_mgc);
+const char* vrt_string_agc_or_mgc(enum vrt_agc_or_mgc agc_or_mgc);
 
 /**
  * Get a string representation of Packing method enum.
@@ -73,7 +73,7 @@ const char* vrt_string_agc_or_mgc(vrt_agc_or_mgc agc_or_mgc);
  *
  * \note Inputting an unknown Packing method returns "Unknown".
  */
-const char* vrt_string_packing_method(vrt_packing_method packing_method);
+const char* vrt_string_packing_method(enum vrt_packing_method packing_method);
 
 /**
  * Get a string representation of Real/Complex enum.
@@ -84,7 +84,7 @@ const char* vrt_string_packing_method(vrt_packing_method packing_method);
  *
  * \note Inputting an unknown Real/Complex returns "Unknown".
  */
-const char* vrt_string_real_or_complex(vrt_real_complex real_or_complex);
+const char* vrt_string_real_or_complex(enum vrt_real_complex real_or_complex);
 
 /**
  * Get a string representation of Data item format enum.
@@ -95,7 +95,7 @@ const char* vrt_string_real_or_complex(vrt_real_complex real_or_complex);
  *
  * \note Inputting an unknown Data item format returns "Unknown".
  */
-const char* vrt_string_data_item_format(vrt_data_item_format data_item_format);
+const char* vrt_string_data_item_format(enum vrt_data_item_format data_item_format);
 
 /**
  * Get a string representation of an error code.

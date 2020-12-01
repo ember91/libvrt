@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__write_8h_1af1e9bd26febf67e9239cfdcc05dc3ec0:
+
+Function vrt_write_trailer
+==========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_write.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_write_trailer(const struct vrt_trailer *, void *, int32_t, bool)

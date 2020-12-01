@@ -35,7 +35,7 @@ int main() {
     }
 
     /* Initialize to reasonable values */
-    vrt_packet p;
+    struct vrt_packet p;
     vrt_init_packet(&p);
 
     /* Configure */

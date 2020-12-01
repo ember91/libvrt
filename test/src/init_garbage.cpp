@@ -4,7 +4,7 @@
 
 #include <vrt/vrt_types.h>
 
-void init_garbage_header(vrt_header* h) {
+void init_garbage_header(struct vrt_header* h) {
     h->packet_type  = static_cast<vrt_packet_type>(0xFFFFFFFF);
     h->has.class_id = true;
     h->has.trailer  = true;
@@ -15,7 +15,7 @@ void init_garbage_header(vrt_header* h) {
     h->packet_size  = 0xFFFF;
 }
 
-void init_garbage_fields(vrt_fields* f) {
+void init_garbage_fields(struct vrt_fields* f) {
     f->stream_id                       = 0xFFFFFFFF;
     f->class_id.oui                    = 0x00FFFFFF;
     f->class_id.information_class_code = 0xFFFF;
@@ -24,7 +24,7 @@ void init_garbage_fields(vrt_fields* f) {
     f->fractional_seconds_timestamp    = 0xFFFFFFFFFFFFFFFF;
 }
 
-void init_garbage_trailer(vrt_trailer* t) {
+void init_garbage_trailer(struct vrt_trailer* t) {
     t->has.calibrated_time                 = true;
     t->has.valid_data                      = true;
     t->has.reference_lock                  = true;
@@ -113,7 +113,7 @@ static void init_garbage_ephemeris(vrt_ephemeris* e) {
     e->velocity_dz        = 987.654;
 }
 
-void init_garbage_if_context(vrt_if_context* c) {
+void init_garbage_if_context(struct vrt_if_context* c) {
     c->context_field_change_indicator     = true;
     c->has.reference_point_identifier     = true;
     c->has.bandwidth                      = true;
@@ -209,7 +209,7 @@ void init_garbage_if_context(vrt_if_context* c) {
     c->context_association_lists.asynchronous_channel_tag_list                 = reinterpret_cast<uint32_t*>(c);
 }
 
-void init_garbage_packet(vrt_packet* p) {
+void init_garbage_packet(struct vrt_packet* p) {
     init_garbage_header(&p->header);
     init_garbage_fields(&p->fields);
     p->words_body = 0x0000FFFF;

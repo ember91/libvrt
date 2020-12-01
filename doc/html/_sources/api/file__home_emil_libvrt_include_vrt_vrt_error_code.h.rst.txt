@@ -42,10 +42,3 @@ Enums
 
 - :ref:`exhale_enum_vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4`
 
-
-Typedefs
---------
-
-
-- :ref:`exhale_typedef_vrt__error__code_8h_1a3e44610f267afc6441a1c149083be04b`
-

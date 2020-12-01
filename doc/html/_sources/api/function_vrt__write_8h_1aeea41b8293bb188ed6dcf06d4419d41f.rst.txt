@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__write_8h_1aeea41b8293bb188ed6dcf06d4419d41f:
+
+Function vrt_write_packet
+=========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_write.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_write_packet(const struct vrt_packet *, void *, int32_t, bool)

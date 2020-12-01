@@ -150,8 +150,8 @@
   <div class="section" id="program-listing-for-file-vrt-words-h">
 <span id="program-listing-file-home-emil-libvrt-include-vrt-vrt-words-h"></span><h1>Program Listing for File vrt_words.h<a class="headerlink" href="#program-listing-for-file-vrt-words-h" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_words.h.html#file-home-emil-libvrt-include-vrt-vrt-words-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">/home/emil/libvrt/include/vrt/vrt_words.h</span></code>)</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef INCLUDE_VRT_VRT_COMMON_H_</span>
-<span class="cp">#define INCLUDE_VRT_VRT_COMMON_H_</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef INCLUDE_VRT_VRT_WORDS_H_</span>
+<span class="cp">#define INCLUDE_VRT_VRT_WORDS_H_</span>
 
 <span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span>
 
@@ -168,13 +168,13 @@
 <span class="k">static</span> <span class="k">const</span> <span class="kt">uint16_t</span> <span class="n">VRT_WORDS_TRAILER</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="k">static</span> <span class="k">const</span> <span class="kt">uint16_t</span> <span class="n">VRT_WORDS_MAX_PACKET</span> <span class="o">=</span> <span class="n">UINT16_MAX</span><span class="p">;</span>
 
-<span class="kt">int32_t</span> <span class="nf">vrt_words_fields</span><span class="p">(</span><span class="k">const</span> <span class="n">vrt_header</span><span class="o">*</span> <span class="n">header</span><span class="p">);</span>
+<span class="kt">int32_t</span> <span class="nf">vrt_words_fields</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_header</span><span class="o">*</span> <span class="n">header</span><span class="p">);</span>
 
-<span class="kt">int32_t</span> <span class="nf">vrt_words_trailer</span><span class="p">(</span><span class="k">const</span> <span class="n">vrt_header</span><span class="o">*</span> <span class="n">header</span><span class="p">);</span>
+<span class="kt">int32_t</span> <span class="nf">vrt_words_trailer</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_header</span><span class="o">*</span> <span class="n">header</span><span class="p">);</span>
 
-<span class="kt">int32_t</span> <span class="nf">vrt_words_if_context</span><span class="p">(</span><span class="k">const</span> <span class="n">vrt_if_context</span><span class="o">*</span> <span class="n">if_context</span><span class="p">);</span>
+<span class="kt">int32_t</span> <span class="nf">vrt_words_if_context</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_if_context</span><span class="o">*</span> <span class="n">if_context</span><span class="p">);</span>
 
-<span class="kt">int32_t</span> <span class="nf">vrt_words_packet</span><span class="p">(</span><span class="k">const</span> <span class="n">vrt_packet</span><span class="o">*</span> <span class="n">packet</span><span class="p">);</span>
+<span class="kt">int32_t</span> <span class="nf">vrt_words_packet</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_packet</span><span class="o">*</span> <span class="n">packet</span><span class="p">);</span>
 
 <span class="cp">#ifdef __cplusplus</span>
 <span class="p">}</span>

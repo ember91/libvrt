@@ -3,7 +3,7 @@
 #include "vrt_error_code.h"
 #include "vrt_types.h"
 
-const char* vrt_string_packet_type(vrt_packet_type packet_type) {
+const char* vrt_string_packet_type(enum vrt_packet_type packet_type) {
     switch (packet_type) {
         case VRT_PT_IF_DATA_WITHOUT_STREAM_ID:
             return "IF Data packet without Stream Identifier";
@@ -22,7 +22,7 @@ const char* vrt_string_packet_type(vrt_packet_type packet_type) {
     }
 }
 
-const char* vrt_string_tsm(vrt_tsm tsm) {
+const char* vrt_string_tsm(enum vrt_tsm tsm) {
     switch (tsm) {
         case VRT_TSM_FINE:
             return "Fine";
@@ -33,7 +33,7 @@ const char* vrt_string_tsm(vrt_tsm tsm) {
     }
 }
 
-const char* vrt_string_tsi(vrt_tsi tsi) {
+const char* vrt_string_tsi(enum vrt_tsi tsi) {
     switch (tsi) {
         case VRT_TSI_NONE:
             return "None/Undefined";
@@ -48,7 +48,7 @@ const char* vrt_string_tsi(vrt_tsi tsi) {
     }
 }
 
-const char* vrt_string_tsf(vrt_tsf tsf) {
+const char* vrt_string_tsf(enum vrt_tsf tsf) {
     switch (tsf) {
         case VRT_TSF_NONE:
             return "None/Undefined";
@@ -63,7 +63,7 @@ const char* vrt_string_tsf(vrt_tsf tsf) {
     }
 }
 
-const char* vrt_string_agc_or_mgc(vrt_agc_or_mgc agc_or_mgc) {
+const char* vrt_string_agc_or_mgc(enum vrt_agc_or_mgc agc_or_mgc) {
     switch (agc_or_mgc) {
         case VRT_AOM_MGC:
             return "MGC";
@@ -74,7 +74,7 @@ const char* vrt_string_agc_or_mgc(vrt_agc_or_mgc agc_or_mgc) {
     }
 }
 
-const char* vrt_string_packing_method(vrt_packing_method packing_method) {
+const char* vrt_string_packing_method(enum vrt_packing_method packing_method) {
     switch (packing_method) {
         case VRT_PM_PROCESSING_EFFICIENT:
             return "Processing Efficient";
@@ -85,7 +85,7 @@ const char* vrt_string_packing_method(vrt_packing_method packing_method) {
     }
 }
 
-const char* vrt_string_real_or_complex(vrt_real_complex real_or_complex) {
+const char* vrt_string_real_or_complex(enum vrt_real_complex real_or_complex) {
     switch (real_or_complex) {
         case VRT_ROC_REAL:
             return "Real";
@@ -98,7 +98,7 @@ const char* vrt_string_real_or_complex(vrt_real_complex real_or_complex) {
     }
 }
 
-const char* vrt_string_data_item_format(vrt_data_item_format data_item_format) {
+const char* vrt_string_data_item_format(enum vrt_data_item_format data_item_format) {
     switch (data_item_format) {
         case VRT_DIF_SIGNED_FIXED_POINT:
             return "Signed Fixed-Point";

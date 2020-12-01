@@ -42,8 +42,8 @@ int main() {
     fclose(fp);
 
     /* Read header */
-    vrt_packet p;
-    int32_t    rv = vrt_read_packet(b, SIZE, &p, true);
+    struct vrt_packet p;
+    int32_t           rv = vrt_read_packet(b, SIZE, &p, true);
     if (rv < 0) {
         fprintf(stderr, "Failed to read header: %s\n", vrt_string_error(rv));
         return EXIT_FAILURE;

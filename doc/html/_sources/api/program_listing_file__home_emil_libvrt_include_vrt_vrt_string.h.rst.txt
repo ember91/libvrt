@@ -21,21 +21,21 @@ Program Listing for File vrt_string.h
    extern "C" {
    #endif
    
-   const char* vrt_string_packet_type(vrt_packet_type packet_type);
+   const char* vrt_string_packet_type(enum vrt_packet_type packet_type);
    
-   const char* vrt_string_tsm(vrt_tsm tsm);
+   const char* vrt_string_tsm(enum vrt_tsm tsm);
    
-   const char* vrt_string_tsi(vrt_tsi tsi);
+   const char* vrt_string_tsi(enum vrt_tsi tsi);
    
-   const char* vrt_string_tsf(vrt_tsf tsf);
+   const char* vrt_string_tsf(enum vrt_tsf tsf);
    
-   const char* vrt_string_agc_or_mgc(vrt_agc_or_mgc agc_or_mgc);
+   const char* vrt_string_agc_or_mgc(enum vrt_agc_or_mgc agc_or_mgc);
    
-   const char* vrt_string_packing_method(vrt_packing_method packing_method);
+   const char* vrt_string_packing_method(enum vrt_packing_method packing_method);
    
-   const char* vrt_string_real_or_complex(vrt_real_complex real_or_complex);
+   const char* vrt_string_real_or_complex(enum vrt_real_complex real_or_complex);
    
-   const char* vrt_string_data_item_format(vrt_data_item_format data_item_format);
+   const char* vrt_string_data_item_format(enum vrt_data_item_format data_item_format);
    
    const char* vrt_string_error(int32_t error);
    

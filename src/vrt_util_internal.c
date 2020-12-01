@@ -5,10 +5,10 @@
 /* Defined inline in header */
 extern uint32_t vrt_b2u(bool b);
 extern uint32_t vrt_u2b(uint32_t u);
-extern bool     vrt_has_stream_id(vrt_packet_type type);
-extern bool     vrt_has_fractional_timestamp(vrt_tsf t);
+extern bool     vrt_has_stream_id(enum vrt_packet_type type);
+extern bool     vrt_has_fractional_timestamp(enum vrt_tsf t);
 
-int32_t vrt_words_if_context_indicator(const vrt_context_indicators* ind) {
+int32_t vrt_words_if_context_indicator(const struct vrt_context_indicators* ind) {
     /* For context indicator field */
     int32_t words = 1;
 

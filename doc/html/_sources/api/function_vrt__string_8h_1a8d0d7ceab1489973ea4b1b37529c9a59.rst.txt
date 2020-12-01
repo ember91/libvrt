@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__string_8h_1a8d0d7ceab1489973ea4b1b37529c9a59:
+
+Function vrt_string_packet_type
+===============================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_string.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_string_packet_type(enum vrt_packet_type)

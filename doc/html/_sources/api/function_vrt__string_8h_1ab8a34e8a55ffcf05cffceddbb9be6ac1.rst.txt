@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__string_8h_1ab8a34e8a55ffcf05cffceddbb9be6ac1:
+
+Function vrt_string_tsm
+=======================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_string.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_string_tsm(enum vrt_tsm)

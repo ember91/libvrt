@@ -167,37 +167,37 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__util_8h_1a30582a8973527846758281f72d6bafd2.rst
+   function_vrt__util_8h_1a374ded9153dc7e7c686bd7b05dfbb414.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__init_8h_1a9f7f55ea8ca949ef2f0f2033e8b9e896.rst
+   function_vrt__init_8h_1a7eb79955441624617e36814e15842131.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__init_8h_1a8e9c2e8dde51136486cc2e7d9728f6f5.rst
+   function_vrt__init_8h_1a438d9e547d1f1f767c165e39424f47f3.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__init_8h_1a17707913c26e86919ef357b8ee303fb8.rst
+   function_vrt__init_8h_1a7fbb080f872ff991c828d5230b29cc6c.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__init_8h_1a2dbcaf0926d3f1a4ef7eb8a6fdc3d471.rst
+   function_vrt__init_8h_1a1dcad10c4fcc5f3aee3e2285797e15a8.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__init_8h_1ac48207b4c8fe750f09efca40d5d12130.rst
+   function_vrt__init_8h_1ac676b61f32044b4f08d1caf7b740c328.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__util_8h_1afdd285193b37fbbb286b8b3347abe770.rst
+   function_vrt__util_8h_1ae4d0eddd46915893437a0d38763fc45a.rst
 
 .. toctree::
    :maxdepth: 5
@@ -207,37 +207,37 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__read_8h_1a8960f1bcb0e24dca12dba6287ca86bdc.rst
+   function_vrt__read_8h_1a86943d1960f1ae3ff365ca9d287bc35d.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__read_8h_1afeab8d85b8013ecd06117289f90f31d1.rst
+   function_vrt__read_8h_1a5e14ee75a882a9ba9b9c6722baed0cad.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__read_8h_1a7b0934183b6fc69cb6dc157413f8664e.rst
+   function_vrt__read_8h_1a976e0eefff7fabefb6e275dc55840ab5.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__read_8h_1a3bd8d8ecbcff87f65615e4bec9a5f651.rst
+   function_vrt__read_8h_1a2d7ce708f41e8122380eeed30d0e996a.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__read_8h_1a643dc4ef9230bfded6aac41491d34078.rst
+   function_vrt__read_8h_1aaf4fc4ffd25f1f50cef27fffa289f570.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__string_8h_1a99c9ae304a4b8d079cf2bd89eb8c3970.rst
+   function_vrt__string_8h_1a52bfe40a317266e3bce607b9fabc65b6.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__string_8h_1a69be6997674761912825d90bf058032a.rst
+   function_vrt__string_8h_1a385655b416a1f6d72d3927fae1ada6f3.rst
 
 .. toctree::
    :maxdepth: 5
@@ -247,77 +247,77 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__string_8h_1aa2b99569815d0971f22687df7392d3e6.rst
+   function_vrt__string_8h_1a8d0d7ceab1489973ea4b1b37529c9a59.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__string_8h_1abd44330e5a4dbca145b5918fc29b7b00.rst
+   function_vrt__string_8h_1aabd7dfceee3960163a4cad85fa3b351e.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__string_8h_1a3996420d201f8b5b94a380a72036576a.rst
+   function_vrt__string_8h_1a172b4cc982cfedb708f12cf6db96c779.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__string_8h_1ac3d84d0157b350448d87a68b8349ae6e.rst
+   function_vrt__string_8h_1ae1610ff777b25da6f25d9ad532e0a677.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__string_8h_1a3b3850641b61ac8c3a3809d628e6eb2e.rst
+   function_vrt__string_8h_1ad6e0b8635a01cf095539730003587dcd.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__string_8h_1af2eb78df73c725620b77e457f2bcfbea.rst
+   function_vrt__string_8h_1ab8a34e8a55ffcf05cffceddbb9be6ac1.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__words_8h_1a43d81453b982dac8675b2535f503510b.rst
+   function_vrt__words_8h_1a8cc41c6688a37ffec6be52baa4eca23b.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__words_8h_1aeb1517bbc6cf8dedf0718a8966ee2121.rst
+   function_vrt__words_8h_1adff2fc2d34c52261a3ebd85559695ca0.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__words_8h_1af0ac31d95069ccf042c8f1cce35aaefd.rst
+   function_vrt__words_8h_1aa7cb266b18ae3dd0e849a5ec0e4da142.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__words_8h_1a13c1af1da879e131bab326a503c6cfe9.rst
+   function_vrt__words_8h_1a1e0b54c1074eca5a163321d622c8de2b.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__write_8h_1aa3826d4ba59dd0e787d97f06bd2e65b8.rst
+   function_vrt__write_8h_1aa8a41029efa0bf1188898eee5bde11c9.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__write_8h_1a02e577357aea4177b2189849be8a978a.rst
+   function_vrt__write_8h_1a890940821fc194091ec4e1d9f7cb0852.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__write_8h_1ae9a12b1a22b88bd495be8afaac351b60.rst
+   function_vrt__write_8h_1aa71729dc0c2da9d768054c9c77112de5.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__write_8h_1a77d52f0b5bbf0e7680305a63a7d4601a.rst
+   function_vrt__write_8h_1aeea41b8293bb188ed6dcf06d4419d41f.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__write_8h_1a5e15a065fd85bb8a09a5598f2a693d09.rst
+   function_vrt__write_8h_1af1e9bd26febf67e9239cfdcc05dc3ec0.rst
 
 Variables
 *********
@@ -361,157 +361,3 @@ Defines
    :maxdepth: 5
 
    define_vrt__util_8h_1a5f3ca533aadf44ad610a9082a03f2970.rst
-
-Typedefs
-********
-
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a35510365a5dde291c074ec18b9d5e3cf.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1ae612e4cd21a6812207f4b602138b207e.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a88f6de98f2f63ebed0de46b31ee70573.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1ab2ad005e6f35f6132c52f054108d727f.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a15f7ae6dc252cb49d04167cb2c3a9938.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a7cb74df26973af4163f6a454bfac1752.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1abfc30cf041cd83e0d7330161b44acbb6.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1af9cb4b17ea0361f305020bf8b00ef45e.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a7ecf86c7448f1053a4e427a8e5124f03.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1adc2595101b556c8a626f0e15d756bebd.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__error__code_8h_1a3e44610f267afc6441a1c149083be04b.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1af8bc036edb7d29f5dcd8963a4bf365e2.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a0fb6ed22138cbd5a2e6ade1374a5cab6.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1ae46fca03125d928bf4301c24bc214ce1.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1abc5ac592b2dbfab1303919e4fb0a99c3.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1ace732908c30469bc10bbc2a536d8fac5.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a911ea976d33838e89b7a25ecf7e3cea9.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a6322281affed3e99968831f769eb3946.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a2848c63ec869af030cd4aa26a1591f16.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a621cf5da99465b58c13006741e4bfef1.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a0e6dfcb09c9e0f88410bebe4392d2932.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a6841f73b1f5dcf36581e9dd81f00f0d6.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1ac840da71ca6440bf4cf20d3556fd0b54.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a1ed6ad1422a5da88af10093c1ccf2884.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1ab73faf0b3544528a5163b98d12878686.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1ad68ac10e9a6971eb3c535612fb17606e.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1ae85a56a4ebbc758432fd426c2ed920f7.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a19358442082642e99f2b1e8f2d777418.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a4f18056135a2d71940e1177b3f5850f8.rst
-
-.. toctree::
-   :maxdepth: 5
-
-   typedef_vrt__types_8h_1a0254369bdf6a1ed031376a62a9309dfd.rst
