@@ -158,15 +158,15 @@
 </ul>
 <div class="section" id="struct-documentation">
 <h2>Struct Documentation<a class="headerlink" href="#struct-documentation" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp struct">
-<dt id="_CPPv413vrt_gps_ascii">
-<span id="_CPPv313vrt_gps_ascii"></span><span id="_CPPv213vrt_gps_ascii"></span><span id="vrt_gps_ascii"></span><span class="target" id="structvrt__gps__ascii"></span><em class="property">struct </em><code class="sig-name descname">vrt_gps_ascii</code><a class="headerlink" href="#_CPPv413vrt_gps_ascii" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="c struct">
+<dt id="c.vrt_gps_ascii">
+<span class="target" id="structvrt__gps__ascii"></span><em class="property">struct </em><code class="sig-name descname">vrt_gps_ascii</code><a class="headerlink" href="#c.vrt_gps_ascii" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>GPS device ASCII. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="cpp var">
-<dt id="_CPPv4N13vrt_gps_ascii3ouiE">
-<span id="_CPPv3N13vrt_gps_ascii3ouiE"></span><span id="_CPPv2N13vrt_gps_ascii3ouiE"></span><span id="vrt_gps_ascii::oui__uint32_t"></span><span class="target" id="structvrt__gps__ascii_1abf1522ca0f474a9ec246f21fc4849e34"></span>uint32_t <code class="sig-name descname">oui</code><a class="headerlink" href="#_CPPv4N13vrt_gps_ascii3ouiE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="c var">
+<dt id="c.vrt_gps_ascii.oui">
+<span class="target" id="structvrt__gps__ascii_1abf1522ca0f474a9ec246f21fc4849e34"></span>uint32_t <code class="sig-name descname">oui</code><a class="headerlink" href="#c.vrt_gps_ascii.oui" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>IEEE Organizationally Unique Identifier of GPS/INS manufacturer.</p>
 <p><dl class="simple">
 <dt><strong>Note</strong></dt><dd><p>Only the 24 least significant bits are used. </p>
@@ -175,15 +175,15 @@
 </p>
 </dd></dl>
 
-<dl class="cpp var">
-<dt id="_CPPv4N13vrt_gps_ascii15number_of_wordsE">
-<span id="_CPPv3N13vrt_gps_ascii15number_of_wordsE"></span><span id="_CPPv2N13vrt_gps_ascii15number_of_wordsE"></span><span id="vrt_gps_ascii::number_of_words__uint32_t"></span><span class="target" id="structvrt__gps__ascii_1aed0c8e9fea9bf7ce8ce9d52d9df7c8c4"></span>uint32_t <code class="sig-name descname">number_of_words</code><a class="headerlink" href="#_CPPv4N13vrt_gps_ascii15number_of_wordsE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="c var">
+<dt id="c.vrt_gps_ascii.number_of_words">
+<span class="target" id="structvrt__gps__ascii_1aed0c8e9fea9bf7ce8ce9d52d9df7c8c4"></span>uint32_t <code class="sig-name descname">number_of_words</code><a class="headerlink" href="#c.vrt_gps_ascii.number_of_words" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Number of 32-bit words used for the GPS ASCII. </p>
 </dd></dl>
 
-<dl class="cpp var">
-<dt id="_CPPv4N13vrt_gps_ascii5asciiE">
-<span id="_CPPv3N13vrt_gps_ascii5asciiE"></span><span id="_CPPv2N13vrt_gps_ascii5asciiE"></span><span id="vrt_gps_ascii::ascii__cCP"></span><span class="target" id="structvrt__gps__ascii_1a9ba10742e7df773d21529add3f5629d8"></span><em class="property">const</em> char *<code class="sig-name descname">ascii</code><a class="headerlink" href="#_CPPv4N13vrt_gps_ascii5asciiE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="c var">
+<dt id="c.vrt_gps_ascii.ascii">
+<span class="target" id="structvrt__gps__ascii_1a9ba10742e7df773d21529add3f5629d8"></span><em class="property">const</em> char *<code class="sig-name descname">ascii</code><a class="headerlink" href="#c.vrt_gps_ascii.ascii" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>GPS ASCII sentences. Padded with null characters so it’s a multiple of 4 B. Pointer may be null when not defined.</p>
 <p><dl class="simple">
 <dt><strong>Warning</strong></dt><dd><p>Will point into the buffer when the field is read. Deallocating the buffer will render the pointer invalid. </p>

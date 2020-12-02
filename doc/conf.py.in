@@ -80,6 +80,13 @@ import subprocess
 
 subprocess.call("doxygen", shell=True)
 
+# Fix for a bug that identifies the code as C++ and not C
+breathe_domain_by_extension = {"h" : "c"}
+
+# Macro list
+c_id_attributes = [
+  'VRT_WARN_UNUSED'
+]
 
 # -- Options for HTML output -------------------------------------------------
 

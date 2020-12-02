@@ -158,15 +158,15 @@
 </ul>
 <div class="section" id="struct-documentation">
 <h2>Struct Documentation<a class="headerlink" href="#struct-documentation" title="Permalink to this headline">¶</a></h2>
-<dl class="cpp struct">
-<dt id="_CPPv410vrt_fields">
-<span id="_CPPv310vrt_fields"></span><span id="_CPPv210vrt_fields"></span><span id="vrt_fields"></span><span class="target" id="structvrt__fields"></span><em class="property">struct </em><code class="sig-name descname">vrt_fields</code><a class="headerlink" href="#_CPPv410vrt_fields" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="c struct">
+<dt id="c.vrt_fields">
+<span class="target" id="structvrt__fields"></span><em class="property">struct </em><code class="sig-name descname">vrt_fields</code><a class="headerlink" href="#c.vrt_fields" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Field data. </p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="cpp var">
-<dt id="_CPPv4N10vrt_fields9stream_idE">
-<span id="_CPPv3N10vrt_fields9stream_idE"></span><span id="_CPPv2N10vrt_fields9stream_idE"></span><span id="vrt_fields::stream_id__uint32_t"></span><span class="target" id="structvrt__fields_1aedacde9429ebcf8c55a5c5d527610f40"></span>uint32_t <code class="sig-name descname">stream_id</code><a class="headerlink" href="#_CPPv4N10vrt_fields9stream_idE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="c var">
+<dt id="c.vrt_fields.stream_id">
+<span class="target" id="structvrt__fields_1aedacde9429ebcf8c55a5c5d527610f40"></span>uint32_t <code class="sig-name descname">stream_id</code><a class="headerlink" href="#c.vrt_fields.stream_id" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Identifies which stream it belongs to. Activate by setting packet_type accordingly.</p>
 <p><dl class="simple">
 <dt><strong>Note</strong></dt><dd><p>Although this field is optional for IF data packets it is required for context packets. </p>
@@ -175,21 +175,21 @@
 </p>
 </dd></dl>
 
-<dl class="cpp var">
-<dt id="_CPPv4N10vrt_fields8class_idE">
-<span id="_CPPv3N10vrt_fields8class_idE"></span><span id="_CPPv2N10vrt_fields8class_idE"></span><span id="vrt_fields::class_id__vrt_class_identifier"></span><span class="target" id="structvrt__fields_1aa115f788e1f0dd4cb70981ccf80de467"></span><em class="property">struct</em> <a class="reference internal" href="structvrt__class__identifier.html#_CPPv420vrt_class_identifier" title="vrt_class_identifier">vrt_class_identifier</a> <code class="sig-name descname">class_id</code><a class="headerlink" href="#_CPPv4N10vrt_fields8class_idE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="c var">
+<dt id="c.vrt_fields.class_id">
+<span class="target" id="structvrt__fields_1aa115f788e1f0dd4cb70981ccf80de467"></span><em class="property">struct</em> <a class="reference internal" href="structvrt__class__identifier.html#c.vrt_class_identifier" title="vrt_class_identifier">vrt_class_identifier</a> <code class="sig-name descname">class_id</code><a class="headerlink" href="#c.vrt_fields.class_id" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Determines data origin. Activate by setting has.class_id. </p>
 </dd></dl>
 
-<dl class="cpp var">
-<dt id="_CPPv4N10vrt_fields25integer_seconds_timestampE">
-<span id="_CPPv3N10vrt_fields25integer_seconds_timestampE"></span><span id="_CPPv2N10vrt_fields25integer_seconds_timestampE"></span><span id="vrt_fields::integer_seconds_timestamp__uint32_t"></span><span class="target" id="structvrt__fields_1af0abc01e6eb521f814253986423ad9d0"></span>uint32_t <code class="sig-name descname">integer_seconds_timestamp</code><a class="headerlink" href="#_CPPv4N10vrt_fields25integer_seconds_timestampE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="c var">
+<dt id="c.vrt_fields.integer_seconds_timestamp">
+<span class="target" id="structvrt__fields_1af0abc01e6eb521f814253986423ad9d0"></span>uint32_t <code class="sig-name descname">integer_seconds_timestamp</code><a class="headerlink" href="#c.vrt_fields.integer_seconds_timestamp" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Integer second timestamp as specified by tsi. Activate by setting tsi to anything but VRT_TSI_NONE/VRT_TSI_UNDEFINED. </p>
 </dd></dl>
 
-<dl class="cpp var">
-<dt id="_CPPv4N10vrt_fields28fractional_seconds_timestampE">
-<span id="_CPPv3N10vrt_fields28fractional_seconds_timestampE"></span><span id="_CPPv2N10vrt_fields28fractional_seconds_timestampE"></span><span id="vrt_fields::fractional_seconds_timestamp__uint64_t"></span><span class="target" id="structvrt__fields_1a1205d40fdec5780cbd69100a58dce97b"></span>uint64_t <code class="sig-name descname">fractional_seconds_timestamp</code><a class="headerlink" href="#_CPPv4N10vrt_fields28fractional_seconds_timestampE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="c var">
+<dt id="c.vrt_fields.fractional_seconds_timestamp">
+<span class="target" id="structvrt__fields_1a1205d40fdec5780cbd69100a58dce97b"></span>uint64_t <code class="sig-name descname">fractional_seconds_timestamp</code><a class="headerlink" href="#c.vrt_fields.fractional_seconds_timestamp" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Fractional second timestamp as specified by tsf. Activate by setting tsf to anything but VRT_TSF_NONE/VRT_TSF_UNDEFINED. </p>
 </dd></dl>
 
