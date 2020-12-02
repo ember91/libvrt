@@ -1,5 +1,5 @@
-* not sure if doc/html/_static and doc/html_sources should be under source control
 * Copy paste in example/CMakeLists.txt
+* Documentation cleanup
 
 # Future
 * Add support for 128 bit float
