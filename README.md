@@ -216,9 +216,9 @@ make -j4
 
 **Emil Berg**
 
-## Other libraries
+## Usages
 
-Tools using this library may pop up in the future.
+[A series of command line tools using libvrt](https://github.com/ember91/vrt_tools_cmd)
 
 ## License
 
