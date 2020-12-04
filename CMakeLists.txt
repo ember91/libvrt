@@ -86,7 +86,7 @@ if(DOCUMENTATION)
 
     # Copy all configuration files with file extension ".in"
     file(
-      GLOB TEMPLATE_FILES
+      GLOB CONFIGURE_DEPENDS TEMPLATE_FILES
       RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/"
       "${CMAKE_CURRENT_SOURCE_DIR}/doc/*.in")
     foreach(FILE ${TEMPLATE_FILES})
@@ -142,7 +142,7 @@ if(${EXAMPLE})
 endif()
 
 # Add source files
-file(GLOB FILES_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
+file(GLOB FILES_SRC CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 add_library(${TARGET_NAME} STATIC ${FILES_SRC})
 
 # Set warning levels
@@ -170,7 +170,7 @@ set_target_properties(${TARGET_NAME} PROPERTIES C_STANDARD 99)
 install(TARGETS ${PROJECT_NAME} DESTINATION lib)
 
 # Install library headers
-file(GLOB FILES_HEADER
+file(GLOB FILES_HEADER CONFIGURE_DEPENDS
      "${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}/*.h")
 install(FILES ${FILES_HEADER} DESTINATION include/${PROJECT_NAME})
 
