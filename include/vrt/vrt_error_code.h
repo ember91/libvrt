@@ -44,7 +44,7 @@ enum vrt_error_code {
      */
     VRT_ERR_INVALID_TSF = -8,
     /**
-     * TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds (> 999999999999 ps).
+     * TSF is VRT_TSF_REAL_TIME but picoseconds is outside valid bounds (> 999999999999 ps).
      */
     VRT_ERR_BOUNDS_REAL_TIME = -9,
     /**

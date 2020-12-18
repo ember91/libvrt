@@ -44,7 +44,7 @@ int32_t vrt_read_header(const void* buf, int32_t words_buf, struct vrt_header* h
  * \return Number of read 32-bit words, or a negative number if error.
  * \retval VRT_ERR_BUFFER_SIZE      Buffer is too small.
  * \retval VRT_ERR_RESERVED         One or multiple reserved bits are set.
- * \retval VRT_ERR_BOUNDS_REAL_TIME TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds
+ * \retval VRT_ERR_BOUNDS_REAL_TIME TSF is VRT_TSF_REAL_TIME but picoseconds is outside valid bounds
  *                                  (> 999999999999 ps).
  */
 VRT_WARN_UNUSED
@@ -92,7 +92,7 @@ int32_t vrt_read_trailer(const void* buf, int32_t words_buf, struct vrt_trailer*
  *                                                      VRT_TSI_UNDEFINED.
  * \retval VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP      Fractional second timestamp is not 0xFFFFFFFFFFFFFFFF when TSF
  *                                                      is VRT_TSF_UNDEFINED.
- * \retval VRT_ERR_BOUNDS_REAL_TIME                     TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds
+ * \retval VRT_ERR_BOUNDS_REAL_TIME                     TSF is VRT_TSF_REAL_TIME but picoseconds is outside valid bounds
  *                                                      (> 999999999999 ps).
  * \retval VRT_ERR_BOUNDS_LATITUDE                      Latitude is outside valid bounds (< -90 or > 90 degrees).
  * \retval VRT_ERR_BOUNDS_LONGITUDE                     Longitude is outside valid bounds (< -180 or > 180 degrees).
@@ -124,7 +124,7 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, struct vrt_if_co
  * \retval VRT_ERR_INVALID_PACKET_TYPE                  Packet type is an invalid value.
  * \retval VRT_ERR_TRAILER_IN_CONTEXT                   Context packet has trailer bit set.
  * \retval VRT_ERR_TSM_IN_DATA                          Data packet has TSM bit set.
- * \retval VRT_ERR_BOUNDS_REAL_TIME                     TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds
+ * \retval VRT_ERR_BOUNDS_REAL_TIME                     TSF is VRT_TSF_REAL_TIME but picoseconds is outside valid bounds
  *                                                      (> 999999999999 ps).
  * \retval VRT_ERR_BOUNDS_BANDWIDTH                     Bandwidth is outside valid bounds (< 0 Hz).
  * \retval VRT_ERR_GAIN_STAGE2_SET                      Gain stage 1 must be used instead of stage 2 when only one is
