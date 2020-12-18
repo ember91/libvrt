@@ -357,7 +357,7 @@ TEST_F(ReadPacketTest, ValidationPacketSizeMismatch) {
     buf_[1] = 0xABABABAB;
     buf_[2] = 0x00000000;
 
-    ASSERT_EQ(vrt_read_packet(buf_.data(), 3, &p_, true), VRT_ERR_PACKET_SIZE_MISMATCH);
+    ASSERT_EQ(vrt_read_packet(buf_.data(), 3, &p_, true), VRT_ERR_MISMATCH_PACKET_SIZE);
     ASSERT_EQ(vrt_read_packet(buf_.data(), 3, &p_, false), 3);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_header(p_.header, {{"packet_type", VRT_PT_IF_CONTEXT}, {"packet_size", static_cast<uint16_t>(4)}});

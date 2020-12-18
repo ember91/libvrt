@@ -234,7 +234,7 @@ const char* vrt_string_error(int32_t error /* Do NOT use vrt_error_code, since i
             return "Channel list size is outside valid bounds (> 0x7FFF)";
         case VRT_ERR_BOUNDS_PACKET_SIZE:
             return "Calculated packet size is outside valid bounds (> 0xFFFF)";
-        case VRT_ERR_PACKET_SIZE_MISMATCH:
+        case VRT_ERR_MISMATCH_PACKET_SIZE:
             return "Packet size in header and calculated packet size do not match";
         default:
             return "Unknown";

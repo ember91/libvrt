@@ -194,7 +194,7 @@ enum vrt_error_code {
     /**
      * Packet size in header and calculated packet size do not match.
      */
-    VRT_ERR_PACKET_SIZE_MISMATCH = -46
+    VRT_ERR_MISMATCH_PACKET_SIZE = -46
 };
 
 #ifdef __cplusplus

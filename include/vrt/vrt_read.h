@@ -145,7 +145,7 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, struct vrt_if_co
  *                                                      degrees).
  * \retval VRT_ERR_BOUNDS_MAGNETIC_VARIATION            Magnetic variation is outside valid bounds (< -180 or > 180
  *                                                      degrees).
- * \retval VRT_ERR_PACKET_SIZE_MISMATCH                 Packet size in header and calculated packet size do not match.
+ * \retval VRT_ERR_MISMATCH_PACKET_SIZE                 Packet size in header and calculated packet size do not match.
  *
  * \warning The packet body pointer will point into buf. That's why buf isn't const.
  * \warning Fields represented as double but with an underlying 64-bit fixed precision format, i.e. bandwidth,

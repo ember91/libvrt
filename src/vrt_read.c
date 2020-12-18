@@ -994,7 +994,7 @@ int32_t vrt_read_packet(void* buf, int32_t words_buf, struct vrt_packet* packet,
             /* Body is actually optional */
             if (validate && packet->words_body < 0) {
                 if (validate) {
-                    return VRT_ERR_PACKET_SIZE_MISMATCH;
+                    return VRT_ERR_MISMATCH_PACKET_SIZE;
                 }
             }
 
@@ -1040,7 +1040,7 @@ int32_t vrt_read_packet(void* buf, int32_t words_buf, struct vrt_packet* packet,
 
     /* Sanity checks */
     if (validate && packet->header.packet_size != words_total) {
-        return VRT_ERR_PACKET_SIZE_MISMATCH;
+        return VRT_ERR_MISMATCH_PACKET_SIZE;
     }
 
     return words_total;
