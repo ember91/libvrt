@@ -14,15 +14,13 @@
 
 class WriteIfContextTest : public ::testing::Test {
    protected:
-    WriteIfContextTest() : c_(), buf_() {}
-
     void SetUp() override {
         vrt_init_if_context(&c_);
         buf_.fill(0xBAADF00D);
     }
 
-    vrt_if_context             c_;
-    std::array<uint32_t, 1024> buf_;
+    vrt_if_context             c_{};
+    std::array<uint32_t, 1024> buf_{};
 };
 
 /**

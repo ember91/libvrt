@@ -12,15 +12,13 @@
 
 class WriteTrailerTest : public ::testing::Test {
    protected:
-    WriteTrailerTest() : t_(), buf_() {}
-
     void SetUp() override {
         vrt_init_trailer(&t_);
         buf_.fill(0xBAADF00D);
     }
 
-    vrt_trailer             t_;
-    std::array<uint32_t, 2> buf_;
+    vrt_trailer             t_{};
+    std::array<uint32_t, 2> buf_{};
 };
 
 TEST_F(WriteTrailerTest, NegativeSizeBuffer) {

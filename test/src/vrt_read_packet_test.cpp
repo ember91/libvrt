@@ -15,15 +15,13 @@
 
 class ReadPacketTest : public ::testing::Test {
    protected:
-    ReadPacketTest() : p_(), buf_() {}
-
     void SetUp() override {
         init_garbage_packet(&p_);
         buf_.fill(0xBAADF00D);
     }
 
-    vrt_packet               p_;
-    std::array<uint32_t, 16> buf_;
+    vrt_packet               p_{};
+    std::array<uint32_t, 16> buf_{};
 };
 
 TEST_F(ReadPacketTest, NegativeSizeBuffer) {

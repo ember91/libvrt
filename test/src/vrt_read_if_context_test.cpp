@@ -15,15 +15,13 @@
 
 class ReadIfContextTest : public ::testing::Test {
    protected:
-    ReadIfContextTest() : c_(), buf_() {}
-
     void SetUp() override {
         init_garbage_if_context(&c_);
         buf_.fill(0xBAADF00D);
     }
 
-    vrt_if_context            c_;
-    std::array<uint32_t, 128> buf_;
+    vrt_if_context            c_{};
+    std::array<uint32_t, 128> buf_{};
 };
 
 TEST_F(ReadIfContextTest, NegativeSizeBuffer) {

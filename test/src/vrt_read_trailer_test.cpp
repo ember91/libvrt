@@ -14,15 +14,13 @@
 
 class ReadTrailerTest : public ::testing::Test {
    protected:
-    ReadTrailerTest() : t_(), buf_() {}
-
     void SetUp() override {
         init_garbage_trailer(&t_);
         buf_.fill(0xBAADF00D);
     }
 
-    vrt_trailer             t_;
-    std::array<uint32_t, 2> buf_;
+    vrt_trailer             t_{};
+    std::array<uint32_t, 2> buf_{};
 };
 
 TEST_F(ReadTrailerTest, NegativeSizeBuffer) {

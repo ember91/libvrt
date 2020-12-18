@@ -12,15 +12,13 @@
 
 class WriteHeaderTest : public ::testing::Test {
    protected:
-    WriteHeaderTest() : h_(), buf_() {}
-
     void SetUp() override {
         vrt_init_header(&h_);
         buf_.fill(0xBAADF00D);
     }
 
-    vrt_header              h_;
-    std::array<uint32_t, 2> buf_;
+    vrt_header              h_{};
+    std::array<uint32_t, 2> buf_{};
 };
 
 TEST_F(WriteHeaderTest, NegativeSizeBuffer) {

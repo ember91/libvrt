@@ -14,15 +14,13 @@
 
 class ReadHeaderTest : public ::testing::Test {
    protected:
-    ReadHeaderTest() : h_(), buf_() {}
-
     void SetUp() override {
         init_garbage_header(&h_);
         buf_.fill(0xBAADF00D);
     }
 
-    vrt_header              h_;
-    std::array<uint32_t, 2> buf_;
+    vrt_header              h_{};
+    std::array<uint32_t, 2> buf_{};
 };
 
 TEST_F(ReadHeaderTest, NegativeSizeBuffer) {

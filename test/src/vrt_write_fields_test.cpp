@@ -12,17 +12,15 @@
 
 class WriteFieldsTest : public ::testing::Test {
    protected:
-    WriteFieldsTest() : h_(), f_(), buf_() {}
-
     void SetUp() override {
         vrt_init_header(&h_);
         vrt_init_fields(&f_);
         buf_.fill(0xBAADF00D);
     }
 
-    vrt_header              h_;
-    vrt_fields              f_;
-    std::array<uint32_t, 8> buf_;
+    vrt_header              h_{};
+    vrt_fields              f_{};
+    std::array<uint32_t, 8> buf_{};
 };
 
 TEST_F(WriteFieldsTest, NegativeSizeBuffer) {

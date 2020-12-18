@@ -14,15 +14,13 @@
 
 class WritePacketTest : public ::testing::Test {
    protected:
-    WritePacketTest() : p_(), buf_() {}
-
     void SetUp() override {
         vrt_init_packet(&p_);
         buf_.fill(0xBAADF00D);
     }
 
-    vrt_packet               p_;
-    std::array<uint32_t, 32> buf_;
+    vrt_packet               p_{};
+    std::array<uint32_t, 32> buf_{};
 };
 
 TEST_F(WritePacketTest, NegativeSizeBuffer) {
@@ -105,7 +103,7 @@ TEST_F(WritePacketTest, BodyIfDataWithoutStreamId) {
 TEST_F(WritePacketTest, BodyIfDataWithStreamId) {
     p_.header.packet_type = VRT_PT_IF_DATA_WITH_STREAM_ID;
     p_.fields.stream_id   = 0xABABABAB;
-    std::array<uint32_t, 3> body;
+    std::array<uint32_t, 3> body{};
     body[0]       = 0xCECECECE;
     body[1]       = 0xFEFEFEFE;
     body[2]       = 0xDEDEDEDE;
@@ -122,7 +120,7 @@ TEST_F(WritePacketTest, BodyIfDataWithStreamId) {
 
 TEST_F(WritePacketTest, BodyExtDataWithoutStreamId) {
     p_.header.packet_type = VRT_PT_EXT_DATA_WITHOUT_STREAM_ID;
-    std::array<uint32_t, 3> body;
+    std::array<uint32_t, 3> body{};
     body[0]       = 0xCECECECE;
     body[1]       = 0xFEFEFEFE;
     body[2]       = 0xDEDEDEDE;
@@ -139,7 +137,7 @@ TEST_F(WritePacketTest, BodyExtDataWithoutStreamId) {
 TEST_F(WritePacketTest, BodyExtDataWithStreamId) {
     p_.header.packet_type = VRT_PT_EXT_DATA_WITH_STREAM_ID;
     p_.fields.stream_id   = 0xABABABAB;
-    std::array<uint32_t, 3> body;
+    std::array<uint32_t, 3> body{};
     body[0]       = 0xCECECECE;
     body[1]       = 0xFEFEFEFE;
     body[2]       = 0xDEDEDEDE;
@@ -157,7 +155,7 @@ TEST_F(WritePacketTest, BodyExtDataWithStreamId) {
 TEST_F(WritePacketTest, BodyIfContext) {
     p_.header.packet_type = VRT_PT_IF_CONTEXT;
     p_.fields.stream_id   = 0xABABABAB;
-    std::array<uint32_t, 3> body;
+    std::array<uint32_t, 3> body{};
     body[0]       = 0xCECECECE;
     body[1]       = 0xFEFEFEFE;
     body[2]       = 0xDEDEDEDE;
@@ -173,7 +171,7 @@ TEST_F(WritePacketTest, BodyIfContext) {
 TEST_F(WritePacketTest, BodyExtContext) {
     p_.header.packet_type = VRT_PT_EXT_CONTEXT;
     p_.fields.stream_id   = 0xABABABAB;
-    std::array<uint32_t, 3> body;
+    std::array<uint32_t, 3> body{};
     body[0]       = 0xCECECECE;
     body[1]       = 0xFEFEFEFE;
     body[2]       = 0xDEDEDEDE;

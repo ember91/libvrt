@@ -43,7 +43,7 @@ int32_t vrt_read_header(const void* buf, int32_t words_buf, struct vrt_header* h
     const int32_t words = 1;
 
     /* Check if buf size is sufficient */
-    if (words_buf < (int32_t)words) {
+    if (words_buf < words) {
         return VRT_ERR_BUFFER_SIZE;
     }
 
@@ -86,10 +86,10 @@ int32_t vrt_read_fields(const struct vrt_header* header,
                         int32_t                  words_buf,
                         struct vrt_fields*       fields,
                         bool                     validate) {
-    const int32_t words = (int32_t)vrt_words_fields(header);
+    const int32_t words = vrt_words_fields(header);
 
     /* Check if buf size is sufficient */
-    if (words_buf < (int32_t)words) {
+    if (words_buf < words) {
         return VRT_ERR_BUFFER_SIZE;
     }
 
@@ -153,7 +153,7 @@ int32_t vrt_read_trailer(const void* buf, int32_t words_buf, struct vrt_trailer*
     const int32_t words = 1;
 
     /* Check if buf size is sufficient */
-    if (words_buf < (int32_t)words) {
+    if (words_buf < words) {
         return VRT_ERR_BUFFER_SIZE;
     }
 
@@ -743,7 +743,7 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, struct vrt_if_co
 
     int32_t words = 1;
 
-    if (words_buf < (int32_t)words) {
+    if (words_buf < words) {
         return VRT_ERR_BUFFER_SIZE;
     }
 
@@ -758,7 +758,7 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, struct vrt_if_co
 
     /* Replace context_words here instead of increasing it */
     words = vrt_words_if_context_indicator(&if_context->has);
-    if (words_buf < (int32_t)words) {
+    if (words_buf < words) {
         return VRT_ERR_BUFFER_SIZE;
     }
 

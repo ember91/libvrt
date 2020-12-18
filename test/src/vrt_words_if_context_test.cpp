@@ -6,11 +6,9 @@
 
 class WordsIfContextTest : public ::testing::Test {
    protected:
-    WordsIfContextTest() : c_() {}
-
     void SetUp() override { vrt_init_if_context(&c_); }
 
-    vrt_if_context c_;
+    vrt_if_context c_{};
 };
 
 TEST_F(WordsIfContextTest, None) {

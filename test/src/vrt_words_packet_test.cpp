@@ -6,11 +6,9 @@
 
 class WordsPacketTest : public ::testing::Test {
    protected:
-    WordsPacketTest() : p_() {}
-
     void SetUp() override { vrt_init_packet(&p_); }
 
-    vrt_packet p_;
+    vrt_packet p_{};
 };
 
 TEST_F(WordsPacketTest, None) {

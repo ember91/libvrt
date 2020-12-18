@@ -97,7 +97,7 @@ int32_t vrt_write_fields(const struct vrt_header* header,
                          void*                    buf,
                          int32_t                  words_buf,
                          bool                     validate) {
-    const int32_t words = (int32_t)vrt_words_fields(header);
+    const int32_t words = vrt_words_fields(header);
 
     /* Check if buf size is sufficient */
     if (words_buf < words) {

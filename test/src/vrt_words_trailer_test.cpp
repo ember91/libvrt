@@ -6,11 +6,9 @@
 
 class WordsTrailerTest : public ::testing::Test {
    protected:
-    WordsTrailerTest() : h_() {}
-
     void SetUp() override { vrt_init_header(&h_); }
 
-    vrt_header h_;
+    vrt_header h_{};
 };
 
 TEST_F(WordsTrailerTest, NoTrailer) {

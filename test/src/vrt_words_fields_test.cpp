@@ -6,11 +6,9 @@
 
 class WordsFieldsTest : public ::testing::Test {
    protected:
-    WordsFieldsTest() : h_() {}
-
     void SetUp() override { vrt_init_header(&h_); }
 
-    vrt_header h_;
+    vrt_header h_{};
 };
 
 TEST_F(WordsFieldsTest, StreamId1) {
