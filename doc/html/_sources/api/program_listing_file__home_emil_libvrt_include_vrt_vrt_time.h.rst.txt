@@ -1,0 +1,40 @@
+
+.. _program_listing_file__home_emil_libvrt_include_vrt_vrt_time.h:
+
+Program Listing for File vrt_time.h
+===================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file__home_emil_libvrt_include_vrt_vrt_time.h>` (``/home/emil/libvrt/include/vrt/vrt_time.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #ifndef INCLUDE_VRT_VRT_TIME_H_
+   #define INCLUDE_VRT_VRT_TIME_H_
+   
+   #include <stdint.h>
+   
+   #include "vrt_types.h"
+   #include "vrt_util.h"
+   
+   #ifdef __cplusplus
+   extern "C" {
+   #endif
+   
+   struct vrt_time {
+       int32_t  s;  
+       uint64_t ps; 
+   };
+   
+   VRT_WARN_UNUSED
+   int vrt_time_duration(const struct vrt_packet* p1,
+                         const struct vrt_packet* p2,
+                         double                   sample_rate,
+                         struct vrt_time*         diff);
+   
+   #ifdef __cplusplus
+   }
+   #endif
+   
+   #endif

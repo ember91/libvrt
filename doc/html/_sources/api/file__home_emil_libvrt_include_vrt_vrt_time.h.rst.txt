@@ -1,0 +1,55 @@
+
+.. _file__home_emil_libvrt_include_vrt_vrt_time.h:
+
+File vrt_time.h
+===============
+
+|exhale_lsh| :ref:`Parent directory <dir__home_emil_libvrt_include_vrt>` (``/home/emil/libvrt/include/vrt``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``/home/emil/libvrt/include/vrt/vrt_time.h``)
+---------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file__home_emil_libvrt_include_vrt_vrt_time.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``stdint.h``
+
+- ``vrt_types.h`` (:ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`)
+
+- ``vrt_util.h`` (:ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`)
+
+
+
+
+
+
+Classes
+-------
+
+
+- :ref:`exhale_struct_structvrt__time`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_vrt__time_8h_1a4c9d106a3fa831cb7cbe10f6abda4e42`
+

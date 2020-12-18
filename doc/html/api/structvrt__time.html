@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>File Hierarchy &mdash; libvrt  documentation</title>
+  <title>Struct vrt_time &mdash; libvrt  documentation</title>
   
 
   
@@ -35,7 +35,9 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Struct vrt_trailer" href="structvrt__trailer.html" />
+    <link rel="prev" title="Struct vrt_state_and_event_indicators" href="structvrt__state__and__event__indicators.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -128,13 +130,15 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>File Hierarchy</li>
+          <li><a href="library_root.html">Library API</a> &raquo;</li>
+        
+      <li>Struct vrt_time</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/api/file_view_hierarchy.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/structvrt__time.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -147,31 +151,40 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="file-hierarchy">
-<h1>File Hierarchy<a class="headerlink" href="#file-hierarchy" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="struct-vrt-time">
+<span id="exhale-struct-structvrt-time"></span><h1>Struct vrt_time<a class="headerlink" href="#struct-vrt-time" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><dl class="simple">
-<dt><a class="reference internal" href="dir__home_emil_libvrt_include.html#dir-home-emil-libvrt-include"><span class="std std-ref">Directory include</span></a></dt><dd><ul>
-<li><dl class="simple">
-<dt><a class="reference internal" href="dir__home_emil_libvrt_include_vrt.html#dir-home-emil-libvrt-include-vrt"><span class="std std-ref">Directory vrt</span></a></dt><dd><ul>
-<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_error_code.h.html#file-home-emil-libvrt-include-vrt-vrt-error-code-h"><span class="std std-ref">File vrt_error_code.h</span></a></p></li>
-<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_init.h.html#file-home-emil-libvrt-include-vrt-vrt-init-h"><span class="std std-ref">File vrt_init.h</span></a></p></li>
-<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_read.h.html#file-home-emil-libvrt-include-vrt-vrt-read-h"><span class="std std-ref">File vrt_read.h</span></a></p></li>
-<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_string.h.html#file-home-emil-libvrt-include-vrt-vrt-string-h"><span class="std std-ref">File vrt_string.h</span></a></p></li>
-<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_time.h.html#file-home-emil-libvrt-include-vrt-vrt-time-h"><span class="std std-ref">File vrt_time.h</span></a></p></li>
-<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_types.h.html#file-home-emil-libvrt-include-vrt-vrt-types-h"><span class="std std-ref">File vrt_types.h</span></a></p></li>
-<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_util.h.html#file-home-emil-libvrt-include-vrt-vrt-util-h"><span class="std std-ref">File vrt_util.h</span></a></p></li>
-<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_words.h.html#file-home-emil-libvrt-include-vrt-vrt-words-h"><span class="std std-ref">File vrt_words.h</span></a></p></li>
-<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_write.h.html#file-home-emil-libvrt-include-vrt-vrt-write-h"><span class="std std-ref">File vrt_write.h</span></a></p></li>
+<li><p>Defined in <a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_time.h.html#file-home-emil-libvrt-include-vrt-vrt-time-h"><span class="std std-ref">File vrt_time.h</span></a></p></li>
 </ul>
+<div class="section" id="struct-documentation">
+<h2>Struct Documentation<a class="headerlink" href="#struct-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="c struct">
+<dt id="c.vrt_time">
+<span class="target" id="structvrt__time"></span><em class="property">struct </em><code class="sig-name descname">vrt_time</code><a class="headerlink" href="#c.vrt_time" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Time duration in whole and fractional seconds.</p>
+<p><dl class="simple">
+<dt><strong>Note</strong></dt><dd><p>ps is always positive. So -3.5 is represented as s = -4, ps = 5e11. </p>
 </dd>
 </dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="c var">
+<dt id="c.vrt_time.s">
+<span class="target" id="structvrt__time_1aa1037cf64913618f3db7caf8975c84d2"></span>int32_t <code class="sig-name descname">s</code><a class="headerlink" href="#c.vrt_time.s" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Seconds. </p>
+</dd></dl>
+
+<dl class="c var">
+<dt id="c.vrt_time.ps">
+<span class="target" id="structvrt__time_1ab32946f9be81fb6e74f0ce4d7ec41eba"></span>uint64_t <code class="sig-name descname">ps</code><a class="headerlink" href="#c.vrt_time.ps" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Picoseconds. Positive. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -179,6 +192,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="structvrt__trailer.html" class="btn btn-neutral float-right" title="Struct vrt_trailer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="structvrt__state__and__event__indicators.html" class="btn btn-neutral float-left" title="Struct vrt_state_and_event_indicators" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

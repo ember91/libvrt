@@ -214,7 +214,7 @@
 <dl class="c enumerator">
 <dt id="c.vrt_error_code.VRT_ERR_BOUNDS_REAL_TIME">
 <span class="target" id="vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4a0345ba8dfbda3b603928fb96de00eac9"></span><em class="property">enumerator </em><code class="sig-name descname">VRT_ERR_BOUNDS_REAL_TIME</code><a class="headerlink" href="#c.vrt_error_code.VRT_ERR_BOUNDS_REAL_TIME" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>TSF is VRT_TSF_REAL TIME but picoseconds is outside valid bounds (&gt; 999999999999 ps). </p>
+<dd><p>TSF is VRT_TSF_REAL_TIME but picoseconds is outside valid bounds (&gt; 999999999999 ps). </p>
 </dd></dl>
 
 <dl class="c enumerator">
@@ -437,6 +437,30 @@
 <dt id="c.vrt_error_code.VRT_ERR_MISMATCH_PACKET_SIZE">
 <span class="target" id="vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4aba5592fea2e8681636d1cf5c35ddb8c4"></span><em class="property">enumerator </em><code class="sig-name descname">VRT_ERR_MISMATCH_PACKET_SIZE</code><a class="headerlink" href="#c.vrt_error_code.VRT_ERR_MISMATCH_PACKET_SIZE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Packet size in header and calculated packet size do not match. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt id="c.vrt_error_code.VRT_ERR_MISMATCH_TIME_TYPES">
+<span class="target" id="vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4a80630d5d3340cc2f2577c4bbf896071c"></span><em class="property">enumerator </em><code class="sig-name descname">VRT_ERR_MISMATCH_TIME_TYPES</code><a class="headerlink" href="#c.vrt_error_code.VRT_ERR_MISMATCH_TIME_TYPES" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>TSI and/or TSF timestamps differ between packets. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt id="c.vrt_error_code.VRT_ERR_MISSING_SAMPLE_RATE">
+<span class="target" id="vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4a428e53d8f0d85b038da865f02beb29ad"></span><em class="property">enumerator </em><code class="sig-name descname">VRT_ERR_MISSING_SAMPLE_RATE</code><a class="headerlink" href="#c.vrt_error_code.VRT_ERR_MISSING_SAMPLE_RATE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sample rate is required but is not provided. </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt id="c.vrt_error_code.VRT_ERR_BOUNDS_SAMPLE_COUNT">
+<span class="target" id="vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4aab9773965e83e6e40cbffe5105a06595"></span><em class="property">enumerator </em><code class="sig-name descname">VRT_ERR_BOUNDS_SAMPLE_COUNT</code><a class="headerlink" href="#c.vrt_error_code.VRT_ERR_BOUNDS_SAMPLE_COUNT" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Fractional timestamp is outside valid bounds (&gt;= sample rate). </p>
+</dd></dl>
+
+<dl class="c enumerator">
+<dt id="c.vrt_error_code.VRT_ERR_INTEGER_SECONDS_MISMATCH">
+<span class="target" id="vrt__error__code_8h_1a9abf070632d4fe3b3942f589a1576cd4a29d057e5bb9fd98983014e15f4a77af9"></span><em class="property">enumerator </em><code class="sig-name descname">VRT_ERR_INTEGER_SECONDS_MISMATCH</code><a class="headerlink" href="#c.vrt_error_code.VRT_ERR_INTEGER_SECONDS_MISMATCH" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Timestamp integer seconds and calculated seconds from the Free running count fractional part differ. </p>
 </dd></dl>
 
 </dd></dl>

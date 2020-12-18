@@ -1,7 +1,8 @@
 * Copy paste in example/CMakeLists.txt
 * Documentation cleanup
+* Change name of vrt_time_duration? Maybe vrt_time_interval or vrt_time_difference?
+* vrt_time error when generating documentation
 
 # Future
-* Add time difference calculations that takes two packets with the same tsi and tsf and calculates time difference in s + ps
 * Add support for 128 bit float
 * Add single header library?

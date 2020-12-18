@@ -107,6 +107,7 @@
 <li class="toctree-l4"><a class="reference internal" href="structvrt__packet.html">Struct vrt_packet</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structvrt__state__and__event.html">Struct vrt_state_and_event</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structvrt__state__and__event__indicators.html">Struct vrt_state_and_event_indicators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="structvrt__time.html">Struct vrt_time</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structvrt__trailer.html">Struct vrt_trailer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="structvrt__trailer__indicators.html">Struct vrt_trailer_indicators</a></li>
 </ul>
@@ -146,6 +147,7 @@
 <li class="toctree-l4"><a class="reference internal" href="function_vrt__string_8h_1ae1610ff777b25da6f25d9ad532e0a677.html">Function vrt_string_tsf</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_vrt__string_8h_1ad6e0b8635a01cf095539730003587dcd.html">Function vrt_string_tsi</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_vrt__string_8h_1ab8a34e8a55ffcf05cffceddbb9be6ac1.html">Function vrt_string_tsm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="function_vrt__time_8h_1a4c9d106a3fa831cb7cbe10f6abda4e42.html">Function vrt_time_duration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_vrt__words_8h_1a8cc41c6688a37ffec6be52baa4eca23b.html">Function vrt_words_fields</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_vrt__words_8h_1adff2fc2d34c52261a3ebd85559695ca0.html">Function vrt_words_if_context</a></li>
 <li class="toctree-l4"><a class="reference internal" href="function_vrt__words_8h_1aa7cb266b18ae3dd0e849a5ec0e4da142.html">Function vrt_words_packet</a></li>
@@ -263,6 +265,7 @@
 <li><p><a class="reference internal" href="structvrt__packet.html#exhale-struct-structvrt-packet"><span class="std std-ref">Struct vrt_packet</span></a></p></li>
 <li><p><a class="reference internal" href="structvrt__state__and__event.html#exhale-struct-structvrt-state-and-event"><span class="std std-ref">Struct vrt_state_and_event</span></a></p></li>
 <li><p><a class="reference internal" href="structvrt__state__and__event__indicators.html#exhale-struct-structvrt-state-and-event-indicators"><span class="std std-ref">Struct vrt_state_and_event_indicators</span></a></p></li>
+<li><p><a class="reference internal" href="structvrt__time.html#exhale-struct-structvrt-time"><span class="std std-ref">Struct vrt_time</span></a></p></li>
 <li><p><a class="reference internal" href="structvrt__trailer.html#exhale-struct-structvrt-trailer"><span class="std std-ref">Struct vrt_trailer</span></a></p></li>
 <li><p><a class="reference internal" href="structvrt__trailer__indicators.html#exhale-struct-structvrt-trailer-indicators"><span class="std std-ref">Struct vrt_trailer_indicators</span></a></p></li>
 <li><p><a class="reference internal" href="enum_vrt__types_8h_1ad3f5248585002368996827c559fa7e8d.html#exhale-enum-vrt-types-8h-1ad3f5248585002368996827c559fa7e8d"><span class="std std-ref">Enum vrt_agc_or_mgc</span></a></p></li>
@@ -287,6 +290,7 @@
 <li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_init.h.html#file-home-emil-libvrt-include-vrt-vrt-init-h"><span class="std std-ref">File vrt_init.h</span></a></p></li>
 <li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_read.h.html#file-home-emil-libvrt-include-vrt-vrt-read-h"><span class="std std-ref">File vrt_read.h</span></a></p></li>
 <li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_string.h.html#file-home-emil-libvrt-include-vrt-vrt-string-h"><span class="std std-ref">File vrt_string.h</span></a></p></li>
+<li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_time.h.html#file-home-emil-libvrt-include-vrt-vrt-time-h"><span class="std std-ref">File vrt_time.h</span></a></p></li>
 <li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_types.h.html#file-home-emil-libvrt-include-vrt-vrt-types-h"><span class="std std-ref">File vrt_types.h</span></a></p></li>
 <li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_util.h.html#file-home-emil-libvrt-include-vrt-vrt-util-h"><span class="std std-ref">File vrt_util.h</span></a></p></li>
 <li><p><a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_words.h.html#file-home-emil-libvrt-include-vrt-vrt-words-h"><span class="std std-ref">File vrt_words.h</span></a></p></li>
@@ -453,6 +457,14 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="structvrt__state__and__event__indicators.html">Struct vrt_state_and_event_indicators</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="structvrt__state__and__event__indicators.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structvrt__time.html">Struct vrt_time</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="structvrt__time.html#struct-documentation">Struct Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -723,6 +735,14 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="function_vrt__string_8h_1ab8a34e8a55ffcf05cffceddbb9be6ac1.html">Function vrt_string_tsm</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="function_vrt__string_8h_1ab8a34e8a55ffcf05cffceddbb9be6ac1.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_vrt__time_8h_1a4c9d106a3fa831cb7cbe10f6abda4e42.html">Function vrt_time_duration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function_vrt__time_8h_1a4c9d106a3fa831cb7cbe10f6abda4e42.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>

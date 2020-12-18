@@ -104,6 +104,11 @@ Classes and Structs
 .. toctree::
    :maxdepth: 5
 
+   structvrt__time.rst
+
+.. toctree::
+   :maxdepth: 5
+
    structvrt__trailer.rst
 
 .. toctree::
@@ -273,6 +278,11 @@ Functions
    :maxdepth: 5
 
    function_vrt__string_8h_1ab8a34e8a55ffcf05cffceddbb9be6ac1.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_vrt__time_8h_1a4c9d106a3fa831cb7cbe10f6abda4e42.rst
 
 .. toctree::
    :maxdepth: 5

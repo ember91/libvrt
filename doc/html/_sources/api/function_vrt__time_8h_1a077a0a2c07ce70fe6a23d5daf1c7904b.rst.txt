@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__time_8h_1a077a0a2c07ce70fe6a23d5daf1c7904b:
+
+Function vrt_time_duration
+==========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_time.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_time_duration(const struct vrt_packet *, const struct vrt_packet *, double, struct vrt_time_duration *)

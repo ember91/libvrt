@@ -21,6 +21,7 @@ Class Hierarchy
 - :ref:`exhale_struct_structvrt__packet`
 - :ref:`exhale_struct_structvrt__state__and__event`
 - :ref:`exhale_struct_structvrt__state__and__event__indicators`
+- :ref:`exhale_struct_structvrt__time`
 - :ref:`exhale_struct_structvrt__trailer`
 - :ref:`exhale_struct_structvrt__trailer__indicators`
 - :ref:`exhale_enum_vrt__types_8h_1ad3f5248585002368996827c559fa7e8d`

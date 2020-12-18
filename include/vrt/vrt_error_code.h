@@ -194,7 +194,23 @@ enum vrt_error_code {
     /**
      * Packet size in header and calculated packet size do not match.
      */
-    VRT_ERR_MISMATCH_PACKET_SIZE = -46
+    VRT_ERR_MISMATCH_PACKET_SIZE = -46,
+    /**
+     * TSI and/or TSF timestamps differ between packets.
+     */
+    VRT_ERR_MISMATCH_TIME_TYPES = -47,
+    /**
+     * Sample rate is required but is not provided.
+     */
+    VRT_ERR_MISSING_SAMPLE_RATE = -48,
+    /**
+     * Fractional timestamp is outside valid bounds (>= sample rate).
+     */
+    VRT_ERR_BOUNDS_SAMPLE_COUNT = -49,
+    /**
+     * Timestamp integer seconds and calculated seconds from the Free running count fractional part differ.
+     */
+    VRT_ERR_INTEGER_SECONDS_MISMATCH = -50
 };
 
 #ifdef __cplusplus

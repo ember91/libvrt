@@ -49,6 +49,8 @@ Included By
 
 - :ref:`file__home_emil_libvrt_include_vrt_vrt_string.h`
 
+- :ref:`file__home_emil_libvrt_include_vrt_vrt_time.h`
+
 - :ref:`file__home_emil_libvrt_include_vrt_vrt_words.h`
 
 - :ref:`file__home_emil_libvrt_include_vrt_vrt_write.h`

@@ -65,7 +65,11 @@ Program Listing for File vrt_error_code.h
        VRT_ERR_BOUNDS_SYSTEM_LIST_SIZE = -43,
        VRT_ERR_BOUNDS_CHANNEL_LIST_SIZE = -44,
        VRT_ERR_BOUNDS_PACKET_SIZE = -45,
-       VRT_ERR_MISMATCH_PACKET_SIZE = -46
+       VRT_ERR_MISMATCH_PACKET_SIZE = -46,
+       VRT_ERR_MISMATCH_TIME_TYPES = -47,
+       VRT_ERR_MISSING_SAMPLE_RATE = -48,
+       VRT_ERR_BOUNDS_SAMPLE_COUNT = -49,
+       VRT_ERR_INTEGER_SECONDS_MISMATCH = -50
    };
    
    #ifdef __cplusplus

@@ -7,6 +7,28 @@ project(
 
 find_package(StandardMathLibrary)
 
+# Check if options are set
+if(${CLANG_TIDY})
+  message(STATUS "Enabling clang-tidy for C++")
+  set(CMAKE_CXX_CLANG_TIDY
+      "clang-tidy;-checks=*,-readability-magic-numbers,-cppcoreguidelines-avoid-magic-numbers,-cert-err58-cpp,-google-readability-avoid-underscore-in-googletest-name,-fuchsia-statically-constructed-objects,-fuchsia-default-arguments-calls,-cppcoreguidelines-owning-memory,-hicpp-special-member-functions,-cppcoreguidelines-special-member-functions,-modernize-use-trailing-return-type,-cppcoreguidelines-non-private-member-variables-in-classes,-google-readability-function-size,-hicpp-function-size,-hicpp-signed-bitwise,-readability-function-size,-misc-non-private-member-variables-in-classes,-cppcoreguidelines-pro-type-reinterpret-cast,-cppcoreguidelines-pro-type-const-cast,-cppcoreguidelines-pro-bounds-constant-array-index,-cppcoreguidelines-pro-bounds-pointer-arithmetic"
+  )
+endif()
+if(${CPPCHECK})
+  message(STATUS "Enabling Cppcheck for C++")
+  set(CMAKE_CXX_CPPCHECK "cppcheck;--std=c++17")
+endif()
+if(${CPPLINT})
+  message(STATUS "Enabling cpplint for C++")
+  set(CMAKE_CXX_CPPLINT
+      "cpplint;--linelength=120;--filter=-legal/copyright,-build/include_subdir"
+  )
+endif()
+if(${IWYU})
+  message(STATUS "Enabling Include-what-you-use for C++")
+  set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "/usr/local/bin/include-what-you-use")
+endif()
+
 # Add executables
 add_executable(read_simple
                ${CMAKE_CURRENT_SOURCE_DIR}/src/read_if_data_simple.c)
