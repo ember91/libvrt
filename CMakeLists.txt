@@ -86,7 +86,7 @@ if(DOCUMENTATION)
 
     # Copy all configuration files with file extension ".in"
     file(
-      GLOB CONFIGURE_DEPENDS TEMPLATE_FILES
+      GLOB TEMPLATE_FILES CONFIGURE_DEPENDS
       RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/"
       "${CMAKE_CURRENT_SOURCE_DIR}/doc/*.in")
     foreach(FILE ${TEMPLATE_FILES})
