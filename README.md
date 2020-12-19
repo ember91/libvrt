@@ -14,6 +14,7 @@ C implementation of an encoder and decoder of the ANSI/VITA 49.0 Radio Transport
 * Heap friendly - No heap allocations
 * No printf - Neither stdout nor stderr output
 * Packet validation - But only if you want
+* Few dependencies - Only standard library
 
 This library uses a packet terminology as follows:
 | Header: 1 word       |
