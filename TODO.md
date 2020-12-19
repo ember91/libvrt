@@ -4,6 +4,7 @@
   * thread safe (not use gmtime)
   * Handle leap seconds for UTC and not for UTC.
   * Perhaps also with extra time zone information.
+* Add uninstall option to CMake
 
 # Future
 * Add support for 128 bit float
