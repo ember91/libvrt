@@ -11,7 +11,7 @@ extern "C" {
 #endif
 
 /**
- * Time duration in whole and fractional seconds.
+ * Timestamp in whole and fractional seconds.
  *
  * \note ps is always positive. So -3.5 is represented as s = -4, ps = 5e11.
  */
@@ -21,7 +21,7 @@ struct vrt_time {
 };
 
 /**
- * Calculate positive or negative time duration between two packets in whole and fractional seconds.
+ * Calculate positive or negative time difference between two packets in whole and fractional seconds.
  *
  * \note Ignores any IF context sample rate field in packet. Use sample_rate parameter instead.
  *
@@ -32,7 +32,7 @@ struct vrt_time {
  * \param sample_rate   Sample rate [Hz].
  * \param diff          Time difference [out].
  *
- * \note Time duration is positive if p1 happens after p2.
+ * \note Time difference is positive if p1 happens after p2.
  *
  * \return 0, or error code if error.
  * \retval VRT_ERR_MISMATCH_TIME_TYPES      TSI and/or TSF timestamps differ between packets.
@@ -44,10 +44,10 @@ struct vrt_time {
  *                                          fractional part differ.
  */
 VRT_WARN_UNUSED
-int vrt_time_duration(const struct vrt_packet* p1,
-                      const struct vrt_packet* p2,
-                      double                   sample_rate,
-                      struct vrt_time*         diff);
+int vrt_time_difference(const struct vrt_packet* p1,
+                        const struct vrt_packet* p2,
+                        double                   sample_rate,
+                        struct vrt_time*         diff);
 
 #ifdef __cplusplus
 }

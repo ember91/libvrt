@@ -154,10 +154,10 @@ static int tsi_and_tsf(const struct vrt_packet* p1,
     return 0;
 }
 
-int vrt_time_duration(const struct vrt_packet* p1,
-                      const struct vrt_packet* p2,
-                      double                   sample_rate,
-                      struct vrt_time*         diff) {
+int vrt_time_difference(const struct vrt_packet* p1,
+                        const struct vrt_packet* p2,
+                        double                   sample_rate,
+                        struct vrt_time*         diff) {
     /* Sanity check */
     if (p1->header.tsi != p2->header.tsi || p1->header.tsf != p2->header.tsf) {
         return VRT_ERR_MISMATCH_TIME_TYPES;

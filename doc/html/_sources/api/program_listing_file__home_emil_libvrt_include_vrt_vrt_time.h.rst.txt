@@ -28,10 +28,10 @@ Program Listing for File vrt_time.h
    };
    
    VRT_WARN_UNUSED
-   int vrt_time_duration(const struct vrt_packet* p1,
-                         const struct vrt_packet* p2,
-                         double                   sample_rate,
-                         struct vrt_time*         diff);
+   int vrt_time_difference(const struct vrt_packet* p1,
+                           const struct vrt_packet* p2,
+                           double                   sample_rate,
+                           struct vrt_time*         diff);
    
    #ifdef __cplusplus
    }

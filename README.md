@@ -141,7 +141,7 @@ vrt_write_packet(packet, buf, words_buf, validate)
 ```
 For calculating time between packets:
 ```
-vrt_time_duration(p1, p2, sample_rate, duration)
+vrt_time_difference(p1, p2, sample_rate, diff)
 ```
 For getting a string representation of an error:
 ```
