@@ -3,7 +3,6 @@
   * thread safe (not use gmtime)
   * Handle leap seconds for UTC and not for UTC.
   * Perhaps also with extra time zone information.
-* CMake find clang-tidy, iwyu
 * Test coverage
 
 # Future

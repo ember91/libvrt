@@ -26,7 +26,6 @@ set(TARGET_NAME "${PROJECT_NAME}")
 
 # Add options
 option(CPPLINT "Use google style guide linter" OFF)
-option(CPPCHECK "Enable cppcheck" OFF)
 option(CLANG_TIDY "Enable clang-tidy" OFF)
 option(DOCUMENTATION "Build doxygen documentation" OFF)
 option(IWYU "Include what you use" OFF)
@@ -60,22 +59,21 @@ endif()
 
 # Check if options are set
 if(${CLANG_TIDY})
+  find_package(ClangTidy REQUIRED)
+
   message(STATUS "Enabling clang-tidy for C")
   # Note that CMAKE_CXX_CLANG_TIDY is set in CMakeLists.txt in 'test' directory
   set(CMAKE_C_CLANG_TIDY
-      "clang-tidy;-checks=*,-readability-magic-numbers,-cppcoreguidelines-avoid-magic-numbers,-hicpp-signed-bitwise,-android-cloexec-fopen"
+      "${ClangTidy_EXE};-checks=*,-readability-magic-numbers,-cppcoreguidelines-avoid-magic-numbers,-hicpp-signed-bitwise,-android-cloexec-fopen"
   )
 endif()
-if(${CPPCHECK})
-  # Note that CMAKE_CXX_CPPCHECK is set in CMakeLists.txt in 'test' directory
-  message(STATUS "Enabling Cppcheck for C")
-  set(CMAKE_C_CPPCHECK "cppcheck;--std=c99")
-endif()
 if(${CPPLINT})
+  find_package(Cpplint REQUIRED)
+
   # Note that CMAKE_CXX_CPPLINT is set in CMakeLists.txt in 'test' directory
   message(STATUS "Enabling cpplint for C")
   set(CMAKE_C_CPPLINT
-      "cpplint;--linelength=120;--filter=-legal/copyright,-build/include_subdir"
+      "${CPPLINT_PROGRAM};--linelength=120;--filter=-legal/copyright,-build/include_subdir"
   )
 endif()
 if(DOCUMENTATION)
@@ -132,8 +130,10 @@ if(DOCUMENTATION)
   endif()
 endif()
 if(${IWYU})
+  find_package(IWYU REQUIRED)
+
   message(STATUS "Enabling Include-what-you-use for C")
-  set(CMAKE_C_INCLUDE_WHAT_YOU_USE "/usr/local/bin/include-what-you-use")
+  set(CMAKE_C_INCLUDE_WHAT_YOU_USE "${IWYU_PROGRAM}")
 endif()
 if(${TEST})
   message(STATUS "Compiling test suite")

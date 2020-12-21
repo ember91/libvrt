@@ -18,10 +18,6 @@ if(${CLANG_TIDY})
       "clang-tidy;-checks=*,-readability-magic-numbers,-cppcoreguidelines-avoid-magic-numbers,-cert-err58-cpp,-google-readability-avoid-underscore-in-googletest-name,-fuchsia-statically-constructed-objects,-fuchsia-default-arguments-calls,-cppcoreguidelines-owning-memory,-hicpp-special-member-functions,-cppcoreguidelines-special-member-functions,-modernize-use-trailing-return-type,-cppcoreguidelines-non-private-member-variables-in-classes,-google-readability-function-size,-hicpp-function-size,-hicpp-signed-bitwise,-readability-function-size,-misc-non-private-member-variables-in-classes,-cppcoreguidelines-pro-type-reinterpret-cast,-cppcoreguidelines-pro-type-const-cast,-cppcoreguidelines-pro-bounds-constant-array-index,-cppcoreguidelines-pro-bounds-pointer-arithmetic"
   )
 endif()
-if(${CPPCHECK})
-  message(STATUS "Enabling Cppcheck for C++")
-  set(CMAKE_CXX_CPPCHECK "cppcheck;--std=c++17")
-endif()
 if(${CPPLINT})
   message(STATUS "Enabling cpplint for C++")
   set(CMAKE_CXX_CPPLINT

@@ -14,10 +14,6 @@ if(${CLANG_TIDY})
       "clang-tidy;-checks=*,-readability-magic-numbers,-cppcoreguidelines-avoid-magic-numbers,-hicpp-signed-bitwise,-android-cloexec-fopen"
   )
 endif()
-if(${CPPCHECK})
-  message(STATUS "Enabling Cppcheck for C")
-  set(CMAKE_C_CPPCHECK "cppcheck;--std=c99")
-endif()
 if(${CPPLINT})
   message(STATUS "Enabling cpplint for C")
   set(CMAKE_C_CPPLINT
