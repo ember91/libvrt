@@ -7,6 +7,7 @@
 * Add uninstall option to CMake
 * Add missing vrt_string error codes
 * CMake find clang-tidy, iwyu
+* Test coverage
 
 # Future
 * Add single header library?
