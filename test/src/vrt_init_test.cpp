@@ -210,7 +210,7 @@ static void test_packet(const vrt_packet& p) {
     test_if_context(p.if_context);
 }
 
-TEST(InitTest, InitHeader) {
+TEST(InitTest, Header) {
     vrt_header h{};
     init_garbage_header(&h);
     vrt_init_header(&h);
@@ -218,7 +218,7 @@ TEST(InitTest, InitHeader) {
     test_header(h);
 }
 
-TEST(InitTest, InitFields) {
+TEST(InitTest, Fields) {
     vrt_fields f{};
     init_garbage_fields(&f);
     vrt_init_fields(&f);
@@ -226,7 +226,7 @@ TEST(InitTest, InitFields) {
     test_fields(f);
 }
 
-TEST(InitTest, InitTrailer) {
+TEST(InitTest, Trailer) {
     vrt_trailer t{};
     init_garbage_trailer(&t);
     vrt_init_trailer(&t);
@@ -234,7 +234,7 @@ TEST(InitTest, InitTrailer) {
     test_trailer(t);
 }
 
-TEST(InitTest, InitIfContext) {
+TEST(InitTest, IfContext) {
     vrt_if_context c{};
     init_garbage_if_context(&c);
     vrt_init_if_context(&c);
@@ -242,7 +242,7 @@ TEST(InitTest, InitIfContext) {
     test_if_context(c);
 }
 
-TEST(InitTest, InitPacket) {
+TEST(InitTest, Packet) {
     vrt_packet p{};
     init_garbage_packet(&p);
     vrt_init_packet(&p);

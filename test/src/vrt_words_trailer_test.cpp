@@ -15,36 +15,36 @@ TEST_F(WordsTrailerTest, NoTrailer) {
     ASSERT_EQ(vrt_words_trailer(&h_), 0);
 }
 
-TEST_F(WordsTrailerTest, PacketType1) {
+TEST_F(WordsTrailerTest, IfDataWithoutStreamId) {
     h_.has.trailer = true;
     ASSERT_EQ(vrt_words_trailer(&h_), 1);
 }
 
-TEST_F(WordsTrailerTest, PacketType2) {
+TEST_F(WordsTrailerTest, IfDataWithStreamId) {
     h_.packet_type = VRT_PT_IF_DATA_WITH_STREAM_ID;
     h_.has.trailer = true;
     ASSERT_EQ(vrt_words_trailer(&h_), 1);
 }
 
-TEST_F(WordsTrailerTest, PacketType3) {
+TEST_F(WordsTrailerTest, ExtDataWithoutStreamId) {
     h_.packet_type = VRT_PT_EXT_DATA_WITHOUT_STREAM_ID;
     h_.has.trailer = true;
     ASSERT_EQ(vrt_words_trailer(&h_), 1);
 }
 
-TEST_F(WordsTrailerTest, PacketType4) {
+TEST_F(WordsTrailerTest, ExtDataWithStreamId) {
     h_.packet_type = VRT_PT_EXT_DATA_WITH_STREAM_ID;
     h_.has.trailer = true;
     ASSERT_EQ(vrt_words_trailer(&h_), 1);
 }
 
-TEST_F(WordsTrailerTest, PacketType5) {
+TEST_F(WordsTrailerTest, IfContext) {
     h_.packet_type = VRT_PT_IF_CONTEXT;
     h_.has.trailer = true;
     ASSERT_EQ(vrt_words_trailer(&h_), 0);
 }
 
-TEST_F(WordsTrailerTest, PacketType6) {
+TEST_F(WordsTrailerTest, ExtContext) {
     h_.packet_type = VRT_PT_EXT_CONTEXT;
     h_.has.trailer = true;
     ASSERT_EQ(vrt_words_trailer(&h_), 0);

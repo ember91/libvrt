@@ -920,7 +920,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormat) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalidSmall) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid1) {
     c_.has.data_packet_payload_format              = true;
     c_.data_packet_payload_format.data_item_format = static_cast<vrt_data_item_format>(-1);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_DATA_ITEM_FORMAT);
@@ -931,7 +931,7 @@ TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalidSmall) {
     ASSERT_EQ(Hex(buf_[3]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalidLarge) {
+TEST_F(WriteIfContextTest, DataPacketPayloadFormatDataItemFormatInvalid2) {
     c_.has.data_packet_payload_format              = true;
     c_.data_packet_payload_format.data_item_format = static_cast<vrt_data_item_format>(0x07);
     ASSERT_EQ(vrt_write_if_context(&c_, buf_.data(), 3, true), VRT_ERR_INVALID_DATA_ITEM_FORMAT);

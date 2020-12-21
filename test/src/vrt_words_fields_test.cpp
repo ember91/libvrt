@@ -11,32 +11,32 @@ class WordsFieldsTest : public ::testing::Test {
     vrt_header h_{};
 };
 
-TEST_F(WordsFieldsTest, StreamId1) {
+TEST_F(WordsFieldsTest, IfDataWithoutStreamId) {
     ASSERT_EQ(vrt_words_fields(&h_), 0);
     h_.packet_type = VRT_PT_IF_DATA_WITHOUT_STREAM_ID;
 }
 
-TEST_F(WordsFieldsTest, StreamId2) {
+TEST_F(WordsFieldsTest, IfDataWithStreamId) {
     h_.packet_type = VRT_PT_IF_DATA_WITH_STREAM_ID;
     ASSERT_EQ(vrt_words_fields(&h_), 1);
 }
 
-TEST_F(WordsFieldsTest, StreamId3) {
+TEST_F(WordsFieldsTest, ExtDataWithoutStreamId) {
     h_.packet_type = VRT_PT_EXT_DATA_WITHOUT_STREAM_ID;
     ASSERT_EQ(vrt_words_fields(&h_), 0);
 }
 
-TEST_F(WordsFieldsTest, StreamId4) {
+TEST_F(WordsFieldsTest, ExtDataWithStreamId) {
     h_.packet_type = VRT_PT_EXT_DATA_WITH_STREAM_ID;
     ASSERT_EQ(vrt_words_fields(&h_), 1);
 }
 
-TEST_F(WordsFieldsTest, StreamId5) {
+TEST_F(WordsFieldsTest, IfContext) {
     h_.packet_type = VRT_PT_IF_CONTEXT;
     ASSERT_EQ(vrt_words_fields(&h_), 1);
 }
 
-TEST_F(WordsFieldsTest, StreamId6) {
+TEST_F(WordsFieldsTest, ExtContext) {
     h_.packet_type = VRT_PT_EXT_CONTEXT;
     ASSERT_EQ(vrt_words_fields(&h_), 1);
 }

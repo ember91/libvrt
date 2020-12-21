@@ -42,14 +42,14 @@ TEST_F(WordsPacketTest, TrailerIfContext) {
     ASSERT_EQ(vrt_words_packet(&p_), 3);
 }
 
-TEST_F(WordsPacketTest, AllIfDataWithoutStreamId) {
+TEST_F(WordsPacketTest, BodyIfDataWithoutStreamId) {
     p_.header.has.class_id = true;
     p_.header.has.trailer  = true;
     p_.words_body          = 45;
     ASSERT_EQ(vrt_words_packet(&p_), 49);
 }
 
-TEST_F(WordsPacketTest, AllIfContext) {
+TEST_F(WordsPacketTest, BodyIfContext) {
     p_.header.packet_type         = VRT_PT_IF_CONTEXT;
     p_.header.has.class_id        = true;
     p_.header.has.trailer         = true;

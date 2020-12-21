@@ -32,13 +32,13 @@ TEST_F(WriteFieldsTest, None) {
     ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0, true), 0);
 }
 
-TEST_F(WriteFieldsTest, StreamIdIfDataWithout) {
+TEST_F(WriteFieldsTest, IfDataWithoutStreamId) {
     h_.packet_type = VRT_PT_IF_DATA_WITHOUT_STREAM_ID;
     f_.stream_id   = 0xFEDCBA98;
     ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1, true), 0);
 }
 
-TEST_F(WriteFieldsTest, StreamIdIfDataWith) {
+TEST_F(WriteFieldsTest, IfDataWithStreamId) {
     h_.packet_type = VRT_PT_IF_DATA_WITH_STREAM_ID;
     f_.stream_id   = 0xFEDCBA98;
     ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0, true), VRT_ERR_BUFFER_SIZE);
@@ -47,13 +47,13 @@ TEST_F(WriteFieldsTest, StreamIdIfDataWith) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteFieldsTest, StreamIdExtDataWithout) {
+TEST_F(WriteFieldsTest, ExtDataWithoutStreamId) {
     h_.packet_type = VRT_PT_EXT_DATA_WITHOUT_STREAM_ID;
     f_.stream_id   = 0xFEDCBA98;
     ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 1, true), 0);
 }
 
-TEST_F(WriteFieldsTest, StreamIdExtDataWith) {
+TEST_F(WriteFieldsTest, ExtDataWithStreamId) {
     h_.packet_type = VRT_PT_EXT_DATA_WITH_STREAM_ID;
     f_.stream_id   = 0xFEDCBA98;
     ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0, true), VRT_ERR_BUFFER_SIZE);
@@ -62,7 +62,7 @@ TEST_F(WriteFieldsTest, StreamIdExtDataWith) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteFieldsTest, StreamIdIfContext) {
+TEST_F(WriteFieldsTest, IfContext) {
     h_.packet_type = VRT_PT_IF_CONTEXT;
     f_.stream_id   = 0xFEDCBA98;
     ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0, true), VRT_ERR_BUFFER_SIZE);
@@ -71,7 +71,7 @@ TEST_F(WriteFieldsTest, StreamIdIfContext) {
     ASSERT_EQ(Hex(buf_[1]), Hex(0xBAADF00D));
 }
 
-TEST_F(WriteFieldsTest, StreamIdExtContext) {
+TEST_F(WriteFieldsTest, ExtContext) {
     h_.packet_type = VRT_PT_EXT_CONTEXT;
     f_.stream_id   = 0xFEDCBA98;
     ASSERT_EQ(vrt_write_fields(&h_, &f_, buf_.data(), 0, true), VRT_ERR_BUFFER_SIZE);

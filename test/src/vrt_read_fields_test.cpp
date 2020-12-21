@@ -35,7 +35,7 @@ TEST_F(ReadFieldsTest, None) {
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_, true), 0);
 }
 
-TEST_F(ReadFieldsTest, StreamId1) {
+TEST_F(ReadFieldsTest, IfDataWithStreamId) {
     h_.packet_type = VRT_PT_IF_DATA_WITH_STREAM_ID;
     buf_[0]        = 0xFEFEBEBE;
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 1, &f_, true), 1);
@@ -43,14 +43,14 @@ TEST_F(ReadFieldsTest, StreamId1) {
     assert_fields(f_, {{"stream_id", static_cast<uint32_t>(0xFEFEBEBE)}});
 }
 
-TEST_F(ReadFieldsTest, StreamId2) {
+TEST_F(ReadFieldsTest, ExtDataWithoutStreamId) {
     h_.packet_type = VRT_PT_EXT_DATA_WITHOUT_STREAM_ID;
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_, true), 0);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
     assert_fields(f_, {});
 }
 
-TEST_F(ReadFieldsTest, StreamId3) {
+TEST_F(ReadFieldsTest, ExtDataWithStreamId) {
     h_.packet_type = VRT_PT_EXT_DATA_WITH_STREAM_ID;
     buf_[0]        = 0xFEFEBEBE;
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_, true), VRT_ERR_BUFFER_SIZE);
@@ -59,7 +59,7 @@ TEST_F(ReadFieldsTest, StreamId3) {
     assert_fields(f_, {{"stream_id", static_cast<uint32_t>(0xFEFEBEBE)}});
 }
 
-TEST_F(ReadFieldsTest, StreamId4) {
+TEST_F(ReadFieldsTest, IfContext) {
     h_.packet_type = VRT_PT_IF_CONTEXT;
     buf_[0]        = 0xFEFEBEBE;
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_, true), VRT_ERR_BUFFER_SIZE);
@@ -68,7 +68,7 @@ TEST_F(ReadFieldsTest, StreamId4) {
     assert_fields(f_, {{"stream_id", static_cast<uint32_t>(0xFEFEBEBE)}});
 }
 
-TEST_F(ReadFieldsTest, StreamId5) {
+TEST_F(ReadFieldsTest, ExtContext) {
     h_.packet_type = VRT_PT_EXT_CONTEXT;
     buf_[0]        = 0xFEFEBEBE;
     ASSERT_EQ(vrt_read_fields(&h_, buf_.data(), 0, &f_, true), VRT_ERR_BUFFER_SIZE);
