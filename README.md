@@ -10,6 +10,7 @@ C implementation of an encoder and decoder of the ANSI/VITA 49.0 Radio Transport
 * Portable - Written in plain C99
 * Flexible - Read and write only the parts of a packet you want
 * Easy to install - Use CMake, with no external dependencies
+* Easy to learn - Comes with examples
 * Complete - Implements full VRT standard
 * Heap friendly - No heap allocations
 * No printf - Neither stdout nor stderr output
