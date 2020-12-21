@@ -236,6 +236,15 @@ const char* vrt_string_error(int32_t error /* Do NOT use vrt_error_code, since i
             return "Calculated packet size is outside valid bounds (> 0xFFFF)";
         case VRT_ERR_MISMATCH_PACKET_SIZE:
             return "Packet size in header and calculated packet size do not match";
+        case VRT_ERR_MISMATCH_TIME_TYPES:
+            return "TSI and/or TSF timestamps differ between packets";
+        case VRT_ERR_MISSING_SAMPLE_RATE:
+            return "Sample rate is required but is not provided";
+        case VRT_ERR_BOUNDS_SAMPLE_COUNT:
+            return "Fractional timestamp is outside valid bounds (>= sample rate)";
+        case VRT_ERR_INTEGER_SECONDS_MISMATCH:
+            return "Timestamp integer seconds and calculated seconds from the Free running count fractional part "
+                   "differ";
         default:
             return "Unknown";
     }
