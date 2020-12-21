@@ -7,6 +7,16 @@
  */
 static const uint64_t PS_IN_S = 1000000000000;
 
+/**
+ * Calculate time difference from sample count.
+ *
+ * \param p1          Packet 1.
+ * \param p2          Packet 2.
+ * \param sample_rate Sample rate [Hz].
+ * \param diff        Time difference [out].
+ *
+ * \return 0, or error code if error.
+ */
 static int sample_count(const struct vrt_packet* p1,
                         const struct vrt_packet* p2,
                         double                   sample_rate,
@@ -37,6 +47,16 @@ static int sample_count(const struct vrt_packet* p1,
     return 0;
 }
 
+/**
+ * Calculate time difference from real time.
+ *
+ * \param p1          Packet 1.
+ * \param p2          Packet 2.
+ * \param sample_rate Sample rate [Hz].
+ * \param diff        Time difference [out].
+ *
+ * \return 0, or error code if error.
+ */
 static int real_time(const struct vrt_packet* p1, const struct vrt_packet* p2, struct vrt_time* diff) {
     /* Sanity check */
     if (p1->fields.fractional_seconds_timestamp >= PS_IN_S || p2->fields.fractional_seconds_timestamp >= PS_IN_S) {
@@ -58,6 +78,16 @@ static int real_time(const struct vrt_packet* p1, const struct vrt_packet* p2, s
     return 0;
 }
 
+/**
+ * Calculate time difference from free running count.
+ *
+ * \param p1          Packet 1.
+ * \param p2          Packet 2.
+ * \param sample_rate Sample rate [Hz].
+ * \param diff        Time difference [out].
+ *
+ * \return 0, or error code if error.
+ */
 static int free_running_count(const struct vrt_packet* p1,
                               const struct vrt_packet* p2,
                               double                   sample_rate,
@@ -96,6 +126,13 @@ static int free_running_count(const struct vrt_packet* p1,
     return 0;
 }
 
+/**
+ * Neither TSI nor TSF are set.
+ *
+ * \param diff        Time difference [out].
+ *
+ * \return 0, or error code if error.
+ */
 static int none(struct vrt_time* diff) {
     diff->s  = 0;
     diff->ps = 0;
@@ -103,6 +140,16 @@ static int none(struct vrt_time* diff) {
     return 0;
 }
 
+/**
+ * Calculate time difference assuming TSI is set and not TSF.
+ *
+ * \param p1          Packet 1.
+ * \param p2          Packet 2.
+ * \param sample_rate Sample rate [Hz].
+ * \param diff        Time difference [out].
+ *
+ * \return 0, or error code if error.
+ */
 static int tsi(const struct vrt_packet* p1, const struct vrt_packet* p2, struct vrt_time* diff) {
     diff->s  = (int32_t)(p1->fields.integer_seconds_timestamp - p2->fields.integer_seconds_timestamp);
     diff->ps = 0;
@@ -110,6 +157,16 @@ static int tsi(const struct vrt_packet* p1, const struct vrt_packet* p2, struct 
     return 0;
 }
 
+/**
+ * Calculate time difference assuming TSF is set and not TSI.
+ *
+ * \param p1          Packet 1.
+ * \param p2          Packet 2.
+ * \param sample_rate Sample rate [Hz].
+ * \param diff        Time difference [out].
+ *
+ * \return 0, or error code if error.
+ */
 static int tsf(const struct vrt_packet* p1, const struct vrt_packet* p2, double sample_rate, struct vrt_time* diff) {
     switch (p1->header.tsf) {
         case VRT_TSF_NONE: {
@@ -130,6 +187,16 @@ static int tsf(const struct vrt_packet* p1, const struct vrt_packet* p2, double 
     return 0;
 }
 
+/**
+ * Calculate time difference assuming TSI and TSF are set.
+ *
+ * \param p1          Packet 1.
+ * \param p2          Packet 2.
+ * \param sample_rate Sample rate [Hz].
+ * \param diff        Time difference [out].
+ *
+ * \return 0, or error code if error.
+ */
 static int tsi_and_tsf(const struct vrt_packet* p1,
                        const struct vrt_packet* p2,
                        double                   sample_rate,
