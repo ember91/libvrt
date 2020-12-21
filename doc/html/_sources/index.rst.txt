@@ -3,14 +3,19 @@
 Welcome to libvrt's documentation!
 ======================================================
 
+This is the documentation for *libvrt*, a library for encoding and decoding packets following the ANSI/VITA 49.0 Radio Transport (VRT) standard.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-    
-Indices and tables
-==================
+
+Index
+=====
 
 * :ref:`genindex`
+
+API
+===
 
 .. toctree::
    :maxdepth: 2
