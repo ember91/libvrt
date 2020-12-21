@@ -184,3 +184,8 @@ if(UNIX)
   install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/doc/index.html"
           DESTINATION "share/doc/${PROJECT_NAME}")
 endif()
+
+# Add uninstall target
+add_custom_target(uninstall
+    "${CMAKE_COMMAND}" -P "${CMAKE_MODULE_PATH}/Uninstall.cmake"
+)
