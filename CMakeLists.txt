@@ -31,6 +31,7 @@ option(DOCUMENTATION "Build doxygen documentation" OFF)
 option(IWYU "Include what you use" OFF)
 option(TEST "Compile test suite" OFF)
 option(EXAMPLE "Compile example suite" OFF)
+option(GCOV "Generate code coverage report" OFF)
 
 if(DOCUMENTATION)
   find_package(Doxygen)
@@ -147,6 +148,15 @@ endif()
 # Add source files
 file(GLOB FILES_SRC CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 add_library(${TARGET_NAME} STATIC ${FILES_SRC})
+
+if(${GCOV})
+  if(CMAKE_C_COMPILER_ID MATCHES "GNU")
+    target_compile_options(${TARGET_NAME} PUBLIC -fprofile-arcs -ftest-coverage)
+    target_link_libraries(${TARGET_NAME} INTERFACE gcov)
+  else()
+    message(WARNING "Can only generate code coverage symbols with GCC")
+  endif()
+endif()
 
 # Set warning levels
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
