@@ -89,15 +89,15 @@ endif()
 
 # Add include directory
 target_include_directories(read_simple
-                           PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../include/")
+                           PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../include/")
 target_include_directories(read_advanced
-                           PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../include/")
+                           PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../include/")
 target_include_directories(write_simple
-                           PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../include/")
+                           PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../include/")
 target_include_directories(write_advanced
-                           PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../include/")
+                           PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../include/")
 target_include_directories(time_difference
-                           PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../include/")
+                           PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../include/")
 
 # Add libraries to link to
 target_link_libraries(read_simple vrt)
