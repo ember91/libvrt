@@ -3,7 +3,8 @@
 C implementation of an encoder and decoder of the ANSI/VITA 49.0 Radio Transport (VRT) standard.
 
 **Features:**
-* Well tested - High test code coverage, analyzed with static analysis tools
+* Well tested - High test code coverage with more than 800 tests
+* Analyzed - With runtime analysis tools such as valgrind
 * Compatible - Tested with GCC, Clang, Visual Studio, and ICC
 * Well documented - Doxygen style
 * Low-level - A high degree of control
