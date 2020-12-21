@@ -7,6 +7,5 @@
 * Add uninstall option to CMake
 
 # Future
-* Add support for 128 bit float
 * Add single header library?
 * Make version number tag on github
