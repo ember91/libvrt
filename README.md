@@ -199,8 +199,17 @@ Some functions return negative numbers if there's an error.
 
 * C99 compiler, such as GCC
 * CMake
-* Build system such as GNU Make
-* (C++ compiler and Google test framework, for the tests)
+* Build system, such as GNU Make
+
+** For tests:**
+* C++17 compiler
+* Google test framework
+
+** For documentation generation:**
+* Doxygen
+* Sphinx
+* Breathe
+* Exhale
 
 ### Notes
 
