@@ -5,6 +5,7 @@
   * Handle leap seconds for UTC and not for UTC.
   * Perhaps also with extra time zone information.
 * Add uninstall option to CMake
+* Add example with time.h
 
 # Future
 * Add single header library?
