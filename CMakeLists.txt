@@ -33,26 +33,29 @@ option(IWYU "Include what you use" OFF)
 option(TEST "Compile test suite" OFF)
 option(EXAMPLE "Compile example suite" OFF)
 
-find_package(Doxygen)
-# Note that Breathe may located with find_package but may not work with sudo
-# make install. Install with 'sudo pip3 install breathe'.
-find_package(Breathe)
-# Note that Sphinx may located with find_package but may not work with sudo make
-# install. Install with 'sudo pip3 install sphinx_rtd_theme'.
-find_package(Sphinx)
-find_package(Exhale)
+if(DOCUMENTATION)
+  find_package(Doxygen)
+  # Note that Breathe may located with find_package but may not work with sudo
+  # make install. Install with 'sudo pip3 install breathe'.
+  find_package(Breathe)
+  # Note that Sphinx may located with find_package but may not work with sudo make
+  # install. Install with 'sudo pip3 install sphinx_rtd_theme'.
+  find_package(Sphinx)
+  # Install with 'sudo pip3 install exhale'.
+  find_package(Exhale)
 
-if(NOT DOXYGEN_FOUND)
-  message(WARNING "Doxygen is required for documentation generation")
-endif()
-if(NOT BREATHE_FOUND)
-  message(WARNING "Breathe is required for documentation generation")
-endif()
-if(NOT SPHINX_FOUND)
-  message(WARNING "Sphinx is required for documentation generation")
-endif()
-if(NOT EXHALE_FOUND)
-  message(WARNING "Exhale is required for documentation generation")
+  if(NOT DOXYGEN_FOUND)
+    message(WARNING "Doxygen is required for documentation generation")
+  endif()
+  if(NOT BREATHE_FOUND)
+    message(WARNING "Breathe is required for documentation generation")
+  endif()
+  if(NOT SPHINX_FOUND)
+    message(WARNING "Sphinx is required for documentation generation")
+  endif()
+  if(NOT EXHALE_FOUND)
+    message(WARNING "Exhale is required for documentation generation")
+  endif()
 endif()
 
 # Check if options are set

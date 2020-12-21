@@ -39,7 +39,7 @@ add_executable(${TARGET_NAME} ${SRC_FILES})
 
 # Setup testing
 enable_testing()
-find_package(GTest REQUIRED)
+find_package(GTest REQUIRED) # Install with 'sudo apt install libgtest-dev'
 target_include_directories(${TARGET_NAME} PUBLIC ${GTEST_INCLUDE_DIR})
 
 # Set warning levels
