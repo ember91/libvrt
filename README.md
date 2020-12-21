@@ -202,11 +202,11 @@ Some functions return negative numbers if there's an error.
 * CMake
 * Build system, such as GNU Make
 
-** For tests:**
+**For tests:**
 * C++17 compiler
 * Google test framework
 
-** For documentation generation:**
+**For documentation generation:**
 * Doxygen
 * Sphinx
 * Breathe
