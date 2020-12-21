@@ -27,12 +27,12 @@ struct vrt_time {
  *
  * \note If both TSI and TSF are NONE, it is regarded as no time difference.
  *
- * \param p1            Packet 1.
  * \param p2            Packet 2.
+ * \param p1            Packet 1.
  * \param sample_rate   Sample rate [Hz].
  * \param diff          Time difference [out].
  *
- * \note Time difference is positive if p1 happens after p2.
+ * \note Time difference is positive if p2 happens after p1.
  *
  * \return 0, or error code if error.
  * \retval VRT_ERR_MISMATCH_TIME_TYPES      TSI and/or TSF timestamps differ between packets.
@@ -44,8 +44,8 @@ struct vrt_time {
  *                                          fractional part differ.
  */
 VRT_WARN_UNUSED
-int vrt_time_difference(const struct vrt_packet* p1,
-                        const struct vrt_packet* p2,
+int vrt_time_difference(const struct vrt_packet* p2,
+                        const struct vrt_packet* p1,
                         double                   sample_rate,
                         struct vrt_time*         diff);
 

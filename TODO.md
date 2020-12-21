@@ -6,7 +6,6 @@
   * Perhaps also with extra time zone information.
 * Add uninstall option to CMake
 * Add missing vrt_string error codes
-* Change name of p1 and p2 in vrt_time documentation
 * CMake find clang-tidy, iwyu
 
 # Future

@@ -22,617 +22,617 @@ class TimeDurationTest : public ::testing::Test {
 };
 
 TEST_F(TimeDurationTest, None) {
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
 }
 
 TEST_F(TimeDurationTest, MismatchTsi) {
-    p1_.header.tsi = VRT_TSI_UTC;
-    p2_.header.tsi = VRT_TSI_GPS;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISMATCH_TIME_TYPES);
+    p2_.header.tsi = VRT_TSI_UTC;
+    p1_.header.tsi = VRT_TSI_GPS;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISMATCH_TIME_TYPES);
 }
 
 TEST_F(TimeDurationTest, MismatchTsf) {
-    p1_.header.tsf = VRT_TSF_SAMPLE_COUNT;
-    p2_.header.tsf = VRT_TSF_FREE_RUNNING_COUNT;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISMATCH_TIME_TYPES);
+    p2_.header.tsf = VRT_TSF_SAMPLE_COUNT;
+    p1_.header.tsf = VRT_TSF_FREE_RUNNING_COUNT;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISMATCH_TIME_TYPES);
 }
 
 TEST_F(TimeDurationTest, UtcPositive) {
-    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsi                          = VRT_TSI_UTC;
-    p1_.fields.integer_seconds_timestamp    = 5;
-    p2_.fields.integer_seconds_timestamp    = 2;
-    p1_.fields.fractional_seconds_timestamp = 5000;
-    p2_.fields.fractional_seconds_timestamp = 2000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsi                          = VRT_TSI_UTC;
+    p2_.fields.integer_seconds_timestamp    = 5;
+    p1_.fields.integer_seconds_timestamp    = 2;
+    p2_.fields.fractional_seconds_timestamp = 5000;
+    p1_.fields.fractional_seconds_timestamp = 2000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 3);
     ASSERT_EQ(dur_.ps, 0);
 }
 
 TEST_F(TimeDurationTest, UtcNegative) {
-    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsi                          = VRT_TSI_UTC;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 5;
-    p1_.fields.fractional_seconds_timestamp = 5000;
-    p2_.fields.fractional_seconds_timestamp = 2000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsi                          = VRT_TSI_UTC;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 5;
+    p2_.fields.fractional_seconds_timestamp = 5000;
+    p1_.fields.fractional_seconds_timestamp = 2000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -3);
     ASSERT_EQ(dur_.ps, 0);
 }
 
 TEST_F(TimeDurationTest, GpsPositive) {
-    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsi                          = VRT_TSI_GPS;
-    p1_.fields.integer_seconds_timestamp    = 5;
-    p2_.fields.integer_seconds_timestamp    = 2;
-    p1_.fields.fractional_seconds_timestamp = 5000;
-    p2_.fields.fractional_seconds_timestamp = 2000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsi                          = VRT_TSI_GPS;
+    p2_.fields.integer_seconds_timestamp    = 5;
+    p1_.fields.integer_seconds_timestamp    = 2;
+    p2_.fields.fractional_seconds_timestamp = 5000;
+    p1_.fields.fractional_seconds_timestamp = 2000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 3);
     ASSERT_EQ(dur_.ps, 0);
 }
 
 TEST_F(TimeDurationTest, GpsNegative) {
-    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsi                          = VRT_TSI_GPS;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 5;
-    p1_.fields.fractional_seconds_timestamp = 5000;
-    p2_.fields.fractional_seconds_timestamp = 2000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsi                          = VRT_TSI_GPS;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 5;
+    p2_.fields.fractional_seconds_timestamp = 5000;
+    p1_.fields.fractional_seconds_timestamp = 2000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -3);
     ASSERT_EQ(dur_.ps, 0);
 }
 
 TEST_F(TimeDurationTest, OtherPositive) {
-    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsi                          = VRT_TSI_OTHER;
-    p1_.fields.integer_seconds_timestamp    = 5;
-    p2_.fields.integer_seconds_timestamp    = 2;
-    p1_.fields.fractional_seconds_timestamp = 5000;
-    p2_.fields.fractional_seconds_timestamp = 2000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsi                          = VRT_TSI_OTHER;
+    p2_.fields.integer_seconds_timestamp    = 5;
+    p1_.fields.integer_seconds_timestamp    = 2;
+    p2_.fields.fractional_seconds_timestamp = 5000;
+    p1_.fields.fractional_seconds_timestamp = 2000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 3);
     ASSERT_EQ(dur_.ps, 0);
 }
 
 TEST_F(TimeDurationTest, OtherNegative) {
-    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsi                          = VRT_TSI_OTHER;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 5;
-    p1_.fields.fractional_seconds_timestamp = 5000;
-    p2_.fields.fractional_seconds_timestamp = 2000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsi                          = VRT_TSI_OTHER;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 5;
+    p2_.fields.fractional_seconds_timestamp = 5000;
+    p1_.fields.fractional_seconds_timestamp = 2000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -3);
     ASSERT_EQ(dur_.ps, 0);
 }
 
 TEST_F(TimeDurationTest, SampleCountPositive) {
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 5;
-    p1_.fields.fractional_seconds_timestamp = 750;
-    p2_.fields.fractional_seconds_timestamp = 250;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 5;
+    p2_.fields.fractional_seconds_timestamp = 750;
+    p1_.fields.fractional_seconds_timestamp = 250;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 0);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, SampleCountNegative) {
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 5;
-    p1_.fields.fractional_seconds_timestamp = 250;
-    p2_.fields.fractional_seconds_timestamp = 750;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 5;
+    p2_.fields.fractional_seconds_timestamp = 250;
+    p1_.fields.fractional_seconds_timestamp = 750;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -1);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, SampleCountOutsideBounds1) {
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.fractional_seconds_timestamp = 1000;
-    p2_.fields.fractional_seconds_timestamp = 750;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.fractional_seconds_timestamp = 1000;
+    p1_.fields.fractional_seconds_timestamp = 750;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
 TEST_F(TimeDurationTest, SampleCountOutsideBounds2) {
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.fractional_seconds_timestamp = 750;
-    p2_.fields.fractional_seconds_timestamp = 1000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.fractional_seconds_timestamp = 750;
+    p1_.fields.fractional_seconds_timestamp = 1000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
 TEST_F(TimeDurationTest, RealTimePositive) {
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.integer_seconds_timestamp    = 8;
-    p2_.fields.integer_seconds_timestamp    = 12;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.integer_seconds_timestamp    = 8;
+    p1_.fields.integer_seconds_timestamp    = 12;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 0);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, RealTimeNegative) {
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.integer_seconds_timestamp    = 8;
-    p2_.fields.integer_seconds_timestamp    = 12;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.integer_seconds_timestamp    = 8;
+    p1_.fields.integer_seconds_timestamp    = 12;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -1);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, RealTimeBounds1) {
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
 TEST_F(TimeDurationTest, RealTimeBounds2) {
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
 TEST_F(TimeDurationTest, FreeRunningCountPositive) {
-    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 5;
-    p1_.fields.fractional_seconds_timestamp = 3000;
-    p2_.fields.fractional_seconds_timestamp = 500;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 5;
+    p2_.fields.fractional_seconds_timestamp = 3000;
+    p1_.fields.fractional_seconds_timestamp = 500;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 2);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, FreeRunningCountNegative) {
-    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 5;
-    p1_.fields.fractional_seconds_timestamp = 500;
-    p2_.fields.fractional_seconds_timestamp = 3000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 5;
+    p2_.fields.fractional_seconds_timestamp = 500;
+    p1_.fields.fractional_seconds_timestamp = 3000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -3);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, UtcSampleCountPositive) {
-    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsi                          = VRT_TSI_UTC;
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 5;
-    p2_.fields.integer_seconds_timestamp    = 2;
-    p1_.fields.fractional_seconds_timestamp = 750;
-    p2_.fields.fractional_seconds_timestamp = 250;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 5;
+    p1_.fields.integer_seconds_timestamp    = 2;
+    p2_.fields.fractional_seconds_timestamp = 750;
+    p1_.fields.fractional_seconds_timestamp = 250;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 3);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, UtcSampleCountNegative) {
-    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsi                          = VRT_TSI_UTC;
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 5;
-    p1_.fields.fractional_seconds_timestamp = 250;
-    p2_.fields.fractional_seconds_timestamp = 750;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 5;
+    p2_.fields.fractional_seconds_timestamp = 250;
+    p1_.fields.fractional_seconds_timestamp = 750;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -4);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, UtcSampleCountOutsideBounds1) {
-    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsi                          = VRT_TSI_UTC;
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.fractional_seconds_timestamp = 1000;
-    p2_.fields.fractional_seconds_timestamp = 750;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.fractional_seconds_timestamp = 1000;
+    p1_.fields.fractional_seconds_timestamp = 750;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
 TEST_F(TimeDurationTest, UtcSampleCountOutsideBounds2) {
-    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsi                          = VRT_TSI_UTC;
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.fractional_seconds_timestamp = 750;
-    p2_.fields.fractional_seconds_timestamp = 1000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.fractional_seconds_timestamp = 750;
+    p1_.fields.fractional_seconds_timestamp = 1000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
 TEST_F(TimeDurationTest, UtcRealTimePositive) {
-    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsi                          = VRT_TSI_UTC;
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.integer_seconds_timestamp    = 12;
-    p2_.fields.integer_seconds_timestamp    = 8;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.integer_seconds_timestamp    = 12;
+    p1_.fields.integer_seconds_timestamp    = 8;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 4);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, UtcRealTimeNegative) {
-    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsi                          = VRT_TSI_UTC;
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.integer_seconds_timestamp    = 8;
-    p2_.fields.integer_seconds_timestamp    = 12;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.integer_seconds_timestamp    = 8;
+    p1_.fields.integer_seconds_timestamp    = 12;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -5);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, UtcRealTimeBounds1) {
-    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsi                          = VRT_TSI_UTC;
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
 TEST_F(TimeDurationTest, UtcRealTimeBounds2) {
-    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsi                          = VRT_TSI_UTC;
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
 TEST_F(TimeDurationTest, UtcFreeRunningCountPositive) {
-    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsi                          = VRT_TSI_UTC;
-    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 4;
-    p2_.fields.integer_seconds_timestamp    = 2;
-    p1_.fields.fractional_seconds_timestamp = 3000;
-    p2_.fields.fractional_seconds_timestamp = 500;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 4;
+    p1_.fields.integer_seconds_timestamp    = 2;
+    p2_.fields.fractional_seconds_timestamp = 3000;
+    p1_.fields.fractional_seconds_timestamp = 500;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 2);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, UtcFreeRunningCountNegative) {
-    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsi                          = VRT_TSI_UTC;
-    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 4;
-    p1_.fields.fractional_seconds_timestamp = 500;
-    p2_.fields.fractional_seconds_timestamp = 3000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 4;
+    p2_.fields.fractional_seconds_timestamp = 500;
+    p1_.fields.fractional_seconds_timestamp = 3000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -3);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, UtcFreeRunningCountMismatch) {
-    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsi                          = VRT_TSI_UTC;
-    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 100;
-    p1_.fields.fractional_seconds_timestamp = 500;
-    p2_.fields.fractional_seconds_timestamp = 3000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), VRT_ERR_INTEGER_SECONDS_MISMATCH);
+    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 100;
+    p2_.fields.fractional_seconds_timestamp = 500;
+    p1_.fields.fractional_seconds_timestamp = 3000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_INTEGER_SECONDS_MISMATCH);
 }
 
 TEST_F(TimeDurationTest, GpsSampleCountPositive) {
-    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsi                          = VRT_TSI_GPS;
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 5;
-    p2_.fields.integer_seconds_timestamp    = 2;
-    p1_.fields.fractional_seconds_timestamp = 750;
-    p2_.fields.fractional_seconds_timestamp = 250;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 5;
+    p1_.fields.integer_seconds_timestamp    = 2;
+    p2_.fields.fractional_seconds_timestamp = 750;
+    p1_.fields.fractional_seconds_timestamp = 250;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 3);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, GpsSampleCountNegative) {
-    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsi                          = VRT_TSI_GPS;
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 5;
-    p1_.fields.fractional_seconds_timestamp = 250;
-    p2_.fields.fractional_seconds_timestamp = 750;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 5;
+    p2_.fields.fractional_seconds_timestamp = 250;
+    p1_.fields.fractional_seconds_timestamp = 750;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -4);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, GpsSampleCountOutsideBounds1) {
-    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsi                          = VRT_TSI_GPS;
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.fractional_seconds_timestamp = 1000;
-    p2_.fields.fractional_seconds_timestamp = 750;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.fractional_seconds_timestamp = 1000;
+    p1_.fields.fractional_seconds_timestamp = 750;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
 TEST_F(TimeDurationTest, GpsSampleCountOutsideBounds2) {
-    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsi                          = VRT_TSI_GPS;
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.fractional_seconds_timestamp = 750;
-    p2_.fields.fractional_seconds_timestamp = 1000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.fractional_seconds_timestamp = 750;
+    p1_.fields.fractional_seconds_timestamp = 1000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
 TEST_F(TimeDurationTest, GpsRealTimePositive) {
-    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsi                          = VRT_TSI_GPS;
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.integer_seconds_timestamp    = 12;
-    p2_.fields.integer_seconds_timestamp    = 8;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.integer_seconds_timestamp    = 12;
+    p1_.fields.integer_seconds_timestamp    = 8;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 4);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, GpsRealTimeNegative) {
-    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsi                          = VRT_TSI_GPS;
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.integer_seconds_timestamp    = 8;
-    p2_.fields.integer_seconds_timestamp    = 12;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.integer_seconds_timestamp    = 8;
+    p1_.fields.integer_seconds_timestamp    = 12;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -5);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, GpsRealTimeBounds1) {
-    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsi                          = VRT_TSI_GPS;
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
 TEST_F(TimeDurationTest, GpsRealTimeBounds2) {
-    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsi                          = VRT_TSI_GPS;
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
 TEST_F(TimeDurationTest, GpsFreeRunningCountPositive) {
-    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsi                          = VRT_TSI_GPS;
-    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 4;
-    p2_.fields.integer_seconds_timestamp    = 2;
-    p1_.fields.fractional_seconds_timestamp = 3000;
-    p2_.fields.fractional_seconds_timestamp = 500;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 4;
+    p1_.fields.integer_seconds_timestamp    = 2;
+    p2_.fields.fractional_seconds_timestamp = 3000;
+    p1_.fields.fractional_seconds_timestamp = 500;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 2);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, GpsFreeRunningCountNegative) {
-    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsi                          = VRT_TSI_GPS;
-    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 4;
-    p1_.fields.fractional_seconds_timestamp = 500;
-    p2_.fields.fractional_seconds_timestamp = 3000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 4;
+    p2_.fields.fractional_seconds_timestamp = 500;
+    p1_.fields.fractional_seconds_timestamp = 3000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -3);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, GpsFreeRunningCountMismatch) {
-    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsi                          = VRT_TSI_GPS;
-    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 100;
-    p1_.fields.fractional_seconds_timestamp = 500;
-    p2_.fields.fractional_seconds_timestamp = 3000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), VRT_ERR_INTEGER_SECONDS_MISMATCH);
+    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 100;
+    p2_.fields.fractional_seconds_timestamp = 500;
+    p1_.fields.fractional_seconds_timestamp = 3000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_INTEGER_SECONDS_MISMATCH);
 }
 
 TEST_F(TimeDurationTest, OtherSampleCountPositive) {
-    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsi                          = VRT_TSI_OTHER;
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 5;
-    p2_.fields.integer_seconds_timestamp    = 2;
-    p1_.fields.fractional_seconds_timestamp = 750;
-    p2_.fields.fractional_seconds_timestamp = 250;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 5;
+    p1_.fields.integer_seconds_timestamp    = 2;
+    p2_.fields.fractional_seconds_timestamp = 750;
+    p1_.fields.fractional_seconds_timestamp = 250;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 3);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, OtherSampleCountNegative) {
-    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsi                          = VRT_TSI_OTHER;
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 5;
-    p1_.fields.fractional_seconds_timestamp = 250;
-    p2_.fields.fractional_seconds_timestamp = 750;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 5;
+    p2_.fields.fractional_seconds_timestamp = 250;
+    p1_.fields.fractional_seconds_timestamp = 750;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -4);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, OtherSampleCountOutsideBounds1) {
-    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsi                          = VRT_TSI_OTHER;
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.fractional_seconds_timestamp = 1000;
-    p2_.fields.fractional_seconds_timestamp = 750;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.fractional_seconds_timestamp = 1000;
+    p1_.fields.fractional_seconds_timestamp = 750;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
 TEST_F(TimeDurationTest, OtherSampleCountOutsideBounds2) {
-    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsi                          = VRT_TSI_OTHER;
-    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
-    p1_.fields.fractional_seconds_timestamp = 750;
-    p2_.fields.fractional_seconds_timestamp = 1000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
+    p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
+    p2_.fields.fractional_seconds_timestamp = 750;
+    p1_.fields.fractional_seconds_timestamp = 1000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
 TEST_F(TimeDurationTest, OtherRealTimePositive) {
-    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsi                          = VRT_TSI_OTHER;
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.integer_seconds_timestamp    = 12;
-    p2_.fields.integer_seconds_timestamp    = 8;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.integer_seconds_timestamp    = 12;
+    p1_.fields.integer_seconds_timestamp    = 8;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 4);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, OtherRealTimeNegative) {
-    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsi                          = VRT_TSI_OTHER;
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.integer_seconds_timestamp    = 8;
-    p2_.fields.integer_seconds_timestamp    = 12;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.integer_seconds_timestamp    = 8;
+    p1_.fields.integer_seconds_timestamp    = 12;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S * 3 / 4;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -5);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, OtherRealTimeBounds1) {
-    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsi                          = VRT_TSI_OTHER;
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
 TEST_F(TimeDurationTest, OtherRealTimeBounds2) {
-    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsi                          = VRT_TSI_OTHER;
-    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p1_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
-    p2_.fields.fractional_seconds_timestamp = PS_IN_S;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
+    p1_.header.tsf                          = VRT_TSF_REAL_TIME;
+    p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
+    p1_.fields.fractional_seconds_timestamp = PS_IN_S;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
 TEST_F(TimeDurationTest, OtherFreeRunningCountPositive) {
-    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsi                          = VRT_TSI_OTHER;
-    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 4;
-    p2_.fields.integer_seconds_timestamp    = 2;
-    p1_.fields.fractional_seconds_timestamp = 3000;
-    p2_.fields.fractional_seconds_timestamp = 500;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 4;
+    p1_.fields.integer_seconds_timestamp    = 2;
+    p2_.fields.fractional_seconds_timestamp = 3000;
+    p1_.fields.fractional_seconds_timestamp = 500;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, 2);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, OtherFreeRunningCountNegative) {
-    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsi                          = VRT_TSI_OTHER;
-    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 4;
-    p1_.fields.fractional_seconds_timestamp = 500;
-    p2_.fields.fractional_seconds_timestamp = 3000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), 0);
+    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 4;
+    p2_.fields.fractional_seconds_timestamp = 500;
+    p1_.fields.fractional_seconds_timestamp = 3000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISSING_SAMPLE_RATE);
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), 0);
     ASSERT_EQ(dur_.s, -3);
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
 TEST_F(TimeDurationTest, OtherFreeRunningCountMismatch) {
-    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsi                          = VRT_TSI_OTHER;
-    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
-    p1_.fields.integer_seconds_timestamp    = 2;
-    p2_.fields.integer_seconds_timestamp    = 100;
-    p1_.fields.fractional_seconds_timestamp = 500;
-    p2_.fields.fractional_seconds_timestamp = 3000;
-    ASSERT_EQ(vrt_time_difference(&p1_, &p2_, 1000.0, &dur_), VRT_ERR_INTEGER_SECONDS_MISMATCH);
+    p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
+    p2_.fields.integer_seconds_timestamp    = 2;
+    p1_.fields.integer_seconds_timestamp    = 100;
+    p2_.fields.fractional_seconds_timestamp = 500;
+    p1_.fields.fractional_seconds_timestamp = 3000;
+    ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_INTEGER_SECONDS_MISMATCH);
 }
