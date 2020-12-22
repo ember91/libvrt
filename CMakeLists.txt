@@ -16,8 +16,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 
 # Default to 'Release'
 if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE # Lowercased since before
-      "release"
+  set(CMAKE_BUILD_TYPE
+      "release" # Lowercased since before
       CACHE
         STRING
         "Choose the type of build. Options are: Debug, Release, RelWithDebInfo, MinSizeRel."
