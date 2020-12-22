@@ -261,6 +261,12 @@ TEST_F(WritePacketTest, TrailerExtContext) {
     ASSERT_EQ(Hex(buf_[2]), Hex(0xBAADF00D));
 }
 
+TEST_F(WritePacketTest, ValidationBodyBufferSize) {
+    p_.header.packet_count = static_cast<vrt_packet_type>(3);
+    p_.words_body          = 5;
+    ASSERT_EQ(vrt_write_packet(&p_, buf_.data(), 1, true), VRT_ERR_BUFFER_SIZE);
+}
+
 TEST_F(WritePacketTest, ValidationHeader) {
     p_.header.packet_count = static_cast<vrt_packet_type>(0xFF);
     ASSERT_EQ(vrt_write_packet(&p_, buf_.data(), 1, true), VRT_ERR_BOUNDS_PACKET_COUNT);
