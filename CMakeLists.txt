@@ -10,7 +10,7 @@ project(
 # Make CMAKE_BUILD_TYPE lowercase for case-insensitive comparison
 string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE)
 
-# Search for packages in module directory as well
+# Search for modules in local module directory as well
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
                       "${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules")
 
