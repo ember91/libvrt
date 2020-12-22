@@ -20,7 +20,7 @@
  *
  * \return Bits after masking and shifting.
  */
-static inline uint32_t msk(uint32_t val, uint32_t pos, uint32_t n) {
+static inline uint32_t mskw(uint32_t val, uint32_t pos, uint32_t n) {
     uint32_t mask = (1U << n) - 1;
     return (val & mask) << pos;
 }
@@ -80,13 +80,13 @@ int32_t vrt_write_header(const struct vrt_header* header, void* buf, int32_t wor
     /* Rule 6.1.1-6: The reserved bits shall be set to 0. */
     b[0] = 0;
 
-    b[0] |= msk(header->packet_type, 28, 4);
-    b[0] |= msk(vrt_b2u(header->has.class_id), 27, 1);
-    b[0] |= msk(vrt_b2u(header->has.trailer), 26, 1);
-    b[0] |= msk(header->tsm, 24, 1);
-    b[0] |= msk(header->tsi, 22, 2);
-    b[0] |= msk(header->tsf, 20, 2);
-    b[0] |= msk(header->packet_count, 16, 4);
+    b[0] |= mskw(header->packet_type, 28, 4);
+    b[0] |= mskw(vrt_b2u(header->has.class_id), 27, 1);
+    b[0] |= mskw(vrt_b2u(header->has.trailer), 26, 1);
+    b[0] |= mskw(header->tsm, 24, 1);
+    b[0] |= mskw(header->tsi, 22, 2);
+    b[0] |= mskw(header->tsf, 20, 2);
+    b[0] |= mskw(header->packet_count, 16, 4);
     b[0] |= header->packet_size;
 
     return words;
@@ -117,8 +117,8 @@ int32_t vrt_write_fields(const struct vrt_header* header,
             }
         }
 
-        b[0] = msk(fields->class_id.oui, 0, 24);
-        b[1] = msk(fields->class_id.information_class_code, 16, 16) | fields->class_id.packet_class_code;
+        b[0] = mskw(fields->class_id.oui, 0, 24);
+        b[1] = mskw(fields->class_id.information_class_code, 16, 16) | fields->class_id.packet_class_code;
         b += 2;
     }
     if (header->tsi != VRT_TSI_NONE) {
@@ -155,52 +155,52 @@ int32_t vrt_write_trailer(const struct vrt_trailer* trailer, void* buf, int32_t 
 
     /* Go from msb to lsb */
     if (trailer->has.calibrated_time) {
-        b[0] |= msk(vrt_b2u(trailer->calibrated_time), 19, 1);
-        b[0] |= msk(1, 31, 1);
+        b[0] |= mskw(vrt_b2u(trailer->calibrated_time), 19, 1);
+        b[0] |= mskw(1, 31, 1);
     }
     if (trailer->has.valid_data) {
-        b[0] |= msk(vrt_b2u(trailer->valid_data), 18, 1);
-        b[0] |= msk(1, 30, 1);
+        b[0] |= mskw(vrt_b2u(trailer->valid_data), 18, 1);
+        b[0] |= mskw(1, 30, 1);
     }
     if (trailer->has.reference_lock) {
-        b[0] |= msk(vrt_b2u(trailer->reference_lock), 17, 1);
-        b[0] |= msk(1, 29, 1);
+        b[0] |= mskw(vrt_b2u(trailer->reference_lock), 17, 1);
+        b[0] |= mskw(1, 29, 1);
     }
     if (trailer->has.agc_or_mgc) {
-        b[0] |= msk(trailer->agc_or_mgc, 16, 1);
-        b[0] |= msk(1, 28, 1);
+        b[0] |= mskw(trailer->agc_or_mgc, 16, 1);
+        b[0] |= mskw(1, 28, 1);
     }
     if (trailer->has.detected_signal) {
-        b[0] |= msk(vrt_b2u(trailer->detected_signal), 15, 1);
-        b[0] |= msk(1, 27, 1);
+        b[0] |= mskw(vrt_b2u(trailer->detected_signal), 15, 1);
+        b[0] |= mskw(1, 27, 1);
     }
     if (trailer->has.spectral_inversion) {
-        b[0] |= msk(vrt_b2u(trailer->spectral_inversion), 14, 1);
-        b[0] |= msk(1, 26, 1);
+        b[0] |= mskw(vrt_b2u(trailer->spectral_inversion), 14, 1);
+        b[0] |= mskw(1, 26, 1);
     }
     if (trailer->has.over_range) {
-        b[0] |= msk(vrt_b2u(trailer->over_range), 13, 1);
-        b[0] |= msk(1, 25, 1);
+        b[0] |= mskw(vrt_b2u(trailer->over_range), 13, 1);
+        b[0] |= mskw(1, 25, 1);
     }
     if (trailer->has.sample_loss) {
-        b[0] |= msk(vrt_b2u(trailer->sample_loss), 12, 1);
-        b[0] |= msk(1, 24, 1);
+        b[0] |= mskw(vrt_b2u(trailer->sample_loss), 12, 1);
+        b[0] |= mskw(1, 24, 1);
     }
     if (trailer->has.user_defined11) {
-        b[0] |= msk(vrt_b2u(trailer->user_defined11), 11, 1);
-        b[0] |= msk(1, 23, 1);
+        b[0] |= mskw(vrt_b2u(trailer->user_defined11), 11, 1);
+        b[0] |= mskw(1, 23, 1);
     }
     if (trailer->has.user_defined10) {
-        b[0] |= msk(vrt_b2u(trailer->user_defined10), 10, 1);
-        b[0] |= msk(1, 22, 1);
+        b[0] |= mskw(vrt_b2u(trailer->user_defined10), 10, 1);
+        b[0] |= mskw(1, 22, 1);
     }
     if (trailer->has.user_defined9) {
-        b[0] |= msk(vrt_b2u(trailer->user_defined9), 9, 1);
-        b[0] |= msk(1, 21, 1);
+        b[0] |= mskw(vrt_b2u(trailer->user_defined9), 9, 1);
+        b[0] |= mskw(1, 21, 1);
     }
     if (trailer->has.user_defined8) {
-        b[0] |= msk(vrt_b2u(trailer->user_defined8), 8, 1);
-        b[0] |= msk(1, 20, 1);
+        b[0] |= mskw(vrt_b2u(trailer->user_defined8), 8, 1);
+        b[0] |= mskw(1, 20, 1);
     }
     if (trailer->has.associated_context_packet_count) {
         if (validate) {
@@ -209,8 +209,8 @@ int32_t vrt_write_trailer(const struct vrt_trailer* trailer, void* buf, int32_t 
             }
         }
 
-        b[0] |= msk(trailer->associated_context_packet_count, 0, 7);
-        b[0] |= msk(1, 7, 1);
+        b[0] |= mskw(trailer->associated_context_packet_count, 0, 7);
+        b[0] |= mskw(1, 7, 1);
     }
 
     return words;
@@ -228,30 +228,30 @@ static int32_t if_context_write_context_indicator_field(const struct vrt_if_cont
     /* Zero reserved bits */
     b[0] = 0;
 
-    b[0] |= msk(vrt_b2u(c->context_field_change_indicator), 31, 1);
-    b[0] |= msk(vrt_b2u(c->has.reference_point_identifier), 30, 1);
-    b[0] |= msk(vrt_b2u(c->has.bandwidth), 29, 1);
-    b[0] |= msk(vrt_b2u(c->has.if_reference_frequency), 28, 1);
-    b[0] |= msk(vrt_b2u(c->has.rf_reference_frequency), 27, 1);
-    b[0] |= msk(vrt_b2u(c->has.rf_reference_frequency_offset), 26, 1);
-    b[0] |= msk(vrt_b2u(c->has.if_band_offset), 25, 1);
-    b[0] |= msk(vrt_b2u(c->has.reference_level), 24, 1);
-    b[0] |= msk(vrt_b2u(c->has.gain), 23, 1);
-    b[0] |= msk(vrt_b2u(c->has.over_range_count), 22, 1);
-    b[0] |= msk(vrt_b2u(c->has.sample_rate), 21, 1);
-    b[0] |= msk(vrt_b2u(c->has.timestamp_adjustment), 20, 1);
-    b[0] |= msk(vrt_b2u(c->has.timestamp_calibration_time), 19, 1);
-    b[0] |= msk(vrt_b2u(c->has.temperature), 18, 1);
-    b[0] |= msk(vrt_b2u(c->has.device_identifier), 17, 1);
-    b[0] |= msk(vrt_b2u(c->has.state_and_event_indicators), 16, 1);
-    b[0] |= msk(vrt_b2u(c->has.data_packet_payload_format), 15, 1);
-    b[0] |= msk(vrt_b2u(c->has.formatted_gps_geolocation), 14, 1);
-    b[0] |= msk(vrt_b2u(c->has.formatted_ins_geolocation), 13, 1);
-    b[0] |= msk(vrt_b2u(c->has.ecef_ephemeris), 12, 1);
-    b[0] |= msk(vrt_b2u(c->has.relative_ephemeris), 11, 1);
-    b[0] |= msk(vrt_b2u(c->has.ephemeris_reference_identifier), 10, 1);
-    b[0] |= msk(vrt_b2u(c->has.gps_ascii), 9, 1);
-    b[0] |= msk(vrt_b2u(c->has.context_association_lists), 8, 1);
+    b[0] |= mskw(vrt_b2u(c->context_field_change_indicator), 31, 1);
+    b[0] |= mskw(vrt_b2u(c->has.reference_point_identifier), 30, 1);
+    b[0] |= mskw(vrt_b2u(c->has.bandwidth), 29, 1);
+    b[0] |= mskw(vrt_b2u(c->has.if_reference_frequency), 28, 1);
+    b[0] |= mskw(vrt_b2u(c->has.rf_reference_frequency), 27, 1);
+    b[0] |= mskw(vrt_b2u(c->has.rf_reference_frequency_offset), 26, 1);
+    b[0] |= mskw(vrt_b2u(c->has.if_band_offset), 25, 1);
+    b[0] |= mskw(vrt_b2u(c->has.reference_level), 24, 1);
+    b[0] |= mskw(vrt_b2u(c->has.gain), 23, 1);
+    b[0] |= mskw(vrt_b2u(c->has.over_range_count), 22, 1);
+    b[0] |= mskw(vrt_b2u(c->has.sample_rate), 21, 1);
+    b[0] |= mskw(vrt_b2u(c->has.timestamp_adjustment), 20, 1);
+    b[0] |= mskw(vrt_b2u(c->has.timestamp_calibration_time), 19, 1);
+    b[0] |= mskw(vrt_b2u(c->has.temperature), 18, 1);
+    b[0] |= mskw(vrt_b2u(c->has.device_identifier), 17, 1);
+    b[0] |= mskw(vrt_b2u(c->has.state_and_event_indicators), 16, 1);
+    b[0] |= mskw(vrt_b2u(c->has.data_packet_payload_format), 15, 1);
+    b[0] |= mskw(vrt_b2u(c->has.formatted_gps_geolocation), 14, 1);
+    b[0] |= mskw(vrt_b2u(c->has.formatted_ins_geolocation), 13, 1);
+    b[0] |= mskw(vrt_b2u(c->has.ecef_ephemeris), 12, 1);
+    b[0] |= mskw(vrt_b2u(c->has.relative_ephemeris), 11, 1);
+    b[0] |= mskw(vrt_b2u(c->has.ephemeris_reference_identifier), 10, 1);
+    b[0] |= mskw(vrt_b2u(c->has.gps_ascii), 9, 1);
+    b[0] |= mskw(vrt_b2u(c->has.context_association_lists), 8, 1);
 
     return 1;
 }
@@ -273,39 +273,39 @@ static int32_t if_context_write_state_and_event_indicator_field(bool            
         b[0] = 0;
 
         if (s->has.calibrated_time) {
-            b[0] |= msk(vrt_b2u(s->has.calibrated_time), 31, 1);
-            b[0] |= msk(vrt_b2u(s->calibrated_time), 19, 1);
+            b[0] |= mskw(vrt_b2u(s->has.calibrated_time), 31, 1);
+            b[0] |= mskw(vrt_b2u(s->calibrated_time), 19, 1);
         }
         if (s->has.valid_data) {
-            b[0] |= msk(vrt_b2u(s->has.valid_data), 30, 1);
-            b[0] |= msk(vrt_b2u(s->valid_data), 18, 1);
+            b[0] |= mskw(vrt_b2u(s->has.valid_data), 30, 1);
+            b[0] |= mskw(vrt_b2u(s->valid_data), 18, 1);
         }
         if (s->has.reference_lock) {
-            b[0] |= msk(vrt_b2u(s->has.reference_lock), 29, 1);
-            b[0] |= msk(vrt_b2u(s->reference_lock), 17, 1);
+            b[0] |= mskw(vrt_b2u(s->has.reference_lock), 29, 1);
+            b[0] |= mskw(vrt_b2u(s->reference_lock), 17, 1);
         }
         if (s->has.agc_or_mgc) {
-            b[0] |= msk(vrt_b2u(s->has.agc_or_mgc), 28, 1);
-            b[0] |= msk(s->agc_or_mgc, 16, 1);
+            b[0] |= mskw(vrt_b2u(s->has.agc_or_mgc), 28, 1);
+            b[0] |= mskw(s->agc_or_mgc, 16, 1);
         }
         if (s->has.detected_signal) {
-            b[0] |= msk(vrt_b2u(s->has.detected_signal), 27, 1);
-            b[0] |= msk(vrt_b2u(s->detected_signal), 15, 1);
+            b[0] |= mskw(vrt_b2u(s->has.detected_signal), 27, 1);
+            b[0] |= mskw(vrt_b2u(s->detected_signal), 15, 1);
         }
         if (s->has.spectral_inversion) {
-            b[0] |= msk(vrt_b2u(s->has.spectral_inversion), 26, 1);
-            b[0] |= msk(vrt_b2u(s->spectral_inversion), 14, 1);
+            b[0] |= mskw(vrt_b2u(s->has.spectral_inversion), 26, 1);
+            b[0] |= mskw(vrt_b2u(s->spectral_inversion), 14, 1);
         }
         if (s->has.over_range) {
-            b[0] |= msk(vrt_b2u(s->has.over_range), 25, 1);
-            b[0] |= msk(vrt_b2u(s->over_range), 13, 1);
+            b[0] |= mskw(vrt_b2u(s->has.over_range), 25, 1);
+            b[0] |= mskw(vrt_b2u(s->over_range), 13, 1);
         }
         if (s->has.sample_loss) {
-            b[0] |= msk(vrt_b2u(s->has.sample_loss), 24, 1);
-            b[0] |= msk(vrt_b2u(s->sample_loss), 12, 1);
+            b[0] |= mskw(vrt_b2u(s->has.sample_loss), 24, 1);
+            b[0] |= mskw(vrt_b2u(s->sample_loss), 12, 1);
         }
 
-        b[0] |= msk(s->user_defined, 0, 8);
+        b[0] |= mskw(s->user_defined, 0, 8);
 
         return 1;
     }
@@ -358,16 +358,16 @@ static int32_t if_context_write_data_packet_payload_format(bool                 
         /* Zero reserved bits */
         b[0] = 0;
 
-        b[0] |= msk(f->packing_method, 31, 1);
-        b[0] |= msk(f->real_or_complex, 29, 2);
-        b[0] |= msk(f->data_item_format, 24, 5);
-        b[0] |= msk(vrt_b2u(f->sample_component_repeat), 23, 1);
-        b[0] |= msk(f->event_tag_size, 20, 3);
-        b[0] |= msk(f->channel_tag_size, 16, 4);
-        b[0] |= msk(f->item_packing_field_size, 6, 6);
-        b[0] |= msk(f->data_item_size, 0, 6);
+        b[0] |= mskw(f->packing_method, 31, 1);
+        b[0] |= mskw(f->real_or_complex, 29, 2);
+        b[0] |= mskw(f->data_item_format, 24, 5);
+        b[0] |= mskw(vrt_b2u(f->sample_component_repeat), 23, 1);
+        b[0] |= mskw(f->event_tag_size, 20, 3);
+        b[0] |= mskw(f->channel_tag_size, 16, 4);
+        b[0] |= mskw(f->item_packing_field_size, 6, 6);
+        b[0] |= mskw(f->data_item_size, 0, 6);
 
-        b[1] = msk(f->repeat_count, 16, 16) | msk(f->vector_size, 0, 16);
+        b[1] = mskw(f->repeat_count, 16, 16) | mskw(f->vector_size, 0, 16);
 
         return 2;
     }
@@ -438,9 +438,9 @@ static int32_t if_context_write_formatted_geolocation(bool                      
         /* Zero reserved bits */
         b[0] = 0;
 
-        b[0] |= msk(g->tsi, 26, 2);
-        b[0] |= msk(g->tsf, 24, 2);
-        b[0] |= msk(g->oui, 0, 24);
+        b[0] |= mskw(g->tsi, 26, 2);
+        b[0] |= mskw(g->tsf, 24, 2);
+        b[0] |= mskw(g->oui, 0, 24);
         b[1] = g->integer_second_timestamp;
         write_uint64(g->fractional_second_timestamp, b + 2);
         b[4] = g->has.latitude ? (uint32_t)vrt_double_to_fixed_point_i32(g->latitude, VRT_RADIX_ANGLE)
@@ -529,9 +529,9 @@ static int32_t if_context_write_ephemeris(bool has, const struct vrt_ephemeris* 
         /* Zero reserved bits */
         b[0] = 0;
 
-        b[0] |= msk(e->tsi, 26, 2);
-        b[0] |= msk(e->tsf, 24, 2);
-        b[0] |= msk(e->oui, 0, 24);
+        b[0] |= mskw(e->tsi, 26, 2);
+        b[0] |= mskw(e->tsf, 24, 2);
+        b[0] |= mskw(e->oui, 0, 24);
         b[1] = e->integer_second_timestamp;
         write_uint64(e->fractional_second_timestamp, b + 2);
         b[4] = e->has.position_x ? (uint32_t)vrt_double_to_fixed_point_i32(e->position_x, VRT_RADIX_POSITION)
@@ -577,7 +577,7 @@ static int32_t if_context_write_gps_ascii(bool has, const struct vrt_gps_ascii* 
             }
         }
 
-        b[0] = msk(g->oui, 0, 24);
+        b[0] = mskw(g->oui, 0, 24);
         b[1] = g->number_of_words;
 
         /* Protect against g->ascii == NULL when number_of_words == 0 */
@@ -618,10 +618,10 @@ static int32_t if_context_write_context_association_lists(bool                  
             }
         }
 
-        uint16_t sz1 = (uint16_t)msk(l->source_list_size, 0, 9);
-        uint16_t sz2 = (uint16_t)msk(l->system_list_size, 0, 9);
+        uint16_t sz1 = (uint16_t)mskw(l->source_list_size, 0, 9);
+        uint16_t sz2 = (uint16_t)mskw(l->system_list_size, 0, 9);
         uint16_t sz3 = l->vector_component_list_size;
-        uint16_t sz4 = (uint16_t)msk(l->asynchronous_channel_list_size, 0, 15);
+        uint16_t sz4 = (uint16_t)mskw(l->asynchronous_channel_list_size, 0, 15);
 
         int32_t words = 2 + sz1 + sz2 + sz3 + sz4 + (l->has.asynchronous_channel_tag_list ? sz4 : 0);
 
@@ -736,9 +736,9 @@ int32_t vrt_write_if_context(const struct vrt_if_context* if_context, void* buf,
             }
         }
 
-        b[0] =
-            ((int32_t)msk(vrt_float_to_fixed_point_i16(if_context->gain.stage2, VRT_RADIX_GAIN), 16, 16) & 0xFFFF0000) |
-            ((int32_t)vrt_float_to_fixed_point_i16(if_context->gain.stage1, VRT_RADIX_GAIN) & 0x0000FFFF);
+        b[0] = ((int32_t)mskw(vrt_float_to_fixed_point_i16(if_context->gain.stage2, VRT_RADIX_GAIN), 16, 16) &
+                0xFFFF0000) |
+               ((int32_t)vrt_float_to_fixed_point_i16(if_context->gain.stage1, VRT_RADIX_GAIN) & 0x0000FFFF);
         b += 1;
     }
     if (if_context->has.over_range_count) {
@@ -776,7 +776,7 @@ int32_t vrt_write_if_context(const struct vrt_if_context* if_context, void* buf,
             }
         }
 
-        b[0] = msk(if_context->device_identifier.oui, 0, 24);
+        b[0] = mskw(if_context->device_identifier.oui, 0, 24);
         b[1] = if_context->device_identifier.device_code;
         b += 2;
     }

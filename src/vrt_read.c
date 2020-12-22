@@ -12,7 +12,7 @@
 #include "vrt_util_internal.h"
 
 /**
- * Mask and shift a specified number of consecutive bits from a specified position in a word.
+ * Shift and mask a specified number of consecutive bits from a specified position in a word.
  *
  * \param val Word to read from.
  * \param pos Position of bits in word, starting from lsb.
@@ -20,7 +20,7 @@
  *
  * \return Value of shifted and masked bits.
  */
-static inline uint32_t msk(uint32_t val, uint32_t pos, uint32_t n) {
+static inline uint32_t mskr(uint32_t val, uint32_t pos, uint32_t n) {
     uint32_t mask = (1U << n) - 1;
     return (val >> pos) & mask;
 }
@@ -51,14 +51,14 @@ int32_t vrt_read_header(const void* buf, int32_t words_buf, struct vrt_header* h
     uint32_t b = *((const uint32_t*)buf);
 
     /* Decode in order from msb to lsb */
-    header->packet_type  = (enum vrt_packet_type)msk(b, 28, 4);
-    header->has.class_id = vrt_u2b(msk(b, 27, 1));
-    header->has.trailer  = vrt_u2b(msk(b, 26, 1));
-    header->tsm          = (enum vrt_tsm)msk(b, 24, 1);
-    header->tsi          = (enum vrt_tsi)msk(b, 22, 2);
-    header->tsf          = (enum vrt_tsf)msk(b, 20, 2);
-    header->packet_count = (uint8_t)msk(b, 16, 4);
-    header->packet_size  = (uint16_t)msk(b, 0, 16);
+    header->packet_type  = (enum vrt_packet_type)mskr(b, 28, 4);
+    header->has.class_id = vrt_u2b(mskr(b, 27, 1));
+    header->has.trailer  = vrt_u2b(mskr(b, 26, 1));
+    header->tsm          = (enum vrt_tsm)mskr(b, 24, 1);
+    header->tsi          = (enum vrt_tsi)mskr(b, 22, 2);
+    header->tsf          = (enum vrt_tsf)mskr(b, 20, 2);
+    header->packet_count = (uint8_t)mskr(b, 16, 4);
+    header->packet_size  = (uint16_t)mskr(b, 0, 16);
 
     if (validate) {
         if (header->packet_type > VRT_PT_EXT_CONTEXT) {
@@ -104,8 +104,8 @@ int32_t vrt_read_fields(const struct vrt_header* header,
     }
 
     if (header->has.class_id) {
-        fields->class_id.oui                    = msk(b[0], 0, 24);
-        fields->class_id.information_class_code = (uint16_t)msk(b[1], 16, 16);
+        fields->class_id.oui                    = mskr(b[0], 0, 24);
+        fields->class_id.information_class_code = (uint16_t)mskr(b[1], 16, 16);
         fields->class_id.packet_class_code      = (uint16_t)b[1];
 
         if (validate) {
@@ -160,83 +160,83 @@ int32_t vrt_read_trailer(const void* buf, int32_t words_buf, struct vrt_trailer*
     uint32_t b = *(const uint32_t*)buf;
 
     /* Go from msb to lsb. Make sure to zero fields if not present, just to be sure. */
-    trailer->has.calibrated_time    = msk(b, 31, 1);
-    trailer->has.valid_data         = msk(b, 30, 1);
-    trailer->has.reference_lock     = msk(b, 29, 1);
-    trailer->has.agc_or_mgc         = msk(b, 28, 1);
-    trailer->has.detected_signal    = msk(b, 27, 1);
-    trailer->has.spectral_inversion = msk(b, 26, 1);
-    trailer->has.over_range         = msk(b, 25, 1);
-    trailer->has.sample_loss        = msk(b, 24, 1);
-    trailer->has.user_defined11     = msk(b, 23, 1);
-    trailer->has.user_defined10     = msk(b, 22, 1);
-    trailer->has.user_defined9      = msk(b, 21, 1);
-    trailer->has.user_defined8      = msk(b, 20, 1);
+    trailer->has.calibrated_time    = mskr(b, 31, 1);
+    trailer->has.valid_data         = mskr(b, 30, 1);
+    trailer->has.reference_lock     = mskr(b, 29, 1);
+    trailer->has.agc_or_mgc         = mskr(b, 28, 1);
+    trailer->has.detected_signal    = mskr(b, 27, 1);
+    trailer->has.spectral_inversion = mskr(b, 26, 1);
+    trailer->has.over_range         = mskr(b, 25, 1);
+    trailer->has.sample_loss        = mskr(b, 24, 1);
+    trailer->has.user_defined11     = mskr(b, 23, 1);
+    trailer->has.user_defined10     = mskr(b, 22, 1);
+    trailer->has.user_defined9      = mskr(b, 21, 1);
+    trailer->has.user_defined8      = mskr(b, 20, 1);
 
     if (trailer->has.calibrated_time) {
-        trailer->calibrated_time = msk(b, 19, 1);
+        trailer->calibrated_time = mskr(b, 19, 1);
     } else {
         trailer->calibrated_time = false;
     }
     if (trailer->has.valid_data) {
-        trailer->valid_data = msk(b, 18, 1);
+        trailer->valid_data = mskr(b, 18, 1);
     } else {
         trailer->valid_data = false;
     }
     if (trailer->has.reference_lock) {
-        trailer->reference_lock = msk(b, 17, 1);
+        trailer->reference_lock = mskr(b, 17, 1);
     } else {
         trailer->reference_lock = false;
     }
     if (trailer->has.agc_or_mgc) {
-        trailer->agc_or_mgc = (enum vrt_agc_or_mgc)msk(b, 16, 1);
+        trailer->agc_or_mgc = (enum vrt_agc_or_mgc)mskr(b, 16, 1);
     } else {
         trailer->agc_or_mgc = VRT_AOM_MGC;
     }
     if (trailer->has.detected_signal) {
-        trailer->detected_signal = msk(b, 15, 1);
+        trailer->detected_signal = mskr(b, 15, 1);
     } else {
         trailer->detected_signal = false;
     }
     if (trailer->has.spectral_inversion) {
-        trailer->spectral_inversion = msk(b, 14, 1);
+        trailer->spectral_inversion = mskr(b, 14, 1);
     } else {
         trailer->spectral_inversion = false;
     }
     if (trailer->has.over_range) {
-        trailer->over_range = msk(b, 13, 1);
+        trailer->over_range = mskr(b, 13, 1);
     } else {
         trailer->over_range = false;
     }
     if (trailer->has.sample_loss) {
-        trailer->sample_loss = msk(b, 12, 1);
+        trailer->sample_loss = mskr(b, 12, 1);
     } else {
         trailer->sample_loss = false;
     }
     if (trailer->has.user_defined11) {
-        trailer->user_defined11 = msk(b, 11, 1);
+        trailer->user_defined11 = mskr(b, 11, 1);
     } else {
         trailer->user_defined11 = false;
     }
     if (trailer->has.user_defined10) {
-        trailer->user_defined10 = msk(b, 10, 1);
+        trailer->user_defined10 = mskr(b, 10, 1);
     } else {
         trailer->user_defined10 = false;
     }
     if (trailer->has.user_defined9) {
-        trailer->user_defined9 = msk(b, 9, 1);
+        trailer->user_defined9 = mskr(b, 9, 1);
     } else {
         trailer->user_defined9 = false;
     }
     if (trailer->has.user_defined8) {
-        trailer->user_defined8 = msk(b, 8, 1);
+        trailer->user_defined8 = mskr(b, 8, 1);
     } else {
         trailer->user_defined8 = false;
     }
 
-    trailer->has.associated_context_packet_count = vrt_u2b(msk(b, 7, 1));
+    trailer->has.associated_context_packet_count = vrt_u2b(mskr(b, 7, 1));
     if (trailer->has.associated_context_packet_count) {
-        trailer->associated_context_packet_count = (uint8_t)msk(b, 0, 7);
+        trailer->associated_context_packet_count = (uint8_t)mskr(b, 0, 7);
     } else {
         trailer->associated_context_packet_count = 0;
     }
@@ -258,30 +258,30 @@ int32_t vrt_read_trailer(const void* buf, int32_t words_buf, struct vrt_trailer*
  * \return Number of read words, or a negative number if error.
  */
 static int32_t if_context_read_indicator_field(uint32_t b, struct vrt_if_context* c, bool validate) {
-    c->context_field_change_indicator     = vrt_u2b(msk(b, 31, 1));
-    c->has.reference_point_identifier     = vrt_u2b(msk(b, 30, 1));
-    c->has.bandwidth                      = vrt_u2b(msk(b, 29, 1));
-    c->has.if_reference_frequency         = vrt_u2b(msk(b, 28, 1));
-    c->has.rf_reference_frequency         = vrt_u2b(msk(b, 27, 1));
-    c->has.rf_reference_frequency_offset  = vrt_u2b(msk(b, 26, 1));
-    c->has.if_band_offset                 = vrt_u2b(msk(b, 25, 1));
-    c->has.reference_level                = vrt_u2b(msk(b, 24, 1));
-    c->has.gain                           = vrt_u2b(msk(b, 23, 1));
-    c->has.over_range_count               = vrt_u2b(msk(b, 22, 1));
-    c->has.sample_rate                    = vrt_u2b(msk(b, 21, 1));
-    c->has.timestamp_adjustment           = vrt_u2b(msk(b, 20, 1));
-    c->has.timestamp_calibration_time     = vrt_u2b(msk(b, 19, 1));
-    c->has.temperature                    = vrt_u2b(msk(b, 18, 1));
-    c->has.device_identifier              = vrt_u2b(msk(b, 17, 1));
-    c->has.state_and_event_indicators     = vrt_u2b(msk(b, 16, 1));
-    c->has.data_packet_payload_format     = vrt_u2b(msk(b, 15, 1));
-    c->has.formatted_gps_geolocation      = vrt_u2b(msk(b, 14, 1));
-    c->has.formatted_ins_geolocation      = vrt_u2b(msk(b, 13, 1));
-    c->has.ecef_ephemeris                 = vrt_u2b(msk(b, 12, 1));
-    c->has.relative_ephemeris             = vrt_u2b(msk(b, 11, 1));
-    c->has.ephemeris_reference_identifier = vrt_u2b(msk(b, 10, 1));
-    c->has.gps_ascii                      = vrt_u2b(msk(b, 9, 1));
-    c->has.context_association_lists      = vrt_u2b(msk(b, 8, 1));
+    c->context_field_change_indicator     = vrt_u2b(mskr(b, 31, 1));
+    c->has.reference_point_identifier     = vrt_u2b(mskr(b, 30, 1));
+    c->has.bandwidth                      = vrt_u2b(mskr(b, 29, 1));
+    c->has.if_reference_frequency         = vrt_u2b(mskr(b, 28, 1));
+    c->has.rf_reference_frequency         = vrt_u2b(mskr(b, 27, 1));
+    c->has.rf_reference_frequency_offset  = vrt_u2b(mskr(b, 26, 1));
+    c->has.if_band_offset                 = vrt_u2b(mskr(b, 25, 1));
+    c->has.reference_level                = vrt_u2b(mskr(b, 24, 1));
+    c->has.gain                           = vrt_u2b(mskr(b, 23, 1));
+    c->has.over_range_count               = vrt_u2b(mskr(b, 22, 1));
+    c->has.sample_rate                    = vrt_u2b(mskr(b, 21, 1));
+    c->has.timestamp_adjustment           = vrt_u2b(mskr(b, 20, 1));
+    c->has.timestamp_calibration_time     = vrt_u2b(mskr(b, 19, 1));
+    c->has.temperature                    = vrt_u2b(mskr(b, 18, 1));
+    c->has.device_identifier              = vrt_u2b(mskr(b, 17, 1));
+    c->has.state_and_event_indicators     = vrt_u2b(mskr(b, 16, 1));
+    c->has.data_packet_payload_format     = vrt_u2b(mskr(b, 15, 1));
+    c->has.formatted_gps_geolocation      = vrt_u2b(mskr(b, 14, 1));
+    c->has.formatted_ins_geolocation      = vrt_u2b(mskr(b, 13, 1));
+    c->has.ecef_ephemeris                 = vrt_u2b(mskr(b, 12, 1));
+    c->has.relative_ephemeris             = vrt_u2b(mskr(b, 11, 1));
+    c->has.ephemeris_reference_identifier = vrt_u2b(mskr(b, 10, 1));
+    c->has.gps_ascii                      = vrt_u2b(mskr(b, 9, 1));
+    c->has.context_association_lists      = vrt_u2b(mskr(b, 8, 1));
 
     if (validate) {
         if ((b & 0x000000FFU) != 0) {
@@ -307,57 +307,57 @@ static int32_t if_context_read_state_and_event_indicators(bool                  
                                                           struct vrt_state_and_event* s,
                                                           bool                        validate) {
     if (has) {
-        s->has.calibrated_time    = vrt_u2b(msk(b, 31, 1));
-        s->has.valid_data         = vrt_u2b(msk(b, 30, 1));
-        s->has.reference_lock     = vrt_u2b(msk(b, 29, 1));
-        s->has.agc_or_mgc         = vrt_u2b(msk(b, 28, 1));
-        s->has.detected_signal    = vrt_u2b(msk(b, 27, 1));
-        s->has.spectral_inversion = vrt_u2b(msk(b, 26, 1));
-        s->has.over_range         = vrt_u2b(msk(b, 25, 1));
-        s->has.sample_loss        = vrt_u2b(msk(b, 24, 1));
+        s->has.calibrated_time    = vrt_u2b(mskr(b, 31, 1));
+        s->has.valid_data         = vrt_u2b(mskr(b, 30, 1));
+        s->has.reference_lock     = vrt_u2b(mskr(b, 29, 1));
+        s->has.agc_or_mgc         = vrt_u2b(mskr(b, 28, 1));
+        s->has.detected_signal    = vrt_u2b(mskr(b, 27, 1));
+        s->has.spectral_inversion = vrt_u2b(mskr(b, 26, 1));
+        s->has.over_range         = vrt_u2b(mskr(b, 25, 1));
+        s->has.sample_loss        = vrt_u2b(mskr(b, 24, 1));
 
         if (s->has.calibrated_time) {
-            s->calibrated_time = vrt_u2b(msk(b, 19, 1));
+            s->calibrated_time = vrt_u2b(mskr(b, 19, 1));
         } else {
             s->calibrated_time = 0;
         }
         if (s->has.valid_data) {
-            s->valid_data = vrt_u2b(msk(b, 18, 1));
+            s->valid_data = vrt_u2b(mskr(b, 18, 1));
         } else {
             s->valid_data = 0;
         }
         if (s->has.reference_lock) {
-            s->reference_lock = vrt_u2b(msk(b, 17, 1));
+            s->reference_lock = vrt_u2b(mskr(b, 17, 1));
         } else {
             s->reference_lock = 0;
         }
         if (s->has.agc_or_mgc) {
-            s->agc_or_mgc = (enum vrt_agc_or_mgc)msk(b, 16, 1);
+            s->agc_or_mgc = (enum vrt_agc_or_mgc)mskr(b, 16, 1);
         } else {
             s->agc_or_mgc = VRT_AOM_MGC;
         }
         if (s->has.detected_signal) {
-            s->detected_signal = vrt_u2b(msk(b, 15, 1));
+            s->detected_signal = vrt_u2b(mskr(b, 15, 1));
         } else {
             s->detected_signal = 0;
         }
         if (s->has.spectral_inversion) {
-            s->spectral_inversion = vrt_u2b(msk(b, 14, 1));
+            s->spectral_inversion = vrt_u2b(mskr(b, 14, 1));
         } else {
             s->spectral_inversion = 0;
         }
         if (s->has.over_range) {
-            s->over_range = vrt_u2b(msk(b, 13, 1));
+            s->over_range = vrt_u2b(mskr(b, 13, 1));
         } else {
             s->over_range = 0;
         }
         if (s->has.sample_loss) {
-            s->sample_loss = vrt_u2b(msk(b, 12, 1));
+            s->sample_loss = vrt_u2b(mskr(b, 12, 1));
         } else {
             s->sample_loss = 0;
         }
 
-        s->user_defined = (uint8_t)msk(b, 0, 8);
+        s->user_defined = (uint8_t)mskr(b, 0, 8);
 
         if (validate) {
             if ((b & 0x00F00F00U) != 0) {
@@ -404,17 +404,17 @@ static int32_t if_context_read_data_packet_payload_format(bool                  
                                                           struct vrt_data_packet_payload_format* f,
                                                           bool                                   validate) {
     if (has) {
-        f->packing_method          = (enum vrt_packing_method)msk(b[0], 31, 1);
-        f->real_or_complex         = (enum vrt_real_complex)msk(b[0], 29, 2);
-        f->data_item_format        = (enum vrt_data_item_format)msk(b[0], 24, 5);
-        f->sample_component_repeat = vrt_u2b(msk(b[0], 23, 1));
-        f->event_tag_size          = (uint8_t)msk(b[0], 20, 3);
-        f->channel_tag_size        = (uint8_t)msk(b[0], 16, 4);
-        f->item_packing_field_size = (uint8_t)msk(b[0], 6, 6);
-        f->data_item_size          = (uint8_t)msk(b[0], 0, 6);
+        f->packing_method          = (enum vrt_packing_method)mskr(b[0], 31, 1);
+        f->real_or_complex         = (enum vrt_real_complex)mskr(b[0], 29, 2);
+        f->data_item_format        = (enum vrt_data_item_format)mskr(b[0], 24, 5);
+        f->sample_component_repeat = vrt_u2b(mskr(b[0], 23, 1));
+        f->event_tag_size          = (uint8_t)mskr(b[0], 20, 3);
+        f->channel_tag_size        = (uint8_t)mskr(b[0], 16, 4);
+        f->item_packing_field_size = (uint8_t)mskr(b[0], 6, 6);
+        f->data_item_size          = (uint8_t)mskr(b[0], 0, 6);
 
-        f->repeat_count = (uint16_t)msk(b[1], 16, 16);
-        f->vector_size  = (uint16_t)msk(b[1], 0, 16);
+        f->repeat_count = (uint16_t)mskr(b[1], 16, 16);
+        f->vector_size  = (uint16_t)mskr(b[1], 0, 16);
 
         if (validate) {
             if (f->real_or_complex > VRT_ROC_COMPLEX_POLAR) {
@@ -463,9 +463,9 @@ static int32_t if_context_read_formatted_geolocation(bool                       
                                                      struct vrt_formatted_geolocation* g,
                                                      bool                              validate) {
     if (has) {
-        g->tsi                         = (enum vrt_tsi)msk(b[0], 26, 2);
-        g->tsf                         = (enum vrt_tsf)msk(b[0], 24, 2);
-        g->oui                         = msk(b[0], 0, 24);
+        g->tsi                         = (enum vrt_tsi)mskr(b[0], 26, 2);
+        g->tsf                         = (enum vrt_tsf)mskr(b[0], 24, 2);
+        g->oui                         = mskr(b[0], 0, 24);
         g->integer_second_timestamp    = b[1];
         g->fractional_second_timestamp = read_uint64(b + 2);
         g->has.latitude                = (b[4] != VRT_UNSPECIFIED_FIXED_POINT);
@@ -558,9 +558,9 @@ static int32_t if_context_read_formatted_geolocation(bool                       
  */
 static int32_t if_context_read_ephemeris(bool has, const uint32_t* b, struct vrt_ephemeris* e, bool validate) {
     if (has) {
-        e->tsi                         = (enum vrt_tsi)msk(b[0], 26, 2);
-        e->tsf                         = (enum vrt_tsf)msk(b[0], 24, 2);
-        e->oui                         = msk(b[0], 0, 24);
+        e->tsi                         = (enum vrt_tsi)mskr(b[0], 26, 2);
+        e->tsf                         = (enum vrt_tsf)mskr(b[0], 24, 2);
+        e->oui                         = mskr(b[0], 0, 24);
         e->integer_second_timestamp    = b[1];
         e->fractional_second_timestamp = read_uint64(b + 2);
 
@@ -646,7 +646,7 @@ static int32_t if_context_read_ephemeris(bool has, const uint32_t* b, struct vrt
  */
 static int32_t if_context_read_gps_ascii(bool has, const uint32_t* b, struct vrt_gps_ascii* g, bool validate) {
     if (has) {
-        g->oui             = msk(b[0], 0, 24);
+        g->oui             = mskr(b[0], 0, 24);
         g->number_of_words = b[1];
         if (g->number_of_words == 0) {
             g->ascii = NULL;
@@ -681,11 +681,11 @@ static int32_t if_context_read_gps_ascii(bool has, const uint32_t* b, struct vrt
  */
 static int32_t if_context_read_association_lists(bool has, const uint32_t* b, struct vrt_context_association_lists* l) {
     if (has) {
-        l->source_list_size                  = (uint16_t)msk(b[0], 16, 9);
-        l->system_list_size                  = (uint16_t)msk(b[0], 0, 9);
-        l->vector_component_list_size        = (uint16_t)msk(b[1], 16, 16);
-        l->has.asynchronous_channel_tag_list = vrt_u2b(msk(b[1], 15, 1));
-        l->asynchronous_channel_list_size    = (uint16_t)msk(b[1], 0, 15);
+        l->source_list_size                  = (uint16_t)mskr(b[0], 16, 9);
+        l->system_list_size                  = (uint16_t)mskr(b[0], 0, 9);
+        l->vector_component_list_size        = (uint16_t)mskr(b[1], 16, 16);
+        l->has.asynchronous_channel_tag_list = vrt_u2b(mskr(b[1], 15, 1));
+        l->asynchronous_channel_list_size    = (uint16_t)mskr(b[1], 0, 15);
 
         int32_t words = 2;
         if (l->source_list_size == 0) {
@@ -889,8 +889,8 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, struct vrt_if_co
         if_context->temperature = 0.0F;
     }
     if (if_context->has.device_identifier) {
-        if_context->device_identifier.oui         = msk(b[0], 0, 24);
-        if_context->device_identifier.device_code = (uint16_t)msk(b[1], 0, 16);
+        if_context->device_identifier.oui         = mskr(b[0], 0, 24);
+        if_context->device_identifier.device_code = (uint16_t)mskr(b[1], 0, 16);
 
         if (validate) {
             if ((b[0] & 0xFF000000U) != 0 || (b[1] & 0xFFFF0000U) != 0) {
