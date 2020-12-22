@@ -152,6 +152,7 @@ endif()
 file(GLOB FILES_SRC CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 add_library(${TARGET_NAME} STATIC ${FILES_SRC})
 
+# Code coverage
 if(${GCOV})
   if(CMAKE_BUILD_TYPE STREQUAL "debug") # Lowercased since before
     if(CMAKE_C_COMPILER_ID MATCHES "GNU")
