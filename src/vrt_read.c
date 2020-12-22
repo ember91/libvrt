@@ -992,8 +992,8 @@ int32_t vrt_read_packet(void* buf, int32_t words_buf, struct vrt_packet* packet,
             packet->words_body = packet->header.packet_size - words_total - (has_trailer ? 1 : 0);
 
             /* Body is actually optional */
-            if (validate && packet->words_body < 0) {
-                if (validate) {
+            if (validate) {
+                if (packet->words_body < 0) {
                     return VRT_ERR_MISMATCH_PACKET_SIZE;
                 }
             }
