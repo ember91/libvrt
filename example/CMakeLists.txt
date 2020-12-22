@@ -36,7 +36,7 @@ function(add_example source_file)
   set_target_properties(${target_name} PROPERTIES C_STANDARD 99)
 
   # Set warning levels
-  if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  if(CMAKE_BUILD_TYPE STREQUAL "debug") # Lowercased since before
     if(CMAKE_C_COMPILER_ID MATCHES "Clang")
       target_compile_options(${target_name} PRIVATE -Weverything -Wno-padded
                                                 -Wno-newline-eof)
