@@ -1000,12 +1000,12 @@ int32_t vrt_read_packet(void* buf, int32_t words_buf, struct vrt_packet* packet,
 
             packet->body = packet->words_body > 0 ? b + words_total : NULL;
 
+            words_total += packet->words_body;
+
             /* Check bounds */
-            if (packet->words_body > words_buf - words_total) {
+            if (words_total > words_buf) {
                 return VRT_ERR_BUFFER_SIZE;
             }
-
-            words_total += packet->words_body;
             break;
         }
         case VRT_PT_IF_CONTEXT: {

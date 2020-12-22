@@ -214,6 +214,15 @@ TEST_F(ReadPacketTest, BodyExtContext) {
     ASSERT_EQ(Hex(b[2]), Hex(0xDEDEDEDE));
 }
 
+TEST_F(ReadPacketTest, BodyErrBufferSize) {
+    buf_[0] = 0x20000003;
+    buf_[1] = 0xCECECECE;
+    buf_[2] = 0xFEFEFEFE;
+
+    ASSERT_EQ(vrt_read_packet(buf_.data(), 2, &p_, true), VRT_ERR_BUFFER_SIZE);
+    ASSERT_EQ(vrt_read_packet(buf_.data(), 2, &p_, false), VRT_ERR_BUFFER_SIZE);
+}
+
 TEST_F(ReadPacketTest, TrailerIfDataWithoutStreamId) {
     buf_[0] = 0x04000002;
     buf_[1] = 0x01001000;
@@ -350,7 +359,14 @@ TEST_F(ReadPacketTest, ValidationIfContext) {
     assert_if_context(p_.if_context, {{"has.sample_rate", true}, {"sample_rate", -1.0}});
 }
 
-TEST_F(ReadPacketTest, ValidationPacketSizeMismatch) {
+TEST_F(ReadPacketTest, ValidationPacketSizeMismatch1) {
+    buf_[0] = 0x04000001;
+    buf_[1] = 0x01001000;
+
+    ASSERT_EQ(vrt_read_packet(buf_.data(), 3, &p_, true), VRT_ERR_MISMATCH_PACKET_SIZE);
+}
+
+TEST_F(ReadPacketTest, ValidationPacketSizeMismatch2) {
     buf_[0] = 0x40000004;
     buf_[1] = 0xABABABAB;
     buf_[2] = 0x00000000;
