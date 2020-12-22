@@ -4,5 +4,4 @@
   * Perhaps also with extra time zone information.
 
 # Future
-* Add single header library?
 * Make version number tag on github
