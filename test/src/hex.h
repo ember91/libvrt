@@ -22,7 +22,7 @@ class Hex {
     friend std::ostream& operator<<(std::ostream&, const Hex&);
     friend bool          operator==(const Hex&, const Hex&);
 
-    /* Value to present as hexadecimal */
+    /** Value to present as hexadecimal */
     uint64_t val_;
 };
 
