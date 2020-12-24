@@ -78,8 +78,6 @@ int vrt_time_difference(const struct vrt_packet* p2,
  * \retval VRT_ERR_INVALID_TSI         TSI is an invalid value.
  * \retval VRT_ERR_INVALID_TSF         TSF is an invalid value.
  * \retval VRT_ERR_MISSING_SAMPLE_RATE Sample rate is required but is not provided (<= 0).
- * \retval VRT_ERR_BOUNDS_REAL_TIME    TSF is VRT_TSF_REAL_TIME but picoseconds is outside valid bounds
- *                                     (> 999999999999 ps).
  */
 VRT_WARN_UNUSED
 int vrt_time_calendar(const struct vrt_packet* packet, double sample_rate, struct vrt_calendar_time* cal_time);

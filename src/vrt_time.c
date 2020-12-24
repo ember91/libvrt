@@ -433,9 +433,6 @@ int vrt_time_calendar(const struct vrt_packet* packet, double sample_rate, struc
             break;
         }
         case VRT_TSF_REAL_TIME: {
-            if (packet->fields.fractional_seconds_timestamp >= PS_IN_S) {
-                return VRT_ERR_BOUNDS_REAL_TIME;
-            }
             cal_time->ps = packet->fields.fractional_seconds_timestamp;
             break;
         }

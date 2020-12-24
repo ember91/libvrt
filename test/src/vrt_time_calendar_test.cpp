@@ -143,14 +143,6 @@ TEST_F(TimeCalendarTest, TsiUtcTsfRealTime) {
     ASSERT_EQ(cal_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeCalendarTest, TsiUtcTsfRealTimeBounds) {
-    p_.header.tsi                          = VRT_TSI_UTC;
-    p_.fields.integer_seconds_timestamp    = 1608751092;
-    p_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p_.fields.fractional_seconds_timestamp = PS_IN_S;
-    ASSERT_EQ(vrt_time_calendar(&p_, 0.0, &cal_), VRT_ERR_BOUNDS_REAL_TIME);
-}
-
 TEST_F(TimeCalendarTest, TsiUtcTsfFreeRunningCount) {
     p_.header.tsi                       = VRT_TSI_UTC;
     p_.fields.integer_seconds_timestamp = 1608751092;
@@ -198,14 +190,6 @@ TEST_F(TimeCalendarTest, TsiGpsTsfRealTime) {
     ASSERT_EQ(cal_.mon, 11);
     ASSERT_EQ(cal_.wday, 3);
     ASSERT_EQ(cal_.ps, PS_IN_S / 2);
-}
-
-TEST_F(TimeCalendarTest, TsiGpsTsfRealTimeBounds) {
-    p_.header.tsi                          = VRT_TSI_GPS;
-    p_.fields.integer_seconds_timestamp    = 1292793456;
-    p_.header.tsf                          = VRT_TSF_REAL_TIME;
-    p_.fields.fractional_seconds_timestamp = PS_IN_S;
-    ASSERT_EQ(vrt_time_calendar(&p_, 0.0, &cal_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
 TEST_F(TimeCalendarTest, TsiGpsTsfFreeRunningCount) {
