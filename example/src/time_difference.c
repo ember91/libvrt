@@ -38,7 +38,7 @@ int main() {
     struct vrt_time diff;
     int32_t         rv = vrt_time_difference(&p2, &p1, SAMPLE_RATE, &diff);
     if (rv < 0) {
-        fprintf(stderr, "Failed to write packet: %s\n", vrt_string_error(rv));
+        fprintf(stderr, "Failed to calculate time difference: %s\n", vrt_string_error(rv));
         return EXIT_FAILURE;
     }
 
