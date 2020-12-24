@@ -56,7 +56,8 @@
 			"stdexcept": "cpp",
 			"streambuf": "cpp",
 			"typeinfo": "cpp",
-			"any": "cpp"
+			"any": "cpp",
+			"cinttypes": "cpp"
 		},
 		"cSpell.words": [
 			"libvrt"
