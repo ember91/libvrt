@@ -17,7 +17,7 @@ extern "C" {
  * \param header    Header to write.
  * \param buf       Buffer to write to.
  * \param words_buf Size of buf in 32-bit words.
- * \param validate  True if validation should be done. If false, only buffer size is validated.
+ * \param validate  True if validation shall be done. If false, only buffer size is validated.
  *
  * \return Number of written 32-bit words (always 1), or a negative number if error.
  * \retval VRT_ERR_BUFFER_SIZE          Buffer is too small.
@@ -41,7 +41,7 @@ int32_t vrt_write_header(const struct vrt_header* header, void* buf, int32_t wor
  * \param buf       Buffer to write to. This must point to the start of the fields section, i.e. directly following the
  *                  header word.
  * \param words_buf Size of buf in 32-bit words.
- * \param validate  True if validation should be done. If false, only buffer size is validated.
+ * \param validate  True if validation shall be done. If false, only buffer size is validated.
  *
  * \return Number of written 32-bit words, or a negative number if error.
  * \retval VRT_ERR_BUFFER_SIZE      Buffer is too small.
@@ -63,7 +63,7 @@ int32_t vrt_write_fields(const struct vrt_header* header,
  * \param buf        Buffer to write to. This must point to the position of the trailer word, i.e. the last word in the
  *                   packet.
  * \param words_buf  Size of buf in 32-bit words.
- * \param validate   True if validation should be done. If false, only buffer size is validated.
+ * \param validate   True if validation shall be done. If false, only buffer size is validated.
  *
  * \return Number of written 32-bit words, or a negative number if error.
  * \retval VRT_ERR_BUFFER_SIZE                              Buffer is too small.
@@ -80,7 +80,7 @@ int32_t vrt_write_trailer(const struct vrt_trailer* trailer, void* buf, int32_t 
  * \param buf        Buffer to write to. This must point to the first context section word in the packet, i.e. directly
  *                   following the fields section.
  * \param words_buf  Size of buf in 32-bit words.
- * \param validate   True if validation should be done. If false, only buffer size is validated.
+ * \param validate   True if validation shall be done. If false, only buffer size is validated.
  *
  * \return Number of written 32-bit words, or a negative number if error.
  * \retval VRT_ERR_BUFFER_SIZE                          Buffer is too small.
@@ -95,10 +95,10 @@ int32_t vrt_write_trailer(const struct vrt_trailer* trailer, void* buf, int32_t 
  *                                                      (< ~-8.79 or > ~8.79 THz).
  * \retval VRT_ERR_BOUNDS_REFERENCE_LEVEL               Reference level is outside valid bounds (< -256 or > ~256 dBm).
  * \retval VRT_ERR_BOUNDS_GAIN                          Gain stage 1 or 2 outside valid bounds (< -256 or > ~256 dB).
- * \retval VRT_ERR_GAIN_STAGE2_SET                      Gain stage 1 must be used instead of stage 2 when only one is
- *                                                      set.
- * \retval VRT_ERR_BOUNDS_SAMPLE_RATE                   Sample rate is outside valid bounds (< 0 Hz or > ~8.79 THz).
- * \retval VRT_ERR_BOUNDS_TEMPERATURE                   Temperature is outside valid bounds
+ * \retval VRT_ERR_GAIN_STAGE2_SET                      Gain stage 1 must be used instead of stage 2 when only one of
+ *                                                      them is set.
+ * \retval VRT_ERR_BOUNDS_SAMPLE_RATE                   Sample rate is outside valid bounds (< 0 Hz or >
+ * ~8.79 THz). \retval VRT_ERR_BOUNDS_TEMPERATURE       Temperature is outside valid bounds
  *                                                      (< -273.15 or > ~512 degrees C).
  * \retval VRT_ERR_BOUNDS_OUI                           OUI is outside valid bounds (> 0x00FFFFFF).
  * \retval VRT_ERR_INVALID_PACKING_METHOD               Packing method is an invalid value.
@@ -149,7 +149,7 @@ int32_t vrt_write_if_context(const struct vrt_if_context* if_context, void* buf,
  * \param packet     Packet to write.
  * \param buf        Buffer to write to.
  * \param words_buf  Size of buf in 32-bit words.
- * \param validate   True if validation should be done. If false, only buffer size is validated.
+ * \param validate   True if validation shall be done. If false, only buffer size is validated.
  *
  * \return Number of written 32-bit words, or a negative number if error.
  * \retval VRT_ERR_BUFFER_SIZE                            Buffer is too small.
@@ -177,8 +177,8 @@ int32_t vrt_write_if_context(const struct vrt_if_context* if_context, void* buf,
  *                                                        (< -256 or > ~256 dBm).
  * \retval VRT_ERR_BOUNDS_GAIN                            Gain stage 1 or 2 outside valid bounds
  *                                                        (< -256 or > ~256 dB).
- * \retval VRT_ERR_GAIN_STAGE2_SET                        Gain stage 1 must be used instead of stage 2 when only
- *                                                        one is set.
+ * \retval VRT_ERR_GAIN_STAGE2_SET                        Gain stage 1 must be used instead of stage 2 when only one of
+ *                                                        them is set.
  * \retval VRT_ERR_BOUNDS_SAMPLE_RATE                     Sample rate is outside valid bounds
  *                                                        (< 0 Hz or > ~8.79 THz).
  * \retval VRT_ERR_BOUNDS_TEMPERATURE                     Temperature is outside valid bounds

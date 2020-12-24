@@ -86,7 +86,7 @@ enum vrt_error_code {
      */
     VRT_ERR_BOUNDS_GAIN = -19,
     /**
-     * Gain stage 1 must be used instead of stage 2 when only one is set.
+     * Gain stage 1 must be used instead of stage 2 when only one of them is set.
      */
     VRT_ERR_GAIN_STAGE2_SET = -20,
     /**

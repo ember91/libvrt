@@ -12,7 +12,7 @@ extern "C" {
  *
  * \param header Header.
  *
- * \note Packet size must still be set explicitly to the actual packet size in 32-bit words.
+ * \note Packet size must still be set to the actual packet size in 32-bit words.
  */
 void vrt_init_header(struct vrt_header* header);
 

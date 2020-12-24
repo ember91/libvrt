@@ -253,7 +253,7 @@ int32_t vrt_read_trailer(const void* buf, int32_t words_buf, struct vrt_trailer*
  *
  * \param b        Word to read from.
  * \param c        IF context to read into.
- * \param validate True if data should be validated.
+ * \param validate True if data shall be validated.
  *
  * \return Number of read words, or a negative number if error.
  */
@@ -298,7 +298,7 @@ static int32_t if_context_read_indicator_field(uint32_t b, struct vrt_if_context
  * \param has      True if it is included.
  * \param b        Word to read from.
  * \param s        State and event field struct to read into.
- * \param validate True if data should be validated.
+ * \param validate True if data shall be validated.
  *
  * \return Number of read words, or a negative number if error.
  */
@@ -395,7 +395,7 @@ static int32_t if_context_read_state_and_event_indicators(bool                  
  * \param has      True if it is included.
  * \param b        Buffer to read from.
  * \param f        Data packet payload format struct to read into.
- * \param validate True if data should be validated.
+ * \param validate True if data shall be validated.
  *
  * \return Number of read words, or a negative number if error.
  */
@@ -454,7 +454,7 @@ static int32_t if_context_read_data_packet_payload_format(bool                  
  * \param has      True if it is included.
  * \param b        Buffer to read from.
  * \param g        Formatted GPS/INS geolocation struct to read into.
- * \param validate True if data should be validated.
+ * \param validate True if data shall be validated.
  *
  * \return Number of read words, or a negative number if error.
  */
@@ -552,7 +552,7 @@ static int32_t if_context_read_formatted_geolocation(bool                       
  * \param has      True if it is included.
  * \param b        Buffer to read from [0] or [13].
  * \param e        Ephemeris struct to read into.
- * \param validate True if data should be validated.
+ * \param validate True if data shall be validated.
  *
  * \return Number of read words, or a negative number if error.
  */
@@ -640,7 +640,7 @@ static int32_t if_context_read_ephemeris(bool has, const uint32_t* b, struct vrt
  * \param has      True if it is included.
  * \param b        Buffer to read from.
  * \param g        GPS ASCII struct to read into.
- * \param validate True if data should be validated.
+ * \param validate True if data shall be validated.
  *
  * \return Number of read words, or a negative number if error.
  */

@@ -69,7 +69,7 @@ int main() {
     offset += rv;
 
     /* Copy signal data from signal to packet buffer.
-     * This could also have been written directly into the buffer. */
+     * This could also have been written directly into the write buffer. */
     memcpy(b + offset, s, sizeof(float) * (SIZE - 3));
     offset += SIZE - 3;
 

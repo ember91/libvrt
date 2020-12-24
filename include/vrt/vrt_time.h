@@ -13,11 +13,11 @@ extern "C" {
 /**
  * Timestamp in whole and fractional seconds.
  *
- * \note ps is always positive. So -3.5 is represented as s = -4, ps = 5e11.
+ * \note ps is always nonnegative. So -3.5 is represented as s = -4, ps = 5e11.
  */
 struct vrt_time {
     int32_t  s;  /**< Seconds. */
-    uint64_t ps; /**< Picoseconds. Positive. */
+    uint64_t ps; /**< Picoseconds. Always nonnegative. */
 };
 
 /**

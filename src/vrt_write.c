@@ -319,7 +319,7 @@ static int32_t if_context_write_state_and_event_indicator_field(bool            
  * \param has      True if it is included.
  * \param f        Data packet payload format struct to write.
  * \param b        Buffer to write to.
- * \param validate True if data should be validated.
+ * \param validate True if data shall be validated.
  *
  * \return Number of written words, or a negative number if error.
  */
@@ -381,7 +381,7 @@ static int32_t if_context_write_data_packet_payload_format(bool                 
  * \param has      True if it is included.
  * \param g        GPS/INS geolocation field to write.
  * \param b        Buffer to write to.
- * \param validate True if data should be validated.
+ * \param validate True if data shall be validated.
  *
  * \return Number of written words, or a negative number if error.
  */
@@ -472,7 +472,7 @@ static int32_t if_context_write_formatted_geolocation(bool                      
  * \param has      True if it is included.
  * \param e        Ephemeris struct to write.
  * \param b        Buffer to write to.
- * \param validate True if data should be validated.
+ * \param validate True if data shall be validated.
  *
  * \return Number of written words, or a negative number if error.
  */
@@ -565,7 +565,7 @@ static int32_t if_context_write_ephemeris(bool has, const struct vrt_ephemeris* 
  * \param has      True if it is included.
  * \param g        GPS ASCII struct to write.
  * \param b        Buffer to write to.
- * \param validate True if data should be validated.
+ * \param validate True if data shall be validated.
  *
  * \return Number of written words, or a negative number if error.
  */
@@ -597,7 +597,7 @@ static int32_t if_context_write_gps_ascii(bool has, const struct vrt_gps_ascii* 
  * \param has      True if it is included.
  * \param l        Context association lists struct to write.
  * \param b        Buffer to write to.
- * \param validate True if data should be validated.
+ * \param validate True if data shall be validated.
  *
  * \return Number of written words, or a negative number if error.
  */

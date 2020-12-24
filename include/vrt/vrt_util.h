@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-/* Force compiler to warn when return values are ignored */
+/* Force compiler to emit warning when return value is ignored */
 #ifdef __GNUC__
 #define VRT_WARN_UNUSED __attribute__((warn_unused_result))
 #elif __clang__
@@ -21,7 +21,7 @@ extern "C" {
 #define VRT_WARN_UNUSED
 #endif
 
-/* Silence warnings when using C++ */
+/* Silence C-style cast warnings when using C++ */
 #ifdef __cplusplus
 #define VRT_STATIC_CAST(T, X)      static_cast<T>(X)
 #define VRT_REINTERPRET_CAST(T, X) reinterpret_cast<T>(X)
@@ -35,7 +35,7 @@ extern "C" {
  *
  * \param header Packet header.
  *
- * \return True if it is a IF or Ext context packet.
+ * \return True if it is IF or Ext context packet.
  *
  * \warning Undefined behaviour if type is outside bounds.
  */

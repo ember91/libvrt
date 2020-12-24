@@ -104,7 +104,8 @@ const char* vrt_string_data_item_format(enum vrt_data_item_format data_item_form
  *
  * \return String representation.
  *
- * \note Inputting a code that isn't an error returns "Success". Inputting an unknown error code returns "Unknown".
+ * \note Inputting a code that isn't an error, i.e. >= 0, returns "Success". Inputting an unknown error code returns
+ *       "Unknown".
  */
 const char* vrt_string_error(int32_t error);
 

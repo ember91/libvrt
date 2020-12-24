@@ -171,14 +171,14 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Buffer to read from. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">words_buf</span></code>: Size of buf in 32-bit words. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">if_context</span></code>: IF context struct to read into. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">validate</span></code>: True if validation should be done. If false, only buffer size is validated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validate</span></code>: True if validation shall be done. If false, only buffer size is validated.</p></li>
 </ul>
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BUFFER_SIZE</span></code>: Buffer is too small. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_RESERVED</span></code>: One or multiple reserved bits are set. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_BANDWIDTH</span></code>: Bandwidth is outside valid bounds (&lt; 0 Hz). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_GAIN_STAGE2_SET</span></code>: Gain stage 1 must be used instead of stage 2 when only one is set. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_GAIN_STAGE2_SET</span></code>: Gain stage 1 must be used instead of stage 2 when only one of them is set. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SAMPLE_RATE</span></code>: Sample rate is outside valid bounds (&lt; 0 Hz). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TEMPERATURE</span></code>: Temperature is outside valid bounds (&lt; -273.15 degrees). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_REAL_OR_COMPLEX</span></code>: Real/Complex is an invalid value. </p></li>

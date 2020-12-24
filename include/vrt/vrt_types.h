@@ -40,15 +40,13 @@ struct vrt_header_indicators {
  * Timestamp mode. Resolution of timestamps.
  */
 enum vrt_tsm {
-    VRT_TSM_FINE   = 0x0,
-    VRT_TSM_COARSE = 0x1,
+    VRT_TSM_FINE   = 0x0, /**< Precise resolution. */
+    VRT_TSM_COARSE = 0x1 /**< Context events occurred sometime within the Data Sampling Interval of a Data packet in the
+                              paired Data Packet Stream. */
 };
 
 /**
  * Reference-point time in resolution of a second.
- *
- * \note Rule 6.1.1-7: All the packets in an IF Data Packet Stream shall have the same TSI code, and thus the same
- *       Integer-seconds Timestamp.
  */
 enum vrt_tsi {
     VRT_TSI_NONE      = 0x0, /**< No one-second resolution time. */
@@ -60,9 +58,6 @@ enum vrt_tsi {
 
 /**
  * Reference-point time in subsecond resolution.
- *
- * \note Rule 6.1.1-10: All the packets in an IF Data Packet Stream shall have the same TSF code, and thus the same
- *       Fractional-seconds Timestamp.
  */
 enum vrt_tsf {
     VRT_TSF_NONE               = 0x0, /**< No subsecond time resolution. */
@@ -89,16 +84,10 @@ struct vrt_header {
     enum vrt_tsm tsm;
     /**
      * Type of integer second timestamp.
-     *
-     * \note Rule 6.1.1-7: All the packets in an IF Data Packet Stream shall have the same TSI code, and thus the same
-     *       Integer-seconds Timestamp.
      */
     enum vrt_tsi tsi;
     /**
      * Type of fractional second timestamp.
-     *
-     * \note Rule 6.1.1-10: All the packets in an IF Data Packet Stream shall have the same TSF code, and thus the same
-     *       Fractional-seconds Timestamp.
      */
     enum vrt_tsf tsf;
     /**
@@ -127,11 +116,15 @@ struct vrt_class_identifier {
      * \note Only the 24 least significant bits are used.
      */
     uint32_t oui;
-    /** Information class to which this packet stream belongs. A value of zero in this field shall indicate that the
-     * Information Class is unspecified. */
+    /**
+     * Information class to which this packet stream belongs. A value of zero in this field shall indicate that the
+     * Information Class is unspecified.
+     */
     uint16_t information_class_code;
-    /** Packet class of company to which this packet stream belongs. A value of zero in this field shall indicate that
-     * the Packet Class is unspecified. */
+    /**
+     * Packet class of company to which this packet stream belongs. A value of zero in this field shall indicate that
+     * the Packet Class is unspecified.
+     */
     uint16_t packet_class_code;
 };
 
@@ -139,7 +132,8 @@ struct vrt_class_identifier {
  * Field data.
  */
 struct vrt_fields {
-    /** Identifies which stream it belongs to. Activate by setting packet_type accordingly.
+    /**
+     * Identifies which stream it belongs to. Activate by setting packet_type accordingly.
      *
      * \note Although this field is optional for IF data packets it is required for context packets.
      */
@@ -619,7 +613,7 @@ struct vrt_if_context {
     /**
      * True if this packet contains new context information.
      *
-     * \note This is sometimes called named indicator and sometimes identifier.
+     * \note In the standard this is sometimes called 'indicator' and sometimes 'identifier'.
      * \note Since over-range count isn't a persistent field, and individual user-defined fields may not be persistent,
      *       do not mark a packet as changed when only those field changes.
      */
@@ -677,7 +671,7 @@ struct vrt_if_context {
      * Sample rate [Hz].
      *
      * \warning This may lead to loss of precision, since the underlying VRT fixed point format has 64 bits while a
-     * double only has 53 bits of precision.
+     *          double only has 53 bits of precision.
      */
     double sample_rate;
     /** System signal processing time [ps]. Offset from reference point time. */
@@ -709,7 +703,7 @@ struct vrt_if_context {
     /**
      * Describes which data packets are associated to this context packet.
      *
-     * \note This is sometimes called lists and sometimes list.
+     * \note In the standard this is sometimes called 'lists' and sometimes 'list'.
      */
     struct vrt_context_association_lists context_association_lists;
 };

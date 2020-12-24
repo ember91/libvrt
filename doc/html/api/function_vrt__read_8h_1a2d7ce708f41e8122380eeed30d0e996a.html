@@ -165,15 +165,15 @@
 <p><dl class="simple">
 <dt><strong>Return</strong></dt><dd><p>Number of read 32-bit words, or a negative number if error. </p>
 </dd>
-<dt><strong>Warning</strong></dt><dd><p>The packet body pointer will point into buf. That’s why buf isn’t const. </p>
+<dt><strong>Warning</strong></dt><dd><p>The packet body pointer will point into buf, which is why buf isn’t const. </p>
 </dd>
 <dt><strong>Warning</strong></dt><dd><p>Fields represented as double but with an underlying 64-bit fixed precision format, i.e. bandwidth, if_reference_frequency, rf_reference_frequency, rf_reference_frequency_offset, if_band_offset, and sample_rate, may in rare cases lose precision since double only has 53 bits of precision. </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">buf</span></code>: Buffer to read from. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">words_buf</span></code>: Size of buf in 32-bit words. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">packet</span></code>: Packet struct to read into. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">validate</span></code>: True if validation should be done. If false, only buffer size is validated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">packet</span></code>: Packet to read into. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validate</span></code>: True if validation shall be done. If false, only buffer size is validated.</p></li>
 </ul>
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">
@@ -184,7 +184,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_TSM_IN_DATA</span></code>: Data packet has TSM bit set. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: TSF is VRT_TSF_REAL_TIME but picoseconds is outside valid bounds (&gt; 999999999999 ps). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_BANDWIDTH</span></code>: Bandwidth is outside valid bounds (&lt; 0 Hz). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_GAIN_STAGE2_SET</span></code>: Gain stage 1 must be used instead of stage 2 when only one is set. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_GAIN_STAGE2_SET</span></code>: Gain stage 1 must be used instead of stage 2 when only one of them is set. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SAMPLE_RATE</span></code>: Sample rate is outside valid bounds (&lt; 0 Hz). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_TEMPERATURE</span></code>: Temperature is outside valid bounds (&lt; -273.15 degrees). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_REAL_OR_COMPLEX</span></code>: Real/Complex is an invalid value. </p></li>

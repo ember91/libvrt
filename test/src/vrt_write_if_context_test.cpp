@@ -29,7 +29,7 @@ class WriteIfContextTest : public ::testing::Test {
  *
  * \param buf    Buffer to compare with.
  * \param ignore List of indices to ignore.
- * \param use11  True if 11 values (GPS/INS geolocation) should be used instead of 13 (ECEF/Relative ephemeris).
+ * \param use11  True if 11 values (GPS/INS geolocation) shall be used instead of 13 (ECEF/Relative ephemeris).
  */
 static void buf_cmp_geolocation_ephemeris(const std::array<uint32_t, 1024>& buf,
                                           const std::set<size_t>&           ignore,

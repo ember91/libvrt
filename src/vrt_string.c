@@ -183,7 +183,7 @@ const char* vrt_string_error(int32_t error /* Do NOT use vrt_error_code, since i
         case VRT_ERR_BOUNDS_GAIN:
             return "Gain stage 1 or 2 outside valid bounds (< -256 or > 256 dB)";
         case VRT_ERR_GAIN_STAGE2_SET:
-            return "Gain stage 1 must be used instead of stage 2 when only one is set";
+            return "Gain stage 1 must be used instead of stage 2 when only one of them is set";
         case VRT_ERR_BOUNDS_SAMPLE_RATE:
             return "Sample rate is outside valid bounds (< 0 Hz or > 8.79 THz)";
         case VRT_ERR_BOUNDS_TEMPERATURE:

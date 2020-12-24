@@ -17,7 +17,7 @@ extern "C" {
  * \param buf       Buffer to read from.
  * \param words_buf Size of buf in 32-bit words.
  * \param header    Header to read into.
- * \param validate  True if validation should be done. If false, only buffer size is validated.
+ * \param validate  True if validation shall be done. If false, only buffer size is validated.
  *
  * \return Number of read 32-bit words, or a negative number if error.
  * \retval VRT_ERR_BUFFER_SIZE          Buffer is too small.
@@ -38,8 +38,8 @@ int32_t vrt_read_header(const void* buf, int32_t words_buf, struct vrt_header* h
  * \param buf       Buffer to read from. This must point to the first field in the sequence, i.e. directly following the
  *                  header word.
  * \param words_buf Size of buf in 32-bit words.
- * \param fields    Fields to read into.
- * \param validate  True if validation should be done. If false, only buffer size is validated.
+ * \param fields    Fields section to read into.
+ * \param validate  True if validation shall be done. If false, only buffer size is validated.
  *
  * \return Number of read 32-bit words, or a negative number if error.
  * \retval VRT_ERR_BUFFER_SIZE      Buffer is too small.
@@ -76,14 +76,14 @@ int32_t vrt_read_trailer(const void* buf, int32_t words_buf, struct vrt_trailer*
  * \param buf        Buffer to read from.
  * \param words_buf  Size of buf in 32-bit words.
  * \param if_context IF context struct to read into.
- * \param validate   True if validation should be done. If false, only buffer size is validated.
+ * \param validate   True if validation shall be done. If false, only buffer size is validated.
  *
  * \return Number of read 32-bit words, or a negative number if error.
  * \retval VRT_ERR_BUFFER_SIZE                          Buffer is too small.
  * \retval VRT_ERR_RESERVED                             One or multiple reserved bits are set.
  * \retval VRT_ERR_BOUNDS_BANDWIDTH                     Bandwidth is outside valid bounds (< 0 Hz).
- * \retval VRT_ERR_GAIN_STAGE2_SET                      Gain stage 1 must be used instead of stage 2 when only one is
- *                                                      set.
+ * \retval VRT_ERR_GAIN_STAGE2_SET                      Gain stage 1 must be used instead of stage 2 when only one of
+ *                                                      them is set.
  * \retval VRT_ERR_BOUNDS_SAMPLE_RATE                   Sample rate is outside valid bounds (< 0 Hz).
  * \retval VRT_ERR_BOUNDS_TEMPERATURE                   Temperature is outside valid bounds (< -273.15 degrees).
  * \retval VRT_ERR_INVALID_REAL_OR_COMPLEX              Real/Complex is an invalid value.
@@ -115,8 +115,8 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, struct vrt_if_co
  *
  * \param buf        Buffer to read from.
  * \param words_buf  Size of buf in 32-bit words.
- * \param packet     Packet struct to read into.
- * \param validate   True if validation should be done. If false, only buffer size is validated.
+ * \param packet     Packet to read into.
+ * \param validate   True if validation shall be done. If false, only buffer size is validated.
  *
  * \return Number of read 32-bit words, or a negative number if error.
  * \retval VRT_ERR_BUFFER_SIZE                          Buffer is too small.
@@ -127,8 +127,8 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, struct vrt_if_co
  * \retval VRT_ERR_BOUNDS_REAL_TIME                     TSF is VRT_TSF_REAL_TIME but picoseconds is outside valid bounds
  *                                                      (> 999999999999 ps).
  * \retval VRT_ERR_BOUNDS_BANDWIDTH                     Bandwidth is outside valid bounds (< 0 Hz).
- * \retval VRT_ERR_GAIN_STAGE2_SET                      Gain stage 1 must be used instead of stage 2 when only one is
- *                                                      set.
+ * \retval VRT_ERR_GAIN_STAGE2_SET                      Gain stage 1 must be used instead of stage 2 when only one of
+ *                                                      them is set.
  * \retval VRT_ERR_BOUNDS_SAMPLE_RATE                   Sample rate is outside valid bounds (< 0 Hz).
  * \retval VRT_ERR_BOUNDS_TEMPERATURE                   Temperature is outside valid bounds (< -273.15 degrees).
  * \retval VRT_ERR_INVALID_REAL_OR_COMPLEX              Real/Complex is an invalid value.
@@ -147,7 +147,7 @@ int32_t vrt_read_if_context(const void* buf, int32_t words_buf, struct vrt_if_co
  *                                                      degrees).
  * \retval VRT_ERR_MISMATCH_PACKET_SIZE                 Packet size in header and calculated packet size do not match.
  *
- * \warning The packet body pointer will point into buf. That's why buf isn't const.
+ * \warning The packet body pointer will point into buf, which is why buf isn't const.
  * \warning Fields represented as double but with an underlying 64-bit fixed precision format, i.e. bandwidth,
  *          if_reference_frequency, rf_reference_frequency, rf_reference_frequency_offset, if_band_offset, and
  *          sample_rate, may in rare cases lose precision since double only has 53 bits of precision.
