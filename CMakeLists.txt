@@ -77,7 +77,7 @@ if(${CPPLINT})
   # Note that CMAKE_CXX_CPPLINT is set in CMakeLists.txt in 'test' directory
   message(STATUS "Enabling cpplint for C")
   set(CMAKE_C_CPPLINT
-      "${CPPLINT_PROGRAM};--linelength=120;--filter=-legal/copyright,-build/include_subdir"
+      "${CPPLINT_PROGRAM};--linelength=120;--filter=-legal/copyright,-build/include_subdir,-readability/casting,-build/include_order"
   )
 endif()
 if(DOCUMENTATION)

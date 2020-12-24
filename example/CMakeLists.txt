@@ -17,7 +17,7 @@ endif()
 if(${CPPLINT})
   message(STATUS "Enabling cpplint for C")
   set(CMAKE_C_CPPLINT
-      "cpplint;--linelength=120;--filter=-legal/copyright,-build/include_subdir"
+      "cpplint;--linelength=120;--filter=-legal/copyright,-build/include_subdir,-build/include_order,-readability/casting"
   )
 endif()
 if(${IWYU})
