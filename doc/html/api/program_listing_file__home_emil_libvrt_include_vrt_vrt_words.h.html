@@ -155,11 +155,13 @@
 
 <span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;vrt_types.h&quot;</span><span class="cp"></span>
-
 <span class="cp">#ifdef __cplusplus</span>
 <span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="p">{</span>
 <span class="cp">#endif</span>
+
+<span class="k">struct</span> <span class="n">vrt_header</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">vrt_if_context</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">vrt_packet</span><span class="p">;</span>
 
 <span class="cm">/* There is no point in adding max sizes for e.g. data body and IF/Ext context, since they can be UINT16_MAX - 1. */</span>
 

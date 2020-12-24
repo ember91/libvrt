@@ -4,12 +4,17 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#include "vrt_types.h"
 #include "vrt_util.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+struct vrt_fields;
+struct vrt_header;
+struct vrt_if_context;
+struct vrt_packet;
+struct vrt_trailer;
 
 /**
  * Low-level function that reads VRT header section.

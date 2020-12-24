@@ -16,12 +16,17 @@ Program Listing for File vrt_write.h
    #include <stdbool.h>
    #include <stdint.h>
    
-   #include "vrt_types.h"
    #include "vrt_util.h"
    
    #ifdef __cplusplus
    extern "C" {
    #endif
+   
+   struct vrt_fields;
+   struct vrt_header;
+   struct vrt_if_context;
+   struct vrt_packet;
+   struct vrt_trailer;
    
    VRT_WARN_UNUSED
    int32_t vrt_write_header(const struct vrt_header* header, void* buf, int32_t words_buf, bool validate);

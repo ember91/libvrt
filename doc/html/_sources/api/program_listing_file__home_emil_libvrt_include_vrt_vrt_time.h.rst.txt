@@ -15,12 +15,13 @@ Program Listing for File vrt_time.h
    
    #include <stdint.h>
    
-   #include "vrt_types.h"
    #include "vrt_util.h"
    
    #ifdef __cplusplus
    extern "C" {
    #endif
+   
+   struct vrt_packet;
    
    struct vrt_time {
        int32_t  s;  

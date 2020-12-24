@@ -1,7 +1,11 @@
 #ifndef TEST_SRC_INIT_GARBAGE_H_
 #define TEST_SRC_INIT_GARBAGE_H_
 
-#include <vrt/vrt_types.h>
+struct vrt_header;
+struct vrt_fields;
+struct vrt_trailer;
+struct vrt_if_context;
+struct vrt_packet;
 
 /**
  * Initialize header to an easy to spot, non-default sequence.

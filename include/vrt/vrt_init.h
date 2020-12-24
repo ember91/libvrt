@@ -1,11 +1,15 @@
 #ifndef INCLUDE_VRT_VRT_INIT_H_
 #define INCLUDE_VRT_VRT_INIT_H_
 
-#include "vrt_types.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+struct vrt_fields;
+struct vrt_header;
+struct vrt_if_context;
+struct vrt_packet;
+struct vrt_trailer;
 
 /**
  * Initialize header to a reasonable default state.

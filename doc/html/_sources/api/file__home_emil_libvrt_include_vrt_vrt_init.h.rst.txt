@@ -25,12 +25,6 @@ Definition (``/home/emil/libvrt/include/vrt/vrt_init.h``)
 
 
 
-Includes
---------
-
-
-- ``vrt_types.h`` (:ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`)
-
 
 
 

@@ -3,11 +3,13 @@
 
 #include <stdint.h>
 
-#include "vrt_types.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+struct vrt_header;
+struct vrt_if_context;
+struct vrt_packet;
 
 /* There is no point in adding max sizes for e.g. data body and IF/Ext context, since they can be UINT16_MAX - 1. */
 

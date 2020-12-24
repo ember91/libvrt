@@ -3,12 +3,13 @@
 
 #include <stdint.h>
 
-#include "vrt_types.h"
 #include "vrt_util.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+struct vrt_packet;
 
 /**
  * Timestamp in whole and fractional seconds.

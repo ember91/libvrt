@@ -31,8 +31,6 @@ Includes
 
 - ``stdint.h``
 
-- ``vrt_types.h`` (:ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`)
-
 - ``vrt_util.h`` (:ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`)
 
 
