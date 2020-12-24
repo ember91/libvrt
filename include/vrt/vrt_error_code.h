@@ -198,7 +198,7 @@ enum vrt_error_code {
      */
     VRT_ERR_MISMATCH_TIME_TYPES = -47,
     /**
-     * Sample rate is required but is not provided.
+     * Sample rate is required but is not provided (<= 0).
      */
     VRT_ERR_MISSING_SAMPLE_RATE = -48,
     /**

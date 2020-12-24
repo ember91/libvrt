@@ -3,20 +3,19 @@
 C implementation of an encoder and decoder of the ANSI/VITA 49.0 Radio Transport (VRT) standard.
 
 **Features:**
-* Well tested - High test code coverage with more than 800 tests
+* Well tested - High test code coverage with more than 900 tests
 * Analyzed - With runtime analysis tools such as valgrind
 * Compatible - Tested with GCC, Clang, Visual Studio, and ICC
 * Well documented - Doxygen style
 * Low-level - A high degree of control
 * Portable - Written in plain C99
 * Flexible - Read and write only the parts of a packet you want
-* Easy to install - Use CMake, with no external dependencies
+* Easy to install - Use CMake, with no external dependencies except standard library
 * Easy to learn - Comes with examples
 * Complete - Implements full VRT standard
 * Heap friendly - No heap allocations
 * No printf - Neither stdout nor stderr output
 * Packet validation - But only if you want
-* Few dependencies - Only standard library
 
 This library uses a packet terminology as follows:
 | Header: 1 word       |
