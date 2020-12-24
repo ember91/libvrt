@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 # Calculate bounds for floating point fields such as bandwidth and attitude
 
 import enum
