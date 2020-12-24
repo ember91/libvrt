@@ -82,7 +82,7 @@ int vrt_time_difference(const struct vrt_packet* p2,
  *                                     (> 999999999999 ps).
  */
 VRT_WARN_UNUSED
-int vrt_time_calendar(const struct vrt_packet* packet, double sample_rate, struct vrt_calendar_time* t);
+int vrt_time_calendar(const struct vrt_packet* packet, double sample_rate, struct vrt_calendar_time* cal_time);
 
 #ifdef __cplusplus
 }
