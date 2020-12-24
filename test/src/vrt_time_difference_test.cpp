@@ -9,7 +9,7 @@
 
 static const uint64_t PS_IN_S{1000000000000};
 
-class TimeDurationTest : public ::testing::Test {
+class TimeDifferenceTest : public ::testing::Test {
    protected:
     void SetUp() override {
         vrt_init_packet(&p1_);
@@ -21,23 +21,23 @@ class TimeDurationTest : public ::testing::Test {
     vrt_time   dur_{};
 };
 
-TEST_F(TimeDurationTest, None) {
+TEST_F(TimeDifferenceTest, None) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), 0);
 }
 
-TEST_F(TimeDurationTest, MismatchTsi) {
+TEST_F(TimeDifferenceTest, MismatchTsi) {
     p2_.header.tsi = VRT_TSI_UTC;
     p1_.header.tsi = VRT_TSI_GPS;
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISMATCH_TIME_TYPES);
 }
 
-TEST_F(TimeDurationTest, MismatchTsf) {
+TEST_F(TimeDifferenceTest, MismatchTsf) {
     p2_.header.tsf = VRT_TSF_SAMPLE_COUNT;
     p1_.header.tsf = VRT_TSF_FREE_RUNNING_COUNT;
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_MISMATCH_TIME_TYPES);
 }
 
-TEST_F(TimeDurationTest, UtcPositive) {
+TEST_F(TimeDifferenceTest, UtcPositive) {
     p2_.header.tsi                          = VRT_TSI_UTC;
     p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.fields.integer_seconds_timestamp    = 5;
@@ -49,7 +49,7 @@ TEST_F(TimeDurationTest, UtcPositive) {
     ASSERT_EQ(dur_.ps, 0);
 }
 
-TEST_F(TimeDurationTest, UtcNegative) {
+TEST_F(TimeDifferenceTest, UtcNegative) {
     p2_.header.tsi                          = VRT_TSI_UTC;
     p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.fields.integer_seconds_timestamp    = 2;
@@ -61,7 +61,7 @@ TEST_F(TimeDurationTest, UtcNegative) {
     ASSERT_EQ(dur_.ps, 0);
 }
 
-TEST_F(TimeDurationTest, GpsPositive) {
+TEST_F(TimeDifferenceTest, GpsPositive) {
     p2_.header.tsi                          = VRT_TSI_GPS;
     p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.fields.integer_seconds_timestamp    = 5;
@@ -73,7 +73,7 @@ TEST_F(TimeDurationTest, GpsPositive) {
     ASSERT_EQ(dur_.ps, 0);
 }
 
-TEST_F(TimeDurationTest, GpsNegative) {
+TEST_F(TimeDifferenceTest, GpsNegative) {
     p2_.header.tsi                          = VRT_TSI_GPS;
     p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.fields.integer_seconds_timestamp    = 2;
@@ -85,7 +85,7 @@ TEST_F(TimeDurationTest, GpsNegative) {
     ASSERT_EQ(dur_.ps, 0);
 }
 
-TEST_F(TimeDurationTest, OtherPositive) {
+TEST_F(TimeDifferenceTest, OtherPositive) {
     p2_.header.tsi                          = VRT_TSI_OTHER;
     p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.fields.integer_seconds_timestamp    = 5;
@@ -97,7 +97,7 @@ TEST_F(TimeDurationTest, OtherPositive) {
     ASSERT_EQ(dur_.ps, 0);
 }
 
-TEST_F(TimeDurationTest, OtherNegative) {
+TEST_F(TimeDifferenceTest, OtherNegative) {
     p2_.header.tsi                          = VRT_TSI_OTHER;
     p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.fields.integer_seconds_timestamp    = 2;
@@ -109,7 +109,7 @@ TEST_F(TimeDurationTest, OtherNegative) {
     ASSERT_EQ(dur_.ps, 0);
 }
 
-TEST_F(TimeDurationTest, SampleCountPositive) {
+TEST_F(TimeDifferenceTest, SampleCountPositive) {
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
     p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
     p2_.fields.integer_seconds_timestamp    = 2;
@@ -122,7 +122,7 @@ TEST_F(TimeDurationTest, SampleCountPositive) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, SampleCountNegative) {
+TEST_F(TimeDifferenceTest, SampleCountNegative) {
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
     p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
     p2_.fields.integer_seconds_timestamp    = 2;
@@ -135,7 +135,7 @@ TEST_F(TimeDurationTest, SampleCountNegative) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, SampleCountOutsideBounds1) {
+TEST_F(TimeDifferenceTest, SampleCountOutsideBounds1) {
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
     p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
     p2_.fields.fractional_seconds_timestamp = 1000;
@@ -143,7 +143,7 @@ TEST_F(TimeDurationTest, SampleCountOutsideBounds1) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
-TEST_F(TimeDurationTest, SampleCountOutsideBounds2) {
+TEST_F(TimeDifferenceTest, SampleCountOutsideBounds2) {
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
     p1_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
     p2_.fields.fractional_seconds_timestamp = 750;
@@ -151,7 +151,7 @@ TEST_F(TimeDurationTest, SampleCountOutsideBounds2) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
-TEST_F(TimeDurationTest, RealTimePositive) {
+TEST_F(TimeDifferenceTest, RealTimePositive) {
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
     p1_.header.tsf                          = VRT_TSF_REAL_TIME;
     p2_.fields.integer_seconds_timestamp    = 8;
@@ -163,7 +163,7 @@ TEST_F(TimeDurationTest, RealTimePositive) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, RealTimeNegative) {
+TEST_F(TimeDifferenceTest, RealTimeNegative) {
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
     p1_.header.tsf                          = VRT_TSF_REAL_TIME;
     p2_.fields.integer_seconds_timestamp    = 8;
@@ -175,7 +175,7 @@ TEST_F(TimeDurationTest, RealTimeNegative) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, RealTimeBounds1) {
+TEST_F(TimeDifferenceTest, RealTimeBounds1) {
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
     p1_.header.tsf                          = VRT_TSF_REAL_TIME;
     p2_.fields.fractional_seconds_timestamp = PS_IN_S;
@@ -183,7 +183,7 @@ TEST_F(TimeDurationTest, RealTimeBounds1) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
-TEST_F(TimeDurationTest, RealTimeBounds2) {
+TEST_F(TimeDifferenceTest, RealTimeBounds2) {
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
     p1_.header.tsf                          = VRT_TSF_REAL_TIME;
     p2_.fields.fractional_seconds_timestamp = PS_IN_S / 4;
@@ -191,7 +191,7 @@ TEST_F(TimeDurationTest, RealTimeBounds2) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
-TEST_F(TimeDurationTest, FreeRunningCountPositive) {
+TEST_F(TimeDifferenceTest, FreeRunningCountPositive) {
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
     p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
     p2_.fields.integer_seconds_timestamp    = 2;
@@ -204,7 +204,7 @@ TEST_F(TimeDurationTest, FreeRunningCountPositive) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, FreeRunningCountNegative) {
+TEST_F(TimeDifferenceTest, FreeRunningCountNegative) {
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
     p1_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
     p2_.fields.integer_seconds_timestamp    = 2;
@@ -217,7 +217,7 @@ TEST_F(TimeDurationTest, FreeRunningCountNegative) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, UtcSampleCountPositive) {
+TEST_F(TimeDifferenceTest, UtcSampleCountPositive) {
     p2_.header.tsi                          = VRT_TSI_UTC;
     p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
@@ -232,7 +232,7 @@ TEST_F(TimeDurationTest, UtcSampleCountPositive) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, UtcSampleCountNegative) {
+TEST_F(TimeDifferenceTest, UtcSampleCountNegative) {
     p2_.header.tsi                          = VRT_TSI_UTC;
     p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
@@ -247,7 +247,7 @@ TEST_F(TimeDurationTest, UtcSampleCountNegative) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, UtcSampleCountOutsideBounds1) {
+TEST_F(TimeDifferenceTest, UtcSampleCountOutsideBounds1) {
     p2_.header.tsi                          = VRT_TSI_UTC;
     p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
@@ -257,7 +257,7 @@ TEST_F(TimeDurationTest, UtcSampleCountOutsideBounds1) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
-TEST_F(TimeDurationTest, UtcSampleCountOutsideBounds2) {
+TEST_F(TimeDifferenceTest, UtcSampleCountOutsideBounds2) {
     p2_.header.tsi                          = VRT_TSI_UTC;
     p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
@@ -267,7 +267,7 @@ TEST_F(TimeDurationTest, UtcSampleCountOutsideBounds2) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
-TEST_F(TimeDurationTest, UtcRealTimePositive) {
+TEST_F(TimeDifferenceTest, UtcRealTimePositive) {
     p2_.header.tsi                          = VRT_TSI_UTC;
     p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
@@ -281,7 +281,7 @@ TEST_F(TimeDurationTest, UtcRealTimePositive) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, UtcRealTimeNegative) {
+TEST_F(TimeDifferenceTest, UtcRealTimeNegative) {
     p2_.header.tsi                          = VRT_TSI_UTC;
     p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
@@ -295,7 +295,7 @@ TEST_F(TimeDurationTest, UtcRealTimeNegative) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, UtcRealTimeBounds1) {
+TEST_F(TimeDifferenceTest, UtcRealTimeBounds1) {
     p2_.header.tsi                          = VRT_TSI_UTC;
     p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
@@ -305,7 +305,7 @@ TEST_F(TimeDurationTest, UtcRealTimeBounds1) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
-TEST_F(TimeDurationTest, UtcRealTimeBounds2) {
+TEST_F(TimeDifferenceTest, UtcRealTimeBounds2) {
     p2_.header.tsi                          = VRT_TSI_UTC;
     p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
@@ -315,7 +315,7 @@ TEST_F(TimeDurationTest, UtcRealTimeBounds2) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
-TEST_F(TimeDurationTest, UtcFreeRunningCountPositive) {
+TEST_F(TimeDifferenceTest, UtcFreeRunningCountPositive) {
     p2_.header.tsi                          = VRT_TSI_UTC;
     p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
@@ -330,7 +330,7 @@ TEST_F(TimeDurationTest, UtcFreeRunningCountPositive) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, UtcFreeRunningCountNegative) {
+TEST_F(TimeDifferenceTest, UtcFreeRunningCountNegative) {
     p2_.header.tsi                          = VRT_TSI_UTC;
     p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
@@ -345,7 +345,7 @@ TEST_F(TimeDurationTest, UtcFreeRunningCountNegative) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, UtcFreeRunningCountMismatch) {
+TEST_F(TimeDifferenceTest, UtcFreeRunningCountMismatch) {
     p2_.header.tsi                          = VRT_TSI_UTC;
     p1_.header.tsi                          = VRT_TSI_UTC;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
@@ -357,7 +357,7 @@ TEST_F(TimeDurationTest, UtcFreeRunningCountMismatch) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_INTEGER_SECONDS_MISMATCH);
 }
 
-TEST_F(TimeDurationTest, GpsSampleCountPositive) {
+TEST_F(TimeDifferenceTest, GpsSampleCountPositive) {
     p2_.header.tsi                          = VRT_TSI_GPS;
     p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
@@ -372,7 +372,7 @@ TEST_F(TimeDurationTest, GpsSampleCountPositive) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, GpsSampleCountNegative) {
+TEST_F(TimeDifferenceTest, GpsSampleCountNegative) {
     p2_.header.tsi                          = VRT_TSI_GPS;
     p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
@@ -387,7 +387,7 @@ TEST_F(TimeDurationTest, GpsSampleCountNegative) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, GpsSampleCountOutsideBounds1) {
+TEST_F(TimeDifferenceTest, GpsSampleCountOutsideBounds1) {
     p2_.header.tsi                          = VRT_TSI_GPS;
     p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
@@ -397,7 +397,7 @@ TEST_F(TimeDurationTest, GpsSampleCountOutsideBounds1) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
-TEST_F(TimeDurationTest, GpsSampleCountOutsideBounds2) {
+TEST_F(TimeDifferenceTest, GpsSampleCountOutsideBounds2) {
     p2_.header.tsi                          = VRT_TSI_GPS;
     p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
@@ -407,7 +407,7 @@ TEST_F(TimeDurationTest, GpsSampleCountOutsideBounds2) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
-TEST_F(TimeDurationTest, GpsRealTimePositive) {
+TEST_F(TimeDifferenceTest, GpsRealTimePositive) {
     p2_.header.tsi                          = VRT_TSI_GPS;
     p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
@@ -421,7 +421,7 @@ TEST_F(TimeDurationTest, GpsRealTimePositive) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, GpsRealTimeNegative) {
+TEST_F(TimeDifferenceTest, GpsRealTimeNegative) {
     p2_.header.tsi                          = VRT_TSI_GPS;
     p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
@@ -435,7 +435,7 @@ TEST_F(TimeDurationTest, GpsRealTimeNegative) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, GpsRealTimeBounds1) {
+TEST_F(TimeDifferenceTest, GpsRealTimeBounds1) {
     p2_.header.tsi                          = VRT_TSI_GPS;
     p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
@@ -445,7 +445,7 @@ TEST_F(TimeDurationTest, GpsRealTimeBounds1) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
-TEST_F(TimeDurationTest, GpsRealTimeBounds2) {
+TEST_F(TimeDifferenceTest, GpsRealTimeBounds2) {
     p2_.header.tsi                          = VRT_TSI_GPS;
     p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
@@ -455,7 +455,7 @@ TEST_F(TimeDurationTest, GpsRealTimeBounds2) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
-TEST_F(TimeDurationTest, GpsFreeRunningCountPositive) {
+TEST_F(TimeDifferenceTest, GpsFreeRunningCountPositive) {
     p2_.header.tsi                          = VRT_TSI_GPS;
     p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
@@ -470,7 +470,7 @@ TEST_F(TimeDurationTest, GpsFreeRunningCountPositive) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, GpsFreeRunningCountNegative) {
+TEST_F(TimeDifferenceTest, GpsFreeRunningCountNegative) {
     p2_.header.tsi                          = VRT_TSI_GPS;
     p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
@@ -485,7 +485,7 @@ TEST_F(TimeDurationTest, GpsFreeRunningCountNegative) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, GpsFreeRunningCountMismatch) {
+TEST_F(TimeDifferenceTest, GpsFreeRunningCountMismatch) {
     p2_.header.tsi                          = VRT_TSI_GPS;
     p1_.header.tsi                          = VRT_TSI_GPS;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
@@ -497,7 +497,7 @@ TEST_F(TimeDurationTest, GpsFreeRunningCountMismatch) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_INTEGER_SECONDS_MISMATCH);
 }
 
-TEST_F(TimeDurationTest, OtherSampleCountPositive) {
+TEST_F(TimeDifferenceTest, OtherSampleCountPositive) {
     p2_.header.tsi                          = VRT_TSI_OTHER;
     p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
@@ -512,7 +512,7 @@ TEST_F(TimeDurationTest, OtherSampleCountPositive) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, OtherSampleCountNegative) {
+TEST_F(TimeDifferenceTest, OtherSampleCountNegative) {
     p2_.header.tsi                          = VRT_TSI_OTHER;
     p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
@@ -527,7 +527,7 @@ TEST_F(TimeDurationTest, OtherSampleCountNegative) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, OtherSampleCountOutsideBounds1) {
+TEST_F(TimeDifferenceTest, OtherSampleCountOutsideBounds1) {
     p2_.header.tsi                          = VRT_TSI_OTHER;
     p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
@@ -537,7 +537,7 @@ TEST_F(TimeDurationTest, OtherSampleCountOutsideBounds1) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
-TEST_F(TimeDurationTest, OtherSampleCountOutsideBounds2) {
+TEST_F(TimeDifferenceTest, OtherSampleCountOutsideBounds2) {
     p2_.header.tsi                          = VRT_TSI_OTHER;
     p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_SAMPLE_COUNT;
@@ -547,7 +547,7 @@ TEST_F(TimeDurationTest, OtherSampleCountOutsideBounds2) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 1000.0, &dur_), VRT_ERR_BOUNDS_SAMPLE_COUNT);
 }
 
-TEST_F(TimeDurationTest, OtherRealTimePositive) {
+TEST_F(TimeDifferenceTest, OtherRealTimePositive) {
     p2_.header.tsi                          = VRT_TSI_OTHER;
     p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
@@ -561,7 +561,7 @@ TEST_F(TimeDurationTest, OtherRealTimePositive) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, OtherRealTimeNegative) {
+TEST_F(TimeDifferenceTest, OtherRealTimeNegative) {
     p2_.header.tsi                          = VRT_TSI_OTHER;
     p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
@@ -575,7 +575,7 @@ TEST_F(TimeDurationTest, OtherRealTimeNegative) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, OtherRealTimeBounds1) {
+TEST_F(TimeDifferenceTest, OtherRealTimeBounds1) {
     p2_.header.tsi                          = VRT_TSI_OTHER;
     p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
@@ -585,7 +585,7 @@ TEST_F(TimeDurationTest, OtherRealTimeBounds1) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
-TEST_F(TimeDurationTest, OtherRealTimeBounds2) {
+TEST_F(TimeDifferenceTest, OtherRealTimeBounds2) {
     p2_.header.tsi                          = VRT_TSI_OTHER;
     p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_REAL_TIME;
@@ -595,7 +595,7 @@ TEST_F(TimeDurationTest, OtherRealTimeBounds2) {
     ASSERT_EQ(vrt_time_difference(&p2_, &p1_, 0.0, &dur_), VRT_ERR_BOUNDS_REAL_TIME);
 }
 
-TEST_F(TimeDurationTest, OtherFreeRunningCountPositive) {
+TEST_F(TimeDifferenceTest, OtherFreeRunningCountPositive) {
     p2_.header.tsi                          = VRT_TSI_OTHER;
     p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
@@ -610,7 +610,7 @@ TEST_F(TimeDurationTest, OtherFreeRunningCountPositive) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, OtherFreeRunningCountNegative) {
+TEST_F(TimeDifferenceTest, OtherFreeRunningCountNegative) {
     p2_.header.tsi                          = VRT_TSI_OTHER;
     p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
@@ -625,7 +625,7 @@ TEST_F(TimeDurationTest, OtherFreeRunningCountNegative) {
     ASSERT_EQ(dur_.ps, PS_IN_S / 2);
 }
 
-TEST_F(TimeDurationTest, OtherFreeRunningCountMismatch) {
+TEST_F(TimeDifferenceTest, OtherFreeRunningCountMismatch) {
     p2_.header.tsi                          = VRT_TSI_OTHER;
     p1_.header.tsi                          = VRT_TSI_OTHER;
     p2_.header.tsf                          = VRT_TSF_FREE_RUNNING_COUNT;
