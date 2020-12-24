@@ -44,12 +44,16 @@ Classes
 -------
 
 
+- :ref:`exhale_struct_structvrt__calendar__time`
+
 - :ref:`exhale_struct_structvrt__time`
 
 
 Functions
 ---------
 
+
+- :ref:`exhale_function_vrt__time_8h_1ab6523bb96cbdbc43cb66d8285e721138`
 
 - :ref:`exhale_function_vrt__time_8h_1af5199e6d4b4944258297674dd000712a`
 

@@ -27,11 +27,26 @@ Program Listing for File vrt_time.h
        uint64_t ps; 
    };
    
+   struct vrt_calendar_time {
+       int32_t  year; 
+       int32_t  mday; 
+       int32_t  yday; 
+       int32_t  sec;  
+       int32_t  min;  
+       int32_t  hour; 
+       int32_t  mon;  
+       int32_t  wday; 
+       uint64_t ps;   
+   };
+   
    VRT_WARN_UNUSED
    int vrt_time_difference(const struct vrt_packet* p2,
                            const struct vrt_packet* p1,
                            double                   sample_rate,
                            struct vrt_time*         diff);
+   
+   VRT_WARN_UNUSED
+   int vrt_time_calendar(const struct vrt_packet* packet, double sample_rate, struct vrt_calendar_time* t);
    
    #ifdef __cplusplus
    }

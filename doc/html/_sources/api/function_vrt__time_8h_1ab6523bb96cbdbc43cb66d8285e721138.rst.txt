@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__time_8h_1ab6523bb96cbdbc43cb66d8285e721138:
+
+Function vrt_time_calendar
+==========================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_time.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_time_calendar(const struct vrt_packet *, double, struct vrt_calendar_time *)

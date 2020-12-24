@@ -2,6 +2,7 @@
 Class Hierarchy
 ---------------
 
+- :ref:`exhale_struct_structvrt__calendar__time`
 - :ref:`exhale_struct_structvrt__class__identifier`
 - :ref:`exhale_struct_structvrt__context__association__lists`
 - :ref:`exhale_struct_structvrt__context__association__lists__indicators`
