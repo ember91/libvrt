@@ -284,7 +284,6 @@ static const int length_of_year[2] = {365, 366};
 /* Some numbers relating to the gregorian cycle */
 static const int64_t years_in_gregorian_cycle = 400;
 #define days_in_gregorian_cycle ((365 * 400) + 100 - 4 + 1)
-static const int64_t seconds_in_gregorian_cycle = days_in_gregorian_cycle * 60LL * 60LL * 24LL;
 
 /**
  * Calculate human comprehensible date from seconds.
