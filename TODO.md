@@ -2,7 +2,6 @@
   * Thread safe (not use gmtime).
   * Handle leap seconds for UTC and not for GPS.
   * Perhaps also with extra time zone information.
-* Add example for calendar_time
 
 # Future
 * Make version number tag on github
