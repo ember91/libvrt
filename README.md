@@ -143,7 +143,11 @@ vrt_write_packet(packet, buf, words_buf, validate)
 ```
 For calculating time between packets:
 ```
-vrt_time_difference(p2, p1, sample_rate, diff)
+vrt_time_difference(packet2, packet1, sample_rate, diff)
+```
+For converting a packet timestamp to a more human comprehensible form:
+```
+vrt_time_calendar(packet, sample_rate, time)
 ```
 For getting a string representation of an error:
 ```
@@ -185,6 +189,11 @@ vrt_string_tsi(tsi)
 vrt_string_tsf(tsf)
 vrt_string_real_or_complex(real_or_complex)
 vrt_string_data_item_format(data_item_format)
+```
+For handling time:
+```
+vrt_time_difference(packet2, packet1, sample_rate, diff)
+vrt_time_calendar(packet, sample_rate, time)
 ```
 And other helper functions:
 ```
