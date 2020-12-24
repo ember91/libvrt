@@ -41,11 +41,11 @@ TEST_F(ReadHeaderTest, PacketType) {
 }
 
 TEST_F(ReadHeaderTest, PacketTypeInvalid) {
-    buf_[0] = 0xF0000000;
+    buf_[0] = 0x60000000;
     ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, true), VRT_ERR_INVALID_PACKET_TYPE);
     ASSERT_EQ(vrt_read_header(buf_.data(), 1, &h_, false), 1);
     SCOPED_TRACE(::testing::UnitTest::GetInstance()->current_test_info()->name());
-    assert_header(h_, {{"packet_type", static_cast<vrt_packet_type>(0xF)}});
+    assert_header(h_, {{"packet_type", static_cast<vrt_packet_type>(0x6)}});
 }
 
 TEST_F(ReadHeaderTest, HasClassId) {
