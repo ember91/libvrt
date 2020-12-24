@@ -298,8 +298,13 @@ static const int64_t years_in_gregorian_cycle = 400;
  * \return 0, or error code if error.
  */
 static int vrt_gmtime(uint32_t in_time, struct vrt_calendar_time* t) {
-    int     v_tm_sec, v_tm_min, v_tm_hour, v_tm_mon, v_tm_wday;
+    int32_t v_tm_sec;
+    int32_t v_tm_min;
+    int32_t v_tm_hour;
+    int32_t v_tm_mon;
+    int32_t v_tm_wday;
     int64_t v_tm_tday;
+
     int     leap;
     int64_t m;
     int64_t time   = in_time;
@@ -319,8 +324,9 @@ static int vrt_gmtime(uint32_t in_time, struct vrt_calendar_time* t) {
     WRAP(v_tm_hour, v_tm_tday, 24);
 
     v_tm_wday = (int)((v_tm_tday + 4) % 7);
-    if (v_tm_wday < 0)
+    if (v_tm_wday < 0) {
         v_tm_wday += 7;
+    }
     m = v_tm_tday;
 
     if (m >= CHEAT_DAYS) {
