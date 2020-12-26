@@ -55,7 +55,7 @@ struct vrt_calendar_time {
  * \retval VRT_ERR_MISMATCH_TIME_TYPES      TSI and/or TSF timestamps differ between packets.
  * \retval VRT_ERR_MISSING_SAMPLE_RATE      Sample rate is required but is not provided (<= 0).
  * \retval VRT_ERR_BOUNDS_SAMPLE_COUNT      Fractional timestamp is outside valid bounds (>= sample rate).
- * \retval VRT_ERR_BOUNDS_REAL_TIME         TSF is VRT_TSF_REAL_TIME but picoseconds is outside valid bounds
+ * \retval VRT_ERR_BOUNDS_REAL_TIME         TSF is VRT_TSF_REAL_TIME but fractional timestamp is outside valid bounds
  *                                          (> 999999999999 ps).
  * \retval VRT_ERR_INTEGER_SECONDS_MISMATCH Timestamp integer seconds and calculated seconds from the Free running count
  *                                          fractional part differ.
@@ -79,6 +79,9 @@ int vrt_time_difference(const struct vrt_packet* p2,
  * \retval VRT_ERR_INVALID_TSI         TSI is an invalid value.
  * \retval VRT_ERR_INVALID_TSF         TSF is an invalid value.
  * \retval VRT_ERR_MISSING_SAMPLE_RATE Sample rate is required but is not provided (<= 0).
+ * \retval VRT_ERR_BOUNDS_SAMPLE_COUNT Fractional timestamp is outside valid bounds (>= sample rate).
+ * \retval VRT_ERR_BOUNDS_REAL_TIME    TSF is VRT_TSF_REAL_TIME but fractional timestamp is outside valid bounds
+ *                                     (> 999999999999 ps)
  */
 VRT_WARN_UNUSED
 int vrt_time_calendar(const struct vrt_packet* packet, double sample_rate, struct vrt_calendar_time* cal_time);

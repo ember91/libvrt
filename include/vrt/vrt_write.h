@@ -50,7 +50,7 @@ int32_t vrt_write_header(const struct vrt_header* header, void* buf, int32_t wor
  *
  * \return Number of written 32-bit words, or a negative number if error.
  * \retval VRT_ERR_BUFFER_SIZE      Buffer is too small.
- * \retval VRT_ERR_BOUNDS_REAL_TIME TSF is VRT_TSF_REAL_TIME but picoseconds is outside valid bounds
+ * \retval VRT_ERR_BOUNDS_REAL_TIME TSF is VRT_TSF_REAL_TIME but fractional timestamp is outside valid bounds
  *                                  (> 999999999999 ps).
  * \retval VRT_ERR_BOUNDS_OUI       OUI is outside valid bounds (> 0x00FFFFFF).
  */
@@ -119,8 +119,8 @@ int32_t vrt_write_trailer(const struct vrt_trailer* trailer, void* buf, int32_t 
  *                                                      VRT_TSI_UNDEFINED.
  * \retval VRT_ERR_SET_FRACTIONAL_SECOND_TIMESTAMP      Integer second timestamp is not 0xFFFFFFFF when TSI is
  *                                                      VRT_TSI_UNDEFINED.
- * \retval VRT_ERR_BOUNDS_REAL_TIME                     TSF is VRT_TSF_REAL_TIME but picoseconds is outside valid bounds
- *                                                      (> 999999999999 ps).
+ * \retval VRT_ERR_BOUNDS_REAL_TIME                     TSF is VRT_TSF_REAL_TIME but fractional timestamp is outside
+ *                                                      valid bounds (> 999999999999 ps).
  * \retval VRT_ERR_BOUNDS_LATITUDE                      Latitude is outside valid bounds (< -90 or > 90 degrees).
  * \retval VRT_ERR_BOUNDS_LONGITUDE                     Longitude is outside valid bounds (< -180 or > 180 degrees).
  * \retval VRT_ERR_BOUNDS_ALTITUDE                      Altitude is outside valid bounds (< ~-67108 or > ~67108 km).
@@ -164,10 +164,11 @@ int32_t vrt_write_if_context(const struct vrt_if_context* if_context, void* buf,
  * \retval VRT_ERR_INVALID_TSI                            TSI is an invalid value.
  * \retval VRT_ERR_INVALID_TSF                            TSF is an invalid value.
  * \retval VRT_ERR_BOUNDS_PACKET_COUNT                    Packet count is outside valid bounds (> 0x0F).
- * \retval VRT_ERR_BOUNDS_REAL_TIME                       TSF is VRT_TSF_REAL_TIME but picoseconds is outside valid
- *                                                        bounds (> 999999999999 ps).
+ * \retval VRT_ERR_BOUNDS_REAL_TIME                       TSF is VRT_TSF_REAL_TIME but fractional timestamp is outside
+ *                                                        valid bounds (> 999999999999 ps).
  * \retval VRT_ERR_BOUNDS_OUI                             OUI is outside valid bounds (> 0x00FFFFFF).
- * \retval VRT_ERR_BOUNDS_ASSOCIATED_CONTEXT_PACKET_COUNT Associated context packet count is outside valid bounds
+ * \retval VRT_ERR_BOUNDS_ASSOCIATED_CONTEXT_PACKET_COUNT Associated context packet count is outside
+ *                                                        valid bounds
  *                                                        (>0x7F).
  * \retval VRT_ERR_BOUNDS_BANDWIDTH                       Bandwidth is outside valid bounds (< 0 Hz or > 8.79 THz).
  * \retval VRT_ERR_BOUNDS_IF_REFERENCE_FREQUENCY          IF reference frequency is outside valid bounds

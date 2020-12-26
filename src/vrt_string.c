@@ -161,7 +161,7 @@ const char* vrt_string_error(int32_t error /* Do NOT use vrt_error_code, since i
         case VRT_ERR_INVALID_TSF:
             return "TSF is an invalid value";
         case VRT_ERR_BOUNDS_REAL_TIME:
-            return "TSF is VRT_TSF_REAL_TIME but picoseconds is outside valid bounds (> 999999999999 ps)";
+            return "TSF is VRT_TSF_REAL_TIME but fractional timestamp is outside valid bounds (> 999999999999 ps)";
         case VRT_ERR_BOUNDS_PACKET_COUNT:
             return "Packet count is outside valid bounds (> 0x0F)";
         case VRT_ERR_BOUNDS_OUI:
