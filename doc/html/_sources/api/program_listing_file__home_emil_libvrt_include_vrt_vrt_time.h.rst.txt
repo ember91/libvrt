@@ -13,39 +13,66 @@ Program Listing for File vrt_time.h
    #ifndef INCLUDE_VRT_VRT_TIME_H_
    #define INCLUDE_VRT_VRT_TIME_H_
    
-   #include <stdint.h>
-   
    #include "vrt_util.h"
    
    #ifdef __cplusplus
    extern "C" {
    #endif
    
+   struct vrt_calendar_time;
+   struct vrt_fields;
+   struct vrt_header;
+   struct vrt_if_context;
    struct vrt_packet;
+   struct vrt_time;
    
-   struct vrt_time {
-       int32_t  s;  
-       uint64_t ps; 
-   };
+   VRT_WARN_UNUSED
+   int vrt_time_difference_fields(const struct vrt_header* h2,
+                                  const struct vrt_fields* f2,
+                                  const struct vrt_header* h1,
+                                  const struct vrt_fields* f1,
+                                  double                   sample_rate,
+                                  struct vrt_time*         diff);
    
-   struct vrt_calendar_time {
-       int32_t  year; 
-       int32_t  mday; 
-       int32_t  yday; 
-       int32_t  sec;  
-       int32_t  min;  
-       int32_t  hour; 
-       int32_t  mon;  
-       int32_t  wday; 
-       uint64_t ps;   
-   };
-   
+   VRT_DEPRECATED
    VRT_WARN_UNUSED
    int vrt_time_difference(const struct vrt_packet* p2,
                            const struct vrt_packet* p1,
                            double                   sample_rate,
                            struct vrt_time*         diff);
    
+   VRT_WARN_UNUSED
+   int vrt_time_calendar_fields(const struct vrt_header*  header,
+                                const struct vrt_fields*  fields,
+                                double                    sample_rate,
+                                struct vrt_calendar_time* cal_time);
+   
+   VRT_WARN_UNUSED
+   int vrt_time_calendar_gps_geolocation(const struct vrt_if_context* if_context,
+                                         double                       sample_rate,
+                                         struct vrt_calendar_time*    cal_time);
+   
+   VRT_WARN_UNUSED
+   int vrt_time_calendar_ins_geolocation(const struct vrt_if_context* if_context,
+                                         double                       sample_rate,
+                                         struct vrt_calendar_time*    cal_time);
+   
+   VRT_WARN_UNUSED
+   int vrt_time_calendar_ecef_ephemeris(const struct vrt_if_context* if_context,
+                                        double                       sample_rate,
+                                        struct vrt_calendar_time*    cal_time);
+   
+   VRT_WARN_UNUSED
+   int vrt_time_calendar_relative_ephemeris(const struct vrt_if_context* if_context,
+                                            double                       sample_rate,
+                                            struct vrt_calendar_time*    cal_time);
+   
+   VRT_WARN_UNUSED
+   int vrt_time_calendar_calibration(const struct vrt_header*     header,
+                                     const struct vrt_if_context* if_context,
+                                     struct vrt_calendar_time*    cal_time);
+   
+   VRT_DEPRECATED
    VRT_WARN_UNUSED
    int vrt_time_calendar(const struct vrt_packet* packet, double sample_rate, struct vrt_calendar_time* cal_time);
    

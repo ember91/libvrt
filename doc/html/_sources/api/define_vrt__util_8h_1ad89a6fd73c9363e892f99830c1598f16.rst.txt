@@ -1,0 +1,13 @@
+.. _exhale_define_vrt__util_8h_1ad89a6fd73c9363e892f99830c1598f16:
+
+Define VRT_DEPRECATED
+=====================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_util.h`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: VRT_DEPRECATED

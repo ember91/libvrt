@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__time_8h_1a37355d43d171a6c2f7ea3fabadf3bc6f:
+
+Function vrt_time_calendar_ecef_ephemeris
+=========================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_time.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_time_calendar_ecef_ephemeris(const struct vrt_if_context *, double, struct vrt_calendar_time *)

@@ -469,6 +469,23 @@
     <span class="k">struct</span> <span class="n">vrt_if_context</span> <span class="n">if_context</span><span class="p">;</span>
 <span class="p">};</span>
 
+<span class="k">struct</span> <span class="n">vrt_time</span> <span class="p">{</span>
+    <span class="kt">int32_t</span>  <span class="n">s</span><span class="p">;</span>
+    <span class="kt">uint64_t</span> <span class="n">ps</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">vrt_calendar_time</span> <span class="p">{</span>
+    <span class="kt">int32_t</span>  <span class="n">year</span><span class="p">;</span>
+    <span class="kt">int32_t</span>  <span class="n">mday</span><span class="p">;</span>
+    <span class="kt">int32_t</span>  <span class="n">yday</span><span class="p">;</span>
+    <span class="kt">int32_t</span>  <span class="n">sec</span><span class="p">;</span>
+    <span class="kt">int32_t</span>  <span class="n">min</span><span class="p">;</span>
+    <span class="kt">int32_t</span>  <span class="n">hour</span><span class="p">;</span>
+    <span class="kt">int32_t</span>  <span class="n">mon</span><span class="p">;</span>
+    <span class="kt">int32_t</span>  <span class="n">wday</span><span class="p">;</span>
+    <span class="kt">uint64_t</span> <span class="n">ps</span><span class="p">;</span>
+<span class="p">};</span>
+
 <span class="cp">#ifdef __cplusplus</span>
 <span class="p">}</span>
 <span class="cp">#endif</span>

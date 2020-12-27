@@ -1,6 +1,6 @@
 #include "vrt_util.h"
 
-struct vrt_types;
+struct vrt_header;
 
 /* Defined inline in header */
 extern bool vrt_is_context(const struct vrt_header* header);

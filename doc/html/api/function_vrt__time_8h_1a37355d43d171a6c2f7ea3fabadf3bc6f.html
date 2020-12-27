@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Function vrt_time_calendar &mdash; libvrt  documentation</title>
+  <title>Function vrt_time_calendar_ecef_ephemeris &mdash; libvrt  documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Function vrt_time_difference" href="function_vrt__time_8h_1af5199e6d4b4944258297674dd000712a.html" />
-    <link rel="prev" title="Function vrt_string_tsm" href="function_vrt__string_8h_1ab8a34e8a55ffcf05cffceddbb9be6ac1.html" /> 
+    <link rel="next" title="Function vrt_time_calendar_fields" href="function_vrt__time_8h_1a8c05a60065d5e63e1995e85837059a15.html" />
+    <link rel="prev" title="Function vrt_time_calendar_calibration" href="function_vrt__time_8h_1a2bfebfa456e7a010d5686e8f8cfa1e80.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -132,13 +132,13 @@
         
           <li><a href="library_root.html">Library API</a> &raquo;</li>
         
-      <li>Function vrt_time_calendar</li>
+      <li>Function vrt_time_calendar_ecef_ephemeris</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/api/function_vrt__time_8h_1a8d0e173fa91a5b25f90a1c2852da0ce1.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/function_vrt__time_8h_1a37355d43d171a6c2f7ea3fabadf3bc6f.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -151,25 +151,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="function-vrt-time-calendar">
-<span id="exhale-function-vrt-time-8h-1a8d0e173fa91a5b25f90a1c2852da0ce1"></span><h1>Function vrt_time_calendar<a class="headerlink" href="#function-vrt-time-calendar" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="function-vrt-time-calendar-ecef-ephemeris">
+<span id="exhale-function-vrt-time-8h-1a37355d43d171a6c2f7ea3fabadf3bc6f"></span><h1>Function vrt_time_calendar_ecef_ephemeris<a class="headerlink" href="#function-vrt-time-calendar-ecef-ephemeris" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>Defined in <a class="reference internal" href="file__home_emil_libvrt_include_vrt_vrt_time.h.html#file-home-emil-libvrt-include-vrt-vrt-time-h"><span class="std std-ref">File vrt_time.h</span></a></p></li>
 </ul>
 <div class="section" id="function-documentation">
 <h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="c function">
-<dt id="c.vrt_time_calendar">
-<span class="target" id="vrt__time_8h_1a8d0e173fa91a5b25f90a1c2852da0ce1"></span>VRT_WARN_UNUSED int <code class="sig-name descname">vrt_time_calendar</code><span class="sig-paren">(</span><em class="property">const</em> <em class="property">struct</em> <a class="reference internal" href="structvrt__packet.html#c.vrt_packet" title="vrt_packet">vrt_packet</a> *<em>packet</em>, double <em>sample_rate</em>, <em class="property">struct</em> <a class="reference internal" href="structvrt__calendar__time.html#c.vrt_calendar_time" title="vrt_calendar_time">vrt_calendar_time</a> *<em>cal_time</em><span class="sig-paren">)</span><a class="headerlink" href="#c.vrt_time_calendar" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Generate a human-readable form of packet timestamp. Only applicable when TSI is UTC or GPS.</p>
+<dt id="c.vrt_time_calendar_ecef_ephemeris">
+<span class="target" id="vrt__time_8h_1a37355d43d171a6c2f7ea3fabadf3bc6f"></span>VRT_WARN_UNUSED int <code class="sig-name descname">vrt_time_calendar_ecef_ephemeris</code><span class="sig-paren">(</span><em class="property">const</em> <em class="property">struct</em> <a class="reference internal" href="structvrt__if__context.html#c.vrt_if_context" title="vrt_if_context">vrt_if_context</a> *<em>if_context</em>, double <em>sample_rate</em>, <em class="property">struct</em> <a class="reference internal" href="structvrt__calendar__time.html#c.vrt_calendar_time" title="vrt_calendar_time">vrt_calendar_time</a> *<em>cal_time</em><span class="sig-paren">)</span><a class="headerlink" href="#c.vrt_time_calendar_ecef_ephemeris" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Generate a human-readable form of IF context ECEF ephemeris timestamp. Only applicable when packet is IF context, ECEF ephemeris is present, and ECEF ephemeris TSI is UTC or GPS.</p>
 <p><dl class="simple">
 <dt><strong>Note</strong></dt><dd><p>GPS timestamps may seem a bit off since they do not take leap seconds in consideration.</p>
 </dd>
 <dt><strong>Return</strong></dt><dd><p>0, or error code if error. </p>
 </dd>
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">packet</span></code>: Packet. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sample_rate</span></code>: Sample rate [Hz]. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if_context</span></code>: IF context. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sample_rate</span></code>: Sample rate [Hz]. May be set to 0 if TSF isn’t VRT_TSF_SAMPLE_COUNT. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cal_time</span></code>: Human readable form of a time point, e.g. year, month, day in month, … [out].</p></li>
 </ul>
 </dd>
@@ -178,7 +178,8 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_INVALID_TSF</span></code>: TSF is an invalid value. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_MISSING_SAMPLE_RATE</span></code>: Sample rate is required but is not provided (&lt;= 0). </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_SAMPLE_COUNT</span></code>: Fractional timestamp is outside valid bounds (&gt;= sample rate). </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: TSF is VRT_TSF_REAL_TIME but fractional timestamp is outside valid bounds (&gt; 999999999999 ps) </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_BOUNDS_REAL_TIME</span></code>: TSF is VRT_TSF_REAL_TIME but fractional timestamp is outside valid bounds (&gt; 999999999999 ps). </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VRT_ERR_EXPECTED_FIELD</span></code>: Expected a field that was not present. </p></li>
 </ul>
 </dd>
 </dl>
@@ -196,10 +197,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="function_vrt__time_8h_1af5199e6d4b4944258297674dd000712a.html" class="btn btn-neutral float-right" title="Function vrt_time_difference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="function_vrt__time_8h_1a8c05a60065d5e63e1995e85837059a15.html" class="btn btn-neutral float-right" title="Function vrt_time_calendar_fields" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="function_vrt__string_8h_1ab8a34e8a55ffcf05cffceddbb9be6ac1.html" class="btn btn-neutral float-left" title="Function vrt_string_tsm" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="function_vrt__time_8h_1a2bfebfa456e7a010d5686e8f8cfa1e80.html" class="btn btn-neutral float-left" title="Function vrt_time_calendar_calibration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -208,7 +208,11 @@ enum vrt_error_code {
     /**
      * Timestamp integer seconds and calculated seconds from the Free running count fractional part differ.
      */
-    VRT_ERR_INTEGER_SECONDS_MISMATCH = -50
+    VRT_ERR_INTEGER_SECONDS_MISMATCH = -50,
+    /**
+     * Expected a field that was not present.
+     */
+    VRT_ERR_EXPECTED_FIELD = -51
 };
 
 #ifdef __cplusplus

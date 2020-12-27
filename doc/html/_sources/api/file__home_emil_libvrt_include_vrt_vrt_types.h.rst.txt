@@ -50,6 +50,8 @@ Classes
 -------
 
 
+- :ref:`exhale_struct_structvrt__calendar__time`
+
 - :ref:`exhale_struct_structvrt__class__identifier`
 
 - :ref:`exhale_struct_structvrt__context__association__lists`
@@ -87,6 +89,8 @@ Classes
 - :ref:`exhale_struct_structvrt__state__and__event`
 
 - :ref:`exhale_struct_structvrt__state__and__event__indicators`
+
+- :ref:`exhale_struct_structvrt__time`
 
 - :ref:`exhale_struct_structvrt__trailer`
 

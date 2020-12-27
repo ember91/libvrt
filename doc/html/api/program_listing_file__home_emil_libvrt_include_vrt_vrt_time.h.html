@@ -153,39 +153,66 @@
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef INCLUDE_VRT_VRT_TIME_H_</span>
 <span class="cp">#define INCLUDE_VRT_VRT_TIME_H_</span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span>
-
 <span class="cp">#include</span> <span class="cpf">&quot;vrt_util.h&quot;</span><span class="cp"></span>
 
 <span class="cp">#ifdef __cplusplus</span>
 <span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="p">{</span>
 <span class="cp">#endif</span>
 
+<span class="k">struct</span> <span class="n">vrt_calendar_time</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">vrt_fields</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">vrt_header</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">vrt_if_context</span><span class="p">;</span>
 <span class="k">struct</span> <span class="n">vrt_packet</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">vrt_time</span><span class="p">;</span>
 
-<span class="k">struct</span> <span class="n">vrt_time</span> <span class="p">{</span>
-    <span class="kt">int32_t</span>  <span class="n">s</span><span class="p">;</span>
-    <span class="kt">uint64_t</span> <span class="n">ps</span><span class="p">;</span>
-<span class="p">};</span>
+<span class="n">VRT_WARN_UNUSED</span>
+<span class="kt">int</span> <span class="nf">vrt_time_difference_fields</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_header</span><span class="o">*</span> <span class="n">h2</span><span class="p">,</span>
+                               <span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_fields</span><span class="o">*</span> <span class="n">f2</span><span class="p">,</span>
+                               <span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_header</span><span class="o">*</span> <span class="n">h1</span><span class="p">,</span>
+                               <span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_fields</span><span class="o">*</span> <span class="n">f1</span><span class="p">,</span>
+                               <span class="kt">double</span>                   <span class="n">sample_rate</span><span class="p">,</span>
+                               <span class="k">struct</span> <span class="n">vrt_time</span><span class="o">*</span>         <span class="n">diff</span><span class="p">);</span>
 
-<span class="k">struct</span> <span class="n">vrt_calendar_time</span> <span class="p">{</span>
-    <span class="kt">int32_t</span>  <span class="n">year</span><span class="p">;</span>
-    <span class="kt">int32_t</span>  <span class="n">mday</span><span class="p">;</span>
-    <span class="kt">int32_t</span>  <span class="n">yday</span><span class="p">;</span>
-    <span class="kt">int32_t</span>  <span class="n">sec</span><span class="p">;</span>
-    <span class="kt">int32_t</span>  <span class="n">min</span><span class="p">;</span>
-    <span class="kt">int32_t</span>  <span class="n">hour</span><span class="p">;</span>
-    <span class="kt">int32_t</span>  <span class="n">mon</span><span class="p">;</span>
-    <span class="kt">int32_t</span>  <span class="n">wday</span><span class="p">;</span>
-    <span class="kt">uint64_t</span> <span class="n">ps</span><span class="p">;</span>
-<span class="p">};</span>
-
+<span class="n">VRT_DEPRECATED</span>
 <span class="n">VRT_WARN_UNUSED</span>
 <span class="kt">int</span> <span class="nf">vrt_time_difference</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_packet</span><span class="o">*</span> <span class="n">p2</span><span class="p">,</span>
                         <span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_packet</span><span class="o">*</span> <span class="n">p1</span><span class="p">,</span>
                         <span class="kt">double</span>                   <span class="n">sample_rate</span><span class="p">,</span>
                         <span class="k">struct</span> <span class="n">vrt_time</span><span class="o">*</span>         <span class="n">diff</span><span class="p">);</span>
 
+<span class="n">VRT_WARN_UNUSED</span>
+<span class="kt">int</span> <span class="nf">vrt_time_calendar_fields</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_header</span><span class="o">*</span>  <span class="n">header</span><span class="p">,</span>
+                             <span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_fields</span><span class="o">*</span>  <span class="n">fields</span><span class="p">,</span>
+                             <span class="kt">double</span>                    <span class="n">sample_rate</span><span class="p">,</span>
+                             <span class="k">struct</span> <span class="n">vrt_calendar_time</span><span class="o">*</span> <span class="n">cal_time</span><span class="p">);</span>
+
+<span class="n">VRT_WARN_UNUSED</span>
+<span class="kt">int</span> <span class="nf">vrt_time_calendar_gps_geolocation</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_if_context</span><span class="o">*</span> <span class="n">if_context</span><span class="p">,</span>
+                                      <span class="kt">double</span>                       <span class="n">sample_rate</span><span class="p">,</span>
+                                      <span class="k">struct</span> <span class="n">vrt_calendar_time</span><span class="o">*</span>    <span class="n">cal_time</span><span class="p">);</span>
+
+<span class="n">VRT_WARN_UNUSED</span>
+<span class="kt">int</span> <span class="nf">vrt_time_calendar_ins_geolocation</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_if_context</span><span class="o">*</span> <span class="n">if_context</span><span class="p">,</span>
+                                      <span class="kt">double</span>                       <span class="n">sample_rate</span><span class="p">,</span>
+                                      <span class="k">struct</span> <span class="n">vrt_calendar_time</span><span class="o">*</span>    <span class="n">cal_time</span><span class="p">);</span>
+
+<span class="n">VRT_WARN_UNUSED</span>
+<span class="kt">int</span> <span class="nf">vrt_time_calendar_ecef_ephemeris</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_if_context</span><span class="o">*</span> <span class="n">if_context</span><span class="p">,</span>
+                                     <span class="kt">double</span>                       <span class="n">sample_rate</span><span class="p">,</span>
+                                     <span class="k">struct</span> <span class="n">vrt_calendar_time</span><span class="o">*</span>    <span class="n">cal_time</span><span class="p">);</span>
+
+<span class="n">VRT_WARN_UNUSED</span>
+<span class="kt">int</span> <span class="nf">vrt_time_calendar_relative_ephemeris</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_if_context</span><span class="o">*</span> <span class="n">if_context</span><span class="p">,</span>
+                                         <span class="kt">double</span>                       <span class="n">sample_rate</span><span class="p">,</span>
+                                         <span class="k">struct</span> <span class="n">vrt_calendar_time</span><span class="o">*</span>    <span class="n">cal_time</span><span class="p">);</span>
+
+<span class="n">VRT_WARN_UNUSED</span>
+<span class="kt">int</span> <span class="nf">vrt_time_calendar_calibration</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_header</span><span class="o">*</span>     <span class="n">header</span><span class="p">,</span>
+                                  <span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_if_context</span><span class="o">*</span> <span class="n">if_context</span><span class="p">,</span>
+                                  <span class="k">struct</span> <span class="n">vrt_calendar_time</span><span class="o">*</span>    <span class="n">cal_time</span><span class="p">);</span>
+
+<span class="n">VRT_DEPRECATED</span>
 <span class="n">VRT_WARN_UNUSED</span>
 <span class="kt">int</span> <span class="nf">vrt_time_calendar</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">vrt_packet</span><span class="o">*</span> <span class="n">packet</span><span class="p">,</span> <span class="kt">double</span> <span class="n">sample_rate</span><span class="p">,</span> <span class="k">struct</span> <span class="n">vrt_calendar_time</span><span class="o">*</span> <span class="n">cal_time</span><span class="p">);</span>
 

@@ -245,6 +245,8 @@ const char* vrt_string_error(int32_t error /* Do NOT use vrt_error_code, since i
         case VRT_ERR_INTEGER_SECONDS_MISMATCH:
             return "Timestamp integer seconds and calculated seconds from the Free running count fractional part "
                    "differ";
+        case VRT_ERR_EXPECTED_FIELD:
+            return "Expected a field that was not present";
         default:
             return "Unknown";
     }

@@ -287,12 +287,47 @@ Functions
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__time_8h_1a8d0e173fa91a5b25f90a1c2852da0ce1.rst
+   function_vrt__time_8h_1a25a329a03609fc98ee265c35356b3360.rst
 
 .. toctree::
    :maxdepth: 5
 
-   function_vrt__time_8h_1af5199e6d4b4944258297674dd000712a.rst
+   function_vrt__time_8h_1a2bfebfa456e7a010d5686e8f8cfa1e80.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_vrt__time_8h_1a37355d43d171a6c2f7ea3fabadf3bc6f.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_vrt__time_8h_1a8c05a60065d5e63e1995e85837059a15.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_vrt__time_8h_1a2e2decf41f9e3d52a84b0afa2620f737.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_vrt__time_8h_1aa9b88226ceea1bb7d502e52a5eb4ee01.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_vrt__time_8h_1a2aa0cc213cef0e0853ed52e0685c7030.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_vrt__time_8h_1ab0ca0b0cb8364fe8099680146ac8fabd.rst
+
+.. toctree::
+   :maxdepth: 5
+
+   function_vrt__time_8h_1a1f4f4e4ffbaa0367cdc64e464030868f.rst
 
 .. toctree::
    :maxdepth: 5
@@ -366,6 +401,11 @@ Variables
 Defines
 *******
 
+
+.. toctree::
+   :maxdepth: 5
+
+   define_vrt__util_8h_1ad89a6fd73c9363e892f99830c1598f16.rst
 
 .. toctree::
    :maxdepth: 5

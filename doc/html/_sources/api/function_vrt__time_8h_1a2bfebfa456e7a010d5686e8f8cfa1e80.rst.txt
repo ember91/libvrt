@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__time_8h_1a2bfebfa456e7a010d5686e8f8cfa1e80:
+
+Function vrt_time_calendar_calibration
+======================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_time.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_time_calendar_calibration(const struct vrt_header *, const struct vrt_if_context *, struct vrt_calendar_time *)

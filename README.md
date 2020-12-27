@@ -143,11 +143,11 @@ vrt_write_packet(packet, buf, words_buf, validate)
 ```
 For calculating time between packets:
 ```
-vrt_time_difference(packet2, packet1, sample_rate, diff)
+vrt_time_difference_fields(header2, fields2, header1, fields1, sample_rate, diff)
 ```
 For converting a packet timestamp to a more human comprehensible form:
 ```
-vrt_time_calendar(packet, sample_rate, time)
+vrt_time_calendar_fields(packet, sample_rate, time)
 ```
 For getting a string representation of an error:
 ```
@@ -192,8 +192,13 @@ vrt_string_data_item_format(data_item_format)
 ```
 For handling time:
 ```
-vrt_time_difference(packet2, packet1, sample_rate, diff)
-vrt_time_calendar(packet, sample_rate, time)
+vrt_time_difference_fields(header2, fields2, header1, fields1, sample_rate, diff)
+vrt_time_calendar_fields(header, fields, sample_rate, time)
+vrt_time_calendar_gps_geolocation(if_context, sample_rate, time)
+vrt_time_calendar_ins_geolocation(if_context, sample_rate, time)
+vrt_time_calendar_ecef_ephemeris(if_context, sample_rate, time)
+vrt_time_calendar_relative_ephemeris(if_context, sample_rate, time)
+vrt_time_calendar_calibration(header, if_context, sample_rate, time)
 ```
 And other helper functions:
 ```

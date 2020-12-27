@@ -5,7 +5,11 @@
 #include <map>
 #include <string>
 
-#include <vrt/vrt_types.h>
+struct vrt_fields;
+struct vrt_header;
+struct vrt_if_context;
+struct vrt_packet;
+struct vrt_trailer;
 
 void assert_header(const vrt_header& h, const std::map<std::string, std::any>& values);
 void assert_fields(const vrt_fields& f, const std::map<std::string, std::any>& values);

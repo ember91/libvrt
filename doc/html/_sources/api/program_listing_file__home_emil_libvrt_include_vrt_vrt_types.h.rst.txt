@@ -329,6 +329,23 @@ Program Listing for File vrt_types.h
        struct vrt_if_context if_context; 
    };
    
+   struct vrt_time {
+       int32_t  s;  
+       uint64_t ps; 
+   };
+   
+   struct vrt_calendar_time {
+       int32_t  year; 
+       int32_t  mday; 
+       int32_t  yday; 
+       int32_t  sec;  
+       int32_t  min;  
+       int32_t  hour; 
+       int32_t  mon;  
+       int32_t  wday; 
+       uint64_t ps;   
+   };
+   
    #ifdef __cplusplus
    }
    #endif

@@ -173,6 +173,17 @@
 <span class="cp">#define VRT_WARN_UNUSED</span>
 <span class="cp">#endif</span>
 
+<span class="cm">/* Force compiler to emit warning when a deprecated value/function is used */</span>
+<span class="cp">#ifdef __GNUC__</span>
+<span class="cp">#define VRT_DEPRECATED __attribute__((deprecated))</span>
+<span class="cp">#elif __clang__</span>
+<span class="cp">#define VRT_DEPRECATED __attribute__((deprecated))</span>
+<span class="cp">#elif _MSC_VER</span>
+<span class="cp">#define VRT_DEPRECATED __declspec(deprecated)</span>
+<span class="cp">#else</span>
+<span class="cp">#define VRT_DEPRECATED</span>
+<span class="cp">#endif</span>
+
 <span class="cm">/* Silence C-style cast warnings when using C++ */</span>
 <span class="cp">#ifdef __cplusplus</span>
 <span class="cp">#define VRT_STATIC_CAST(T, X)      static_cast&lt;T&gt;(X)</span>

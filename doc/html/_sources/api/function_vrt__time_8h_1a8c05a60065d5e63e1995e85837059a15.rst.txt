@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__time_8h_1a8c05a60065d5e63e1995e85837059a15:
+
+Function vrt_time_calendar_fields
+=================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_time.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_time_calendar_fields(const struct vrt_header *, const struct vrt_fields *, double, struct vrt_calendar_time *)

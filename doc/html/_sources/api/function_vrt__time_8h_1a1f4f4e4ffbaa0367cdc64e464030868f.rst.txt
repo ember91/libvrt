@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__time_8h_1a1f4f4e4ffbaa0367cdc64e464030868f:
+
+Function vrt_time_difference_fields
+===================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_time.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_time_difference_fields(const struct vrt_header *, const struct vrt_fields *, const struct vrt_header *, const struct vrt_fields *, double, struct vrt_time *)

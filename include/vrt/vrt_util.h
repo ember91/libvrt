@@ -21,6 +21,17 @@ extern "C" {
 #define VRT_WARN_UNUSED
 #endif
 
+/* Force compiler to emit warning when a deprecated value/function is used */
+#ifdef __GNUC__
+#define VRT_DEPRECATED __attribute__((deprecated))
+#elif __clang__
+#define VRT_DEPRECATED __attribute__((deprecated))
+#elif _MSC_VER
+#define VRT_DEPRECATED __declspec(deprecated)
+#else
+#define VRT_DEPRECATED
+#endif
+
 /* Silence C-style cast warnings when using C++ */
 #ifdef __cplusplus
 #define VRT_STATIC_CAST(T, X)      static_cast<T>(X)

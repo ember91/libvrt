@@ -1,0 +1,13 @@
+.. _exhale_function_vrt__time_8h_1aa9b88226ceea1bb7d502e52a5eb4ee01:
+
+Function vrt_time_calendar_ins_geolocation
+==========================================
+
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_time.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: vrt_time_calendar_ins_geolocation(const struct vrt_if_context *, double, struct vrt_calendar_time *)

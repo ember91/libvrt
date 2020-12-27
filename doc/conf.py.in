@@ -85,7 +85,8 @@ breathe_domain_by_extension = {"h" : "c"}
 
 # Macro list
 c_id_attributes = [
-  'VRT_WARN_UNUSED'
+  'VRT_WARN_UNUSED',
+  'VRT_DEPRECATED'
 ]
 
 # -- Options for HTML output -------------------------------------------------

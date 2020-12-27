@@ -720,6 +720,32 @@ struct vrt_packet {
     struct vrt_if_context if_context; /**< IF context. */
 };
 
+/**
+ * Timestamp in whole and fractional seconds.
+ *
+ * \note ps is always nonnegative. So -3.5 is represented as s = -4, ps = 5e11.
+ */
+struct vrt_time {
+    int32_t  s;  /**< Seconds. */
+    uint64_t ps; /**< Picoseconds. Always nonnegative. */
+};
+
+/**
+ * Human comprehensible calendar date/time format. Similar to C standard library struct tm, but with an extra field for
+ * picoseconds.
+ */
+struct vrt_calendar_time {
+    int32_t  year; /**< Number of years since 1900. */
+    int32_t  mday; /**< Day of month [1, 31]. */
+    int32_t  yday; /**< Day in year [0, 365]. */
+    int32_t  sec;  /**< Seconds [0, 59]. */
+    int32_t  min;  /**< Minutes [0, 59]. */
+    int32_t  hour; /**< Hours [0, 23]. */
+    int32_t  mon;  /**< Month [0, 11]. */
+    int32_t  wday; /**< Day of week, starting with Sunday [0, 6]. */
+    uint64_t ps;   /**< Picoseconds [0, 999999999999]. */
+};
+
 #ifdef __cplusplus
 }
 #endif

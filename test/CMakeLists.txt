@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(
   test
-  LANGUAGES CXX
+  LANGUAGES C CXX
   DESCRIPTION "Test suite for libvrt.")
 
 # Set C++ standard
@@ -31,7 +31,7 @@ endif()
 
 # Add test source files
 file(GLOB SRC_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
-add_executable(${TARGET_NAME} ${SRC_FILES})
+add_executable(${TARGET_NAME} ${SRC_FILES} "${CMAKE_CURRENT_SOURCE_DIR}/../src/timestamp_to_calendar.c")
 
 # Setup testing
 enable_testing()

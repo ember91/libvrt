@@ -3,7 +3,7 @@
 Struct vrt_time
 ===============
 
-- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_time.h`
+- Defined in :ref:`file__home_emil_libvrt_include_vrt_vrt_types.h`
 
 
 Struct Documentation
