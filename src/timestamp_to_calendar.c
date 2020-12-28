@@ -187,6 +187,8 @@ int timestamp_to_calendar(enum vrt_tsi              tsi,
             }
             break;
         }
+        case VRT_TSI_NONE:
+        case VRT_TSI_OTHER:
         default: {
             return VRT_ERR_INVALID_TSI;
         }
@@ -215,6 +217,7 @@ int timestamp_to_calendar(enum vrt_tsi              tsi,
             cal_time->ps = ts_frac;
             break;
         }
+        case VRT_TSF_FREE_RUNNING_COUNT:
         default: {
             return VRT_ERR_INVALID_TSF;
         }

@@ -585,7 +585,7 @@ static int32_t if_context_write_gps_ascii(bool has, const struct vrt_gps_ascii* 
             memcpy(b + 2, g->ascii, sizeof(uint32_t) * g->number_of_words);
         }
 
-        return 2 + g->number_of_words;
+        return (int32_t)(2 + g->number_of_words);
     }
 
     return 0;

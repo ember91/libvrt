@@ -660,7 +660,7 @@ static int32_t if_context_read_gps_ascii(bool has, const uint32_t* b, struct vrt
             }
         }
 
-        return 2 + g->number_of_words;
+        return (int32_t)(2 + g->number_of_words);
     }
 
     g->oui             = 0;
