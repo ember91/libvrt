@@ -1,6 +1,6 @@
 List of things to do for a new library release.
 
-* Compile with:
+* Full recompile with:
   * GCC
   * clang
   * ICC
