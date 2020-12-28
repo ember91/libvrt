@@ -12,7 +12,7 @@ extern "C" {
 struct vrt_calendar_time;
 
 /**
- * Convert time stamp to human readable format.
+ * Convert time stamp to calendar format.
  *
  * \param tsi         TSI.
  * \param tsf         TSF.

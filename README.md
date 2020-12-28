@@ -145,7 +145,7 @@ For calculating time between packets:
 ```
 vrt_time_difference_fields(header2, fields2, header1, fields1, sample_rate, diff)
 ```
-For converting a packet timestamp to a more human comprehensible form:
+For converting a packet timestamp to a calendar representation:
 ```
 vrt_time_calendar_fields(packet, sample_rate, time)
 ```

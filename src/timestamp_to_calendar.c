@@ -54,7 +54,7 @@ static const int64_t years_in_gregorian_cycle = 400;
 #define days_in_gregorian_cycle ((365 * 400) + 100 - 4 + 1)
 
 /**
- * Calculate human comprehensible date from seconds.
+ * Calculate calendar representation date from seconds.
  *
  * A modified copy of gmtime() from the Bionic C standard library. This has two advantages:
  *   It can be rewritten to use a pre-allocated output, making it thread safe.

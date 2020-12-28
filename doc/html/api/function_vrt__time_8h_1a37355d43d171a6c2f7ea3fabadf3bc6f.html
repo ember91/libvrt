@@ -161,7 +161,7 @@
 <dl class="c function">
 <dt id="c.vrt_time_calendar_ecef_ephemeris">
 <span class="target" id="vrt__time_8h_1a37355d43d171a6c2f7ea3fabadf3bc6f"></span>VRT_WARN_UNUSED int <code class="sig-name descname">vrt_time_calendar_ecef_ephemeris</code><span class="sig-paren">(</span><em class="property">const</em> <em class="property">struct</em> <a class="reference internal" href="structvrt__if__context.html#c.vrt_if_context" title="vrt_if_context">vrt_if_context</a> *<em>if_context</em>, double <em>sample_rate</em>, <em class="property">struct</em> <a class="reference internal" href="structvrt__calendar__time.html#c.vrt_calendar_time" title="vrt_calendar_time">vrt_calendar_time</a> *<em>cal_time</em><span class="sig-paren">)</span><a class="headerlink" href="#c.vrt_time_calendar_ecef_ephemeris" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Generate a human-readable form of IF context ECEF ephemeris timestamp. Only applicable when packet is IF context, ECEF ephemeris is present, and ECEF ephemeris TSI is UTC or GPS.</p>
+<dd><p>Generate a calendar representation of IF context ECEF ephemeris timestamp. Only applicable when ECEF ephemeris is present and ECEF ephemeris TSI is UTC or GPS.</p>
 <p><dl class="simple">
 <dt><strong>Note</strong></dt><dd><p>GPS timestamps may seem a bit off since they do not take leap seconds in consideration.</p>
 </dd>
@@ -170,7 +170,7 @@
 <dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">if_context</span></code>: IF context. </p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sample_rate</span></code>: Sample rate [Hz]. May be set to 0 if TSF isn’t VRT_TSF_SAMPLE_COUNT. </p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cal_time</span></code>: Human readable form of a time point, e.g. year, month, day in month, … [out].</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cal_time</span></code>: Calendar representation of a time point, i.e. year, month, day in month, … [out].</p></li>
 </ul>
 </dd>
 <dt><strong>Return Value</strong></dt><dd><ul class="breatheparameterlist simple">

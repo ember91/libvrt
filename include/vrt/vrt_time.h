@@ -15,7 +15,8 @@ struct vrt_packet;
 struct vrt_time;
 
 /**
- * Calculate positive or negative time difference between fields section of two packets in whole and fractional seconds.
+ * Calculate positive or negative time difference between fields sections of two packets in whole and fractional
+ * seconds.
  *
  * \note Ignores any IF context sample rate field in packet. Use sample_rate parameter instead.
  *
@@ -58,14 +59,14 @@ int vrt_time_difference(const struct vrt_packet* p2,
                         struct vrt_time*         diff);
 
 /**
- * Generate a human-readable form of fields section timestamp. Only applicable when header TSI is UTC or GPS.
+ * Generate a calendar representation of the fields section timestamp. Only applicable when header TSI is UTC or GPS.
  *
  * \note GPS timestamps may seem a bit off since they do not take leap seconds in consideration.
  *
  * \param header      Header.
  * \param fields      Fields.
  * \param sample_rate Sample rate [Hz]. May be set to 0 if TSF isn't VRT_TSF_SAMPLE_COUNT.
- * \param cal_time    Human readable form of a time point, e.g. year, month, day in month, ... [out].
+ * \param cal_time    Calendar representation of a time point, i.e. year, month, day in month, ... [out].
  *
  * \return 0, or error code if error.
  * \retval VRT_ERR_INVALID_TSI          TSI is an invalid value.
@@ -83,14 +84,14 @@ int vrt_time_calendar_fields(const struct vrt_header*  header,
                              struct vrt_calendar_time* cal_time);
 
 /**
- * Generate a human-readable form of IF context GPS geolocation timestamp. Only applicable when GPS geolocation is
+ * Generate a calendar representation of IF context GPS geolocation timestamp. Only applicable when GPS geolocation is
  * present and GPS geolocation TSI is UTC or GPS.
  *
  * \note GPS timestamps may seem a bit off since they do not take leap seconds in consideration.
  *
  * \param if_context  IF context.
  * \param sample_rate Sample rate [Hz]. May be set to 0 if TSF isn't VRT_TSF_SAMPLE_COUNT.
- * \param cal_time    Human readable form of a time point, e.g. year, month, day in month, ... [out].
+ * \param cal_time    Calendar representation of a time point, i.e. year, month, day in month, ... [out].
  *
  * \return 0, or error code if error.
  * \retval VRT_ERR_INVALID_TSI          TSI is an invalid value.
@@ -107,14 +108,14 @@ int vrt_time_calendar_gps_geolocation(const struct vrt_if_context* if_context,
                                       struct vrt_calendar_time*    cal_time);
 
 /**
- * Generate a human-readable form of IF context INS geolocation timestamp. Only applicable when INS geolocation is
+ * Generate a calendar representation of IF context INS geolocation timestamp. Only applicable when INS geolocation is
  * present and INS geolocation TSI is UTC or GPS.
  *
  * \note GPS timestamps may seem a bit off since they do not take leap seconds in consideration.
  *
  * \param if_context  IF context.
  * \param sample_rate Sample rate [Hz]. May be set to 0 if TSF isn't VRT_TSF_SAMPLE_COUNT.
- * \param cal_time    Human readable form of a time point, e.g. year, month, day in month, ... [out].
+ * \param cal_time    Calendar representation of a time point, i.e. year, month, day in month, ... [out].
  *
  * \return 0, or error code if error.
  * \retval VRT_ERR_INVALID_TSI          TSI is an invalid value.
@@ -131,14 +132,14 @@ int vrt_time_calendar_ins_geolocation(const struct vrt_if_context* if_context,
                                       struct vrt_calendar_time*    cal_time);
 
 /**
- * Generate a human-readable form of IF context ECEF ephemeris timestamp. Only applicable when ECEF ephemeris is
+ * Generate a calendar representation of IF context ECEF ephemeris timestamp. Only applicable when ECEF ephemeris is
  * present and ECEF ephemeris TSI is UTC or GPS.
  *
  * \note GPS timestamps may seem a bit off since they do not take leap seconds in consideration.
  *
  * \param if_context  IF context.
  * \param sample_rate Sample rate [Hz]. May be set to 0 if TSF isn't VRT_TSF_SAMPLE_COUNT.
- * \param cal_time    Human readable form of a time point, e.g. year, month, day in month, ... [out].
+ * \param cal_time    Calendar representation of a time point, i.e. year, month, day in month, ... [out].
  *
  * \return 0, or error code if error.
  * \retval VRT_ERR_INVALID_TSI          TSI is an invalid value.
@@ -155,14 +156,14 @@ int vrt_time_calendar_ecef_ephemeris(const struct vrt_if_context* if_context,
                                      struct vrt_calendar_time*    cal_time);
 
 /**
- * Generate a human-readable form of IF context Relative ephemeris timestamp. Only applicable when Relative ephemeris is
- * present and Relative ephemeris TSI is UTC or GPS.
+ * Generate a calendar representation of IF context Relative ephemeris timestamp. Only applicable when Relative
+ * ephemeris is present and Relative ephemeris TSI is UTC or GPS.
  *
  * \note GPS timestamps may seem a bit off since they do not take leap seconds in consideration.
  *
  * \param if_context  IF context.
  * \param sample_rate Sample rate [Hz]. May be set to 0 if TSF isn't VRT_TSF_SAMPLE_COUNT.
- * \param cal_time    Human readable form of a time point, e.g. year, month, day in month, ... [out].
+ * \param cal_time    Calendar representation of a time point, i.e. year, month, day in month, ... [out].
  *
  * \return 0, or error code if error.
  * \retval VRT_ERR_INVALID_TSI          TSI is an invalid value.
@@ -179,14 +180,14 @@ int vrt_time_calendar_relative_ephemeris(const struct vrt_if_context* if_context
                                          struct vrt_calendar_time*    cal_time);
 
 /**
- * Generate a human-readable form of Timestamp calibration time. Only applicable when IF calibration time is present and
- * Calibration time TSI is UTC or GPS.
+ * Generate a calendar representation of Timestamp calibration time. Only applicable when IF calibration time is present
+ * and Calibration time TSI is UTC or GPS.
  *
  * \note GPS timestamps may seem a bit off since they do not take leap seconds in consideration.
  *
  * \param header      Header.
  * \param if_context  IF context.
- * \param cal_time    Human readable form of a time point, e.g. year, month, day in month, ... [out].
+ * \param cal_time    Calendar representation of a time point, i.e. year, month, day in month, ... [out].
  *
  * \note cal_time.ps will always be 0.
  *
