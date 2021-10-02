@@ -99,7 +99,7 @@ int32_t vrt_write_trailer(const struct vrt_trailer* trailer, void* buf, int32_t 
  * \retval VRT_ERR_BOUNDS_IF_BAND_OFFSET                IF band offset is outside valid bounds
  *                                                      (< ~-8.79 or > ~8.79 THz).
  * \retval VRT_ERR_BOUNDS_REFERENCE_LEVEL               Reference level is outside valid bounds (< -256 or > ~256 dBm).
- * \retval VRT_ERR_BOUNDS_GAIN                          Gain stage 1 or 2 outside valid bounds (< -256 or > ~256 dB).
+ * \retval VRT_ERR_BOUNDS_GAIN                          Gain stage 1 or 2 is outside valid bounds (< -256 or > ~256 dB).
  * \retval VRT_ERR_GAIN_STAGE2_SET                      Gain stage 1 must be used instead of stage 2 when only one of
  *                                                      them is set.
  * \retval VRT_ERR_BOUNDS_SAMPLE_RATE                   Sample rate is outside valid bounds (< 0 Hz or >
@@ -125,7 +125,7 @@ int32_t vrt_write_trailer(const struct vrt_trailer* trailer, void* buf, int32_t 
  * \retval VRT_ERR_BOUNDS_LONGITUDE                     Longitude is outside valid bounds (< -180 or > 180 degrees).
  * \retval VRT_ERR_BOUNDS_ALTITUDE                      Altitude is outside valid bounds (< ~-67108 or > ~67108 km).
  * \retval VRT_ERR_BOUNDS_SPEED_OVER_GROUND             Speed over ground is outside valid bounds (< 0 or > ~65536 m/s).
- * \retval VRT_ERR_BOUNDS_HEADING_ANGLE                 Heading angle outside valid bounds (< 0 or > ~360
+ * \retval VRT_ERR_BOUNDS_HEADING_ANGLE                 Heading angle is outside valid bounds (< 0 or > ~360
  *                                                      degrees).
  * \retval VRT_ERR_BOUNDS_TRACK_ANGLE                   Track angle is outside valid bounds (< 0 or > ~360
  *                                                      degrees).
@@ -181,7 +181,7 @@ int32_t vrt_write_if_context(const struct vrt_if_context* if_context, void* buf,
  *                                                        (< ~-8.79 or > ~8.79 THz).
  * \retval VRT_ERR_BOUNDS_REFERENCE_LEVEL                 Reference level is outside valid bounds
  *                                                        (< -256 or > ~256 dBm).
- * \retval VRT_ERR_BOUNDS_GAIN                            Gain stage 1 or 2 outside valid bounds
+ * \retval VRT_ERR_BOUNDS_GAIN                            Gain stage 1 or 2 is outside valid bounds
  *                                                        (< -256 or > ~256 dB).
  * \retval VRT_ERR_GAIN_STAGE2_SET                        Gain stage 1 must be used instead of stage 2 when only one of
  *                                                        them is set.

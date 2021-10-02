@@ -181,7 +181,7 @@ const char* vrt_string_error(int32_t error /* Do NOT use vrt_error_code, since i
         case VRT_ERR_BOUNDS_REFERENCE_LEVEL:
             return "Reference level is outside valid bounds (< -256 or > 256 dBm)";
         case VRT_ERR_BOUNDS_GAIN:
-            return "Gain stage 1 or 2 outside valid bounds (< -256 or > 256 dB)";
+            return "Gain stage 1 or 2 is outside valid bounds (< -256 or > 256 dB)";
         case VRT_ERR_GAIN_STAGE2_SET:
             return "Gain stage 1 must be used instead of stage 2 when only one of them is set";
         case VRT_ERR_BOUNDS_SAMPLE_RATE:
@@ -215,9 +215,9 @@ const char* vrt_string_error(int32_t error /* Do NOT use vrt_error_code, since i
         case VRT_ERR_BOUNDS_SPEED_OVER_GROUND:
             return "Speed over ground is outside valid bounds (< 0 or > 65536 m/s)";
         case VRT_ERR_BOUNDS_HEADING_ANGLE:
-            return "Heading angle outside valid bounds (< 0 or > 359.999999761582 degrees)";
+            return "Heading angle is outside valid bounds (< 0 or > ~360 degrees)";
         case VRT_ERR_BOUNDS_TRACK_ANGLE:
-            return "Track angle is outside valid bounds (< 0 or > 359.999999761582 degrees)";
+            return "Track angle is outside valid bounds (< 0 or > ~360 degrees)";
         case VRT_ERR_BOUNDS_MAGNETIC_VARIATION:
             return "Magnetic variation is outside valid bounds (< -180 or > 180 degrees)";
         case VRT_ERR_BOUNDS_POSITION:

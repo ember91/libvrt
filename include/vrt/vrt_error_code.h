@@ -82,7 +82,7 @@ enum vrt_error_code {
      */
     VRT_ERR_BOUNDS_REFERENCE_LEVEL = -18,
     /**
-     * Gain stage 1 or 2 outside valid bounds (< -256 or > ~256 dB).
+     * Gain stage 1 or 2 is outside valid bounds (< -256 or > ~256 dB).
      */
     VRT_ERR_BOUNDS_GAIN = -19,
     /**
@@ -150,7 +150,7 @@ enum vrt_error_code {
      */
     VRT_ERR_BOUNDS_SPEED_OVER_GROUND = -35,
     /**
-     * Heading angle outside valid bounds (< 0 or > ~360 degrees).
+     * Heading angle is outside valid bounds (< 0 or > ~360 degrees).
      */
     VRT_ERR_BOUNDS_HEADING_ANGLE = -36,
     /**

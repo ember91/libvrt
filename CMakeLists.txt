@@ -37,6 +37,7 @@ option(EXAMPLE "Compile example suite" OFF)
 option(GCOV "Generate code coverage report" OFF)
 
 if(DOCUMENTATION)
+  # Install with 'sudo apt install doxygen'.
   find_package(Doxygen)
   # Note that Breathe may located with find_package but may not work with sudo
   # make install. Install with 'sudo pip3 install breathe'.

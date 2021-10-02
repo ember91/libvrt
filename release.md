@@ -13,6 +13,7 @@ List of things to do for a new library release.
   * clang -Weverything ...
 * Run all tests: `./test/run_unit_tests`
 * Generate new documentation
+* Inspect new documentation
 * Static analysis:
   * clang-tidy
   * cpplint
