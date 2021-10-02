@@ -52,17 +52,18 @@ Generate a packet with:
  */
 
 #include <math.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include <vrt/vrt_init.h>
 #include <vrt/vrt_string.h>
+#include <vrt/vrt_types.h>
 #include <vrt/vrt_util.h>
 #include <vrt/vrt_write.h>
 
-/* Size of packet in 32-bit words */
+/* Size of buffer in 32-bit words */
 #define SIZE 515
 /* Sample rate [Hz] */
 #define SAMPLE_RATE 44100.0F
@@ -82,7 +83,7 @@ int main() {
     }
 
     /* Initialize to reasonable values */
-    vrt_packet p;
+    struct vrt_packet p;
     vrt_init_packet(&p);
 
     /* Configure */
@@ -103,13 +104,14 @@ int main() {
     }
 
     /* Write generated packet to file */
-    FILE* fp = fopen("signal.vrt", "wb");
+    const char* file_path = "signal.vrt";
+    FILE*       fp        = fopen(file_path, "wb");
     if (fp == NULL) {
-        fprintf(stderr, "Failed to open file\n");
+        fprintf(stderr, "Failed to open file '%s'\n", file_path);
         return EXIT_FAILURE;
     }
     if (fwrite(b, sizeof(uint32_t) * SIZE, 1, fp) != 1) {
-        fprintf(stderr, "Failed to write to file\n");
+        fprintf(stderr, "Failed to write to file '%s'\n", file_path);
         fclose(fp);
         return EXIT_FAILURE;
     }
