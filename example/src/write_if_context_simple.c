@@ -1,9 +1,8 @@
 /*
- * Generate signal and write VRT IF data packet to file. Note that this will not generate a big endian-format, i.e.
- * standard conforming, packet on a little endian platform.
+ * Generate VRT IF context packet and write to file. Note that this will not generate a big endian-format, i.e. standard
+ * conforming, packet on a little endian platform.
  */
 
-#include <math.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -17,36 +16,24 @@
 
 /* Size of buffer in 32-bit words */
 #define SIZE 515
-/* Sample rate [Hz] */
-#define SAMPLE_RATE 44100.0F
-/* Center frequency [Hz] */
-#define CENTER_FREQUENCY 10000.0F
-/* M_PI in math.h is nonstandard :( */
-#define PI 3.1415926F
 
 int main() {
     /* Packet data buffer */
     uint32_t b[SIZE];
 
-    /* Generate signal data */
-    float s[SIZE - 3];
-    for (int i = 0; i < SIZE - 3; ++i) {
-        s[i] = sinf(2.0F * PI * CENTER_FREQUENCY * (float)i / SAMPLE_RATE);
-    }
-
     /* Initialize to reasonable values */
     struct vrt_packet p;
     vrt_init_packet(&p);
 
-    /* Configure */
-    p.header.packet_type         = VRT_PT_IF_DATA_WITH_STREAM_ID;
-    p.header.has.trailer         = true;
-    p.header.packet_size         = SIZE;
+    /* Configure. Note that context packets cannot have a trailer word. */
+    p.header.packet_type         = VRT_PT_IF_CONTEXT;
     p.fields.stream_id           = 0xDEADBEEF;
-    p.words_body                 = SIZE - 3;
-    p.body                       = s;
-    p.trailer.has.reference_lock = true;
-    p.trailer.reference_lock     = true;
+    p.if_context.has.bandwidth   = true;
+    p.if_context.has.sample_rate = true;
+    p.if_context.has.temperature = true;
+    p.if_context.bandwidth       = 2.4e9;
+    p.if_context.sample_rate     = 2e6;
+    p.if_context.temperature     = 24.0F;
 
     /* Write to buffer */
     int32_t rv = vrt_write_packet(&p, b, SIZE, true);
@@ -54,15 +41,16 @@ int main() {
         fprintf(stderr, "Failed to write packet: %s\n", vrt_string_error(rv));
         return EXIT_FAILURE;
     }
+    int32_t pkt_sz = rv;
 
     /* Write generated packet to file */
-    const char* file_path = "signal.vrt";
+    const char* file_path = "context.vrt";
     FILE*       fp        = fopen(file_path, "wb");
     if (fp == NULL) {
         fprintf(stderr, "Failed to open file '%s'\n", file_path);
         return EXIT_FAILURE;
     }
-    if (fwrite(b, sizeof(uint32_t) * SIZE, 1, fp) != 1) {
+    if (fwrite(b, sizeof(uint32_t) * pkt_sz, 1, fp) != 1) {
         fprintf(stderr, "Failed to write to file '%s'\n", file_path);
         fclose(fp);
         return EXIT_FAILURE;

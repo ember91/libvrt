@@ -1,6 +1,6 @@
 /*
- * Read VRT IF data packet from file. Note that this will fail to read a big endian-format, i.e. standard conforming,
- * packet on a little endian platform.
+ * Read VRT IF packet from file and parse it. Note that this will fail to read a big endian-format, i.e. standard
+ * conforming, packet on a little endian platform.
  */
 
 #include <stdbool.h>
@@ -27,25 +27,26 @@ int main() {
     }
 
     /* Open file */
-    FILE* fp = fopen("signal.vrt", "rb");
+    const char* file_path = "signal.vrt";
+    FILE*       fp        = fopen(file_path, "rb");
     if (fp == NULL) {
-        fprintf(stderr, "Failed to open file\n");
+        fprintf(stderr, "Failed to open file '%s'\n", file_path);
         return EXIT_FAILURE;
     }
 
     /* Read data from file */
     if (fread(b, sizeof(uint32_t) * SIZE, 1, fp) != 1) {
-        fprintf(stderr, "Failed to read data from file\n");
+        fprintf(stderr, "Failed to read data from file '%s'\n", file_path);
         fclose(fp);
         return EXIT_FAILURE;
     }
     fclose(fp);
 
-    /* Read header */
+    /* Parse packet */
     struct vrt_packet p;
     int32_t           rv = vrt_read_packet(b, SIZE, &p, true);
     if (rv < 0) {
-        fprintf(stderr, "Failed to read header: %s\n", vrt_string_error(rv));
+        fprintf(stderr, "Failed to parse packet: %s\n", vrt_string_error(rv));
         return EXIT_FAILURE;
     }
 
