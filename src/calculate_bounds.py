@@ -56,12 +56,8 @@ def pr(name, type_fp, type_int=None, radix=None, lower=None, upper=None):
     name_type = type_fp.name.lower()
     name_var = name.upper().replace(" ", "_")
     suffix = "F" if type_fp == TypeFp.Float else ""
-    print(
-        "static const {} VRT_MIN_{} = {}{};".format(name_type, name_var, lower, suffix)
-    )
-    print(
-        "static const {} VRT_MAX_{} = {}{};".format(name_type, name_var, upper, suffix)
-    )
+    print(f"static const {name_type} VRT_MIN_{name_var} = {lower}{suffix};")
+    print(f"static const {name_type} VRT_MAX_{name_var} = {upper}{suffix};")
 
 
 # Print all floating point fields

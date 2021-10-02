@@ -14,7 +14,7 @@ if len(sys.argv) == 1:
 if len(sys.argv) == 2:
     file_path = sys.argv[1]
 else:
-    print("Usage: {} [file]".format(sys.argv[0]))
+    print(f"Usage: {sys.argv[0]} [file]")
     exit()
 
 with open(file_path, "rb") as f:
