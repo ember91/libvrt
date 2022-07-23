@@ -247,10 +247,6 @@ make -j4
 
 **Emil Berg**
 
-## Usages
-
-[A series of command line tools using libvrt](https://github.com/ember91/vrt_tools_cmd)
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
