@@ -39,7 +39,7 @@ find_package(GTest REQUIRED) # Install with 'sudo apt install libgtest-dev'
 target_include_directories(${TARGET_NAME} PUBLIC ${GTEST_INCLUDE_DIR})
 
 # Set warning levels
-if(CMAKE_BUILD_TYPE STREQUAL "debug") # Lowercased since before
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     target_compile_options(
       ${TARGET_NAME}

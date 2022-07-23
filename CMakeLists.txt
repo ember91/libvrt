@@ -7,9 +7,6 @@ project(
     "Read/write library of packets following the VITA Radio Transport (VRT) standard, i.e. VITA-49.0."
 )
 
-# Make CMAKE_BUILD_TYPE lowercase for case-insensitive comparison
-string(TOLOWER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE)
-
 # Search for modules in local module directory as well
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
                       "${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules")
@@ -17,7 +14,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 # Default to 'Release'
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE
-      "release" # Lowercased since before
+      "Release"
       CACHE
         STRING
         "Choose the type of build. Options are: Debug, Release, RelWithDebInfo, MinSizeRel."
@@ -155,7 +152,7 @@ add_library(${TARGET_NAME} STATIC ${FILES_SRC})
 
 # Code coverage
 if(${GCOV})
-  if(CMAKE_BUILD_TYPE STREQUAL "debug") # Lowercased since before
+  if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     if(CMAKE_C_COMPILER_ID MATCHES "GNU")
       target_compile_options(${TARGET_NAME} PUBLIC -fprofile-arcs -ftest-coverage)
       target_link_libraries(${TARGET_NAME} INTERFACE gcov)
@@ -168,7 +165,7 @@ if(${GCOV})
 endif()
 
 # Set warning levels
-if(CMAKE_BUILD_TYPE STREQUAL "debug") # Lowercased since before
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   if(CMAKE_C_COMPILER_ID MATCHES "Clang")
     target_compile_options(${TARGET_NAME} PRIVATE -Weverything -Wno-padded
                                                   -Wno-newline-eof)
