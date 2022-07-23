@@ -44,12 +44,12 @@ def pr(name, type_fp, type_int=None, radix=None, lower=None, upper=None):
         sign = 1
 
     # Calculate lower and upper limits
-    if lower == None:
+    if lower is None:
         if sign == 1:
             lower = -math.pow(2, bits - radix - sign)
         else:
             lower = 0.0
-    if upper == None:
+    if upper is None:
         upper = math.pow(2, bits - radix - sign) - math.pow(2, -radix)
 
     # String fixing and printout

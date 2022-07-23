@@ -15,7 +15,7 @@ if len(sys.argv) == 2:
     file_path = sys.argv[1]
 else:
     print(f"Usage: {sys.argv[0]} [file]")
-    exit()
+    sys.exit()
 
 with open(file_path, "rb") as f:
     # Read little endian float32 from file
