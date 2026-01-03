@@ -1,10 +1,10 @@
 #ifndef SRC_VRT_UTIL_H_
 #define SRC_VRT_UTIL_H_
 
+#include "vrt/vrt_types.h"
+
 #include <stdbool.h>
 #include <stdint.h>
-
-#include "vrt_types.h"
 
 #ifdef __cplusplus
 extern "C" {

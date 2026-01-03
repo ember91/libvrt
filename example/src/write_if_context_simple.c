@@ -3,16 +3,16 @@
  * conforming, packet on a little endian platform.
  */
 
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 #include <vrt/vrt_init.h>
 #include <vrt/vrt_string.h>
 #include <vrt/vrt_types.h>
 #include <vrt/vrt_util.h>
 #include <vrt/vrt_write.h>
+
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /* Size of buffer in 32-bit words */
 #define SIZE 515

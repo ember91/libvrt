@@ -1,10 +1,10 @@
 #ifndef INCLUDE_VRT_VRT_READ_H_
 #define INCLUDE_VRT_VRT_READ_H_
 
+#include "vrt_util.h"
+
 #include <stdbool.h>
 #include <stdint.h>
-
-#include "vrt_util.h"
 
 #ifdef __cplusplus
 extern "C" {

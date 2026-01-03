@@ -1,15 +1,15 @@
-#include "vrt_write.h"
+#include "vrt/vrt_write.h"
 
-#include <string.h>
-
+#include "vrt/vrt_error_code.h"
+#include "vrt/vrt_types.h"
+#include "vrt/vrt_util.h"
+#include "vrt/vrt_words.h"
 #include "vrt_bounds.h"
-#include "vrt_error_code.h"
-#include "vrt_types.h"
-#include "vrt_util.h"
-#include "vrt_words.h"
 
 #include "vrt_fixed_point.h"
 #include "vrt_util_internal.h"
+
+#include <string.h>
 
 /**
  * Mask a specified number of consecutive bits and shift them to a position in a word.
@@ -534,18 +534,18 @@ static int32_t if_context_write_ephemeris(bool has, const struct vrt_ephemeris* 
         b[0] |= mskw(e->oui, 0, 24);
         b[1] = e->integer_second_timestamp;
         write_uint64(e->fractional_second_timestamp, b + 2);
-        b[4] = e->has.position_x ? (uint32_t)vrt_double_to_fixed_point_i32(e->position_x, VRT_RADIX_POSITION)
-                                 : VRT_UNSPECIFIED_FIXED_POINT;
-        b[5] = e->has.position_y ? (uint32_t)vrt_double_to_fixed_point_i32(e->position_y, VRT_RADIX_POSITION)
-                                 : VRT_UNSPECIFIED_FIXED_POINT;
-        b[6] = e->has.position_z ? (uint32_t)vrt_double_to_fixed_point_i32(e->position_z, VRT_RADIX_POSITION)
-                                 : VRT_UNSPECIFIED_FIXED_POINT;
-        b[7] = e->has.attitude_alpha ? (uint32_t)vrt_double_to_fixed_point_i32(e->attitude_alpha, VRT_RADIX_ANGLE)
+        b[4]  = e->has.position_x ? (uint32_t)vrt_double_to_fixed_point_i32(e->position_x, VRT_RADIX_POSITION)
+                                  : VRT_UNSPECIFIED_FIXED_POINT;
+        b[5]  = e->has.position_y ? (uint32_t)vrt_double_to_fixed_point_i32(e->position_y, VRT_RADIX_POSITION)
+                                  : VRT_UNSPECIFIED_FIXED_POINT;
+        b[6]  = e->has.position_z ? (uint32_t)vrt_double_to_fixed_point_i32(e->position_z, VRT_RADIX_POSITION)
+                                  : VRT_UNSPECIFIED_FIXED_POINT;
+        b[7]  = e->has.attitude_alpha ? (uint32_t)vrt_double_to_fixed_point_i32(e->attitude_alpha, VRT_RADIX_ANGLE)
+                                      : VRT_UNSPECIFIED_FIXED_POINT;
+        b[8]  = e->has.attitude_beta ? (uint32_t)vrt_double_to_fixed_point_i32(e->attitude_beta, VRT_RADIX_ANGLE)
                                      : VRT_UNSPECIFIED_FIXED_POINT;
-        b[8] = e->has.attitude_beta ? (uint32_t)vrt_double_to_fixed_point_i32(e->attitude_beta, VRT_RADIX_ANGLE)
+        b[9]  = e->has.attitude_phi ? (uint32_t)vrt_double_to_fixed_point_i32(e->attitude_phi, VRT_RADIX_ANGLE)
                                     : VRT_UNSPECIFIED_FIXED_POINT;
-        b[9] = e->has.attitude_phi ? (uint32_t)vrt_double_to_fixed_point_i32(e->attitude_phi, VRT_RADIX_ANGLE)
-                                   : VRT_UNSPECIFIED_FIXED_POINT;
         b[10] = e->has.velocity_dx ? (uint32_t)vrt_double_to_fixed_point_i32(e->velocity_dx, VRT_RADIX_SPEED_VELOCITY)
                                    : VRT_UNSPECIFIED_FIXED_POINT;
         b[11] = e->has.velocity_dy ? (uint32_t)vrt_double_to_fixed_point_i32(e->velocity_dy, VRT_RADIX_SPEED_VELOCITY)

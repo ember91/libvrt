@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.15)
 
 project(
   test
@@ -31,18 +31,17 @@ endif()
 
 # Add test source files
 file(GLOB SRC_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
-add_executable(${TARGET_NAME} ${SRC_FILES} "${CMAKE_CURRENT_SOURCE_DIR}/../src/timestamp_to_calendar.c")
+add_executable("${TARGET_NAME}" ${SRC_FILES} "${CMAKE_CURRENT_SOURCE_DIR}/../src/timestamp_to_calendar.c")
 
 # Setup testing
 enable_testing()
 find_package(GTest REQUIRED) # Install with 'sudo apt install libgtest-dev'
-target_include_directories(${TARGET_NAME} PUBLIC ${GTEST_INCLUDE_DIR})
 
 # Set warning levels
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     target_compile_options(
-      ${TARGET_NAME}
+      "${TARGET_NAME}"
       PRIVATE -Weverything
               -Wno-c++98-compat-pedantic
               -Wno-padded
@@ -51,21 +50,17 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
               -Wno-weak-vtables
               -Wno-used-but-marked-unused)
   elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    target_compile_options(${TARGET_NAME} PRIVATE -Wall -Wextra -Wpedantic
+    target_compile_options("${TARGET_NAME}" PRIVATE -Wall -Wextra -Wpedantic
                                                   -Wshadow)
   elseif(CMAKE_CXX_COMPILER_ID MATCHES "Intel")
-    target_compile_options(${TARGET_NAME} PRIVATE -w3) # /W5 on Windows
+    target_compile_options("${TARGET_NAME}" PRIVATE -w3) # /W5 on Windows
   elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-    target_compile_options(${TARGET_NAME} PRIVATE /W4)
+    target_compile_options("${TARGET_NAME}" PRIVATE /W4)
   endif()
 endif()
 
-# Add include directory
-target_include_directories(${TARGET_NAME}
-                           PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../include/")
-
 # Link executable
-target_link_libraries(${TARGET_NAME} vrt ${GTEST_LIBRARIES} pthread)
+target_link_libraries("${TARGET_NAME}" vrt ${GTEST_LIBRARIES} pthread)
 
 # Add test
-add_test(name ${TARGET_NAME} COMMAND ${TARGET_NAME})
+add_test(name "${TARGET_NAME}" COMMAND "${TARGET_NAME}")

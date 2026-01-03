@@ -1,7 +1,7 @@
 #include "timestamp_to_calendar.h"
 
-#include "vrt_error_code.h"
-#include "vrt_types.h"
+#include "vrt/vrt_error_code.h"
+#include "vrt/vrt_types.h"
 
 /**
  * Number of picoseconds in a second.

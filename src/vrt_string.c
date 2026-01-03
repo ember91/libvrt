@@ -1,7 +1,7 @@
-#include "vrt_string.h"
+#include "vrt/vrt_string.h"
 
-#include "vrt_error_code.h"
-#include "vrt_types.h"
+#include "vrt/vrt_error_code.h"
+#include "vrt/vrt_types.h"
 
 const char* vrt_string_packet_type(enum vrt_packet_type packet_type) {
     switch (packet_type) {

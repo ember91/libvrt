@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.15)
 
 project(
   vrt
@@ -8,8 +8,7 @@ project(
 )
 
 # Search for modules in local module directory as well
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
-                      "${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules")
 
 # Default to 'Release'
 if(NOT CMAKE_BUILD_TYPE)
@@ -90,21 +89,19 @@ if(DOCUMENTATION)
     # Copy all configuration files with file extension ".in"
     file(
       GLOB TEMPLATE_FILES CONFIGURE_DEPENDS
-      RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/"
+      RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
       "${CMAKE_CURRENT_SOURCE_DIR}/doc/*.in")
     foreach(FILE ${TEMPLATE_FILES})
-      string(LENGTH ${FILE} LEN)
-      math(EXPR LEN "${LEN} - 3")
-      string(SUBSTRING ${FILE} 0 ${LEN} FILE_NO_EXT)
-      configure_file(${CMAKE_CURRENT_SOURCE_DIR}/${FILE}
-                     ${CMAKE_CURRENT_BINARY_DIR}/${FILE_NO_EXT})
+      cmake_path(GET FILE STEM FILE_NO_EXT)
+      configure_file("${CMAKE_CURRENT_SOURCE_DIR}/${FILE}"
+                     "${CMAKE_CURRENT_BINARY_DIR}/${FILE_NO_EXT}")
     endforeach()
 
     # Option ALL allows building documentation together with the application
     add_custom_target(
       doxygen ALL
-      COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
-      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+      COMMAND "${DOXYGEN_EXECUTABLE}" "${DOXYGEN_OUT}"
+      WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
       VERBATIM)
 
     if(NOT DEFINED SPHINX_THEME)
@@ -117,7 +114,7 @@ if(DOCUMENTATION)
 
     add_custom_target(
       sphinx ALL
-      ${SPHINX_EXECUTABLE}
+      "${SPHINX_EXECUTABLE}"
       -q
       -b
       html
@@ -148,14 +145,14 @@ endif()
 
 # Add source files
 file(GLOB FILES_SRC CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
-add_library(${TARGET_NAME} STATIC ${FILES_SRC})
+add_library("${TARGET_NAME}" STATIC ${FILES_SRC})
 
 # Code coverage
 if(${GCOV})
   if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     if(CMAKE_C_COMPILER_ID MATCHES "GNU")
-      target_compile_options(${TARGET_NAME} PUBLIC -fprofile-arcs -ftest-coverage)
-      target_link_libraries(${TARGET_NAME} INTERFACE gcov)
+      target_compile_options("${TARGET_NAME}" PUBLIC -fprofile-arcs -ftest-coverage)
+      target_link_libraries("${TARGET_NAME}" INTERFACE gcov)
     else()
       message(WARNING "Can only generate code coverage symbols with GCC")
     endif()
@@ -167,31 +164,31 @@ endif()
 # Set warning levels
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   if(CMAKE_C_COMPILER_ID MATCHES "Clang")
-    target_compile_options(${TARGET_NAME} PRIVATE -Weverything -Wno-padded
+    target_compile_options("${TARGET_NAME}" PRIVATE -Weverything -Wno-padded
                                                   -Wno-newline-eof)
   elseif(CMAKE_C_COMPILER_ID MATCHES "GNU")
-    target_compile_options(${TARGET_NAME} PRIVATE -Wall -Wextra -Wpedantic
+    target_compile_options("${TARGET_NAME}" PRIVATE -Wall -Wextra -Wpedantic
                                                   -Wshadow)
   elseif(CMAKE_C_COMPILER_ID MATCHES "Intel")
-    target_compile_options(${TARGET_NAME} PRIVATE -w3) # /W5 on Windows
+    target_compile_options("${TARGET_NAME}" PRIVATE -w3) # /W5 on Windows
   elseif(CMAKE_C_COMPILER_ID MATCHES "MSVC")
-    target_compile_options(${TARGET_NAME} PRIVATE /W4)
+    target_compile_options("${TARGET_NAME}" PRIVATE /W4)
   endif()
 endif()
 
 # Add include directory
-target_include_directories(${TARGET_NAME} PUBLIC include/vrt/)
+target_include_directories("${TARGET_NAME}" PUBLIC include PRIVATE src)
 
 # Set C standard
-set_target_properties(${TARGET_NAME} PROPERTIES C_STANDARD 99)
+set_target_properties("${TARGET_NAME}" PROPERTIES C_STANDARD 99)
 
 # Install library
-install(TARGETS ${PROJECT_NAME} DESTINATION lib)
+install(TARGETS "${PROJECT_NAME}" DESTINATION lib)
 
 # Install library headers
 file(GLOB FILES_HEADER CONFIGURE_DEPENDS
      "${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}/*.h")
-install(FILES ${FILES_HEADER} DESTINATION include/${PROJECT_NAME})
+install(FILES ${FILES_HEADER} DESTINATION "include/${PROJECT_NAME}")
 
 # Copy documentation as well
 if(UNIX)

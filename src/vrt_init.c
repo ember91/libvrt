@@ -1,12 +1,12 @@
-#include "vrt_init.h"
+#include "vrt/vrt_init.h"
 
-#include <stdbool.h>
-#include <stddef.h>
-
-#include "vrt_types.h"
+#include "vrt/vrt_types.h"
 
 #include "vrt_fixed_point.h"
 #include "vrt_util_internal.h"
+
+#include <stdbool.h>
+#include <stddef.h>
 
 void vrt_init_header(struct vrt_header* header) {
     header->packet_type  = VRT_PT_IF_DATA_WITHOUT_STREAM_ID;
