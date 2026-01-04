@@ -257,14 +257,14 @@ Some functions return negative numbers if there's an error.
 
 **For documentation generation:**
 
-- Doxygen
-- Sphinx
 - Breathe
+- Doxygen
 - Exhale
+- Sphinx
 
 ### Notes
 
-To follow the standard fully one must byte swap before reading and after writing on little endian platforms such as x86 and most ARM CPUs. As of now, there's no support for that in this library. Obviously, header, fields section, context, and trailer words must be swapped with 4 byte swaps while the data section depends on the data type.
+To follow the standard fully one must byte swap before reading and after writing on little endian platforms such as x86 and most ARM CPUs. There's no support for that in this library. Obviously, header, fields section, context, and trailer words must be swapped with 4 byte swaps while the data section depends on the data type.
 
 ## Running tests
 
@@ -273,7 +273,7 @@ Compile and run the test suite:
 ```bash
 cmake -B Debug -DCMAKE_BUILD_TYPE=Debug -DTEST=On
 cmake --build Debug
-Debug/test/run_unit_tests
+ctest --test-dir Debug/test
 ```
 
 ## Author
